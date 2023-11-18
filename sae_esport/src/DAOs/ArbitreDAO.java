@@ -29,6 +29,7 @@ public class ArbitreDAO {
 		return arbitres;
 	}
 	
+	//retourne un Arbitre specifique
 	public Optional<Arbitre> getById(Integer... id) throws Exception {
 		Statement st = this.dbConnection.createStatement();
 		for (Integer i : id) {
