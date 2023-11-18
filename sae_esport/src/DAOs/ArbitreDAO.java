@@ -12,10 +12,12 @@ public class ArbitreDAO {
 	
 	private Connection dbConnection;
 	
+	//Constructeur DAO, et mise en place de la connexion
 	public ArbitreDAO(Connection c) {
 		this.dbConnection = c;
 	}
 	
+	//Renvois l'ensemble des arbitres
 	public List<Arbitre> getAll() throws Exception {
 		String reqSelectArbitre = "SELECT * FROM arbitre";
 		PreparedStatement st = this.dbConnection.prepareStatement(reqSelectArbitre);
@@ -38,6 +40,7 @@ public class ArbitreDAO {
 		return Optional.empty();
 	}
 	
+	//ajoute un arbitre à la liste
 	public boolean add(Arbitre value) throws Exception {
 
 		Statement st = this.dbConnection.createStatement();
@@ -46,6 +49,7 @@ public class ArbitreDAO {
 		
 	}
 	
+	//update un arbitre donné
 	public boolean update(Arbitre value) throws Exception {
 		
 		Statement st = this.dbConnection.createStatement();
@@ -54,6 +58,7 @@ public class ArbitreDAO {
 		
 	}
 	
+	//retire un arbitre donné
 	public boolean delete(Arbitre value) throws Exception {
 		
 		Statement st = this.dbConnection.createStatement();
