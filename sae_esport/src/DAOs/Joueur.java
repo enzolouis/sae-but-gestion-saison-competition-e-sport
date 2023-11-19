@@ -19,7 +19,7 @@ public class Joueur {
 	}
 
 	public String getPrepseudo() {
-		return prepseudo;
+		return pseudo;
 	}
 
 	public int getIdJoueur() {
