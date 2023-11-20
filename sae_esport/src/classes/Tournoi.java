@@ -1,47 +1,35 @@
 package classes;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Tournoi {
-	public enum EtatTournoi {
-		OUVERT,FERME
-	}
-	public enum Notoriete{
-		LOCAL,
-		REGIONAL,
-		NATIONAL,
-		INTERNATIONAL,
-		INTERNATIONAL_CLASSE
-	}
 	
 	private String nomTournoi;
-	private String StringDebut;		//format : "dd/MM/YYYY"
-	private String StringFin;
+	private String DateDebut;		//format : "dd/MM/YYYY"
+	private String DateFin;
 	private Notoriete notoriete;
 	private EtatTournoi etat;
 	private String login;
 	private String motDePasse;
 	private int idTournoi;
 	private List<Match> matches;
-	private List<Equipe> equipes;
+	private Map<Equipe, Integer> participants;
 
-	public Tournoi(String nomTournoi, String StringDebut,String StringFin,
-					Notoriete notoriete, EtatTournoi etat,
-					String motDePasse, int idTournoi, List<Equipe> equipes) {
+	public Tournoi(int idTournoi, String nomTournoi, String DateDebut,
+			String DateFin, Notoriete notoriete, EtatTournoi etat) {
+		
 		this.idTournoi = idTournoi;
 		this.nomTournoi = nomTournoi;
-		this.StringDebut =StringDebut;
-		this.StringFin = StringFin;
+		this.DateDebut = DateDebut;
+		this.DateFin = DateFin;
 		this.notoriete = notoriete;
 		this.etat = etat;
-		this.motDePasse = motDePasse;
 		this.matches= new ArrayList<>();
-		
-		this.equipes = new ArrayList<>();
-		for(Equipe e : equipes) {
-			this.equipes.add(e);
-		}
+		this.participants = new HashMap<>();
+
 	}
 	
 	public int getIDTournoi() {
@@ -61,34 +49,29 @@ public class Tournoi {
 	public String getLogin() {
 		return this.login;
 	}
-	public void setLogin(String login) {
-		this.login = login;
-	}
 	
 	public String getMotDePasse() {
 		return this.motDePasse;
 	}
-	public void setTournoiMDP(String MDP) {
-		this.motDePasse = MDP;
-	}
 	
 	public String getDateDebut() {
-		return this.StringDebut;
+		return this.DateDebut;
 	}
 	public void setDateDebut(String dateDebut) {
-		this.StringDebut = dateDebut;
+		this.DateDebut = dateDebut;
 	}
 	
 	public String getDateFin() {
-		return this.StringFin;
+		return this.DateFin;
 	}
 	public void setDateFin(String dateFin) {
-		this.StringDebut = dateFin;
+		this.DateFin = dateFin;
 	}
 	
 	public Notoriete getNotoriete() {
 		return this.notoriete;
 	}
+	
 	public void setNotoriete(Notoriete not) {
 		this.notoriete = not;
 	}
@@ -104,15 +87,16 @@ public class Tournoi {
 		this.matches.add(new Match(idMatch, finale));
 	}
 	
-	public List<Equipe> getEquipes(){
-		return this.equipes;
+	public Map<Equipe, Integer> getParticipants(){
+		return this.participants;
 	}
-	public void remplacerEquipe(Equipe equipeARemplacer, Equipe EquipeAMettre) {
-		for (Equipe i : this.equipes) {
-			if(i == equipeARemplacer) {
-				i = EquipeAMettre;
-			}
-		}
+	
+	public void ajouterEquipe(Equipe equipe) {
+		this.participants.put(equipe, 0);
+	}
+	
+	public void majPointsEquipe(Equipe equipeARemplacer, int points) {
+		this.participants.put(equipeARemplacer, points);
 	}
 	
 }
