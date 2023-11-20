@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import classes.Arbitre;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -45,16 +48,22 @@ private Connection dbConnection;
 	public boolean add(classes.Administrateur value) throws Exception {
 
 		Statement st = this.dbConnection.createStatement();
-		int rowcount = st.executeUpdate("INSERT INTO administrateur VALUES ("+value.getIdAdministrateur()+", '"+value.getNom()+"', '"+value.getLogin()+"', '"+value.getmotDePasse()+"',)");
+		ResultSet rs = st.executeQuery("SELECT NEXT VALUE FOR seqIdAdmin FROM DUAL");
+		int id = 0;
+		if (rs.next()) {
+			id = rs.getInt(1);
+		}
+		value.setIdAdministrateur(id);
+		int rowcount = st.executeUpdate("INSERT INTO arbitre VALUES ("+id+", "+value.getNom()+"', '"+value.getLogin()+"', '"+value.getMotDePasse()+"')");
 		return rowcount > 0;
-		
+			
 	}
 	
 	//update un administrateur donné
 	public boolean update(classes.Administrateur value) throws Exception {
 		
 		Statement st = this.dbConnection.createStatement();
-		int rowcount = st.executeUpdate("UPDATE administrateur SET nom='"+value.getNom()+"', login='"+value.getLogin()+"', mdp='"+value.getmotDePasse()+", WHERE idSujet="+value.getIdAdministrateur());
+		int rowcount = st.executeUpdate("UPDATE administrateur SET nom='"+value.getNom()+"', login='"+value.getLogin()+"', mdp='"+value.getMotDePasse()+", WHERE idSujet="+value.getIdAdministrateur());
 		return rowcount > 0;
 		
 	}

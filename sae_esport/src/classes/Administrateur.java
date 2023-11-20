@@ -41,5 +41,9 @@ public class Administrateur {
 	public int getIdAdministrateur() {
 		return this.idAdministrateur;
 	}
+	
+	public void setIdAdministrateur(int id) {
+		this.idAdministrateur = id;
+	}
 
 }

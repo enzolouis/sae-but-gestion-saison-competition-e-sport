@@ -46,10 +46,17 @@ public class ArbitreDAO {
 	}
 	
 	//ajoute un arbitre à la liste
+	//peu importe l'id que vous mettrez à l'arbitre, il sera changé
 	public boolean add(Arbitre value) throws Exception {
 
 		Statement st = this.dbConnection.createStatement();
-		int rowcount = st.executeUpdate("INSERT INTO arbitre VALUES ("+value.getIdArbitre()+", '"+value.getNom()+"', '"+value.getPrenom()+"', '"+value.getNationalite()+"')");
+		ResultSet rs = st.executeQuery("SELECT NEXT VALUE FOR seqIdArbitre FROM DUAL");
+		int id = 0;
+		if (rs.next()) {
+			id = rs.getInt(1);
+		}
+		value.setIdArbitre(id);
+		int rowcount = st.executeUpdate("INSERT INTO arbitre VALUES ("+id+", "+value.getNom()+"', '"+value.getPrenom()+"', '"+value.getNationalite()+"')");
 		return rowcount > 0;
 		
 	}

@@ -42,4 +42,8 @@ public class Arbitre {
 		return this.idArbitre;
 	}
 
+	public void setIdArbitre(int id) {
+		this.idArbitre = id;
+	}
+	
 }
