@@ -4,30 +4,33 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import java.awt.GridLayout;
+import java.awt.Insets;
+
 import javax.swing.JTextField;
 import java.awt.FlowLayout;
 import javax.swing.JButton;
 import java.awt.Font;
+import java.awt.Graphics;
+
 import javax.swing.SwingConstants;
-import java.awt.CardLayout;
 import java.awt.Dimension;
 
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import java.awt.Color;
+import java.awt.Component;
+
+import javax.swing.JSeparator;
 
 public class IdentificationVue extends JFrame {
 
     private JPanel contentPane;
-    private JTextField textField_1;
-    private JTextField textField;
-    private JTextField textField_2;
-
+    private JTextField textFieldMotDePasse;
+    private JTextField textFieldUtilisateur;
+    
     /**
      * Launch the application.
      */
@@ -48,60 +51,104 @@ public class IdentificationVue extends JFrame {
      * Create the frame.
      */
     public IdentificationVue() {
+    	setMinimumSize(new Dimension(450, 300));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
         contentPane = new JPanel();
+        contentPane.setBackground(new Color(44, 47, 51));
         contentPane.setBorder(new EmptyBorder(30, 30, 30, 30));
 
         setContentPane(contentPane);
         contentPane.setLayout(new BorderLayout(0, 0));
         
+        JPanel panelUtilisateurMotDePasse = new JPanel();
+        panelUtilisateurMotDePasse.setBorder(new EmptyBorder(10, 10, 10, 10));
+        panelUtilisateurMotDePasse.setBackground(new Color(44, 47, 51));
+        contentPane.add(panelUtilisateurMotDePasse, BorderLayout.CENTER);
+        panelUtilisateurMotDePasse.setLayout(new GridLayout(2, 0, 0, 0));
+        
+        JPanel panelUtilisateur = new JPanel();
+        panelUtilisateur.setBackground(new Color(44, 47, 51));
+        panelUtilisateurMotDePasse.add(panelUtilisateur);
+        panelUtilisateur.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        
+        JLabel labelNomUtilisateur = new JLabel("Nom d'utilisateur :");
+        labelNomUtilisateur.setForeground(new Color(255, 255, 255));
+        labelNomUtilisateur.setPreferredSize(new Dimension(110, 30));
+        panelUtilisateur.add(labelNomUtilisateur);
+        
+        textFieldUtilisateur = new JTextField();
+        textFieldUtilisateur.setBorder(new EmptyBorder(5, 5, 5, 5));
+        textFieldUtilisateur.setForeground(new Color(255, 255, 255));
+        textFieldUtilisateur.setBackground(new Color(29, 88, 129));
+        panelUtilisateur.add(textFieldUtilisateur);
+        textFieldUtilisateur.setColumns(10);
+        
+        JPanel panelMotDePasse = new JPanel();
+        panelMotDePasse.setBackground(new Color(44, 47, 51));
+        panelUtilisateurMotDePasse.add(panelMotDePasse);
+        
+        JLabel labelMotDePasse = new JLabel("Mot de passe :");
+        labelMotDePasse.setForeground(new Color(255, 255, 255));
+        labelMotDePasse.setPreferredSize(new Dimension(110, 30));
+        panelMotDePasse.add(labelMotDePasse);
+        
+        textFieldMotDePasse = new JTextField();
+        textFieldMotDePasse.setBorder(new EmptyBorder(5, 5, 5, 5));
+        textFieldMotDePasse.setBackground(new Color(29, 88, 129));
+        textFieldMotDePasse.setForeground(new Color(255, 255, 255));
+        panelMotDePasse.add(textFieldMotDePasse);
+        textFieldMotDePasse.setColumns(10);
+        
+        JPanel panelQuitterSeconnecter = new JPanel();
+        panelQuitterSeconnecter.setBackground(new Color(44, 47, 51));
+        panelQuitterSeconnecter.setBorder(new EmptyBorder(10, 10, 10, 10));
+        contentPane.add(panelQuitterSeconnecter, BorderLayout.SOUTH);
+        panelQuitterSeconnecter.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        
+        JButton btnQuit = new JButton("Quitter");
+        btnQuit.setBackground(new Color(231, 76, 60));
+        btnQuit.setForeground(new Color(255, 255, 255));
+        btnQuit.setBorder(new RoundBtn(5));
+        panelQuitterSeconnecter.add(btnQuit);
+        
+        JButton btnLogin = new JButton("Se connecter");
+        btnLogin.setForeground(new Color(255, 255, 255));
+        btnLogin.setBackground(new Color(46, 204, 113));
+        btnLogin.setBorder(new RoundBtn(5));
+        panelQuitterSeconnecter.add(btnLogin);
+        
+        JPanel panelTitre = new JPanel();
+        panelTitre.setBackground(new Color(44, 47, 51));
+        contentPane.add(panelTitre, BorderLayout.NORTH);
+        panelTitre.setLayout(new BorderLayout(0, 0));
+        
+        JSeparator separatorTitre = new JSeparator();
+        panelTitre.add(separatorTitre, BorderLayout.SOUTH);
+        
         JLabel titreFenetre = new JLabel("CONNEXION");
-        titreFenetre.setBorder(new EmptyBorder(20, 20, 20, 20));
         titreFenetre.setHorizontalAlignment(SwingConstants.CENTER);
-        titreFenetre.setFont(new Font("Tahoma", Font.PLAIN, 25));
-        contentPane.add(titreFenetre, BorderLayout.NORTH);
-        
-        JPanel panel = new JPanel();
-        contentPane.add(panel, BorderLayout.CENTER);
-        panel.setLayout(new GridLayout(2, 0, 0, 0));
-        
-        JPanel panel_3 = new JPanel();
-        panel.add(panel_3);
-        panel_3.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        
-        JLabel lblNewLabel = new JLabel("Nom d'utilisateur");
-        lblNewLabel.setPreferredSize(new Dimension(110, 30));
-        panel_3.add(lblNewLabel);
-        
-        textField_2 = new JTextField();
-        panel_3.add(textField_2);
-        textField_2.setColumns(10);
-        
-        JPanel panel_2 = new JPanel();
-        panel.add(panel_2);
-        
-        JLabel lblNewLabel_1 = new JLabel("Mot de passe     ");
-        lblNewLabel_1.setPreferredSize(new Dimension(110, 30));
-        panel_2.add(lblNewLabel_1);
-        
-        textField_1 = new JTextField();
-        panel_2.add(textField_1);
-        textField_1.setColumns(10);
-        
-        JPanel panel_1 = new JPanel();
-        panel_1.setBorder(new EmptyBorder(10, 10, 10, 10));
-        contentPane.add(panel_1, BorderLayout.SOUTH);
-        panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        
-        JButton btnNewButton = new JButton("Quitter");
-        panel_1.add(btnNewButton);
-        
-        JButton btnNewButton_1 = new JButton("Se connecter");
-        btnNewButton_1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            }
-        });
-        panel_1.add(btnNewButton_1);
+        titreFenetre.setForeground(new Color(41, 128, 185));
+        titreFenetre.setFont(new Font("Tahoma", Font.BOLD, 25));
+        titreFenetre.setBorder(new EmptyBorder(10, 10, 10, 10));
+        panelTitre.add(titreFenetre);
+    }
+    
+    class RoundBtn implements Border 
+    {
+        private int r;
+        RoundBtn(int r) {
+            this.r = r;
+        }
+        public Insets getBorderInsets(Component c) {
+            return new Insets(this.r+1, this.r+1, this.r+2, this.r);
+        }
+        public boolean isBorderOpaque() {
+            return true;
+        }
+        public void paintBorder(Component c, Graphics g, int x, int y, 
+        int width, int height) {
+            g.drawRoundRect(x, y, width-1, height-1, r, r);
+        }
     }
 }
