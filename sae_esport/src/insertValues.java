@@ -21,11 +21,9 @@ public class insertValues {
         Statement st = dbConnection.createStatement();
         
         AdministrateurDAO adminDAO = new AdministrateurDAO(dbConnection);
-        adminDAO.add(new Administrateur(0, "chat", "bidule", "mdp1"));
-        adminDAO.add(new Administrateur(0, "chien", "trucmuche", "mdp2"));
         List<Administrateur> admins = adminDAO.getAll();
         for (Administrateur a : admins) {
-            System.out.println(a);
+            System.out.println(a.getIdAdministrateur()+" "+a.getLogin()+" "+a.getMotDePasse());
         }
 
     }
