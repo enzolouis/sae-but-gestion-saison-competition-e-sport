@@ -30,4 +30,8 @@ bin
 .settings
 .classpath
 .project
+BDDSaeEsport
+derby.log
 *.lck
+*.ctrl
+*.dat
