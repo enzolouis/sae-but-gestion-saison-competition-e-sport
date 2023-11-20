@@ -35,9 +35,6 @@ public class IdentificationVue extends JFrame {
     private JTextField textFieldUtilisateur;
     private IdentificationControleur controleur;
     
-    /**
-     * Launch the application.
-     */
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -50,14 +47,18 @@ public class IdentificationVue extends JFrame {
             }
         });
     }
+    
+    public String getTextFieldUtilisateurContenu() {
+    	return this.textFieldUtilisateur.getText();
+    }
 
-    /**
-     * Create the frame.
-     * @throws Exception 
-     */
+    public String getTextFieldMotDePasseContenu() {
+    	return this.textFieldMotDePasse.getText();
+    }
+    
     public IdentificationVue() throws Exception {
     	
-    	this.controleur = new IdentificationControleur(this);
+    	//this.controleur = new IdentificationControleur(this);
     	
     	setMinimumSize(new Dimension(450, 300));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -85,7 +86,8 @@ public class IdentificationVue extends JFrame {
         labelNomUtilisateur.setPreferredSize(new Dimension(110, 30));
         panelUtilisateur.add(labelNomUtilisateur);
         
-        textFieldUtilisateur = new JTextField();
+        textFieldUtilisateur = new PlaceholderTextField();
+        ((Object) textFieldUtilisateur).setPlaceHolder("toto234");
         textFieldUtilisateur.setBorder(new EmptyBorder(5, 5, 5, 5));
         textFieldUtilisateur.setForeground(new Color(255, 255, 255));
         textFieldUtilisateur.setBackground(new Color(29, 88, 129));
@@ -101,7 +103,7 @@ public class IdentificationVue extends JFrame {
         labelMotDePasse.setPreferredSize(new Dimension(110, 30));
         panelMotDePasse.add(labelMotDePasse);
         
-        textFieldMotDePasse = new JTextField();
+        textFieldMotDePasse = new PlaceholderTextField("********");
         textFieldMotDePasse.setBorder(new EmptyBorder(5, 5, 5, 5));
         textFieldMotDePasse.setBackground(new Color(29, 88, 129));
         textFieldMotDePasse.setForeground(new Color(255, 255, 255));

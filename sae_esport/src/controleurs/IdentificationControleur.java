@@ -13,7 +13,6 @@ public class IdentificationControleur implements ActionListener {
 	public IdentificationControleur(IdentificationVue vue) throws Exception {
 		this.vue = vue;
 		this.modele = new IdentificationModele();
-		
 	}
 	
 	@Override
@@ -23,8 +22,8 @@ public class IdentificationControleur implements ActionListener {
 			this.vue.setVisible(false);
 			this.vue.dispose();
 		} else {
-			String login = this.vue.textFieldUtilisateur.getText();
-			String mdp = this.vue.textFieldMotDePasse.getText();
+			String login = this.vue.getTextFieldUtilisateurContenu();
+			String mdp = this.vue.getTextFieldMotDePasseContenu();
 			if (this.modele.checkLogins(login, mdp)) {
 				//succes de l'identification gg wp
 				//recuperer le type du login pour ouvrir une page en consequence
