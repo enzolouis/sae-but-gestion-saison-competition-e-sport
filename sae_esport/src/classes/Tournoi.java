@@ -1,7 +1,6 @@
 package classes;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class Tournoi {
@@ -17,8 +16,8 @@ public class Tournoi {
 	}
 	
 	private String nomTournoi;
-	private Date dateDebut;
-	private Date dateFin;
+	private String StringDebut;		//format : "dd/MM/YYYY"
+	private String StringFin;
 	private Notoriete notoriete;
 	private EtatTournoi etat;
 	private String login;
@@ -27,13 +26,13 @@ public class Tournoi {
 	private List<Match> matches;
 	private List<Equipe> equipes;
 
-	public Tournoi(String nomTournoi, Date dateDebut,Date DateFin,
+	public Tournoi(String nomTournoi, String StringDebut,String StringFin,
 					Notoriete notoriete, EtatTournoi etat,
 					String motDePasse, int idTournoi, List<Equipe> equipes) {
 		this.idTournoi = idTournoi;
 		this.nomTournoi = nomTournoi;
-		this.dateDebut =dateDebut;
-		this.dateFin = DateFin;
+		this.StringDebut =StringDebut;
+		this.StringFin = StringFin;
 		this.notoriete = notoriete;
 		this.etat = etat;
 		this.motDePasse = motDePasse;
@@ -52,6 +51,13 @@ public class Tournoi {
 		this.idTournoi = id;
 	}
 	
+	public String getNomTournoi() {
+		return this.nomTournoi;
+	}
+	public void setNomTournoi(String nom) {
+		this.nomTournoi = nom;
+	}
+	
 	public String getLogin() {
 		return this.login;
 	}
@@ -66,18 +72,18 @@ public class Tournoi {
 		this.motDePasse = MDP;
 	}
 	
-	public Date getDateDebut() {
-		return this.dateDebut;
+	public String getDateDebut() {
+		return this.StringDebut;
 	}
-	public void setDateDebut(Date Datedebut) {
-		this.dateDebut = Datedebut;
+	public void setDateDebut(String dateDebut) {
+		this.StringDebut = dateDebut;
 	}
 	
-	public Date getDateFin() {
-		return this.dateFin;
+	public String getDateFin() {
+		return this.StringFin;
 	}
-	public void setDateFin(Date DateFin) {
-		this.dateDebut = DateFin;
+	public void setDateFin(String dateFin) {
+		this.StringDebut = dateFin;
 	}
 	
 	public Notoriete getNotoriete() {
