@@ -12,6 +12,9 @@
 .mtj.tmp/
 
 # Package Files #
+*.lck
+*.ctrl
+*.dat
 *.jar
 *.war
 *.nar
@@ -24,7 +27,6 @@
 hs_err_pid*
 replay_pid*
 
-
 # Others
 bin
 .settings
@@ -32,6 +34,5 @@ bin
 .project
 BDDSaeEsport
 derby.log
-*.lck
-*.ctrl
-*.dat
+
+sae_esport/BDDSaeEsport/

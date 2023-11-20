@@ -25,7 +25,7 @@ public class IdentificationControleur implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton bouton = (JButton) e.getSource();
-		if (bouton.getText() == "Quitter") {
+		if (bouton.getText().equals("Quitter")) {
 			this.vue.setVisible(false);
 			this.vue.dispose();
 		} else {
