@@ -10,11 +10,13 @@ import org.junit.Test;
 import classes.Administrateur;
 
 public class testDAOAdministrateur {
+    String dirProjetJava = System.getProperty("user.dir");
 
 	@Test
 	/// Ryan GAUNAND
 	/// Test de la récupération complète des administrateurs
 	public void testGetAllAdministrateur() throws SQLException {
+	    System.setProperty("derby.system.home", dirProjetJava + "/BDDSAEEsport");
 		DriverManager.registerDriver(new org.apache.derby.jdbc.EmbeddedDriver());
 		Connection connection = DriverManager.getConnection("jdbc:derby:BDDSAEEsport;create=true");
 		AdministrateurDAO adminDAO = new AdministrateurDAO(connection);
@@ -24,7 +26,7 @@ public class testDAOAdministrateur {
 			
 			List<Administrateur> listAdministrateur = adminDAO.getAll();
 		    Assert.assertNotNull(listAdministrateur);
-		    Assert.assertEquals(8, listAdministrateur.size());
+		    Assert.assertEquals(3, listAdministrateur.size());
 		}catch(Exception e){
 	        e.printStackTrace();
 	    }finally{
@@ -43,10 +45,11 @@ public class testDAOAdministrateur {
 	/// Ryan GAUNAND
 	/// Test de l'ajout d'administrateur 
 	public void testAddAdministrateur() throws SQLException {
+	    System.setProperty("derby.system.home", dirProjetJava + "/BDDSAEEsport");
 		DriverManager.registerDriver(new org.apache.derby.jdbc.EmbeddedDriver());
 		Connection connection = DriverManager.getConnection("jdbc:derby:BDDSAEEsport;create=true");
 		AdministrateurDAO adminDAO = new AdministrateurDAO(connection);
-		Administrateur admin = new Administrateur(12, "Ryan", "r.gaunand", "monMotDePasseSecurise");  
+		Administrateur admin = new Administrateur(10, "Ryan", "r.gaunand", "monMotDePasseSecurise");  
 		
 	    try{
 	    	connection.setAutoCommit(false);
@@ -54,8 +57,8 @@ public class testDAOAdministrateur {
 	    	adminDAO.add(admin);
 	    	
 	        Assert.assertNotNull(adminDAO);
-	        Assert.assertTrue(adminDAO.getById(12).isPresent()); 
-	        Assert.assertEquals(9, adminDAO.getAll().size()); 
+	        Assert.assertNotNull(adminDAO.getById(10).get()); 
+	        Assert.assertEquals(2, adminDAO.getAll().size()); 
 	 
 	        Administrateur admin1 = adminDAO.getById(admin.getIdAdministrateur()).get();
 	        Assert.assertEquals(admin1.getIdAdministrateur(), admin.getIdAdministrateur());
@@ -80,17 +83,18 @@ public class testDAOAdministrateur {
 	/// Ryan GAUNAND
 	/// Test de la mise à jour d'un administrateur en éditant l'entièreté des données de celui-ci (Id, Nom, Login et MDP)
 	public void testUpdateAdministrateur() throws SQLException {
+	    System.setProperty("derby.system.home", dirProjetJava + "/BDDSAEEsport");
 		DriverManager.registerDriver(new org.apache.derby.jdbc.EmbeddedDriver());
 		Connection connection = DriverManager.getConnection("jdbc:derby:BDDSAEEsport;create=true");
 		AdministrateurDAO adminDAO = new AdministrateurDAO(connection);
-		Administrateur admin = new Administrateur(12, "Ryan", "r.gaunand", "monMotDePasseSecurise"); 
+		Administrateur admin = new Administrateur(11, "Ryan", "r.gaunand", "monMotDePasseSecurise"); 
 		
 	    try{
 	        connection.setAutoCommit(false);
 	        
 	        adminDAO.add(admin);
 	 
-	        Integer newId = 13;
+	        Integer newId = 12;
 	        String newName = "Nayr";
 	        String newLogin = "nayr.gaunand";
 	        String newPassword = "monNouveauMotDePasseSecurise";
@@ -124,18 +128,22 @@ public class testDAOAdministrateur {
 	/// Ryan GAUNAND
 	/// Test de supression d'un administrateur
 	public void testDeleteAdministrateur() throws SQLException {
+	    System.setProperty("derby.system.home", dirProjetJava + "/BDDSAEEsport");
 		DriverManager.registerDriver(new org.apache.derby.jdbc.EmbeddedDriver());
 		Connection connection = DriverManager.getConnection("jdbc:derby:BDDSAEEsport;create=true");
 		AdministrateurDAO adminDAO = new AdministrateurDAO(connection);
-		Administrateur admin = new Administrateur(12, "Ryan", "r.gaunand", "monMotDePasseSecurise"); 
+		Administrateur admin = new Administrateur(2, "Ryan", "r.gaunand", "monMotDePasseSecurise"); 
 		
 		try{
 	        connection.setAutoCommit(false);
 	        
-	        adminDAO.add(admin);
-	        adminDAO.delete(admin);   
+	        boolean rowChanged = adminDAO.add(admin);
+	        List<Administrateur> listAdministrateur = adminDAO.getAll();
+	        Assert.assertEquals(4, listAdministrateur.size());
 	        
-	        Assert.assertEquals(6, adminDAO.getAll().size());
+	        adminDAO.delete(admin);           
+	        Assert.assertEquals(3, adminDAO.getAll().size());
+	        
 	        Administrateur admin1 = adminDAO.getById(admin.getIdAdministrateur()).get();
 	        Assert.assertNull(admin1);
 	    }catch(Exception e){
