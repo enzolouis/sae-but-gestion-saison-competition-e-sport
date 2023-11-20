@@ -48,6 +48,7 @@ private Connection dbConnection;
 		for (Integer i : id) {
 			ResultSet rs = st.executeQuery("SELECT * FROM tournoi WHERE idTournoi="+i);
 			if (rs.next()) {
+				Tournoi t = new Tournoi(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), classes.Notoriete.valueOf(rs.getString(5)), classes.EtatTournoi.valueOf(rs.getString(6)));
 				return Optional.of(null);
 			}
 		}
@@ -57,7 +58,7 @@ private Connection dbConnection;
 	//ajoute un arbitre à la liste
 	public boolean add(Tournoi value) throws Exception {
 		Statement st = this.dbConnection.createStatement();
-		int rowcount = st.executeUpdate("INSERT INTO tournoi VALUES ()");
+		int rowcount = st.executeUpdate("INSERT INTO tournoi VALUES()");
 		return rowcount > 0;
 	}
 	
@@ -71,7 +72,7 @@ private Connection dbConnection;
 	//retire un arbitre donné
 	public boolean delete(Tournoi value) throws Exception {
 		Statement st = this.dbConnection.createStatement();
-		int rowcount = st.executeUpdate("DELETE FROM tournoi WHERE idTournoi=");
+		int rowcount = st.executeUpdate("DELETE FROM tournoi WHERE idTournoi=?");
 		return rowcount > 0;
 	}
 	
