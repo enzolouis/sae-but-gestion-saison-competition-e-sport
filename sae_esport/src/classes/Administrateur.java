@@ -20,7 +20,7 @@ public class Administrateur {
 		this.nom = nom;
 	}
 
-	public String getmot_de_passe() {
+	public String getMot_de_passe() {
 		return mot_de_passe;
 	}
 

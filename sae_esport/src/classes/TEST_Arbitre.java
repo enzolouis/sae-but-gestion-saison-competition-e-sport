@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.*;
 
 public class TEST_Arbitre {
+	
+	private Arbitre a;
 
 	@Test
 	public void test() {
@@ -14,7 +16,7 @@ public class TEST_Arbitre {
 	//test des instances correcte
 	@Test
 	public void testArbitreCorrectTraits() {
-		Arbitre a = new Arbitre(1,"Gendre", "Xavier", Nationalite.FR);
+		a = new Arbitre(1,"Gendre", "Xavier", Nationalite.FR);
 		
 		assertEquals(a.getNom(), "Gendre");
 		assertEquals(a.getIdArbitre(), 1);
@@ -25,7 +27,7 @@ public class TEST_Arbitre {
 	//test des instances incorrecte
 	@Test
 	public void testArbitreIncorrectTraits() {
-		Arbitre a = new Arbitre(1,"Gendre", "Xavier", Nationalite.FR);
+		a = new Arbitre(1,"Gendre", "Xavier", Nationalite.FR);
 		
 		assertNotEquals(a.getNom(), "Gendrerior");
 		assertNotEquals(a.getIdArbitre(), 13);
@@ -36,7 +38,7 @@ public class TEST_Arbitre {
 	
 	@Test
 	public void testArbitreChangementNoms() {
-		Arbitre a = new Arbitre(1,"Gendre", "Xavier", Nationalite.FR);
+		a = new Arbitre(1,"Gendre", "Xavier", Nationalite.FR);
 		
 		assertEquals(a.getNom(), "Gendre");
 		
@@ -48,7 +50,7 @@ public class TEST_Arbitre {
 	
 	@Test
 	public void testArbitreChangementPrenoms() {
-		Arbitre a = new Arbitre(1,"Gendre", "Xavier", Nationalite.FR);
+		a = new Arbitre(1,"Gendre", "Xavier", Nationalite.FR);
 		
 		assertEquals(a.getPrenom(), "Xavier");
 		
@@ -60,7 +62,7 @@ public class TEST_Arbitre {
 	
 	@Test
 	public void testArbitreChangementNationalite() {
-		Arbitre a = new Arbitre(1,"Gendre", "Xavier", Nationalite.FR);
+		a = new Arbitre(1,"Gendre", "Xavier", Nationalite.FR);
 		
 		assertEquals(a.getNationalite(), Nationalite.FR);
 		
