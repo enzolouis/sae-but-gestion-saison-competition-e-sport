@@ -1,3 +1,4 @@
+package classes;
 public enum Nationalite {
     // Afghanistan:
     AF("Afghanistan"),

@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import classes.Equipe;
+import classes.Match;
+
 public class Tournoi {
 	private enum Etat_Tournoi {
 		OUVERT,FERME

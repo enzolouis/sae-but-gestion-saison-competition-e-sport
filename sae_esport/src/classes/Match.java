@@ -1,4 +1,4 @@
-package DAOs;
+package classes;
 
 public class Match {
 	private int idMatch;

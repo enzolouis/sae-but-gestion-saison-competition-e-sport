@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import classes.Arbitre;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -24,7 +27,7 @@ public class ArbitreDAO {
 		ResultSet rs = st.executeQuery();
 		ArrayList<Arbitre> arbitres = new ArrayList<Arbitre>();
 		while (rs.next()) {
-			arbitres.add(new Arbitre(rs.getInt(1),rs.getString(2),rs.getString(3),Nationalite.valueOf(rs.getString(4))));
+			arbitres.add(new Arbitre(rs.getInt(1),rs.getString(2),rs.getString(3),classes.Nationalite.valueOf(rs.getString(4))));
 		}
 		return arbitres;
 	}
@@ -35,7 +38,7 @@ public class ArbitreDAO {
 		for (Integer i : id) {
 			ResultSet rs = st.executeQuery("SELECT * FROM arbitre WHERE idArbitre="+i);
 			if (rs.next()) {
-				return Optional.of(new Arbitre(rs.getInt(1),rs.getString(2),rs.getString(3),Nationalite.valueOf(rs.getString(4))));
+				return Optional.of(new Arbitre(rs.getInt(1),rs.getString(2),rs.getString(3),classes.Nationalite.valueOf(rs.getString(4))));
 			}
 		}
 		return Optional.empty();
