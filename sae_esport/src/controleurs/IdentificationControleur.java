@@ -10,7 +10,7 @@ public class IdentificationControleur implements ActionListener {
 	private IdentificationVue vue;
 	private IdentificationModele modele;
 	
-	public IdentificationControleur(IdentificationVue vue) {
+	public IdentificationControleur(IdentificationVue vue) throws Exception {
 		this.vue = vue;
 		this.modele = new IdentificationModele();
 		
@@ -23,8 +23,15 @@ public class IdentificationControleur implements ActionListener {
 			this.vue.setVisible(false);
 			this.vue.dispose();
 		} else {
-			String id = this.vue.textField.getText();
-			
+			String login = this.vue.textFieldUtilisateur.getText();
+			String mdp = this.vue.textFieldMotDePasse.getText();
+			if (this.modele.checkLogins(login, mdp)) {
+				//succes de l'identification gg wp
+				//recuperer le type du login pour ouvrir une page en consequence
+				//possibilite de faire page de test
+			} else {
+				//envoi un msg pour dire ntm
+			}
 		}
 	}
 	
