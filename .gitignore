@@ -35,8 +35,4 @@ bin
 BDDSaeEsport
 derby.log
 
-sae_esport/BDDSaeEsport/BDDSAEEsport/db.lck
-sae_esport/BDDSaeEsport/BDDSAEEsport/log/log.ctrl
-sae_esport/BDDSaeEsport/BDDSAEEsport/log/log1.dat
-sae_esport/BDDSaeEsport/BDDSAEEsport/log/logmirror.ctrl
-sae_esport/BDDSaeEsport/derby.log
+sae_esport/BDDSaeEsport/
