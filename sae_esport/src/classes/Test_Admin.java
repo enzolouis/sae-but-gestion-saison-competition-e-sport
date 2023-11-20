@@ -1,10 +1,10 @@
-package DAOs;
+package classes;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class TEST_Arbitre {
+public class Test_Admin {
 
 	@Test
 	public void test() {

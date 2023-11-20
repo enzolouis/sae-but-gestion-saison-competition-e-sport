@@ -1,11 +1,8 @@
-package DAOs;
+package classes;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import classes.Equipe;
-import classes.Match;
 
 public class Tournoi {
 	private enum Etat_Tournoi {
@@ -24,6 +21,7 @@ public class Tournoi {
 	private Date dateFin;
 	private Notoriete notoriete;
 	private Etat_Tournoi etat;
+	private String login;
 	private String motDePasse;
 	private int idTournoi;
 	private List<Match> matches;
@@ -49,14 +47,59 @@ public class Tournoi {
 	public int getIDTournoi() {
 		return this.idTournoi;
 	}
-	public String getTournoiMDP() {
+	
+	public String getLogin() {
+		return this.login;
+	}
+	
+	public String getMotDePasse() {
 		return this.motDePasse;
+	}
+	public void setTournoiMDP(String MDP) {
+		this.motDePasse = MDP;
 	}
 	
 	public Date getDateDebut() {
 		return this.dateDebut;
 	}
+	public void setDateDebut(Date Datedebut) {
+		this.dateDebut = Datedebut;
+	}
+	
 	public Date getDateFin() {
 		return this.dateFin;
 	}
+	public void setDateFin(Date DateFin) {
+		this.dateDebut = DateFin;
+	}
+	
+	public Notoriete getNotoriete() {
+		return this.notoriete;
+	}
+	public void setNotoriete(Notoriete not) {
+		this.notoriete = not;
+	}
+	
+	public Etat_Tournoi getEtat_Tournoi() {
+		return this.etat;
+	}
+	public void setEtat_Tournoi(Etat_Tournoi etat) {
+		this.etat = etat;
+	}
+	
+	public void NouveauMatch(int idMatch, boolean finale) {
+		this.matches.add(new Match(idMatch, finale));
+	}
+	
+	public List<Equipe> getEquipes(){
+		return this.equipes;
+	}
+	public void remplacerEquipe(Equipe equipeARemplacer, Equipe EquipeAMettre) {
+		for (Equipe i : this.equipes) {
+			if(i == equipeARemplacer) {
+				i = EquipeAMettre;
+			}
+		}
+	}
+	
 }

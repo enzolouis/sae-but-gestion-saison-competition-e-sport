@@ -18,10 +18,14 @@ public class Equipe {
 		this.idEquipe = id;
 		this.nom = nom;
 		this.nationalite = nat;
-		this.joueurs = new ArrayList<>();
 		this.dispose = dispose;
 		this.pointsSaison = pointsSaison;
 		this.rangSaisonPrecedante =rangSaisonPrecedante;
+		this.joueurs = new ArrayList<>();
+		
+		for(Joueur i : joueurs) {
+			this.joueurs.add(i);
+		}
 	}
 
 	public String getNom() {
@@ -41,10 +45,6 @@ public class Equipe {
 	//Retourne la liste de joueurs
 	public List<Joueur> getListeJoueurs(){
 		return this.joueurs;
-	}
-	//Retourne un joueur spécifique
-	public Joueur getJoueur(int i){
-		return this.joueurs.get(i);
 	}
 	
 	public int getPointsSaison(){

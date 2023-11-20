@@ -4,12 +4,14 @@ public class Administrateur {
 	
 	private int idAdministrateur;
 	private String nom;
-	private String mot_de_passe;
+	private String login;
+	private String motDePasse;
 	
-	public Administrateur(int id, String nom, String mot_de_passe) {
+	public Administrateur(int id, String nom, String login, String mdp) {
 		this.idAdministrateur = id;
 		this.nom = nom;
-		this.mot_de_passe = mot_de_passe;
+		this.login = login;
+		this.motDePasse = mdp;
 	}
 
 	public String getNom() {
@@ -19,13 +21,21 @@ public class Administrateur {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-
-	public String getmot_de_passe() {
-		return mot_de_passe;
+	
+	public String getLogin() {
+		return login;
+	}
+	
+	public void setLogin(String login) {
+		this.login = login;
 	}
 
-	public void setmot_de_passe(String mot_de_passe) {
-		this.mot_de_passe = mot_de_passe;
+	public String getMotDePasse() {
+		return motDePasse;
+	}
+
+	public void setMotDePasse(String motDePasse) {
+		this.motDePasse = motDePasse;
 	}
 
 	public int getIdAdministrateur() {
