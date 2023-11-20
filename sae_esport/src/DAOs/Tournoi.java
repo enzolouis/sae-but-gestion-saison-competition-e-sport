@@ -18,7 +18,7 @@ public class Tournoi {
 	
 	private String nomTournoi;
 	private Date dateDebut;
-	private Date DateFin;
+	private Date dateFin;
 	private Notoriete notoriete;
 	private Etat_Tournoi etat;
 	private String motDePasse;
@@ -31,7 +31,7 @@ public class Tournoi {
 					String motDePasse, int idTournoi, List<Equipe> equipes) {
 		this.nomTournoi = nomTournoi;
 		this.dateDebut =dateDebut;
-		this.DateFin = DateFin;
+		this.dateFin = DateFin;
 		this.notoriete = notoriete;
 		this.etat = etat;
 		this.motDePasse = motDePasse;
@@ -41,5 +41,19 @@ public class Tournoi {
 		for(Equipe e : equipes) {
 			this.equipes.add(e);
 		}
+	}
+	
+	public int getIDTournoi() {
+		return this.idTournoi;
+	}
+	public String getTournoiMDP() {
+		return this.motDePasse;
+	}
+	
+	public Date getDateDebut() {
+		return this.dateDebut;
+	}
+	public Date getDateFin() {
+		return this.dateFin;
 	}
 }
