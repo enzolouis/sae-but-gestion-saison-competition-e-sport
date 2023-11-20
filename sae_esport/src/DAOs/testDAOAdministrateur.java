@@ -137,9 +137,8 @@ public class testDAOAdministrateur {
 		try{
 	        connection.setAutoCommit(false);
 	        
-	        boolean rowChanged = adminDAO.add(admin);
-	        List<Administrateur> listAdministrateur = adminDAO.getAll();
-	        Assert.assertEquals(4, listAdministrateur.size());
+	        adminDAO.add(admin);
+	        Assert.assertEquals(4, adminDAO.getAll().size());
 	        
 	        adminDAO.delete(admin);           
 	        Assert.assertEquals(3, adminDAO.getAll().size());
