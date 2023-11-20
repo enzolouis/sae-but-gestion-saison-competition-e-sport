@@ -66,7 +66,7 @@ private Connection dbConnection;
 	//update un administrateur donné
 	public boolean update(classes.Administrateur value) throws Exception {
 		
-		PreparedStatement st = this.dbConnection.prepareStatement("UPDATE admin SET nom=?, login=?, mdp=?, WHERE idSujet=?");
+		PreparedStatement st = this.dbConnection.prepareStatement("UPDATE admin SET nom=?, login=?, motDePasse=? WHERE idAdmin=?");
 		st.setString(1, value.getNom()); st.setString(2, value.getLogin());
 		st.setString(3, value.getMotDePasse()); st.setInt(4, value.getIdAdministrateur());
 		int rowcount = st.executeUpdate();
