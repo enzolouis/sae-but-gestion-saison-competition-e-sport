@@ -48,19 +48,18 @@ private Connection dbConnection;
 	//ajoute un administrateur à la liste
 	public boolean add(classes.Administrateur value) throws Exception {
 		
-		PreparedStatement st = this.dbConnection.prepareStatement("SELECT NEXT VALUE FOR seqIdAdmin FROM dual");
+		PreparedStatement st = this.dbConnection.prepareStatement("SELECT NEXT VALUE FOR seqIdAdmin FROM admin");
 		ResultSet rs = st.executeQuery();
 		int id = 0;
 		if (rs.next()) {
-			System.out.println(rs.getInt(1));
+			id = rs.getInt(1);
 		}
-		return false;
-		//value.setIdAdministrateur(id);
-		//st = this.dbConnection.prepareStatement("INSERT INTO admin VALUES (?, ?, ?, ?)");
-		//st.setInt(1, id); st.setString(2, value.getNom());
-		//st.setString(3, value.getLogin()); st.setString(4, value.getMotDePasse());
-		//int rowcount = st.executeUpdate();
-		//return rowcount > 0;
+		value.setIdAdministrateur(id);
+		st = this.dbConnection.prepareStatement("INSERT INTO admin VALUES (?, ?, ?, ?)");
+		st.setInt(1, id); st.setString(2, value.getNom());
+		st.setString(3, value.getLogin()); st.setString(4, value.getMotDePasse());
+		int rowcount = st.executeUpdate();
+		return rowcount > 0;
 			
 	}
 	
