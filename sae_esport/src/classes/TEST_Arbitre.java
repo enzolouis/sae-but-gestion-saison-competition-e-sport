@@ -7,11 +7,6 @@ import org.junit.*;
 public class TEST_Arbitre {
 	
 	private Arbitre a;
-
-	@Test
-	public void test() {
-		fail("Not yet implemented");
-	}
 	
 	//test des instances correcte
 	@Test
@@ -70,6 +65,18 @@ public class TEST_Arbitre {
 		
 		assertEquals(a.getNationalite(), Nationalite.GA);
 		assertNotEquals(a.getNationalite(), Nationalite.FR);
+	}
+	
+	@Test
+	public void testArbitreChangementID() {
+		a = new Arbitre(1,"Gendre", "Xavier", Nationalite.FR);
+		
+		assertEquals(a.getIdArbitre(), 1);
+		
+		a.setIdArbitre(3);
+		
+		assertEquals(a.getIdArbitre(), 3);
+		assertNotEquals(a.getIdArbitre(), 1);
 	}
 	
 	
