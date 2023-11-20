@@ -49,14 +49,17 @@ public class ArbitreDAO {
 	//peu importe l'id que vous mettrez à l'arbitre, il sera changé
 	public boolean add(Arbitre value) throws Exception {
 
-		Statement st = this.dbConnection.createStatement();
-		ResultSet rs = st.executeQuery("SELECT NEXT VALUE FOR seqIdArbitre FROM DUAL");
+		PreparedStatement st = this.dbConnection.prepareStatement("SELECT NEXT VALUE FOR seqIdArbitre FROM DUAL");
+		ResultSet rs = st.executeQuery();
 		int id = 0;
 		if (rs.next()) {
 			id = rs.getInt(1);
 		}
 		value.setIdArbitre(id);
-		int rowcount = st.executeUpdate("INSERT INTO arbitre VALUES ("+id+", "+value.getNom()+"', '"+value.getPrenom()+"', '"+value.getNationalite()+"')");
+		st = this.dbConnection.prepareStatement("INSERT INTO arbitre VALUES (?,?,?,?)");
+		st.setInt(1, id); st.setString(2, value.getNom()); 
+		st.setString(3, value.getPrenom()); st.setString(4, value.getNationalite().toString());
+		int rowcount = st.executeUpdate();
 		return rowcount > 0;
 		
 	}
@@ -64,8 +67,10 @@ public class ArbitreDAO {
 	//update un arbitre donné
 	public boolean update(Arbitre value) throws Exception {
 		
-		Statement st = this.dbConnection.createStatement();
-		int rowcount = st.executeUpdate("UPDATE arbitre SET nom='"+value.getNom()+"', prenom='"+value.getPrenom()+", nationalite='"+value.getNationalite()+"' WHERE idSujet="+value.getIdArbitre());
+		PreparedStatement st = this.dbConnection.prepareStatement("UPDATE arbitre SET nom=?, prenom=?, nationalite=? WHERE idSujet=?");
+		st.setString(1, value.getNom()); st.setString(2, value.getPrenom());
+		st.setString(3, value.getNationalite().toString()); st.setInt(4, value.getIdArbitre());
+		int rowcount = st.executeUpdate();
 		return rowcount > 0;
 		
 	}
@@ -73,8 +78,9 @@ public class ArbitreDAO {
 	//retire un arbitre donné
 	public boolean delete(Arbitre value) throws Exception {
 		
-		Statement st = this.dbConnection.createStatement();
-		int rowcount = st.executeUpdate("DELETE FROM arbitre WHERE idArbitre="+value.getIdArbitre());
+		PreparedStatement st = this.dbConnection.prepareStatement("DELETE FROM arbitre WHERE idArbitre=?");
+		st.setInt(1, value.getIdArbitre());
+		int rowcount = st.executeUpdate();
 		return rowcount > 0;
 	}
 

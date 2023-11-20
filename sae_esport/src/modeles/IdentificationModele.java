@@ -23,12 +23,12 @@ public class IdentificationModele {
 	private Tournoi tournoiOuvert;
 	private Utilisateur utilisateur = null;
 	
-	public IdentificationModele() throws Exception {
+	public IdentificationModele(Connection dbConnection) throws Exception {
 		
 		//création de la connexion
 		DriverManager.registerDriver(new org.apache.derby.jdbc.EmbeddedDriver());
-		String urlConnexion = "jdbc:derby:BDDSAEEsport;create=true";
-		this.dbConnection = DriverManager.getConnection(urlConnexion);
+		
+		this.dbConnection = dbConnection;
 		this.adminDAO = new AdministrateurDAO(dbConnection);
 		//initalisation des variables
 		//recuperer le tournoi ouvert à l'aide du DAO (créer un DAO tournoi)
@@ -39,10 +39,10 @@ public class IdentificationModele {
 	
 	public boolean checkLogins(String login, String motDePasse) {
 		JFrame jFrametest = new JFrame();
-		if (this.tournoiOuvert.getLogin() == login && this.tournoiOuvert.getMotDePasse() == motDePasse) {
-			this.utilisateur = Utilisateur.ARBITRE;
-			    JOptionPane.showMessageDialog(jFrametest, "Arbitre login");
-		}
+		//if (this.tournoiOuvert.getLogin() == login && this.tournoiOuvert.getMotDePasse() == motDePasse) {
+		//	this.utilisateur = Utilisateur.ARBITRE;
+		//	    JOptionPane.showMessageDialog(jFrametest, "Arbitre login");
+		//}
 		for (Administrateur a : admins) {
 			if (a.getLogin() == login && a.getMotDePasse() == motDePasse) {
 				this.utilisateur = Utilisateur.ADMIN;

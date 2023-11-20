@@ -22,7 +22,7 @@ private Connection dbConnection;
 	
 	//Renvoie l'ensemble des administrateurs
 	public List<classes.Administrateur> getAll() throws Exception {
-		String reqSelectAdministrateur = "SELECT * FROM administrateur";
+		String reqSelectAdministrateur = "SELECT * FROM admin";
 		PreparedStatement st = this.dbConnection.prepareStatement(reqSelectAdministrateur);
 		ResultSet rs = st.executeQuery();
 		ArrayList<classes.Administrateur> administrateur = new ArrayList<classes.Administrateur>();
@@ -34,11 +34,12 @@ private Connection dbConnection;
 	
 	//retourne un Administrateur specifique
 	public Optional<classes.Administrateur> getById(Integer... id) throws Exception {
-		Statement st = this.dbConnection.createStatement();
+		PreparedStatement st = this.dbConnection.prepareStatement("SELECT * FROM admin WHERE idAdmin=?");
 		for (Integer i : id) {
-			ResultSet rs = st.executeQuery("SELECT * FROM administrateur WHERE idadministrateur="+i);
+			st.setInt(1, i);
+			ResultSet rs = st.executeQuery();
 			if (rs.next()) {
-				return Optional.of(new classes.Administrateur(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4)));
+				return Optional.of(new classes.Administrateur(i,rs.getString(2),rs.getString(3),rs.getString(4)));
 			}
 		}
 		return Optional.empty();
@@ -46,24 +47,30 @@ private Connection dbConnection;
 	
 	//ajoute un administrateur à la liste
 	public boolean add(classes.Administrateur value) throws Exception {
-
-		Statement st = this.dbConnection.createStatement();
-		ResultSet rs = st.executeQuery("SELECT NEXT VALUE FOR seqIdAdmin FROM DUAL");
+		
+		PreparedStatement st = this.dbConnection.prepareStatement("SELECT NEXT VALUE FOR seqIdAdmin FROM dual");
+		ResultSet rs = st.executeQuery();
 		int id = 0;
 		if (rs.next()) {
-			id = rs.getInt(1);
+			System.out.println(rs.getInt(1));
 		}
-		value.setIdAdministrateur(id);
-		int rowcount = st.executeUpdate("INSERT INTO arbitre VALUES ("+id+", "+value.getNom()+"', '"+value.getLogin()+"', '"+value.getMotDePasse()+"')");
-		return rowcount > 0;
+		return false;
+		//value.setIdAdministrateur(id);
+		//st = this.dbConnection.prepareStatement("INSERT INTO admin VALUES (?, ?, ?, ?)");
+		//st.setInt(1, id); st.setString(2, value.getNom());
+		//st.setString(3, value.getLogin()); st.setString(4, value.getMotDePasse());
+		//int rowcount = st.executeUpdate();
+		//return rowcount > 0;
 			
 	}
 	
 	//update un administrateur donné
 	public boolean update(classes.Administrateur value) throws Exception {
 		
-		Statement st = this.dbConnection.createStatement();
-		int rowcount = st.executeUpdate("UPDATE administrateur SET nom='"+value.getNom()+"', login='"+value.getLogin()+"', mdp='"+value.getMotDePasse()+", WHERE idSujet="+value.getIdAdministrateur());
+		PreparedStatement st = this.dbConnection.prepareStatement("UPDATE admin SET nom=?, login=?, mdp=?, WHERE idSujet=?");
+		st.setString(1, value.getNom()); st.setString(2, value.getLogin());
+		st.setString(3, value.getMotDePasse()); st.setInt(4, value.getIdAdministrateur());
+		int rowcount = st.executeUpdate();
 		return rowcount > 0;
 		
 	}
@@ -71,8 +78,9 @@ private Connection dbConnection;
 	//retire un administrateur donné
 	public boolean delete(classes.Administrateur value) throws Exception {
 		
-		Statement st = this.dbConnection.createStatement();
-		int rowcount = st.executeUpdate("DELETE FROM administrateur WHERE idAdministrateur="+value.getIdAdministrateur());
+		PreparedStatement st = this.dbConnection.prepareStatement("DELETE FROM admin WHERE idAdmin=?");
+		st.setInt(1, value.getIdAdministrateur());
+		int rowcount = st.executeUpdate();
 		return rowcount > 0;
 	}
 	

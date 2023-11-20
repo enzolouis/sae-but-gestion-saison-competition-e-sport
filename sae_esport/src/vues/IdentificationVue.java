@@ -13,8 +13,9 @@ import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.sql.Connection;
+import java.sql.DriverManager;
 
-import javax.swing.JTextField;
 import java.awt.FlowLayout;
 import javax.swing.JButton;
 import java.awt.Font;
@@ -31,18 +32,21 @@ import javax.swing.JSeparator;
 public class IdentificationVue extends JFrame {
 
     private JPanel contentPane;
-    private JTextField textFieldMotDePasse;
-    private JTextField textFieldUtilisateur;
+    private PlaceholderTextField textFieldMotDePasse;
+    private PlaceholderTextField textFieldUtilisateur;
     private IdentificationControleur controleur;
+    private Connection dbConnection;
     
-    /**
-     * Launch the application.
-     */
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    IdentificationVue frame = new IdentificationVue();
+                	String dirProjetJava = System.getProperty("user.dir");
+            		System.setProperty("derby.system.home", dirProjetJava+"/BDDSAEEsport");
+            		DriverManager.registerDriver(new org.apache.derby.jdbc.EmbeddedDriver());
+        			String urlConnexion = "jdbc:derby:BDDSAEEsport;create=true";
+        			Connection dbConnection = DriverManager.getConnection(urlConnexion);
+                    IdentificationVue frame = new IdentificationVue(dbConnection);
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -50,14 +54,19 @@ public class IdentificationVue extends JFrame {
             }
         });
     }
-
-    /**
-     * Create the frame.
-     * @throws Exception 
-     */
-    public IdentificationVue() throws Exception {
+    
+    public String getUtilisateurContenu() {
+    	return this.textFieldUtilisateur.getText();
+    }
+    
+    public String getMotDePasseContentu() {
+    	return this.textFieldMotDePasse.getText();
+    }
+    
+    public IdentificationVue(Connection dbConnection) throws Exception {
     	
-    	this.controleur = new IdentificationControleur(this);
+    	this.dbConnection = dbConnection;
+    	this.controleur = new IdentificationControleur(this, dbConnection);
     	
     	setMinimumSize(new Dimension(450, 300));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -81,11 +90,12 @@ public class IdentificationVue extends JFrame {
         panelUtilisateur.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
         
         JLabel labelNomUtilisateur = new JLabel("Nom d'utilisateur :");
-        labelNomUtilisateur.setForeground(new Color(255, 255, 255));
+        labelNomUtilisateur.setForeground(new Color(102, 173, 221));
         labelNomUtilisateur.setPreferredSize(new Dimension(110, 30));
         panelUtilisateur.add(labelNomUtilisateur);
         
-        textFieldUtilisateur = new JTextField();
+        textFieldUtilisateur = new PlaceholderTextField();
+        textFieldUtilisateur.setPlaceholder("toto234");
         textFieldUtilisateur.setBorder(new EmptyBorder(5, 5, 5, 5));
         textFieldUtilisateur.setForeground(new Color(255, 255, 255));
         textFieldUtilisateur.setBackground(new Color(29, 88, 129));
@@ -97,11 +107,12 @@ public class IdentificationVue extends JFrame {
         panelUtilisateurMotDePasse.add(panelMotDePasse);
         
         JLabel labelMotDePasse = new JLabel("Mot de passe :");
-        labelMotDePasse.setForeground(new Color(255, 255, 255));
+        labelMotDePasse.setForeground(new Color(102, 173, 221));
         labelMotDePasse.setPreferredSize(new Dimension(110, 30));
         panelMotDePasse.add(labelMotDePasse);
         
-        textFieldMotDePasse = new JTextField();
+        textFieldMotDePasse = new PlaceholderTextField();
+        textFieldMotDePasse.setPlaceholder("*********");
         textFieldMotDePasse.setBorder(new EmptyBorder(5, 5, 5, 5));
         textFieldMotDePasse.setBackground(new Color(29, 88, 129));
         textFieldMotDePasse.setForeground(new Color(255, 255, 255));
@@ -134,11 +145,13 @@ public class IdentificationVue extends JFrame {
         panelTitre.setLayout(new BorderLayout(0, 0));
         
         JSeparator separatorTitre = new JSeparator();
+        separatorTitre.setBackground(new Color(102, 173, 221));
+        separatorTitre.setForeground(new Color(102, 173, 221));
         panelTitre.add(separatorTitre, BorderLayout.SOUTH);
         
         JLabel titreFenetre = new JLabel("CONNEXION");
         titreFenetre.setHorizontalAlignment(SwingConstants.CENTER);
-        titreFenetre.setForeground(new Color(41, 128, 185));
+        titreFenetre.setForeground(new Color(102, 173, 221));
         titreFenetre.setFont(new Font("Tahoma", Font.BOLD, 25));
         titreFenetre.setBorder(new EmptyBorder(10, 10, 10, 10));
         panelTitre.add(titreFenetre);
@@ -160,14 +173,6 @@ public class IdentificationVue extends JFrame {
         int width, int height) {
             g.drawRoundRect(x, y, width-1, height-1, r, r);
         }
-    }
-    
-    public String getUtilisateurContent() {
-    	return this.textFieldUtilisateur.getText();
-    }
-    
-    public String getMotDePasseContent() {
-    	return this.textFieldMotDePasse.getText();
     }
     
 }
