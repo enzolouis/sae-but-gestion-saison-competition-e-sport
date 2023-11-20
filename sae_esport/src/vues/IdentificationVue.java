@@ -95,7 +95,7 @@ public class IdentificationVue extends JFrame {
         panelUtilisateur.add(labelNomUtilisateur);
         
         textFieldUtilisateur = new PlaceholderTextField();
-        textFieldUtilisateur.setPlaceholder("toto234");
+        textFieldUtilisateur.setPlaceholder("login");
         textFieldUtilisateur.setBorder(new EmptyBorder(5, 5, 5, 5));
         textFieldUtilisateur.setForeground(new Color(255, 255, 255));
         textFieldUtilisateur.setBackground(new Color(29, 88, 129));
@@ -112,7 +112,7 @@ public class IdentificationVue extends JFrame {
         panelMotDePasse.add(labelMotDePasse);
         
         textFieldMotDePasse = new PlaceholderTextField();
-        textFieldMotDePasse.setPlaceholder("*********");
+        textFieldMotDePasse.setPlaceholder("mot de passe");
         textFieldMotDePasse.setBorder(new EmptyBorder(5, 5, 5, 5));
         textFieldMotDePasse.setBackground(new Color(29, 88, 129));
         textFieldMotDePasse.setForeground(new Color(255, 255, 255));

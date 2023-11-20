@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import classes.*;
 import DAOs.AdministrateurDAO;
 import DAOs.ArbitreDAO;
+import DAOs.TournoiDAO;
 
 public class IdentificationModele {
 	
@@ -20,6 +21,7 @@ public class IdentificationModele {
 	private List<Administrateur> admins;
 	private AdministrateurDAO adminDAO;
 	private Connection dbConnection;
+	private TournoiDAO tournoiDAO;
 	private Tournoi tournoiOuvert;
 	private Utilisateur utilisateur = null;
 	
@@ -31,6 +33,9 @@ public class IdentificationModele {
 		this.dbConnection = dbConnection;
 		this.adminDAO = new AdministrateurDAO(dbConnection);
 		//initalisation des variables
+		this.tournoiDAO = new TournoiDAO(dbConnection);
+		this.tournoiOuvert = tournoiDAO.getTournoiOuvert().get();
+		
 		//recuperer le tournoi ouvert à l'aide du DAO (créer un DAO tournoi)
 		//recuperer les logins d'arbitre, ajouter les check logins
 		this.admins = adminDAO.getAll();
@@ -44,18 +49,26 @@ public class IdentificationModele {
 		//	    JOptionPane.showMessageDialog(jFrametest, "Arbitre login");
 		//}
 		for (Administrateur a : admins) {
-			if (a.getLogin() == login && a.getMotDePasse() == motDePasse) {
+			System.out.println(a.getLogin()+" "+a.getMotDePasse());
+			System.out.println(login+" "+motDePasse);
+			if (a.getLogin().equals(login) && a.getMotDePasse().equals(motDePasse)) {
 				this.utilisateur = Utilisateur.ADMIN;
 				JOptionPane.showMessageDialog(jFrametest, "Admin login");
 				return true;
 			}
+			if (this.tournoiOuvert.getLogin().equals(login) && this.tournoiOuvert.getMotDePasse().equals(motDePasse)) {
+				JOptionPane.showMessageDialog(jFrametest, "Arbitre login");
+				return true;
+			}
 		}
-		JOptionPane.showMessageDialog(jFrametest, "Aucun login");
+		JOptionPane.showMessageDialog(jFrametest, "Login faux");
 		return false;
 	}
 	
 	public Utilisateur getUtilisateur() {
 		return this.utilisateur;
 	}
+	
+	
 
 }

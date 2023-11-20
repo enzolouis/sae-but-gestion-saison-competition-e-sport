@@ -20,7 +20,6 @@ public class IdentificationControleur implements ActionListener {
 		this.vue = vue;
 		this.dbConnection = dbConnection;
 		this.modele = new IdentificationModele(dbConnection);
-		
 	}
 	
 	@Override
@@ -31,7 +30,7 @@ public class IdentificationControleur implements ActionListener {
 			this.vue.dispose();
 		} else {
 			String login = this.vue.getUtilisateurContenu();
-			String mdp = this.vue.getUtilisateurContenu();
+			String mdp = this.vue.getMotDePasseContentu();
 			this.modele.checkLogins(login, mdp);
 		}
 	}	

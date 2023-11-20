@@ -3,6 +3,7 @@ package DAOs;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,29 +56,32 @@ private Connection dbConnection;
 	
 	//ajoute un arbitre à la liste
 	public boolean add(Tournoi value) throws Exception {
-
 		Statement st = this.dbConnection.createStatement();
 		int rowcount = st.executeUpdate("INSERT INTO tournoi VALUES ()");
 		return rowcount > 0;
-		
 	}
 	
 	//update un arbitre donné
 	public boolean update(Tournoi value) throws Exception {
-		
 		Statement st = this.dbConnection.createStatement();
 		int rowcount = st.executeUpdate("UPDATE tournoi SET ");
 		return rowcount > 0;
-		
 	}
 	
 	//retire un arbitre donné
 	public boolean delete(Tournoi value) throws Exception {
-		
 		Statement st = this.dbConnection.createStatement();
 		int rowcount = st.executeUpdate("DELETE FROM tournoi WHERE idTournoi=");
 		return rowcount > 0;
-		
+	}
+	
+	public Optional<Tournoi> getTournoiOuvert() throws Exception {
+		Statement st = this.dbConnection.createStatement();
+		ResultSet rs = st.executeQuery("SELECT * FROM tournoi WHERE ouvert=OUVERT");
+		if (rs.next()) {
+			return Optional.of(null);
+		}
+		return Optional.empty();
 	}
 
 }
