@@ -5,10 +5,10 @@ import java.util.Date;
 import java.util.List;
 
 public class Tournoi {
-	private enum Etat_Tournoi {
+	public enum EtatTournoi {
 		OUVERT,FERME
 	}
-	private enum Notoriete{
+	public enum Notoriete{
 		LOCAL,
 		REGIONAL,
 		NATIONAL,
@@ -20,16 +20,17 @@ public class Tournoi {
 	private Date dateDebut;
 	private Date dateFin;
 	private Notoriete notoriete;
-	private Etat_Tournoi etat;
+	private EtatTournoi etat;
 	private String login;
 	private String motDePasse;
 	private int idTournoi;
 	private List<Match> matches;
 	private List<Equipe> equipes;
-	
+
 	public Tournoi(String nomTournoi, Date dateDebut,Date DateFin,
-					Notoriete notoriete, Etat_Tournoi etat,
+					Notoriete notoriete, EtatTournoi etat,
 					String motDePasse, int idTournoi, List<Equipe> equipes) {
+		this.idTournoi = idTournoi;
 		this.nomTournoi = nomTournoi;
 		this.dateDebut =dateDebut;
 		this.dateFin = DateFin;
@@ -47,9 +48,15 @@ public class Tournoi {
 	public int getIDTournoi() {
 		return this.idTournoi;
 	}
+	public void setIDTournoi(int id) {
+		this.idTournoi = id;
+	}
 	
 	public String getLogin() {
 		return this.login;
+	}
+	public void setLogin(String login) {
+		this.login = login;
 	}
 	
 	public String getMotDePasse() {
@@ -80,10 +87,10 @@ public class Tournoi {
 		this.notoriete = not;
 	}
 	
-	public Etat_Tournoi getEtat_Tournoi() {
+	public EtatTournoi getEtat_Tournoi() {
 		return this.etat;
 	}
-	public void setEtat_Tournoi(Etat_Tournoi etat) {
+	public void setEtat_Tournoi(EtatTournoi etat) {
 		this.etat = etat;
 	}
 	
