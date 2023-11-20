@@ -9,10 +9,15 @@ import DAOs.ArbitreDAO;
 
 public class IdentificationModele {
 	
+	enum Utilisateur {
+		ADMIN,ARBITRE
+	}
+	
 	private List<Administrateur> admins;
 	private AdminDAO adminDAO;
 	private Connection dbConnection;
 	private Tournoi tournoiOuvert;
+	private Utilisateur utilisateur = null;
 	
 	public IdentificationModele() throws Exception {
 		
@@ -29,9 +34,16 @@ public class IdentificationModele {
 	}
 	
 	public boolean checkLogins(String login, String motDePasse) {
-		for (Administrateur a : admins) {
-			if (a.getIdAdmi)
+		if (this.tournoiOuvert.getLogin() == login && this.tournoiOuvert.getMotDePasse() == motDePasse) {
+			this.utilisateur = Utilisateur.ARBITRE;
 		}
+		for (Administrateur a : admins) {
+			if (a.getLogin() == login && a.getMotDePasse() == motDePasse) {
+				this.utilisateur = Utilisateur.ADMIN;
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

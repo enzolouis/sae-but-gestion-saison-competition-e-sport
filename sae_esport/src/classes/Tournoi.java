@@ -21,6 +21,7 @@ public class Tournoi {
 	private Date dateFin;
 	private Notoriete notoriete;
 	private Etat_Tournoi etat;
+	private String login;
 	private String motDePasse;
 	private int idTournoi;
 	private List<Match> matches;
@@ -46,7 +47,12 @@ public class Tournoi {
 	public int getIDTournoi() {
 		return this.idTournoi;
 	}
-	public String getTournoiMDP() {
+	
+	public String getLogin() {
+		return this.login;
+	}
+	
+	public String getMotDePasse() {
 		return this.motDePasse;
 	}
 	
