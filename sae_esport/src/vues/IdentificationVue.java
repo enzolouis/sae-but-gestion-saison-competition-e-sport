@@ -13,6 +13,8 @@ import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.sql.Connection;
+import java.sql.DriverManager;
 
 import javax.swing.JTextField;
 import java.awt.FlowLayout;
@@ -34,6 +36,7 @@ public class IdentificationVue extends JFrame {
     private JTextField textFieldMotDePasse;
     private JTextField textFieldUtilisateur;
     private IdentificationControleur controleur;
+    private Connection dbConnection;
     
     /**
      * Launch the application.
@@ -42,7 +45,12 @@ public class IdentificationVue extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    IdentificationVue frame = new IdentificationVue();
+                	String dirProjetJava = System.getProperty("user.dir");
+            		System.setProperty("derby.system.home", dirProjetJava+"/BDDSAEEsport");
+            		DriverManager.registerDriver(new org.apache.derby.jdbc.EmbeddedDriver());
+        			String urlConnexion = "jdbc:derby:BDDSAEEsport;create=true";
+        			Connection dbConnection = DriverManager.getConnection(urlConnexion);
+                    IdentificationVue frame = new IdentificationVue(dbConnection);
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -55,9 +63,10 @@ public class IdentificationVue extends JFrame {
      * Create the frame.
      * @throws Exception 
      */
-    public IdentificationVue() throws Exception {
+    public IdentificationVue(Connection dbConnection) throws Exception {
     	
-    	this.controleur = new IdentificationControleur(this);
+    	this.dbConnection = dbConnection;
+    	this.controleur = new IdentificationControleur(this, dbConnection);
     	
     	setMinimumSize(new Dimension(450, 300));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -1,23 +1,10 @@
 ----------------------------------------------------------------
-Mon Nov 20 11:53:52 CET 2023:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.2.2 - (1181258): instance a816c00e-018b-ec5d-7e5d-0000123d2b25 
-on database directory C:\Users\rasoa\Documents\GitHub\sae-gestion-saison-competition-e-sport\sae_esport\BDDSaeEsport\BDDSAEEsport  with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@22d8cfe0 
-Loaded from file:/C:/Users/rasoa/Documents/GitHub/sae-gestion-saison-competition-e-sport/sae_esport/src/derby.jar
+Mon Nov 20 14:41:57 CET 2023:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.2.2 - (1181258): instance a816c00e-018b-ecf7-605e-000044213a6c 
+on database directory C:\Users\rasoa\Documents\GitHub\sae-gestion-esport\sae-gestion-saison-competition-e-sport\sae_esport\BDDSAEEsport\BDDSAEEsport  with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@22d8cfe0 
+Loaded from file:/C:/Users/rasoa/Documents/GitHub/sae-gestion-esport/sae-gestion-saison-competition-e-sport/sae_esport/src/derby.jar
 java.vendor=Eclipse Adoptium
 java.runtime.version=17.0.8+7
-user.dir=C:\Users\rasoa\Documents\GitHub\sae-gestion-saison-competition-e-sport\sae_esport
-derby.system.home=C:\Users\rasoa\Documents\GitHub\sae-gestion-saison-competition-e-sport\sae_esport/BDDSAEEsport
+user.dir=C:\Users\rasoa\Documents\GitHub\sae-gestion-esport\sae-gestion-saison-competition-e-sport\sae_esport
+derby.system.home=C:\Users\rasoa\Documents\GitHub\sae-gestion-esport\sae-gestion-saison-competition-e-sport\sae_esport/BDDSAEEsport
 Database Class Loader started - derby.database.classpath=''
-Mon Nov 20 11:53:52 CET 2023 Thread[main,5,main] (XID = 243), (SESSIONID = 1), (DATABASE = BDDSAEEsport), (DRDAID = null), Cleanup action starting
-Mon Nov 20 11:53:52 CET 2023 Thread[main,5,main] (XID = 243), (SESSIONID = 1), (DATABASE = BDDSAEEsport), (DRDAID = null), Failed Statement is: CREATE SEQUENCE seqIdArbitre START WITH 1 INCREMENT BY 1
-ERROR X0Y68: Sequence 'SEQIDARBITRE' already exists.
-	at org.apache.derby.iapi.error.StandardException.newException(StandardException.java:303)
-	at org.apache.derby.impl.sql.execute.CreateSequenceConstantAction.executeConstantAction(CreateSequenceConstantAction.java:114)
-	at org.apache.derby.impl.sql.execute.MiscResultSet.open(MiscResultSet.java:61)
-	at org.apache.derby.impl.sql.GenericPreparedStatement.executeStmt(GenericPreparedStatement.java:436)
-	at org.apache.derby.impl.sql.GenericPreparedStatement.execute(GenericPreparedStatement.java:317)
-	at org.apache.derby.impl.jdbc.EmbedStatement.executeStatement(EmbedStatement.java:1242)
-	at org.apache.derby.impl.jdbc.EmbedPreparedStatement.executeStatement(EmbedPreparedStatement.java:1686)
-	at org.apache.derby.impl.jdbc.EmbedPreparedStatement.executeUpdate(EmbedPreparedStatement.java:308)
-	at createTablesAdminArbitre.main(createTablesAdminArbitre.java:23)
-Cleanup action completed
