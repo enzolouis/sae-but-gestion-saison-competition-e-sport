@@ -50,7 +50,6 @@ public class Test_Admin {
 		assertEquals(admin.getLogin(),"login");
 		
 		admin.setLogin("logout");
-		
 
 		assertEquals(admin.getLogin(),"logout");
 		assertNotEquals(admin.getLogin(),"login");
