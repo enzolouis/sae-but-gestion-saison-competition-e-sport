@@ -30,8 +30,8 @@ public class IdentificationControleur implements ActionListener {
 			this.vue.setVisible(false);
 			this.vue.dispose();
 		} else {
-			String login = this.vue.getUtilisateurContent();
-			String mdp = this.vue.getUtilisateurContent();
+			String login = this.vue.getUtilisateurContenu();
+			String mdp = this.vue.getUtilisateurContenu();
 			this.modele.checkLogins(login, mdp);
 		}
 	}	
