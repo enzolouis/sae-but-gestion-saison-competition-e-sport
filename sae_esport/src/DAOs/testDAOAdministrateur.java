@@ -102,10 +102,10 @@ public class testDAOAdministrateur {
 	        adminDAO.update(admin);
 	 
 	        Administrateur admin1 = adminDAO.getById(admin.getIdAdministrateur()).get();
-	        Assert.assertEquals((Integer) newId, (Integer) admin.getIdAdministrateur());
-	        Assert.assertEquals(newName, admin.getNom());
-	        Assert.assertEquals(newLogin, admin.getLogin());
-	        Assert.assertEquals(newPassword, admin.getMotDePasse());
+	        Assert.assertEquals((Integer) newId, (Integer) admin1.getIdAdministrateur());
+	        Assert.assertEquals(newName, admin1.getNom());
+	        Assert.assertEquals(newLogin, admin1.getLogin());
+	        Assert.assertEquals(newPassword, admin1.getMotDePasse());
 	    }catch(Exception e){
 	        e.printStackTrace();
 	    }finally{
