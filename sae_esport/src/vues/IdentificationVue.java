@@ -24,9 +24,9 @@ import java.awt.event.ActionEvent;
 public class IdentificationVue extends JFrame {
 
     private JPanel contentPane;
-    private JTextField textField_1;
-    private JTextField textField;
-    private JTextField textField_2;
+    public JTextField textField_1;
+    public JTextField textField;
+    public JTextField textField_2;
 
     /**
      * Launch the application.
@@ -100,6 +100,7 @@ public class IdentificationVue extends JFrame {
         JButton btnNewButton_1 = new JButton("Se connecter");
         btnNewButton_1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	
             }
         });
         panel_1.add(btnNewButton_1);
