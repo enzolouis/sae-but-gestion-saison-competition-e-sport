@@ -45,5 +45,9 @@ public class IdentificationModele {
 		}
 		return false;
 	}
+	
+	public Utilisateur getUtilisateur() {
+		return this.utilisateur;
+	}
 
 }

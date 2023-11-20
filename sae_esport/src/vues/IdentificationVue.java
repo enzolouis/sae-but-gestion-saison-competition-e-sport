@@ -6,6 +6,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
+
+import controleurs.IdentificationControleur;
+
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import java.awt.GridLayout;
@@ -30,6 +33,7 @@ public class IdentificationVue extends JFrame {
     private JPanel contentPane;
     private JTextField textFieldMotDePasse;
     private JTextField textFieldUtilisateur;
+    private IdentificationControleur controleur;
     
     /**
      * Launch the application.
@@ -49,8 +53,12 @@ public class IdentificationVue extends JFrame {
 
     /**
      * Create the frame.
+     * @throws Exception 
      */
-    public IdentificationVue() {
+    public IdentificationVue() throws Exception {
+    	
+    	this.controleur = new IdentificationControleur(this);
+    	
     	setMinimumSize(new Dimension(450, 300));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 450, 300);
@@ -110,12 +118,14 @@ public class IdentificationVue extends JFrame {
         btnQuit.setBackground(new Color(231, 76, 60));
         btnQuit.setForeground(new Color(255, 255, 255));
         btnQuit.setBorder(new RoundBtn(5));
+        btnQuit.addActionListener(this.controleur);
         panelQuitterSeconnecter.add(btnQuit);
         
         JButton btnLogin = new JButton("Se connecter");
         btnLogin.setForeground(new Color(255, 255, 255));
         btnLogin.setBackground(new Color(46, 204, 113));
         btnLogin.setBorder(new RoundBtn(5));
+        btnLogin.addActionListener(controleur);
         panelQuitterSeconnecter.add(btnLogin);
         
         JPanel panelTitre = new JPanel();
@@ -151,4 +161,13 @@ public class IdentificationVue extends JFrame {
             g.drawRoundRect(x, y, width-1, height-1, r, r);
         }
     }
+    
+    public String getUtilisateurContent() {
+    	return this.textFieldUtilisateur.getText();
+    }
+    
+    public String getMotDePasseContent() {
+    	return this.textFieldMotDePasse.getText();
+    }
+    
 }
