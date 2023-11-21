@@ -153,4 +153,6 @@ public class Test_Tournoi {
 		assertEquals(t.getMatchs().get(0).getIDMatch(), 13);
 		assertEquals(t.getMatchs().get(0).IsItFinale(), false);
 	}
+	
+	
 }
