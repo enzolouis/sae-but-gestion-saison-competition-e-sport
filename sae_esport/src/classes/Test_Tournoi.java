@@ -27,7 +27,6 @@ public class Test_Tournoi {
 		assertEquals(t.getDateDebut(), "29/09/1988");
 		assertEquals(t.getNotoriete(), Notoriete.REGIONAL);		
 		assertEquals(t.getEtat_Tournoi(), EtatTournoi.FERME);
-		assertEquals(t.getMotDePasse(),"MotDePasse" );
 		assertEquals(t.getIDTournoi(),1);
 	}
 	
@@ -123,24 +122,6 @@ public class Test_Tournoi {
 	}
 	
 	@Test
-	public void testTournoiChangementMotDePasse() {
-		t = new Tournoi(		
-				1,
-				"Champers", 
-				"29/09/1988", 
-				"30/12/1988", 
-				Notoriete.REGIONAL,
-				EtatTournoi.FERME);
-	
-		assertEquals(t.getMotDePasse(),"MotDePasse" );
-
-		t.setTournoiMDP("NotPass");
-		
-		assertEquals(t.getMotDePasse(),"NotPass" );
-		assertNotEquals(t.getMotDePasse(),"MotDePasse" );
-	}
-	
-	@Test
 	public void testTournoiChangementID() {
 		t = new Tournoi(
 				1,
@@ -156,5 +137,20 @@ public class Test_Tournoi {
 		
 		assertEquals(t.getIDTournoi(),3);
 		assertNotEquals(t.getIDTournoi(),1);
+	}
+	
+	public void testTournoiCreerMatch() {
+		t = new Tournoi(
+				1,
+				"Champers", 
+				"29/09/1988", 
+				"30/12/1988", 
+				Notoriete.REGIONAL,
+				EtatTournoi.FERME);
+		
+		t.NouveauMatch(13, false);
+		
+		assertEquals(t.getMatchs().get(0).getIDMatch(), 13);
+		assertEquals(t.getMatchs().get(0).IsItFinale(), false);
 	}
 }
