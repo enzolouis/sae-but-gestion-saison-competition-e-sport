@@ -142,6 +142,7 @@ public class Tournoi {
 		for (int i = 0; i<12; i++) {
 			this.mdp += this.generateLetter();
 		}
+		System.out.println(this.mdp);
 	}
 	
 	private char generateLetter() {

@@ -14,7 +14,7 @@ import DAOs.TournoiDAO;
 
 public class IdentificationModele {
 	
-	enum Utilisateur {
+	public enum Utilisateur {
 		ADMIN,ARBITRE
 	}
 	
