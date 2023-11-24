@@ -1,33 +1,42 @@
 package classes;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.Random;
 
 public class Tournoi {
 	
 	private String nomTournoi;
 	private String DateDebut;		//format : "dd/MM/YYYY"
 	private String DateFin;
+	private String login;
+	private String mdp;
 	private Notoriete notoriete;
 	private EtatTournoi etat;
 	private int idTournoi;
 	private List<Match> matches;
 	private Map<Equipe, Integer> participants;
+	private Optional<Equipe> vainqueur;
 
-	public Tournoi(int idTournoi, String nomTournoi, String DateDebut,
-			String DateFin, Notoriete notoriete, EtatTournoi etat) {
+	public Tournoi(int idTournoi, String nomTournoi, String string,
+			String string2, Notoriete notoriete, EtatTournoi etat) {
 		
 		this.idTournoi = idTournoi;
 		this.nomTournoi = nomTournoi;
-		this.DateDebut = DateDebut;
-		this.DateFin = DateFin;
+		this.DateDebut = string;
+		this.DateFin = string2;
 		this.notoriete = notoriete;
 		this.etat = etat;
 		this.matches= new ArrayList<>();
 		this.participants = new HashMap<>();
-
+		this.vainqueur = Optional.empty();
+		this.generateLogin();
+		this.generateMdp();
+		
 	}
 	
 	//Donne l'id du tournoi
@@ -95,6 +104,8 @@ public class Tournoi {
 		this.matches.add(new Match(idMatch, finale));
 	}
 	
+	
+	
 	//Donne la map de participant
 	public Map<Equipe, Integer> getParticipants(){
 		return this.participants;
@@ -107,6 +118,34 @@ public class Tournoi {
 	
 	public void majPointsEquipe(Equipe equipeARemplacer, int points) {
 		this.participants.put(equipeARemplacer, points);
+	}
+
+	public String getLogin() {
+		return this.login;	}
+
+	public String getMotDePasse() {
+		return this.mdp;
+	}
+
+	public Optional<Equipe> getVainqueur() {
+		return this.vainqueur;
+	}
+	
+	private void generateLogin() {
+		this.login = this.nomTournoi.substring(0, 2).toUpperCase() + this.idTournoi + this.generateLetter()+ this.generateLetter() + this.generateLetter();
+		System.out.println(this.login);
+	}
+	
+	private void generateMdp() {
+		this.mdp = "";
+		for (int i = 0; i<12; i++) {
+			this.mdp += this.generateLetter();
+		}
+	}
+	
+	private char generateLetter() {
+		Random r = new Random();
+		return (char)(r.nextInt(26) + 'a');
 	}
 	
 }
