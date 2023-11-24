@@ -45,7 +45,6 @@ public class IdentificationModele {
 	}
 	
 	public boolean checkLogins(String login, String motDePasse) {
-		JFrame jFrametest = new JFrame();
 		//if (this.tournoiOuvert.getLogin() == login && this.tournoiOuvert.getMotDePasse() == motDePasse) {
 		//	this.utilisateur = Utilisateur.ARBITRE;
 		//	    JOptionPane.showMessageDialog(jFrametest, "Arbitre login");
@@ -55,15 +54,12 @@ public class IdentificationModele {
 			System.out.println(login+" "+motDePasse);
 			if (a.getLogin().equals(login) && a.getMotDePasse().equals(motDePasse)) {
 				this.utilisateur = Utilisateur.ADMIN;
-				JOptionPane.showMessageDialog(jFrametest, "Admin login");
 				return true;
 			}
 			if (this.tournoiOuvert.getLogin().equals(login) && this.tournoiOuvert.getMotDePasse().equals(motDePasse)) {
-				JOptionPane.showMessageDialog(jFrametest, "Arbitre login");
 				return true;
 			}
 		}
-		JOptionPane.showMessageDialog(jFrametest, "Login faux");
 		return false;
 	}
 	

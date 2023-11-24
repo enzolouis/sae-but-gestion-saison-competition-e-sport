@@ -1,10 +1,12 @@
+package sqlrequests;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class createTablesTournoiEquipeParticipation {
-public static void main(String[] args) {
+	
+	public static void main(String[] args) {
 		
 		//à ne pas re-exéucter!! à servi à créer des tables SQL
 		//avec Git, la base de données est push aussi 

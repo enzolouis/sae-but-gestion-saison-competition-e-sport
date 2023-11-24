@@ -34,8 +34,7 @@ public class IdentificationControleur implements ActionListener {
 		} else {
 			String login = this.vue.getUtilisateurContenu();
 			String mdp = this.vue.getMotDePasseContentu();
-			boolean loginValid = this.modele.checkLogins(login, mdp);
-			if (loginValid) {
+			if (this.modele.checkLogins(login, mdp)) {
 				if (this.modele.getUtilisateur() == Utilisateur.ADMIN) {
 					AccueilAdministrateurVue vueAdmin;
 					try {
@@ -55,6 +54,9 @@ public class IdentificationControleur implements ActionListener {
 						e1.printStackTrace();
 					}
 				}
+			} else {
+				JFrame jFrame = new JFrame();
+				JOptionPane.showMessageDialog(jFrame, "Login faux");
 			}
 			
 		}
