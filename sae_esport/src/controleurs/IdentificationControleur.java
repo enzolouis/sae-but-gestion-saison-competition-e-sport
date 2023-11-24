@@ -31,7 +31,13 @@ public class IdentificationControleur implements ActionListener {
 		} else {
 			String login = this.vue.getUtilisateurContenu();
 			String mdp = this.vue.getMotDePasseContentu();
-			this.modele.checkLogins(login, mdp);
+			boolean loginValid = this.modele.checkLogins(login, mdp);
+			
+			if (loginValid) {
+				// affichage de la vue Administrateur
+				System.out.println("truee");
+			}
+			
 		}
 	}	
 

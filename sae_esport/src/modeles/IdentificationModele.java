@@ -32,9 +32,11 @@ public class IdentificationModele {
 		
 		this.dbConnection = dbConnection;
 		this.adminDAO = new AdministrateurDAO(dbConnection);
+		this.adminDAO.add(new Administrateur(0, "Admin", "login1", "mdp1"));
+		this.adminDAO.add(new Administrateur(0, "Admin", "login2", "mdp2"));
 		//initalisation des variables
 		this.tournoiDAO = new TournoiDAO(dbConnection);
-		this.tournoiOuvert = tournoiDAO.getTournoiOuvert().get();
+		//this.tournoiOuvert = tournoiDAO.getTournoiOuvert().get();
 		
 		//recuperer le tournoi ouvert à l'aide du DAO (créer un DAO tournoi)
 		//recuperer les logins d'arbitre, ajouter les check logins

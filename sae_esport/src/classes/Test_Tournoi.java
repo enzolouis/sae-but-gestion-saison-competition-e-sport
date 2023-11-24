@@ -3,11 +3,10 @@ package classes;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.junit.Test;
 
-import classes.Tournoi.EtatTournoi;
-import classes.Tournoi.Notoriete;
 
 public class Test_Tournoi {
 	
@@ -15,35 +14,31 @@ public class Test_Tournoi {
 
 	@Test
 	public void testTournoiBasic() {
-		t = new Tournoi(		"Champers", 
-								"29/09/1988", 
-								"30/12/1988", 
-								Notoriete.REGIONAL,
-								EtatTournoi.FERME,
-								"MotDePasse",
-								1,
-								new ArrayList<>());
+		t = new Tournoi(	
+				1,
+				"Champers", 
+				"29/09/1988", 
+				"30/12/1988", 
+				Notoriete.REGIONAL,
+				EtatTournoi.FERME);
 		
 		assertEquals(t.getNomTournoi(), "Champers");
 		assertEquals(t.getDateFin(), "30/12/1988");
 		assertEquals(t.getDateDebut(), "29/09/1988");
 		assertEquals(t.getNotoriete(), Notoriete.REGIONAL);		
 		assertEquals(t.getEtat_Tournoi(), EtatTournoi.FERME);
-		assertEquals(t.getMotDePasse(),"MotDePasse" );
 		assertEquals(t.getIDTournoi(),1);
 	}
 	
 	@Test
 	public void testTournoiChangementNom() {
 		t = new Tournoi(		
+				1,
 				"Champers", 
 				"29/09/1988", 
 				"30/12/1988", 
 				Notoriete.REGIONAL,
-				EtatTournoi.FERME,
-				"MotDePasse",
-				1,
-				new ArrayList<>());
+				EtatTournoi.FERME);
 		
 		assertEquals(t.getNomTournoi(), "Champers");
 		
@@ -56,14 +51,12 @@ public class Test_Tournoi {
 	@Test
 	public void testTournoiChangementDateDebut() {
 		t = new Tournoi(		
+				1,
 				"Champers", 
 				"29/09/1988", 
 				"30/12/1988", 
 				Notoriete.REGIONAL,
-				EtatTournoi.FERME,
-				"MotDePasse",
-				1,
-				new ArrayList<>());
+				EtatTournoi.FERME);
 		
 		assertEquals(t.getDateDebut(), "29/09/1988");
 		
@@ -77,18 +70,16 @@ public class Test_Tournoi {
 	@Test
 	public void testTournoiChangementDateFin() {
 		t = new Tournoi(		
+				1,
 				"Champers", 
 				"29/09/1988", 
 				"30/12/1988", 
 				Notoriete.REGIONAL,
-				EtatTournoi.FERME,
-				"MotDePasse",
-				1,
-				new ArrayList<>());
+				EtatTournoi.FERME);
 		
 		assertEquals(t.getDateFin(), "30/12/1988");
 		
-		t.setDateDebut("22/10/1989");
+		t.setDateFin("22/10/1989");
 		
 		assertEquals(t.getDateFin(), "22/10/1989");
 		assertNotEquals(t.getDateFin(), "30/12/1988");
@@ -97,14 +88,12 @@ public class Test_Tournoi {
 	@Test
 	public void testTournoiChangementNotoriete() {
 		t = new Tournoi(		
+				1,
 				"Champers", 
 				"29/09/1988", 
 				"30/12/1988", 
 				Notoriete.REGIONAL,
-				EtatTournoi.FERME,
-				"MotDePasse",
-				1,
-				new ArrayList<>());
+				EtatTournoi.FERME);
 	
 		assertEquals(t.getNotoriete(), Notoriete.REGIONAL);		
 
@@ -117,14 +106,12 @@ public class Test_Tournoi {
 	@Test
 	public void testTournoiChangementEtatTournoi() {
 		t = new Tournoi(		
+				1,
 				"Champers", 
 				"29/09/1988", 
 				"30/12/1988", 
 				Notoriete.REGIONAL,
-				EtatTournoi.FERME,
-				"MotDePasse",
-				1,
-				new ArrayList<>());
+				EtatTournoi.FERME);
 		
 		assertEquals(t.getEtat_Tournoi(), EtatTournoi.FERME);
 
@@ -135,36 +122,14 @@ public class Test_Tournoi {
 	}
 	
 	@Test
-	public void testTournoiChangementMotDePasse() {
-		t = new Tournoi(		
-				"Champers", 
-				"29/09/1988", 
-				"30/12/1988", 
-				Notoriete.REGIONAL,
-				EtatTournoi.FERME,
-				"MotDePasse",
-				1,
-				new ArrayList<>());
-	
-		assertEquals(t.getMotDePasse(),"MotDePasse" );
-
-		t.setTournoiMDP("NotPass");
-		
-		assertEquals(t.getMotDePasse(),"NotPass" );
-		assertNotEquals(t.getMotDePasse(),"MotDePasse" );
-	}
-	
-	@Test
 	public void testTournoiChangementID() {
-		t = new Tournoi(		
+		t = new Tournoi(
+				1,
 				"Champers", 
 				"29/09/1988", 
 				"30/12/1988", 
 				Notoriete.REGIONAL,
-				EtatTournoi.FERME,
-				"MotDePasse",
-				1,
-				new ArrayList<>());
+				EtatTournoi.FERME);
 	
 		assertEquals(t.getIDTournoi(),1);
 
@@ -173,4 +138,22 @@ public class Test_Tournoi {
 		assertEquals(t.getIDTournoi(),3);
 		assertNotEquals(t.getIDTournoi(),1);
 	}
+	
+	@Test
+	public void testTournoiCreerMatch() {
+		t = new Tournoi(
+				1,
+				"Champers", 
+				"29/09/1988", 
+				"30/12/1988", 
+				Notoriete.REGIONAL,
+				EtatTournoi.FERME);
+		
+		t.NouveauMatch(13, false);
+		
+		assertEquals(t.getMatchs().get(0).getIDMatch(), 13);
+		assertEquals(t.getMatchs().get(0).IsItFinale(), false);
+	}
+	
+	
 }
