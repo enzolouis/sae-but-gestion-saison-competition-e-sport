@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
@@ -28,11 +29,13 @@ import java.awt.Color;
 import java.awt.Component;
 
 import javax.swing.JSeparator;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class IdentificationVue extends JFrame {
 
     private JPanel contentPane;
-    private PlaceholderTextField textFieldMotDePasse;
+    private JPasswordField textFieldMotDePasse;
     private PlaceholderTextField textFieldUtilisateur;
     private IdentificationControleur controleur;
     private Connection dbConnection;
@@ -95,6 +98,7 @@ public class IdentificationVue extends JFrame {
         panelUtilisateur.add(labelNomUtilisateur);
         
         textFieldUtilisateur = new PlaceholderTextField();
+        textFieldUtilisateur.addActionListener(controleur);
         textFieldUtilisateur.setPlaceholder("login");
         textFieldUtilisateur.setBorder(new EmptyBorder(5, 5, 5, 5));
         textFieldUtilisateur.setForeground(new Color(255, 255, 255));
@@ -111,8 +115,7 @@ public class IdentificationVue extends JFrame {
         labelMotDePasse.setPreferredSize(new Dimension(110, 30));
         panelMotDePasse.add(labelMotDePasse);
         
-        textFieldMotDePasse = new PlaceholderTextField();
-        textFieldMotDePasse.setPlaceholder("mot de passe");
+        textFieldMotDePasse = new JPasswordField();
         textFieldMotDePasse.setBorder(new EmptyBorder(5, 5, 5, 5));
         textFieldMotDePasse.setBackground(new Color(29, 88, 129));
         textFieldMotDePasse.setForeground(new Color(255, 255, 255));
