@@ -49,7 +49,7 @@ public class ArbitreDAO {
 	//peu importe l'id que vous mettrez à l'arbitre, il sera changé
 	public boolean add(Arbitre value) throws Exception {
 
-		PreparedStatement st = this.dbConnection.prepareStatement("SELECT NEXT VALUE FOR seqIdArbitre FROM DUAL");
+		PreparedStatement st = this.dbConnection.prepareStatement("SELECT NEXT VALUE FOR seqIdArbitre FROM arbitre");
 		ResultSet rs = st.executeQuery();
 		int id = 0;
 		if (rs.next()) {
@@ -67,7 +67,7 @@ public class ArbitreDAO {
 	//update un arbitre donné
 	public boolean update(Arbitre value) throws Exception {
 		
-		PreparedStatement st = this.dbConnection.prepareStatement("UPDATE arbitre SET nom=?, prenom=?, nationalite=? WHERE idSujet=?");
+		PreparedStatement st = this.dbConnection.prepareStatement("UPDATE arbitre SET nom=?, prenom=?, nationalite=? WHERE idArbitre=?");
 		st.setString(1, value.getNom()); st.setString(2, value.getPrenom());
 		st.setString(3, value.getNationalite().toString()); st.setInt(4, value.getIdArbitre());
 		int rowcount = st.executeUpdate();
