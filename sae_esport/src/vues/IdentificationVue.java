@@ -116,6 +116,7 @@ public class IdentificationVue extends JFrame {
         panelMotDePasse.add(labelMotDePasse);
         
         textFieldMotDePasse = new JPasswordField();
+        textFieldMotDePasse.addActionListener(controleur);
         textFieldMotDePasse.setBorder(new EmptyBorder(5, 5, 5, 5));
         textFieldMotDePasse.setBackground(new Color(29, 88, 129));
         textFieldMotDePasse.setForeground(new Color(255, 255, 255));

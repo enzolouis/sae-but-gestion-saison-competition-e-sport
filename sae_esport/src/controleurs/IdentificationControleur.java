@@ -25,41 +25,49 @@ public class IdentificationControleur implements ActionListener {
 		this.modele = new IdentificationModele(dbConnection);
 	}
 	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		JButton bouton = (JButton) e.getSource();
-		if (bouton.getText().equals("Quitter")) {
-			this.vue.setVisible(false);
-			this.vue.dispose();
-		} else {
-			String login = this.vue.getUtilisateurContenu();
-			String mdp = this.vue.getMotDePasseContentu();
-			if (this.modele.checkLogins(login, mdp)) {
-				if (this.modele.getUtilisateur() == Utilisateur.ADMIN) {
-					AccueilAdministrateurVue vueAdmin;
-					try {
-						vueAdmin = new AccueilAdministrateurVue(dbConnection);
-						vueAdmin.setVisible(true);
-					} catch (Exception e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-				} else {
-					AccueilArbitreVue vueArbitre;
-					try {
-						vueArbitre = new AccueilArbitreVue(dbConnection);
-						vueArbitre.setVisible(true);
-					} catch (Exception e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+	public void seConnecter() {
+		String login = this.vue.getUtilisateurContenu();
+		String mdp = this.vue.getMotDePasseContentu();
+		if (this.modele.checkLogins(login, mdp)) {
+			if (this.modele.getUtilisateur() == Utilisateur.ADMIN) {
+				AccueilAdministrateurVue vueAdmin;
+				try {
+					vueAdmin = new AccueilAdministrateurVue(dbConnection);
+					vueAdmin.setVisible(true);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
 			} else {
-				JFrame jFrame = new JFrame();
-				JOptionPane.showMessageDialog(jFrame, "Login faux");
+				AccueilArbitreVue vueArbitre;
+				try {
+					vueArbitre = new AccueilArbitreVue(dbConnection);
+					vueArbitre.setVisible(true);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
-			
+		} else {
+			JFrame jFrame = new JFrame();
+			JOptionPane.showMessageDialog(jFrame, "Login faux");
 		}
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() instanceof JButton) {
+			JButton bouton = (JButton) e.getSource();
+			if (bouton.getText().equals("Quitter")) {
+				this.vue.setVisible(false);
+				this.vue.dispose();
+			} else {
+				seConnecter();
+			}
+		} else {
+			seConnecter();
+		}
+		
 	}	
 
 }
