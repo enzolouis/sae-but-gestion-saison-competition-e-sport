@@ -57,7 +57,7 @@ public class testDAOAdministrateur {
 	    	adminDAO.add(admin);
 	    	
 	        Assert.assertNotNull(adminDAO);
-	        Assert.assertNotNull(adminDAO.getById(10).get()); 
+	        Assert.assertNotNull(adminDAO.getById(10));
 	        Assert.assertEquals(2, adminDAO.getAll().size()); 
 	 
 	        Administrateur admin1 = adminDAO.getById(admin.getIdAdministrateur()).get();
