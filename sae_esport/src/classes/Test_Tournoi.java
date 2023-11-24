@@ -79,7 +79,7 @@ public class Test_Tournoi {
 		
 		assertEquals(t.getDateFin(), "30/12/1988");
 		
-		t.setDateDebut("22/10/1989");
+		t.setDateFin("22/10/1989");
 		
 		assertEquals(t.getDateFin(), "22/10/1989");
 		assertNotEquals(t.getDateFin(), "30/12/1988");
@@ -139,6 +139,7 @@ public class Test_Tournoi {
 		assertNotEquals(t.getIDTournoi(),1);
 	}
 	
+	@Test
 	public void testTournoiCreerMatch() {
 		t = new Tournoi(
 				1,
