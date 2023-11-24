@@ -164,6 +164,7 @@ public class Test_Tournoi {
 				"29/09/1988", 
 				"30/12/1988", 
 				Notoriete.REGIONAL,
+				
 				EtatTournoi.FERME);
 	
 	t.ajouterEquipe(new Equipe(1,"rofl",Nationalite.AD,false,14,12));
