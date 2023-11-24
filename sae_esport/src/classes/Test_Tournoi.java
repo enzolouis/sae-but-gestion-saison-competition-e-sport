@@ -28,6 +28,7 @@ public class Test_Tournoi {
 		assertEquals(t.getNotoriete(), Notoriete.REGIONAL);		
 		assertEquals(t.getEtat_Tournoi(), EtatTournoi.FERME);
 		assertEquals(t.getIDTournoi(),1);
+		assertEquals(t.getParticipants(),new HashMap<>());
 	}
 	
 	@Test
@@ -153,6 +154,22 @@ public class Test_Tournoi {
 		
 		assertEquals(t.getMatchs().get(0).getIDMatch(), 13);
 		assertEquals(t.getMatchs().get(0).IsItFinale(), false);
+	}
+	
+	@Test
+	public void testTournoiAjouterEquipe() {
+		t = new Tournoi(
+				1,
+				"Champers", 
+				"29/09/1988", 
+				"30/12/1988", 
+				Notoriete.REGIONAL,
+				EtatTournoi.FERME);
+	
+	t.ajouterEquipe(new Equipe(1,"rofl",Nationalite.AD,false,14,12));
+	t.majPointsEquipe(new Equipe(1,"rofl",Nationalite.AD,false,14,12), 121);
+	
+	assertTrue(t.getParticipants().containsKey(new Equipe(1,"rofl",Nationalite.AD,false,14,12)));
 	}
 	
 	

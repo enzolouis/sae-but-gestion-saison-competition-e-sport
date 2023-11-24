@@ -13,7 +13,24 @@ public class Equipe {
 	private int rangSaisonPrecedante;
 	private int pointsSaison;
 	
+	//Constructeur, SANS une liste de joueurs déja donné
+	public Equipe(int id, 
+					String nom, 
+					Nationalite nat,
+					boolean dispose, 
+					int rangSaisonPrecedante, 
+					int pointsSaison) {
+		this.idEquipe = id;
+		this.nom = nom;
+		this.nationalite = nat;
+		this.dispose = dispose;
+		this.pointsSaison = pointsSaison;
+		this.rangSaisonPrecedante =rangSaisonPrecedante;
+		this.joueurs = new ArrayList<>();
+		
+	}
 	
+	//Constructeur, AVEC une liste de joueurs donné
 	public Equipe(int id, String nom, Nationalite nat, List<Joueur> joueurs,boolean dispose, int rangSaisonPrecedante, int pointsSaison) {
 		this.idEquipe = id;
 		this.nom = nom;
@@ -45,6 +62,9 @@ public class Equipe {
 	//Retourne la liste de joueurs
 	public List<Joueur> getListeJoueurs(){
 		return this.joueurs;
+	}
+	public void AjouterJoueurs(Joueur joueur){
+		this.joueurs.add(joueur);
 	}
 	
 	public int getPointsSaison(){
