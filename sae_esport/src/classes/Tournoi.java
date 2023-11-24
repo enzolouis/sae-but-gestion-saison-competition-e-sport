@@ -116,6 +116,7 @@ public class Tournoi {
 		this.participants.put(equipe, 0);
 	}
 	
+	//
 	public void majPointsEquipe(Equipe equipeARemplacer, int points) {
 		this.participants.put(equipeARemplacer, points);
 	}
