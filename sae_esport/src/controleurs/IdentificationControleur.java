@@ -8,6 +8,9 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import modeles.IdentificationModele;
+import modeles.IdentificationModele.Utilisateur;
+import vues.AccueilAdministrateurVue;
+import vues.AccueilArbitreVue;
 import vues.IdentificationVue;
 
 public class IdentificationControleur implements ActionListener {
@@ -32,10 +35,26 @@ public class IdentificationControleur implements ActionListener {
 			String login = this.vue.getUtilisateurContenu();
 			String mdp = this.vue.getMotDePasseContentu();
 			boolean loginValid = this.modele.checkLogins(login, mdp);
-			
 			if (loginValid) {
-				// affichage de la vue Administrateur
-				System.out.println("truee");
+				if (this.modele.getUtilisateur() == Utilisateur.ADMIN) {
+					AccueilAdministrateurVue vueAdmin;
+					try {
+						vueAdmin = new AccueilAdministrateurVue(dbConnection);
+						vueAdmin.setVisible(true);
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				} else {
+					AccueilArbitreVue vueArbitre;
+					try {
+						vueArbitre = new AccueilArbitreVue(dbConnection);
+						vueArbitre.setVisible(true);
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
 			}
 			
 		}

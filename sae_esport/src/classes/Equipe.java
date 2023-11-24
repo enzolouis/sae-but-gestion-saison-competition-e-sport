@@ -31,7 +31,13 @@ public class Equipe {
 	}
 	
 	//Constructeur, AVEC une liste de joueurs donné
-	public Equipe(int id, String nom, Nationalite nat, List<Joueur> joueurs,boolean dispose, int rangSaisonPrecedante, int pointsSaison) {
+	public Equipe(int id, 
+					String nom, 
+					Nationalite nat, 
+					List<Joueur> joueurs,
+					boolean dispose, 
+					int rangSaisonPrecedante, 
+					int pointsSaison) {
 		this.idEquipe = id;
 		this.nom = nom;
 		this.nationalite = nat;
