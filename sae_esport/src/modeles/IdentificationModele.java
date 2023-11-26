@@ -49,9 +49,8 @@ public class IdentificationModele {
 		//	this.utilisateur = Utilisateur.ARBITRE;
 		//	    JOptionPane.showMessageDialog(jFrametest, "Arbitre login");
 		//}
+		System.out.println(login+" "+motDePasse);
 		for (Administrateur a : admins) {
-			System.out.println(a.getLogin()+" "+a.getMotDePasse());
-			System.out.println(login+" "+motDePasse);
 			if (a.getLogin().equals(login) && a.getMotDePasse().equals(motDePasse)) {
 				this.utilisateur = Utilisateur.ADMIN;
 				return true;

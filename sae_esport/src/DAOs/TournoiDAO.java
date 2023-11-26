@@ -1,14 +1,10 @@
 package DAOs;
 
-import java.sql.Date;
-
 import java.sql.Connection;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -76,8 +72,10 @@ private Connection dbConnection;
 			id = rs.getInt(1);
 		}
 		value.setIDTournoi(id);
+		System.out.println(value.getDateDebut());
+		System.out.println(value.getDateFin());
 		st = this.dbConnection.prepareStatement("INSERT INTO tournoi VALUES (?, ?, ?, ?, ?, ?, ?)");
-		st.setInt(1, id); st.setDate(2, new Date(Timestamp.valueOf(value.getDateDebut()).getTime())); st.setString(3, value.getDateFin().toString());
+		st.setInt(1, id); st.setDate(2, value.getDateDebut()); st.setDate(3, value.getDateFin());
 		st.setString(4, value.getNotoriete().toString()); st.setInt(5, value.getVainqueur().get().getIdEquipe());
 		st.setString(6, value.getEtat_Tournoi().toString());
 		st.setString(3, value.getLogin()); st.setString(4, value.getMotDePasse());
@@ -101,7 +99,7 @@ private Connection dbConnection;
 	
 	public Optional<Tournoi> getTournoiOuvert() throws Exception {
 		Statement st = this.dbConnection.createStatement();
-		ResultSet rs = st.executeQuery("SELECT * FROM tournoi WHERE ouvert=OUVERT");
+		ResultSet rs = st.executeQuery("SELECT * FROM tournoi WHERE ouvert='OUVERT'");
 		if (rs.next()) {
 			return Optional.of(new Tournoi(rs.getInt(1), "", rs.getString(2), rs.getString(3), 
 					classes.Notoriete.valueOf(rs.getString(3)), classes.EtatTournoi.valueOf(rs.getString(4))));

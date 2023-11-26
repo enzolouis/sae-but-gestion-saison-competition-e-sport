@@ -1,6 +1,9 @@
 package classes;
 
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,8 +14,8 @@ import java.util.Random;
 public class Tournoi {
 	
 	private String nomTournoi;
-	private String DateDebut;		//format : "dd/MM/YYYY"
-	private String DateFin;
+	private String dateDebut;
+	private String dateFin;
 	private String login;
 	private String mdp;
 	private Notoriete notoriete;
@@ -22,13 +25,13 @@ public class Tournoi {
 	private Map<Equipe, Integer> participants;
 	private Optional<Equipe> vainqueur;
 
-	public Tournoi(int idTournoi, String nomTournoi, String string,
-			String string2, Notoriete notoriete, EtatTournoi etat) {
+	public Tournoi(int idTournoi, String nomTournoi, String dateDebut,
+			String dateFin, Notoriete notoriete, EtatTournoi etat) {
 		
 		this.idTournoi = idTournoi;
 		this.nomTournoi = nomTournoi;
-		this.DateDebut = string;
-		this.DateFin = string2;
+		this.dateDebut = dateDebut;
+		this.dateFin = dateFin;
 		this.notoriete = notoriete;
 		this.etat = etat;
 		this.matches= new ArrayList<>();
@@ -58,21 +61,13 @@ public class Tournoi {
 	}
 	
 	//Donne la date de début du tournoi
-	public String getDateDebut() {
-		return this.DateDebut;
-	}
-	//Change la date de début du tournoi
-	public void setDateDebut(String dateDebut) {
-		this.DateDebut = dateDebut;
+	public java.sql.Date getDateDebut() throws ParseException {
+		return java.sql.Date.valueOf(getDate(this.dateDebut));
 	}
 	
 	//Donne la date de fin du tournoi
-	public String getDateFin() {
-		return this.DateFin;
-	}
-	//Change la date de fin du tournoi
-	public void setDateFin(String dateFin) {
-		this.DateFin = dateFin;
+	public java.sql.Date getDateFin() throws ParseException {
+		return java.sql.Date.valueOf(getDate(this.dateFin));
 	}
 	
 	//Donne la Notoriete du tournoi
@@ -149,5 +144,27 @@ public class Tournoi {
 		Random r = new Random();
 		return (char)(r.nextInt(26) + 'a');
 	}
+	
+	private static LocalDate getDate(String date) {
+		
+		//récuperer le jour
+		int indexJour = date.indexOf('/');
+		int jour = Integer.valueOf(date.substring(0,  indexJour));
+		date = date.substring(indexJour+1);
+		
+		//récuperer le mois 
+		int indexMois = date.indexOf('/');
+		int mois = Integer.valueOf(date.substring(0, indexMois));
+		date = date.substring(indexMois+1);
+		
+		//récuperer l'année
+		int indexAnnee = date.indexOf('/');
+		int annee = Integer.valueOf(date.substring(1));
+		
+		return LocalDate.of(annee, mois, jour);
+		
+	}
+	
+	
 	
 }

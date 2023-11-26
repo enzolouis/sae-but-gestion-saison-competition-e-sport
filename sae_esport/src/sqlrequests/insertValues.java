@@ -1,12 +1,6 @@
 package sqlrequests;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.List;
-
 import DAOs.AdministrateurDAO;
 import DAOs.TournoiDAO;
 import classes.Administrateur;
@@ -26,12 +20,10 @@ public class insertValues {
         String urlConnexion = "jdbc:derby:BDDSAEEsport;create=true";
         Connection dbConnection = DriverManager.getConnection(urlConnexion);
         
+        //ajout d'administrateur
         AdministrateurDAO adminDAO = new AdministrateurDAO(dbConnection);
-        List<Administrateur> admins = adminDAO.getAll();
-        for (Administrateur a : admins) {
-            System.out.println(a.getIdAdministrateur()+" "+a.getLogin()+" "+a.getMotDePasse());
-        }
-        
+        adminDAO.add(new Administrateur(0, "admin1", "admin1", "motdepasse"));
+             
     }
 
 }
