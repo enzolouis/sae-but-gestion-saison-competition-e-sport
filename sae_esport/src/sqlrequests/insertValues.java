@@ -1,6 +1,8 @@
 package sqlrequests;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+
 import DAOs.AdministrateurDAO;
 import DAOs.TournoiDAO;
 import classes.Administrateur;
@@ -23,7 +25,7 @@ public class insertValues {
         //ajout d'administrateur
         AdministrateurDAO adminDAO = new AdministrateurDAO(dbConnection);
         adminDAO.add(new Administrateur(0, "admin1", "admin1", "motdepasse"));
-             
+        
     }
 
 }

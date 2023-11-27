@@ -1,5 +1,7 @@
 package classes;
 
+import java.util.Objects;
+
 public class Administrateur {
 	
 	private int idAdministrateur;
@@ -45,5 +47,20 @@ public class Administrateur {
 	public void setIdAdministrateur(int id) {
 		this.idAdministrateur = id;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Administrateur other = (Administrateur) obj;
+		return idAdministrateur == other.idAdministrateur && Objects.equals(login, other.login)
+				&& Objects.equals(motDePasse, other.motDePasse) && Objects.equals(nom, other.nom);
+	}
+	
+	
 
 }

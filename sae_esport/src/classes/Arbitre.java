@@ -1,5 +1,7 @@
 package classes;
 
+import java.util.Objects;
+
 public class Arbitre {
 	
 	private int idArbitre;
@@ -45,5 +47,20 @@ public class Arbitre {
 	public void setIdArbitre(int id) {
 		this.idArbitre = id;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Arbitre other = (Arbitre) obj;
+		return idArbitre == other.idArbitre && nationalite == other.nationalite && Objects.equals(nom, other.nom)
+				&& Objects.equals(prenom, other.prenom);
+	}
+	
+	
 	
 }

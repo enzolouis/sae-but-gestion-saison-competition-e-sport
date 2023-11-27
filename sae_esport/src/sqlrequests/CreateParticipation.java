@@ -14,11 +14,13 @@ public class CreateParticipation {
 		
 		try {
 			
+			//connexion
 			DriverManager.registerDriver(new org.apache.derby.jdbc.EmbeddedDriver());
 			String urlConnexion = "jdbc:derby:BDDSAEEsport;create=true";
 			Connection dbConnection = DriverManager.getConnection(urlConnexion);
 			System.out.println("Connexion ok");
 			
+			//creation de la table participation
 			String reqCreateParticipation = "CREATE TABLE participation"
 					+ "(resultat INT,"
 					+ "idTournoi INT,"
@@ -30,6 +32,7 @@ public class CreateParticipation {
 			PreparedStatement stCreateParticipation = dbConnection.prepareStatement(reqCreateParticipation);
 			stCreateParticipation.executeUpdate();
 			System.out.println("Table participation créée");
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
