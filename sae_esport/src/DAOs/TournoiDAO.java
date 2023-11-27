@@ -72,13 +72,14 @@ private Connection dbConnection;
 			id = rs.getInt(1);
 		}
 		value.setIDTournoi(id);
-		System.out.println(value.getDateDebut());
-		System.out.println(value.getDateFin());
 		st = this.dbConnection.prepareStatement("INSERT INTO tournoi VALUES (?, ?, ?, ?, ?, ?, ?)");
-		st.setInt(1, id); st.setDate(2, value.getDateDebut()); st.setDate(3, value.getDateFin());
-		st.setString(4, value.getNotoriete().toString()); st.setInt(5, value.getVainqueur().get().getIdEquipe());
-		st.setString(6, value.getEtat_Tournoi().toString());
-		st.setString(3, value.getLogin()); st.setString(4, value.getMotDePasse());
+		st.setInt(1, id); 
+		st.setString(2, value.getNomTournoi());
+		st.setDate(3, value.getDateDebut()); 
+		st.setDate(4, value.getDateFin());
+		st.setString(5, value.getNotoriete().toString()); 
+		st.setObject(6, null);
+		st.setString(7, value.getEtat_Tournoi().toString());
 		int rowcount = st.executeUpdate();
 		return rowcount > 0;
 	}
