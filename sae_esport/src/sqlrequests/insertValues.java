@@ -23,7 +23,10 @@ public class insertValues {
         //ajout d'administrateur
         AdministrateurDAO adminDAO = new AdministrateurDAO(dbConnection);
         adminDAO.add(new Administrateur(0, "admin1", "admin1", "motdepasse"));
-             
+        System.out.print("Admin OK");
+        
+        TournoiDAO tournoiDAO = new TournoiDAO(dbConnection);
+        tournoiDAO.add(new Tournoi(0, "premierTournoi", "2023-12-16", "2023-12-24", Notoriete.LOCAL, EtatTournoi.OUVERT));
+        System.out.print("Tournoi OK");
     }
-
 }
