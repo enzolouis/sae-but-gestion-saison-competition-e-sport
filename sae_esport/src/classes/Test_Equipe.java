@@ -3,6 +3,7 @@ package classes;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -23,6 +24,10 @@ public class Test_Equipe {
 	
 	@Test
 	public void testEquipeAVECJoueurs() {
+		List<Joueur> equipes = new ArrayList<Joueur>();
+		
+		equipes.add(new Joueur(1,"dorr"));
+		
 		e = new Equipe(1,
 					"rofl",
 					Nationalite.AD,
@@ -38,6 +43,79 @@ public class Test_Equipe {
 		assertEquals(e.getRangSaisonPrecedante(),14);
 		assertEquals(e.getListeJoueurs(),new ArrayList<Joueur>());
 		assertEquals(e.getPointsSaison(),12);
+	}
+	
+	@Test
+	public void testEquipeChangementDisposition() {
+		e = new Equipe(1,
+					"rofl",
+					Nationalite.AD,
+					new ArrayList<Joueur>(),
+					false,
+					14,
+					12);
+	
+		assertEquals(e.getDisposition(), false);
+		
+		e.setDisposition(true);;
+	
+		assertEquals(e.getDisposition(), true);
+		assertNotEquals(e.getDisposition(), false);
+
+	}
+	
+	@Test
+	public void testEquipeChangementPointsSaison() {
+		e = new Equipe(1,
+					"rofl",
+					Nationalite.AD,
+					false,
+					14,
+					12);
+		
+		assertEquals(e.getPointsSaison(),12);
+		
+		e.setPointsSaison(33);
+		
+		assertEquals(e.getPointsSaison(),33);
+		assertNotEquals(e.getPointsSaison(),12);
+	}
+	
+	
+	@Test
+	public void testEquipeAjoutDePoints() {
+		e = new Equipe(1,
+					"rofl",
+					Nationalite.AD,
+					false,
+					14,
+					12);
+		
+		
+		assertEquals(e.getPointsSaison(),12);
+		
+		e.ajoutDePoints(3);
+		
+		assertEquals(e.getPointsSaison(),15);
+		assertNotEquals(e.getPointsSaison(),12);
+	}
+	
+	@Test
+	public void testEquipeAjoutDeJoueur() {
+		e = new Equipe(1,
+					"rofl",
+					Nationalite.AD,
+					false,
+					14,
+					12);
+		
+		Equipe etest = new Equipe(1,"rofl",Nationalite.AD,false,14,12);
+		
+		etest.AjouterJoueurs(new Joueur(1,"dorr"));
+		
+		e.AjouterJoueurs(new Joueur(1,"dorr"));
+		
+		assertEquals(e.getListeJoueurs(),etest.getListeJoueurs());
 	}
 
 }
