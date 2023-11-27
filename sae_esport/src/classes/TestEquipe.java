@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-public class Test_Equipe {
+public class TestEquipe {
 	private Equipe e;
 
 	@Test

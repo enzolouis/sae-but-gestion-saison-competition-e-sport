@@ -8,7 +8,7 @@ import java.util.HashMap;
 import org.junit.Test;
 
 
-public class Test_Tournoi {
+public class TestTournoi {
 	
 	private Tournoi t;
 

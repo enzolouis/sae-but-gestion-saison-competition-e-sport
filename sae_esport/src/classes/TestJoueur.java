@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class Test_Joueur {
+public class TestJoueur {
 	private Joueur j;
 	
 	@Test
