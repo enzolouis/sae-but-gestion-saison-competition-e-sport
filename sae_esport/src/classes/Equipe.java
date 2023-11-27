@@ -13,7 +13,13 @@ public class Equipe {
 	private int rangSaisonPrecedante;
 	private int pointsSaison;
 	
-	//Constructeur, SANS une liste de joueurs déja donné
+	/**Constructeur, SANS une liste de joueurs déja donné
+	*	@param l'ID de l'Equipe
+	*	@param la Nationalite de l'Equipe
+	*	@param la Disposition d'une Equipe, en boolean
+	*	@param le Rang de l'Equipe sur leurs Saison précédente
+	*	@param leurs valeur de Points sur la Saison courante
+	*/
 	public Equipe(int id, 
 					String nom, 
 					Nationalite nat,
@@ -30,7 +36,14 @@ public class Equipe {
 		
 	}
 	
-	//Constructeur, AVEC une liste de joueurs donné
+	/**Constructeur, AVEC une liste de joueurs déja donné
+	*	@param l'ID de l'Equipe
+	*	@param la Nationalite de l'Equipe
+	*	@param la Disposition d'une Equipe, en boolean
+	*	@param une Liste de Joueurs attribué à l'Equipe
+	*	@param le Rang de l'Equipe sur leurs Saison précédente
+	*	@param leurs valeur de Points sur la Saison courante
+	*/
 	public Equipe(int id, 
 					String nom, 
 					Nationalite nat, 
@@ -51,11 +64,28 @@ public class Equipe {
 		}
 	}
 
+	//Retourne le nom l'Equipe
 	public String getNom() {
-		return this.nom;
+		return nom;
 	}
+	/**
+	 * Change le nom de l'Equipe
+	 * 	@param le nom de l'Equipe à remplacer
+	 * */
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+		
+	//Retourne la Nationalite de l'Equipe
 	public Nationalite getNationalite() {
-		return this.nationalite;
+		return nationalite;
+	}
+	/**
+	 * Change la Nationalite de l'Equipe
+	 * 	@param la valeur Nationalite avec lequel remplacer l'Equipe
+	 * */
+	public void setNationalite(Nationalite nationalite) {
+		this.nationalite = nationalite;
 	}
 	
 	public boolean getDisposition() {

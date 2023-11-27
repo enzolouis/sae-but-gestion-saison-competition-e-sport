@@ -12,10 +12,13 @@ import java.util.Optional;
 import java.util.Random;
 
 public class Tournoi {
-	
+	//Représente le nom ou le titre du Tournoi
 	private String nomTournoi;
+	
+	//Représente les dates d'ouvertures et de fermeture du Tournoi
 	private String dateDebut;
 	private String dateFin;
+	
 	private String login;
 	private String mdp;
 	private Notoriete notoriete;
@@ -25,6 +28,15 @@ public class Tournoi {
 	private Map<Equipe, Integer> participants;
 	private Optional<Equipe> vainqueur;
 
+	/**
+	 * Constructeur de la classe Tournoi
+	 * 	@param ID du tournoi
+	 * 	@param nom du tournoi
+	 * 	@param date de début du tournoi, date de son ouverture
+	 * 	@param date de fin, date de sa fermeture
+	 * 	@param notoriété du Tournoi
+	 * 	@param Etat d'ouverture ou fermeture du Tournoi
+	 * */
 	public Tournoi(int idTournoi, String nomTournoi, String dateDebut,
 			String dateFin, Notoriete notoriete, EtatTournoi etat) {
 		
@@ -40,22 +52,31 @@ public class Tournoi {
 		this.generateLogin();
 		this.generateMdp();
 		
+		
 	}
 	
-	//Donne l'id du tournoi
+	/**Donne l'id du tournoi
+	 * */
 	public int getIDTournoi() {
 		return this.idTournoi;
 	}
-	//Change l'id du tournoi
+	/**Change l'id du tournoi
+		@param id à remplacer 
+	*/
 	public void setIDTournoi(int id) {
 		this.idTournoi = id;
 	}
 	
-	//Donne le nom du tournoi
+	/**
+	 * Donne le nom du tournoi
+	 * 
+	 * */
 	public String getNomTournoi() {
 		return this.nomTournoi;
 	}
-	//Change le nom du tournoi
+	/**Change le nom du tournoi
+	 * @param nom à remplacer
+	 * */
 	public void setNomTournoi(String nom) {
 		this.nomTournoi = nom;
 	}
@@ -75,7 +96,9 @@ public class Tournoi {
 		return this.notoriete;
 	}
 	
-	//Change la Notoriete du tournoi
+	/**Change la Notoriete du tournoi
+	 * 	@param la valeur de notoriété avec lequel changer
+	 * */
 	public void setNotoriete(Notoriete not) {
 		this.notoriete = not;
 	}
@@ -84,7 +107,9 @@ public class Tournoi {
 	public EtatTournoi getEtat_Tournoi() {
 		return this.etat;
 	}
-	//DChange l'etat du tournoi
+	/**Change l'etat du tournoi
+	 * 	@param la valeur de l'état du tournoi avec lequel changer
+	 * */
 	public void setEtat_Tournoi(EtatTournoi etat) {
 		this.etat = etat;
 	}
@@ -93,8 +118,11 @@ public class Tournoi {
 	public List<Match> getMatchs(){
 		return this.matches;
 	}
-	//Créé un nouveau tournoi, 
-	//avec id et booléen donné
+	
+	/**Créé un nouveau match pour le tournoi, 
+	* 	@param la valeur de l'ID du match créée
+	* 	@param le booléan précisant s'il sagit d'une finale, ou non
+	 * */
 	public void NouveauMatch(int idMatch, boolean finale) {
 		this.matches.add(new Match(idMatch, finale));
 	}
@@ -111,27 +139,34 @@ public class Tournoi {
 		this.participants.put(equipe, 0);
 	}
 	
-	//
+	//Attribue les points à une Equipe
 	public void majPointsEquipe(Equipe equipeARemplacer, int points) {
 		this.participants.put(equipeARemplacer, points);
 	}
 
+	//Donne le Login du Tournoi
 	public String getLogin() {
 		return this.login;	}
-
+	
+	//Donne le Mot de Passe du Tournoi
 	public String getMotDePasse() {
 		return this.mdp;
 	}
 
+	//Donne l'Equipe vainqueur du Tournoi, 
+	//retourne un false si aucuns vainqueur n'est encore attribué
 	public Optional<Equipe> getVainqueur() {
 		return this.vainqueur;
 	}
 	
+	//Génère un Login pour le Tournoi,
+	//l'ensemble est basé sur le NomTournoi + idTournoi, en UpperCase + 3 lettres générés au hasard
 	private void generateLogin() {
 		this.login = this.nomTournoi.substring(0, 2).toUpperCase() + this.idTournoi + this.generateLetter()+ this.generateLetter() + this.generateLetter();
 		System.out.println(this.login);
 	}
 	
+	//Génère un Mot de Passe pour le Tournoi
 	private void generateMdp() {
 		this.mdp = "";
 		for (int i = 0; i<12; i++) {
@@ -140,6 +175,8 @@ public class Tournoi {
 		System.out.println(this.mdp);
 	}
 	
+	//Renvois une lettre au hasard 
+	//Utilisé pour la génération de Mot de passe et ID du Tournoi
 	private char generateLetter() {
 		Random r = new Random();
 		return (char)(r.nextInt(26) + 'a');
