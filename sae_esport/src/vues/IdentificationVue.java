@@ -5,7 +5,6 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 import controleurs.IdentificationControleur;
@@ -13,38 +12,41 @@ import controleurs.IdentificationControleur;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import java.awt.GridLayout;
-import java.awt.Insets;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
 import java.awt.FlowLayout;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Font;
-import java.awt.Graphics;
-
 import javax.swing.SwingConstants;
 import java.awt.Dimension;
 
 import java.awt.Color;
-import java.awt.Component;
-
 import javax.swing.JSeparator;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class IdentificationVue extends JFrame {
+	
 
+	public static final ImageIcon OEIL_INVISIBLE_ICON = new ImageIcon(new ImageIcon(IdentificationVue.class.getClassLoader().getResource
+			("oeilMotDePasseInvisible.png")).getImage().getScaledInstance(30, 30,  java.awt.Image.SCALE_SMOOTH));
+	
+	public static final ImageIcon OEIL_VISIBLE_ICON = new ImageIcon(new ImageIcon(IdentificationVue.class.getClassLoader().getResource
+			("oeilMotDePasseVisible.png")).getImage().getScaledInstance(30, 30,  java.awt.Image.SCALE_SMOOTH));
+	
     private JPanel contentPane;
-    private JPasswordField textFieldMotDePasse;
-    private PlaceholderTextField textFieldUtilisateur;
     private IdentificationControleur controleur;
     private Connection dbConnection;
+    private PlaceholderTextField textFieldUtilisateur;
+    private JPasswordField textFieldMotDePasse;
     
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
                 	String dirProjetJava = System.getProperty("user.dir");
+                	System.out.println(dirProjetJava);
             		System.setProperty("derby.system.home", dirProjetJava+"/BDDSAEEsport");
             		DriverManager.registerDriver(new org.apache.derby.jdbc.EmbeddedDriver());
         			String urlConnexion = "jdbc:derby:BDDSAEEsport;create=true";
@@ -59,15 +61,18 @@ public class IdentificationVue extends JFrame {
     }
     
     public String getUtilisateurContenu() {
-    	return this.textFieldUtilisateur.getText();
+    	return textFieldUtilisateur.getText();
     }
     
-    public String getMotDePasseContentu() {
-    	return this.textFieldMotDePasse.getText();
+    public String getMotDePasseContenu() {
+    	return textFieldMotDePasse.getText();
+    }
+    
+    public JPasswordField getMotDePasse() {
+    	return textFieldMotDePasse;
     }
     
     public IdentificationVue(Connection dbConnection) throws Exception {
-    	
     	this.dbConnection = dbConnection;
     	this.controleur = new IdentificationControleur(this, dbConnection);
     	
@@ -97,14 +102,18 @@ public class IdentificationVue extends JFrame {
         labelNomUtilisateur.setPreferredSize(new Dimension(110, 30));
         panelUtilisateur.add(labelNomUtilisateur);
         
+        JPanel panelTextFieldNomUtilisateur = new JPanel();
+        panelTextFieldNomUtilisateur.setBorder(null);
+        panelTextFieldNomUtilisateur.setBackground(new Color(29, 88, 129));
+        panelUtilisateur.add(panelTextFieldNomUtilisateur);
+        
         textFieldUtilisateur = new PlaceholderTextField();
-        textFieldUtilisateur.addActionListener(controleur);
         textFieldUtilisateur.setPlaceholder("login");
-        textFieldUtilisateur.setBorder(new EmptyBorder(5, 5, 5, 5));
-        textFieldUtilisateur.setForeground(new Color(255, 255, 255));
+        textFieldUtilisateur.setForeground(Color.WHITE);
+        textFieldUtilisateur.setColumns(13);
+        textFieldUtilisateur.setBorder(null);
         textFieldUtilisateur.setBackground(new Color(29, 88, 129));
-        panelUtilisateur.add(textFieldUtilisateur);
-        textFieldUtilisateur.setColumns(10);
+        panelTextFieldNomUtilisateur.add(textFieldUtilisateur);
         
         JPanel panelMotDePasse = new JPanel();
         panelMotDePasse.setBackground(new Color(44, 47, 51));
@@ -115,13 +124,26 @@ public class IdentificationVue extends JFrame {
         labelMotDePasse.setPreferredSize(new Dimension(110, 30));
         panelMotDePasse.add(labelMotDePasse);
         
+        JPanel panelTextFieldMotDePasse = new JPanel();
+        FlowLayout fl_panelTextFieldMotDePasse = (FlowLayout) panelTextFieldMotDePasse.getLayout();
+        fl_panelTextFieldMotDePasse.setVgap(0);
+        fl_panelTextFieldMotDePasse.setHgap(0);
+        panelTextFieldMotDePasse.setBackground(new Color(29, 88, 129));
+        panelMotDePasse.add(panelTextFieldMotDePasse);
+        
         textFieldMotDePasse = new JPasswordField();
-        textFieldMotDePasse.addActionListener(controleur);
+        textFieldMotDePasse.setForeground(Color.WHITE);
+        textFieldMotDePasse.setColumns(10);
         textFieldMotDePasse.setBorder(new EmptyBorder(5, 5, 5, 5));
         textFieldMotDePasse.setBackground(new Color(29, 88, 129));
-        textFieldMotDePasse.setForeground(new Color(255, 255, 255));
-        panelMotDePasse.add(textFieldMotDePasse);
-        textFieldMotDePasse.setColumns(10);
+        panelTextFieldMotDePasse.add(textFieldMotDePasse);
+        
+        JButton btnMotDePasseVisibilite = new JButton("");
+        btnMotDePasseVisibilite.addActionListener(controleur);
+        btnMotDePasseVisibilite.setBackground(new Color(29, 88, 129));
+        btnMotDePasseVisibilite.setBorder(null);
+        btnMotDePasseVisibilite.setIcon(OEIL_INVISIBLE_ICON);
+        panelTextFieldMotDePasse.add(btnMotDePasseVisibilite);
         
         JPanel panelQuitterSeconnecter = new JPanel();
         panelQuitterSeconnecter.setBackground(new Color(44, 47, 51));

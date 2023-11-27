@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class Test_Admin {
+public class TestAdmin {
 	
 	private Administrateur admin;
 	@Test	
