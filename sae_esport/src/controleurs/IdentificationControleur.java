@@ -1,6 +1,8 @@
 package controleurs;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.sql.Connection;
 
 import javax.swing.JButton;
@@ -18,8 +20,14 @@ public class IdentificationControleur implements ActionListener {
 	private IdentificationVue vue;
 	private IdentificationModele modele;
 	private Connection dbConnection;
+	private boolean isMotDePasseCache;
+	private Character mdpValeur;
+	private Character lastMdpValeur;
 	
 	public IdentificationControleur(IdentificationVue vue, Connection dbConnection) throws Exception {
+		this.isMotDePasseCache = true;
+		this.mdpValeur = ' ';
+		this.lastMdpValeur = ' ';
 		this.vue = vue;
 		this.dbConnection = dbConnection;
 		this.modele = new IdentificationModele(dbConnection);
@@ -27,7 +35,7 @@ public class IdentificationControleur implements ActionListener {
 	
 	public void seConnecter() {
 		String login = this.vue.getUtilisateurContenu();
-		String mdp = this.vue.getMotDePasseContentu();
+		String mdp = this.vue.getMotDePasseContenu();
 		if (this.modele.checkLogins(login, mdp)) {
 			if (this.modele.getUtilisateur() == Utilisateur.ADMIN) {
 				AccueilAdministrateurVue vueAdmin;
@@ -54,6 +62,19 @@ public class IdentificationControleur implements ActionListener {
 		}
 	}
 	
+	public void inverserIconMotDePasseMasque(JButton btn) {
+		this.isMotDePasseCache = !this.isMotDePasseCache;
+		
+		if (isMotDePasseCache) {
+			btn.setIcon(IdentificationVue.OEIL_INVISIBLE_ICON);
+			
+			this.vue.getMotDePasse().setEchoChar('•');
+		} else {
+			btn.setIcon(IdentificationVue.OEIL_VISIBLE_ICON);
+			this.vue.getMotDePasse().setEchoChar((char) 0);
+		}
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() instanceof JButton) {
@@ -61,13 +82,17 @@ public class IdentificationControleur implements ActionListener {
 			if (bouton.getText().equals("Quitter")) {
 				this.vue.setVisible(false);
 				this.vue.dispose();
-			} else {
+			} else if (bouton.getText().equals("Se connecter")) {
 				seConnecter();
+			} else {
+				this.inverserIconMotDePasseMasque(bouton);
 			}
+			
 		} else {
 			seConnecter();
 		}
 		
-	}	
+	}
+
 
 }
