@@ -115,12 +115,20 @@ public class Equipe {
 		this.pointsSaison += points;
 	}
 	
+	//Retourne le Rang de la Saison précendente de l'Equipe
 	public int getRangSaisonPrecedante(){
 		return this.rangSaisonPrecedante;
 	}
-
+	
+	//Retourne l'ID de l'Equipe
 	public int getIdEquipe() {
 		return this.idEquipe;
 	}
 
+	/**Change l'ID de l'Equipe
+	 * 	@param valeur d'ID avec lequel remplacer
+	 * */
+	public void setIdEquipe(int id) {
+		this.idEquipe = id;
+	}
 }
