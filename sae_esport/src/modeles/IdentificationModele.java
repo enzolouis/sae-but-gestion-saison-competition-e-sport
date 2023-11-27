@@ -27,9 +27,6 @@ public class IdentificationModele {
 	
 	public IdentificationModele(Connection dbConnection) throws Exception {
 		
-		//création de la connexion
-		DriverManager.registerDriver(new org.apache.derby.jdbc.EmbeddedDriver());
-		
 		this.dbConnection = dbConnection;
 		this.adminDAO = new AdministrateurDAO(dbConnection);
 		this.adminDAO.add(new Administrateur(0, "Admin", "login1", "mdp1"));
@@ -50,15 +47,19 @@ public class IdentificationModele {
 		//	    JOptionPane.showMessageDialog(jFrametest, "Arbitre login");
 		//}
 		System.out.println(login+" "+motDePasse);
+		
+		if (this.tournoiOuvert.getLogin().equals(login) && this.tournoiOuvert.getMotDePasse().equals(motDePasse)) {
+			this.utilisateur = Utilisateur.ARBITRE;
+			return true;
+		}
+		
 		for (Administrateur a : admins) {
 			if (a.getLogin().equals(login) && a.getMotDePasse().equals(motDePasse)) {
 				this.utilisateur = Utilisateur.ADMIN;
 				return true;
 			}
-			if (this.tournoiOuvert.getLogin().equals(login) && this.tournoiOuvert.getMotDePasse().equals(motDePasse)) {
-				return true;
-			}
 		}
+		
 		return false;
 	}
 	
