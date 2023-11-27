@@ -14,19 +14,38 @@ public class Match {
 		this.equipes = new ArrayList<>();
 	}
 	
+	//Retourne l'ID du match
 	public int getIDMatch() {
 		return this.idMatch;
 	}
+	/**Change l'ID du Match
+	 * 	@param valeur de remplacement de l'ID du Match
+	 * */
+	public void setIdMatch(int id) {
+		this.idMatch = id;
+	}
+	
+	//Retourne le boolean exprimant si le match est une finale ou non
 	public boolean IsItFinale() {
 		return this.finale;
 	}
 	
+	/**Ajoute une Equipe au match
+	 * 	@param l'Equipe à ajouter au match
+	 * */
 	public void AddEquipe(Equipe equipe) {
 		this.equipes.add(equipe);
 	}
+	
+	//Retourne les Equipes participant au Match
 	public List<Equipe> getEquipes(){
 		return this.equipes;
 	}
+	
+	/**Remplace une des Equipes du Match
+	 * 	@param Equipe deja en place, qui est à remplacer
+	 * 	@param Equipe qui va remplacer la 1e valeur
+	 * */
 	public void remplacerEquipe(Equipe equipeARemplacer, Equipe EquipeAMettre) {
 		for (Equipe i : this.equipes) {
 			if(i == equipeARemplacer) {
@@ -34,4 +53,5 @@ public class Match {
 			}
 		}
 	}
+	
 }

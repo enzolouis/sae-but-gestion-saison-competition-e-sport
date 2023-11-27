@@ -65,7 +65,7 @@ public class JoueurDAO {
 		public boolean update(Joueur value) throws Exception {
 			
 			PreparedStatement st = this.dbConnection.prepareStatement("UPDATE arbitre SET pseudo=? WHERE idArbitre=?");
-			st.setString(1, value.getPseudo()); st.setInt(4, value.getIdJoueur());
+			st.setString(1, value.getPseudo()); st.setInt(2, value.getIdJoueur());
 			int rowcount = st.executeUpdate();
 			return rowcount > 0;
 			
