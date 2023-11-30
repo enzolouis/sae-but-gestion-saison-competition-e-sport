@@ -29,7 +29,9 @@ public class CreateJoueur {
 			//création de la table arbitre
 			String reqCreateJoueur = "CREATE TABLE joueur ("
 					+ "idJoueur INT PRIMARY KEY NOT NULL,"
-					+ "pseudo VARCHAR(50)";
+					+ "pseudo VARCHAR(50)"
+					+ "idEquipe INT NOT NULL"
+					+ "FOREIGN KEY (idEquipe) REFERENCES Equipe(idEquipe)";
 			PreparedStatement stCreateJoueur= dbConnection.prepareStatement(reqCreateJoueur);
 			stCreateJoueur.executeUpdate();
 			System.out.println("Table joueur créée");
