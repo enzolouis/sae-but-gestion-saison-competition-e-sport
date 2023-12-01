@@ -83,6 +83,11 @@ public class Arbitre {
 				&& Objects.equals(prenom, other.prenom);
 	}
 	
+	@Override
+	public String toString() {
+		return this.nom.toUpperCase()+" "+this.prenom+" ("+this.nationalite+")";
+	}
+	
 	
 	
 }
