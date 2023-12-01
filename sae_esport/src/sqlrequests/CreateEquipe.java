@@ -21,11 +21,11 @@ public static void main(String[] args) {
 			System.out.println("Connexion ok");
 			
 			//création de la séquence de l'identifiant d'équioe
-			String reqSeqEquipe = "CREATE SEQUENCE seqIdEquipe START WITH 1 INCREMENT BY 1";
+			String reqSeqEquipe = "CREATE OR REPLACE SEQUENCE seqIdEquipe START WITH 1 INCREMENT BY 1";
 			PreparedStatement stSeqEquipe = dbConnection.prepareStatement(reqSeqEquipe);
 			stSeqEquipe.executeUpdate();
 			System.out.println("Séquence equipe créée");
-			String reqCreateEquipe = "CREATE TABLE equipe"
+			String reqCreateEquipe = "CREATE OR REPLACE TABLE equipe"
 					+ "(idEquipe INT PRIMARY KEY NOT NULL,"
 					+ "nom VARCHAR(50),"
 					+ "nationalite VARCHAR(50),"

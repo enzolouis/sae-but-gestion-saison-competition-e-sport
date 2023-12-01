@@ -20,8 +20,14 @@ public class CreateParticipation {
 			Connection dbConnection = DriverManager.getConnection(urlConnexion);
 			System.out.println("Connexion ok");
 			
+			//création de la séquence de l'id tournoi				
+			String reqSeqParticiper = "CREATE OR REPLACE SEQUENCE seqParticipation START WITH 1 INCREMENT BY 1";
+			PreparedStatement stSeqParticiper = dbConnection.prepareStatement(reqSeqParticiper);
+			stSeqParticiper.executeUpdate();
+			System.out.println("Séquence tournoi créée");
+			
 			//creation de la table participation
-			String reqCreateParticipation = "CREATE TABLE participation"
+			String reqCreateParticipation = "CREATE OR REPLACE TABLE participer"
 					+ "(resultat INT,"
 					+ "idTournoi INT,"
 					+ "idEquipe INT,"
