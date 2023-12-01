@@ -150,7 +150,7 @@ public class TestTournoi {
 				Notoriete.REGIONAL,
 				EtatTournoi.FERME);
 		
-		t.NouveauMatch(13, false);
+		t.nouveauMatch(13, false);
 		
 		assertEquals(t.getMatchs().get(0).getIDMatch(), 13);
 		assertEquals(t.getMatchs().get(0).IsItFinale(), false);

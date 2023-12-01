@@ -123,7 +123,7 @@ public class Tournoi {
 	* 	@param la valeur de l'ID du match créée
 	* 	@param le booléan précisant s'il sagit d'une finale, ou non
 	 * */
-	public void NouveauMatch(int idMatch, boolean finale) {
+	public void nouveauMatch(int idMatch, boolean finale) {
 		this.matches.add(new Match(idMatch, finale));
 	}
 	
