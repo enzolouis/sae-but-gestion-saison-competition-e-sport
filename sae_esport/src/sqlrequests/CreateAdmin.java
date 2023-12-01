@@ -27,7 +27,7 @@ public class CreateAdmin {
 			System.out.println("Séquence admin créée");
 			
 			//création de la table admin
-			String reqCreateAdmin = "CREATE TABLE admin"
+			String reqCreateAdmin = "CREATE OR REPLACE TABLE admin"
 							+ "(idAdmin INT PRIMARY KEY NOT NULL,"
 							+ "nom VARCHAR(50),"
 							+ "login VARCHAR(50),"

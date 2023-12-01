@@ -5,7 +5,15 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+//<<<<<<< Updated upstream
 public class CreateGerer {	
+//***
+/*public class CreateGerer {
+*	public static void main(String[] args) {
+*
+*	String dirProjetJava = System.getProperty("user.dir");
+*	System.setProperty("derby.system.home", dirProjetJava+"/BDDSAEEsport");
+***/ //>>>>>>> Stashed changes
 	
 	public static void main(String[] args) {
 		

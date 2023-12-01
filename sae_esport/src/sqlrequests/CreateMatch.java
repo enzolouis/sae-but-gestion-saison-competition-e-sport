@@ -20,13 +20,13 @@ public class CreateMatch {
 			System.out.println("Connexion ok");
 			
 			//création de la séquence de l'identifiant arbitre
-			String reqSeqArbitre = "CREATE SEQUENCE seqIdMatch START WITH 1 INCREMENT BY 1";
+			String reqSeqArbitre = "CREATE OR REPLACE SEQUENCE seqIdMatch START WITH 1 INCREMENT BY 1";
 			PreparedStatement stSeqJoueur = dbConnection.prepareStatement(reqSeqArbitre);
 			stSeqJoueur.executeUpdate();
 			System.out.println("Séquence arbitre créée");
 			
 			//création de la table arbitre
-			String reqCreateJoueur = "CREATE TABLE match ("
+			String reqCreateJoueur = "CREATE OR REPLACE TABLE match ("
 					+ "idMatch INT PRIMARY KEY NOT NULL,"
 					+ "finale LOGICAL"
 					+ "idEquipe INT NOT NULL"
