@@ -108,6 +108,7 @@ public class IdentificationVue extends JFrame {
         panelUtilisateur.add(panelTextFieldNomUtilisateur);
         
         textFieldUtilisateur = new PlaceholderTextField();
+        textFieldUtilisateur.addActionListener(controleur);
         textFieldUtilisateur.setPlaceholder("login");
         textFieldUtilisateur.setForeground(Color.WHITE);
         textFieldUtilisateur.setColumns(13);
@@ -132,6 +133,7 @@ public class IdentificationVue extends JFrame {
         panelMotDePasse.add(panelTextFieldMotDePasse);
         
         textFieldMotDePasse = new JPasswordField();
+        textFieldMotDePasse.addActionListener(controleur);
         textFieldMotDePasse.setForeground(Color.WHITE);
         textFieldMotDePasse.setColumns(10);
         textFieldMotDePasse.setBorder(new EmptyBorder(5, 5, 5, 5));
