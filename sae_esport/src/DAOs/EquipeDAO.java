@@ -5,9 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 
 import classes.Equipe;
-import classes.Equipe;
+import classes.Nationalite;
 
 public class EquipeDAO {
 	private Connection dbConnection;
@@ -17,20 +20,20 @@ public class EquipeDAO {
 		this.dbConnection = c;
 	}
 	
-	//Renvois l'ensemble des arbitres
+	//Renvois l'ensemble des equipes
 	public List<Equipe> getAll() throws Exception {
 		String reqSelectEquipe = "SELECT * FROM equipe";
 		PreparedStatement st = this.dbConnection.prepareStatement(reqSelectEquipe);
 		ResultSet rs = st.executeQuery();
-		ArrayList<Equipe> arbitres = new ArrayList<Equipe>();
+		ArrayList<Equipe> equipes = new ArrayList<Equipe>();
 		while (rs.next()) {
-			arbitres.add(new Equipe(rs.getInt(1),rs.getString(2),classes.Nationalite.valueOf(rs.getString(3)),rs.getBoolean(4),rs.getInt(5),rs.getInt(6)));
+			equipes.add(new Equipe(rs.getInt(1),rs.getString(2),classes.Nationalite.valueOf(rs.getString(3)),rs.getBoolean(4),rs.getInt(5),rs.getInt(6)));
 		}
-		return arbitres;
+		return equipes;
 	}
 	
-	//ajoute un arbitre à la liste
-	//peu importe l'id que vous mettrez à l'arbitre, il sera changé
+	//ajoute un equipe à la liste
+	//peu importe l'id que vous mettrez à l'equipe, il sera changé
 	public boolean add(Equipe value) throws Exception {
 
 		PreparedStatement st = this.dbConnection.prepareStatement("SELECT NEXT VALUE FOR idEquipe FROM equipe");
@@ -40,7 +43,7 @@ public class EquipeDAO {
 			id = rs.getInt(1);
 		}
 		value.setIdEquipe(id);
-		st = this.dbConnection.prepareStatement("INSERT INTO arbitre VALUES (?,?,?,?,?,?)");
+		st = this.dbConnection.prepareStatement("INSERT INTO equipe VALUES (?,?,?,?,?,?)");
 		st.setInt(1, id); 
 		st.setString(2, value.getNom()); 
 		st.setObject(3, (Object) value.getNationalite()); 
@@ -53,10 +56,37 @@ public class EquipeDAO {
 		
 	}
 	
-	//update un arbitre donné
+	//ajoute des equipes d'un tableau css
+		public void importEquipes(String FILEPATH) throws Exception{
+			File file;
+			FileReader fr;
+			BufferedReader bfr;
+			
+			file = new File(FILEPATH);
+			fr = new FileReader(file);
+			bfr= new BufferedReader(fr);
+			
+			
+			List<String[] > data = new ArrayList<String[] >();
+
+			String nextLine = null;
+			while ((nextLine = bfr.readLine()) != null) {
+			    String s = nextLine;
+			    data.add(s.split(","));
+			}
+			bfr.close();
+			
+			for (String[] s : data) {
+				Nationalite n = Nationalite.valueOf(s[1]);
+				Equipe e = new Equipe(0,s[0],n,true,Integer.parseInt(s[2]),Integer.parseInt(s[3]));
+				add(e);
+			}
+		}
+	
+	//update un equipe donné
 	public boolean update(Equipe value) throws Exception {
 		
-		PreparedStatement st = this.dbConnection.prepareStatement("UPDATE arbitre SET nom=?, nationalite=?, dispose=?, rangsaisonprecedante=?, pointssaison=? WHERE idArbitre=?");
+		PreparedStatement st = this.dbConnection.prepareStatement("UPDATE equipe SET nom=?, nationalite=?, dispose=?, rangsaisonprecedante=?, pointssaison=? WHERE idequipe=?");
 		st.setString(1, value.getNom()); 
 		st.setObject(2, (Object) value.getNationalite()); 
 		st.setBoolean(3, value.getDisposition()); 
@@ -70,7 +100,7 @@ public class EquipeDAO {
 		
 	}
 	
-	//retire un arbitre donné
+	//retire un equipe donné
 	public boolean delete(Equipe value) throws Exception {
 		
 		PreparedStatement st = this.dbConnection.prepareStatement("DELETE FROM equipe WHERE idEquipe=?");
