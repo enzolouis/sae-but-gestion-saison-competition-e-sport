@@ -12,7 +12,10 @@ import javax.swing.JLabel;
 import java.awt.GridLayout;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.Iterator;
 import java.awt.FlowLayout;
+
+import javax.swing.Icon;
 import javax.swing.JButton;
 import java.awt.Font;
 
@@ -22,6 +25,7 @@ import java.awt.Dimension;
 import java.awt.Color;
 
 import javax.swing.JSeparator;
+import javax.swing.JTable;
 
 import controleurs.ChoixArbitreControleur;
 
@@ -84,15 +88,21 @@ public class ChoixArbitreVue extends JFrame {
         panelTop.add(separatorTop, BorderLayout.SOUTH);
         
         // Panel middle : Action
-		JPanel panelMiddle = new JPanel();
+        JScrollPane panelMiddle = new JScrollPane();
         panelMiddle.setBorder(new EmptyBorder(10, 10, 10, 10));
         panelMiddle.setBackground(new Color(44, 47, 51));
         panelMiddle.setLayout(new GridLayout(2, 0, 0, 0));
-        contentPanel.add(panelMiddle, BorderLayout.CENTER);
         
-        JScrollPane scrollListArbitre = new JScrollPane();
+        for (int i = 0; i < 10; i++) {
+        	JButton button = new JButton("Arbitre n°" + i);
+        	button.setBackground(new Color(231, 76, 60));
+        	button.setForeground(new Color(255, 255, 255));
+        	button.setBorder(new RoundBtn(5));
+        	button.addActionListener(this.controleur);
+        	panelMiddle.add(button);
+		}
         
-        panelMiddle.add(scrollListArbitre);
+        //contentPanel.add(panelMiddle, BorderLayout.CENTER);
         
         // Panel bottom : Quit
         JPanel panelBottom = new JPanel();
@@ -101,11 +111,15 @@ public class ChoixArbitreVue extends JFrame {
         panelBottom.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
         contentPanel.add(panelBottom, BorderLayout.SOUTH);
         
-        JButton btnQuit = new JButton("Quitter");
+        JButton btnQuit = new JButton("eg!elrimhugzmoitjrely!mjgemoiljgfr-!hlkj");
         btnQuit.setBackground(new Color(231, 76, 60));
         btnQuit.setForeground(new Color(255, 255, 255));
         btnQuit.setBorder(new RoundBtn(5));
         btnQuit.addActionListener(this.controleur);
         panelBottom.add(btnQuit);
+    }
+    
+    public void SetArbitreList() {
+    	
     }
 }

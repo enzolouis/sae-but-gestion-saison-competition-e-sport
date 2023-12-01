@@ -20,18 +20,20 @@ public static void main(String[] args) {
 			Connection dbConnection = DriverManager.getConnection(urlConnexion);
 			System.out.println("Connexion ok");
 			
-			//création de la séquence de l'identifiant d'équioe
+			//création de la séquence de l'identifiant d'équipe
 			String reqSeqEquipe = "CREATE OR REPLACE SEQUENCE seqIdEquipe START WITH 1 INCREMENT BY 1";
 			PreparedStatement stSeqEquipe = dbConnection.prepareStatement(reqSeqEquipe);
 			stSeqEquipe.executeUpdate();
 			System.out.println("Séquence equipe créée");
+			
+			//Creation de la table Equipe
 			String reqCreateEquipe = "CREATE OR REPLACE TABLE equipe"
 					+ "(idEquipe INT PRIMARY KEY NOT NULL,"
 					+ "nom VARCHAR(50),"
 					+ "nationalite VARCHAR(50),"
 					+ "rangSaisonPrecedente INT,"
 					+ "pointsSaison INT,"
-					+ "disposee VARCHAR(30))";
+					+ "disposee LOGICAL)";
 			PreparedStatement stCreateEquipe = dbConnection.prepareStatement(reqCreateEquipe);
 			stCreateEquipe.executeUpdate();
 			System.out.println("Table equipe créée");
