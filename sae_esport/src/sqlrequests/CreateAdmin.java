@@ -21,7 +21,7 @@ public class CreateAdmin {
 			System.out.println("Connexion ok");
 			
 			//création de la séquence de l'identifiant admin
-			String reqSeqAdmin = "CREATE SEQUENCE seqIdAdmin START WITH 1 INCREMENT BY 1";
+			String reqSeqAdmin = "CREATE OR REPLACE SEQUENCE seqIdAdmin START WITH 1 INCREMENT BY 1";
 			PreparedStatement stSeqAdmin = dbConnection.prepareStatement(reqSeqAdmin);
 			stSeqAdmin.executeUpdate();
 			System.out.println("Séquence admin créée");
