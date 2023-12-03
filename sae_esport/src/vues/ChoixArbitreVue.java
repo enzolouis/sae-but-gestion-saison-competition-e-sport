@@ -1,34 +1,31 @@
 package vues;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
-
 import java.awt.BorderLayout;
-import javax.swing.JLabel;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.EventQueue;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.util.Iterator;
-import java.awt.FlowLayout;
 
-import javax.swing.Icon;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import java.awt.Font;
-
-import javax.swing.SwingConstants;
-import java.awt.Dimension;
-
-import java.awt.Color;
-
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
-import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.basic.BasicScrollBarUI;
 
 import controleurs.ChoixArbitreControleur;
+import style.CustomScrollBarUI;
 
 public class ChoixArbitreVue extends JFrame {
 
@@ -88,22 +85,46 @@ public class ChoixArbitreVue extends JFrame {
         separatorTop.setForeground(new Color(102, 173, 221));
         panelTop.add(separatorTop, BorderLayout.SOUTH);
         
-        // Panel middle : Action
+        // Panel middle : Action et Listes
         
         JPanel panelMiddle = new JPanel();
-        panelMiddle.setLayout(new GridLayout(3, 0));
+        panelMiddle.setBorder(new EmptyBorder(10, 0, 0, 0));
+        panelMiddle.setBackground(new Color(44, 47, 51));
         contentPanel.add(panelMiddle);
         
+        GridBagLayout gbl_panelMiddle = new GridBagLayout();
+        gbl_panelMiddle.rowHeights = new int[] {266, 133};
+        gbl_panelMiddle.columnWidths = new int[] {399};
+        gbl_panelMiddle.columnWeights = new double[]{1.0};
+        gbl_panelMiddle.rowWeights = new double[]{0.0, 0.0};
+        panelMiddle.setLayout(gbl_panelMiddle);
+        
+        // Panel middle --> Panel Liste : Ligne 1 et 2
         JPanel panelArbitreList = new JPanel();
-        JScrollPane scrollpanelArbitreList = new JScrollPane(panelArbitreList);
         panelArbitreList.setBorder(new EmptyBorder(10, 10, 10, 10));
         panelArbitreList.setBackground(new Color(44, 47, 51));
-        GridLayout panelArbitreListLayout = new GridLayout(0, 4);
-        panelArbitreListLayout.setHgap(10);
-        panelArbitreListLayout.setVgap(20);
-        panelArbitreList.setLayout(panelArbitreListLayout);
         
-        for (int i = 1; i <= 79; i++) {
+        GridLayout panelArbitreListLayout = new GridLayout(0, 4, 10, 10);
+        panelArbitreList.setLayout(panelArbitreListLayout);  
+        
+        JScrollPane scrollpanelArbitreList = new JScrollPane(panelArbitreList);
+        scrollpanelArbitreList.setBorder(BorderFactory.createEmptyBorder());
+        scrollpanelArbitreList.setViewportBorder(BorderFactory.createEmptyBorder());
+        scrollpanelArbitreList.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollpanelArbitreList.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        
+        BasicScrollBarUI scrollBarArbitreListBarUI = new CustomScrollBarUI();
+        
+        scrollpanelArbitreList.getVerticalScrollBar().setUI(scrollBarArbitreListBarUI);
+        
+        GridBagConstraints gbc_scrollpanelArbitreList = new GridBagConstraints();
+        gbc_scrollpanelArbitreList.insets = new Insets(0, 0, 0, 0);
+        gbc_scrollpanelArbitreList.fill = GridBagConstraints.BOTH;
+        gbc_scrollpanelArbitreList.gridx = 0;
+        gbc_scrollpanelArbitreList.gridy = 0;
+        panelMiddle.add(scrollpanelArbitreList, gbc_scrollpanelArbitreList);
+       
+        for (int i = 1; i <= 35; i++) {
         	JButton button = new JButton("Arbitre n°" + i);
         	button.setBackground(new Color(29, 88, 129));
         	button.setForeground(new Color(255, 255, 255));
@@ -112,11 +133,15 @@ public class ChoixArbitreVue extends JFrame {
         	panelArbitreList.add(button);
 		}
         
-        scrollpanelArbitreList.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollpanelArbitreList.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        scrollpanelArbitreList.setViewportBorder(new LineBorder(Color.RED));
-        
-        panelMiddle.add(scrollpanelArbitreList, BorderLayout.CENTER);
+        // Panel middle --> Panel Action : Ligne 3
+        JPanel panelArbitreActions = new JPanel();
+        panelArbitreActions.setBackground(new Color(44, 47, 51));
+        GridBagConstraints gbc_panelArbitreActions = new GridBagConstraints();
+        gbc_panelArbitreActions.fill = GridBagConstraints.BOTH;
+        gbc_panelArbitreActions.gridx = 0;
+        gbc_panelArbitreActions.gridy = 1;
+        panelMiddle.add(panelArbitreActions, gbc_panelArbitreActions);
+       
         
         // Panel bottom : Quit
         JPanel panelBottom = new JPanel();
