@@ -21,6 +21,7 @@ import javax.swing.JFormattedTextField;
 import com.toedter.calendar.JDateChooser;
 
 import classes.Arbitre;
+import classes.DBConnection;
 import classes.Nationalite;
 import classes.Notoriete;
 
@@ -54,13 +55,8 @@ public class CreationTournoiVue extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                	String dirProjetJava = System.getProperty("user.dir");
-                	System.out.println(dirProjetJava);
-            		System.setProperty("derby.system.home", dirProjetJava+"/BDDSAEEsport");
-            		DriverManager.registerDriver(new org.apache.derby.jdbc.EmbeddedDriver());
-        			String urlConnexion = "jdbc:derby:BDDSAEEsport;create=true";
-        			Connection dbConnection = DriverManager.getConnection(urlConnexion);
-                    CreationTournoiVue frame = new CreationTournoiVue(dbConnection);
+                	
+                    CreationTournoiVue frame = new CreationTournoiVue(DBConnection.getInstance());
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();

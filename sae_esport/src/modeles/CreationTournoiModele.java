@@ -15,7 +15,7 @@ public class CreationTournoiModele {
 	
 	public CreationTournoiModele(Connection dbConnection) {
 		this.dbConnection = dbConnection;
-		this.tournoiDAO = new TournoiDAO(DBConnection.getInstance());
+		this.tournoiDAO = new TournoiDAO();
 	}
 	
 	// a tester
