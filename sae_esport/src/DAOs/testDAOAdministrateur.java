@@ -29,7 +29,7 @@ public class testDAOAdministrateur {
 			
 			System.setProperty("derby.system.home", dirProjetJava + "/BDDSAEEsport");
 			this.connection = DriverManager.getConnection("jdbc:derby:BDDSAEEsport;create=true");
-			this.adminDAO = new AdministrateurDAO(connection);
+			this.adminDAO = new AdministrateurDAO();
 			connection.setAutoCommit(false);
 			
 		} catch (SQLException e) {

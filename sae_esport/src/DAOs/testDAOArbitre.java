@@ -28,7 +28,7 @@ public class testDAOArbitre {
 			
 			System.setProperty("derby.system.home", dirProjetJava + "/BDDSAEEsport");
 			this.connection = DriverManager.getConnection("jdbc:derby:BDDSAEEsport;create=true");
-			this.arbitreDAO = new ArbitreDAO(connection);
+			this.arbitreDAO = new ArbitreDAO();
 			connection.setAutoCommit(false);
 			
 		} catch (SQLException e) {

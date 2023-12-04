@@ -175,7 +175,7 @@ public class TestTournoi {
 	t.ajouterEquipe(new Equipe(1,"rofl",Nationalite.AD,false,14,12));
 	t.majPointsEquipe(new Equipe(1,"rofl",Nationalite.AD,false,14,12), 121);
 	
-	assertTrue(t.getParticipants().containsKey(new Equipe(1,"rofl",Nationalite.AD,false,14,12)));
+	assertTrue(t.getParticipants().containsKey(new Equipe(1,"rofl",Nationalite.AD,false,14,121)));
 	}
 	
 	@Test
