@@ -14,14 +14,14 @@ import classes.Equipe;
 import modeles.TournoiModele;
 
 public class TournoiDAO {
-		
+	
 	//Renvois l'ensemble des arbitres
 	public List<TournoiModele> getAll() throws Exception {
 		ArrayList<TournoiModele> tournois = new ArrayList<>();
 		String reqSelectTournoi = "SELECT * FROM tournoi";
 		PreparedStatement st = DBConnection.getInstance().prepareStatement(reqSelectTournoi);
 		ResultSet rs = st.executeQuery();
-		String reqSelectParticipants = "SELECT idEquipe FROM Participer WHERE idTournoi = ?";
+		String reqSelectParticipants = "SELECT idEquipe FROM Participation WHERE idTournoi = ?";
 		PreparedStatement stParticipants = DBConnection.getInstance().prepareStatement(reqSelectParticipants);
 		ArrayList<Equipe> participants = new ArrayList<>();
 		while (rs.next()) {
@@ -44,7 +44,7 @@ public class TournoiDAO {
 			ResultSet rs = st.executeQuery("SELECT * FROM tournoi WHERE idTournoi="+i);
 			if (rs.next()) {
 				TournoiModele t = new TournoiModele(rs.getInt(1), rs.getString(2), rs.getString(3),rs.getString(4), classes.Notoriete.valueOf(rs.getString(5)), classes.EtatTournoi.valueOf(rs.getString(6)));
-				PreparedStatement stParticipants = DBConnection.getInstance().prepareStatement("SELECT idEquipe FROM Participer WHERE idTournoi = ?");
+				PreparedStatement stParticipants = DBConnection.getInstance().prepareStatement("SELECT idEquipe FROM Participation WHERE idTournoi = ?");
 				stParticipants.setInt(1, rs.getInt(1));
 				ResultSet rsParticipants = stParticipants.executeQuery();
 				while (rsParticipants.next()) {
@@ -71,9 +71,9 @@ public class TournoiDAO {
 		st.setString(2, value.getNomTournoi());
 		st.setDate(3, value.getDateDebut()); 
 		st.setDate(4, value.getDateFin());
-		st.setString(5, value.getNotoriete().toString()); 
-		st.setObject(6, null);
-		st.setString(7, value.getEtatTournoi().toString());
+		st.setString(5, value.getNotoriete().toString());
+		st.setString(6, value.getEtatTournoi().toString());
+		st.setObject(7, null);
 		int rowcount = st.executeUpdate();
 		return rowcount > 0;
 	}
@@ -87,8 +87,10 @@ public class TournoiDAO {
 	
 	//retire un arbitre donné
 	public boolean delete(TournoiModele value) throws Exception {
-		Statement st = DBConnection.getInstance().createStatement();
-		int rowcount = st.executeUpdate("DELETE FROM tournoi WHERE idTournoi=?");
+		PreparedStatement st = DBConnection.getInstance().prepareStatement("DELETE FROM tournoi WHERE idTournoi=?");
+		st.setInt(1, value.getIDTournoi());
+		//Statement st = DBConnection.getInstance().createStatement();
+		int rowcount = st.executeUpdate();
 		return rowcount > 0;
 	}
 	
