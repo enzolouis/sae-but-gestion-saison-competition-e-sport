@@ -26,7 +26,6 @@ public class IdentificationModele {
 	
 	public IdentificationModele() throws Exception {
 		
-		this.dbConnection = dbConnection;
 		this.adminDAO = new AdministrateurDAO();
 		this.adminDAO.add(new Administrateur(0, "Admin", "login1", "mdp1"));
 		this.adminDAO.add(new Administrateur(0, "Admin", "login2", "mdp2"));

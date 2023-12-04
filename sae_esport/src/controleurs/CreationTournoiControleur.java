@@ -8,17 +8,17 @@ import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import classes.Arbitre;
-import modeles.CreationTournoiModele;
+import modeles.TournoiModele;
 import vues.CreationTournoiVue;
 
 public class CreationTournoiControleur implements ActionListener {
 	private CreationTournoiVue vue;
-	private CreationTournoiModele modele;
+	private TournoiModele modele;
 	
 	// remplacer identificationvue par CreationTournoiVue
 	public CreationTournoiControleur(CreationTournoiVue vue) {
 		this.vue = vue;
-		this.modele = new CreationTournoiModele();
+		this.modele = new TournoiModele();
 	}
 
 	@Override
