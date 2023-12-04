@@ -5,24 +5,18 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import classes.DBConnection;
+
 public class CreateAdmin {
 
 	public static void main(String[] args) { 
 				
-		String dirProjetJava = System.getProperty("user.dir");
-		System.setProperty("derby.system.home", dirProjetJava+"/BDDSAEEsport");
-				
+	
 		try {
 			
-			//connexion
-			DriverManager.registerDriver(new org.apache.derby.jdbc.EmbeddedDriver());
-			String urlConnexion = "jdbc:derby:BDDSAEEsport;create=true";
-			Connection dbConnection = DriverManager.getConnection(urlConnexion);
-			System.out.println("Connexion ok");
-			
-			//création de la séquence de l'identifiant admin
+	//création de la séquence de l'identifiant admin
 			String reqSeqAdmin = "CREATE OR REPLACE SEQUENCE seqIdAdmin START WITH 1 INCREMENT BY 1";
-			PreparedStatement stSeqAdmin = dbConnection.prepareStatement(reqSeqAdmin);
+			PreparedStatement stSeqAdmin = DBConnection.getInstance().prepareStatement(reqSeqAdmin);
 			stSeqAdmin.executeUpdate();
 			System.out.println("Séquence admin créée");
 			
@@ -32,7 +26,7 @@ public class CreateAdmin {
 							+ "nom VARCHAR(50),"
 							+ "login VARCHAR(50),"
 							+ "motDePasse VARCHAR(50))";
-			PreparedStatement stCreateAdmin = dbConnection.prepareStatement(reqCreateAdmin);
+			PreparedStatement stCreateAdmin = DBConnection.getInstance().prepareStatement(reqCreateAdmin);
 			stCreateAdmin.executeUpdate();
 			System.out.println("Table admin créée");
 			

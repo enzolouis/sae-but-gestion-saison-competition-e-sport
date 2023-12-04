@@ -5,24 +5,16 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import classes.DBConnection;
+
 public class CreateParticipation {
 
 	public static void main(String[] args) {
 
-		String dirProjetJava = System.getProperty("user.dir");
-		System.setProperty("derby.system.home", dirProjetJava+"/BDDSAEEsport");
-		
 		try {
-			
-			//connexion
-			DriverManager.registerDriver(new org.apache.derby.jdbc.EmbeddedDriver());
-			String urlConnexion = "jdbc:derby:BDDSAEEsport;create=true";
-			Connection dbConnection = DriverManager.getConnection(urlConnexion);
-			System.out.println("Connexion ok");
-			
 			//création de la séquence de l'id tournoi				
 			String reqSeqParticiper = "CREATE OR REPLACE SEQUENCE seqParticipation START WITH 1 INCREMENT BY 1";
-			PreparedStatement stSeqParticiper = dbConnection.prepareStatement(reqSeqParticiper);
+			PreparedStatement stSeqParticiper = DBConnection.getInstance().prepareStatement(reqSeqParticiper);
 			stSeqParticiper.executeUpdate();
 			System.out.println("Séquence tournoi créée");
 			
@@ -35,7 +27,7 @@ public class CreateParticipation {
 					+ "FOREIGN KEY (idTournoi) REFERENCES Tournoi(idTournoi),"
 					+ "FOREIGN KEY (idEquipe) REFERENCES Equipe(idEquipe))";
 			
-			PreparedStatement stCreateParticipation = dbConnection.prepareStatement(reqCreateParticipation);
+			PreparedStatement stCreateParticipation = DBConnection.getInstance().prepareStatement(reqCreateParticipation);
 			stCreateParticipation.executeUpdate();
 			System.out.println("Table participation créée");
 			

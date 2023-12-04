@@ -5,24 +5,17 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import classes.DBConnection;
+
 public class CreateArbitre {
 
 	public static void main(String[] args) {
-
-		String dirProjetJava = System.getProperty("user.dir");
-		System.setProperty("derby.system.home", dirProjetJava+"/BDDSAEEsport");
-		
+	
 		try {
-			
-			//connexion
-			DriverManager.registerDriver(new org.apache.derby.jdbc.EmbeddedDriver());
-			String urlConnexion = "jdbc:derby:BDDSAEEsport;create=true";
-			Connection dbConnection = DriverManager.getConnection(urlConnexion);
-			System.out.println("Connexion ok");
 			
 			//création de la séquence de l'identifiant arbitre
 			String reqSeqArbitre = "CREATE OR REPLACE SEQUENCE seqIdArbitre START WITH 1 INCREMENT BY 1";
-			PreparedStatement stSeqArbitre = dbConnection.prepareStatement(reqSeqArbitre);
+			PreparedStatement stSeqArbitre = DBConnection.getInstance().prepareStatement(reqSeqArbitre);
 			stSeqArbitre.executeUpdate();
 			System.out.println("Séquence arbitre créée");
 			
@@ -32,7 +25,7 @@ public class CreateArbitre {
 					+ "nom VARCHAR(50),"
 					+ "prenom VARCHAR(50),"
 					+ "nationalite VARCHAR(50))";
-			PreparedStatement stCreateArbitre = dbConnection.prepareStatement(reqCreateArbitre);
+			PreparedStatement stCreateArbitre = DBConnection.getInstance().prepareStatement(reqCreateArbitre);
 			stCreateArbitre.executeUpdate();
 			System.out.println("Table arbitre créée");
 				
