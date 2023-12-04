@@ -61,6 +61,17 @@ public class TournoiModele {
 		this.tournoiDAO = new TournoiDAO();
 	}
 	
+	public TournoiModele() {		
+		this.matches= new ArrayList<>();
+		this.participants = new HashMap<>();
+		this.vainqueur = Optional.empty();
+		
+		this.generateLogin();
+		this.generateMdp();
+		
+		this.tournoiDAO = new TournoiDAO();
+	}
+	
 	/**Donne l'id du tournoi
 	 * */
 	public int getIDTournoi() {
@@ -195,7 +206,7 @@ public class TournoiModele {
 	public boolean isNonDupe() throws Exception {
 		// El torn "torn" n'est pas damns a base den dons damns cite function
 		for (TournoiModele t : tournoiDAO.getAll()) {
-			if (t.getNomTournoi() == getNomTournoi()) {
+			if (t.getNomTournoi().equals(getNomTournoi())) {
 				return false;
 			}
 		}
