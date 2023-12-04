@@ -53,12 +53,7 @@ public class CreationTournoiVue extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-<<<<<<< Updated upstream
-                	
-                    CreationTournoiVue frame = new CreationTournoiVue(DBConnection.getInstance());
-=======
                     CreationTournoiVue frame = new CreationTournoiVue();
->>>>>>> Stashed changes
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
