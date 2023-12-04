@@ -29,7 +29,8 @@ public class DBConnection {
 	public static synchronized Connection getInstance()
 	{
 		if (instance == null) {
-			instance = new DBConnection().instance;
+			new DBConnection();
+			return DBConnection.instance;
 		}
 		
 		return instance;

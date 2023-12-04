@@ -8,21 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import classes.DBConnection;
 import classes.Joueur;
 import classes.Joueur;
 
 public class JoueurDAO {
-	private Connection dbConnection;
-	
-	//Constructeur DAO, et mise en place de la connexion
-	public JoueurDAO(Connection c) {
-		this.dbConnection = c;
-	}
 	
 	//Renvois l'ensemble des joueurs
 	public List<Joueur> getAll() throws Exception {
 		String reqSelectJoueur = "SELECT * FROM joueur";
-		PreparedStatement st = this.dbConnection.prepareStatement(reqSelectJoueur);
+		PreparedStatement st = DBConnection.getInstance().prepareStatement(reqSelectJoueur);
 		ResultSet rs = st.executeQuery();
 		ArrayList<Joueur> joueur = new ArrayList<Joueur>();
 		while (rs.next()) {
@@ -33,7 +28,7 @@ public class JoueurDAO {
 	
 	//retourne un joueur specifique
 	public Optional<Joueur> getById(Integer... id) throws Exception {
-		Statement st = this.dbConnection.createStatement();
+		Statement st = DBConnection.getInstance().createStatement();
 		for (Integer i : id) {
 			ResultSet rs = st.executeQuery("SELECT * FROM joueur WHERE idJoueur="+i);
 			if (rs.next()) {
@@ -47,14 +42,14 @@ public class JoueurDAO {
 		//peu importe l'id que vous mettrez à l'arbitre, il sera changé
 		public boolean add(Joueur value) throws Exception {
 
-			PreparedStatement st = this.dbConnection.prepareStatement("SELECT NEXT VALUE FOR setIDJoueur FROM joueur");
+			PreparedStatement st = DBConnection.getInstance().prepareStatement("SELECT NEXT VALUE FOR setIDJoueur FROM joueur");
 			ResultSet rs = st.executeQuery();
 			int id = 0;
 			if (rs.next()) {
 				id = rs.getInt(1);
 			}
 			value.setIDJoueur(id);
-			st = this.dbConnection.prepareStatement("INSERT INTO joueur VALUES (?,?)");
+			st = DBConnection.getInstance().prepareStatement("INSERT INTO joueur VALUES (?,?)");
 			st.setInt(1, id); st.setString(2, value.getPseudo()); 
 			int rowcount = st.executeUpdate();
 			return rowcount > 0;
@@ -64,7 +59,7 @@ public class JoueurDAO {
 		//update un arbitre donné
 		public boolean update(Joueur value) throws Exception {
 			
-			PreparedStatement st = this.dbConnection.prepareStatement("UPDATE arbitre SET pseudo=? WHERE idArbitre=?");
+			PreparedStatement st = DBConnection.getInstance().prepareStatement("UPDATE arbitre SET pseudo=? WHERE idArbitre=?");
 			st.setString(1, value.getPseudo()); st.setInt(2, value.getIdJoueur());
 			int rowcount = st.executeUpdate();
 			return rowcount > 0;
@@ -74,7 +69,7 @@ public class JoueurDAO {
 		//retire un arbitre donné
 		public boolean delete(Joueur value) throws Exception {
 			
-			PreparedStatement st = this.dbConnection.prepareStatement("DELETE FROM joueur WHERE idArbitre=?");
+			PreparedStatement st = DBConnection.getInstance().prepareStatement("DELETE FROM joueur WHERE idArbitre=?");
 			st.setInt(1, value.getIdJoueur());
 			int rowcount = st.executeUpdate();
 			return rowcount > 0;

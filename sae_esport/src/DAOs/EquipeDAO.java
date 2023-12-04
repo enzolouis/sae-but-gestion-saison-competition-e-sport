@@ -9,21 +9,17 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 
+import classes.DBConnection;
 import classes.Equipe;
 import classes.Nationalite;
 
 public class EquipeDAO {
-	private Connection dbConnection;
-	
-	//Constructeur DAO, et mise en place de la connexion
-	public EquipeDAO(Connection c) {
-		this.dbConnection = c;
-	}
+
 	
 	//Renvois l'ensemble des equipes
 	public List<Equipe> getAll() throws Exception {
 		String reqSelectEquipe = "SELECT * FROM equipe";
-		PreparedStatement st = this.dbConnection.prepareStatement(reqSelectEquipe);
+		PreparedStatement st = DBConnection.getInstance().prepareStatement(reqSelectEquipe);
 		ResultSet rs = st.executeQuery();
 		ArrayList<Equipe> equipes = new ArrayList<Equipe>();
 		while (rs.next()) {
@@ -36,14 +32,14 @@ public class EquipeDAO {
 	//peu importe l'id que vous mettrez à l'equipe, il sera changé
 	public boolean add(Equipe value) throws Exception {
 
-		PreparedStatement st = this.dbConnection.prepareStatement("SELECT NEXT VALUE FOR idEquipe FROM equipe");
+		PreparedStatement st = DBConnection.getInstance().prepareStatement("SELECT NEXT VALUE FOR idEquipe FROM equipe");
 		ResultSet rs = st.executeQuery();
 		int id = 0;
 		if (rs.next()) {
 			id = rs.getInt(1);
 		}
 		value.setIdEquipe(id);
-		st = this.dbConnection.prepareStatement("INSERT INTO equipe VALUES (?,?,?,?,?,?)");
+		st = DBConnection.getInstance().prepareStatement("INSERT INTO equipe VALUES (?,?,?,?,?,?)");
 		st.setInt(1, id); 
 		st.setString(2, value.getNom()); 
 		st.setObject(3, (Object) value.getNationalite()); 
@@ -86,7 +82,7 @@ public class EquipeDAO {
 	//update un equipe donné
 	public boolean update(Equipe value) throws Exception {
 		
-		PreparedStatement st = this.dbConnection.prepareStatement("UPDATE equipe SET nom=?, nationalite=?, dispose=?, rangsaisonprecedante=?, pointssaison=? WHERE idequipe=?");
+		PreparedStatement st = DBConnection.getInstance().prepareStatement("UPDATE equipe SET nom=?, nationalite=?, dispose=?, rangsaisonprecedante=?, pointssaison=? WHERE idequipe=?");
 		st.setString(1, value.getNom()); 
 		st.setObject(2, (Object) value.getNationalite()); 
 		st.setBoolean(3, value.getDisposition()); 
@@ -103,7 +99,7 @@ public class EquipeDAO {
 	//retire un equipe donné
 	public boolean delete(Equipe value) throws Exception {
 		
-		PreparedStatement st = this.dbConnection.prepareStatement("DELETE FROM equipe WHERE idEquipe=?");
+		PreparedStatement st = DBConnection.getInstance().prepareStatement("DELETE FROM equipe WHERE idEquipe=?");
 		st.setInt(1, value.getIdEquipe());
 		int rowcount = st.executeUpdate();
 		return rowcount > 0;
