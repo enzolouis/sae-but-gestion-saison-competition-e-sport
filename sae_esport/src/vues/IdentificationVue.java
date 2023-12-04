@@ -37,7 +37,6 @@ public class IdentificationVue extends JFrame {
 	
     private JPanel contentPane;
     private IdentificationControleur controleur;
-    private Connection dbConnection;
     private PlaceholderTextField textFieldUtilisateur;
     private JPasswordField textFieldMotDePasse;
     
@@ -51,7 +50,7 @@ public class IdentificationVue extends JFrame {
             		DriverManager.registerDriver(new org.apache.derby.jdbc.EmbeddedDriver());
         			String urlConnexion = "jdbc:derby:BDDSAEEsport;create=true";
         			Connection dbConnection = DriverManager.getConnection(urlConnexion);
-                    IdentificationVue frame = new IdentificationVue(dbConnection);
+                    IdentificationVue frame = new IdentificationVue();
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -72,9 +71,8 @@ public class IdentificationVue extends JFrame {
     	return textFieldMotDePasse;
     }
     
-    public IdentificationVue(Connection dbConnection) throws Exception {
-    	this.dbConnection = dbConnection;
-    	this.controleur = new IdentificationControleur(this, dbConnection);
+    public IdentificationVue() throws Exception {
+    	this.controleur = new IdentificationControleur(this);
     	
     	setMinimumSize(new Dimension(450, 300));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

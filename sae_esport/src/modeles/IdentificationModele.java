@@ -20,19 +20,26 @@ public class IdentificationModele {
 	
 	private List<Administrateur> admins;
 	private AdministrateurDAO adminDAO;
-	private Connection dbConnection;
 	private TournoiDAO tournoiDAO;
 	private Tournoi tournoiOuvert;
 	private Utilisateur utilisateur = null;
 	
-	public IdentificationModele(Connection dbConnection) throws Exception {
+	public IdentificationModele() throws Exception {
 		
+<<<<<<< Updated upstream
 		this.dbConnection = dbConnection;
 		this.adminDAO = new AdministrateurDAO();
 		this.adminDAO.add(new Administrateur(0, "Admin", "login1", "mdp1"));
 		this.adminDAO.add(new Administrateur(0, "Admin", "login2", "mdp2"));
 		//initalisation des variables
 		this.tournoiDAO = new TournoiDAO();
+=======
+		this.adminDAO = new AdministrateurDAO(DBConnection.getInstance());
+		this.adminDAO.add(new Administrateur(0, "Admin", "login1", "mdp1"));
+		this.adminDAO.add(new Administrateur(0, "Admin", "login2", "mdp2"));
+		//initalisation des variables
+		this.tournoiDAO = new TournoiDAO(DBConnection.getInstance());
+>>>>>>> Stashed changes
 		this.tournoiOuvert = new Tournoi(1, "Tournoi test", "20/10/2023", "26/10/2023", Notoriete.INTERNATIONAL, EtatTournoi.OUVERT);
 		
 		//recuperer le tournoi ouvert à l'aide du DAO (créer un DAO tournoi)
