@@ -2,6 +2,7 @@ package classes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Equipe {
 	
@@ -12,6 +13,8 @@ public class Equipe {
 	private boolean dispose;
 	private int rangSaisonPrecedante;
 	private int pointsSaison;
+	
+	
 	
 	/**Constructeur, SANS une liste de joueurs déja donné
 	*	@param l'ID de l'Equipe
@@ -131,4 +134,22 @@ public class Equipe {
 	public void setIdEquipe(int id) {
 		this.idEquipe = id;
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(joueurs, nom);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Equipe other = (Equipe) obj;
+		return Objects.equals(joueurs, other.joueurs) && Objects.equals(nom, other.nom);
+	}
+
 }

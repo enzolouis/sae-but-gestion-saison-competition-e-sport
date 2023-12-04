@@ -1,19 +1,25 @@
-package classes;
+package modeles;
 
-import java.text.DateFormat;
-import java.text.Format;
+import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Random;
-import java.sql.Date;
 
-public class Tournoi {
+import DAOs.TournoiDAO;
+import classes.Equipe;
+import classes.EtatTournoi;
+import classes.Match;
+import classes.Notoriete;
+
+public class TournoiModele {
+	
+	private TournoiDAO tournoiDAO;
 	//Représente le nom ou le titre du Tournoi
 	private String nomTournoi;
 	
@@ -39,7 +45,7 @@ public class Tournoi {
 	 * 	@param notoriété du Tournoi
 	 * 	@param Etat d'ouverture ou fermeture du Tournoi
 	 * */
-	public Tournoi(int idTournoi, String nomTournoi, String dateDebut, String dateFin, Notoriete notoriete, EtatTournoi etat) {
+	public TournoiModele(int idTournoi, String nomTournoi, String dateDebut, String dateFin, Notoriete notoriete, EtatTournoi etat) {
 		this.idTournoi = idTournoi;
 		this.nomTournoi = nomTournoi;
 		this.dateDebut = dateDebut;
@@ -52,7 +58,7 @@ public class Tournoi {
 		this.generateLogin();
 		this.generateMdp();
 		
-		
+		this.tournoiDAO = new TournoiDAO();
 	}
 	
 	/**Donne l'id du tournoi
@@ -104,13 +110,13 @@ public class Tournoi {
 	}
 	
 	//Donne l'etat du tournoi
-	public EtatTournoi getEtat_Tournoi() {
+	public EtatTournoi getEtatTournoi() {
 		return this.etat;
 	}
 	/**Change l'etat du tournoi
 	 * 	@param la valeur de l'état du tournoi avec lequel changer
 	 * */
-	public void setEtat_Tournoi(EtatTournoi etat) {
+	public void setEtatTournoi(EtatTournoi etat) {
 		this.etat = etat;
 	}
 	
@@ -126,8 +132,6 @@ public class Tournoi {
 	public void nouveauMatch(int idMatch, boolean finale) {
 		this.matches.add(new Match(idMatch, finale));
 	}
-	
-	
 	
 	//Donne la map de participant
 	public Map<Equipe, Integer> getParticipants(){
@@ -183,9 +187,44 @@ public class Tournoi {
 	}
 	
 	private static Date getDate(String date) throws ParseException {
-		return new Date(new SimpleDateFormat("yyyy-MM-dd").parse(date).getTime());
+		return new Date(new SimpleDateFormat("dd/mm/yyyy").parse(date).getTime());
 	}
 	
 	
+	// a tester
+	public boolean isNonDupe() throws Exception {
+		// El torn "torn" n'est pas damns a base den dons damns cite function
+		for (Tournoi t : tournoiDAO.getAll()) {
+			if (t.getNomTournoi() == getNomTournoi()) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
 	
+	public boolean isDateFinSupADateDebut() throws ParseException {
+		return getDateFin().compareTo(getDateDebut()) == 1;
+	}
+	
+	public boolean isDateFinDateDebutDifferenceInfA30Jours() throws ParseException {
+		// 30 jours = 2592000000 milisecond
+		
+		return getDateFin().getTime() - getDateDebut().getTime() < 2592000000L;
+	}
+	
+	public boolean isTournoiNonSuperpose(Tournoi tournoi) throws Exception {
+		for (Tournoi t : tournoiDAO.getAll()) {
+			if ((
+				t.getDateDebut().getTime() > tournoi.getDateDebut().getTime()
+				&&
+				t.getDateDebut().getTime() < tournoi.getDateDebut().getTime()
+				)) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
+
 }
