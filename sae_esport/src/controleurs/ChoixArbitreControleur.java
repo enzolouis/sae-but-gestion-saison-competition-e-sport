@@ -26,6 +26,8 @@ public class ChoixArbitreControleur implements ActionListener {
 		if (bouton.getText().equals("Quitter")) {
 			this.vue.setVisible(false);
 			this.vue.dispose();
+		} else if (bouton.getText().equals("sdqz")) {
+			
 		}
 	}
 	

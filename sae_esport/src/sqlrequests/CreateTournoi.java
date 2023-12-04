@@ -21,13 +21,13 @@ public class CreateTournoi {
 			System.out.println("Connexion ok");
 			
 			//création de la séquence de l'id tournoi				
-			String reqSeqTournoi = "CREATE SEQUENCE seqIdTournoi START WITH 1 INCREMENT BY 1";
+			String reqSeqTournoi = "CREATE OR REPLACE SEQUENCE seqIdTournoi START WITH 1 INCREMENT BY 1";
 			PreparedStatement stSeqTournoi = dbConnection.prepareStatement(reqSeqTournoi);
 			stSeqTournoi.executeUpdate();
 			System.out.println("Séquence tournoi créée");
 			
 			//création de la table tournoi
-			String reqCreateTournoi = "CREATE TABLE tournoi ("
+			String reqCreateTournoi = "CREATE OR REPLACE TABLE tournoi ("
 					+ "idTournoi INT PRIMARY KEY NOT NULL,"
 					+ "nom VARCHAR(30),"
 					+ "dateDebut DATE,"
