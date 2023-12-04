@@ -5,8 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBConnection {
-	private static DBConnection instance;
-	private Connection con;
+	private static Connection instance;
 	
 	private DBConnection() {
 		String dirProjetJava = System.getProperty("user.dir");
@@ -21,16 +20,16 @@ public class DBConnection {
 		String urlConnexion = "jdbc:derby:BDDSAEEsport;create=true";
 		
 		try {
-			this.con = DriverManager.getConnection(urlConnexion);
+			DBConnection.instance = DriverManager.getConnection(urlConnexion);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public static synchronized DBConnection getInstance()
+	public static synchronized Connection getInstance()
 	{
 		if (instance == null) {
-			instance = new DBConnection();
+			instance = new DBConnection().instance;
 		}
 		
 		return instance;
