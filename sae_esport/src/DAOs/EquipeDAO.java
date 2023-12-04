@@ -53,31 +53,42 @@ public class EquipeDAO {
 	}
 	
 	//ajoute des equipes d'un tableau css
-		public void importEquipes(String FILEPATH) throws Exception{
-			File file;
-			FileReader fr;
-			BufferedReader bfr;
-			
-			file = new File(FILEPATH);
-			fr = new FileReader(file);
-			bfr= new BufferedReader(fr);
-			
-			
-			List<String[] > data = new ArrayList<String[] >();
+			public List<String[] > importEquipes(String FILEPATH) throws Exception{
+				File file;
+				FileReader fr;
+				BufferedReader bfr;
+				
+				file = new File(FILEPATH);
+				fr = new FileReader(file);
+				bfr= new BufferedReader(fr);
+				
+				
+				List<String[] > data = new ArrayList<String[] >();
 
-			String nextLine = null;
-			while ((nextLine = bfr.readLine()) != null) {
-			    String s = nextLine;
-			    data.add(s.split(","));
+				String nextLine = null;
+				while ((nextLine = bfr.readLine()) != null) {
+				    String s = nextLine;
+				    data.add(s.split(","));
+				}
+				bfr.close();
+				
+				List<Equipe> le= getAll();
+				
+				for (String[] s : data) {
+					Nationalite n = Nationalite.valueOf(s[1]);
+					Equipe e = new Equipe(0,s[0],n,true,Integer.parseInt(s[2]),Integer.parseInt(s[3]));
+					boolean t = true;
+					for (Equipe eq : le) {
+						if (e.getNom() == eq.getNom()) {
+							t = false;
+						}
+					}
+					if (t) {
+						add(e);
+					}
+				}
+				return data;
 			}
-			bfr.close();
-			
-			for (String[] s : data) {
-				Nationalite n = Nationalite.valueOf(s[1]);
-				Equipe e = new Equipe(0,s[0],n,true,Integer.parseInt(s[2]),Integer.parseInt(s[3]));
-				add(e);
-			}
-		}
 	
 	//update un equipe donné
 	public boolean update(Equipe value) throws Exception {
