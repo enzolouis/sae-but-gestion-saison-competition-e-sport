@@ -35,30 +35,19 @@ public class AccueilArbitreVue extends JFrame {
 
     private JPanel contentPane;
     private AccueilArbitreControleur controleur;
-    private Connection dbConnection;
     
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try {
-                	String dirProjetJava = System.getProperty("user.dir");
-            		System.setProperty("derby.system.home", dirProjetJava+"/BDDSAEEsport");
-            		DriverManager.registerDriver(new org.apache.derby.jdbc.EmbeddedDriver());
-        			String urlConnexion = "jdbc:derby:BDDSAEEsport;create=true";
-        			Connection dbConnection = DriverManager.getConnection(urlConnexion);
-        			AccueilArbitreVue frame = new AccueilArbitreVue(dbConnection);
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+        			AccueilArbitreVue frame = new AccueilArbitreVue();
+						frame.setVisible(true);
             }
         });
     }
     
-    public AccueilArbitreVue(Connection dbConnection) throws Exception {
-    	
-    	this.dbConnection = dbConnection;
-    	this.controleur = new AccueilArbitreControleur(this, dbConnection);
+    public AccueilArbitreVue() {
+
+    	this.controleur = new AccueilArbitreControleur(this);
     	
     	setMinimumSize(new Dimension(450, 300));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

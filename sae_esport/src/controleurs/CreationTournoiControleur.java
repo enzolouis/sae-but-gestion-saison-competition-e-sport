@@ -2,9 +2,10 @@ package controleurs;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-
+import java.io.File;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import classes.Arbitre;
 import modeles.CreationTournoiModele;
@@ -13,12 +14,11 @@ import vues.CreationTournoiVue;
 public class CreationTournoiControleur implements ActionListener {
 	private CreationTournoiVue vue;
 	private CreationTournoiModele modele;
-	private Connection dbConnection;
 	
 	// remplacer identificationvue par CreationTournoiVue
-	public CreationTournoiControleur(CreationTournoiVue vue, Connection dbConnection) {
+	public CreationTournoiControleur(CreationTournoiVue vue) {
 		this.vue = vue;
-		this.modele = new CreationTournoiModele(dbConnection);
+		this.modele = new CreationTournoiModele();
 	}
 
 	@Override
@@ -38,13 +38,20 @@ public class CreationTournoiControleur implements ActionListener {
 				}
 				break;
 			case ("Importer"):
-				if (!this.vue.textFieldEquipesFile.getText().isEmpty()) {
-					//code d'ajout de l'importation des équipes
+				JFileChooser fc = new JFileChooser();
+				fc.setAcceptAllFileFilterUsed(false);
+				fc.addChoosableFileFilter(new FileNameExtensionFilter("CSV Documents", "csv"));
+				int chose = fc.showOpenDialog(this.vue);
+				if (chose == JFileChooser.APPROVE_OPTION) {
+					File file = fc.getSelectedFile();
+					this.vue.textFieldEquipesFile.setText(file.getName());
 				}
 				break;
 			case ("Quitter"):
+				this.vue.dispose();
 				break;
 			case ("Valider"):
+				
 				break;
 			}
 		}

@@ -12,12 +12,10 @@ public class AccueilArbitreControleur implements ActionListener {
 	
 	private AccueilArbitreVue vue;
 	private AccueilArbitreModele modele;
-	private Connection dbConnection;
 	
-	public AccueilArbitreControleur(AccueilArbitreVue vue, Connection dbConnection) throws Exception {
+	public AccueilArbitreControleur(AccueilArbitreVue vue) {
 		this.vue = vue;
-		this.dbConnection = dbConnection;
-		this.modele = new AccueilArbitreModele(dbConnection);
+		this.modele = new AccueilArbitreModele();
 	}
 	
 	@Override

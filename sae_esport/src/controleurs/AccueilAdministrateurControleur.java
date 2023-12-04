@@ -7,25 +7,33 @@ import javax.swing.JButton;
 
 import modeles.AccueilAdministrateurModele;
 import vues.AccueilAdministrateurVue;
+import vues.CreationTournoiVue;
 
 public class AccueilAdministrateurControleur implements ActionListener {
 	
 	private AccueilAdministrateurVue vue;
 	private AccueilAdministrateurModele modele;
-	private Connection dbConnection;
 	
-	public AccueilAdministrateurControleur(AccueilAdministrateurVue vue, Connection dbConnection) throws Exception {
+	public AccueilAdministrateurControleur(AccueilAdministrateurVue vue) {
 		this.vue = vue;
-		this.dbConnection = dbConnection;
-		this.modele = new AccueilAdministrateurModele(dbConnection);
+		this.modele = new AccueilAdministrateurModele();
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		JButton bouton = (JButton) e.getSource();
-		if (bouton.getText().equals("Quitter")) {
-			this.vue.setVisible(false);
-			this.vue.dispose();
+		if (e.getSource() instanceof JButton) {
+			JButton bouton = (JButton) e.getSource();
+			switch (bouton.getText()) {
+			case ("Quitter"):
+				this.vue.setVisible(false);
+				this.vue.dispose();
+				break;
+			case ("Créer un tournoi"):
+				CreationTournoiVue frame = new CreationTournoiVue();
+				frame.setVisible(true);
+			default:
+				break;
+			}
 		}
 	}
 

@@ -35,30 +35,19 @@ public class AccueilAdministrateurVue extends JFrame {
 
     private JPanel contentPane;
     private AccueilAdministrateurControleur controleur;
-    private Connection dbConnection;
     
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try {
-                	String dirProjetJava = System.getProperty("user.dir");
-            		System.setProperty("derby.system.home", dirProjetJava+"/BDDSAEEsport");
-            		DriverManager.registerDriver(new org.apache.derby.jdbc.EmbeddedDriver());
-        			String urlConnexion = "jdbc:derby:BDDSAEEsport;create=true";
-        			Connection dbConnection = DriverManager.getConnection(urlConnexion);
-        			AccueilAdministrateurVue frame = new AccueilAdministrateurVue(dbConnection);
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+        		AccueilAdministrateurVue frame = new AccueilAdministrateurVue();
+                frame.setVisible(true);
             }
         });
     }
     
-    public AccueilAdministrateurVue(Connection dbConnection) throws Exception {
+    public AccueilAdministrateurVue() {
     	
-    	this.dbConnection = dbConnection;
-    	this.controleur = new AccueilAdministrateurControleur(this, dbConnection);
+    	this.controleur = new AccueilAdministrateurControleur(this);
     	
     	setMinimumSize(new Dimension(450, 300));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -81,11 +70,12 @@ public class AccueilAdministrateurVue extends JFrame {
         panelUtilisateurMotDePasse.add(panelUtilisateur);
         panelUtilisateur.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
         
-        JButton btnCrerUnTournoi = new JButton("Créer un tournoi");
-        btnCrerUnTournoi.setForeground(Color.WHITE);
-        btnCrerUnTournoi.setBorder(new RoundBtn(5));
-        btnCrerUnTournoi.setBackground(new Color(102, 173, 221));
-        panelUtilisateur.add(btnCrerUnTournoi);
+        JButton btnCreerUnTournoi = new JButton("Créer un tournoi");
+        btnCreerUnTournoi.addActionListener(controleur);
+        btnCreerUnTournoi.setForeground(Color.WHITE);
+        btnCreerUnTournoi.setBorder(new RoundBtn(5));
+        btnCreerUnTournoi.setBackground(new Color(102, 173, 221));
+        panelUtilisateur.add(btnCreerUnTournoi);
         
         JPanel panelMotDePasse = new JPanel();
         panelMotDePasse.setBackground(new Color(44, 47, 51));

@@ -20,12 +20,11 @@ public class IdentificationModele {
 	
 	private List<Administrateur> admins;
 	private AdministrateurDAO adminDAO;
-	private Connection dbConnection;
 	private TournoiDAO tournoiDAO;
 	private TournoiModele tournoiOuvert;
 	private Utilisateur utilisateur = null;
 	
-	public IdentificationModele(Connection dbConnection) throws Exception {
+	public IdentificationModele() throws Exception {
 		
 		this.dbConnection = dbConnection;
 		this.adminDAO = new AdministrateurDAO();
