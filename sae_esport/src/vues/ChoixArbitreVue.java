@@ -24,8 +24,10 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 
+import DAOs.ArbitreDAO;
 import controleurs.ChoixArbitreControleur;
 import style.CustomScrollBarUI;
+import style.RoundBtn;
 
 public class ChoixArbitreVue extends JFrame {
 
@@ -114,7 +116,6 @@ public class ChoixArbitreVue extends JFrame {
         scrollpanelArbitreList.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         
         BasicScrollBarUI scrollBarArbitreListBarUI = new CustomScrollBarUI();
-        
         scrollpanelArbitreList.getVerticalScrollBar().setUI(scrollBarArbitreListBarUI);
         
         GridBagConstraints gbc_scrollpanelArbitreList = new GridBagConstraints();
@@ -123,7 +124,7 @@ public class ChoixArbitreVue extends JFrame {
         gbc_scrollpanelArbitreList.gridx = 0;
         gbc_scrollpanelArbitreList.gridy = 0;
         panelMiddle.add(scrollpanelArbitreList, gbc_scrollpanelArbitreList);
-       
+        
         for (int i = 1; i <= 35; i++) {
         	JButton button = new JButton("Arbitre n°" + i);
         	button.setBackground(new Color(29, 88, 129));
@@ -141,7 +142,10 @@ public class ChoixArbitreVue extends JFrame {
         gbc_panelArbitreActions.gridx = 0;
         gbc_panelArbitreActions.gridy = 1;
         panelMiddle.add(panelArbitreActions, gbc_panelArbitreActions);
-       
+        
+        JLabel labelSelectedTournoiJLabel = new JLabel("Tournoi sélectioné : ");
+        labelSelectedTournoiJLabel.setForeground(new Color(102, 173, 221));
+        panelArbitreActions.add(labelSelectedTournoiJLabel);
         
         // Panel bottom : Quit
         JPanel panelBottom = new JPanel();
