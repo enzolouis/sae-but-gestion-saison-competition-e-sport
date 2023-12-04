@@ -17,7 +17,7 @@ public class ChoixArbitreControleur implements ActionListener {
 	public ChoixArbitreControleur(ChoixArbitreVue vue, Connection dbConnection) throws Exception {
 		this.vue = vue;
 		this.dbConnection = dbConnection;
-		this.modele = new ChoixArbitreModele(dbConnection);
+		this.modele = new ChoixArbitreModele();
 	}
 	
 	@Override

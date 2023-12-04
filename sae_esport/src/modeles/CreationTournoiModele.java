@@ -1,6 +1,5 @@
 package modeles;
 
-import java.sql.Connection;
 import java.sql.Date;
 
 import DAOs.TournoiDAO;
@@ -8,14 +7,18 @@ import classes.DBConnection;
 import classes.Tournoi;
 
 public class CreationTournoiModele {
-	
-	private Connection dbConnection;
+
 	private TournoiDAO tournoiDAO;
 	
 	
+<<<<<<< Updated upstream
 	public CreationTournoiModele(Connection dbConnection) {
 		this.dbConnection = dbConnection;
 		this.tournoiDAO = new TournoiDAO();
+=======
+	public CreationTournoiModele() {
+		this.tournoiDAO = new TournoiDAO(DBConnection.getInstance());
+>>>>>>> Stashed changes
 	}
 	
 	// a tester
@@ -46,7 +49,7 @@ public class CreationTournoiModele {
 		Date d = new Date(2023, 11, 31);
 		Date d2 = new Date(2023, 12, 29);
 		
-		CreationTournoiModele c = new CreationTournoiModele(DBConnection.getInstance());
+		CreationTournoiModele c = new CreationTournoiModele();
 		
 		System.out.println(c.isDateFinSupADateDebut(d, d2));
 		System.out.println(c.isDateFinDateDebutDifferenceInfA30Jours(d, d2));
