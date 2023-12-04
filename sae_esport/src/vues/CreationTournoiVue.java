@@ -13,12 +13,10 @@ import javax.swing.SwingConstants;
 import java.awt.GridLayout;
 
 import javax.swing.JTextField;
-import java.awt.FlowLayout;
 import javax.swing.JComboBox;
 import com.toedter.calendar.JDateChooser;
 
 import classes.Arbitre;
-import classes.DBConnection;
 import classes.Nationalite;
 import classes.Notoriete;
 import controleurs.CreationTournoiControleur;

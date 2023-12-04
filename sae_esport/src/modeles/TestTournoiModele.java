@@ -2,7 +2,6 @@ package modeles;
 
 import static org.junit.Assert.*;
 
-import java.sql.Date;
 import java.text.ParseException;
 import java.util.HashMap;
 

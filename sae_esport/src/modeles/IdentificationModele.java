@@ -1,15 +1,8 @@
 package modeles;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 import classes.*;
 import DAOs.AdministrateurDAO;
-import DAOs.ArbitreDAO;
 import DAOs.TournoiDAO;
 
 public class IdentificationModele {

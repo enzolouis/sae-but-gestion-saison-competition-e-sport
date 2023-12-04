@@ -1,20 +1,14 @@
 package controleurs;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.sql.Connection;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-import classes.DBConnection;
 import modeles.IdentificationModele;
 import modeles.IdentificationModele.Utilisateur;
 import vues.AccueilAdministrateurVue;
 import vues.AccueilArbitreVue;
-import vues.CreationTournoiVue;
 import vues.IdentificationVue;
 
 public class IdentificationControleur implements ActionListener {

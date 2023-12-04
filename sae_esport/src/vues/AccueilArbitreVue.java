@@ -2,11 +2,8 @@ package vues;
 
 import java.awt.EventQueue;
 
-import java.util.Date;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 import controleurs.AccueilArbitreControleur;
@@ -15,21 +12,13 @@ import style.RoundBtn;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import java.awt.GridLayout;
-import java.awt.Insets;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Timestamp;
 import java.awt.FlowLayout;
 import javax.swing.JButton;
 import java.awt.Font;
-import java.awt.Graphics;
-
 import javax.swing.SwingConstants;
 import java.awt.Dimension;
 
 import java.awt.Color;
-import java.awt.Component;
-
 import javax.swing.JSeparator;
 
 public class AccueilArbitreVue extends JFrame {
@@ -40,8 +29,8 @@ public class AccueilArbitreVue extends JFrame {
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
-        			AccueilArbitreVue frame = new AccueilArbitreVue();
-						frame.setVisible(true);
+        		AccueilArbitreVue frame = new AccueilArbitreVue();
+				frame.setVisible(true);
             }
         });
     }

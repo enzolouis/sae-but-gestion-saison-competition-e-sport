@@ -8,13 +8,12 @@ import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 
 import controleurs.IdentificationControleur;
+import style.PlaceholderTextField;
 import style.RoundBtn;
 
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import java.awt.GridLayout;
-import java.sql.Connection;
-import java.sql.DriverManager;
 
 import java.awt.FlowLayout;
 
@@ -28,7 +27,6 @@ import java.awt.Color;
 import javax.swing.JSeparator;
 
 public class IdentificationVue extends JFrame {
-	
 
 	public static final ImageIcon OEIL_INVISIBLE_ICON = new ImageIcon(new ImageIcon(IdentificationVue.class.getClassLoader().getResource
 			("oeilMotDePasseInvisible.png")).getImage().getScaledInstance(30, 30,  java.awt.Image.SCALE_SMOOTH));
@@ -45,12 +43,6 @@ public class IdentificationVue extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                	String dirProjetJava = System.getProperty("user.dir");
-                	System.out.println(dirProjetJava);
-            		System.setProperty("derby.system.home", dirProjetJava+"/BDDSAEEsport");
-            		DriverManager.registerDriver(new org.apache.derby.jdbc.EmbeddedDriver());
-        			String urlConnexion = "jdbc:derby:BDDSAEEsport;create=true";
-        			Connection dbConnection = DriverManager.getConnection(urlConnexion);
                     IdentificationVue frame = new IdentificationVue();
                     frame.setVisible(true);
                 } catch (Exception e) {
@@ -65,7 +57,7 @@ public class IdentificationVue extends JFrame {
     }
     
     public String getMotDePasseContenu() {
-    	return textFieldMotDePasse.getText();
+    	return String.valueOf(textFieldMotDePasse.getPassword());
     }
     
     public JPasswordField getMotDePasse() {
