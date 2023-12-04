@@ -8,7 +8,7 @@ import DAOs.TournoiDAO;
 import classes.Administrateur;
 import classes.EtatTournoi;
 import classes.Notoriete;
-import classes.Tournoi;
+import modeles.TournoiModele;
 
 public class insertValues {
 
@@ -20,7 +20,7 @@ public class insertValues {
         System.out.print("Admin OK");
         
         TournoiDAO tournoiDAO = new TournoiDAO();
-        tournoiDAO.add(new Tournoi(0, "premierTournoi", "2023-12-16", "2023-12-24", Notoriete.LOCAL, EtatTournoi.OUVERT));
+        tournoiDAO.add(new TournoiModele(0, "premierTournoi", "2023-12-16", "2023-12-24", Notoriete.LOCAL, EtatTournoi.OUVERT));
         System.out.print("Tournoi OK");
     }
 }

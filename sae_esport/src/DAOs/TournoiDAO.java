@@ -11,13 +11,13 @@ import java.util.Optional;
 
 import classes.DBConnection;
 import classes.Equipe;
-import classes.Tournoi;
+import modeles.TournoiModele;
 
 public class TournoiDAO {
 		
 	//Renvois l'ensemble des arbitres
-	public List<Tournoi> getAll() throws Exception {
-		ArrayList<Tournoi> tournois = new ArrayList<>();
+	public List<TournoiModele> getAll() throws Exception {
+		ArrayList<TournoiModele> tournois = new ArrayList<>();
 		String reqSelectTournoi = "SELECT * FROM tournoi";
 		PreparedStatement st = DBConnection.getInstance().prepareStatement(reqSelectTournoi);
 		ResultSet rs = st.executeQuery();
@@ -25,7 +25,7 @@ public class TournoiDAO {
 		PreparedStatement stParticipants = DBConnection.getInstance().prepareStatement(reqSelectParticipants);
 		ArrayList<Equipe> participants = new ArrayList<>();
 		while (rs.next()) {
-			Tournoi t = new Tournoi(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), classes.Notoriete.valueOf(rs.getString(5)), classes.EtatTournoi.valueOf(rs.getString(6)));
+			TournoiModele t = new TournoiModele(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), classes.Notoriete.valueOf(rs.getString(5)), classes.EtatTournoi.valueOf(rs.getString(6)));
 			stParticipants.setInt(1, rs.getInt(1));
 			ResultSet rsParticipants = stParticipants.executeQuery();
 			while (rsParticipants.next()) {
@@ -38,12 +38,12 @@ public class TournoiDAO {
 	}
 	
 	//retourne un Arbitre specifique
-	public Optional<Tournoi> getById(Integer... id) throws Exception {
+	public Optional<TournoiModele> getById(Integer... id) throws Exception {
 		Statement st = DBConnection.getInstance().createStatement();
 		for (Integer i : id) {
 			ResultSet rs = st.executeQuery("SELECT * FROM tournoi WHERE idTournoi="+i);
 			if (rs.next()) {
-				Tournoi t = new Tournoi(rs.getInt(1), rs.getString(2), rs.getString(3),rs.getString(4), classes.Notoriete.valueOf(rs.getString(5)), classes.EtatTournoi.valueOf(rs.getString(6)));
+				TournoiModele t = new TournoiModele(rs.getInt(1), rs.getString(2), rs.getString(3),rs.getString(4), classes.Notoriete.valueOf(rs.getString(5)), classes.EtatTournoi.valueOf(rs.getString(6)));
 				PreparedStatement stParticipants = DBConnection.getInstance().prepareStatement("SELECT idEquipe FROM Participer WHERE idTournoi = ?");
 				stParticipants.setInt(1, rs.getInt(1));
 				ResultSet rsParticipants = stParticipants.executeQuery();
@@ -57,7 +57,7 @@ public class TournoiDAO {
 	}
 	
 	//ajoute un arbitre à la liste
-	public boolean add(Tournoi value) throws Exception {
+	public boolean add(TournoiModele value) throws Exception {
 		
 		PreparedStatement st = DBConnection.getInstance().prepareStatement("SELECT NEXT VALUE FOR seqIdTournoi FROM admin");
 		ResultSet rs = st.executeQuery();
@@ -73,30 +73,30 @@ public class TournoiDAO {
 		st.setDate(4, value.getDateFin());
 		st.setString(5, value.getNotoriete().toString()); 
 		st.setObject(6, null);
-		st.setString(7, value.getEtat_Tournoi().toString());
+		st.setString(7, value.getEtatTournoi().toString());
 		int rowcount = st.executeUpdate();
 		return rowcount > 0;
 	}
 	
 	//update un arbitre donné
-	public boolean update(Tournoi value) throws Exception {
+	public boolean update(TournoiModele value) throws Exception {
 		Statement st = DBConnection.getInstance().createStatement();
 		int rowcount = st.executeUpdate("UPDATE tournoi SET ");
 		return rowcount > 0;
 	}
 	
 	//retire un arbitre donné
-	public boolean delete(Tournoi value) throws Exception {
+	public boolean delete(TournoiModele value) throws Exception {
 		Statement st = DBConnection.getInstance().createStatement();
 		int rowcount = st.executeUpdate("DELETE FROM tournoi WHERE idTournoi=?");
 		return rowcount > 0;
 	}
 	
-	public Optional<Tournoi> getTournoiOuvert() throws Exception {
+	public Optional<TournoiModele> getTournoiOuvert() throws Exception {
 		Statement st = DBConnection.getInstance().createStatement();
 		ResultSet rs = st.executeQuery("SELECT * FROM tournoi WHERE ouvert='OUVERT'");
 		if (rs.next()) {
-			return Optional.of(new Tournoi(rs.getInt(1), "", rs.getString(2), rs.getString(3), 
+			return Optional.of(new TournoiModele(rs.getInt(1), "", rs.getString(2), rs.getString(3), 
 					classes.Notoriete.valueOf(rs.getString(3)), classes.EtatTournoi.valueOf(rs.getString(4))));
 		}
 		return Optional.empty();

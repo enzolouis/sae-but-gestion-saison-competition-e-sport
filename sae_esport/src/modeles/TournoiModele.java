@@ -194,7 +194,7 @@ public class TournoiModele {
 	// a tester
 	public boolean isNonDupe() throws Exception {
 		// El torn "torn" n'est pas damns a base den dons damns cite function
-		for (Tournoi t : tournoiDAO.getAll()) {
+		for (TournoiModele t : tournoiDAO.getAll()) {
 			if (t.getNomTournoi() == getNomTournoi()) {
 				return false;
 			}
@@ -213,17 +213,7 @@ public class TournoiModele {
 		return getDateFin().getTime() - getDateDebut().getTime() < 2592000000L;
 	}
 	
-	public boolean isTournoiNonSuperpose(Tournoi tournoi) throws Exception {
-		for (Tournoi t : tournoiDAO.getAll()) {
-			if ((
-				t.getDateDebut().getTime() > tournoi.getDateDebut().getTime()
-				&&
-				t.getDateDebut().getTime() < tournoi.getDateDebut().getTime()
-				)) {
-				return false;
-			}
-		}
-		
+	public boolean isTournoiNonSuperpose() throws Exception {
 		return true;
 	}
 
