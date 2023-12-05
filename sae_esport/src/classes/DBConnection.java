@@ -31,7 +31,6 @@ public class DBConnection {
 	{
 		if (instance == null) {
 			new DBConnection();
-			return DBConnection.instance;
 		}
 		
 		return instance;

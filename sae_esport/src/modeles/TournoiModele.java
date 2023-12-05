@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.Random;
 
@@ -55,6 +54,17 @@ public class TournoiModele {
 		this.matches= new ArrayList<>();
 		this.participants = new HashMap<>();
 		this.vainqueur = Optional.empty();
+		this.generateLogin();
+		this.generateMdp();
+		
+		this.tournoiDAO = new TournoiDAO();
+	}
+	
+	public TournoiModele() {		
+		this.matches= new ArrayList<>();
+		this.participants = new HashMap<>();
+		this.vainqueur = Optional.empty();
+		
 		this.generateLogin();
 		this.generateMdp();
 		
@@ -195,7 +205,7 @@ public class TournoiModele {
 	public boolean isNonDupe() throws Exception {
 		// El torn "torn" n'est pas damns a base den dons damns cite function
 		for (TournoiModele t : tournoiDAO.getAll()) {
-			if (t.getNomTournoi() == getNomTournoi()) {
+			if (t.getNomTournoi().equals(getNomTournoi())) {
 				return false;
 			}
 		}

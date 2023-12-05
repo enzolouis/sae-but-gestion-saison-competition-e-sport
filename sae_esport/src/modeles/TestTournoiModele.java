@@ -2,19 +2,19 @@ package modeles;
 
 import static org.junit.Assert.*;
 
-import java.sql.Date;
 import java.text.ParseException;
 import java.util.HashMap;
 
 import org.junit.Test;
 
+import DAOs.TournoiDAO;
 import classes.Equipe;
 import classes.EtatTournoi;
 import classes.Nationalite;
 import classes.Notoriete;
 
 
-public class TestTournoi {
+public class TestTournoiModele {
 	
 	private TournoiModele t;
 
@@ -243,8 +243,8 @@ public class TestTournoi {
 		assertTrue(t.isDateFinSupADateDebut());
 	}
 	
-	//@Test
-	public void tesNonDupeSansDupe() throws Exception {
+	@Test
+	public void testNonDupeSansDupe() throws Exception {
 		t = new TournoiModele(
 				1,
 				"Champers", 
@@ -254,6 +254,38 @@ public class TestTournoi {
 				EtatTournoi.FERME);
 		
 		assertTrue(t.isNonDupe());
+	}
+	
+	@Test
+	public void testNonDupeAvecDupe() throws Exception {
+		
+		t = new TournoiModele(
+				2,
+				"gnegne", 
+				"20/12/1888", 
+				"31/12/1888", 
+				Notoriete.REGIONAL,
+				EtatTournoi.FERME);
+		
+		TournoiDAO tournoiDao = new TournoiDAO();
+		
+		System.out.println("LLLLLAAAAAA : ss");
+		tournoiDao.add(t);
+		System.out.println("LLLLLAAAAAA : ss");
+		
+		TournoiModele t2 = new TournoiModele(
+				2,
+				"gnegne", 
+				"20/12/1888", 
+				"31/12/1888", 
+				Notoriete.REGIONAL,
+				EtatTournoi.FERME);
+		
+		
+		assertFalse(t2.isNonDupe());
+		
+		// rollback
+		tournoiDao.delete(t);
 	}
 	
 	
