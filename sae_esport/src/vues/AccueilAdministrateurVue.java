@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controleurs.AccueilAdministrateurControleur;
-import style.RoundBtn;
+import style.CustomBorder;
 
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
@@ -63,7 +63,7 @@ public class AccueilAdministrateurVue extends JFrame {
         JButton btnCreerUnTournoi = new JButton("Créer un tournoi");
         btnCreerUnTournoi.addActionListener(controleur);
         btnCreerUnTournoi.setForeground(Color.WHITE);
-        btnCreerUnTournoi.setBorder(new RoundBtn(5));
+        btnCreerUnTournoi.setBorder(new CustomBorder(5));
         btnCreerUnTournoi.setBackground(new Color(102, 173, 221));
         panelUtilisateur.add(btnCreerUnTournoi);
         
@@ -73,7 +73,7 @@ public class AccueilAdministrateurVue extends JFrame {
         
         JButton btnStatistiquesDeLa = new JButton("Statistiques de la saison");
         btnStatistiquesDeLa.setForeground(Color.WHITE);
-        btnStatistiquesDeLa.setBorder(new RoundBtn(5));
+        btnStatistiquesDeLa.setBorder(new CustomBorder(5));
         btnStatistiquesDeLa.setBackground(new Color(102, 173, 221));
         panelMotDePasse.add(btnStatistiquesDeLa);
         
@@ -86,7 +86,7 @@ public class AccueilAdministrateurVue extends JFrame {
         JButton btnQuit = new JButton("Quitter");
         btnQuit.setBackground(new Color(231, 76, 60));
         btnQuit.setForeground(new Color(255, 255, 255));
-        btnQuit.setBorder(new RoundBtn(5));
+        btnQuit.setBorder(new CustomBorder(5));
         btnQuit.addActionListener(this.controleur);
         panelQuitterSeconnecter.add(btnQuit);
         
