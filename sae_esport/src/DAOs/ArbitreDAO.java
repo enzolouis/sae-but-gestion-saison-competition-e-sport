@@ -10,8 +10,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class ArbitreDAO {
+public class ArbitreDAO extends SingletonDAO {
 	
+	public ArbitreDAO() {
+		super();
+	}
 	//Renvois l'ensemble des arbitres
 	public List<Arbitre> getAll() throws Exception {
 		String reqSelectArbitre = "SELECT * FROM arbitre";

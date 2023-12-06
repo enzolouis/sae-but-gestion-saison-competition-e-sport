@@ -10,8 +10,11 @@ import java.util.Optional;
 import classes.DBConnection;
 import classes.Joueur;
 
-public class JoueurDAO {
+public class JoueurDAO extends SingletonDAO {
 	
+	public JoueurDAO() {
+		super();
+	}
 	//Renvois l'ensemble des joueurs
 	public List<Joueur> getAll() throws Exception {
 		String reqSelectJoueur = "SELECT * FROM joueur";

@@ -8,8 +8,11 @@ import java.util.List;
 import classes.DBConnection;
 import classes.Match;
 
-public class MatchDAO {
-
+public class MatchDAO extends SingletonDAO {
+	
+	public MatchDAO() {
+		super();
+	}
 	
 	//Renvois l'ensemble des joueurs
 	public List<Match> getAll() throws Exception {

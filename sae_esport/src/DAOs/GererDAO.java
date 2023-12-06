@@ -8,7 +8,12 @@ import java.util.List;
 import classes.DBConnection;
 import classes.Gerer;
 
-public class GererDAO {
+public class GererDAO extends SingletonDAO {
+	
+	public GererDAO() {
+		super();
+	}
+	
 	//Renvois l'ensemble des arbitres
 	public List<Gerer> getAll() throws Exception {
 		String reqSelectParticipation = "SELECT * FROM gerer";

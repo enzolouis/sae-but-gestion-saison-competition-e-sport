@@ -8,8 +8,11 @@ import java.util.List;
 import classes.DBConnection;
 import classes.Participer;
 
-public class ParticipationDAO {
-
+public class ParticipationDAO extends SingletonDAO {
+	
+	public ParticipationDAO() {
+		super();
+	}
 	
 	//Renvois l'ensemble des arbitres
 	public List<Participer> getAll() throws Exception {
