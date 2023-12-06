@@ -1,13 +1,11 @@
 package DAOs;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
 import classes.DBConnection;
-import classes.Participer;
 import classes.Participer;
 
 public class ParticipationDAO {
@@ -64,7 +62,7 @@ public class ParticipationDAO {
 	//retire un arbitre donné
 	public boolean delete(Participer value) throws Exception {
 		
-		PreparedStatement st = DBConnection.getInstance().prepareStatement("DELETE FROM equipe WHERE idEquipe=?");
+		PreparedStatement st = DBConnection.getInstance().prepareStatement("DELETE FROM participer WHERE idEquipe=?");
 		st.setInt(1, value.getIdEquipe());
 		int rowcount = st.executeUpdate();
 		return rowcount > 0;

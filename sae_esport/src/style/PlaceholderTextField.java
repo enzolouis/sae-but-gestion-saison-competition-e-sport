@@ -1,4 +1,4 @@
-package vues;
+package style;
 
 import java.awt.Font;
 import java.awt.Graphics;
@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.text.Document;
 
-@SuppressWarnings("serial")
+
 public class PlaceholderTextField extends JTextField {
 
 	public static void main(final String[] args) {

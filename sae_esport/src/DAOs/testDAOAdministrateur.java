@@ -1,8 +1,6 @@
 package DAOs;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -10,7 +8,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 

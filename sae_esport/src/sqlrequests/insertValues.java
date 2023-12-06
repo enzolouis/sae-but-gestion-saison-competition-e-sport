@@ -1,11 +1,10 @@
 package sqlrequests;
-
 import DAOs.AdministrateurDAO;
 import DAOs.TournoiDAO;
 import classes.Administrateur;
 import classes.EtatTournoi;
 import classes.Notoriete;
-import classes.Tournoi;
+import modeles.TournoiModele;
 
 public class insertValues {
 
