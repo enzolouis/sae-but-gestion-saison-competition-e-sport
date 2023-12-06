@@ -20,7 +20,7 @@ import javax.swing.border.EmptyBorder;
 
 import controleurs.IdentificationControleur;
 import style.CustomJTextField;
-import style.RoundBtn;
+import style.CustomBorder;
 
 public class IdentificationVue extends JFrame {
 
@@ -143,14 +143,14 @@ public class IdentificationVue extends JFrame {
         JButton btnQuit = new JButton("Quitter");
         btnQuit.setBackground(new Color(231, 76, 60));
         btnQuit.setForeground(new Color(255, 255, 255));
-        btnQuit.setBorder(new RoundBtn(5));
+        btnQuit.setBorder(new CustomBorder(5));
         btnQuit.addActionListener(this.controleur);
         panelQuitterSeconnecter.add(btnQuit);
         
         JButton btnLogin = new JButton("Se connecter");
         btnLogin.setForeground(new Color(255, 255, 255));
         btnLogin.setBackground(new Color(46, 204, 113));
-        btnLogin.setBorder(new RoundBtn(5));
+        btnLogin.setBorder(new CustomBorder(5));
         btnLogin.addActionListener(controleur);
         panelQuitterSeconnecter.add(btnLogin);
         
