@@ -21,7 +21,7 @@ import classes.Arbitre;
 import classes.Nationalite;
 import classes.Notoriete;
 import controleurs.CreationTournoiControleur;
-import style.RoundBtn;
+import style.CustomBorder;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -302,7 +302,7 @@ public class CreationTournoiVue extends JFrame {
 		btnQuitter.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 11));
 		btnQuitter.setBackground(new Color(231, 76, 60));
         btnQuitter.setForeground(new Color(255, 255, 255));
-        btnQuitter.setBorder(new RoundBtn(5));
+        btnQuitter.setBorder(new CustomBorder(5));
 		btnQuitter.addActionListener(controleur);
 		panelQuitter.add(btnQuitter);
 		
@@ -314,7 +314,7 @@ public class CreationTournoiVue extends JFrame {
 		btnValider.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 11));
 		btnValider.setForeground(new Color(255, 255, 255));
         btnValider.setBackground(new Color(46, 204, 113));
-        btnValider.setBorder(new RoundBtn(5));
+        btnValider.setBorder(new CustomBorder(5));
         btnValider.addActionListener(controleur);
 		this.btnValider.addActionListener(controleur);
 		panelValider.add(this.btnValider);
