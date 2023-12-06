@@ -13,12 +13,11 @@ public class IdentificationModele {
 	
 	private List<Administrateur> admins;
 	private AdministrateurDAO adminDAO;
-	private TournoiDAO tournoiDAO;
-	private TournoiModele tournoiOuvert;
+	private Tournoi tournoiOuvert;
 	private Utilisateur utilisateur = null;
 	
 	public IdentificationModele() throws Exception {
-		
+
 		this.adminDAO = new AdministrateurDAO();
 		this.adminDAO.add(new Administrateur(0, "Admin", "login1", "mdp1"));
 		this.adminDAO.add(new Administrateur(0, "Admin", "login2", "mdp2"));

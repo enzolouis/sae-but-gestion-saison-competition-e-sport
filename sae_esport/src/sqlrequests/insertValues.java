@@ -15,8 +15,7 @@ public class insertValues {
         adminDAO.add(new Administrateur(0, "admin1", "admin1", "motdepasse"));
         System.out.print("Admin OK");
         
-        TournoiDAO tournoiDAO = new TournoiDAO();
-        tournoiDAO.add(new TournoiModele(0, "premierTournoi", "2023-12-16", "2023-12-24", Notoriete.LOCAL, EtatTournoi.OUVERT));
+        TournoiDAO.getInstance().add(new Tournoi(0, "premierTournoi", "2023-12-16", "2023-12-24", Notoriete.LOCAL, EtatTournoi.OUVERT));
         System.out.print("Tournoi OK");
     }
 }

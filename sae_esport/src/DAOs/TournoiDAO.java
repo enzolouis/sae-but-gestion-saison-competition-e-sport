@@ -2,6 +2,7 @@ package DAOs;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,11 @@ import modeles.TournoiModele;
 
 public class TournoiDAO {
 	
+	private static TournoiDAO instance;
+	
+	private TournoiDAO() {
+		
+	}
 	//Renvois l'ensemble des arbitres
 	public List<TournoiModele> getAll() throws Exception {
 		ArrayList<TournoiModele> tournois = new ArrayList<>();
@@ -23,7 +29,7 @@ public class TournoiDAO {
 		PreparedStatement stParticipants = DBConnection.getInstance().prepareStatement(reqSelectParticipants);
 		ArrayList<Equipe> participants = new ArrayList<>();
 		while (rs.next()) {
-			TournoiModele t = new TournoiModele(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), classes.Notoriete.valueOf(rs.getString(5)), classes.EtatTournoi.valueOf(rs.getString(6)));
+			Tournoi t = new Tournoi(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), classes.Notoriete.valueOf(rs.getString(5)), classes.EtatTournoi.valueOf(rs.getString(7)));
 			stParticipants.setInt(1, rs.getInt(1));
 			ResultSet rsParticipants = stParticipants.executeQuery();
 			while (rsParticipants.next()) {
@@ -41,8 +47,8 @@ public class TournoiDAO {
 		for (Integer i : id) {
 			ResultSet rs = st.executeQuery("SELECT * FROM tournoi WHERE idTournoi="+i);
 			if (rs.next()) {
-				TournoiModele t = new TournoiModele(rs.getInt(1), rs.getString(2), rs.getString(3),rs.getString(4), classes.Notoriete.valueOf(rs.getString(5)), classes.EtatTournoi.valueOf(rs.getString(6)));
-				PreparedStatement stParticipants = DBConnection.getInstance().prepareStatement("SELECT idEquipe FROM Participation WHERE idTournoi = ?");
+				Tournoi t = new Tournoi(rs.getInt(1), rs.getString(2), rs.getString(3),rs.getString(4), classes.Notoriete.valueOf(rs.getString(5)), classes.EtatTournoi.valueOf(rs.getString(7)));
+				PreparedStatement stParticipants = DBConnection.getInstance().prepareStatement("SELECT idEquipe FROM Participer WHERE idTournoi = ?");
 				stParticipants.setInt(1, rs.getInt(1));
 				ResultSet rsParticipants = stParticipants.executeQuery();
 				while (rsParticipants.next()) {
@@ -100,6 +106,14 @@ public class TournoiDAO {
 					classes.Notoriete.valueOf(rs.getString(3)), classes.EtatTournoi.valueOf(rs.getString(4))));
 		}
 		return Optional.empty();
+	}
+	
+	public static synchronized TournoiDAO getInstance()
+	{
+		if (instance == null) {
+			instance = new TournoiDAO();
+		}
+		return instance;
 	}
 
 }
