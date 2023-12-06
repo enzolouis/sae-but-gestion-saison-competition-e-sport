@@ -4,6 +4,7 @@ import java.sql.Connection;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,9 +15,15 @@ import classes.Equipe;
 import classes.Tournoi;
 
 public class TournoiDAO {
+	
+	private static TournoiDAO instance;
+	
+	private TournoiDAO() {
+		
+	}
 		
 	//Renvois l'ensemble des arbitres
-	public List<Tournoi> getAll() throws Exception {
+	public List<Tournoi> getAll() throws SQLException {
 		ArrayList<Tournoi> tournois = new ArrayList<>();
 		String reqSelectTournoi = "SELECT * FROM tournoi";
 		PreparedStatement st = DBConnection.getInstance().prepareStatement(reqSelectTournoi);
@@ -25,7 +32,7 @@ public class TournoiDAO {
 		PreparedStatement stParticipants = DBConnection.getInstance().prepareStatement(reqSelectParticipants);
 		ArrayList<Equipe> participants = new ArrayList<>();
 		while (rs.next()) {
-			Tournoi t = new Tournoi(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), classes.Notoriete.valueOf(rs.getString(5)), classes.EtatTournoi.valueOf(rs.getString(6)));
+			Tournoi t = new Tournoi(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), classes.Notoriete.valueOf(rs.getString(5)), classes.EtatTournoi.valueOf(rs.getString(7)));
 			stParticipants.setInt(1, rs.getInt(1));
 			ResultSet rsParticipants = stParticipants.executeQuery();
 			while (rsParticipants.next()) {
@@ -43,7 +50,7 @@ public class TournoiDAO {
 		for (Integer i : id) {
 			ResultSet rs = st.executeQuery("SELECT * FROM tournoi WHERE idTournoi="+i);
 			if (rs.next()) {
-				Tournoi t = new Tournoi(rs.getInt(1), rs.getString(2), rs.getString(3),rs.getString(4), classes.Notoriete.valueOf(rs.getString(5)), classes.EtatTournoi.valueOf(rs.getString(6)));
+				Tournoi t = new Tournoi(rs.getInt(1), rs.getString(2), rs.getString(3),rs.getString(4), classes.Notoriete.valueOf(rs.getString(5)), classes.EtatTournoi.valueOf(rs.getString(7)));
 				PreparedStatement stParticipants = DBConnection.getInstance().prepareStatement("SELECT idEquipe FROM Participer WHERE idTournoi = ?");
 				stParticipants.setInt(1, rs.getInt(1));
 				ResultSet rsParticipants = stParticipants.executeQuery();
@@ -100,6 +107,14 @@ public class TournoiDAO {
 					classes.Notoriete.valueOf(rs.getString(3)), classes.EtatTournoi.valueOf(rs.getString(4))));
 		}
 		return Optional.empty();
+	}
+	
+	public static synchronized TournoiDAO getInstance()
+	{
+		if (instance == null) {
+			instance = new TournoiDAO();
+		}
+		return instance;
 	}
 
 }

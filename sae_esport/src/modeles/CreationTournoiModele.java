@@ -7,24 +7,15 @@ import classes.DBConnection;
 import classes.Tournoi;
 
 public class CreationTournoiModele {
-
-	private TournoiDAO tournoiDAO;
 	
-	
-<<<<<<< Updated upstream
-	public CreationTournoiModele(Connection dbConnection) {
-		this.dbConnection = dbConnection;
-		this.tournoiDAO = new TournoiDAO();
-=======
 	public CreationTournoiModele() {
-		this.tournoiDAO = new TournoiDAO(DBConnection.getInstance());
->>>>>>> Stashed changes
+		
 	}
 	
 	// a tester
 	public boolean isNonDupe(Tournoi tournoi) throws Exception {
 		// El torn "torn" n'est pas damns a base den dons damns cite function
-		for (Tournoi t : tournoiDAO.getAll()) {
+		for (Tournoi t : TournoiDAO.getInstance().getAll()) {
 			if (t.getNomTournoi() == tournoi.getNomTournoi()) {
 				return false;
 			}
@@ -56,7 +47,7 @@ public class CreationTournoiModele {
 		
 	}
 	public boolean isTournoiNonSuperpose(Tournoi tournoi) throws Exception {
-		for (Tournoi t : tournoiDAO.getAll()) {
+		for (Tournoi t : TournoiDAO.getInstance().getAll()) {
 			if ((
 				t.getDateDebut().getTime() > tournoi.getDateDebut().getTime()
 				&&
@@ -76,7 +67,10 @@ public class CreationTournoiModele {
 	public String getMotDePasse(Tournoi tournoi) {
 		return tournoi.getMotDePasse();
 	}
-
 	
+	public String dateChooserToString(java.util.Date date) {
+		return date.getYear()+"-"+date.getMonth()+"-"+date.getDay();
+		
+	}
 	
 }
