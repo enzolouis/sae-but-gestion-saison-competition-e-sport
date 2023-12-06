@@ -8,6 +8,10 @@ import javax.swing.border.EmptyBorder;
 
 import controleurs.AccueilAdministrateurControleur;
 import style.CustomBorder;
+import style.CustomJFrame;
+import style.CustomJLabel;
+import style.CustomJPanel;
+import style.CustomJSeparator;
 
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
@@ -21,9 +25,9 @@ import java.awt.Dimension;
 import java.awt.Color;
 import javax.swing.JSeparator;
 
-public class AccueilAdministrateurVue extends JFrame {
+public class AccueilAdministrateurVue extends CustomJFrame {
 
-    private JPanel contentPane;
+    private CustomJPanel contentPane;
     private AccueilAdministrateurControleur controleur;
     
     public static void main(String[] args) {
@@ -36,29 +40,20 @@ public class AccueilAdministrateurVue extends JFrame {
     }
     
     public AccueilAdministrateurVue() {
+    	super(new int[] {450, 300});
     	
     	this.controleur = new AccueilAdministrateurControleur(this);
-    	
-    	setMinimumSize(new Dimension(450, 300));
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 450, 300);
-        contentPane = new JPanel();
-        contentPane.setBackground(new Color(44, 47, 51));
-        contentPane.setBorder(new EmptyBorder(30, 30, 30, 30));
 
+        contentPane = this.getContentPanel();
         setContentPane(contentPane);
-        contentPane.setLayout(new BorderLayout(0, 0));
         
-        JPanel panelUtilisateurMotDePasse = new JPanel();
-        panelUtilisateurMotDePasse.setBorder(new EmptyBorder(10, 10, 10, 10));
-        panelUtilisateurMotDePasse.setBackground(new Color(44, 47, 51));
-        contentPane.add(panelUtilisateurMotDePasse, BorderLayout.CENTER);
+        CustomJPanel panelUtilisateurMotDePasse = new CustomJPanel(new int[] {10, 10, 10, 10});
         panelUtilisateurMotDePasse.setLayout(new GridLayout(2, 0, 0, 0));
+        contentPane.add(panelUtilisateurMotDePasse, BorderLayout.CENTER);
         
-        JPanel panelUtilisateur = new JPanel();
-        panelUtilisateur.setBackground(new Color(44, 47, 51));
-        panelUtilisateurMotDePasse.add(panelUtilisateur);
+        CustomJPanel panelUtilisateur = new CustomJPanel();
         panelUtilisateur.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        panelUtilisateurMotDePasse.add(panelUtilisateur);
         
         JButton btnCreerUnTournoi = new JButton("Créer un tournoi");
         btnCreerUnTournoi.addActionListener(controleur);
@@ -67,8 +62,8 @@ public class AccueilAdministrateurVue extends JFrame {
         btnCreerUnTournoi.setBackground(new Color(102, 173, 221));
         panelUtilisateur.add(btnCreerUnTournoi);
         
-        JPanel panelMotDePasse = new JPanel();
-        panelMotDePasse.setBackground(new Color(44, 47, 51));
+        CustomJPanel panelMotDePasse = new CustomJPanel();
+        panelMotDePasse.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
         panelUtilisateurMotDePasse.add(panelMotDePasse);
         
         JButton btnStatistiquesDeLa = new JButton("Statistiques de la saison");
@@ -77,11 +72,9 @@ public class AccueilAdministrateurVue extends JFrame {
         btnStatistiquesDeLa.setBackground(new Color(102, 173, 221));
         panelMotDePasse.add(btnStatistiquesDeLa);
         
-        JPanel panelQuitterSeconnecter = new JPanel();
-        panelQuitterSeconnecter.setBackground(new Color(44, 47, 51));
-        panelQuitterSeconnecter.setBorder(new EmptyBorder(10, 10, 0, 10));
-        contentPane.add(panelQuitterSeconnecter, BorderLayout.SOUTH);
+        CustomJPanel panelQuitterSeconnecter = new CustomJPanel(new int[] {10, 10, 0, 10});
         panelQuitterSeconnecter.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        contentPane.add(panelQuitterSeconnecter, BorderLayout.SOUTH);
         
         JButton btnQuit = new JButton("Quitter");
         btnQuit.setBackground(new Color(231, 76, 60));
@@ -90,21 +83,13 @@ public class AccueilAdministrateurVue extends JFrame {
         btnQuit.addActionListener(this.controleur);
         panelQuitterSeconnecter.add(btnQuit);
         
-        JPanel panelTitre = new JPanel();
-        panelTitre.setBackground(new Color(44, 47, 51));
+        CustomJPanel panelTitre = new CustomJPanel();
         contentPane.add(panelTitre, BorderLayout.NORTH);
-        panelTitre.setLayout(new BorderLayout(0, 0));
         
-        JSeparator separatorTitre = new JSeparator();
-        separatorTitre.setBackground(new Color(102, 173, 221));
-        separatorTitre.setForeground(new Color(102, 173, 221));
+        CustomJSeparator separatorTitre = new CustomJSeparator();
         panelTitre.add(separatorTitre, BorderLayout.SOUTH);
         
-        JLabel titreFenetre = new JLabel("Page d'administration");
-        titreFenetre.setHorizontalAlignment(SwingConstants.CENTER);
-        titreFenetre.setForeground(new Color(102, 173, 221));
-        titreFenetre.setFont(new Font("Tahoma", Font.BOLD, 25));
-        titreFenetre.setBorder(new EmptyBorder(10, 10, 10, 10));
+        CustomJLabel titreFenetre = new CustomJLabel("Page d'administration", 25, new int[] {10, 10, 10, 10});
         panelTitre.add(titreFenetre);
     }
 }
