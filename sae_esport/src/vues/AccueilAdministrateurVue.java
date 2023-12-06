@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 
 import controleurs.AccueilAdministrateurControleur;
 import style.CustomBorder;
+import style.CustomJButton;
 import style.CustomJFrame;
 import style.CustomJLabel;
 import style.CustomJPanel;
@@ -55,10 +56,9 @@ public class AccueilAdministrateurVue extends CustomJFrame {
         panelUtilisateur.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
         panelUtilisateurMotDePasse.add(panelUtilisateur);
         
-        JButton btnCreerUnTournoi = new JButton("Créer un tournoi");
+        JButton btnCreerUnTournoi = new CustomJButton("Créer un tournoi", 10);
         btnCreerUnTournoi.addActionListener(controleur);
         btnCreerUnTournoi.setForeground(Color.WHITE);
-        btnCreerUnTournoi.setBorder(new CustomBorder(5));
         btnCreerUnTournoi.setBackground(new Color(102, 173, 221));
         panelUtilisateur.add(btnCreerUnTournoi);
         
@@ -66,9 +66,8 @@ public class AccueilAdministrateurVue extends CustomJFrame {
         panelMotDePasse.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
         panelUtilisateurMotDePasse.add(panelMotDePasse);
         
-        JButton btnStatistiquesDeLa = new JButton("Statistiques de la saison");
+        CustomJButton btnStatistiquesDeLa = new CustomJButton("Statistiques de la saison", 10);
         btnStatistiquesDeLa.setForeground(Color.WHITE);
-        btnStatistiquesDeLa.setBorder(new CustomBorder(5));
         btnStatistiquesDeLa.setBackground(new Color(102, 173, 221));
         panelMotDePasse.add(btnStatistiquesDeLa);
         
@@ -76,10 +75,9 @@ public class AccueilAdministrateurVue extends CustomJFrame {
         panelQuitterSeconnecter.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
         contentPane.add(panelQuitterSeconnecter, BorderLayout.SOUTH);
         
-        JButton btnQuit = new JButton("Quitter");
+        CustomJButton btnQuit = new CustomJButton("Quitter", 10);
         btnQuit.setBackground(new Color(231, 76, 60));
         btnQuit.setForeground(new Color(255, 255, 255));
-        btnQuit.setBorder(new CustomBorder(5));
         btnQuit.addActionListener(this.controleur);
         panelQuitterSeconnecter.add(btnQuit);
         
