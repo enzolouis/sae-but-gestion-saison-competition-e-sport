@@ -36,6 +36,7 @@ import style.CustomBorder;
 
 public class ChoixArbitreVue extends CustomJFrame {
 
+	private CustomJPanel contentPanel;
     private ChoixArbitreControleur controleur;
     
     public static void main(String[] args) {
@@ -52,9 +53,10 @@ public class ChoixArbitreVue extends CustomJFrame {
     }
     
     public ChoixArbitreVue() throws Exception {
+    	super(new int[] {900, 600});
     	
     	this.controleur = new ChoixArbitreControleur(this);
-    	CustomJPanel contentPanel = this.getContentPanel();
+    	contentPanel = this.getContentPanel();
         
         // Panel Top : Title
     	CustomJPanel panelTop = new CustomJPanel();
