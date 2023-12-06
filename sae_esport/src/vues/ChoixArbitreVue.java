@@ -25,13 +25,17 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 
 import controleurs.ChoixArbitreControleur;
+import style.CustomJFrame;
+import style.CustomJLabel;
+import style.CustomJPanel;
+import style.CustomJScrollPane;
+import style.CustomJSeparator;
 import style.CustomJTextField;
 import style.CustomScrollBarUI;
-import style.RoundBtn;
+import style.CustomBorder;
 
-public class ChoixArbitreVue extends JFrame {
+public class ChoixArbitreVue extends CustomJFrame {
 
-    private JPanel contentPanel;
     private ChoixArbitreControleur controleur;
     
     public static void main(String[] args) {
@@ -50,40 +54,20 @@ public class ChoixArbitreVue extends JFrame {
     public ChoixArbitreVue() throws Exception {
     	
     	this.controleur = new ChoixArbitreControleur(this);
-    	
-    	// JFrame
-    	contentPanel = new JPanel();
-    	contentPanel.setBackground(new Color(44, 47, 51));
-    	contentPanel.setBorder(new EmptyBorder(30, 30, 30, 30));
-    	contentPanel.setLayout(new BorderLayout(0, 0));
-    	setMinimumSize(new Dimension(900, 600));
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 450, 300);
-        setContentPane(contentPanel);
+    	CustomJPanel contentPanel = this.getContentPanel();
         
         // Panel Top : Title
-        JPanel panelTop = new JPanel();
-        panelTop.setBackground(new Color(44, 47, 51));
-        panelTop.setLayout(new BorderLayout(0, 0));
+    	CustomJPanel panelTop = new CustomJPanel();
         contentPanel.add(panelTop, BorderLayout.NORTH);
         
-        JLabel titleTop = new JLabel("Choix des arbitres");
-        titleTop.setHorizontalAlignment(SwingConstants.CENTER);
-        titleTop.setForeground(new Color(102, 173, 221));
-        titleTop.setFont(new Font("Tahoma", Font.BOLD, 25));
-        titleTop.setBorder(new EmptyBorder(10, 10, 10, 10));
+        CustomJLabel titleTop = new CustomJLabel("Choix des arbitres", 25);
         panelTop.add(titleTop);
         
-        JSeparator separatorTop = new JSeparator();
-        separatorTop.setBackground(new Color(102, 173, 221));
-        separatorTop.setForeground(new Color(102, 173, 221));
+        CustomJSeparator separatorTop = new CustomJSeparator();
         panelTop.add(separatorTop, BorderLayout.SOUTH);
         
         // Panel middle : Action et Listes
-        
-        JPanel panelMiddle = new JPanel();
-        panelMiddle.setBorder(new EmptyBorder(10, 0, 0, 0));
-        panelMiddle.setBackground(new Color(44, 47, 51));
+        JPanel panelMiddle = new CustomJPanel(new int[]{10, 0, 0, 0});
         contentPanel.add(panelMiddle);
         
         GridBagLayout gbl_panelMiddle = new GridBagLayout();
@@ -94,21 +78,11 @@ public class ChoixArbitreVue extends JFrame {
         panelMiddle.setLayout(gbl_panelMiddle);
         
         // Panel middle --> Panel Liste : Ligne 1 et 2
-        JPanel panelArbitreList = new JPanel();
-        panelArbitreList.setBorder(new EmptyBorder(10, 10, 10, 10));
-        panelArbitreList.setBackground(new Color(44, 47, 51));
-        
+        CustomJPanel panelArbitreList = new CustomJPanel(new int[]{10, 10, 10, 10});
         GridLayout panelArbitreListLayout = new GridLayout(0, 4, 10, 10);
         panelArbitreList.setLayout(panelArbitreListLayout);  
         
-        JScrollPane scrollpanelArbitreList = new JScrollPane(panelArbitreList);
-        scrollpanelArbitreList.setBorder(BorderFactory.createEmptyBorder());
-        scrollpanelArbitreList.setViewportBorder(BorderFactory.createEmptyBorder());
-        scrollpanelArbitreList.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollpanelArbitreList.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        
-        BasicScrollBarUI scrollBarArbitreListBarUI = new CustomScrollBarUI();
-        scrollpanelArbitreList.getVerticalScrollBar().setUI(scrollBarArbitreListBarUI);
+        CustomJScrollPane scrollpanelArbitreList = new CustomJScrollPane(panelArbitreList);
         
         GridBagConstraints gbc_scrollpanelArbitreList = new GridBagConstraints();
         gbc_scrollpanelArbitreList.insets = new Insets(0, 0, 0, 0);
@@ -121,14 +95,14 @@ public class ChoixArbitreVue extends JFrame {
         	JButton button = new JButton("Arbitre n°" + i);
         	button.setBackground(new Color(29, 88, 129));
         	button.setForeground(new Color(255, 255, 255));
-        	button.setBorder(new RoundBtn(5));
+        	button.setBorder(new CustomBorder(5));
         	button.addActionListener(this.controleur);
         	panelArbitreList.add(button);
 		}
         
         // Panel middle --> Panel Action : Ligne 3
-        JPanel panelArbitreActions = new JPanel();
-        panelArbitreActions.setBackground(new Color(44, 47, 51));
+        CustomJPanel panelArbitreActions = new CustomJPanel();
+        
         GridBagConstraints gbc_panelArbitreActions = new GridBagConstraints();
         gbc_panelArbitreActions.fill = GridBagConstraints.BOTH;
         gbc_panelArbitreActions.gridx = 0;
@@ -138,18 +112,14 @@ public class ChoixArbitreVue extends JFrame {
         GridLayout panelArbitreActionsLayout = new GridLayout(2, 3, 10, 10);
         panelArbitreActions.setLayout(panelArbitreActionsLayout); 
         
-        JLabel labelSelectedTournoiJLabel = new JLabel("Tournoi sélectioné : Aucun");
-        labelSelectedTournoiJLabel.setForeground(new Color(102, 173, 221));
+        CustomJLabel labelSelectedTournoiJLabel = new CustomJLabel("Tournoi sélectioné : Aucun", 12);
         panelArbitreActions.add(labelSelectedTournoiJLabel);
         
-        JLabel labelSelectedArbitreJLabel = new JLabel("Arbitre sélectioné : Aucun");
-        labelSelectedArbitreJLabel.setForeground(new Color(102, 173, 221));
+        CustomJLabel labelSelectedArbitreJLabel = new CustomJLabel("Arbitre sélectioné : Aucun", 12);
         panelArbitreActions.add(labelSelectedArbitreJLabel);
         
         // Panel for Login (Label + TextField)
-        JPanel panelActionLoginArbitre = new JPanel();
-        panelActionLoginArbitre.setBorder(new EmptyBorder(10, 10, 10, 10));
-        panelActionLoginArbitre.setBackground(new Color(44, 47, 51));
+        CustomJPanel panelActionLoginArbitre = new CustomJPanel(new int[]{10, 10, 10, 10});
         GridBagLayout gbl_panelActionLoginArbitre = new GridBagLayout();
         gbl_panelActionLoginArbitre.rowHeights = new int[] {0};
         gbl_panelActionLoginArbitre.columnWidths = new int[] {0, 0};
@@ -158,8 +128,7 @@ public class ChoixArbitreVue extends JFrame {
         panelActionLoginArbitre.setLayout(gbl_panelActionLoginArbitre); 
         
         // Login Label
-        JLabel loginArbitreJLabel = new JLabel("Login : ");
-        loginArbitreJLabel.setForeground(new Color(102, 173, 221));
+        CustomJLabel loginArbitreJLabel = new CustomJLabel("Login : ", 12);
         GridBagConstraints gbc_loginArbitreJLabel = new GridBagConstraints();
         gbc_loginArbitreJLabel.insets = new Insets(0, 0, 0, 0);
         gbc_loginArbitreJLabel.fill = GridBagConstraints.BOTH;
@@ -168,25 +137,18 @@ public class ChoixArbitreVue extends JFrame {
         panelActionLoginArbitre.add(loginArbitreJLabel, gbc_loginArbitreJLabel);
         
         // Login text field
-        CustomJTextField textFieldLoginArbitre = new CustomJTextField(5);
+        CustomJTextField textFieldLoginArbitre = new CustomJTextField(5, new int[] {10, 10, 10, 10}, "Aucun login");
         textFieldLoginArbitre.addActionListener(controleur);
-        textFieldLoginArbitre.setPlaceholder("Aucun login");
-        textFieldLoginArbitre.setForeground(Color.WHITE);
-        textFieldLoginArbitre.setBorder(new EmptyBorder(10, 10, 10, 10));
-        textFieldLoginArbitre.setBackground(new Color(29, 88, 129));
         GridBagConstraints gbc_loginArbitreTextField = new GridBagConstraints();
         gbc_loginArbitreTextField.insets = new Insets(0, 0, 0, 0);
         gbc_loginArbitreTextField.fill = GridBagConstraints.BOTH;
         gbc_loginArbitreTextField.gridx = 1;
         gbc_loginArbitreTextField.gridy = 0;
         panelActionLoginArbitre.add(textFieldLoginArbitre, gbc_loginArbitreTextField);
-        
         panelArbitreActions.add(panelActionLoginArbitre);
         
         // Panel for MDP (Label + TextField)
-        JPanel panelActionMDPArbitre = new JPanel();
-        panelActionMDPArbitre.setBorder(new EmptyBorder(10, 10, 10, 10));
-        panelActionMDPArbitre.setBackground(new Color(44, 47, 51));
+        CustomJPanel panelActionMDPArbitre = new CustomJPanel(new int[] {10, 10, 10, 10});
         GridBagLayout gbl_panelActionMDPArbitre = new GridBagLayout();
         gbl_panelActionMDPArbitre.rowHeights = new int[] {0};
         gbl_panelActionMDPArbitre.columnWidths = new int[] {0, 0};
@@ -195,8 +157,7 @@ public class ChoixArbitreVue extends JFrame {
         panelActionMDPArbitre.setLayout(gbl_panelActionMDPArbitre); 
         
         // Login Label
-        JLabel mdpArbitreJLabel = new JLabel("MDP : ");
-        mdpArbitreJLabel.setForeground(new Color(102, 173, 221));
+        CustomJLabel mdpArbitreJLabel = new CustomJLabel("MDP : ", 12);
         GridBagConstraints gbc_mdpArbitreJLabel = new GridBagConstraints();
         gbc_mdpArbitreJLabel.insets = new Insets(0, 0, 0, 0);
         gbc_mdpArbitreJLabel.fill = GridBagConstraints.BOTH;
@@ -205,39 +166,34 @@ public class ChoixArbitreVue extends JFrame {
         panelActionMDPArbitre.add(mdpArbitreJLabel, gbc_mdpArbitreJLabel);
         
         // Login text field
-        CustomJTextField textFieldMDPArbitre = new CustomJTextField(5);
+        CustomJTextField textFieldMDPArbitre = new CustomJTextField(5, new int[] {10, 10, 10, 10}, "Aucun MDP");
         textFieldMDPArbitre.addActionListener(controleur);
-        textFieldMDPArbitre.setPlaceholder("Aucun MDP");
-        textFieldMDPArbitre.setForeground(Color.WHITE);
-        textFieldMDPArbitre.setBorder(new EmptyBorder(10, 10, 10, 10));
-        textFieldMDPArbitre.setBackground(new Color(29, 88, 129));
         GridBagConstraints gbc_mdpArbitreTextField = new GridBagConstraints();
         gbc_mdpArbitreTextField.insets = new Insets(0, 0, 0, 0);
         gbc_mdpArbitreTextField.fill = GridBagConstraints.BOTH;
         gbc_mdpArbitreTextField.gridx = 1;
         gbc_mdpArbitreTextField.gridy = 0;
         panelActionMDPArbitre.add(textFieldMDPArbitre, gbc_mdpArbitreTextField);
-        
         panelArbitreActions.add(panelActionMDPArbitre);
         
-        // Panel bottom : Quit
-        JPanel panelBottom = new JPanel();
-        panelBottom.setBackground(new Color(44, 47, 51));
-        panelBottom.setBorder(new EmptyBorder(10, 10, 0, 10));
+        // Panel bottom
+        CustomJPanel panelBottom = new CustomJPanel(new int[] {10, 10, 0, 10});
         panelBottom.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
         contentPanel.add(panelBottom, BorderLayout.SOUTH);
         
+        //Bouton quitter
         JButton btnQuit = new JButton("Quitter");
         btnQuit.setBackground(new Color(231, 76, 60));
         btnQuit.setForeground(new Color(255, 255, 255));
-        btnQuit.setBorder(new RoundBtn(5));
+        btnQuit.setBorder(new CustomBorder(5));
         btnQuit.addActionListener(this.controleur);
         panelBottom.add(btnQuit);
         
+        // Bouton de validation
         JButton btnValid = new JButton("Valider le login");
         btnValid.setBackground(new Color(76, 231, 60));
         btnValid.setForeground(new Color(255, 255, 255));
-        btnValid.setBorder(new RoundBtn(5));
+        btnValid.setBorder(new CustomBorder(5));
         btnValid.addActionListener(this.controleur);
         panelBottom.add(btnValid);
     }
