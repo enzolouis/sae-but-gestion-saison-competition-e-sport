@@ -3,6 +3,7 @@ package vues;
 import javax.swing.JFrame;
 import java.awt.Color;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.BorderLayout;
@@ -28,6 +29,7 @@ import java.awt.EventQueue;
 import javax.swing.JButton;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
+import java.awt.Rectangle;
 
 public class CreationTournoiVue extends JFrame {
 	
@@ -50,12 +52,8 @@ public class CreationTournoiVue extends JFrame {
 	public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try {
-                    CreationTournoiVue frame = new CreationTournoiVue();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                CreationTournoiVue frame = new CreationTournoiVue();
+                frame.setVisible(true);
             }
         });
     }
@@ -64,7 +62,7 @@ public class CreationTournoiVue extends JFrame {
 		
 		this.controleur = new CreationTournoiControleur(this);
 		
-		setMinimumSize(new Dimension(780, 520));
+		setMinimumSize(new Dimension(780, 550));
 		Color backgroundColor = new Color(44, 47, 51);
 		Color policeColor = new Color(107,173,221);
 		
@@ -240,17 +238,19 @@ public class CreationTournoiVue extends JFrame {
 		panelListeArbitres.setBorder(new EmptyBorder(10, 10, 10, 10));
 		panelListeArbitres.setBackground(backgroundColor);
 		panelArbitre.add(panelListeArbitres, BorderLayout.SOUTH);
-		panelListeArbitres.setLayout(new BorderLayout(0, 0));
 		this.modeleList = new DefaultListModel<Arbitre>();
 		
-		JPanel panel = new JPanel();
-		panel.setMinimumSize(new Dimension(50, 50));
-		panelListeArbitres.add(panel, BorderLayout.NORTH);
+		panelListeArbitres.setMinimumSize(new Dimension(50, 50));
+		panelListeArbitres.setLayout(new BorderLayout(0, 0));
 		
 		this.listArbitres = new JList<Arbitre>();
+		listArbitres.setBounds(new Rectangle(0, 0, 20, 20));
+		listArbitres.setMaximumSize(new Dimension(100, 20));
 		this.listArbitres.setModel(modeleList);
-		this.listArbitres.setMinimumSize(new Dimension(100, 100));
-		panel.add(this.listArbitres);
+		this.listArbitres.setMinimumSize(new Dimension(100, 20));
+		JScrollPane sp = new JScrollPane(listArbitres);
+		sp.setMaximumSize(new Dimension(100, 100));
+		panelListeArbitres.add(sp);
 		
 		JPanel panelBtnsArbitre = new JPanel();
 		panelBtnsArbitre.setBackground(backgroundColor);

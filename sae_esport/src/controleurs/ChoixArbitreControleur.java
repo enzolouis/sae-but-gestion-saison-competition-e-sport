@@ -12,12 +12,10 @@ public class ChoixArbitreControleur implements ActionListener {
 
 	private ChoixArbitreVue vue;
 	private ChoixArbitreModele modele;
-	private Connection dbConnection;
 	
-	public ChoixArbitreControleur(ChoixArbitreVue vue, Connection dbConnection) throws Exception {
-		this.vue = vue;
-		this.dbConnection = dbConnection;
+	public ChoixArbitreControleur(ChoixArbitreVue vue) throws Exception {
 		this.modele = new ChoixArbitreModele();
+		this.vue = vue;
 	}
 	
 	@Override
