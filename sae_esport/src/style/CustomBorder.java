@@ -6,10 +6,10 @@ import java.awt.Insets;
 
 import javax.swing.border.Border;
 
-public class RoundBtn implements Border {
+public class CustomBorder implements Border {
     private int r;
     
-    public RoundBtn(int r) {
+    public CustomBorder(int r) {
         this.r = r;
     }
     

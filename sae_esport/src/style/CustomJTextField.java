@@ -1,48 +1,77 @@
 package style;
 
-import java.awt.Font;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.awt.geom.RoundRectangle2D;
 
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 import javax.swing.text.Document;
 
 public class CustomJTextField extends JTextField {
     private Shape shape;
-    
-    public static void main(final String[] args) {
-        final CustomJTextField tf = new CustomJTextField("");
-        tf.setColumns(20);
-        tf.setPlaceholder("All your base are belong to us!");
-        final Font f = tf.getFont();
-        tf.setFont(new Font(f.getName(), f.getStyle(), 30));
-        JOptionPane.showMessageDialog(null, tf);
-    }
-
     private String placeholder;
-
+    
     public CustomJTextField() {
+    	setBasicConstructor();
     }
 
-    public CustomJTextField(
-        final Document pDoc,
-        final String pText,
-        final int pColumns)
-    {
+    public CustomJTextField(final Document pDoc, final String pText, final int pColumns) {
         super(pDoc, pText, pColumns);
+        setBasicConstructor();
     }
 
 
     public CustomJTextField(final String pText) {
         super(pText);
+        setBasicConstructor();
+    }
+    
+    public CustomJTextField(final String pText, int[] border) {
+        super(pText);
+        setBasicConstructor();
+        setBorder(new EmptyBorder(border[0], border[1], border[2], border[3]));
     }
 
     public CustomJTextField(final String pText, final int pColumns) {
         super(pText, pColumns);
+        setBasicConstructor();
+    }
+    
+    public CustomJTextField(int size) {
+        super(size);
+        setOpaque(false);
+        setBasicConstructor();
+    }
+    
+    public CustomJTextField(int size, String placeHolder) {
+        super(size);
+        setOpaque(false);
+        setBasicConstructor();
+        setPlaceholder(placeHolder);
+    }
+    
+    public CustomJTextField(int size, int[] border) {
+        super(size);
+        setOpaque(false);
+        setBasicConstructor();
+        setBorder(new EmptyBorder(border[0], border[1], border[2], border[3]));
+    }
+    
+    public CustomJTextField(int size, int[] border, String placeHolder) {
+        super(size);
+        setOpaque(false);
+        setBasicConstructor();
+        setBorder(new EmptyBorder(border[0], border[1], border[2], border[3]));
+        setPlaceholder(placeHolder);
+    }
+    
+    private void setBasicConstructor() {
+        setForeground(Color.WHITE);
+        setBackground(new Color(29, 88, 129));
     }
 
     public String getPlaceholder() {
@@ -51,11 +80,6 @@ public class CustomJTextField extends JTextField {
 
     public void setPlaceholder(final String s) {
         placeholder = s;
-    }
-    
-    public CustomJTextField(int size) {
-        super(size);
-        setOpaque(false);
     }
     
     protected void paintComponent(Graphics g) {
