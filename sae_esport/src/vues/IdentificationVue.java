@@ -1,30 +1,26 @@
 package vues;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.border.EmptyBorder;
-
-import controleurs.IdentificationControleur;
-import style.PlaceholderTextField;
-import style.RoundBtn;
-
 import java.awt.BorderLayout;
-import javax.swing.JLabel;
-import java.awt.GridLayout;
-
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.EventQueue;
 import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import java.awt.Font;
-import javax.swing.SwingConstants;
-import java.awt.Dimension;
-
-import java.awt.Color;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JSeparator;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+
+import controleurs.IdentificationControleur;
+import style.CustomJTextField;
+import style.RoundBtn;
 
 public class IdentificationVue extends JFrame {
 
@@ -36,7 +32,7 @@ public class IdentificationVue extends JFrame {
 	
     private JPanel contentPane;
     private IdentificationControleur controleur;
-    private PlaceholderTextField textFieldUtilisateur;
+    private CustomJTextField textFieldUtilisateur;
     private JPasswordField textFieldMotDePasse;
     
     public static void main(String[] args) {
@@ -98,7 +94,7 @@ public class IdentificationVue extends JFrame {
         panelTextFieldNomUtilisateur.setBackground(new Color(29, 88, 129));
         panelUtilisateur.add(panelTextFieldNomUtilisateur);
         
-        textFieldUtilisateur = new PlaceholderTextField();
+        textFieldUtilisateur = new CustomJTextField();
         textFieldUtilisateur.addActionListener(controleur);
         textFieldUtilisateur.setPlaceholder("login");
         textFieldUtilisateur.setForeground(Color.WHITE);
