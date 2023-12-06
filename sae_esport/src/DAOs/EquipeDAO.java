@@ -12,8 +12,11 @@ import classes.DBConnection;
 import classes.Equipe;
 import classes.Nationalite;
 
-public class EquipeDAO {
-
+public class EquipeDAO extends SingletonDAO {
+	
+	public EquipeDAO() {
+		super();
+	}
 	
 	//Renvois l'ensemble des equipes
 	public List<Equipe> getAll() throws Exception {

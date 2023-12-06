@@ -9,7 +9,11 @@ import classes.DBConnection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-public class AdministrateurDAO {
+public class AdministrateurDAO extends SingletonDAO {
+	
+	public AdministrateurDAO() {
+		super();
+	}
 		
 	//Renvoie l'ensemble des administrateurs
 	public List<classes.Administrateur> getAll() throws Exception {

@@ -12,13 +12,12 @@ import classes.DBConnection;
 import classes.Equipe;
 import modeles.TournoiModele;
 
-public class TournoiDAO {
+public class TournoiDAO extends SingletonDAO {
 	
-	private static TournoiDAO instance;
-	
-	private TournoiDAO() {
-		
+	public TournoiDAO() {
+		super();
 	}
+	
 	//Renvois l'ensemble des arbitres
 	public List<TournoiModele> getAll() throws Exception {
 		ArrayList<TournoiModele> tournois = new ArrayList<>();
@@ -47,7 +46,7 @@ public class TournoiDAO {
 		for (Integer i : id) {
 			ResultSet rs = st.executeQuery("SELECT * FROM tournoi WHERE idTournoi="+i);
 			if (rs.next()) {
-				Tournoi t = new Tournoi(rs.getInt(1), rs.getString(2), rs.getString(3),rs.getString(4), classes.Notoriete.valueOf(rs.getString(5)), classes.EtatTournoi.valueOf(rs.getString(7)));
+				TournoiModele t = new TournoiModele(rs.getInt(1), rs.getString(2), rs.getString(3),rs.getString(4), classes.Notoriete.valueOf(rs.getString(5)), classes.EtatTournoi.valueOf(rs.getString(7)));
 				PreparedStatement stParticipants = DBConnection.getInstance().prepareStatement("SELECT idEquipe FROM Participer WHERE idTournoi = ?");
 				stParticipants.setInt(1, rs.getInt(1));
 				ResultSet rsParticipants = stParticipants.executeQuery();
@@ -106,14 +105,6 @@ public class TournoiDAO {
 					classes.Notoriete.valueOf(rs.getString(3)), classes.EtatTournoi.valueOf(rs.getString(4))));
 		}
 		return Optional.empty();
-	}
-	
-	public static synchronized TournoiDAO getInstance()
-	{
-		if (instance == null) {
-			instance = new TournoiDAO();
-		}
-		return instance;
 	}
 
 }
