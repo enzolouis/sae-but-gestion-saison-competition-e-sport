@@ -3,8 +3,6 @@ package controleurs;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.Date;
-import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -17,7 +15,6 @@ import classes.Arbitre;
 import classes.EtatTournoi;
 import classes.Notoriete;
 import classes.Tournoi;
-import modeles.CreationTournoiModele;
 import modeles.TournoiModele;
 import vues.CreationTournoiVue;
 
