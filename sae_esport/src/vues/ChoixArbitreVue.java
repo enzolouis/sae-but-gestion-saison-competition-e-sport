@@ -24,28 +24,21 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 
-import DAOs.ArbitreDAO;
 import controleurs.ChoixArbitreControleur;
+import style.CustomJTextField;
 import style.CustomScrollBarUI;
 import style.RoundBtn;
-import style.CustomJTextField;
 
 public class ChoixArbitreVue extends JFrame {
 
     private JPanel contentPanel;
     private ChoixArbitreControleur controleur;
-    private Connection dbConnection;
     
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                	String dirProjetJava = System.getProperty("user.dir");
-            		System.setProperty("derby.system.home", dirProjetJava+"/BDDSAEEsport");
-            		DriverManager.registerDriver(new org.apache.derby.jdbc.EmbeddedDriver());
-        			String urlConnexion = "jdbc:derby:BDDSAEEsport;create=true";
-        			Connection dbConnection = DriverManager.getConnection(urlConnexion);
-        			ChoixArbitreVue frame = new ChoixArbitreVue(dbConnection);
+        			ChoixArbitreVue frame = new ChoixArbitreVue();
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -54,11 +47,9 @@ public class ChoixArbitreVue extends JFrame {
         });
     }
     
-    public ChoixArbitreVue(Connection dbConnection) throws Exception {
+    public ChoixArbitreVue() throws Exception {
     	
-    	// Contrôleur + DB
-    	this.dbConnection = dbConnection;
-    	this.controleur = new ChoixArbitreControleur(this, dbConnection);
+    	this.controleur = new ChoixArbitreControleur(this);
     	
     	// JFrame
     	contentPanel = new JPanel();
@@ -147,7 +138,7 @@ public class ChoixArbitreVue extends JFrame {
         GridLayout panelArbitreActionsLayout = new GridLayout(2, 3, 10, 10);
         panelArbitreActions.setLayout(panelArbitreActionsLayout); 
         
-        JLabel labelSelectedTournoiJLabel = new JLabel("Tournoi sélectioné : ...");
+        JLabel labelSelectedTournoiJLabel = new JLabel("Tournoi sélectioné : Aucun");
         labelSelectedTournoiJLabel.setForeground(new Color(102, 173, 221));
         panelArbitreActions.add(labelSelectedTournoiJLabel);
         
