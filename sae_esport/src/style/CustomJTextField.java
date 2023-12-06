@@ -11,14 +11,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.text.Document;
 
-import vues.PlaceholderTextField;
-
-@SuppressWarnings("serial")
 public class CustomJTextField extends JTextField {
     private Shape shape;
     
     public static void main(final String[] args) {
-        final PlaceholderTextField tf = new PlaceholderTextField("");
+        final CustomJTextField tf = new CustomJTextField("");
         tf.setColumns(20);
         tf.setPlaceholder("All your base are belong to us!");
         final Font f = tf.getFont();
