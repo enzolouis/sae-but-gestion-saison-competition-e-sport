@@ -17,12 +17,12 @@ public class CustomJLabel extends JLabel {
         setBorder(new EmptyBorder(0, 0, 0, 0));
 	}
 	
-	public CustomJLabel(String label, int fontScale, int[] border) {
+	public CustomJLabel(String label, int fontScale, EmptyBorder border) {
 		super(label);
 		
         setHorizontalAlignment(SwingConstants.CENTER);
         setForeground(new Color(102, 173, 221));
         setFont(new Font("Tahoma", Font.BOLD, fontScale));
-        setBorder(new EmptyBorder(border[0], border[1], border[2], border[3]));
+        setBorder(border);
 	}
 }
