@@ -5,34 +5,22 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
-import java.sql.Connection;
-import java.sql.DriverManager;
 
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
-import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.basic.BasicScrollBarUI;
 
 import controleurs.ChoixArbitreControleur;
+import style.CustomJButton;
 import style.CustomJFrame;
 import style.CustomJLabel;
 import style.CustomJPanel;
 import style.CustomJScrollPane;
 import style.CustomJSeparator;
 import style.CustomJTextField;
-import style.CustomScrollBarUI;
-import style.CustomBorder;
 
 public class ChoixArbitreVue extends CustomJFrame {
 
@@ -53,7 +41,7 @@ public class ChoixArbitreVue extends CustomJFrame {
     }
     
     public ChoixArbitreVue() throws Exception {
-    	super(new int[] {900, 600});
+    	super(new Dimension(600, 600));
     	
     	this.controleur = new ChoixArbitreControleur(this);
     	contentPanel = this.getContentPanel();
@@ -69,7 +57,7 @@ public class ChoixArbitreVue extends CustomJFrame {
         panelTop.add(separatorTop, BorderLayout.SOUTH);
         
         // Panel middle : Action et Listes
-        JPanel panelMiddle = new CustomJPanel(new int[]{10, 0, 0, 0});
+        JPanel panelMiddle = new CustomJPanel(new EmptyBorder(10, 0, 0, 0));
         contentPanel.add(panelMiddle);
         
         GridBagLayout gbl_panelMiddle = new GridBagLayout();
@@ -80,10 +68,7 @@ public class ChoixArbitreVue extends CustomJFrame {
         panelMiddle.setLayout(gbl_panelMiddle);
         
         // Panel middle --> Panel Liste : Ligne 1 et 2
-        CustomJPanel panelArbitreList = new CustomJPanel(new int[]{10, 10, 10, 10});
-        GridLayout panelArbitreListLayout = new GridLayout(0, 4, 10, 10);
-        panelArbitreList.setLayout(panelArbitreListLayout);  
-        
+        CustomJPanel panelArbitreList = new CustomJPanel(new EmptyBorder(10, 10, 10, 10), new GridLayout(0, 4, 10, 10)); 
         CustomJScrollPane scrollpanelArbitreList = new CustomJScrollPane(panelArbitreList);
         
         GridBagConstraints gbc_scrollpanelArbitreList = new GridBagConstraints();
@@ -93,11 +78,8 @@ public class ChoixArbitreVue extends CustomJFrame {
         gbc_scrollpanelArbitreList.gridy = 0;
         panelMiddle.add(scrollpanelArbitreList, gbc_scrollpanelArbitreList);
         
-        for (int i = 1; i <= 35; i++) {
-        	JButton button = new JButton("Arbitre n°" + i);
-        	button.setBackground(new Color(29, 88, 129));
-        	button.setForeground(new Color(255, 255, 255));
-        	button.setBorder(new CustomBorder(5));
+        for (int i = 1; i <= 1000; i++) {
+        	CustomJButton button = new CustomJButton("Arbitre n°" + i, 15);
         	button.addActionListener(this.controleur);
         	panelArbitreList.add(button);
 		}
@@ -121,7 +103,7 @@ public class ChoixArbitreVue extends CustomJFrame {
         panelArbitreActions.add(labelSelectedArbitreJLabel);
         
         // Panel for Login (Label + TextField)
-        CustomJPanel panelActionLoginArbitre = new CustomJPanel(new int[]{10, 10, 10, 10});
+        CustomJPanel panelActionLoginArbitre = new CustomJPanel(new EmptyBorder(10, 10, 10, 10));
         GridBagLayout gbl_panelActionLoginArbitre = new GridBagLayout();
         gbl_panelActionLoginArbitre.rowHeights = new int[] {0};
         gbl_panelActionLoginArbitre.columnWidths = new int[] {0, 0};
@@ -150,7 +132,7 @@ public class ChoixArbitreVue extends CustomJFrame {
         panelArbitreActions.add(panelActionLoginArbitre);
         
         // Panel for MDP (Label + TextField)
-        CustomJPanel panelActionMDPArbitre = new CustomJPanel(new int[] {10, 10, 10, 10});
+        CustomJPanel panelActionMDPArbitre = new CustomJPanel(new EmptyBorder(10, 10, 10, 10));
         GridBagLayout gbl_panelActionMDPArbitre = new GridBagLayout();
         gbl_panelActionMDPArbitre.rowHeights = new int[] {0};
         gbl_panelActionMDPArbitre.columnWidths = new int[] {0, 0};
@@ -179,23 +161,20 @@ public class ChoixArbitreVue extends CustomJFrame {
         panelArbitreActions.add(panelActionMDPArbitre);
         
         // Panel bottom
-        CustomJPanel panelBottom = new CustomJPanel(new int[] {10, 10, 0, 10});
-        panelBottom.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        CustomJPanel panelBottom = new CustomJPanel(new EmptyBorder(10, 10, 0, 10), new FlowLayout(FlowLayout.CENTER, 5, 5));
         contentPanel.add(panelBottom, BorderLayout.SOUTH);
         
         //Bouton quitter
-        JButton btnQuit = new JButton("Quitter");
+        CustomJButton btnQuit = new CustomJButton("Quitter", 10);
         btnQuit.setBackground(new Color(231, 76, 60));
         btnQuit.setForeground(new Color(255, 255, 255));
-        btnQuit.setBorder(new CustomBorder(5));
         btnQuit.addActionListener(this.controleur);
         panelBottom.add(btnQuit);
         
         // Bouton de validation
-        JButton btnValid = new JButton("Valider le login");
+        CustomJButton btnValid = new CustomJButton("Valider le login", 10);
         btnValid.setBackground(new Color(76, 231, 60));
         btnValid.setForeground(new Color(255, 255, 255));
-        btnValid.setBorder(new CustomBorder(5));
         btnValid.addActionListener(this.controleur);
         panelBottom.add(btnValid);
     }
