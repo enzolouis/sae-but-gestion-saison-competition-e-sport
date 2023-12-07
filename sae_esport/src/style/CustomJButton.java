@@ -1,5 +1,6 @@
 package style;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -7,6 +8,7 @@ import java.awt.Shape;
 import java.awt.geom.RoundRectangle2D;
 
 import javax.swing.JButton;
+import javax.swing.border.EmptyBorder;
 
 public class CustomJButton extends JButton {
 	Shape shape;
@@ -15,6 +17,17 @@ public class CustomJButton extends JButton {
 	public CustomJButton(String label, int round) {
 		super(label);
 		this.round = round;
+    	setBackground(new Color(29, 88, 129));
+    	setForeground(new Color(255, 255, 255));
+		setOpaque(false);
+	}
+	
+	public CustomJButton(String label, int round, EmptyBorder border) {
+		super(label);
+		this.round = round;
+    	setBackground(new Color(29, 88, 129));
+    	setForeground(new Color(255, 255, 255));
+    	setBorder(border);
 		setOpaque(false);
 	}
 	
