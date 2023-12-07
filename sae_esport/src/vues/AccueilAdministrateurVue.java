@@ -1,30 +1,26 @@
 package vues;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
+import java.awt.Insets;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controleurs.AccueilAdministrateurControleur;
-import style.CustomBorder;
 import style.CustomJButton;
 import style.CustomJFrame;
 import style.CustomJLabel;
 import style.CustomJPanel;
 import style.CustomJSeparator;
-
-import java.awt.BorderLayout;
-import javax.swing.JLabel;
-import java.awt.GridLayout;
-import java.awt.FlowLayout;
-import javax.swing.JButton;
-import java.awt.Font;
 import javax.swing.SwingConstants;
-import java.awt.Dimension;
-
-import java.awt.Color;
-import javax.swing.JSeparator;
 
 public class AccueilAdministrateurVue extends CustomJFrame {
 
@@ -41,53 +37,60 @@ public class AccueilAdministrateurVue extends CustomJFrame {
     }
     
     public AccueilAdministrateurVue() {
-    	super(new int[] {450, 300});
+    	super(new Dimension(400, 300), "Acceuil Administrateur");
+        
+    	pack();
     	
     	this.controleur = new AccueilAdministrateurControleur(this);
 
         contentPane = this.getContentPanel();
         setContentPane(contentPane);
         
-        CustomJPanel panelUtilisateurMotDePasse = new CustomJPanel(new int[] {10, 10, 10, 10});
-        panelUtilisateurMotDePasse.setLayout(new GridLayout(2, 0, 0, 0));
-        contentPane.add(panelUtilisateurMotDePasse, BorderLayout.CENTER);
+        // Top Panel : Titre
+        CustomJPanel panelTitre = new CustomJPanel();
+        contentPane.add(panelTitre, BorderLayout.NORTH);
         
-        CustomJPanel panelUtilisateur = new CustomJPanel();
-        panelUtilisateur.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        panelUtilisateurMotDePasse.add(panelUtilisateur);
+        CustomJLabel titreFenetre = new CustomJLabel("Page d'administration", 25, new EmptyBorder(10, 10, 10, 10));
+        panelTitre.add(titreFenetre, BorderLayout.CENTER);
         
-        JButton btnCreerUnTournoi = new CustomJButton("Créer un tournoi", 10);
-        btnCreerUnTournoi.addActionListener(controleur);
-        btnCreerUnTournoi.setForeground(Color.WHITE);
+        CustomJSeparator separatorTitre = new CustomJSeparator();
+        panelTitre.add(separatorTitre, BorderLayout.SOUTH);
+        
+        // Middle Panel : Actions / Sujet
+        CustomJPanel panelMiddle = new CustomJPanel(new EmptyBorder(5, 5, 5, 5));
+        
+        GridBagLayout gbl_panelMiddle = new GridBagLayout(); 
+        panelMiddle.setLayout(gbl_panelMiddle);
+        contentPane.add(panelMiddle, BorderLayout.CENTER);
+        
+        GridBagConstraints gbc_panelMiddle = new GridBagConstraints();
+        gbc_panelMiddle.weightx = 1.0;
+        gbc_panelMiddle.weighty = 1.0;
+        
+        CustomJButton btnCreerUnTournoi = new CustomJButton("Créer un tournoi", 10);
         btnCreerUnTournoi.setBackground(new Color(102, 173, 221));
-        panelUtilisateur.add(btnCreerUnTournoi);
-        
-        CustomJPanel panelMotDePasse = new CustomJPanel();
-        panelMotDePasse.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        panelUtilisateurMotDePasse.add(panelMotDePasse);
+        btnCreerUnTournoi.setForeground(Color.WHITE);
+        btnCreerUnTournoi.addActionListener(controleur);
+        gbc_panelMiddle.gridx = 0;
+        gbc_panelMiddle.gridy = 0;
+        panelMiddle.add(btnCreerUnTournoi, gbc_panelMiddle);
         
         CustomJButton btnStatistiquesDeLa = new CustomJButton("Statistiques de la saison", 10);
-        btnStatistiquesDeLa.setForeground(Color.WHITE);
         btnStatistiquesDeLa.setBackground(new Color(102, 173, 221));
-        panelMotDePasse.add(btnStatistiquesDeLa);
+        btnStatistiquesDeLa.setForeground(Color.WHITE);
+        btnStatistiquesDeLa.addActionListener(controleur);
+        gbc_panelMiddle.gridx = 0;
+        gbc_panelMiddle.gridy = 1;
+        panelMiddle.add(btnStatistiquesDeLa, gbc_panelMiddle.clone());
         
-        CustomJPanel panelQuitterSeconnecter = new CustomJPanel(new int[] {10, 10, 0, 10});
-        panelQuitterSeconnecter.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        // Bottom Panel : Quitter & Divers
+        CustomJPanel panelQuitterSeconnecter = new CustomJPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
         contentPane.add(panelQuitterSeconnecter, BorderLayout.SOUTH);
         
         CustomJButton btnQuit = new CustomJButton("Quitter", 10);
         btnQuit.setBackground(new Color(231, 76, 60));
         btnQuit.setForeground(new Color(255, 255, 255));
         btnQuit.addActionListener(this.controleur);
-        panelQuitterSeconnecter.add(btnQuit);
-        
-        CustomJPanel panelTitre = new CustomJPanel();
-        contentPane.add(panelTitre, BorderLayout.NORTH);
-        
-        CustomJSeparator separatorTitre = new CustomJSeparator();
-        panelTitre.add(separatorTitre, BorderLayout.SOUTH);
-        
-        CustomJLabel titreFenetre = new CustomJLabel("Page d'administration", 25, new int[] {10, 10, 10, 10});
-        panelTitre.add(titreFenetre);
+        panelQuitterSeconnecter.add(btnQuit, BorderLayout.CENTER); 
     }
 }
