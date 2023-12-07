@@ -1,27 +1,30 @@
 package vues;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSeparator;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import controleurs.AccueilArbitreControleur;
-import style.CustomBorder;
+import style.CustomJButton;
+import style.CustomJFrame;
+import style.CustomJLabel;
+import style.CustomJPanel;
+import style.CustomJSeparator;
 
-import java.awt.BorderLayout;
-import javax.swing.JLabel;
-import java.awt.GridLayout;
-import java.awt.FlowLayout;
-import javax.swing.JButton;
-import java.awt.Font;
-import javax.swing.SwingConstants;
-import java.awt.Dimension;
-
-import java.awt.Color;
-import javax.swing.JSeparator;
-
-public class AccueilArbitreVue extends JFrame {
+public class AccueilArbitreVue extends CustomJFrame {
 
     private JPanel contentPane;
     private AccueilArbitreControleur controleur;
@@ -36,74 +39,60 @@ public class AccueilArbitreVue extends JFrame {
     }
     
     public AccueilArbitreVue() {
-
+    	super(new Dimension(400, 300), "Acceuil Arbitre");
+        
+    	pack();
+    	
     	this.controleur = new AccueilArbitreControleur(this);
     	
-    	setMinimumSize(new Dimension(450, 300));
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 450, 300);
-        contentPane = new JPanel();
-        contentPane.setBackground(new Color(44, 47, 51));
-        contentPane.setBorder(new EmptyBorder(30, 30, 30, 30));
-
+        contentPane = this.getContentPanel();
         setContentPane(contentPane);
-        contentPane.setLayout(new BorderLayout(0, 0));
         
-        JPanel panelUtilisateurMotDePasse = new JPanel();
-        panelUtilisateurMotDePasse.setBorder(new EmptyBorder(10, 10, 10, 10));
-        panelUtilisateurMotDePasse.setBackground(new Color(44, 47, 51));
-        contentPane.add(panelUtilisateurMotDePasse, BorderLayout.CENTER);
-        panelUtilisateurMotDePasse.setLayout(new GridLayout(2, 0, 0, 0));
-        
-        JPanel panelUtilisateur = new JPanel();
-        panelUtilisateur.setBackground(new Color(44, 47, 51));
-        panelUtilisateurMotDePasse.add(panelUtilisateur);
-        panelUtilisateur.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        
-        JButton btnCrerUnTournoi = new JButton("Accès aux tournois");
-        btnCrerUnTournoi.setForeground(Color.WHITE);
-        btnCrerUnTournoi.setBorder(new CustomBorder(5));
-        btnCrerUnTournoi.setBackground(new Color(102, 173, 221));
-        panelUtilisateur.add(btnCrerUnTournoi);
-        
-        JPanel panelMotDePasse = new JPanel();
-        panelMotDePasse.setBackground(new Color(44, 47, 51));
-        panelUtilisateurMotDePasse.add(panelMotDePasse);
-        
-        JButton btnStatistiquesDeLa = new JButton("Statistiques de la saison");
-        btnStatistiquesDeLa.setForeground(Color.WHITE);
-        btnStatistiquesDeLa.setBorder(new CustomBorder(5));
-        btnStatistiquesDeLa.setBackground(new Color(102, 173, 221));
-        panelMotDePasse.add(btnStatistiquesDeLa);
-        
-        JPanel panelQuitterSeconnecter = new JPanel();
-        panelQuitterSeconnecter.setBackground(new Color(44, 47, 51));
-        panelQuitterSeconnecter.setBorder(new EmptyBorder(10, 10, 0, 10));
-        contentPane.add(panelQuitterSeconnecter, BorderLayout.SOUTH);
-        panelQuitterSeconnecter.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        
-        JButton btnQuit = new JButton("Quitter");
-        btnQuit.setBackground(new Color(231, 76, 60));
-        btnQuit.setForeground(new Color(255, 255, 255));
-        btnQuit.setBorder(new CustomBorder(5));
-        btnQuit.addActionListener(this.controleur);
-        panelQuitterSeconnecter.add(btnQuit);
-        
-        JPanel panelTitre = new JPanel();
-        panelTitre.setBackground(new Color(44, 47, 51));
+        // Top Panel : Titre
+        CustomJPanel panelTitre = new CustomJPanel();
         contentPane.add(panelTitre, BorderLayout.NORTH);
-        panelTitre.setLayout(new BorderLayout(0, 0));
         
-        JSeparator separatorTitre = new JSeparator();
-        separatorTitre.setBackground(new Color(102, 173, 221));
-        separatorTitre.setForeground(new Color(102, 173, 221));
+        CustomJLabel titreFenetre = new CustomJLabel("Page d'arbitrage", 25, new EmptyBorder(10, 10, 10, 10));
+        panelTitre.add(titreFenetre, BorderLayout.CENTER);
+        
+        CustomJSeparator separatorTitre = new CustomJSeparator();
         panelTitre.add(separatorTitre, BorderLayout.SOUTH);
         
-        JLabel titreFenetre = new JLabel("Page d'arbitrage");
-        titreFenetre.setHorizontalAlignment(SwingConstants.CENTER);
-        titreFenetre.setForeground(new Color(102, 173, 221));
-        titreFenetre.setFont(new Font("Tahoma", Font.BOLD, 25));
-        titreFenetre.setBorder(new EmptyBorder(10, 10, 10, 10));
-        panelTitre.add(titreFenetre);
+        // Middle Panel : Actions / Sujet
+        CustomJPanel panelMiddle = new CustomJPanel(new EmptyBorder(5, 5, 5, 5));
+        
+        GridBagLayout gbl_panelMiddle = new GridBagLayout(); 
+        panelMiddle.setLayout(gbl_panelMiddle);
+        contentPane.add(panelMiddle, BorderLayout.CENTER);
+        
+        GridBagConstraints gbc_panelMiddle = new GridBagConstraints();
+        gbc_panelMiddle.weightx = 1.0;
+        gbc_panelMiddle.weighty = 1.0;
+        
+        CustomJButton btnCreerUnTournoi = new CustomJButton("Accès aux tournois", 10);
+        btnCreerUnTournoi.setBackground(new Color(102, 173, 221));
+        btnCreerUnTournoi.setForeground(Color.WHITE);
+        btnCreerUnTournoi.addActionListener(controleur);
+        gbc_panelMiddle.gridx = 0;
+        gbc_panelMiddle.gridy = 0;
+        panelMiddle.add(btnCreerUnTournoi, gbc_panelMiddle);
+        
+        CustomJButton btnStatistiquesDeLa = new CustomJButton("Statistiques de la saison", 10);
+        btnStatistiquesDeLa.setBackground(new Color(102, 173, 221));
+        btnStatistiquesDeLa.setForeground(Color.WHITE);
+        btnStatistiquesDeLa.addActionListener(controleur);
+        gbc_panelMiddle.gridx = 0;
+        gbc_panelMiddle.gridy = 1;
+        panelMiddle.add(btnStatistiquesDeLa, gbc_panelMiddle.clone());
+        
+        // Bottom Panel : Quitter & Divers
+        CustomJPanel panelQuitterSeconnecter = new CustomJPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        contentPane.add(panelQuitterSeconnecter, BorderLayout.SOUTH);
+        
+        CustomJButton btnQuit = new CustomJButton("Quitter", 10);
+        btnQuit.setBackground(new Color(231, 76, 60));
+        btnQuit.setForeground(new Color(255, 255, 255));
+        btnQuit.addActionListener(this.controleur);
+        panelQuitterSeconnecter.add(btnQuit, BorderLayout.CENTER); 
     }
 }
