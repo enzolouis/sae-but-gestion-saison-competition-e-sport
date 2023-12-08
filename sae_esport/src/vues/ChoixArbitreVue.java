@@ -41,7 +41,7 @@ public class ChoixArbitreVue extends CustomJFrame {
     }
     
     public ChoixArbitreVue() throws Exception {
-    	super(new Dimension(600, 600));
+    	super(new Dimension(600, 600), "Choix d'arbitre");
     	
     	this.controleur = new ChoixArbitreControleur(this);
     	contentPanel = this.getContentPanel();
@@ -78,7 +78,7 @@ public class ChoixArbitreVue extends CustomJFrame {
         gbc_scrollpanelArbitreList.gridy = 0;
         panelMiddle.add(scrollpanelArbitreList, gbc_scrollpanelArbitreList);
         
-        for (int i = 1; i <= 1000; i++) {
+        for (int i = 1; i <= 100; i++) {
         	CustomJButton button = new CustomJButton("Arbitre n°" + i, 15);
         	button.addActionListener(this.controleur);
         	panelArbitreList.add(button);
