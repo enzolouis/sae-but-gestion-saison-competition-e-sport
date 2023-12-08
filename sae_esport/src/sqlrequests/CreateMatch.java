@@ -9,15 +9,19 @@ public class CreateMatch {
 	public static void main(String[] args) {
 
 		try {
+			//Suppression de la table match
+			String reqSupprMatch = "DROP TABLE match";
+			PreparedStatement stSupprMatch = DBConnection.getInstance().prepareStatement(reqSupprMatch);
+			stSupprMatch.executeUpdate();
 			
-			//création de la séquence de l'identifiant arbitre
-			String reqSeqArbitre = "CREATE OR REPLACE SEQUENCE seqIdMatch START WITH 1 INCREMENT BY 1";
+			//création de la séquence de l'identifiant match
+			String reqSeqArbitre = "CREATE SEQUENCE seqIdMatch START WITH 1 INCREMENT BY 1";
 			PreparedStatement stSeqJoueur = DBConnection.getInstance().prepareStatement(reqSeqArbitre);
 			stSeqJoueur.executeUpdate();
 			System.out.println("Séquence arbitre créée");
 			
-			//création de la table arbitre
-			String reqCreateJoueur = "CREATE OR REPLACE TABLE match ("
+			//création de la table match
+			String reqCreateJoueur = "CREATE TABLE match ("
 					+ "idMatch INT PRIMARY KEY NOT NULL,"
 					+ "finale LOGICAL"
 					+ "idEquipe INT NOT NULL"
