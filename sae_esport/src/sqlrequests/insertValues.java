@@ -9,7 +9,7 @@ import modeles.TournoiModele;
 public class insertValues {
 
     public static void main(String[] args) throws Exception {
-
+    	
         //ajout d'administrateur
         AdministrateurDAO adminDAO = new AdministrateurDAO();
         adminDAO.add(new Administrateur(0, "admin1", "admin1", "motdepasse"));
@@ -17,6 +17,5 @@ public class insertValues {
         
         TournoiDAO.getInstance().add(new TournoiModele(0, "premierTournoi", "20/12/1888", "30/12/1888", Notoriete.LOCAL, EtatTournoi.OUVERT));
         System.out.print("Tournoi OK");
-        
     }
 }
