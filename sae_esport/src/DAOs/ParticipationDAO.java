@@ -8,10 +8,19 @@ import java.util.List;
 import classes.DBConnection;
 import classes.Participer;
 
-public class ParticipationDAO extends SingletonDAO {
+public class ParticipationDAO {
 	
-	public ParticipationDAO() {
-		super();
+private static ParticipationDAO instance;
+	
+	private ParticipationDAO() {
+		
+	}
+	
+	public static synchronized ParticipationDAO getInstance() {
+		if (instance == null) {
+			instance = new ParticipationDAO();
+		}
+		return instance;
 	}
 	
 	//Renvois l'ensemble des arbitres

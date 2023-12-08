@@ -8,10 +8,19 @@ import java.util.List;
 import classes.DBConnection;
 import classes.Match;
 
-public class MatchDAO extends SingletonDAO {
+public class MatchDAO {
 	
-	public MatchDAO() {
-		super();
+private static MatchDAO instance;
+	
+	private MatchDAO() {
+		
+	}
+	
+	public static synchronized MatchDAO getInstance() {
+		if (instance == null) {
+			instance = new MatchDAO();
+		}
+		return instance;
 	}
 	
 	//Renvois l'ensemble des joueurs
