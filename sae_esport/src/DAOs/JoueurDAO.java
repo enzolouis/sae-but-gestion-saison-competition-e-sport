@@ -10,10 +10,19 @@ import java.util.Optional;
 import classes.DBConnection;
 import classes.Joueur;
 
-public class JoueurDAO extends SingletonDAO {
+public class JoueurDAO {
 	
-	public JoueurDAO() {
-		super();
+private static JoueurDAO instance;
+	
+	private JoueurDAO() {
+		
+	}
+	
+	public static synchronized JoueurDAO getInstance() {
+		if (instance == null) {
+			instance = new JoueurDAO();
+		}
+		return instance;
 	}
 	//Renvois l'ensemble des joueurs
 	public List<Joueur> getAll() throws Exception {
