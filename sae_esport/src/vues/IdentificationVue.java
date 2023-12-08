@@ -10,7 +10,6 @@ import java.awt.GridLayout;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -19,10 +18,14 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import controleurs.IdentificationControleur;
+import style.CustomJButton;
+import style.CustomJFrame;
+import style.CustomJLabel;
+import style.CustomJPanel;
+import style.CustomJSeparator;
 import style.CustomJTextField;
-import style.CustomBorder;
 
-public class IdentificationVue extends JFrame {
+public class IdentificationVue extends CustomJFrame {
 
 	public static final ImageIcon OEIL_INVISIBLE_ICON = new ImageIcon(new ImageIcon(IdentificationVue.class.getClassLoader().getResource
 			("oeilMotDePasseInvisible.png")).getImage().getScaledInstance(30, 30,  java.awt.Image.SCALE_SMOOTH));
@@ -61,58 +64,37 @@ public class IdentificationVue extends JFrame {
     }
     
     public IdentificationVue() throws Exception {
-    	this.controleur = new IdentificationControleur(this);
+    	super(new Dimension(450, 300), "Identification");
     	
-    	setMinimumSize(new Dimension(450, 300));
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 450, 300);
-        contentPane = new JPanel();
-        contentPane.setBackground(new Color(44, 47, 51));
-        contentPane.setBorder(new EmptyBorder(30, 30, 30, 30));
-
-        setContentPane(contentPane);
-        contentPane.setLayout(new BorderLayout(0, 0));
+    	this.controleur = new IdentificationControleur(this);
+    	contentPane = super.getContentPanel();
         
-        JPanel panelUtilisateurMotDePasse = new JPanel();
-        panelUtilisateurMotDePasse.setBorder(new EmptyBorder(10, 10, 10, 10));
-        panelUtilisateurMotDePasse.setBackground(new Color(44, 47, 51));
+    	CustomJPanel panelUtilisateurMotDePasse = new CustomJPanel(new EmptyBorder(10, 10, 10, 10), new GridLayout(2, 0, 0, 0));
         contentPane.add(panelUtilisateurMotDePasse, BorderLayout.CENTER);
-        panelUtilisateurMotDePasse.setLayout(new GridLayout(2, 0, 0, 0));
         
-        JPanel panelUtilisateur = new JPanel();
-        panelUtilisateur.setBackground(new Color(44, 47, 51));
+        CustomJPanel panelUtilisateur = new CustomJPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
         panelUtilisateurMotDePasse.add(panelUtilisateur);
-        panelUtilisateur.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
         
-        JLabel labelNomUtilisateur = new JLabel("Nom d'utilisateur :");
-        labelNomUtilisateur.setForeground(new Color(102, 173, 221));
+        CustomJLabel labelNomUtilisateur = new CustomJLabel("Nom d'utilisateur :", 10);
         labelNomUtilisateur.setPreferredSize(new Dimension(110, 30));
         panelUtilisateur.add(labelNomUtilisateur);
         
-        JPanel panelTextFieldNomUtilisateur = new JPanel();
-        panelTextFieldNomUtilisateur.setBorder(null);
+        CustomJPanel panelTextFieldNomUtilisateur = new CustomJPanel((EmptyBorder) null);
         panelTextFieldNomUtilisateur.setBackground(new Color(29, 88, 129));
         panelUtilisateur.add(panelTextFieldNomUtilisateur);
         
-        textFieldUtilisateur = new CustomJTextField();
+        textFieldUtilisateur = new CustomJTextField("Login", 13, (EmptyBorder) null);
         textFieldUtilisateur.addActionListener(controleur);
-        textFieldUtilisateur.setPlaceholder("login");
-        textFieldUtilisateur.setForeground(Color.WHITE);
-        textFieldUtilisateur.setColumns(13);
-        textFieldUtilisateur.setBorder(null);
-        textFieldUtilisateur.setBackground(new Color(29, 88, 129));
         panelTextFieldNomUtilisateur.add(textFieldUtilisateur);
         
-        JPanel panelMotDePasse = new JPanel();
-        panelMotDePasse.setBackground(new Color(44, 47, 51));
+        CustomJPanel panelMotDePasse = new CustomJPanel();
         panelUtilisateurMotDePasse.add(panelMotDePasse);
         
-        JLabel labelMotDePasse = new JLabel("Mot de passe :");
-        labelMotDePasse.setForeground(new Color(102, 173, 221));
+        CustomJLabel labelMotDePasse = new CustomJLabel("Mot de passe :", 10);
         labelMotDePasse.setPreferredSize(new Dimension(110, 30));
         panelMotDePasse.add(labelMotDePasse);
         
-        JPanel panelTextFieldMotDePasse = new JPanel();
+        CustomJPanel panelTextFieldMotDePasse = new CustomJPanel();
         FlowLayout fl_panelTextFieldMotDePasse = (FlowLayout) panelTextFieldMotDePasse.getLayout();
         fl_panelTextFieldMotDePasse.setVgap(0);
         fl_panelTextFieldMotDePasse.setHgap(0);
@@ -127,48 +109,36 @@ public class IdentificationVue extends JFrame {
         textFieldMotDePasse.setBackground(new Color(29, 88, 129));
         panelTextFieldMotDePasse.add(textFieldMotDePasse);
         
-        JButton btnMotDePasseVisibilite = new JButton("");
+        JButton btnMotDePasseVisibilite = new CustomJButton("", 5, (EmptyBorder) null);
         btnMotDePasseVisibilite.addActionListener(controleur);
         btnMotDePasseVisibilite.setBackground(new Color(29, 88, 129));
-        btnMotDePasseVisibilite.setBorder(null);
         btnMotDePasseVisibilite.setIcon(OEIL_INVISIBLE_ICON);
         panelTextFieldMotDePasse.add(btnMotDePasseVisibilite);
         
-        JPanel panelQuitterSeconnecter = new JPanel();
-        panelQuitterSeconnecter.setBackground(new Color(44, 47, 51));
-        panelQuitterSeconnecter.setBorder(new EmptyBorder(10, 10, 10, 10));
+        CustomJPanel panelQuitterSeconnecter = new CustomJPanel(new EmptyBorder(10, 10, 10, 10), new FlowLayout(FlowLayout.CENTER, 5, 5));
         contentPane.add(panelQuitterSeconnecter, BorderLayout.SOUTH);
-        panelQuitterSeconnecter.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
         
-        JButton btnQuit = new JButton("Quitter");
+        CustomJButton btnQuit = new CustomJButton("Quitter", 5);
         btnQuit.setBackground(new Color(231, 76, 60));
         btnQuit.setForeground(new Color(255, 255, 255));
-        btnQuit.setBorder(new CustomBorder(5));
         btnQuit.addActionListener(this.controleur);
         panelQuitterSeconnecter.add(btnQuit);
         
-        JButton btnLogin = new JButton("Se connecter");
+        CustomJButton btnLogin = new CustomJButton("Se connecter", 5);
         btnLogin.setForeground(new Color(255, 255, 255));
         btnLogin.setBackground(new Color(46, 204, 113));
-        btnLogin.setBorder(new CustomBorder(5));
         btnLogin.addActionListener(controleur);
         panelQuitterSeconnecter.add(btnLogin);
         
-        JPanel panelTitre = new JPanel();
-        panelTitre.setBackground(new Color(44, 47, 51));
+        CustomJPanel panelTitre = new CustomJPanel();
         contentPane.add(panelTitre, BorderLayout.NORTH);
-        panelTitre.setLayout(new BorderLayout(0, 0));
+
         
-        JSeparator separatorTitre = new JSeparator();
-        separatorTitre.setBackground(new Color(102, 173, 221));
-        separatorTitre.setForeground(new Color(102, 173, 221));
+        CustomJSeparator separatorTitre = new CustomJSeparator();
         panelTitre.add(separatorTitre, BorderLayout.SOUTH);
         
-        JLabel titreFenetre = new JLabel("CONNEXION");
+        CustomJLabel titreFenetre = new CustomJLabel("CONNEXION", 10, new EmptyBorder(10, 10, 10, 10));
         titreFenetre.setHorizontalAlignment(SwingConstants.CENTER);
-        titreFenetre.setForeground(new Color(102, 173, 221));
-        titreFenetre.setFont(new Font("Tahoma", Font.BOLD, 25));
-        titreFenetre.setBorder(new EmptyBorder(10, 10, 10, 10));
         panelTitre.add(titreFenetre);
     }
 }
