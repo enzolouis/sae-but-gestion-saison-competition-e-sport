@@ -10,15 +10,19 @@ public class CreateTournoi {
 	public static void main(String[] args) {
 				
 		try {
+			//Suppression de la table tournoi
+			String reqSupprTournoi = "DROP TABLE tournoi";
+			PreparedStatement stSupprTournoi = DBConnection.getInstance().prepareStatement(reqSupprTournoi);
+			stSupprTournoi.executeUpdate();
 			
 			//création de la séquence de l'id tournoi				
-			String reqSeqTournoi = "CREATE OR REPLACE SEQUENCE seqIdTournoi START WITH 1 INCREMENT BY 1";
+			String reqSeqTournoi = "CREATE SEQUENCE seqIdTournoi START WITH 1 INCREMENT BY 1";
 			PreparedStatement stSeqTournoi = DBConnection.getInstance().prepareStatement(reqSeqTournoi);
 			stSeqTournoi.executeUpdate();
 			System.out.println("Séquence tournoi créée");
 			
 			//création de la table tournoi
-			String reqCreateTournoi = "CREATE OR REPLACE TABLE tournoi ("
+			String reqCreateTournoi = "CREATE TABLE tournoi ("
 					+ "idTournoi INT PRIMARY KEY NOT NULL,"
 					+ "nom VARCHAR(30),"
 					+ "dateDebut DATE,"

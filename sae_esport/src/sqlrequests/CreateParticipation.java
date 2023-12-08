@@ -10,14 +10,19 @@ public class CreateParticipation {
 	public static void main(String[] args) {
 
 		try {
+			//Suppression de la table participer
+			String reqSupprParticiper = "DROP TABLE participer";
+			PreparedStatement stSupprParticiper = DBConnection.getInstance().prepareStatement(reqSupprParticiper);
+			stSupprParticiper.executeUpdate();
+			
 			//création de la séquence de l'id tournoi				
-			String reqSeqParticiper = "CREATE OR REPLACE SEQUENCE seqParticipation START WITH 1 INCREMENT BY 1";
+			String reqSeqParticiper = "CREATE SEQUENCE seqParticipation START WITH 1 INCREMENT BY 1";
 			PreparedStatement stSeqParticiper = DBConnection.getInstance().prepareStatement(reqSeqParticiper);
 			stSeqParticiper.executeUpdate();
 			System.out.println("Séquence tournoi créée");
 			
 			//creation de la table participation
-			String reqCreateParticipation = "CREATE OR REPLACE TABLE participation"
+			String reqCreateParticipation = "CREATE TABLE participation"
 					+ "(resultat INT,"
 					+ "idTournoi INT,"
 					+ "idEquipe INT,"
