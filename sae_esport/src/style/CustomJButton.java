@@ -14,6 +14,15 @@ public class CustomJButton extends JButton {
 	Shape shape;
 	int round;
 	
+	/**
+	* Ryan GAUNAND <br>
+	* Création d'un JButton avec la fonctionnalités graphique d'arrondi, 
+	* l'ajout d'un texte à l'intérieur et à l'application automatique 
+	* de la charte graphique de l'application.
+	*
+	* @param  Texte affiché dans le bouton
+	* @param  Arrondi du bouton
+	*/
 	public CustomJButton(String label, int round) {
 		super(label);
 		this.round = round;
@@ -22,6 +31,16 @@ public class CustomJButton extends JButton {
 		setOpaque(false);
 	}
 	
+	/**
+	* Ryan GAUNAND <br>
+	* Création d'un JButton avec la fonctionnalités graphique d'arrondi, 
+	* l'ajout d'un texte à l'intérieur, l'ajout de bordure vide et à 
+	* l'application automatique de la charte graphique de l'application.
+	*
+	* @param  Texte affiché dans le bouton
+	* @param  Arrondi du bouton
+	* @param  Bordure vide
+	*/
 	public CustomJButton(String label, int round, EmptyBorder border) {
 		super(label);
 		this.round = round;
@@ -30,7 +49,7 @@ public class CustomJButton extends JButton {
     	setBorder(border);
 		setOpaque(false);
 	}
-	
+
     protected void paintComponent(Graphics g) {
         g.setColor(getBackground());
         g.fillRoundRect(0, 0, getWidth()-1, getHeight()-1, round, round);
