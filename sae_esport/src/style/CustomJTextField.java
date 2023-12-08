@@ -21,6 +21,7 @@ public class CustomJTextField extends JTextField {
 	*
 	*/
     public CustomJTextField() {
+    	super();
     	setBasicConstructor();
     }
 
