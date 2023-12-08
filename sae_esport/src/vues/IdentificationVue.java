@@ -6,7 +6,9 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
+import java.awt.Insets;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -17,6 +19,7 @@ import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import controleurs.ChoixArbitreControleur;
 import controleurs.IdentificationControleur;
 import style.CustomJButton;
 import style.CustomJFrame;
@@ -66,55 +69,53 @@ public class IdentificationVue extends CustomJFrame {
     public IdentificationVue() throws Exception {
     	super(new Dimension(450, 300), "Identification");
     	
+    	pack();
+    	
     	this.controleur = new IdentificationControleur(this);
     	contentPane = super.getContentPanel();
         
-    	CustomJPanel panelUtilisateurMotDePasse = new CustomJPanel(new EmptyBorder(10, 10, 10, 10), new GridLayout(2, 0, 0, 0));
-        contentPane.add(panelUtilisateurMotDePasse, BorderLayout.CENTER);
+        // Panel Top : Title
+    	CustomJPanel panelTop = new CustomJPanel();
+        contentPane.add(panelTop, BorderLayout.NORTH);
         
+        CustomJLabel titleTop = new CustomJLabel("Connexion", 25);
+        panelTop.add(titleTop);
+        
+        CustomJSeparator separatorTop = new CustomJSeparator();
+        panelTop.add(separatorTop, BorderLayout.SOUTH);
+    	
+        // Middle Panel : Login
+    	CustomJPanel panelMiddleLogin = new CustomJPanel(new EmptyBorder(10, 10, 10, 10), new GridLayout(2, 0, 0, 0));
+        contentPane.add(panelMiddleLogin, BorderLayout.CENTER);
+        
+        // Utilisateur
         CustomJPanel panelUtilisateur = new CustomJPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        panelUtilisateurMotDePasse.add(panelUtilisateur);
+        panelMiddleLogin.add(panelUtilisateur);
         
-        CustomJLabel labelNomUtilisateur = new CustomJLabel("Nom d'utilisateur :", 10);
-        labelNomUtilisateur.setPreferredSize(new Dimension(110, 30));
+        CustomJLabel labelNomUtilisateur = new CustomJLabel("Nom d'utilisateur :", 12);
         panelUtilisateur.add(labelNomUtilisateur);
         
-        CustomJPanel panelTextFieldNomUtilisateur = new CustomJPanel((EmptyBorder) null);
-        panelTextFieldNomUtilisateur.setBackground(new Color(29, 88, 129));
-        panelUtilisateur.add(panelTextFieldNomUtilisateur);
+        CustomJTextField textFieldLoginArbitre = new CustomJTextField(10, new EmptyBorder(10, 10, 10, 10), "Login");
+        textFieldLoginArbitre.addActionListener(controleur);
+        panelUtilisateur.add(textFieldLoginArbitre);
         
-        textFieldUtilisateur = new CustomJTextField("Login", 13, (EmptyBorder) null);
-        textFieldUtilisateur.addActionListener(controleur);
-        panelTextFieldNomUtilisateur.add(textFieldUtilisateur);
+        // Mot de passe
+        CustomJPanel panelTextFieldMotDePasse = new CustomJPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        panelMiddleLogin.add(panelTextFieldMotDePasse);
         
-        CustomJPanel panelMotDePasse = new CustomJPanel();
-        panelUtilisateurMotDePasse.add(panelMotDePasse);
+        CustomJLabel labelMotDePasse = new CustomJLabel("Mot de passe :", 12);
+        panelTextFieldMotDePasse.add(labelMotDePasse);
         
-        CustomJLabel labelMotDePasse = new CustomJLabel("Mot de passe :", 10);
-        labelMotDePasse.setPreferredSize(new Dimension(110, 30));
-        panelMotDePasse.add(labelMotDePasse);
+        CustomJTextField textFieldPassword = new CustomJTextField(12, new EmptyBorder(10, 10, 10, 10), "Password");
+        textFieldPassword.addActionListener(controleur);
+        panelTextFieldMotDePasse.add(textFieldPassword);
         
-        CustomJPanel panelTextFieldMotDePasse = new CustomJPanel();
-        FlowLayout fl_panelTextFieldMotDePasse = (FlowLayout) panelTextFieldMotDePasse.getLayout();
-        fl_panelTextFieldMotDePasse.setVgap(0);
-        fl_panelTextFieldMotDePasse.setHgap(0);
-        panelTextFieldMotDePasse.setBackground(new Color(29, 88, 129));
-        panelMotDePasse.add(panelTextFieldMotDePasse);
-        
-        textFieldMotDePasse = new JPasswordField();
-        textFieldMotDePasse.addActionListener(controleur);
-        textFieldMotDePasse.setForeground(Color.WHITE);
-        textFieldMotDePasse.setColumns(10);
-        textFieldMotDePasse.setBorder(new EmptyBorder(5, 5, 5, 5));
-        textFieldMotDePasse.setBackground(new Color(29, 88, 129));
-        panelTextFieldMotDePasse.add(textFieldMotDePasse);
-        
-        JButton btnMotDePasseVisibilite = new CustomJButton("", 5, (EmptyBorder) null);
+        CustomJButton btnMotDePasseVisibilite = new CustomJButton("", 25, new EmptyBorder(0, 0, 0, 0));
         btnMotDePasseVisibilite.addActionListener(controleur);
-        btnMotDePasseVisibilite.setBackground(new Color(29, 88, 129));
         btnMotDePasseVisibilite.setIcon(OEIL_INVISIBLE_ICON);
         panelTextFieldMotDePasse.add(btnMotDePasseVisibilite);
         
+        // Bottom Panel : Quitter + Login
         CustomJPanel panelQuitterSeconnecter = new CustomJPanel(new EmptyBorder(10, 10, 10, 10), new FlowLayout(FlowLayout.CENTER, 5, 5));
         contentPane.add(panelQuitterSeconnecter, BorderLayout.SOUTH);
         
@@ -129,16 +130,5 @@ public class IdentificationVue extends CustomJFrame {
         btnLogin.setBackground(new Color(46, 204, 113));
         btnLogin.addActionListener(controleur);
         panelQuitterSeconnecter.add(btnLogin);
-        
-        CustomJPanel panelTitre = new CustomJPanel();
-        contentPane.add(panelTitre, BorderLayout.NORTH);
-
-        
-        CustomJSeparator separatorTitre = new CustomJSeparator();
-        panelTitre.add(separatorTitre, BorderLayout.SOUTH);
-        
-        CustomJLabel titreFenetre = new CustomJLabel("CONNEXION", 10, new EmptyBorder(10, 10, 10, 10));
-        titreFenetre.setHorizontalAlignment(SwingConstants.CENTER);
-        panelTitre.add(titreFenetre);
     }
 }
