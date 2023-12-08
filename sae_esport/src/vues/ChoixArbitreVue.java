@@ -117,7 +117,7 @@ public class ChoixArbitreVue extends CustomJFrame {
         panelActionLoginArbitre.add(loginArbitreJLabel, gbc_loginArbitreJLabel);
         
         // Login text field
-        CustomJTextField textFieldLoginArbitre = new CustomJTextField(5, new int[] {10, 10, 10, 10}, "Aucun login");
+        CustomJTextField textFieldLoginArbitre = new CustomJTextField(5, new EmptyBorder(10, 10, 10, 10), "Aucun login");
         GridBagConstraints gbc_loginArbitreTextField = new GridBagConstraints();
         gbc_loginArbitreTextField.insets = new Insets(0, 0, 0, 0);
         gbc_loginArbitreTextField.fill = GridBagConstraints.BOTH;
@@ -145,7 +145,7 @@ public class ChoixArbitreVue extends CustomJFrame {
         panelActionMDPArbitre.add(mdpArbitreJLabel, gbc_mdpArbitreJLabel);
         
         // Login text field
-        CustomJTextField textFieldMDPArbitre = new CustomJTextField(5, new int[] {10, 10, 10, 10}, "Aucun MDP");
+        CustomJTextField textFieldMDPArbitre = new CustomJTextField(5, new EmptyBorder(10, 10, 10, 10), "Aucun MDP");
         GridBagConstraints gbc_mdpArbitreTextField = new GridBagConstraints();
         gbc_mdpArbitreTextField.insets = new Insets(0, 0, 0, 0);
         gbc_mdpArbitreTextField.fill = GridBagConstraints.BOTH;
