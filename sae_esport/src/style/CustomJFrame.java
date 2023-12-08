@@ -8,6 +8,11 @@ import javax.swing.border.EmptyBorder;
 public class CustomJFrame extends JFrame {
 	CustomJPanel contentPanel;
 	
+	/**
+	* Ryan GAUNAND <br>
+	* Création d'un JFrame avec l'application automatique 
+	* de la charte graphique de l'application.
+	*/
 	public CustomJFrame() {
 		super();
 		
@@ -17,6 +22,13 @@ public class CustomJFrame extends JFrame {
         setResizable(false);
 	}
 	
+	/**
+	* Ryan GAUNAND <br>
+	* Création d'un JFrame avec l'ajout d'un titre de fenêtre et
+	* l'application automatique de la charte graphique de l'application.
+	*
+	* @param  Titre de la fenêtre
+	*/
 	public CustomJFrame(String frameTitle) {
 		super(frameTitle);
 		
@@ -26,6 +38,13 @@ public class CustomJFrame extends JFrame {
         setResizable(false);
 	}
 	
+	/**
+	* Ryan GAUNAND <br>
+	* Création d'un JFrame avec la définition d'une dimension et
+	* l'application automatique de la charte graphique de l'application.
+	*
+	* @param Dimension de la fenêtre
+	*/
 	public CustomJFrame(Dimension dimension) {
 		super();
 		
@@ -37,6 +56,14 @@ public class CustomJFrame extends JFrame {
         setResizable(false);
 	}
 	
+	/**
+	* Ryan GAUNAND <br>
+	* Création d'un JFrame avec l'ajout d'un titre de fenêtre, la définition d'une dimension et
+	* l'application automatique de la charte graphique de l'application.
+	*
+	* @param  Dimension de la fenêtre
+	* @param  Titre de la fenêtre
+	*/
 	public CustomJFrame(Dimension dimension, String frameTitle) {
 		super(frameTitle);
 		
