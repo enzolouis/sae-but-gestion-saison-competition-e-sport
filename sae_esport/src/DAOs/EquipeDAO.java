@@ -78,12 +78,10 @@ public class EquipeDAO {
 	}
 	
 	//ajoute des equipes d'un tableau css
-			public List<String[] > importEquipes(String FILEPATH) throws Exception{
-				File file;
+			public List<Equipe > importEquipes(File file) throws Exception{
 				FileReader fr;
 				BufferedReader bfr;
 				
-				file = new File(FILEPATH);
 				fr = new FileReader(file);
 				bfr= new BufferedReader(fr);
 				
@@ -98,10 +96,12 @@ public class EquipeDAO {
 				bfr.close();
 				
 				List<Equipe> le= getAll();
+				List<Equipe> et = new ArrayList<Equipe>();
 				
 				for (String[] s : data) {
 					Nationalite n = Nationalite.valueOf(s[1]);
 					Equipe e = new Equipe(0,s[0],n,true,Integer.parseInt(s[2]),Integer.parseInt(s[3]));
+					et.add(e);
 					boolean t = true;
 					for (Equipe eq : le) {
 						if (e.getNom() == eq.getNom()) {
@@ -112,7 +112,7 @@ public class EquipeDAO {
 						add(e);
 					}
 				}
-				return data;
+				return et;
 			}
 	
 	//update un equipe donné

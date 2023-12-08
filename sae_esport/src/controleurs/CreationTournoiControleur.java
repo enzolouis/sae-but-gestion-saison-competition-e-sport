@@ -14,10 +14,12 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import DAOs.TournoiDAO;
+import DAOs.EquipeDAO;
 import classes.Arbitre;
 import classes.DBConnection;
 import classes.EtatTournoi;
 import classes.Notoriete;
+import classes.Equipe;
 import modeles.CreationTournoiModele;
 import modeles.TournoiModele;
 import vues.CreationTournoiVue;
@@ -25,6 +27,7 @@ import vues.CreationTournoiVue;
 public class CreationTournoiControleur implements ActionListener {
 	private CreationTournoiVue vue;
 	private TournoiModele modele;
+	private List<Equipe> data;
 	
 	// remplacer identificationvue par CreationTournoiVue
 	public CreationTournoiControleur(CreationTournoiVue vue) {
@@ -59,6 +62,13 @@ public class CreationTournoiControleur implements ActionListener {
 				if (chose == JFileChooser.APPROVE_OPTION) {
 					File file = fc.getSelectedFile();
 					this.vue.textFieldEquipesFile.setText(file.getName());
+					try {
+						data = EquipeDAO.getInstance().importEquipes(file);
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
 				}
 				break;
 			case ("Quitter"):
@@ -75,6 +85,9 @@ public class CreationTournoiControleur implements ActionListener {
 					String dateFin =   this.modele.getDateString(this.vue.dateChooserFin.getDate());
 					Notoriete not = (Notoriete) this.vue.comboBoxNotoriete.getSelectedItem();
 					TournoiModele t = new TournoiModele(0, nom, dateDebut, dateFin, not, EtatTournoi.FERME);
+					for (Equipe eq : data) {
+						t.ajouterEquipe(eq);
+					}
 					if (!t.isTournoiValide()) {
 						JFrame jFrame = new JFrame();
 						JOptionPane.showMessageDialog(jFrame, "Le tournoi est invalide, vérifiez que les dates"
