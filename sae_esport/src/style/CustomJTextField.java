@@ -15,38 +15,75 @@ public class CustomJTextField extends JTextField {
     private Shape shape;
     private String placeholder;
     
+	/**
+	* Ryan GAUNAND <br>
+	* Création d'un JTextField l'application automatique de la charte graphique de l'application.
+	*
+	*/
     public CustomJTextField() {
     	setBasicConstructor();
     }
 
-    public CustomJTextField(final Document pDoc, final String pText, final int pColumns) {
-        super(pDoc, pText, pColumns);
-        setBasicConstructor();
-    }
-
-
+	/**
+	* Ryan GAUNAND <br>
+	* Création d'un JTextField avec la définition d'un texte de renseignement et
+	* l'application automatique de la charte graphique de l'application.
+	*
+	* @param Texte de renseignement
+	*/
     public CustomJTextField(final String pText) {
         super(pText);
         setBasicConstructor();
     }
     
+	/**
+	* Ryan GAUNAND <br>
+	* Création d'un JTextField avec la définition d'un texte de renseignement et
+	* l'application automatique de la charte graphique de l'application.
+	*
+	* @param Texte de renseignement
+	*/
     public CustomJTextField(final String pText, int[] border) {
         super(pText);
         setBasicConstructor();
         setBorder(new EmptyBorder(border[0], border[1], border[2], border[3]));
     }
 
+	/**
+	* Ryan GAUNAND <br>
+	* Création d'un JTextField avec la définition d'un texte de renseignement, 
+	* la définition du nombre de colonne pour le calcul de la taille voulus et
+	* l'application automatique de la charte graphique de l'application.
+	*
+	* @param Texte de renseignement
+	* @param Colonnes
+	*/
     public CustomJTextField(final String pText, final int pColumns) {
         super(pText, pColumns);
         setBasicConstructor();
     }
     
+	/**
+	* Ryan GAUNAND <br>
+	* Création d'un JTextField avec la définition de la taile et
+	* l'application automatique de la charte graphique de l'application.
+	*
+	* @param Taille
+	*/
     public CustomJTextField(int size) {
         super(size);
         setOpaque(false);
         setBasicConstructor();
     }
     
+	/**
+	* Ryan GAUNAND <br>
+	* Création d'un JTextField avec la définition de la taile, un texte de renseignement et
+	* l'application automatique de la charte graphique de l'application.
+	*
+	* @param Taille
+	* @param Texte de renseignement
+	*/
     public CustomJTextField(int size, String placeHolder) {
         super(size);
         setOpaque(false);
@@ -54,18 +91,36 @@ public class CustomJTextField extends JTextField {
         setPlaceholder(placeHolder);
     }
     
-    public CustomJTextField(int size, int[] border) {
+	/**
+	* Ryan GAUNAND <br>
+	* Création d'un JTextField avec la définition de la taile, de bordure vide et
+	* l'application automatique de la charte graphique de l'application.
+	*
+	* @param Taille
+	* @param Bordure vide
+	*/
+    public CustomJTextField(int size, EmptyBorder border) {
         super(size);
         setOpaque(false);
         setBasicConstructor();
-        setBorder(new EmptyBorder(border[0], border[1], border[2], border[3]));
+        setBorder(border);
     }
     
-    public CustomJTextField(int size, int[] border, String placeHolder) {
+	/**
+	* Ryan GAUNAND <br>
+	* Création d'un JTextField avec la définition de la taile, 
+	* de bordure vide, d'un texte de renseignement et
+	* l'application automatique de la charte graphique de l'application.
+	*
+	* @param Taille
+	* @param Bordure vide
+	* @param Texte de renseignement
+	*/
+    public CustomJTextField(int size, EmptyBorder border, String placeHolder) {
         super(size);
         setOpaque(false);
         setBasicConstructor();
-        setBorder(new EmptyBorder(border[0], border[1], border[2], border[3]));
+        setBorder(border);
         setPlaceholder(placeHolder);
     }
     
