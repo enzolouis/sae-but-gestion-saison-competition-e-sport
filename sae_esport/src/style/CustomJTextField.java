@@ -65,6 +65,22 @@ public class CustomJTextField extends JTextField {
     
 	/**
 	* Ryan GAUNAND <br>
+	* Création d'un JTextField avec la définition d'un texte de renseignement, 
+	* la définition du nombre de colonne pour le calcul de la taille voulus, de bordure vide et
+	* l'application automatique de la charte graphique de l'application.
+	*
+	* @param Texte de renseignement
+	* @param Colonnes
+	* @param Bordure vide
+	*/
+    public CustomJTextField(final String pText, final int pColumns, EmptyBorder border) {
+        super(pText, pColumns);
+        setBasicConstructor();
+        setBorder(border);
+    }
+    
+	/**
+	* Ryan GAUNAND <br>
 	* Création d'un JTextField avec la définition de la taile et
 	* l'application automatique de la charte graphique de l'application.
 	*
