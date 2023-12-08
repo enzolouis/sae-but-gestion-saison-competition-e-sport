@@ -100,8 +100,33 @@ public class EquipeDAO {
 				
 				for (String[] s : data) {
 					Nationalite n = Nationalite.valueOf(s[1]);
-					Equipe e = new Equipe(0,s[0],n,true,Integer.parseInt(s[2]),Integer.parseInt(s[3]));
-					et.add(e);
+					JoueurDAO jdao = new JoueurDAO();
+					List<Joueur> lj = new ArrayList<Joueur>();
+					List<Joueur> j = JoueurDAO.getInstance().getAll();
+					for (int i=4;i<=8;i++) {
+						Joueur jou = new Joueur(0,s[i]);
+						boolean tj = true;
+						for (int k=0;k<lj.size();k++) {
+							if (jou.getPseudo()==j.get(k).getPseudo()) {
+								tj = false;
+							}
+						}
+						if (tj) {
+							jdao.add(jou);
+						}
+						
+						String reqSelectJoueur = "SELECT * FROM joueur WHERE joueur.pseudo = jou.getPseudo()";
+						PreparedStatement st = DBConnection.getInstance().prepareStatement(reqSelectJoueur);
+						ResultSet rs = st.executeQuery();
+						Joueur jo = new Joueur(rs.getInt(1),rs.getString(2));
+						lj.add(jo);						
+					}
+					Equipe e = new Equipe(0,s[0],n,lj,true,Integer.parseInt(s[2]),Integer.parseInt(s[3]));
+					String reqSelectEquipe = "SELECT * FROM equipe WHERE equipe.nom = e.getnom()";
+					PreparedStatement st = DBConnection.getInstance().prepareStatement(reqSelectEquipe);
+					ResultSet rs = st.executeQuery();
+					Equipe equipe = new Equipe(rs.getInt(1),rs.getString(2),classes.Nationalite.valueOf(rs.getString(3)),lj,rs.getBoolean(4),rs.getInt(5),rs.getInt(6));
+					et.add(equipe);
 					boolean t = true;
 					for (Equipe eq : le) {
 						if (e.getNom() == eq.getNom()) {
