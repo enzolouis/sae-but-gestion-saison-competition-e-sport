@@ -22,6 +22,7 @@ import classes.Nationalite;
 import classes.Notoriete;
 import controleurs.CreationTournoiControleur;
 import style.CustomJButton;
+import style.CustomJFrame;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -31,7 +32,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import java.awt.Rectangle;
 
-public class CreationTournoiVue extends JFrame {
+public class CreationTournoiVue extends CustomJFrame {
 	
 	JPanel contentPane;
 	public JTextField textFieldEquipesFile;
@@ -59,9 +60,8 @@ public class CreationTournoiVue extends JFrame {
     }
 	
 	public CreationTournoiVue() {
-		
-		this.setResizable(false);
-		setMaximumSize(new Dimension(780, 550));
+		super(new Dimension(780, 550));
+
 		
 		this.controleur = new CreationTournoiControleur(this);
 		
@@ -70,8 +70,7 @@ public class CreationTournoiVue extends JFrame {
 		Color policeColor = new Color(107,173,221);
 		
 		//création du panel principal
-		contentPane = new JPanel();
-		setContentPane(contentPane);
+		contentPane = getContentPanel();
 		contentPane.setBackground(backgroundColor);
 		contentPane.setLayout(new BorderLayout());
 		contentPane.setBorder(new EmptyBorder(30,30,30,30));
