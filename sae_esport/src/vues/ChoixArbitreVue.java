@@ -85,16 +85,12 @@ public class ChoixArbitreVue extends CustomJFrame {
 		}
         
         // Panel middle --> Panel Action : Ligne 3
-        CustomJPanel panelArbitreActions = new CustomJPanel();
-        
+        CustomJPanel panelArbitreActions = new CustomJPanel(new EmptyBorder(0, 0, 0, 0), new GridLayout(2, 3, 10, 10));
         GridBagConstraints gbc_panelArbitreActions = new GridBagConstraints();
         gbc_panelArbitreActions.fill = GridBagConstraints.BOTH;
         gbc_panelArbitreActions.gridx = 0;
         gbc_panelArbitreActions.gridy = 1;
         panelMiddle.add(panelArbitreActions, gbc_panelArbitreActions);
-        
-        GridLayout panelArbitreActionsLayout = new GridLayout(2, 3, 10, 10);
-        panelArbitreActions.setLayout(panelArbitreActionsLayout); 
         
         CustomJLabel labelSelectedTournoiJLabel = new CustomJLabel("Tournoi sélectioné : Aucun", 12);
         panelArbitreActions.add(labelSelectedTournoiJLabel);
@@ -122,7 +118,6 @@ public class ChoixArbitreVue extends CustomJFrame {
         
         // Login text field
         CustomJTextField textFieldLoginArbitre = new CustomJTextField(5, new int[] {10, 10, 10, 10}, "Aucun login");
-        textFieldLoginArbitre.addActionListener(controleur);
         GridBagConstraints gbc_loginArbitreTextField = new GridBagConstraints();
         gbc_loginArbitreTextField.insets = new Insets(0, 0, 0, 0);
         gbc_loginArbitreTextField.fill = GridBagConstraints.BOTH;
@@ -151,7 +146,6 @@ public class ChoixArbitreVue extends CustomJFrame {
         
         // Login text field
         CustomJTextField textFieldMDPArbitre = new CustomJTextField(5, new int[] {10, 10, 10, 10}, "Aucun MDP");
-        textFieldMDPArbitre.addActionListener(controleur);
         GridBagConstraints gbc_mdpArbitreTextField = new GridBagConstraints();
         gbc_mdpArbitreTextField.insets = new Insets(0, 0, 0, 0);
         gbc_mdpArbitreTextField.fill = GridBagConstraints.BOTH;

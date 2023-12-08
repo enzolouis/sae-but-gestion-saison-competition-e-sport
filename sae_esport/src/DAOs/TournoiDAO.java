@@ -28,7 +28,7 @@ public class TournoiDAO extends SingletonDAO {
 		PreparedStatement stParticipants = DBConnection.getInstance().prepareStatement(reqSelectParticipants);
 		ArrayList<Equipe> participants = new ArrayList<>();
 		while (rs.next()) {
-			Tournoi t = new Tournoi(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), classes.Notoriete.valueOf(rs.getString(5)), classes.EtatTournoi.valueOf(rs.getString(7)));
+			TournoiModele t = new TournoiModele(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), classes.Notoriete.valueOf(rs.getString(5)), classes.EtatTournoi.valueOf(rs.getString(7)));
 			stParticipants.setInt(1, rs.getInt(1));
 			ResultSet rsParticipants = stParticipants.executeQuery();
 			while (rsParticipants.next()) {
