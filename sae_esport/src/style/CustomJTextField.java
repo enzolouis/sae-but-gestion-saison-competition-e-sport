@@ -11,6 +11,12 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.Document;
 
+<<<<<<< Updated upstream
+=======
+import style.PlaceholderTextField;
+
+@SuppressWarnings("serial")
+>>>>>>> Stashed changes
 public class CustomJTextField extends JTextField {
     private Shape shape;
     private String placeholder;

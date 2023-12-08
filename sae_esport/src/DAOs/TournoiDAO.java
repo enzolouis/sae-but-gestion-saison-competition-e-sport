@@ -14,8 +14,14 @@ import modeles.TournoiModele;
 
 public class TournoiDAO extends SingletonDAO {
 	
+<<<<<<< Updated upstream
 	public TournoiDAO() {
 		super();
+=======
+	private static TournoiDAO instance;
+	
+	private TournoiDAO() {	
+>>>>>>> Stashed changes
 	}
 	
 	//Renvois l'ensemble des arbitres
@@ -28,7 +34,11 @@ public class TournoiDAO extends SingletonDAO {
 		PreparedStatement stParticipants = DBConnection.getInstance().prepareStatement(reqSelectParticipants);
 		ArrayList<Equipe> participants = new ArrayList<>();
 		while (rs.next()) {
+<<<<<<< Updated upstream
 			TournoiModele t = new TournoiModele(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), classes.Notoriete.valueOf(rs.getString(5)), classes.EtatTournoi.valueOf(rs.getString(7)));
+=======
+			TournoiModele t = new TournoiModele(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), classes.Notoriete.valueOf(rs.getString(7)), classes.EtatTournoi.valueOf(rs.getString(8)));
+>>>>>>> Stashed changes
 			stParticipants.setInt(1, rs.getInt(1));
 			ResultSet rsParticipants = stParticipants.executeQuery();
 			while (rsParticipants.next()) {
@@ -46,8 +56,13 @@ public class TournoiDAO extends SingletonDAO {
 		for (Integer i : id) {
 			ResultSet rs = st.executeQuery("SELECT * FROM tournoi WHERE idTournoi="+i);
 			if (rs.next()) {
+<<<<<<< Updated upstream
 				TournoiModele t = new TournoiModele(rs.getInt(1), rs.getString(2), rs.getString(3),rs.getString(4), classes.Notoriete.valueOf(rs.getString(5)), classes.EtatTournoi.valueOf(rs.getString(7)));
 				PreparedStatement stParticipants = DBConnection.getInstance().prepareStatement("SELECT idEquipe FROM Participer WHERE idTournoi = ?");
+=======
+				TournoiModele t = new TournoiModele(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), classes.Notoriete.valueOf(rs.getString(7)), classes.EtatTournoi.valueOf(rs.getString(8)));
+				PreparedStatement stParticipants = DBConnection.getInstance().prepareStatement("SELECT idEquipe FROM Participation WHERE idTournoi = ?");
+>>>>>>> Stashed changes
 				stParticipants.setInt(1, rs.getInt(1));
 				ResultSet rsParticipants = stParticipants.executeQuery();
 				while (rsParticipants.next()) {
@@ -68,15 +83,18 @@ public class TournoiDAO extends SingletonDAO {
 		if (rs.next()) {
 			id = rs.getInt(1);
 		}
+		System.out.println(id);
 		value.setIDTournoi(id);
-		st = DBConnection.getInstance().prepareStatement("INSERT INTO tournoi VALUES (?, ?, ?, ?, ?, ?, ?)");
+		
+		st = DBConnection.getInstance().prepareStatement("INSERT INTO tournoi (idTournoi, nom, dateDebut, dateFin, notoriete, ouvert, login, mdp) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 		st.setInt(1, id); 
 		st.setString(2, value.getNomTournoi());
 		st.setDate(3, value.getDateDebut()); 
 		st.setDate(4, value.getDateFin());
-		st.setString(5, value.getNotoriete().toString());
-		st.setString(6, value.getEtatTournoi().toString());
-		st.setObject(7, null);
+		st.setString(5, value.getLogin());
+		st.setString(6, value.getMotDePasse());
+		st.setString(7, value.getNotoriete().toString());
+		st.setString(8, value.getEtatTournoi().toString());
 		int rowcount = st.executeUpdate();
 		return rowcount > 0;
 	}
@@ -101,8 +119,7 @@ public class TournoiDAO extends SingletonDAO {
 		Statement st = DBConnection.getInstance().createStatement();
 		ResultSet rs = st.executeQuery("SELECT * FROM tournoi WHERE ouvert='OUVERT'");
 		if (rs.next()) {
-			return Optional.of(new TournoiModele(rs.getInt(1), "", rs.getString(2), rs.getString(3), 
-					classes.Notoriete.valueOf(rs.getString(3)), classes.EtatTournoi.valueOf(rs.getString(4))));
+			return Optional.of(new TournoiModele(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), classes.Notoriete.valueOf(rs.getString(7)), classes.EtatTournoi.valueOf(rs.getString(8))));
 		}
 		return Optional.empty();
 	}

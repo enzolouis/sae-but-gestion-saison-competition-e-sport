@@ -60,6 +60,9 @@ public class CreationTournoiVue extends JFrame {
 	
 	public CreationTournoiVue() {
 		
+		this.setResizable(false);
+		setMaximumSize(new Dimension(780, 550));
+		
 		this.controleur = new CreationTournoiControleur(this);
 		
 		setMinimumSize(new Dimension(780, 550));
@@ -125,7 +128,7 @@ public class CreationTournoiVue extends JFrame {
 		panelNom.add(lbNom);
 		
 		this.textFieldNom = new JTextField();
-		textFieldNom.setBounds(130, 10, 110, 30);
+		textFieldNom.setBounds(130, 10, 150, 30);
 		textFieldNom.setPreferredSize(new Dimension(110, 30));
 		textFieldNom.setHorizontalAlignment(SwingConstants.LEFT);
 		panelNom.add(textFieldNom);
@@ -147,7 +150,7 @@ public class CreationTournoiVue extends JFrame {
 		
 		this.comboBoxNotoriete = new JComboBox<Notoriete>();
 		comboBoxNotoriete.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 11));
-		comboBoxNotoriete.setBounds(130, 10, 110, 30);
+		comboBoxNotoriete.setBounds(130, 10, 150, 30);
 		this.comboBoxNotoriete.setPreferredSize(new Dimension(100, 30));
 		panelNotoriete.add(comboBoxNotoriete);
 		for (Notoriete n : Notoriete.values()) {
@@ -175,7 +178,7 @@ public class CreationTournoiVue extends JFrame {
 		panelDateDebut.add(lblDateDeDbut);
 		
 		this.dateChooserDebut = new JDateChooser();
-		dateChooserDebut.setBounds(130, 10, 110, 30);
+		dateChooserDebut.setBounds(130, 10, 150, 30);
 		this.dateChooserDebut.setPreferredSize(new Dimension(100, 30));
 		panelDateDebut.add(this.dateChooserDebut);
 		
@@ -195,7 +198,7 @@ public class CreationTournoiVue extends JFrame {
 		panelDateFin.add(lblDateDeFin);
 		
 		this.dateChooserFin = new JDateChooser();
-		dateChooserFin.setBounds(130, 10, 110, 30);
+		dateChooserFin.setBounds(130, 10, 150, 30);
 		this.dateChooserFin.setPreferredSize(new Dimension(100, 30));
 		panelDateFin.add(this.dateChooserFin);
 		
@@ -244,11 +247,11 @@ public class CreationTournoiVue extends JFrame {
 		panelListeArbitres.setLayout(new BorderLayout(0, 0));
 		
 		this.listArbitres = new JList<Arbitre>();
-		listArbitres.setBounds(new Rectangle(0, 0, 20, 20));
-		listArbitres.setMaximumSize(new Dimension(100, 20));
+		listArbitres.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.listArbitres.setModel(modeleList);
-		this.listArbitres.setMinimumSize(new Dimension(100, 20));
 		JScrollPane sp = new JScrollPane(listArbitres);
+		sp.setBounds(new Rectangle(0, 0, 50, 20));
+		sp.setSize(new Dimension(100, 20));
 		sp.setMaximumSize(new Dimension(100, 100));
 		panelListeArbitres.add(sp);
 		
@@ -316,7 +319,6 @@ public class CreationTournoiVue extends JFrame {
         btnValider.setBackground(new Color(46, 204, 113));
         btnValider.setBorder(new CustomBorder(5));
         btnValider.addActionListener(controleur);
-		this.btnValider.addActionListener(controleur);
 		panelValider.add(this.btnValider);
 
 	}

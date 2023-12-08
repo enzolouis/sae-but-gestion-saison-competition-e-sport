@@ -267,10 +267,8 @@ public class TestTournoiModele {
 				Notoriete.REGIONAL,
 				EtatTournoi.FERME);
 		
-		TournoiDAO tournoiDao = new TournoiDAO();
-		
 		System.out.println("LLLLLAAAAAA : ss");
-		tournoiDao.add(t);
+		TournoiDAO.getInstance().add(t);
 		System.out.println("LLLLLAAAAAA : ss");
 		
 		TournoiModele t2 = new TournoiModele(
@@ -285,7 +283,7 @@ public class TestTournoiModele {
 		assertFalse(t2.isNonDupe());
 		
 		// rollback
-		tournoiDao.delete(t);
+		TournoiDAO.getInstance().delete(t);
 	}
 	
 	

@@ -4,7 +4,6 @@ import java.sql.Date;
 
 import DAOs.TournoiDAO;
 import classes.DBConnection;
-import classes.Tournoi;
 
 public class CreationTournoiModele {
 	
@@ -13,9 +12,9 @@ public class CreationTournoiModele {
 	}
 	
 	// a tester
-	public boolean isNonDupe(Tournoi tournoi) throws Exception {
+	public boolean isNonDupe(TournoiModele tournoi) throws Exception {
 		// El torn "torn" n'est pas damns a base den dons damns cite function
-		for (Tournoi t : TournoiDAO.getInstance().getAll()) {
+		for (TournoiModele t : TournoiDAO.getInstance().getAll()) {
 			if (t.getNomTournoi() == tournoi.getNomTournoi()) {
 				return false;
 			}
@@ -46,8 +45,8 @@ public class CreationTournoiModele {
 		System.out.println(c.isDateFinDateDebutDifferenceInfA30Jours(d, d2));
 		
 	}
-	public boolean isTournoiNonSuperpose(Tournoi tournoi) throws Exception {
-		for (Tournoi t : TournoiDAO.getInstance().getAll()) {
+	public boolean isTournoiNonSuperpose(TournoiModele tournoi) throws Exception {
+		for (TournoiModele t : TournoiDAO.getInstance().getAll()) {
 			if ((
 				t.getDateDebut().getTime() > tournoi.getDateDebut().getTime()
 				&&
@@ -60,17 +59,12 @@ public class CreationTournoiModele {
 		return true;
 	}
 	
-	public String getLogin(Tournoi tournoi) {
+	public String getLogin(TournoiModele tournoi) {
 		return tournoi.getLogin();
 	}
 	
-	public String getMotDePasse(Tournoi tournoi) {
+	public String getMotDePasse(TournoiModele tournoi) {
 		return tournoi.getMotDePasse();
-	}
-	
-	public String dateChooserToString(java.util.Date date) {
-		return date.getYear()+"-"+date.getMonth()+"-"+date.getDay();
-		
 	}
 	
 }

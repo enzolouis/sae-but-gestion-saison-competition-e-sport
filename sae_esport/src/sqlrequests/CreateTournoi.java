@@ -25,7 +25,10 @@ public class CreateTournoi {
 					+ "dateFin DATE,"
 					+ "notoriete VARCHAR(30),"
 					+ "ouvert VARCHAR(30),"
-					+ "idVainqueur INT)";
+					+ "login VARCHAR(30),"
+					+ "mdp VARCHAR(50),"
+					+ "idVainqueur INT,"
+					+ "FOREIGN KEY (idVainqueur) REFERENCES Equipe(idEquipe))";
 			PreparedStatement stCreateTournoi = DBConnection.getInstance().prepareStatement(reqCreateTournoi);
 			stCreateTournoi.executeUpdate();
 			System.out.println("Table tournoi créée");

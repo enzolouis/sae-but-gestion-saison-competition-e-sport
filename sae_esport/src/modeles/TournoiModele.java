@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +19,6 @@ import classes.Notoriete;
 
 public class TournoiModele {
 	
-	private TournoiDAO tournoiDAO;
 	//Représente le nom ou le titre du Tournoi
 	private String nomTournoi;
 	
@@ -44,6 +44,26 @@ public class TournoiModele {
 	 * 	@param notoriété du Tournoi
 	 * 	@param Etat d'ouverture ou fermeture du Tournoi
 	 * */
+	public TournoiModele(int idTournoi, String nomTournoi, String dateDebut, String dateFin, String login, String mdp, Notoriete notoriete, EtatTournoi etat) {
+		this.idTournoi = idTournoi;
+		this.nomTournoi = nomTournoi;
+		this.dateDebut = dateDebut;
+		this.dateFin = dateFin;
+		this.notoriete = notoriete;
+		this.etat = etat;
+		this.matches= new ArrayList<>();
+		this.participants = new HashMap<>();
+		this.vainqueur = Optional.empty();
+		this.mdp = mdp;
+		this.login = login;
+	}
+	
+	public TournoiModele() {		
+		this.matches= new ArrayList<>();
+		this.participants = new HashMap<>();
+		this.vainqueur = Optional.empty();
+	}
+	
 	public TournoiModele(int idTournoi, String nomTournoi, String dateDebut, String dateFin, Notoriete notoriete, EtatTournoi etat) {
 		this.idTournoi = idTournoi;
 		this.nomTournoi = nomTournoi;
@@ -56,19 +76,6 @@ public class TournoiModele {
 		this.vainqueur = Optional.empty();
 		this.generateLogin();
 		this.generateMdp();
-		
-		this.tournoiDAO = new TournoiDAO();
-	}
-	
-	public TournoiModele() {		
-		this.matches= new ArrayList<>();
-		this.participants = new HashMap<>();
-		this.vainqueur = Optional.empty();
-		
-		this.generateLogin();
-		this.generateMdp();
-		
-		this.tournoiDAO = new TournoiDAO();
 	}
 	
 	/**Donne l'id du tournoi
@@ -133,6 +140,11 @@ public class TournoiModele {
 	//Donne la liste des match du tournoi
 	public List<Match> getMatchs(){
 		return this.matches;
+	}
+	
+	@Override
+	public String toString() {
+		return this.idTournoi+": "+this.nomTournoi;
 	}
 	
 	/**Créé un nouveau match pour le tournoi, 
@@ -204,7 +216,7 @@ public class TournoiModele {
 	// a tester
 	public boolean isNonDupe() throws Exception {
 		// El torn "torn" n'est pas damns a base den dons damns cite function
-		for (TournoiModele t : tournoiDAO.getAll()) {
+		for (TournoiModele t : TournoiDAO.getInstance().getAll()) {
 			if (t.getNomTournoi().equals(getNomTournoi())) {
 				return false;
 			}
@@ -225,6 +237,23 @@ public class TournoiModele {
 	
 	public boolean isTournoiNonSuperpose() throws Exception {
 		return true;
+	}
+	
+	public String getDateString(java.util.Date date) {
+		Calendar c = Calendar.getInstance();
+		c.setTime(date);
+		return c.get(Calendar.DAY_OF_MONTH)+"/"+c.get(Calendar.MONTH)+"/"+c.get(Calendar.YEAR);
+	}
+	
+	public boolean isTournoiValide() {
+		try {
+			return this.isDateFinDateDebutDifferenceInfA30Jours() && this.isDateFinSupADateDebut()
+					&& this.isNonDupe() && this.isTournoiNonSuperpose();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 }
