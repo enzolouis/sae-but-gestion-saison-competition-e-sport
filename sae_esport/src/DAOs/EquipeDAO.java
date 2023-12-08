@@ -13,10 +13,19 @@ import classes.Equipe;
 import classes.Joueur;
 import classes.Nationalite;
 
-public class EquipeDAO extends SingletonDAO {
+public class EquipeDAO {
+	
+	private static EquipeDAO instance;
 	
 	public EquipeDAO() {
 		super();
+	}
+	
+	public static synchronized EquipeDAO getInstance() {
+		if (instance == null) {
+			instance = new EquipeDAO();
+		}
+		return instance;
 	}
 	
 	//Renvois l'ensemble des equipes
