@@ -21,7 +21,7 @@ import classes.Arbitre;
 import classes.Nationalite;
 import classes.Notoriete;
 import controleurs.CreationTournoiControleur;
-import style.CustomBorder;
+import style.CustomJButton;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -232,7 +232,7 @@ public class CreationTournoiVue extends JFrame {
 		this.comboBoxArbitre.addItem(new Arbitre(0, "arbitre", "test", Nationalite.FR));
 		this.comboBoxArbitre.addItem(new Arbitre(1, "arbitre", "tentative", Nationalite.FR));
 		
-		this.btnAddArbitre = new JButton("Ajouter");
+		this.btnAddArbitre = new CustomJButton("Ajouter", 5);
 		btnAddArbitre.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 11));
 		this.btnAddArbitre.addActionListener(controleur);
 		panelChoixArbitre.add(this.btnAddArbitre);
@@ -259,12 +259,12 @@ public class CreationTournoiVue extends JFrame {
 		panelBtnsArbitre.setBackground(backgroundColor);
 		panelListeArbitres.add(panelBtnsArbitre, BorderLayout.SOUTH);
 		
-		this.btnViderArbitres = new JButton("Vider");
+		this.btnViderArbitres = new CustomJButton("Vider", 5);
 		btnViderArbitres.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 11));
 		this.btnViderArbitres.addActionListener(controleur);
 		panelBtnsArbitre.add(btnViderArbitres);
 		
-		this.btnSupprimerArbitre = new JButton("Supprimer");
+		this.btnSupprimerArbitre = new CustomJButton("Supprimer", 5);
 		btnSupprimerArbitre.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 11));
 		this.btnSupprimerArbitre.addActionListener(controleur);
 		panelBtnsArbitre.add(this.btnSupprimerArbitre);
@@ -301,11 +301,10 @@ public class CreationTournoiVue extends JFrame {
 		panelQuitter.setBackground(backgroundColor);
 		panelValidation.add(panelQuitter);
 		 
-		JButton btnQuitter = new JButton("Quitter");
+		JButton btnQuitter = new CustomJButton("Quitter", 5);
 		btnQuitter.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 11));
 		btnQuitter.setBackground(new Color(231, 76, 60));
         btnQuitter.setForeground(new Color(255, 255, 255));
-        btnQuitter.setBorder(new CustomBorder(5));
 		btnQuitter.addActionListener(controleur);
 		panelQuitter.add(btnQuitter);
 		
@@ -313,11 +312,10 @@ public class CreationTournoiVue extends JFrame {
 		panelValider.setBackground(backgroundColor);
 		panelValidation.add(panelValider);
 		
-		this.btnValider = new JButton("Valider");
+		this.btnValider = new CustomJButton("Valider", 5);
 		btnValider.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 11));
 		btnValider.setForeground(new Color(255, 255, 255));
         btnValider.setBackground(new Color(46, 204, 113));
-        btnValider.setBorder(new CustomBorder(5));
         btnValider.addActionListener(controleur);
 		panelValider.add(this.btnValider);
 

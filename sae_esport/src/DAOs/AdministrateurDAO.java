@@ -9,10 +9,19 @@ import classes.DBConnection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-public class AdministrateurDAO extends SingletonDAO {
+public class AdministrateurDAO {
+	
+	private static AdministrateurDAO instance;
 	
 	public AdministrateurDAO() {
 		super();
+	}
+	
+	public static synchronized AdministrateurDAO getInstance() {
+		if (instance == null) {
+			instance = new AdministrateurDAO();
+		}
+		return instance;
 	}
 		
 	//Renvoie l'ensemble des administrateurs

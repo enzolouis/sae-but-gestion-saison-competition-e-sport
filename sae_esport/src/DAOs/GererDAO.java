@@ -8,10 +8,19 @@ import java.util.List;
 import classes.DBConnection;
 import classes.Gerer;
 
-public class GererDAO extends SingletonDAO {
+public class GererDAO {
+	
+	private static GererDAO instance;
 	
 	public GererDAO() {
 		super();
+	}
+	
+	public static synchronized GererDAO getInstance() {
+		if (instance == null) {
+			instance = new GererDAO();
+		}
+		return instance;
 	}
 	
 	//Renvois l'ensemble des arbitres

@@ -3,12 +3,9 @@ package controleurs;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-<<<<<<< Updated upstream
-=======
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
->>>>>>> Stashed changes
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -21,11 +18,7 @@ import classes.Arbitre;
 import classes.DBConnection;
 import classes.EtatTournoi;
 import classes.Notoriete;
-<<<<<<< Updated upstream
-import classes.Tournoi;
-=======
 import modeles.CreationTournoiModele;
->>>>>>> Stashed changes
 import modeles.TournoiModele;
 import vues.CreationTournoiVue;
 

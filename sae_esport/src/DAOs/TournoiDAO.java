@@ -13,15 +13,10 @@ import classes.Equipe;
 import modeles.TournoiModele;
 
 public class TournoiDAO extends SingletonDAO {
-	
-<<<<<<< Updated upstream
+
+
 	public TournoiDAO() {
 		super();
-=======
-	private static TournoiDAO instance;
-	
-	private TournoiDAO() {	
->>>>>>> Stashed changes
 	}
 	
 	//Renvois l'ensemble des arbitres
