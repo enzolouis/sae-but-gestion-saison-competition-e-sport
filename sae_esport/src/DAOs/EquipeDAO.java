@@ -10,6 +10,7 @@ import java.io.FileReader;
 
 import classes.DBConnection;
 import classes.Equipe;
+import classes.Joueur;
 import classes.Nationalite;
 
 public class EquipeDAO extends SingletonDAO {
@@ -23,9 +24,17 @@ public class EquipeDAO extends SingletonDAO {
 		String reqSelectEquipe = "SELECT * FROM equipe";
 		PreparedStatement st = DBConnection.getInstance().prepareStatement(reqSelectEquipe);
 		ResultSet rs = st.executeQuery();
+		
 		ArrayList<Equipe> equipes = new ArrayList<Equipe>();
 		while (rs.next()) {
-			equipes.add(new Equipe(rs.getInt(1),rs.getString(2),classes.Nationalite.valueOf(rs.getString(3)),rs.getBoolean(4),rs.getInt(5),rs.getInt(6)));
+			String reqSelectJoueursequipe = "SELECT * FROM joueur WHERE rs.getInt(1) = Joueur.idEquipe";
+			PreparedStatement sta = DBConnection.getInstance().prepareStatement(reqSelectJoueursequipe);
+			ResultSet res = sta.executeQuery();
+			List<Joueur> joueurs = new ArrayList<Joueur>();
+			while (res.next()) {
+				joueurs.add(new Joueur(rs.getInt(1),rs.getString(2)));
+			}
+			equipes.add(new Equipe(rs.getInt(1),rs.getString(2),classes.Nationalite.valueOf(rs.getString(3)),joueurs,rs.getBoolean(4),rs.getInt(5),rs.getInt(6)));
 		}
 		return equipes;
 	}
@@ -44,10 +53,15 @@ public class EquipeDAO extends SingletonDAO {
 		st = DBConnection.getInstance().prepareStatement("INSERT INTO equipe VALUES (?,?,?,?,?,?)");
 		st.setInt(1, id); 
 		st.setString(2, value.getNom()); 
-		st.setObject(3, (Object) value.getNationalite()); 
+		st.setObject(3, (Object) value.getNationalite());
 		st.setBoolean(4, value.getDisposition()); 
 		st.setInt(5, value.getRangSaisonPrecedante()); 
 		st.setInt(6, value.getPointsSaison());
+		List<Joueur> lj = value.getListeJoueurs();
+		JoueurDAO j = new JoueurDAO();
+		for (int i=0;i<lj.size();i++) {
+			j.add(lj.get(i));
+		}
 		
 		int rowcount = st.executeUpdate();
 		return rowcount > 0;
@@ -101,8 +115,12 @@ public class EquipeDAO extends SingletonDAO {
 		st.setBoolean(3, value.getDisposition()); 
 		st.setInt(4, value.getRangSaisonPrecedante()); 
 		st.setInt(5, value.getPointsSaison());
-		
 		st.setInt(6, value.getIdEquipe());
+		List<Joueur> lj = value.getListeJoueurs();
+		JoueurDAO j = new JoueurDAO();
+		for (int i=0;i<lj.size();i++) {
+			j.update(lj.get(i));
+		}
 		
 		int rowcount = st.executeUpdate();
 		return rowcount > 0;
