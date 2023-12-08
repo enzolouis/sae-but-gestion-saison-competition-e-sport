@@ -11,17 +11,17 @@ public class CreateMatch {
 		try {
 			
 			//création de la séquence de l'identifiant arbitre
-			String reqSeqArbitre = "CREATE SEQUENCE seqIdMatch START WITH 1 INCREMENT BY 1";
+			String reqSeqArbitre = "CREATE OR REPLACE SEQUENCE seqIdMatch START WITH 1 INCREMENT BY 1";
 			PreparedStatement stSeqJoueur = DBConnection.getInstance().prepareStatement(reqSeqArbitre);
 			stSeqJoueur.executeUpdate();
 			System.out.println("Séquence arbitre créée");
 			
 			//création de la table arbitre
-			String reqCreateJoueur = "CREATE TABLE match ("
+			String reqCreateJoueur = "CREATE OR REPLACE TABLE match ("
 					+ "idMatch INT PRIMARY KEY NOT NULL,"
 					+ "finale LOGICAL"
 					+ "idEquipe INT NOT NULL"
-					+ "FIREIGN KEY(IdEquipe) REFERENCES Equipe(idEquipe)";
+					+ "FIREIGN KEY(IdEquipe) REFERENCES Equipe(idEquipe))";
 			PreparedStatement stCreateJoueur= DBConnection.getInstance().prepareStatement(reqCreateJoueur);
 			stCreateJoueur.executeUpdate();
 			System.out.println("Table joueur créée");

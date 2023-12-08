@@ -11,16 +11,18 @@ public class CreateGerer {
 		try {
 			
 			//création de la séquence de l'identifiant d'équioe
-			String reqSeqEquipe = "CREATE SEQUENCE seqGerer START WITH 1 INCREMENT BY 1";
+			String reqSeqEquipe = "CREATE OR REPLACE SEQUENCE seqGerer START WITH 1 INCREMENT BY 1";
 			PreparedStatement stSeqEquipe = DBConnection.getInstance().prepareStatement(reqSeqEquipe);
 			stSeqEquipe.executeUpdate();
 			System.out.println("Séquence equipe créée");
-			String reqCreateEquipe = "CREATE TABLE Gérer"
+			
+			//Creation de table gerer
+			String reqCreateEquipe = "CREATE OR REPLACE TABLE Gérer("
 					+ "idTournoi INT,"
 					+ "ID_Personne INT,"
 					+ "PRIMARY KEY(idTournoi, idArbitre),"
 					+ "FOREIGN KEY(idTournoi) REFERENCES Tournoi(idTournoi),"
-					+ "FOREIGN KEY(idArbitre) REFERENCES Arbitre(idArbitre),"
+					+ "FOREIGN KEY(idArbitre) REFERENCES Arbitre(idArbitre))"
 					;
 			PreparedStatement stCreateEquipe = DBConnection.getInstance().prepareStatement(reqCreateEquipe);
 			stCreateEquipe.executeUpdate();

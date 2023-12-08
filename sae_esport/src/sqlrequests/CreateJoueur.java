@@ -11,17 +11,17 @@ public class CreateJoueur {
 
 		try {
 			//création de la séquence de l'identifiant arbitre
-			String reqSeqArbitre = "CREATE SEQUENCE seqIdJoueur START WITH 1 INCREMENT BY 1";
+			String reqSeqArbitre = "CREATE OR REPLACE SEQUENCE seqIdJoueur START WITH 1 INCREMENT BY 1";
 			PreparedStatement stSeqJoueur = DBConnection.getInstance().prepareStatement(reqSeqArbitre);
 			stSeqJoueur.executeUpdate();
 			System.out.println("Séquence arbitre créée");
 			
 			//création de la table arbitre
-			String reqCreateJoueur = "CREATE TABLE joueur ("
+			String reqCreateJoueur = "CREATE OR REPLACE TABLE joueur ("
 					+ "idJoueur INT PRIMARY KEY NOT NULL,"
 					+ "pseudo VARCHAR(50)"
 					+ "idEquipe INT NOT NULL"
-					+ "FOREIGN KEY (idEquipe) REFERENCES Equipe(idEquipe)";
+					+ "FOREIGN KEY (idEquipe) REFERENCES Equipe(idEquipe))";
 			PreparedStatement stCreateJoueur= DBConnection.getInstance().prepareStatement(reqCreateJoueur);
 			stCreateJoueur.executeUpdate();
 			System.out.println("Table joueur créée");
