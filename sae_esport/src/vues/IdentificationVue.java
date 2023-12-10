@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JSeparator;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
@@ -39,7 +40,8 @@ public class IdentificationVue extends CustomJFrame {
 	
     private JPanel contentPane;
     private IdentificationControleur controleur;
-    private CustomJTextField textFieldUtilisateur;
+    
+    private JTextField textFieldUtilisateur;
     private JPasswordField textFieldMotDePasse;
     
     public static void main(String[] args) {
@@ -94,30 +96,57 @@ public class IdentificationVue extends CustomJFrame {
         panelMiddleLogin.add(panelUtilisateur);
         
         CustomJLabel labelNomUtilisateur = new CustomJLabel("Nom d'utilisateur :", 12);
+        labelNomUtilisateur.setHorizontalAlignment(SwingConstants.LEFT);
+        labelNomUtilisateur.setPreferredSize(new Dimension(110, 30));
         panelUtilisateur.add(labelNomUtilisateur);
         
-        this.textFieldUtilisateur = new CustomJTextField(10, new EmptyBorder(10, 10, 10, 10), "Login");
+        JPanel panelTextFieldUtilisateur = new CustomJPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        panelTextFieldUtilisateur.setBackground(new Color(29, 88, 129));
+        panelTextFieldUtilisateur.setBorder(null);
+        panelUtilisateur.add(panelTextFieldUtilisateur);
+        
+        // a fix
+        //textFieldUtilisateur = new CustomJTextField(10, (EmptyBorder) null, "Login");
+        //panelTextFieldUtilisateur.add(textFieldUtilisateur);
+        
+        textFieldUtilisateur = new JTextField();
         textFieldUtilisateur.addActionListener(controleur);
-        panelUtilisateur.add(textFieldUtilisateur);
+        //textFieldUtilisateur.setPlaceholder("login");
+        textFieldUtilisateur.setForeground(Color.WHITE);
+        textFieldUtilisateur.setColumns(13);
+        textFieldUtilisateur.setBorder(null);
+        textFieldUtilisateur.setBackground(new Color(29, 88, 129));
+        panelTextFieldUtilisateur.add(textFieldUtilisateur);
         
         // Mot de passe
-        CustomJPanel panelTextFieldMotDePasse = new CustomJPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        panelMiddleLogin.add(panelTextFieldMotDePasse);
+        CustomJPanel panelMotDePasse = new CustomJPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        panelMiddleLogin.add(panelMotDePasse);
         
         CustomJLabel labelMotDePasse = new CustomJLabel("Mot de passe :", 12);
-        panelTextFieldMotDePasse.add(labelMotDePasse);
+        labelMotDePasse.setHorizontalAlignment(SwingConstants.LEFT);
+        labelMotDePasse.setPreferredSize(new Dimension(110, 30));
+        panelMotDePasse.add(labelMotDePasse);
         
-        this.textFieldMotDePasse = new JPasswordField();
+        
+        // 
+        JPanel panelTextFieldMotDePasse = new CustomJPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        panelTextFieldMotDePasse.setBorder(null);
+        panelTextFieldMotDePasse.setBackground(new Color(29, 88, 129));
+        panelMotDePasse.add(panelTextFieldMotDePasse);
+
+        textFieldMotDePasse = new JPasswordField();
+        textFieldMotDePasse.addActionListener(controleur);
+        textFieldMotDePasse.setForeground(Color.WHITE);
+        textFieldMotDePasse.setColumns(10);
+        textFieldMotDePasse.setBorder(new EmptyBorder(5, 5, 5, 5));
         textFieldMotDePasse.setBackground(new Color(29, 88, 129));
-        textFieldMotDePasse.setSelectedTextColor(new Color(29, 88, 129));
-        textFieldMotDePasse.setPreferredSize(new Dimension(100, 34));
-        this.textFieldMotDePasse.setSize(new Dimension(150, 20));
-        this.textFieldMotDePasse.setMinimumSize(new Dimension(150, 20));
-        this.textFieldMotDePasse.addActionListener(controleur);
         panelTextFieldMotDePasse.add(textFieldMotDePasse);
         
-        CustomJButton btnMotDePasseVisibilite = new CustomJButton("", 25, new EmptyBorder(0, 0, 0, 0));
+        
+        JButton btnMotDePasseVisibilite = new CustomJButton("", 25, (EmptyBorder) null);
         btnMotDePasseVisibilite.addActionListener(controleur);
+        btnMotDePasseVisibilite.setBackground(new Color(29, 88, 129));
+        btnMotDePasseVisibilite.setBorder(null);
         btnMotDePasseVisibilite.setIcon(OEIL_INVISIBLE_ICON);
         panelTextFieldMotDePasse.add(btnMotDePasseVisibilite);
         
