@@ -11,18 +11,12 @@ public class CreateAdmin {
 				
 	
 		try {
-			//Suppression de la table admin
-			String reqSupprAdmin = "DROP TABLE admin";
-			PreparedStatement stSupprAdmin = DBConnection.getInstance().prepareStatement(reqSupprAdmin);
-			stSupprAdmin.executeUpdate();
 			
-	//création de la séquence de l'identifiant admin
+			//création de la séquence de l'identifiant admin
 			String reqSeqAdmin = "CREATE SEQUENCE seqIdAdmin START WITH 1 INCREMENT BY 1";
 			PreparedStatement stSeqAdmin = DBConnection.getInstance().prepareStatement(reqSeqAdmin);
 			stSeqAdmin.executeUpdate();
 			System.out.println("Séquence admin créée");
-			
-			
 			
 			//création de la table admin
 			String reqCreateAdmin = "CREATE TABLE admin("

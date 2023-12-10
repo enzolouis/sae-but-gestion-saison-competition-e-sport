@@ -4,15 +4,25 @@ public class Joueur {
 	
 	private int idJoueur;
 	private String pseudo;
+	private int idEquipe;
 	
 	/**
 	 * Constructeur de la classe Joueur
 	 * 	@param l'ID du Joueur 
 	 *	@param du Pseudo du Joueur
 	 * */
-	public Joueur(int id, String pseudo) {
+	public Joueur(int id, String pseudo, int idEquipe) {
 		this.idJoueur = id;
+		this.idEquipe = idEquipe;
 		this.pseudo = pseudo;
+	}
+
+	public int getIdEquipe() {
+		return idEquipe;
+	}
+
+	public void setIdEquipe(int idEquipe) {
+		this.idEquipe = idEquipe;
 	}
 
 	//Retourne le Pseudo du Joueur

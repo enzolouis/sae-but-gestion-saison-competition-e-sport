@@ -36,12 +36,12 @@ public class EquipeDAO {
 		
 		ArrayList<Equipe> equipes = new ArrayList<Equipe>();
 		while (rs.next()) {
-			String reqSelectJoueursequipe = "SELECT * FROM joueur WHERE rs.getInt(1) = Joueur.idEquipe";
-			PreparedStatement sta = DBConnection.getInstance().prepareStatement(reqSelectJoueursequipe);
-			ResultSet res = sta.executeQuery();
+			PreparedStatement reqSelectJoueursequipe = DBConnection.getInstance().prepareStatement("SELECT * FROM joueur WHERE idEquipe = ?");
+			reqSelectJoueursequipe.setInt(1, rs.getInt(1));
+			ResultSet res = reqSelectJoueursequipe.executeQuery();
 			List<Joueur> joueurs = new ArrayList<Joueur>();
 			while (res.next()) {
-				joueurs.add(new Joueur(rs.getInt(1),rs.getString(2)));
+				joueurs.add(new Joueur(rs.getInt(1),rs.getString(2),rs.getInt(3)));
 			}
 			equipes.add(new Equipe(rs.getInt(1),rs.getString(2),classes.Nationalite.valueOf(rs.getString(3)),joueurs,rs.getBoolean(4),rs.getInt(5),rs.getInt(6)));
 		}
@@ -52,7 +52,7 @@ public class EquipeDAO {
 	//peu importe l'id que vous mettrez à l'equipe, il sera changé
 	public boolean add(Equipe value) throws Exception {
 
-		PreparedStatement st = DBConnection.getInstance().prepareStatement("SELECT NEXT VALUE FOR idEquipe FROM equipe");
+		PreparedStatement st = DBConnection.getInstance().prepareStatement("SELECT NEXT VALUE FOR seqIdEquipe FROM equipe");
 		ResultSet rs = st.executeQuery();
 		int id = 0;
 		if (rs.next()) {
@@ -62,7 +62,7 @@ public class EquipeDAO {
 		st = DBConnection.getInstance().prepareStatement("INSERT INTO equipe VALUES (?,?,?,?,?,?)");
 		st.setInt(1, id); 
 		st.setString(2, value.getNom()); 
-		st.setObject(3, (Object) value.getNationalite());
+		st.setString(3, value.getNationalite().toString());
 		st.setBoolean(4, value.getDisposition()); 
 		st.setInt(5, value.getRangSaisonPrecedante()); 
 		st.setInt(6, value.getPointsSaison());
@@ -99,35 +99,24 @@ public class EquipeDAO {
 				List<Equipe> et = new ArrayList<Equipe>();
 				
 				for (String[] s : data) {
+					
 					Nationalite n = Nationalite.valueOf(s[1]);
 					JoueurDAO jdao = new JoueurDAO();
 					List<Joueur> lj = new ArrayList<Joueur>();
 					List<Joueur> j = JoueurDAO.getInstance().getAll();
-					for (int i=4;i<=8;i++) {
-						Joueur jou = new Joueur(0,s[i]);
-						boolean tj = true;
-						for (int k=0;k<lj.size();k++) {
-							if (jou.getPseudo()==j.get(k).getPseudo()) {
-								tj = false;
-							}
-						}
-						if (tj) {
-							jdao.add(jou);
-						}
-						
-						String reqSelectJoueur = "SELECT * FROM joueur WHERE joueur.pseudo = jou.getPseudo()";
-						PreparedStatement st = DBConnection.getInstance().prepareStatement(reqSelectJoueur);
-						ResultSet rs = st.executeQuery();
-						Joueur jo = new Joueur(rs.getInt(1),rs.getString(2));
-						lj.add(jo);						
-					}
-					Equipe e = new Equipe(0,s[0],n,lj,true,Integer.parseInt(s[2]),Integer.parseInt(s[3]));
-					String reqSelectEquipe = "SELECT * FROM equipe WHERE equipe.nom = e.getnom()";
-					PreparedStatement st = DBConnection.getInstance().prepareStatement(reqSelectEquipe);
+					
+					PreparedStatement st = DBConnection.getInstance().prepareStatement("SELECT NEXT VALUE FOR seqIdEquipe FROM equipe");
 					ResultSet rs = st.executeQuery();
-					Equipe equipe = new Equipe(rs.getInt(1),rs.getString(2),classes.Nationalite.valueOf(rs.getString(3)),lj,rs.getBoolean(4),rs.getInt(5),rs.getInt(6));
-					et.add(equipe);
+					int id = 0;
+					if (rs.next()) {
+						id = rs.getInt(1);
+					}
+					
+					Equipe e = new Equipe(id,s[0],n,lj,true,Integer.parseInt(s[2]),Integer.parseInt(s[3]));
+					et.add(e);
+					
 					boolean t = true;
+					
 					for (Equipe eq : le) {
 						if (e.getNom() == eq.getNom()) {
 							t = false;
@@ -136,6 +125,23 @@ public class EquipeDAO {
 					if (t) {
 						add(e);
 					}
+					
+					for (int i=4;i<=8;i++) {
+						Joueur jou = new Joueur(0,s[i],id);
+						boolean tj = true;
+						for (int k=0;k<j.size();k++) {
+							if (jou.getPseudo()==j.get(k).getPseudo()) {
+								tj = false;
+							}
+						}
+						if (tj) {
+							jdao.add(jou);
+						}
+						
+						lj.add(jou);		
+						
+					}
+					
 				}
 				return et;
 			}

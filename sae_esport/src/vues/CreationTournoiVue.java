@@ -60,12 +60,11 @@ public class CreationTournoiVue extends CustomJFrame {
     }
 	
 	public CreationTournoiVue() {
-		super(new Dimension(780, 550));
-
+		
+		super(new Dimension(500,300));
+		setBounds(new Rectangle(0, 0, 700, 550));
 		
 		this.controleur = new CreationTournoiControleur(this);
-		
-		setMinimumSize(new Dimension(780, 550));
 		Color backgroundColor = new Color(44, 47, 51);
 		Color policeColor = new Color(107,173,221);
 		
@@ -246,9 +245,11 @@ public class CreationTournoiVue extends CustomJFrame {
 		panelListeArbitres.setLayout(new BorderLayout(0, 0));
 		
 		this.listArbitres = new JList<Arbitre>();
+		this.listArbitres.setVisibleRowCount(8);
 		listArbitres.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.listArbitres.setModel(modeleList);
 		JScrollPane sp = new JScrollPane(listArbitres);
+		sp.setPreferredSize(new Dimension(50, 110));
 		sp.setBounds(new Rectangle(0, 0, 50, 20));
 		sp.setSize(new Dimension(100, 20));
 		sp.setMaximumSize(new Dimension(100, 100));
@@ -284,7 +285,7 @@ public class CreationTournoiVue extends CustomJFrame {
 		panelEquipes.add(this.textFieldEquipesFile);
 		this.textFieldEquipesFile.setColumns(10);
 		
-		this.btnImportEquipes = new JButton("Importer");
+		this.btnImportEquipes = new CustomJButton("Importer", 5);
 		btnImportEquipes.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 11));
 		this.btnImportEquipes.addActionListener(controleur);
 		panelEquipes.add(this.btnImportEquipes);

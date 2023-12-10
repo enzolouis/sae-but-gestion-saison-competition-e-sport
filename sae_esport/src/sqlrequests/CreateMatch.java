@@ -9,10 +9,6 @@ public class CreateMatch {
 	public static void main(String[] args) {
 
 		try {
-			//Suppression de la table match
-			String reqSupprMatch = "DROP TABLE match";
-			PreparedStatement stSupprMatch = DBConnection.getInstance().prepareStatement(reqSupprMatch);
-			stSupprMatch.executeUpdate();
 			
 			//création de la séquence de l'identifiant match
 			String reqSeqArbitre = "CREATE SEQUENCE seqIdMatch START WITH 1 INCREMENT BY 1";
@@ -23,9 +19,9 @@ public class CreateMatch {
 			//création de la table match
 			String reqCreateJoueur = "CREATE TABLE match ("
 					+ "idMatch INT PRIMARY KEY NOT NULL,"
-					+ "finale LOGICAL"
-					+ "idEquipe INT NOT NULL"
-					+ "FIREIGN KEY(IdEquipe) REFERENCES Equipe(idEquipe))";
+					+ "finale LOGICAL,"
+					+ "idEquipe INT NOT NULL,"
+					+ "FOREIGN KEY(IdEquipe) REFERENCES Equipe(idEquipe))";
 			PreparedStatement stCreateJoueur= DBConnection.getInstance().prepareStatement(reqCreateJoueur);
 			stCreateJoueur.executeUpdate();
 			System.out.println("Table joueur créée");

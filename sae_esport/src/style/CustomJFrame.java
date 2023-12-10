@@ -49,9 +49,9 @@ public class CustomJFrame extends JFrame {
 		super();
 		
 		this.contentPanel = new CustomJPanel(new EmptyBorder(30, 30, 30, 30));
-    	setMinimumSize(dimension);
+    	//setMinimumSize(dimension);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, dimension.height, dimension.width);
+        //setBounds(100, 100, dimension.height, dimension.width);
         setContentPane(this.contentPanel);
         setResizable(false);
 	}

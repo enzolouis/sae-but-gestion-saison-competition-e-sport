@@ -10,16 +10,17 @@ public class TestJoueur {
 	@Test
 	public void testJoueurBasic() {
 
-		j = new Joueur(1,"dorr");
+		j = new Joueur(1,"dorr",1);
 		
 		assertEquals(j.getPseudo(),"dorr");
 		assertEquals(j.getIdJoueur(),1);
+		assertEquals(j.getIdEquipe(),1);
 	}
 	
 	@Test
 	public void testJoueurChangementPseudo() {
 
-		j = new Joueur(1,"dorr");
+		j = new Joueur(1,"dorr",1);
 		
 		assertEquals(j.getPseudo(),"dorr");
 		
@@ -32,7 +33,7 @@ public class TestJoueur {
 	@Test
 	public void testJoueurChangementID() {
 
-		j = new Joueur(1,"dorr");
+		j = new Joueur(1,"dorr",1);
 		
 		assertEquals(j.getIdJoueur(),1);
 		

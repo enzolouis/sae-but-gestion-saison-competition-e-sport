@@ -63,12 +63,12 @@ public class CreationTournoiControleur implements ActionListener {
 					File file = fc.getSelectedFile();
 					this.vue.textFieldEquipesFile.setText(file.getName());
 					try {
+						System.out.println("in data getter");
 						data = EquipeDAO.getInstance().importEquipes(file);
+						System.out.println(data);
 					} catch (Exception e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-					
 				}
 				break;
 			case ("Quitter"):
@@ -76,7 +76,7 @@ public class CreationTournoiControleur implements ActionListener {
 				break;
 			case ("Valider"):
 				if (this.vue.textFieldNom.getText().equals("") || this.vue.dateChooserDebut.getDate() == null 
-				|| this.vue.dateChooserFin.getDate() == null) {
+				|| this.vue.dateChooserFin.getDate() == null || this.vue.textFieldEquipesFile.getText().equals("")) {
 					JFrame jFrame = new JFrame();
 					JOptionPane.showMessageDialog(jFrame, "Un des champs nécessaires n'a pas été rempli");
 				} else {

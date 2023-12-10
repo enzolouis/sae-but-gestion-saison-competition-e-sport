@@ -26,7 +26,7 @@ public class TestEquipe {
 	public void testEquipeAVECJoueurs() {
 		List<Joueur> equipes = new ArrayList<Joueur>();
 		
-		equipes.add(new Joueur(1,"dorr"));
+		equipes.add(new Joueur(1,"dorr",1));
 		
 		e = new Equipe(1,
 					"rofl",
@@ -102,20 +102,10 @@ public class TestEquipe {
 	
 	@Test
 	public void testEquipeAjoutDeJoueur() {
-		e = new Equipe(1,
-					"rofl",
-					Nationalite.AD,
-					false,
-					14,
-					12);
-		
-		Equipe etest = new Equipe(1,"rofl",Nationalite.AD,false,14,12);
-		
-		etest.AjouterJoueurs(new Joueur(1,"dorr"));
-		
-		e.AjouterJoueurs(new Joueur(1,"dorr"));
-		
-		assertEquals(e.getListeJoueurs(),etest.getListeJoueurs());
+		e = new Equipe(1,"rofl",Nationalite.AD,false,14,12);
+		Joueur j = new Joueur(1,"dorr",1);
+		e.AjouterJoueurs(j);
+		assertEquals(e.getListeJoueurs().get(0),j);
 	}
 
 }

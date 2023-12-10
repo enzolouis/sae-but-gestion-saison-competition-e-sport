@@ -10,10 +10,6 @@ public class CreateTournoi {
 	public static void main(String[] args) {
 				
 		try {
-			//Suppression de la table tournoi
-			String reqSupprTournoi = "DROP TABLE tournoi";
-			PreparedStatement stSupprTournoi = DBConnection.getInstance().prepareStatement(reqSupprTournoi);
-			stSupprTournoi.executeUpdate();
 			
 			//création de la séquence de l'id tournoi				
 			String reqSeqTournoi = "CREATE SEQUENCE seqIdTournoi START WITH 1 INCREMENT BY 1";

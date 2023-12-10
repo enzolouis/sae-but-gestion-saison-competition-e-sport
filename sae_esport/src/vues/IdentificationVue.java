@@ -27,6 +27,7 @@ import style.CustomJLabel;
 import style.CustomJPanel;
 import style.CustomJSeparator;
 import style.CustomJTextField;
+import java.awt.Rectangle;
 
 public class IdentificationVue extends CustomJFrame {
 
@@ -95,9 +96,9 @@ public class IdentificationVue extends CustomJFrame {
         CustomJLabel labelNomUtilisateur = new CustomJLabel("Nom d'utilisateur :", 12);
         panelUtilisateur.add(labelNomUtilisateur);
         
-        CustomJTextField textFieldLoginArbitre = new CustomJTextField(10, new EmptyBorder(10, 10, 10, 10), "Login");
-        textFieldLoginArbitre.addActionListener(controleur);
-        panelUtilisateur.add(textFieldLoginArbitre);
+        this.textFieldUtilisateur = new CustomJTextField(10, new EmptyBorder(10, 10, 10, 10), "Login");
+        textFieldUtilisateur.addActionListener(controleur);
+        panelUtilisateur.add(textFieldUtilisateur);
         
         // Mot de passe
         CustomJPanel panelTextFieldMotDePasse = new CustomJPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
@@ -106,9 +107,14 @@ public class IdentificationVue extends CustomJFrame {
         CustomJLabel labelMotDePasse = new CustomJLabel("Mot de passe :", 12);
         panelTextFieldMotDePasse.add(labelMotDePasse);
         
-        CustomJTextField textFieldPassword = new CustomJTextField(12, new EmptyBorder(10, 10, 10, 10), "Password");
-        textFieldPassword.addActionListener(controleur);
-        panelTextFieldMotDePasse.add(textFieldPassword);
+        this.textFieldMotDePasse = new JPasswordField();
+        textFieldMotDePasse.setBackground(new Color(29, 88, 129));
+        textFieldMotDePasse.setSelectedTextColor(new Color(29, 88, 129));
+        textFieldMotDePasse.setPreferredSize(new Dimension(100, 34));
+        this.textFieldMotDePasse.setSize(new Dimension(150, 20));
+        this.textFieldMotDePasse.setMinimumSize(new Dimension(150, 20));
+        this.textFieldMotDePasse.addActionListener(controleur);
+        panelTextFieldMotDePasse.add(textFieldMotDePasse);
         
         CustomJButton btnMotDePasseVisibilite = new CustomJButton("", 25, new EmptyBorder(0, 0, 0, 0));
         btnMotDePasseVisibilite.addActionListener(controleur);

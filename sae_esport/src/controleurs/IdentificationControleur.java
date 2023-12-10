@@ -58,10 +58,8 @@ public class IdentificationControleur implements ActionListener {
 	
 	public void inverserIconMotDePasseMasque(JButton btn) {
 		this.isMotDePasseCache = !this.isMotDePasseCache;
-		
 		if (isMotDePasseCache) {
 			btn.setIcon(IdentificationVue.OEIL_INVISIBLE_ICON);
-			
 			this.vue.getMotDePasse().setEchoChar('•');
 		} else {
 			btn.setIcon(IdentificationVue.OEIL_VISIBLE_ICON);

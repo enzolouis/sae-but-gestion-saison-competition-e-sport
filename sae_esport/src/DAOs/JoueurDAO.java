@@ -32,7 +32,7 @@ public class JoueurDAO {
 		ResultSet rs = st.executeQuery();
 		ArrayList<Joueur> joueur = new ArrayList<Joueur>();
 		while (rs.next()) {
-			joueur.add(new Joueur(rs.getInt(1),rs.getString(2)));
+			joueur.add(new Joueur(rs.getInt(1),rs.getString(2),rs.getInt(3)));
 		}
 		return joueur;
 	}
@@ -43,7 +43,7 @@ public class JoueurDAO {
 		for (Integer i : id) {
 			ResultSet rs = st.executeQuery("SELECT * FROM joueur WHERE idJoueur="+i);
 			if (rs.next()) {
-				return Optional.of(new Joueur(rs.getInt(1),rs.getString(2)));
+				return Optional.of(new Joueur(rs.getInt(1),rs.getString(2),rs.getInt(3)));
 			}
 		}
 		return Optional.empty();
@@ -53,15 +53,15 @@ public class JoueurDAO {
 		//peu importe l'id que vous mettrez à l'arbitre, il sera changé
 		public boolean add(Joueur value) throws Exception {
 
-			PreparedStatement st = DBConnection.getInstance().prepareStatement("SELECT NEXT VALUE FOR setIDJoueur FROM joueur");
+			PreparedStatement st = DBConnection.getInstance().prepareStatement("SELECT NEXT VALUE FOR seQIDJoueur FROM joueur");
 			ResultSet rs = st.executeQuery();
 			int id = 0;
 			if (rs.next()) {
 				id = rs.getInt(1);
 			}
 			value.setIDJoueur(id);
-			st = DBConnection.getInstance().prepareStatement("INSERT INTO joueur VALUES (?,?)");
-			st.setInt(1, id); st.setString(2, value.getPseudo()); 
+			st = DBConnection.getInstance().prepareStatement("INSERT INTO joueur VALUES (?,?, ?)");
+			st.setInt(1, id); st.setString(2, value.getPseudo()); st.setInt(3, value.getIdEquipe());
 			int rowcount = st.executeUpdate();
 			return rowcount > 0;
 			
