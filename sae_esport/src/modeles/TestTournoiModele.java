@@ -8,6 +8,7 @@ import java.util.HashMap;
 import org.junit.Test;
 
 import DAOs.TournoiDAO;
+import classes.DBConnection;
 import classes.Equipe;
 import classes.EtatTournoi;
 import classes.Nationalite;
@@ -267,9 +268,7 @@ public class TestTournoiModele {
 				Notoriete.REGIONAL,
 				EtatTournoi.FERME);
 		
-		System.out.println("LLLLLAAAAAA : ss");
 		TournoiDAO.getInstance().add(t);
-		System.out.println("LLLLLAAAAAA : ss");
 		
 		TournoiModele t2 = new TournoiModele(
 				2,
@@ -283,9 +282,38 @@ public class TestTournoiModele {
 		assertFalse(t2.isNonDupe());
 		
 		// rollback
-		TournoiDAO.getInstance().delete(t);
+		DBConnection.getInstance().rollback();
 	}
 	
+	@Test
+	public void testTournoiNonSuperpose() throws Exception {
+		
+		t = new TournoiModele(
+				2,
+				"gneg", 
+				"20/11/1888", 
+				"31/11/1888", 
+				Notoriete.REGIONAL,
+				EtatTournoi.FERME);
+		
+		TournoiDAO.getInstance().add(t);
+		
+		
+		TournoiModele t2 = new TournoiModele(
+				2,
+				"gnegne", 
+				"25/12/1888", 
+				"27/12/1888", 
+				Notoriete.REGIONAL,
+				EtatTournoi.FERME);
+		
+		System.out.println("-> "+ t2.isTournoiNonSuperpose());
+		//assertTrue(t2.isTournoiNonSuperpose());
+		
+		DBConnection.getInstance().rollback();
+		// rollback
+		//TournoiDAO.getInstance().delete(t);
+	}
 	
 	
 }
