@@ -9,6 +9,7 @@ import modeles.IdentificationModele;
 import modeles.IdentificationModele.Utilisateur;
 import vues.AccueilAdministrateurVue;
 import vues.AccueilArbitreVue;
+import vues.IdentificationLastVue;
 import vues.IdentificationVue;
 
 public class IdentificationControleur implements ActionListener {
@@ -72,29 +73,20 @@ public class IdentificationControleur implements ActionListener {
 		if (e.getSource() instanceof JButton) {
 			JButton bouton = (JButton) e.getSource();
 			switch (bouton.getText()) {
-			case ("Quitter"):
+			case "Quitter":
 				this.vue.setVisible(false);
 				this.vue.dispose();
 				break;
-			case ("Se connecter"):
+			case "Se connecter":
 				seConnecter();
 				break;
 			default:
+				System.out.println("mdp");
+				this.inverserIconMotDePasseMasque(bouton);
 				break;
 			}
 		}
-		if (e.getSource() instanceof JButton) {
-			JButton bouton = (JButton) e.getSource();
-			if (bouton.getText().equals("Quitter")) {
-				this.vue.setVisible(false);
-				this.vue.dispose();
-			} else if (bouton.getText().equals("Se connecter")) {
-				seConnecter();
-			} else {
-				this.inverserIconMotDePasseMasque(bouton);
-			}
-			
-		} else {
+		else {
 			seConnecter();
 		}
 		
