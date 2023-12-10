@@ -18,7 +18,7 @@ import classes.Match;
 import classes.Notoriete;
 
 public class TournoiModele {
-	
+		
 	//Représente le nom ou le titre du Tournoi
 	private String nomTournoi;
 	
@@ -102,6 +102,14 @@ public class TournoiModele {
 	 * */
 	public void setNomTournoi(String nom) {
 		this.nomTournoi = nom;
+	}
+	
+	public void setDateDebut(String dateD) {
+		this.dateDebut = dateD;
+	}
+	
+	public void setDateFin(String dateF) {
+		this.dateFin = dateF;
 	}
 	
 	//Donne la date de début du tournoi
@@ -236,7 +244,16 @@ public class TournoiModele {
 	}
 	
 	public boolean isTournoiNonSuperpose() throws Exception {
+		for (TournoiModele t : TournoiDAO.getInstance().getAll()) {
+			if ((getDateDebut().compareTo(t.getDateDebut()) >= 0 && getDateDebut().compareTo(t.getDateFin()) < 0) 
+		            && (getDateFin().compareTo(t.getDateDebut()) > 0 && getDateFin().compareTo(t.getDateFin()) <= 0) 
+		           && (t.getDateDebut().compareTo(getDateDebut()) >= 0 && t.getDateDebut().compareTo(getDateFin()) < 0)) {
+		            return false;
+			}
+		}
+		
 		return true;
+		
 	}
 	
 	public String getDateString(java.util.Date date) {
