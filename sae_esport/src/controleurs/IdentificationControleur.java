@@ -9,7 +9,6 @@ import modeles.IdentificationModele;
 import modeles.IdentificationModele.Utilisateur;
 import vues.AccueilAdministrateurVue;
 import vues.AccueilArbitreVue;
-import vues.IdentificationLastVue;
 import vues.IdentificationVue;
 
 public class IdentificationControleur implements ActionListener {
