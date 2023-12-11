@@ -6,20 +6,6 @@ import java.sql.Statement;
 import classes.DBConnection;
 
 public class CreateDual {
-
-	public static void main(String[] args) {
-		Drop();
-		Create();
-		try {
-			Statement stInsertDual = DBConnection.getInstance().createStatement();
-			stInsertDual.executeUpdate("INSERT INTO DUAL VALUES ('c')");
-			System.out.println("✔ Insertion de la valeur unique de DUAL réussie.");
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.out.println("❌ Insertion de la valeur unique de DUAL échouée.");
-		}
-		
-	}
 	
 	public static void Create() {
 		
@@ -32,6 +18,15 @@ public class CreateDual {
         } catch (SQLException e) {
             System.out.println("❌  Création de la table DUAL échouée.");
         }
+        
+        try {
+			Statement stInsertDual = DBConnection.getInstance().createStatement();
+			stInsertDual.executeUpdate("INSERT INTO DUAL VALUES ('c')");
+			System.out.println("✔ Insertion de la valeur unique de DUAL réussie.");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("❌ Insertion de la valeur unique de DUAL échouée.");
+		}
         
 	}
 	
