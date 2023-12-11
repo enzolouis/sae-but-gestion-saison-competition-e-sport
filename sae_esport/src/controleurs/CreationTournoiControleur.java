@@ -70,7 +70,8 @@ public class CreationTournoiControleur implements ActionListener {
 				break;
 			case ("Valider"):
 				if (this.vue.textFieldNom.getText().equals("") || this.vue.dateChooserDebut.getDate() == null 
-				|| this.vue.dateChooserFin.getDate() == null || this.vue.textFieldEquipesFile.getText().equals("")) {
+				|| this.vue.dateChooserFin.getDate() == null || this.vue.textFieldEquipesFile.getText().equals("")
+				|| this.vue.comboBoxArbitre.getItemCount() == 0) {
 					JFrame jFrame = new JFrame();
 					JOptionPane.showMessageDialog(jFrame, "Un des champs nécessaires n'a pas été rempli");
 				} else {
@@ -90,6 +91,9 @@ public class CreationTournoiControleur implements ActionListener {
 					} else {
 						try {
 							TournoiDAO.getInstance().add(t);
+							for (int i = 0; i < this.vue.comboBoxArbitre.getItemCount(); i++) {
+								TournoiDAO.getInstance().addArbitre(t, this.vue.comboBoxArbitre.getItemAt(i));
+							}
 						} catch (Exception e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
