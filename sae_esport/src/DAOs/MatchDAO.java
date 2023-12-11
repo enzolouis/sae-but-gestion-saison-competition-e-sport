@@ -42,7 +42,7 @@ public class MatchDAO {
 		public Optional<Match> getById(Integer... id) throws Exception {
 			Statement st = DBConnection.getInstance().createStatement();
 			for (Integer i : id) {
-				ResultSet rs = st.executeQuery("SELECT * FROM match WHERE idMatch="+i);
+				ResultSet rs = st.executeQuery("SELECT * FROM matchT WHERE idMatch="+i);
 				if (rs.next()) {
 					return Optional.of(new Match(rs.getInt(2),rs.getBoolean(1)));
 				}
@@ -61,7 +61,7 @@ public class MatchDAO {
 					id = rs.getInt(1);
 				}
 				value.setIdMatch(id);
-				st = DBConnection.getInstance().prepareStatement("INSERT INTO joueur VALUES (?,?)");
+				st = DBConnection.getInstance().prepareStatement("INSERT INTO matchT VALUES (?,?)");
 				st.setInt(1, id); 
 				st.setBoolean(2, value.IsItFinale()); 
 				

@@ -21,5 +21,6 @@ public class CustomJScrollPane extends JScrollPane {
         setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         getVerticalScrollBar().setUI(new CustomScrollBarUI());
+        getHorizontalScrollBar().setUI(new CustomScrollBarUI());
 	}
 }
