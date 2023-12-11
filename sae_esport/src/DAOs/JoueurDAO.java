@@ -27,18 +27,20 @@ public class JoueurDAO {
 	
 	//Renvois l'ensemble des joueurs
 	public List<Joueur> getAll() throws Exception {
-		String reqSelectJoueur = "SELECT * FROM joueur";
-		PreparedStatement st = DBConnection.getInstance().prepareStatement(reqSelectJoueur);
+		
+		PreparedStatement st = DBConnection.getInstance().prepareStatement("SELECT * FROM joueur");
 		ResultSet rs = st.executeQuery();
-		ArrayList<Joueur> joueur = new ArrayList<Joueur>();
+		ArrayList<Joueur> joueurs = new ArrayList<Joueur>();
 		while (rs.next()) {
-			joueur.add(new Joueur(rs.getInt(1),rs.getString(2),rs.getInt(3)));
+			joueurs.add(new Joueur(rs.getInt(1),rs.getString(2),rs.getInt(3)));
 		}
-		return joueur;
+		return joueurs;
+		
 	}
 	
 	//retourne un joueur specifique
 	public Optional<Joueur> getById(Integer... id) throws Exception {
+		
 		Statement st = DBConnection.getInstance().createStatement();
 		for (Integer i : id) {
 			ResultSet rs = st.executeQuery("SELECT * FROM joueur WHERE idJoueur="+i);
@@ -46,6 +48,7 @@ public class JoueurDAO {
 				return Optional.of(new Joueur(rs.getInt(1),rs.getString(2),rs.getInt(3)));
 			}
 		}
+		
 		return Optional.empty();
 	}
 	
@@ -53,7 +56,7 @@ public class JoueurDAO {
 		//peu importe l'id que vous mettrez à l'arbitre, il sera changé
 		public boolean add(Joueur value) throws Exception {
 
-			PreparedStatement st = DBConnection.getInstance().prepareStatement("SELECT NEXT VALUE FOR seQIDJoueur FROM joueur");
+			PreparedStatement st = DBConnection.getInstance().prepareStatement("SELECT NEXT VALUE FOR seQIDJoueur FROM DUAL");
 			ResultSet rs = st.executeQuery();
 			int id = 0;
 			if (rs.next()) {
@@ -70,8 +73,8 @@ public class JoueurDAO {
 		//update un arbitre donné
 		public boolean update(Joueur value) throws Exception {
 			
-			PreparedStatement st = DBConnection.getInstance().prepareStatement("UPDATE arbitre SET pseudo=? WHERE idArbitre=?");
-			st.setString(1, value.getPseudo()); st.setInt(2, value.getIdJoueur());
+			PreparedStatement st = DBConnection.getInstance().prepareStatement("UPDATE arbitre SET pseudo=? equipe =? WHERE idArbitre=?");
+			st.setString(1, value.getPseudo()); st.setInt(2, value.getIdEquipe()); st.setInt(3, value.getIdJoueur());
 			int rowcount = st.executeUpdate();
 			return rowcount > 0;
 			
@@ -84,5 +87,6 @@ public class JoueurDAO {
 			st.setInt(1, value.getIdJoueur());
 			int rowcount = st.executeUpdate();
 			return rowcount > 0;
+			
 		}
 }
