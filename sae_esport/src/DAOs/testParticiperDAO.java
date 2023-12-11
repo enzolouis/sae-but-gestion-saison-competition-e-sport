@@ -17,7 +17,7 @@ import classes.Notoriete;
 import classes.Participer;
 import modeles.TournoiModele;
 
-public class testParticiper {
+public class testParticiperDAO {
 	String dirProjetJava = System.getProperty("user.dir");
 
 	Connection connection;
