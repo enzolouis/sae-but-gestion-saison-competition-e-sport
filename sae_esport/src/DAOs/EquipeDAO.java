@@ -107,7 +107,6 @@ public class EquipeDAO {
 					
 					Equipe e = new Equipe(0,s[0],nat,joueursEquipe,true,Integer.parseInt(s[2]),Integer.parseInt(s[3]));
 					equipesTournoi.add(e);
-					int id = e.getIdEquipe();
 					
 					boolean nouvelleEquipe = true;
 					for (Equipe eq : listEquipes) {
@@ -116,7 +115,7 @@ public class EquipeDAO {
 						}
 					}
 					
-					if (nouvelleEquipe) add(e);
+					if (nouvelleEquipe) add(e); int id = e.getIdEquipe();
 					
 					for (int i=4;i<=8;i++) {
 						
