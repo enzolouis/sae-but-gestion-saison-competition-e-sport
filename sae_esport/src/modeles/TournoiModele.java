@@ -256,8 +256,8 @@ public class TournoiModele {
 	public boolean isTournoiNonSuperpose() throws Exception {
 		for (TournoiModele t : TournoiDAO.getInstance().getAll()) {
 			if ((getDateDebut().compareTo(t.getDateDebut()) >= 0 && getDateDebut().compareTo(t.getDateFin()) < 0) 
-		            && (getDateFin().compareTo(t.getDateDebut()) > 0 && getDateFin().compareTo(t.getDateFin()) <= 0) 
-		           && (t.getDateDebut().compareTo(getDateDebut()) >= 0 && t.getDateDebut().compareTo(getDateFin()) < 0)) {
+		            || (getDateFin().compareTo(t.getDateDebut()) > 0 && getDateFin().compareTo(t.getDateFin()) <= 0) 
+		           || (t.getDateDebut().compareTo(getDateDebut()) >= 0 && t.getDateDebut().compareTo(getDateFin()) < 0)) {
 		            return false;
 			}
 		}
@@ -269,7 +269,7 @@ public class TournoiModele {
 	public String getDateString(java.util.Date date) {
 		Calendar c = Calendar.getInstance();
 		c.setTime(date);
-		return c.get(Calendar.DAY_OF_MONTH)+"/"+c.get(Calendar.MONTH)+"/"+c.get(Calendar.YEAR);
+		return c.get(Calendar.DAY_OF_MONTH)+"/"+(Integer.valueOf(c.get(Calendar.MONTH))+1)+"/"+c.get(Calendar.YEAR);
 	}
 	
 	public boolean isTournoiValide() {
@@ -285,7 +285,7 @@ public class TournoiModele {
 	
 	// a tester
 	public boolean isTournoiMinimum4EquipeDisposee() {		
-		return participants.keySet().stream().filter(e -> e.getDispose()).count() >= 4;
+		return participants.keySet().stream().filter(e -> e.getDisposition()).count() >= 4;
 	}
 	
 	public boolean isTournoiMinimum1Arbitre() {
