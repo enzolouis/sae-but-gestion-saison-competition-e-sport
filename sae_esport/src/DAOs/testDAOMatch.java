@@ -97,8 +97,8 @@ public class testDAOMatch {
 			
 			Match match1 = new Match(0, false);
 			Match match2 = new Match(0, false);	
-			matchDAO.add(match1);
-			matchDAO.add(match2);
+			this.matchDAO.add(match1);
+			this.matchDAO.add(match2);
 			List<Match> listMatch = matchDAO.getAll();
 		    int index =  listMatch.size();
 		    assertEquals(listMatch.get(index-2), match1);
