@@ -8,17 +8,17 @@ import java.util.List;
 import classes.DBConnection;
 import classes.Participer;
 
-public class ParticipationDAO {
+public class ParticiperDAO {
 	
-	private static ParticipationDAO instance;
+	private static ParticiperDAO instance;
 	
-	public ParticipationDAO() {
+	public ParticiperDAO() {
 		super();
 	}
 	
-	public static synchronized ParticipationDAO getInstance() {
+	public static synchronized ParticiperDAO getInstance() {
 		if (instance == null) {
-			instance = new ParticipationDAO();
+			instance = new ParticiperDAO();
 		}
 		return instance;
 	}
