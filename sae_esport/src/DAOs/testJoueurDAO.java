@@ -12,13 +12,13 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import classes.Match;
+import classes.Joueur;
 
-public class testDAOMatch {
+public class testJoueurDAO {
 
 	String dirProjetJava = System.getProperty("user.dir");
 	Connection connection;
-	MatchDAO matchDAO;
+	JoueurDAO Joueur;
 	
 	@Before
 	public void beforeTests() {
@@ -27,7 +27,7 @@ public class testDAOMatch {
 			
 			System.setProperty("derby.system.home", dirProjetJava + "/BDDSAEEsport");
 			this.connection = DriverManager.getConnection("jdbc:derby:BDDSAEEsport;create=true");
-			this.matchDAO = new MatchDAO();
+			this.Joueur = new JoueurDAO();
 			connection.setAutoCommit(false);
 			
 		} catch (SQLException e) {
@@ -58,8 +58,8 @@ public class testDAOMatch {
 	    
 		try {
 			
-			Optional<Match> match = matchDAO.getById(-1);
-		    assertEquals(Optional.empty(), match);
+			Optional<Joueur> joueur = Joueur.getById(-1);
+		    assertEquals(Optional.empty(), joueur);
 		    connection.rollback();
 		    
 		} catch(Exception e) {
@@ -76,10 +76,10 @@ public class testDAOMatch {
 	    
 		try {
 			
-			Match match = new Match(0, false);
-			matchDAO.add(match);
-			Optional<Match> optional = matchDAO.getById(match.getIDMatch());
-		    assertEquals(optional.get(), match);
+			Joueur joueur = new Joueur(1,"dorr",1);
+			Joueur.add(joueur);
+			Optional<Joueur> optional = Joueur.getById(joueur.getIdJoueur());
+		    assertEquals(optional.get(), joueur);
 		    connection.rollback();
 		    
 		} catch(Exception e) {
@@ -95,14 +95,14 @@ public class testDAOMatch {
 		    
 		try {
 			
-			Match match1 = new Match(0, false);
-			Match match2 = new Match(0, false);	
-			this.matchDAO.add(match1);
-			this.matchDAO.add(match2);
-			List<Match> listMatch = matchDAO.getAll();
+			Joueur joueur1 = new Joueur(1,"dorr",1);
+			Joueur joueur2 = new Joueur(1,"dorr",1);
+			this.Joueur.add(joueur1);
+			this.Joueur.add(joueur2);
+			List<Joueur> listMatch = Joueur.getAll();
 		    int index =  listMatch.size();
-		    assertEquals(listMatch.get(index-2), match1);
-		    assertEquals(listMatch.get(index-1), match2);
+		    assertEquals(listMatch.get(index-2), joueur1);
+		    assertEquals(listMatch.get(index-1), joueur2);
 		    connection.rollback();
 			    
 		} catch(Exception e) {
@@ -118,9 +118,9 @@ public class testDAOMatch {
 
 	    try{
 
-	    	Match match = new Match(-1, true); 
-	    	matchDAO.add(match);
-	    	assertEquals(match, matchDAO.getById(match.getIDMatch()).get());
+			Joueur joueur1 = new Joueur(1,"dorr",1);
+	    	Joueur.add(joueur1);
+	    	assertEquals(joueur1, Joueur.getById(joueur1.getIdJoueur()).get());
 	    	connection.rollback();
 	        
 	    } catch(Exception e) {
@@ -136,11 +136,11 @@ public class testDAOMatch {
 		
 	    try{
 	    	
-	    	Match match = new Match(-1, true);
-	        matchDAO.add(match);
-	        match.setIdMatch(3);
-	        matchDAO.update(match);
-	        assertEquals(match, matchDAO.getById(match.getIDMatch()).get());
+	    	Joueur joueur1 = new Joueur(1,"dorr",1);
+	        Joueur.add(joueur1);
+	        joueur1.setIDJoueur(3);
+	        Joueur.update(joueur1);
+	        assertEquals(joueur1, Joueur.getById(joueur1.getIdJoueur()).get());
 	        connection.rollback();
 	        
 	    } catch(Exception e) {
@@ -156,12 +156,12 @@ public class testDAOMatch {
 		
 		try{
 			
-			Match match = new Match(-1, true); 
-	        matchDAO.add(match);
-	        int size = matchDAO.getAll().size();
-	        matchDAO.delete(match);           
-	        assertEquals(size -1, matchDAO.getAll().size());
-	        assertEquals(Optional.empty(), matchDAO.getById(match.getIDMatch()));
+			Joueur joueur1 = new Joueur(1,"dorr",1); 
+	        Joueur.add(joueur1);
+	        int size = Joueur.getAll().size();
+	        Joueur.delete(joueur1);           
+	        assertEquals(size -1, Joueur.getAll().size());
+	        assertEquals(Optional.empty(), Joueur.getById(joueur1.getIdJoueur()));
 	        connection.rollback();
 	        
 	    }catch(Exception e){

@@ -3,8 +3,6 @@ package controleurs;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.sql.SQLException;
-import java.util.Date;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -16,11 +14,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import DAOs.TournoiDAO;
 import DAOs.EquipeDAO;
 import classes.Arbitre;
-import classes.DBConnection;
 import classes.EtatTournoi;
 import classes.Notoriete;
 import classes.Equipe;
-import modeles.CreationTournoiModele;
 import modeles.TournoiModele;
 import vues.CreationTournoiVue;
 
@@ -63,9 +59,7 @@ public class CreationTournoiControleur implements ActionListener {
 					File file = fc.getSelectedFile();
 					this.vue.textFieldEquipesFile.setText(file.getName());
 					try {
-						System.out.println("in data getter");
 						data = EquipeDAO.getInstance().importEquipes(file);
-						System.out.println(data);
 					} catch (Exception e1) {
 						e1.printStackTrace();
 					}
@@ -76,7 +70,8 @@ public class CreationTournoiControleur implements ActionListener {
 				break;
 			case ("Valider"):
 				if (this.vue.textFieldNom.getText().equals("") || this.vue.dateChooserDebut.getDate() == null 
-				|| this.vue.dateChooserFin.getDate() == null || this.vue.textFieldEquipesFile.getText().equals("")) {
+				|| this.vue.dateChooserFin.getDate() == null || this.vue.textFieldEquipesFile.getText().equals("")
+				|| this.vue.comboBoxArbitre.getItemCount() == 0) {
 					JFrame jFrame = new JFrame();
 					JOptionPane.showMessageDialog(jFrame, "Un des champs nécessaires n'a pas été rempli");
 				} else {
@@ -96,7 +91,9 @@ public class CreationTournoiControleur implements ActionListener {
 					} else {
 						try {
 							TournoiDAO.getInstance().add(t);
-							System.out.println(TournoiDAO.getInstance().getById(t.getIDTournoi()).get());
+							for (int i = 0; i < this.vue.comboBoxArbitre.getItemCount(); i++) {
+								TournoiDAO.getInstance().addArbitre(t, this.vue.comboBoxArbitre.getItemAt(i));
+							}
 						} catch (Exception e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();

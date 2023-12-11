@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import com.toedter.calendar.JDateChooser;
 
+import DAOs.ArbitreDAO;
 import classes.Arbitre;
 import classes.Nationalite;
 import classes.Notoriete;
@@ -227,8 +228,14 @@ public class CreationTournoiVue extends CustomJFrame {
 		this.comboBoxArbitre = new JComboBox<Arbitre>();
 		comboBoxArbitre.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 11));
 		panelChoixArbitre.add(comboBoxArbitre);
-		this.comboBoxArbitre.addItem(new Arbitre(0, "arbitre", "test", Nationalite.FR));
-		this.comboBoxArbitre.addItem(new Arbitre(1, "arbitre", "tentative", Nationalite.FR));
+		try {
+			for (Arbitre a : ArbitreDAO.getInstance().getAll()) {
+				this.comboBoxArbitre.addItem(a);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		this.btnAddArbitre = new CustomJButton("Ajouter", 5);
 		btnAddArbitre.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 11));

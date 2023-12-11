@@ -1,9 +1,5 @@
 package sqlrequests;
 
-import java.sql.SQLException;
-
-import classes.DBConnection;
-
 public class CreateAll {
 
 	public static void main(String[] args) {
@@ -23,6 +19,8 @@ public class CreateAll {
 		CreateAdmin.Drop();
 		CreateArbitre.Drop();
 		
+		CreateDual.Drop();
+		
 		CreateArbitre.Create();
 		CreateAdmin.Create();
 		CreateEquipe.Create();
@@ -32,6 +30,9 @@ public class CreateAll {
 		CreateTournoi.Create();
 		
 		CreateParticipation.Create();
+		
+		CreateDual.Create();
+		
 	}
 	
 }

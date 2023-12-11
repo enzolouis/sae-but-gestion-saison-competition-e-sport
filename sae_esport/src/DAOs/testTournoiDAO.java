@@ -12,13 +12,16 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import classes.Match;
+import classes.EtatTournoi;
+import classes.Joueur;
+import classes.Notoriete;
+import modeles.TournoiModele;
 
-public class testDAOMatch {
-
+public class testTournoiDAO {
 	String dirProjetJava = System.getProperty("user.dir");
+
 	Connection connection;
-	MatchDAO matchDAO;
+	TournoiDAO tournoi;
 	
 	@Before
 	public void beforeTests() {
@@ -27,7 +30,7 @@ public class testDAOMatch {
 			
 			System.setProperty("derby.system.home", dirProjetJava + "/BDDSAEEsport");
 			this.connection = DriverManager.getConnection("jdbc:derby:BDDSAEEsport;create=true");
-			this.matchDAO = new MatchDAO();
+			this.tournoi = new TournoiDAO();
 			connection.setAutoCommit(false);
 			
 		} catch (SQLException e) {
@@ -58,8 +61,8 @@ public class testDAOMatch {
 	    
 		try {
 			
-			Optional<Match> match = matchDAO.getById(-1);
-		    assertEquals(Optional.empty(), match);
+			Optional<TournoiModele> tournoi = this.tournoi.getById(-1);
+		    assertEquals(Optional.empty(), tournoi);
 		    connection.rollback();
 		    
 		} catch(Exception e) {
@@ -76,10 +79,16 @@ public class testDAOMatch {
 	    
 		try {
 			
-			Match match = new Match(0, false);
-			matchDAO.add(match);
-			Optional<Match> optional = matchDAO.getById(match.getIDMatch());
-		    assertEquals(optional.get(), match);
+			TournoiModele tournoi = new TournoiModele(
+					1,
+					"Champers", 
+					"25/12/1988", 
+					"30/12/1988", 
+					Notoriete.REGIONAL,
+					EtatTournoi.FERME);
+			this.tournoi.add(tournoi);
+			Optional<TournoiModele> optional = this.tournoi.getById(tournoi.getIDTournoi());
+		    assertEquals(optional.get(), tournoi);
 		    connection.rollback();
 		    
 		} catch(Exception e) {
@@ -95,14 +104,27 @@ public class testDAOMatch {
 		    
 		try {
 			
-			Match match1 = new Match(0, false);
-			Match match2 = new Match(0, false);	
-			this.matchDAO.add(match1);
-			this.matchDAO.add(match2);
-			List<Match> listMatch = matchDAO.getAll();
+			TournoiModele tournoi1 = new TournoiModele(
+					1,
+					"Champers", 
+					"25/12/1988", 
+					"30/12/1988", 
+					Notoriete.REGIONAL,
+					EtatTournoi.FERME);
+			TournoiModele tournoi2 = new TournoiModele(
+					1,
+					"Champers", 
+					"25/12/1988", 
+					"30/12/1988", 
+					Notoriete.REGIONAL,
+					EtatTournoi.FERME);
+			
+			this.tournoi.add(tournoi1);
+			this.tournoi.add(tournoi2);
+			List<TournoiModele> listMatch = tournoi.getAll();
 		    int index =  listMatch.size();
-		    assertEquals(listMatch.get(index-2), match1);
-		    assertEquals(listMatch.get(index-1), match2);
+		    assertEquals(listMatch.get(index-2), tournoi1);
+		    assertEquals(listMatch.get(index-1), tournoi2);
 		    connection.rollback();
 			    
 		} catch(Exception e) {
@@ -118,9 +140,16 @@ public class testDAOMatch {
 
 	    try{
 
-	    	Match match = new Match(-1, true); 
-	    	matchDAO.add(match);
-	    	assertEquals(match, matchDAO.getById(match.getIDMatch()).get());
+	    	TournoiModele tournoi1 = new TournoiModele(
+					1,
+					"Champers", 
+					"25/12/1988", 
+					"30/12/1988", 
+					Notoriete.REGIONAL,
+					EtatTournoi.FERME);
+	    	
+	    	this.tournoi.add(tournoi1);
+	    	assertEquals(tournoi1, tournoi.getById(tournoi1.getIDTournoi()).get());
 	    	connection.rollback();
 	        
 	    } catch(Exception e) {
@@ -136,11 +165,18 @@ public class testDAOMatch {
 		
 	    try{
 	    	
-	    	Match match = new Match(-1, true);
-	        matchDAO.add(match);
-	        match.setIdMatch(3);
-	        matchDAO.update(match);
-	        assertEquals(match, matchDAO.getById(match.getIDMatch()).get());
+	    	TournoiModele tournoi1 = new TournoiModele(
+					1,
+					"Champers", 
+					"25/12/1988", 
+					"30/12/1988", 
+					Notoriete.REGIONAL,
+					EtatTournoi.FERME);	
+	    	
+	    	tournoi.add(tournoi1);
+	    	tournoi1.setIDTournoi(3);
+	        tournoi.update(tournoi1);
+	        assertEquals(tournoi1, tournoi.getById(tournoi1.getIDTournoi()).get());
 	        connection.rollback();
 	        
 	    } catch(Exception e) {
@@ -156,12 +192,19 @@ public class testDAOMatch {
 		
 		try{
 			
-			Match match = new Match(-1, true); 
-	        matchDAO.add(match);
-	        int size = matchDAO.getAll().size();
-	        matchDAO.delete(match);           
-	        assertEquals(size -1, matchDAO.getAll().size());
-	        assertEquals(Optional.empty(), matchDAO.getById(match.getIDMatch()));
+			TournoiModele tournoi1 = new TournoiModele(
+					1,
+					"Champers", 
+					"25/12/1988", 
+					"30/12/1988", 
+					Notoriete.REGIONAL,
+					EtatTournoi.FERME);
+	    	
+	        tournoi.add(tournoi1);
+	        int size = tournoi.getAll().size();
+	        tournoi.delete(tournoi1);           
+	        assertEquals(size -1, tournoi.getAll().size());
+	        assertEquals(Optional.empty(), tournoi.getById(tournoi1.getIDTournoi()));
 	        connection.rollback();
 	        
 	    }catch(Exception e){
