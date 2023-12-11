@@ -2,17 +2,15 @@ package DAOs;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import classes.Arbitre;
 import classes.DBConnection;
 import classes.Equipe;
-import classes.EtatTournoi;
-import classes.Notoriete;
 import modeles.TournoiModele;
 
 public class TournoiDAO {
@@ -126,6 +124,24 @@ public class TournoiDAO {
 			return Optional.of(new TournoiModele(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), classes.Notoriete.valueOf(rs.getString(7)), classes.EtatTournoi.valueOf(rs.getString(8))));
 		}
 		return Optional.empty();
+	}
+	
+	public boolean addArbitre(TournoiModele t, Arbitre a) throws Exception {
+
+		PreparedStatement stAddGerer = DBConnection.getInstance().prepareStatement("INSERT INTO gerer VALUES (?,?)");
+		stAddGerer.setInt(1, t.getIDTournoi()); stAddGerer.setInt(2, a.getIdArbitre());
+		int rowcount = stAddGerer.executeUpdate();
+		return rowcount > 0;
+		
+	}
+	
+	public boolean deleteArbitre(TournoiModele t, Arbitre a) throws Exception {
+		
+		PreparedStatement stDelGerer = DBConnection.getInstance().prepareStatement("DELETE FROM gerer WHERE idTournoi=? AND idArbitre = ?");
+		stDelGerer.setInt(1, t.getIDTournoi()); stDelGerer.setInt(2, a.getIdArbitre());
+		int rowcount = stDelGerer.executeUpdate();
+		return rowcount > 0;
+		
 	}
 
 }
