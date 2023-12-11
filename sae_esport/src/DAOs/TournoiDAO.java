@@ -79,7 +79,7 @@ public class TournoiDAO {
 	//ajoute un arbitre à la liste
 	public boolean add(TournoiModele value) throws Exception {
 		
-		PreparedStatement st = DBConnection.getInstance().prepareStatement("SELECT NEXT VALUE FOR seqIdTournoi FROM admin");
+		PreparedStatement st = DBConnection.getInstance().prepareStatement("SELECT NEXT VALUE FOR seqIdTournoi FROM dual");
 		ResultSet rs = st.executeQuery();
 		int id = 0;
 		if (rs.next()) {
