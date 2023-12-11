@@ -2,12 +2,15 @@ package DAOs;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 
+import classes.Arbitre;
 import classes.DBConnection;
 import classes.Equipe;
 import classes.Joueur;
@@ -48,6 +51,18 @@ public class EquipeDAO {
 		}
 		return equipes;
 	}
+	
+	//retourne un Equipe specifique
+		public Optional<Equipe> getById(Integer... id) throws Exception {
+			Statement st = DBConnection.getInstance().createStatement();
+			for (Integer i : id) {
+				ResultSet rs = st.executeQuery("SELECT * FROM arbitre WHERE idEquipe="+i);
+				if (rs.next()) {
+					return Optional.of(new Equipe(rs.getInt(1),rs.getString(2),classes.Nationalite.valueOf(rs.getString(3)),rs.getBoolean(4),rs.getInt(5),rs.getInt(6)));
+				}
+			}
+			return Optional.empty();
+		}
 	
 	//ajoute un equipe à la liste
 	//peu importe l'id que vous mettrez à l'equipe, il sera changé
