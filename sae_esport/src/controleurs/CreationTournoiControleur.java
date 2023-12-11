@@ -1,8 +1,10 @@
 package controleurs;
 
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.text.ParseException;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -99,8 +101,14 @@ public class CreationTournoiControleur implements ActionListener {
 							e1.printStackTrace();
 							}
 						JFrame jFrame = new JFrame();
-						JOptionPane.showMessageDialog(jFrame, "Le tournoi N°"+t.getIDTournoi()+" "+t.getNomTournoi()+" a été ajouté"
-								+ " à la base de données\n Login: "+t.getLogin()+"\n Mot de passe: "+t.getMotDePasse());
+						try {
+							JOptionPane.showMessageDialog(jFrame, "Le tournoi N°"+t.getIDTournoi()+" "+t.getNomTournoi()+" a été ajouté"
+									+ " à la base de données\n Login: "+t.getLogin()+"\n Mot de passe: "+t.getMotDePasse()
+									+"\n Du "+t.getDateDebut()+" au "+t.getDateFin());
+						} catch (Exception e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} 
 						this.vue.dispose();
 					}
 				}

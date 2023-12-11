@@ -1,6 +1,5 @@
 package vues;
 
-import javax.swing.JFrame;
 import java.awt.Color;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -19,7 +18,6 @@ import com.toedter.calendar.JDateChooser;
 
 import DAOs.ArbitreDAO;
 import classes.Arbitre;
-import classes.Nationalite;
 import classes.Notoriete;
 import controleurs.CreationTournoiControleur;
 import style.CustomJButton;

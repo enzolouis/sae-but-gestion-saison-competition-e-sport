@@ -8,6 +8,7 @@ public class CreateAll {
 		
 		// 2 FOREIGN KEY (Equipe, Tournoi)
 		CreateParticipation.Drop();
+		CreateGerer.Drop();
 		
 		// 1 FOREIGN KEY (Equipe pour les 3)
 		CreateTournoi.Drop();
@@ -18,7 +19,6 @@ public class CreateAll {
 		CreateEquipe.Drop();
 		CreateAdmin.Drop();
 		CreateArbitre.Drop();
-		
 		CreateDual.Drop();
 		
 		CreateArbitre.Create();
@@ -30,6 +30,7 @@ public class CreateAll {
 		CreateTournoi.Create();
 		
 		CreateParticipation.Create();
+		CreateGerer.Create();
 		
 		CreateDual.Create();
 		

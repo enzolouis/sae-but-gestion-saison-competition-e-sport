@@ -12,13 +12,15 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import classes.Joueur;
+import classes.Equipe;
+import classes.Nationalite;
+import classes.Equipe;
 
-public class testJoueurDAO {
+public class testEquipeDAO {
 
 	String dirProjetJava = System.getProperty("user.dir");
 	Connection connection;
-	JoueurDAO Joueur;
+	EquipeDAO equipeDAO;
 	
 	@Before
 	public void beforeTests() {
@@ -27,7 +29,7 @@ public class testJoueurDAO {
 			
 			System.setProperty("derby.system.home", dirProjetJava + "/BDDSAEEsport");
 			this.connection = DriverManager.getConnection("jdbc:derby:BDDSAEEsport;create=true");
-			this.Joueur = new JoueurDAO();
+			this.equipeDAO = new EquipeDAO();
 			connection.setAutoCommit(false);
 			
 		} catch (SQLException e) {
@@ -54,12 +56,12 @@ public class testJoueurDAO {
 	@Test
 	/// Olivier RODRIGUEZ
 	/// Test de la récupération d'un Arbitre lorsqu'il n'y a pas cet arbitre
-	public void testGetByIdJoueurNonExistant() {
+	public void testGetByIdMatchNonExistant() {
 	    
 		try {
 			
-			Optional<Joueur> joueur = Joueur.getById(-1);
-		    assertEquals(Optional.empty(), joueur);
+			Optional<Equipe> equipe = equipeDAO.getById(-1);
+		    assertEquals(Optional.empty(), equipe);
 		    connection.rollback();
 		    
 		} catch(Exception e) {
@@ -72,14 +74,14 @@ public class testJoueurDAO {
 	@Test
 	/// Olivier RODRIGUEZ
 	/// Test de la récupération d'un administrateur
-	public void testGetByIdJoueur() {
+	public void testGetByIdMatch() {
 	    
 		try {
 			
-			Joueur joueur = new Joueur(1,"dorr",1);
-			Joueur.add(joueur);
-			Optional<Joueur> optional = Joueur.getById(joueur.getIdJoueur());
-		    assertEquals(optional.get(), joueur);
+			Equipe equipe = new Equipe(1,"rofl",Nationalite.AD,false,14,12);
+			equipeDAO.add(equipe);
+			Optional<Equipe> optional = equipeDAO.getById(equipe.getIdEquipe());
+		    assertEquals(optional.get(), equipe);
 		    connection.rollback();
 		    
 		} catch(Exception e) {
@@ -90,19 +92,20 @@ public class testJoueurDAO {
 	
 	
 	@Test
-	//Test de la récupération des administrateur lorsqu'il y a des administrateurs
-	public void testGetAllJoueur() {
+	//Test de la récupération des Equipes lorsqu'il y a des administrateurs
+	public void testGetAllMatch() {
 		    
 		try {
 			
-			Joueur joueur1 = new Joueur(1,"dorr",1);
-			Joueur joueur2 = new Joueur(1,"dorr",1);
-			this.Joueur.add(joueur1);
-			this.Joueur.add(joueur2);
-			List<Joueur> listMatch = Joueur.getAll();
+			Equipe equipe1 = new Equipe(1,"rofl",Nationalite.AD,false,14,12);
+			Equipe equipe2 = new Equipe(1,"rofl",Nationalite.AD,false,14,12);
+
+			this.equipeDAO.add(equipe1);
+			this.equipeDAO.add(equipe2);
+			List<Equipe> listMatch = equipeDAO.getAll();
 		    int index =  listMatch.size();
-		    assertEquals(listMatch.get(index-2), joueur1);
-		    assertEquals(listMatch.get(index-1), joueur2);
+		    assertEquals(listMatch.get(index-2), equipe1);
+		    assertEquals(listMatch.get(index-1), equipe2);
 		    connection.rollback();
 			    
 		} catch(Exception e) {
@@ -113,14 +116,14 @@ public class testJoueurDAO {
 	
 	@Test
 	/// Olivier RODRIGUEZ
-	/// Test de l'ajout d'administrateur 
-	public void testAddJoueur() throws SQLException {
+	/// Test de l'ajout d'Equipe 
+	public void testAddEquipe() throws SQLException {
 
 	    try{
 
-			Joueur joueur1 = new Joueur(1,"dorr",1);
-	    	Joueur.add(joueur1);
-	    	assertEquals(joueur1, Joueur.getById(joueur1.getIdJoueur()).get());
+			Equipe equipe1 = new Equipe(1,"rofl",Nationalite.AD,false,14,12);
+	    	equipeDAO.add(equipe1);
+	    	assertEquals(equipe1, equipeDAO.getById(equipe1.getIdEquipe()).get());
 	    	connection.rollback();
 	        
 	    } catch(Exception e) {
@@ -132,15 +135,15 @@ public class testJoueurDAO {
 	@Test
 	/// Olivier RODRIGUEZ
 	/// Test de la mise à jour d'un administrateur
-	public void testUpdateJoueur() throws SQLException {
+	public void testUpdateMatch() throws SQLException {
 		
 	    try{
 	    	
-	    	Joueur joueur1 = new Joueur(1,"dorr",1);
-	        Joueur.add(joueur1);
-	        joueur1.setIDJoueur(3);
-	        Joueur.update(joueur1);
-	        assertEquals(joueur1, Joueur.getById(joueur1.getIdJoueur()).get());
+			Equipe equipe1 = new Equipe(1,"rofl",Nationalite.AD,false,14,12);
+	        equipeDAO.add(equipe1);
+	        equipe1.setIdEquipe(3);
+	        equipeDAO.update(equipe1);
+	        assertEquals(equipe1, equipeDAO.getById(equipe1.getIdEquipe()).get());
 	        connection.rollback();
 	        
 	    } catch(Exception e) {
@@ -152,16 +155,16 @@ public class testJoueurDAO {
 	@Test
 	/// Olivier RODRIGUEZ
 	/// Test de supression d'un administrateur
-	public void testDeleteJoueur() throws SQLException { 
+	public void testDeleteMatch() throws SQLException { 
 		
 		try{
 			
-			Joueur joueur1 = new Joueur(1,"dorr",1); 
-	        Joueur.add(joueur1);
-	        int size = Joueur.getAll().size();
-	        Joueur.delete(joueur1);           
-	        assertEquals(size -1, Joueur.getAll().size());
-	        assertEquals(Optional.empty(), Joueur.getById(joueur1.getIdJoueur()));
+			Equipe equipe1 = new Equipe(1,"rofl",Nationalite.AD,false,14,12);
+	        equipeDAO.add(equipe1);
+	        int size = equipeDAO.getAll().size();
+	        equipeDAO.delete(equipe1);           
+	        assertEquals(size -1, equipeDAO.getAll().size());
+	        assertEquals(Optional.empty(), equipeDAO.getById(equipe1.getIdEquipe()));
 	        connection.rollback();
 	        
 	    }catch(Exception e){
@@ -169,5 +172,4 @@ public class testJoueurDAO {
 	    }
 
 	}
-
 }
