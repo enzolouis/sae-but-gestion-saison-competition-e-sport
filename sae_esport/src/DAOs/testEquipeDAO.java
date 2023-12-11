@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
+import java.io.File;
 
 import org.junit.After;
 import org.junit.Before;
@@ -171,5 +172,21 @@ public class testEquipeDAO {
 	        e.printStackTrace();
 	    }
 
+	}
+	
+	@Test
+	///Test d'import des equipes avec un fichier CSV
+	public void testImportEquipe() throws SQLException {
+		
+		try {
+			int size = equipeDAO.getAll().size();
+			File f = new File("src/DAOs/CSVTest.csv");
+			equipeDAO.importEquipes(f);
+			assertEquals(size + 2, equipeDAO.getAll().size());			
+			connection.rollback();
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
