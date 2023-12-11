@@ -13,13 +13,15 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import classes.Match;
 import modeles.SaisieResultatModele;
+import modeles.TournoiModele;
 
 public class SaisieResultatControleur implements ActionListener {
 	private SaisieResultatModele modele;
 	
 	public SaisieResultatControleur() {
-		this.modele = new SaisieResultatModele();
+		this.modele = new SaisieResultatModele(new Match(0,false),new TournoiModele());
 	}
 
 	@Override
