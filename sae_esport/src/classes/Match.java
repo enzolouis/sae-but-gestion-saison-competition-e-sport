@@ -7,6 +7,7 @@ public class Match {
 	private int idMatch;
 	private boolean finale;
 	private List<Equipe> equipes;
+	private int idVainqueur;
 	
 	public Match(int idMatch,boolean finale) {
 		this.finale = finale;
@@ -54,4 +55,11 @@ public class Match {
 		}
 	}
 	
+	public void setVainqueur(int idVainqueur) {
+		this.idVainqueur = idVainqueur;
+	}
+	
+	public int getVainqueur() {
+		return idVainqueur;
+	}
 }
