@@ -54,7 +54,7 @@ public class testJoueurDAO {
 	@Test
 	/// Olivier RODRIGUEZ
 	/// Test de la récupération d'un Arbitre lorsqu'il n'y a pas cet arbitre
-	public void testGetByIdArbitreNonExistant() {
+	public void testGetByIdJoueurNonExistant() {
 	    
 		try {
 			
@@ -72,7 +72,7 @@ public class testJoueurDAO {
 	@Test
 	/// Olivier RODRIGUEZ
 	/// Test de la récupération d'un administrateur
-	public void testGetByIdMatch() {
+	public void testGetByIdJoueur() {
 	    
 		try {
 			
@@ -91,7 +91,7 @@ public class testJoueurDAO {
 	
 	@Test
 	//Test de la récupération des administrateur lorsqu'il y a des administrateurs
-	public void testGetAllMatch() {
+	public void testGetAllJoueur() {
 		    
 		try {
 			
@@ -114,7 +114,7 @@ public class testJoueurDAO {
 	@Test
 	/// Olivier RODRIGUEZ
 	/// Test de l'ajout d'administrateur 
-	public void testAddMatch() throws SQLException {
+	public void testAddJoueur() throws SQLException {
 
 	    try{
 
@@ -132,7 +132,7 @@ public class testJoueurDAO {
 	@Test
 	/// Olivier RODRIGUEZ
 	/// Test de la mise à jour d'un administrateur
-	public void testUpdateMatch() throws SQLException {
+	public void testUpdateJoueur() throws SQLException {
 		
 	    try{
 	    	
@@ -152,7 +152,7 @@ public class testJoueurDAO {
 	@Test
 	/// Olivier RODRIGUEZ
 	/// Test de supression d'un administrateur
-	public void testDeleteMatch() throws SQLException { 
+	public void testDeleteJoueur() throws SQLException { 
 		
 		try{
 			

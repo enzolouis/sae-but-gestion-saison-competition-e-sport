@@ -2,26 +2,53 @@ package DAOs;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import classes.DBConnection;
+import classes.Match;
 import classes.Participer;
 
-public class ParticipationDAO {
+public class ParticiperDAO {
 	
-	private static ParticipationDAO instance;
+	private static ParticiperDAO instance;
 	
-	public ParticipationDAO() {
+	public ParticiperDAO() {
 		super();
 	}
 	
-	public static synchronized ParticipationDAO getInstance() {
+	public static synchronized ParticiperDAO getInstance() {
 		if (instance == null) {
-			instance = new ParticipationDAO();
+			instance = new ParticiperDAO();
 		}
 		return instance;
 	}
+	
+	//retourne une participation en fonction des tournois, et les resultats correspondant specifique
+			public Optional<Participer> getByIdTournoi(Integer... id) throws Exception {
+				Statement st = DBConnection.getInstance().createStatement();
+				for (Integer i : id) {
+					ResultSet rs = st.executeQuery("SELECT p.idEquipe, p.idTournoi, p.resultat FROM participer p WHERE idTournoi="+i);
+					if (rs.next()) {					//	
+						return Optional.of(new Participer(rs.getInt(1),rs.getInt(2),rs.getInt(3)));
+					}
+				}
+				return Optional.empty();
+			}
+			
+			//retourne une participation en fonction des equipes, et les resultats correspondant specifique
+			public Optional<Participer> getByIdEquipe(Integer... id) throws Exception {
+				Statement st = DBConnection.getInstance().createStatement();
+				for (Integer i : id) {
+					ResultSet rs = st.executeQuery("SELECT p.idEquipe, p.idTournoi, p.resultat FROM participer p WHERE idEquipe="+i);
+					if (rs.next()) {					//	
+						return Optional.of(new Participer(rs.getInt(1),rs.getInt(2),rs.getInt(3)));
+					}
+				}
+				return Optional.empty();
+			}
 	
 	//Renvois l'ensemble des arbitres
 	public List<Participer> getAll() throws Exception {

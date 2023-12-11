@@ -54,7 +54,7 @@ public class testDAOMatch {
 	@Test
 	/// Olivier RODRIGUEZ
 	/// Test de la récupération d'un Arbitre lorsqu'il n'y a pas cet arbitre
-	public void testGetByIdArbitreNonExistant() {
+	public void testGetByIdMatchNonExistant() {
 	    
 		try {
 			
