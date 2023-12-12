@@ -3,6 +3,9 @@ package modeles;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -263,7 +266,6 @@ public class TournoiModele {
 		}
 		
 		return true;
-		
 	}
 	
 	public String getDateString(java.util.Date date) {
@@ -293,43 +295,11 @@ public class TournoiModele {
 	}
 	
 	public boolean isDateCouranteDansCreneauTournoi() throws ParseException {
-		Calendar calendar = Calendar.getInstance();
-		java.util.Date currentDate = calendar.getTime();
-		
-		Calendar calendar2 = Calendar.getInstance();
-		//System.out.println(calendar2.get(Calendar.DAY_OF_MONTH));
-		//System.out.println(calendar2.get(Calendar.MONTH));
-		//System.out.println(calendar2.get(Calendar.YEAR));
-		
-		System.out.println(currentDate);
-		System.out.println(getDateDebut());
-		System.out.println(getDateFin());
-		
-		System.out.println(currentDate.compareTo(getDateDebut()));
-		System.out.println(getDateFin().compareTo(currentDate));
-		
-		return currentDate.compareTo(getDateDebut()) != -1 && getDateFin().compareTo(currentDate) != -1;
-	}
-	
-	public static void main(String[] args) throws ParseException {
-		TournoiModele t = new TournoiModele();
-		t.setDateDebut("20/12/2020");
-		t.setDateFin("25/12/2023");
-		t.ajouterEquipe(new Equipe(1, "e1", Nationalite.FR, true, 1000, 100));
-		t.ajouterEquipe(new Equipe(2, "e2", Nationalite.FR, true, 1000, 100));
-		t.ajouterEquipe(new Equipe(3, "e3", Nationalite.FR, true, 1000, 100));
-		t.ajouterEquipe(new Equipe(4, "e4", Nationalite.FR, true, 1000, 100));
-		t.ajouterEquipe(new Equipe(5, "e5", Nationalite.FR, false, 1000, 100));
-		
-		System.out.println(t.isTournoiMinimum4EquipeDisposee());
-		
-		System.out.println(t.isTournoiMinimum1Arbitre());
-		t.ajouterArbitre(new Arbitre(1, "Alfred", "Moukhamedov", Nationalite.RU));
-		System.out.println(t.isTournoiMinimum1Arbitre());
-		t.ajouterArbitre(new Arbitre(2, "En", "Moukhamedov", Nationalite.RU));
-		System.out.println(t.isTournoiMinimum1Arbitre());
-		
-		System.out.println(t.isDateCouranteDansCreneauTournoi());
+		LocalDate currentDate = LocalDate.now();
+
+        Date sqlDate = Date.valueOf(LocalDateTime.of(currentDate, LocalTime.MIDNIGHT).toLocalDate());
+        
+		return sqlDate.compareTo(getDateDebut()) != -1 && getDateFin().compareTo(sqlDate) != -1;
 	}
 	
 	public boolean isTournoiOuvrable() {
