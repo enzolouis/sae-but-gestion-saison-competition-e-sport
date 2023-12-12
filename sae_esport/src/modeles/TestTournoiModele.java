@@ -2,12 +2,21 @@ package modeles;
 
 import static org.junit.Assert.*;
 
+import java.sql.Date;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.Calendar;
 import java.util.HashMap;
 
 import org.junit.Test;
 
 import DAOs.TournoiDAO;
+import classes.Arbitre;
 import classes.DBConnection;
 import classes.Equipe;
 import classes.EtatTournoi;
@@ -314,6 +323,58 @@ public class TestTournoiModele {
 		// rollback
 		//TournoiDAO.getInstance().delete(t);
 	}
+	
+	@Test
+	public void testTournoiMinimum4EquipeDisposeeAvecAuMoins4EquipesDisposees() {
+		TournoiModele t = new TournoiModele();
+		t.ajouterEquipe(new Equipe(1, "e1", Nationalite.FR, true, 1000, 100));
+		t.ajouterEquipe(new Equipe(2, "e2", Nationalite.FR, true, 1000, 100));
+		t.ajouterEquipe(new Equipe(3, "e3", Nationalite.FR, true, 1000, 100));
+		t.ajouterEquipe(new Equipe(4, "e4", Nationalite.FR, true, 1000, 100));
+		
+		TournoiModele t2 = new TournoiModele();
+		t2.ajouterEquipe(new Equipe(1, "e1", Nationalite.FR, true, 1000, 100));
+		t2.ajouterEquipe(new Equipe(2, "e2", Nationalite.FR, true, 1000, 100));
+		t2.ajouterEquipe(new Equipe(3, "e3", Nationalite.FR, true, 1000, 100));
+		t2.ajouterEquipe(new Equipe(4, "e4", Nationalite.FR, true, 1000, 100));
+		t2.ajouterEquipe(new Equipe(4, "e4", Nationalite.FR, true, 1000, 100));
+		
+		assertTrue(t.isTournoiMinimum4EquipeDisposee());
+		assertTrue(t2.isTournoiMinimum4EquipeDisposee());
+	}
+	
+	@Test
+	public void testTournoiMinimum4EquipeDisposeeAvecMoinsDe4EquipesDisposees() {
+		TournoiModele t = new TournoiModele();
+		t.ajouterEquipe(new Equipe(1, "e1", Nationalite.FR, true, 1000, 100));
+		t.ajouterEquipe(new Equipe(2, "e2", Nationalite.FR, true, 1000, 100));
+		t.ajouterEquipe(new Equipe(3, "e3", Nationalite.FR, true, 1000, 100));
+		t.ajouterEquipe(new Equipe(4, "e4", Nationalite.FR, false, 1000, 100));
+		
+		assertFalse(t.isTournoiMinimum4EquipeDisposee());
+	}
+	
+	@Test
+	public void testTournoiMinimum1ArbitreAvecAuMoins1Arbitre() {
+		TournoiModele t = new TournoiModele();
+		t.ajouterArbitre(new Arbitre(1, "Alfred", "Moukhamedov", Nationalite.RU));		
+		
+		TournoiModele t2 = new TournoiModele();
+		t2.ajouterArbitre(new Arbitre(1, "Alfred", "Moukhamedov", Nationalite.RU));
+		t2.ajouterArbitre(new Arbitre(2, "Dimitri", "Moukhamedov", Nationalite.RU));
+
+		assertTrue(t.isTournoiMinimum1Arbitre());
+		assertTrue(t2.isTournoiMinimum1Arbitre());
+	}
+	
+	@Test
+	public void testTournoiMinimum1ArbitreAvecMoinsDe1Arbitre() {
+		TournoiModele t = new TournoiModele();
+
+		assertFalse(t.isTournoiMinimum1Arbitre());
+	}
+	
+	
 	
 	
 }
