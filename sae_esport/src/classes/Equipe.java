@@ -134,6 +134,18 @@ public class Equipe {
 	public void setIdEquipe(int id) {
 		this.idEquipe = id;
 	}
+	
+	//Retourne l'ID de l'Equipe
+	public boolean getDispose() {
+		return this.dispose;
+	}
+
+	/**Change l'ID de l'Equipe
+	 * 	@param valeur d'ID avec lequel remplacer
+	 * */
+	public void setDispose(boolean d) {
+		this.dispose = d;
+	}
 
 	@Override
 	public int hashCode() {
