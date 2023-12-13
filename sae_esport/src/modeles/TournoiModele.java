@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
 
+import DAOs.ParticiperDAO;
 import DAOs.TournoiDAO;
 import classes.Arbitre;
 import classes.Equipe;
@@ -21,6 +22,7 @@ import classes.EtatTournoi;
 import classes.Match;
 import classes.Nationalite;
 import classes.Notoriete;
+import classes.Participer;
 
 public class TournoiModele {
 		
@@ -38,6 +40,7 @@ public class TournoiModele {
 	private int idTournoi;
 	private List<Match> matches;
 	private Map<Equipe, Integer> participants;
+	private List<Equipe> participantsIndisposees;
 	private Optional<Equipe> vainqueur;
 	private List<Arbitre> arbitres;
 
@@ -59,6 +62,7 @@ public class TournoiModele {
 		this.etat = etat;
 		this.matches= new ArrayList<>();
 		this.participants = new HashMap<>();
+		this.participantsIndisposees = new ArrayList<>();
 		this.vainqueur = Optional.empty();
 		this.arbitres = new ArrayList<>();
 		this.mdp = mdp;
@@ -68,6 +72,7 @@ public class TournoiModele {
 	public TournoiModele() {		
 		this.matches= new ArrayList<>();
 		this.participants = new HashMap<>();
+		this.participantsIndisposees = new ArrayList<>();
 		this.vainqueur = Optional.empty();
 		this.arbitres = new ArrayList<>();
 	}
@@ -81,6 +86,7 @@ public class TournoiModele {
 		this.etat = etat;
 		this.matches= new ArrayList<>();
 		this.participants = new HashMap<>();
+		this.participantsIndisposees = new ArrayList<>();
 		this.vainqueur = Optional.empty();
 		this.arbitres = new ArrayList<>();
 		this.generateLogin();
@@ -179,7 +185,17 @@ public class TournoiModele {
 	
 	//Ajoute une Equipe donné dans la liste des participans
 	public void ajouterEquipe(Equipe equipe) {
-		this.participants.put(equipe, 0);
+		if (equipe.getDispose()) {
+			this.participants.put(equipe, 0);
+		} else {
+			this.participantsIndisposees.add(equipe);
+		}
+		
+	}
+	
+	public void supprimerEquipe(Equipe equipe) {
+		this.participants.remove(equipe);
+		this.participantsIndisposees.add(equipe);
 	}
 	
 	public void ajouterArbitre(Arbitre arbitre) {
@@ -210,7 +226,7 @@ public class TournoiModele {
 	//l'ensemble est basé sur le NomTournoi + idTournoi, en UpperCase + 3 lettres générés au hasard
 	private void generateLogin() {
 		this.login = this.nomTournoi.substring(0, 2).toUpperCase() + this.idTournoi + this.generateLetter()+ this.generateLetter() + this.generateLetter();
-		System.out.println(this.login);
+		//System.out.println(this.login);
 	}
 	
 	//Génère un Mot de Passe pour le Tournoi
@@ -219,7 +235,7 @@ public class TournoiModele {
 		for (int i = 0; i<12; i++) {
 			this.mdp += this.generateLetter();
 		}
-		System.out.println(this.mdp);
+		//System.out.println(this.mdp);
 	}
 	
 	//Renvois une lettre au hasard 
@@ -234,7 +250,6 @@ public class TournoiModele {
 	}
 	
 	
-	// a tester
 	public boolean isNonDupe() throws Exception {
 		// El torn "torn" n'est pas damns a base den dons damns cite function
 		for (TournoiModele t : TournoiDAO.getInstance().getAll()) {
@@ -247,7 +262,8 @@ public class TournoiModele {
 	}
 	
 	public boolean isDateFinSupADateDebut() throws ParseException {
-		return getDateFin().compareTo(getDateDebut()) == 1;
+		// System.out.println(getDateFin().compareTo(getDateDebut()) == 1);
+		return getDateFin().after(getDateDebut());
 	}
 	
 	public boolean isDateFinDateDebutDifferenceInfA30Jours() throws ParseException {
@@ -258,6 +274,18 @@ public class TournoiModele {
 	
 	public boolean isTournoiNonSuperpose() throws Exception {
 		for (TournoiModele t : TournoiDAO.getInstance().getAll()) {
+			// si (la date de debut est plus grande ou egal à la date de début d'un autre tournoi 
+			//     ET la date début est plus petite que la date de fin de l'autre tournoi) (*** ou egal ??)
+			// OU (la date de fin est plus grande que la date de debut d'un autre tournoi
+			//    (ET la date de fin eest plus petit ou egal a la date de fin d'un autre tournoi)
+			// OU (la date de debut d'un tournoi est plus grande ou egal a la date de debut
+			//    (ET la date de debut d'un tournoi est plus petit que la date de fin
+			
+			// before et after existe...
+			
+			System.out.println((getDateDebut().compareTo(t.getDateDebut()) < 0 && getDateFin().compareTo(getDateDebut()) >= 0));
+			System.out.println((t.getDateDebut().compareTo(getDateDebut()) >= 0 && t.getDateDebut().compareTo(getDateFin()) < 0));
+			
 			if ((getDateDebut().compareTo(t.getDateDebut()) >= 0 && getDateDebut().compareTo(t.getDateFin()) < 0) 
 		            || (getDateFin().compareTo(t.getDateDebut()) > 0 && getDateFin().compareTo(t.getDateFin()) <= 0) 
 		           || (t.getDateDebut().compareTo(getDateDebut()) >= 0 && t.getDateDebut().compareTo(getDateFin()) < 0)) {
@@ -285,7 +313,6 @@ public class TournoiModele {
 		return false;
 	}
 	
-	// a tester
 	public boolean isTournoiMinimum4EquipeDisposee() {		
 		return participants.keySet().stream().filter(e -> e.getDisposition()).count() >= 4;
 	}
@@ -302,8 +329,20 @@ public class TournoiModele {
 		return sqlDate.compareTo(getDateDebut()) != -1 && getDateFin().compareTo(sqlDate) != -1;
 	}
 	
-	public boolean isTournoiOuvrable() {
+	public static boolean isAucunTournoiOuvert() throws Exception {
+		for (TournoiModele t : TournoiDAO.getInstance().getAll()) {
+			if (t.getEtatTournoi() == EtatTournoi.OUVERT) {
+				return false;
+			}
+		}
+		
 		return true;
+	}
+	
+	public void supprimerEquipeIndisposees() throws Exception {
+		for (Equipe e : this.participantsIndisposees) {
+			ParticiperDAO.getInstance().delete(new Participer(e.getIdEquipe(), this.getIDTournoi(), 0)); // 0 : arbitraire
+		}
 	}
 
 }
