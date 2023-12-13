@@ -1,6 +1,5 @@
 package controleurs;
 
-import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -82,9 +81,6 @@ public class CreationTournoiControleur implements ActionListener {
 					String dateFin =   this.modele.getDateString(this.vue.dateChooserFin.getDate());
 					Notoriete not = (Notoriete) this.vue.comboBoxNotoriete.getSelectedItem();
 					TournoiModele t = new TournoiModele(0, nom, dateDebut, dateFin, not, EtatTournoi.FERME);
-					for (Equipe eq : data) {
-						t.ajouterEquipe(eq);
-					}
 					if (!t.isTournoiValide()) {
 						JFrame jFrame = new JFrame();
 						JOptionPane.showMessageDialog(jFrame, "Le tournoi est invalide, vérifiez que les dates"
@@ -95,6 +91,11 @@ public class CreationTournoiControleur implements ActionListener {
 							TournoiDAO.getInstance().add(t);
 							for (int i = 0; i < this.vue.comboBoxArbitre.getItemCount(); i++) {
 								TournoiDAO.getInstance().addArbitre(t, this.vue.comboBoxArbitre.getItemAt(i));
+								t.ajouterArbitre(this.vue.comboBoxArbitre.getItemAt(i));
+							}
+							for (Equipe eq : data) {
+								TournoiDAO.getInstance().addEquipe(t, eq);
+								t.ajouterEquipe(eq, 0);
 							}
 						} catch (Exception e1) {
 							// TODO Auto-generated catch block
@@ -120,6 +121,27 @@ public class CreationTournoiControleur implements ActionListener {
 	public boolean checkAllFields() {
 		return this.vue.textFieldEquipesFile.getText().isEmpty() ||
 				this.vue.textFieldNom.getText().isEmpty();
+	}
+	
+	public String infosTournoi(TournoiModele t) {
+		String infos = t.getIDTournoi()+": "+t.getNomTournoi()+"("+t.getNotoriete()+")\n";
+		try {
+			infos += "Du "+t.getDateDebut()+" au "+t.getDateFin()+"\n";
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		infos+="Liste des arbitres:\n";
+		for (Arbitre a : t.getArbitres()) {
+			infos+=a.toString();
+			infos+="\n";
+		}
+		infos+="Liste des équipes:\n";
+		for (Equipe e : t.getEquipes().keySet()) {
+			infos+=e.toString();
+			infos+="\n";
+		}
+		return infos;
 	}
 	
 }
