@@ -553,7 +553,7 @@ public class TestTournoiModele {
 	}
 	
 	@Test
-	public void supprimerEquipeIndisposees() throws Exception {
+	public void testSupprimerEquipeIndisposees() throws Exception {
 		TournoiModele t = new TournoiModele(
 				2,
 				"testAucunToOuvertMin1ToOu", 
@@ -571,6 +571,84 @@ public class TestTournoiModele {
 		List<String> lstNomEquipe = t.getParticipants().keySet().stream().map(e -> e.getNom()).collect(Collectors.toList());
 		
 		assertEquals(lstNomEquipe, Arrays.asList("e1", "e2"));
+	}
+	
+	@Test
+	public void testTournoiOuvrable() throws ParseException, Exception {
+		Date currentDate = Date.valueOf(LocalDateTime.of(LocalDate.now(), LocalTime.MIDNIGHT).toLocalDate());
+        
+        Calendar cCurrentDate = Calendar.getInstance();
+        cCurrentDate.setTime(currentDate);
+        
+        // cas : on ouvre le tournoi pile au milieu du créneau
+        Calendar cDebut = (Calendar) cCurrentDate.clone();
+        cDebut.add(Calendar.DAY_OF_MONTH, -5); // arbitraire
+        
+        Calendar cFin = (Calendar) cCurrentDate.clone();
+        cFin.add(Calendar.DAY_OF_MONTH, 5);
+        
+		TournoiModele t = new TournoiModele(
+				10,
+				"testAucunToOuvertMin1ToOu", 
+				new SimpleDateFormat("dd/MM/yyyy").format(cDebut.getTime()), 
+				new SimpleDateFormat("dd/MM/yyyy").format(cFin.getTime()), 
+				Notoriete.REGIONAL,
+				EtatTournoi.FERME);
+		
+		
+		// configuration parfaite d'un tournoi pouvant être lancé
+		// (>= 4 equipe, >= 1 equipe, date dans creneau, aucun tournoi deja ouvert)
+		t.ajouterEquipe(new Equipe(1, "e1", Nationalite.FR, true, 1000, 100));
+		t.ajouterEquipe(new Equipe(2, "e2", Nationalite.FR, true, 1000, 100));
+		t.ajouterEquipe(new Equipe(3, "e3", Nationalite.FR, true, 1000, 100));
+		t.ajouterEquipe(new Equipe(4, "e4", Nationalite.FR, true, 1000, 100));
+		
+		t.ajouterArbitre(new Arbitre(1, "Albert", "Camus", Nationalite.FR));
+		
+		assertTrue(t.isTournoiOuvrable());
+	}
+	
+	@Test
+	public void testOuvrirTournoi() throws ParseException, Exception {
+		Date currentDate = Date.valueOf(LocalDateTime.of(LocalDate.now(), LocalTime.MIDNIGHT).toLocalDate());
+        
+        Calendar cCurrentDate = Calendar.getInstance();
+        cCurrentDate.setTime(currentDate);
+        
+        // cas : on ouvre le tournoi pile au milieu du créneau
+        Calendar cDebut = (Calendar) cCurrentDate.clone();
+        cDebut.add(Calendar.DAY_OF_MONTH, -5); // arbitraire
+        
+        Calendar cFin = (Calendar) cCurrentDate.clone();
+        cFin.add(Calendar.DAY_OF_MONTH, 5);
+        
+		TournoiModele t = new TournoiModele(
+				10,
+				"testAucunToOuvertMin1ToOu", 
+				new SimpleDateFormat("dd/MM/yyyy").format(cDebut.getTime()), 
+				new SimpleDateFormat("dd/MM/yyyy").format(cFin.getTime()), 
+				Notoriete.REGIONAL,
+				EtatTournoi.FERME);
+		
+		
+		// configuration parfaite d'un tournoi pouvant être lancé
+		// (>= 4 equipe, >= 1 equipe, date dans creneau, aucun tournoi deja ouvert)
+		t.ajouterEquipe(new Equipe(1, "e1", Nationalite.FR, true, 1000, 100));
+		t.ajouterEquipe(new Equipe(2, "e2", Nationalite.FR, true, 1000, 100));
+		t.ajouterEquipe(new Equipe(3, "e3", Nationalite.FR, true, 1000, 100));
+		t.ajouterEquipe(new Equipe(4, "e4", Nationalite.FR, true, 1000, 100));
+		
+		t.ajouterArbitre(new Arbitre(1, "Albert", "Camus", Nationalite.FR));
+		
+		//assertTrue(t.isTournoiOuvrable());
+		TournoiDAO.getInstance().add(t);
+		
+		t.ouvrirTournoi();
+		assertEquals(t.getEtatTournoi(), EtatTournoi.OUVERT);
+		
+		System.out.println(TournoiDAO.getInstance().getById(t.getIDTournoi()).get().getEtatTournoi());
+		
+		DBConnection.getInstance().rollback();
 	}
 	
 }
