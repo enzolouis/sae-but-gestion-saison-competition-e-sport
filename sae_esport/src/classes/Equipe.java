@@ -164,4 +164,19 @@ public class Equipe {
 		return Objects.equals(joueurs, other.joueurs) && Objects.equals(nom, other.nom);
 	}
 
+	@Override
+	public String toString() {
+		String s = "Equipe N°"+idEquipe+": "+nom+" ("+nationalite+")\n";
+		for (Joueur j : this.joueurs) {
+			s += "Joueur ["+j.getIdJoueur()+"]: "+j.getPseudo()+"\n";
+		}
+		s += "Rang précédent: "+rangSaisonPrecedante+" Points de la saison:"+pointsSaison+"\n";
+		if (dispose) {
+			s+= "Cette équipe est disposée";
+		} else {
+			s+= "Cette équipe est actuellement indisposée";
+		}
+		return s;
+	}
+
 }
