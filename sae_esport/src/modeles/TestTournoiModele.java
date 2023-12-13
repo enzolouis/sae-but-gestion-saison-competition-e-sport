@@ -198,7 +198,7 @@ public class TestTournoiModele {
 				Notoriete.REGIONAL,
 				EtatTournoi.FERME);
 
-	t.ajouterEquipe(new Equipe(1,"rofl",Nationalite.AD,false,14,12));
+	t.ajouterEquipe(new Equipe(1,"rofl",Nationalite.AD,false,14,12),0);
 	t.majPointsEquipe(new Equipe(1,"rofl",Nationalite.AD,false,14,12), 121);
 	
 	assertTrue(t.getParticipants().containsKey(new Equipe(1,"rofl",Nationalite.AD,false,14,121)));
@@ -343,17 +343,17 @@ public class TestTournoiModele {
 	@Test
 	public void testTournoiMinimum4EquipeDisposeeAvecAuMoins4EquipesDisposees() {
 		TournoiModele t = new TournoiModele();
-		t.ajouterEquipe(new Equipe(1, "e1", Nationalite.FR, true, 1000, 100));
-		t.ajouterEquipe(new Equipe(2, "e2", Nationalite.FR, true, 1000, 100));
-		t.ajouterEquipe(new Equipe(3, "e3", Nationalite.FR, true, 1000, 100));
-		t.ajouterEquipe(new Equipe(4, "e4", Nationalite.FR, true, 1000, 100));
+		t.ajouterEquipe(new Equipe(1, "e1", Nationalite.FR, true, 1000, 100),0);
+		t.ajouterEquipe(new Equipe(2, "e2", Nationalite.FR, true, 1000, 100),0);
+		t.ajouterEquipe(new Equipe(3, "e3", Nationalite.FR, true, 1000, 100),0);
+		t.ajouterEquipe(new Equipe(4, "e4", Nationalite.FR, true, 1000, 100),0);
 		
 		TournoiModele t2 = new TournoiModele();
-		t2.ajouterEquipe(new Equipe(1, "e1", Nationalite.FR, true, 1000, 100));
-		t2.ajouterEquipe(new Equipe(2, "e2", Nationalite.FR, true, 1000, 100));
-		t2.ajouterEquipe(new Equipe(3, "e3", Nationalite.FR, true, 1000, 100));
-		t2.ajouterEquipe(new Equipe(4, "e4", Nationalite.FR, true, 1000, 100));
-		t2.ajouterEquipe(new Equipe(4, "e4", Nationalite.FR, true, 1000, 100));
+		t2.ajouterEquipe(new Equipe(1, "e1", Nationalite.FR, true, 1000, 100),0);
+		t2.ajouterEquipe(new Equipe(2, "e2", Nationalite.FR, true, 1000, 100),0);
+		t2.ajouterEquipe(new Equipe(3, "e3", Nationalite.FR, true, 1000, 100),0);
+		t2.ajouterEquipe(new Equipe(4, "e4", Nationalite.FR, true, 1000, 100),0);
+		t2.ajouterEquipe(new Equipe(4, "e4", Nationalite.FR, true, 1000, 100),0);
 		
 		assertTrue(t.isTournoiMinimum4EquipeDisposee());
 		assertTrue(t2.isTournoiMinimum4EquipeDisposee());
@@ -362,10 +362,10 @@ public class TestTournoiModele {
 	@Test
 	public void testTournoiMinimum4EquipeDisposeeAvecMoinsDe4EquipesDisposees() {
 		TournoiModele t = new TournoiModele();
-		t.ajouterEquipe(new Equipe(1, "e1", Nationalite.FR, true, 1000, 100));
-		t.ajouterEquipe(new Equipe(2, "e2", Nationalite.FR, true, 1000, 100));
-		t.ajouterEquipe(new Equipe(3, "e3", Nationalite.FR, true, 1000, 100));
-		t.ajouterEquipe(new Equipe(4, "e4", Nationalite.FR, false, 1000, 100));
+		t.ajouterEquipe(new Equipe(1, "e1", Nationalite.FR, true, 1000, 100),0);
+		t.ajouterEquipe(new Equipe(2, "e2", Nationalite.FR, true, 1000, 100),0);
+		t.ajouterEquipe(new Equipe(3, "e3", Nationalite.FR, true, 1000, 100),0);
+		t.ajouterEquipe(new Equipe(4, "e4", Nationalite.FR, false, 1000, 100),0);
 		
 		assertFalse(t.isTournoiMinimum4EquipeDisposee());
 	}
