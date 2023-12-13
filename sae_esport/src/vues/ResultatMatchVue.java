@@ -11,7 +11,9 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.util.Iterator;
 
+import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -28,8 +30,9 @@ import style.CustomJLabel;
 import style.CustomJPanel;
 import style.CustomJScrollPane;
 import style.CustomJSeparator;
+import style.CustomJTextField;
 
-public class TournoiListeVue extends CustomJFrame {
+public class ResultatMatchVue extends CustomJFrame {
 	private CustomJPanel contentPanel;
     //private TournoiListeControleur controleur;
     
@@ -37,7 +40,7 @@ public class TournoiListeVue extends CustomJFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                	TournoiListeVue frame = new TournoiListeVue();
+                	ResultatMatchVue frame = new ResultatMatchVue();
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -46,8 +49,8 @@ public class TournoiListeVue extends CustomJFrame {
         });
     }
     
-    public TournoiListeVue() throws Exception {
-    	super(new Dimension(975, 500), "Listes des tournois");
+    public ResultatMatchVue() throws Exception {
+    	super(new Dimension(950, 600), "Modification de tournois");
     	
     	pack();
     	
@@ -58,7 +61,7 @@ public class TournoiListeVue extends CustomJFrame {
     	CustomJPanel panelTop = new CustomJPanel();
         contentPanel.add(panelTop, BorderLayout.NORTH);
         
-        CustomJLabel titleTop = new CustomJLabel("Listes des tournois", 25);
+        CustomJLabel titleTop = new CustomJLabel("Modification de tournois", 25);
         panelTop.add(titleTop);
         
         CustomJSeparator separatorTop = new CustomJSeparator();
@@ -79,99 +82,67 @@ public class TournoiListeVue extends CustomJFrame {
         gbc_panelMiddleHeaderCustomJPanel.anchor = GridBagConstraints.BASELINE_LEADING;
         panelMiddle.add(panelMiddleHeaderCustomJPanel, gbc_panelMiddleHeaderCustomJPanel);
         
-        CustomJComboBox comboBoxTournoi = new CustomJComboBox();
-		try {
-			for (TournoiModele a : TournoiDAO.getInstance().getAll()) {
-				comboBoxTournoi.addItem(a);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-        panelMiddleHeaderCustomJPanel.add(comboBoxTournoi);
+        CustomJLabel panelMiddleTitle = new CustomJLabel("Modifications des points", 15);
+        panelMiddleHeaderCustomJPanel.add(panelMiddleTitle);
         
-        GridBagConstraints gbc_panelRoundList = new GridBagConstraints();
-        gbc_panelRoundList.fill = GridBagConstraints.BOTH;
-        gbc_panelRoundList.gridx = 0;
-        gbc_panelRoundList.gridy = 1;
-        CustomJPanel panelRoundList = new CustomJPanel(new EmptyBorder(10, 10, 10, 10), new GridLayout(1, 0, 10, 10)); 
-        CustomJScrollPane scrollpanelRoundList = new CustomJScrollPane(panelRoundList);
-        scrollpanelRoundList.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-        scrollpanelRoundList.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        panelMiddle.add(scrollpanelRoundList, gbc_panelRoundList);
+        GridBagConstraints gbc_panelPointList = new GridBagConstraints();
+        gbc_panelPointList.fill = GridBagConstraints.BOTH;
+        gbc_panelPointList.gridx = 0;
+        gbc_panelPointList.gridy = 1;
+        CustomJPanel panelPointList = new CustomJPanel(new EmptyBorder(5, 5, 5, 5), new GridLayout(0, 3, 5, 5)); 
+        CustomJScrollPane scrollpanelPointList = new CustomJScrollPane(panelPointList);
+        scrollpanelPointList.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollpanelPointList.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        panelMiddle.add(scrollpanelPointList, gbc_panelPointList);
         
-        GridBagLayout gbl_matchCustomJPanel = new GridBagLayout();
-        gbl_matchCustomJPanel.rowHeights = new int[] {30, 0};
-        gbl_matchCustomJPanel.columnWidths = new int[] {0};
-        gbl_matchCustomJPanel.columnWeights = new double[]{1.0};
-        gbl_matchCustomJPanel.rowWeights = new double[]{0.0, 0.0};
+        CustomJLabel labelPouleOneCustomJLabel = new CustomJLabel("Poule 1", 15);
+        panelPointList.add(labelPouleOneCustomJLabel);
         
-        GridBagConstraints gbc_titleMatchTop = new GridBagConstraints();
-        gbc_titleMatchTop.fill = GridBagConstraints.BOTH;
-        gbc_titleMatchTop.gridx = 0;
-        gbc_titleMatchTop.gridy = 0;
+        CustomJLabel labelPouleTwoCustomJLabel = new CustomJLabel("Poule 2", 15);
+        panelPointList.add(labelPouleTwoCustomJLabel);
         
-        GridBagConstraints gbc_roundListEquipe = new GridBagConstraints();
-        gbc_roundListEquipe.fill = GridBagConstraints.BOTH;
-        gbc_roundListEquipe.gridx = 0;
-        gbc_roundListEquipe.gridy = 1;
+        CustomJLabel labelResultCustomJLabel = new CustomJLabel("Résultat", 15);
+
+        panelPointList.add(labelResultCustomJLabel);
         
-        for (int i = 1; i <= 10; i++) {
-        	// Panel Match : Titre + Panel Liste Equipe
-        	CustomJPanel MatchCustomJPanel = new CustomJPanel(new EmptyBorder(0, 0, 0, 0), new GridLayout(2, 1, 0, 0));
-        	MatchCustomJPanel.setLayout(gbl_matchCustomJPanel);
-        	panelRoundList.add(MatchCustomJPanel);
-        	
-        	// Numero Round
-            CustomJLabel titleMatchTop = new CustomJLabel("Round n°" + i, 25);
-            MatchCustomJPanel.add(titleMatchTop, gbc_titleMatchTop);
+        for (int i = 0; i < 5; i++) {
+            CustomJLabel labelIdPouleOne = new CustomJLabel(i + "", 15);
+            panelPointList.add(labelIdPouleOne);
             
-            // Panel Equipe Liste
-            CustomJPanel MatchEquipeListJPanel = new CustomJPanel(new EmptyBorder(10, 10, 10, 10), new GridLayout(0, 2, 5, 5));
-            MatchCustomJPanel.add(MatchEquipeListJPanel, gbc_roundListEquipe);
-        	
-        	for (int j = 1; j <= 8; j++) {
-            	CustomJButton button = new CustomJButton("Équipe n°" + j, 15);
-            	//button.addActionListener(this.controleur);
-            	MatchEquipeListJPanel.add(button);
-    		}
+            CustomJLabel labelIdPouleTwo = new CustomJLabel(i + "", 15);
+            panelPointList.add(labelIdPouleTwo);
+            
+            CustomJTextField textFieldPlaceHolderResult = new CustomJTextField(i*i + "", 4);
+            panelPointList.add(textFieldPlaceHolderResult);
 		}
         
         // Panel middle bottom : Action tournoi
         GridBagConstraints gbc_panelMiddleBottom = new GridBagConstraints();
         gbc_panelMiddleBottom.anchor = GridBagConstraints.SOUTHWEST;
-
         gbc_panelMiddleBottom.gridx = 0;
         gbc_panelMiddleBottom.gridy = 2;
         GridBagLayout gbl_panelMiddleBottom = new GridBagLayout();
         gbl_panelMiddleBottom.rowHeights = new int[] {0};
-        gbl_panelMiddleBottom.columnWidths = new int[] {0, 650, 150};
+        gbl_panelMiddleBottom.columnWidths = new int[] {750, 100};
         gbl_panelMiddleBottom.columnWeights = new double[]{0.0};
         gbl_panelMiddleBottom.rowWeights = new double[]{0.0};
         CustomJPanel panelMiddleBottom = new CustomJPanel(new EmptyBorder(10, 10, 10, 10), new FlowLayout(FlowLayout.CENTER, 5, 5));
         panelMiddleBottom.setLayout(gbl_panelMiddleBottom);
         panelMiddle.add(panelMiddleBottom, gbc_panelMiddleBottom);
-        
-    	CustomJButton buttonModify = new CustomJButton("Modifier", 15);
-        GridBagConstraints gbc_buttonModify = new GridBagConstraints();
-        gbc_buttonModify.fill = GridBagConstraints.VERTICAL;
-        gbc_buttonModify.gridx = 0;
-        gbc_buttonModify.gridy = 0;
-    	//button.addActionListener(this.controleur);
-    	panelMiddleBottom.add(buttonModify, gbc_buttonModify);
     	
-    	CustomJButton buttonOpen = new CustomJButton("Ouvrir le tournoi", 15);
+    	CustomJButton buttonOpen = new CustomJButton("Annuler", 15);
         GridBagConstraints gbc_buttonOpen = new GridBagConstraints();
         gbc_buttonOpen.fill = GridBagConstraints.CENTER;
-        gbc_buttonOpen.gridx = 1;
+        gbc_buttonOpen.gridx = 0;
         gbc_buttonOpen.gridy = 0;
         gbc_buttonOpen.anchor = GridBagConstraints.EAST;
     	//button.addActionListener(this.controleur);
     	panelMiddleBottom.add(buttonOpen, gbc_buttonOpen);
     	
-    	CustomJButton buttonClose = new CustomJButton("Fermer le tournoi", 15);
+    	CustomJButton buttonClose = new CustomJButton("Valider", 15);
         GridBagConstraints gbc_buttonClose = new GridBagConstraints();
         gbc_buttonClose.anchor = GridBagConstraints.EAST;
-        gbc_buttonClose.gridx = 2;
+        gbc_buttonClose.gridx = 1;
         gbc_buttonClose.gridy = 0;
     	//button.addActionListener(this.controleur);
     	panelMiddleBottom.add(buttonClose, gbc_buttonClose);

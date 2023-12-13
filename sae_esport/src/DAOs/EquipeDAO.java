@@ -2,6 +2,7 @@ package DAOs;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ import classes.DBConnection;
 import classes.Equipe;
 import classes.Joueur;
 import classes.Nationalite;
+import modeles.TournoiModele;
 import sqlrequests.CreateDual;
 
 public class EquipeDAO {
@@ -56,9 +58,16 @@ public class EquipeDAO {
 		public Optional<Equipe> getById(Integer... id) throws Exception {
 			Statement st = DBConnection.getInstance().createStatement();
 			for (Integer i : id) {
-				ResultSet rs = st.executeQuery("SELECT * FROM arbitre WHERE idEquipe="+i);
+				ResultSet rs = st.executeQuery("SELECT * FROM equipe WHERE idEquipe="+i);
 				if (rs.next()) {
-					return Optional.of(new Equipe(rs.getInt(1),rs.getString(2),classes.Nationalite.valueOf(rs.getString(3)),rs.getBoolean(4),rs.getInt(5),rs.getInt(6)));
+					PreparedStatement reqSelectJoueursequipe = DBConnection.getInstance().prepareStatement("SELECT * FROM joueur WHERE idEquipe = ?");
+					reqSelectJoueursequipe.setInt(1, rs.getInt(1));
+					ResultSet res = reqSelectJoueursequipe.executeQuery();
+					List<Joueur> joueurs = new ArrayList<Joueur>();
+					while (res.next()) {
+						joueurs.add(new Joueur(res.getInt(1),res.getString(2),res.getInt(3)));
+					}
+					return Optional.of(new Equipe(rs.getInt(1),rs.getString(2),classes.Nationalite.valueOf(rs.getString(3)),joueurs,rs.getBoolean(4),rs.getInt(5),rs.getInt(6)));
 				}
 			}
 			return Optional.empty();
@@ -136,27 +145,25 @@ public class EquipeDAO {
 						
 						Joueur j = new Joueur(0,s[i],id);
 						boolean nouveauJoueur = true;
-						int idJ = 0;
 						for (Joueur jo : listJoueurs) {
 							if (jo.getPseudo() == j.getPseudo()) {
 								nouveauJoueur = false;
-								idJ = jo.getIdJoueur();
+								j.setIDJoueur(jo.getIdJoueur());
 							}
 						}
 						
 						if (nouveauJoueur) {
 							JoueurDAO.getInstance().add(j);
 							joueursEquipe.add(j);
-						} else {
-							j.setIDJoueur(idJ);
-						}	
+						}
 						
 						e.AjouterJoueurs(j);
 						
 					}
 					
-				}
-				
+					
+					
+				}		
 				return equipesTournoi;
 			}
 	
@@ -189,4 +196,18 @@ public class EquipeDAO {
 		int rowcount = st.executeUpdate();
 		return rowcount > 0;
 	}
+	
+	public boolean inscrireEquipe(Equipe equipe, TournoiModele tournoi) {
+		int rowcount = 0;
+		try {
+			PreparedStatement st = DBConnection.getInstance().prepareStatement("INSERT INTO participer VALUES (0,?,?)");
+			st.setInt(1, tournoi.getIDTournoi()); st.setInt(2, equipe.getIdEquipe()); 
+			rowcount = st.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rowcount > 0;
+	}
+	
 }

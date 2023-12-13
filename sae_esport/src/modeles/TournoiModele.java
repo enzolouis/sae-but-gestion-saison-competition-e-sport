@@ -222,6 +222,14 @@ public class TournoiModele {
 		return this.vainqueur;
 	}
 	
+	public List<Arbitre> getArbitres() {
+		return this.arbitres;
+	}
+	
+	public Map<Equipe,Integer> getEquipes() {
+		return this.participants;
+	}
+	
 	//Génère un Login pour le Tournoi,
 	//l'ensemble est basé sur le NomTournoi + idTournoi, en UpperCase + 3 lettres générés au hasard
 	private void generateLogin() {
