@@ -3,6 +3,7 @@ package modeles;
 import static org.junit.Assert.*;
 
 import java.sql.Date;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
@@ -10,9 +11,14 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import DAOs.TournoiDAO;
@@ -27,6 +33,16 @@ import classes.Notoriete;
 public class TestTournoiModele {
 	
 	private TournoiModele t;
+	
+	@Before
+	public void setUp() throws SQLException {
+		DBConnection.getInstance().setAutoCommit(false);
+	}
+	
+	@After
+	public void tearDown() throws SQLException {
+		DBConnection.getInstance().setAutoCommit(true);
+	}
 
 	@Test
 	public void testTournoiBasic() {
@@ -299,7 +315,7 @@ public class TestTournoiModele {
 		
 		t = new TournoiModele(
 				2,
-				"gneg", 
+				"testTournoiNonSuperpose1", 
 				"20/11/1888", 
 				"31/11/1888", 
 				Notoriete.REGIONAL,
@@ -310,7 +326,7 @@ public class TestTournoiModele {
 		
 		TournoiModele t2 = new TournoiModele(
 				2,
-				"gnegne", 
+				"testTournoiNonSuperpose2", 
 				"25/12/1888", 
 				"27/12/1888", 
 				Notoriete.REGIONAL,
@@ -373,8 +389,188 @@ public class TestTournoiModele {
 
 		assertFalse(t.isTournoiMinimum1Arbitre());
 	}
+	@Test
+	public void testDateCouranteDansCreneauTournoiAvecDateCouranteDansCreneau() throws ParseException {
+		Date currentDate = Date.valueOf(LocalDateTime.of(LocalDate.now(), LocalTime.MIDNIGHT).toLocalDate());
+        
+        Calendar cCurrentDate = Calendar.getInstance();
+        cCurrentDate.setTime(currentDate);
+        
+        // cas : on ouvre le tournoi pile au milieu du créneau
+        Calendar cDebut = (Calendar) cCurrentDate.clone();
+        cDebut.add(Calendar.DAY_OF_MONTH, -5);
+        
+        Calendar cFin = (Calendar) cCurrentDate.clone();
+        cFin.add(Calendar.DAY_OF_MONTH, 5);
+        
+        TournoiModele t = new TournoiModele();
+        t.setDateDebut(new SimpleDateFormat("dd/MM/yyyy").format(cDebut.getTime()));
+		t.setDateFin(new SimpleDateFormat("dd/MM/yyyy").format(cFin.getTime()));
+        
+        // cas : on ouvre le tournoi le premier jour du tournoi
+        
+        Calendar cDebut2 = (Calendar) cCurrentDate.clone();
+        
+        Calendar cFin2 = (Calendar) cCurrentDate.clone();
+        cFin2.add(Calendar.DAY_OF_MONTH, 5);
+        
+        TournoiModele t2 = new TournoiModele();
+        t2.setDateDebut(new SimpleDateFormat("dd/MM/yyyy").format(cDebut2.getTime()));
+		t2.setDateFin(new SimpleDateFormat("dd/MM/yyyy").format(cFin2.getTime()));
+        
+        // cas : on ouvre le tournoi le premier jour du tournoi
+		
+		Calendar cDebut3 = (Calendar) cCurrentDate.clone();
+		cDebut3.add(Calendar.DAY_OF_MONTH, -5);
+		
+        Calendar cFin3 = (Calendar) cCurrentDate.clone();
+        
+        TournoiModele t3 = new TournoiModele();
+        t3.setDateDebut(new SimpleDateFormat("dd/MM/yyyy").format(cDebut3.getTime()));
+		t3.setDateFin(new SimpleDateFormat("dd/MM/yyyy").format(cFin3.getTime()));
+        
+		// cas : on ouvre le tournoi le premier et à la fois le dernier jour
+		// impossible selon le test testDateFinSupADateDebutAvecDateFinEgal
+		// un tournoi ne peut pas avoir la même date de début que de fin
+		
+		assertTrue(t.isDateCouranteDansCreneauTournoi());
+		assertTrue(t2.isDateCouranteDansCreneauTournoi());
+		assertTrue(t3.isDateCouranteDansCreneauTournoi());
+	}
 	
+	@Test
+	public void testDateCouranteDansCreneauTournoiAvecDateCouranteAvantCreneau() throws ParseException {
+		Date currentDate = Date.valueOf(LocalDateTime.of(LocalDate.now(), LocalTime.MIDNIGHT).toLocalDate());
+        
+        Calendar cCurrentDate = Calendar.getInstance();
+        cCurrentDate.setTime(currentDate);
+        
+        // cas : on ouvre le tournoi pile au milieu du créneau
+        Calendar cDebut = (Calendar) cCurrentDate.clone();
+        cDebut.add(Calendar.DAY_OF_MONTH, 1); // un jour après aujourd'hui
+        
+        Calendar cFin = (Calendar) cCurrentDate.clone();
+        cFin.add(Calendar.DAY_OF_MONTH, 5); // arbitraire
+        
+        TournoiModele t = new TournoiModele();
+        t.setDateDebut(new SimpleDateFormat("dd/MM/yyyy").format(cDebut.getTime()));
+		t.setDateFin(new SimpleDateFormat("dd/MM/yyyy").format(cFin.getTime()));
+        
+		assertFalse(t.isDateCouranteDansCreneauTournoi());
+	}
 	
+	@Test
+	public void testDateCouranteDansCreneauTournoiAvecDateCouranteApresCreneau() throws ParseException {
+		Date currentDate = Date.valueOf(LocalDateTime.of(LocalDate.now(), LocalTime.MIDNIGHT).toLocalDate());
+        
+        Calendar cCurrentDate = Calendar.getInstance();
+        cCurrentDate.setTime(currentDate);
+        
+        // cas : on ouvre le tournoi pile au milieu du créneau
+        Calendar cDebut = (Calendar) cCurrentDate.clone();
+        cDebut.add(Calendar.DAY_OF_MONTH, -5); // arbitraire
+        
+        Calendar cFin = (Calendar) cCurrentDate.clone();
+        cFin.add(Calendar.DAY_OF_MONTH, -1); // un jour avant aujourd'hui
+        
+        TournoiModele t = new TournoiModele();
+        t.setDateDebut(new SimpleDateFormat("dd/MM/yyyy").format(cDebut.getTime()));
+		t.setDateFin(new SimpleDateFormat("dd/MM/yyyy").format(cFin.getTime()));
+        
+		assertFalse(t.isDateCouranteDansCreneauTournoi());
+	}
 	
+	@Test
+	public void testAucunTournoiOuvertAvecAucunTournoiOuvert() throws Exception {
+		
+		TournoiDAO.getInstance().add(new TournoiModele(
+				2,
+				"testAucunToOuvertAucToOu", 
+				"20/11/1888", 
+				"31/11/1888", 
+				Notoriete.REGIONAL,
+				EtatTournoi.FERME));
+		
+		TournoiDAO.getInstance().add(new TournoiModele(
+				2,
+				"testAucunToOuvertAucToOu2", 
+				"20/11/1888", 
+				"31/11/1888", 
+				Notoriete.REGIONAL,
+				EtatTournoi.FERME));
+		
+		TournoiDAO.getInstance().add(new TournoiModele(
+				2,
+				"testAucunToOuvertAucToOu3", 
+				"20/11/1888", 
+				"31/11/1888", 
+				Notoriete.REGIONAL,
+				EtatTournoi.FERME));
+		
+		assertTrue(TournoiModele.isAucunTournoiOuvert());
+		
+		DBConnection.getInstance().rollback();
+	}
+	
+	@Test
+	public void testAucunTournoiOuvertAvecMinimum1TournoiOuvert() throws Exception {
+		TournoiModele t = new TournoiModele(
+				2,
+				"testAucunToOuvertMin1ToOu", 
+				"20/11/1888", 
+				"31/11/1888", 
+				Notoriete.REGIONAL,
+				EtatTournoi.OUVERT);
+	
+		TournoiDAO.getInstance().add(t);
+		
+		assertFalse(TournoiModele.isAucunTournoiOuvert());
+	
+		DBConnection.getInstance().rollback();
+	
+		TournoiModele t2 = new TournoiModele(
+				2,
+				"testAucunToOuvertMin1ToOu2", 
+				"20/11/1888", 
+				"31/11/1888", 
+				Notoriete.REGIONAL,
+				EtatTournoi.OUVERT);
+		
+		TournoiModele t3 = new TournoiModele(
+				2,
+				"testAucunToOuvertMin1ToOu3", 
+				"20/11/1888", 
+				"31/11/1888", 
+				Notoriete.REGIONAL,
+				EtatTournoi.OUVERT);
+		
+		TournoiDAO.getInstance().add(t2);
+		TournoiDAO.getInstance().add(t3);
+		
+		assertFalse(TournoiModele.isAucunTournoiOuvert());
+	
+		DBConnection.getInstance().rollback();
+	}
+	
+	@Test
+	public void supprimerEquipeIndisposees() throws Exception {
+		TournoiModele t = new TournoiModele(
+				2,
+				"testAucunToOuvertMin1ToOu", 
+				"20/11/1888", 
+				"31/11/1888", 
+				Notoriete.REGIONAL,
+				EtatTournoi.OUVERT);
+		
+		t.ajouterEquipe(new Equipe(1, "e1", Nationalite.FR, true, 1000, 100));
+		t.ajouterEquipe(new Equipe(2, "e2", Nationalite.FR, true, 1000, 100));
+		t.ajouterEquipe(new Equipe(5, "e5", Nationalite.FR, false, 1000, 100));
+		
+		t.supprimerEquipeIndisposees();
+		
+		List<String> lstNomEquipe = t.getParticipants().keySet().stream().map(e -> e.getNom()).collect(Collectors.toList());
+		
+		assertEquals(lstNomEquipe, Arrays.asList("e1", "e2"));
+	}
 	
 }
