@@ -22,6 +22,7 @@ public class insertValues {
     	ArbitreDAO.getInstance().add(new Arbitre(0, "Toxic", "Avenger", Nationalite.FR));
     	ArbitreDAO.getInstance().add(new Arbitre(0, "Bonnard", "Rik", Nationalite.IS));
         
+    	/*
     	TournoiDAO.getInstance().add(
     			new TournoiModele(0, "Tournoi nom 1", "12/12/2023", "12/01/2024", 
     					Notoriete.INTERNATIONAL, EtatTournoi.OUVERT));
@@ -34,5 +35,7 @@ public class insertValues {
     	TournoiDAO.getInstance().add(
     			new TournoiModele(0, "Tournoi nom 4", "12/12/2026", "12/01/2027", 
     					Notoriete.INTERNATIONAL, EtatTournoi.OUVERT));
+    	*/
+    	
     }
 }
