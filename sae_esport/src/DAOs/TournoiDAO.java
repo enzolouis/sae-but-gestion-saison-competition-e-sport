@@ -33,7 +33,7 @@ public class TournoiDAO {
 		String reqSelectTournoi = "SELECT * FROM tournoi";
 		PreparedStatement st = DBConnection.getInstance().prepareStatement(reqSelectTournoi);
 		ResultSet rs = st.executeQuery();
-		String reqSelectParticipants = "SELECT idEquipe FROM Participation WHERE idTournoi = ?";
+		String reqSelectParticipants = "SELECT idEquipe FROM Participer WHERE idTournoi = ?";
 		PreparedStatement stParticipants = DBConnection.getInstance().prepareStatement(reqSelectParticipants);
 		ArrayList<Equipe> participants = new ArrayList<>();
 		while (rs.next()) {
@@ -64,7 +64,7 @@ public class TournoiDAO {
 				TournoiModele t = new TournoiModele(rs.getInt(1), rs.getString(2), outputFormat.format(inputFormat.parse(rs.getString(3))), outputFormat.format(inputFormat.parse(rs.getString(4))), rs.getString(5), rs.getString(6), classes.Notoriete.valueOf(rs.getString(7)), classes.EtatTournoi.valueOf(rs.getString(8)));
 				
 				// TournoiModele t = new TournoiModele(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), classes.Notoriete.valueOf(rs.getString(7)), classes.EtatTournoi.valueOf(rs.getString(8)));
-				PreparedStatement stParticipants = DBConnection.getInstance().prepareStatement("SELECT idEquipe FROM Participation WHERE idTournoi = ?");
+				PreparedStatement stParticipants = DBConnection.getInstance().prepareStatement("SELECT idEquipe FROM Participer WHERE idTournoi = ?");
 				stParticipants.setInt(1, rs.getInt(1));
 				ResultSet rsParticipants = stParticipants.executeQuery();
 				while (rsParticipants.next()) {
