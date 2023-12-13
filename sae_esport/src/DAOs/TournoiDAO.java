@@ -6,6 +6,7 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import classes.Arbitre;
@@ -103,9 +104,39 @@ public class TournoiDAO {
 	
 	//update un arbitre donné
 	public boolean update(TournoiModele value) throws Exception {
-		Statement st = DBConnection.getInstance().createStatement();
-		int rowcount = st.executeUpdate("UPDATE tournoi SET ");
-		return rowcount > 0;
+	    // Construction de la requête UPDATE
+	    String query = "UPDATE tournoi SET "
+	            + "nom = ?, "
+	            + "dateDebut = ?, "
+	            + "dateFin = ?, "
+	            + "notoriete = ?, "
+	            + "ouvert = ?, "
+	            + "login = ?, "
+	            + "mdp = ?, "
+	            + "idVainqueur = ? "
+	            + "WHERE idTournoi = ?";
+	    
+	    PreparedStatement preparedStatement = DBConnection.getInstance().prepareStatement(query);
+
+        // Paramétrage des valeurs dans la requête
+        preparedStatement.setString(1, value.getNomTournoi());
+        preparedStatement.setDate(2, value.getDateDebut());
+        preparedStatement.setDate(3, value.getDateFin());
+        preparedStatement.setString(4, value.getNotoriete().toString());
+        preparedStatement.setString(5, value.getEtatTournoi().toString());
+        preparedStatement.setString(6, value.getLogin());
+        preparedStatement.setString(7, value.getMotDePasse());
+        
+        Integer idE;
+        try {
+        	preparedStatement.setInt(8, value.getVainqueur().get().getIdEquipe());
+        } catch (NoSuchElementException e) {
+        	preparedStatement.setObject(8, null);
+        }
+        preparedStatement.setInt(9, value.getIDTournoi());
+
+        int rowcount = preparedStatement.executeUpdate();
+        return rowcount > 0;
 	}
 	
 	//retire un arbitre donné
