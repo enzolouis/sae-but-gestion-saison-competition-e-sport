@@ -178,8 +178,8 @@ public class TournoiModele {
 	}
 	
 	//Ajoute une Equipe donné dans la liste des participans
-	public void ajouterEquipe(Equipe equipe) {
-		this.participants.put(equipe, 0);
+	public void ajouterEquipe(Equipe equipe, int resultat) {
+		this.participants.put(equipe, resultat);
 	}
 	
 	public void ajouterArbitre(Arbitre arbitre) {
@@ -204,6 +204,14 @@ public class TournoiModele {
 	//retourne un false si aucuns vainqueur n'est encore attribué
 	public Optional<Equipe> getVainqueur() {
 		return this.vainqueur;
+	}
+	
+	public List<Arbitre> getArbitres() {
+		return this.arbitres;
+	}
+	
+	public Map<Equipe,Integer> getEquipes() {
+		return this.participants;
 	}
 	
 	//Génère un Login pour le Tournoi,
