@@ -283,9 +283,6 @@ public class TournoiModele {
 			
 			// before et after existe...
 			
-			System.out.println((getDateDebut().compareTo(t.getDateDebut()) < 0 && getDateFin().compareTo(getDateDebut()) >= 0));
-			System.out.println((t.getDateDebut().compareTo(getDateDebut()) >= 0 && t.getDateDebut().compareTo(getDateFin()) < 0));
-			
 			if ((getDateDebut().compareTo(t.getDateDebut()) >= 0 && getDateDebut().compareTo(t.getDateFin()) < 0) 
 		            || (getDateFin().compareTo(t.getDateDebut()) > 0 && getDateFin().compareTo(t.getDateFin()) <= 0) 
 		           || (t.getDateDebut().compareTo(getDateDebut()) >= 0 && t.getDateDebut().compareTo(getDateFin()) < 0)) {
@@ -342,6 +339,21 @@ public class TournoiModele {
 	public void supprimerEquipeIndisposees() throws Exception {
 		for (Equipe e : this.participantsIndisposees) {
 			ParticiperDAO.getInstance().delete(new Participer(e.getIdEquipe(), this.getIDTournoi(), 0)); // 0 : arbitraire
+		}
+	}
+	
+	public boolean isTournoiOuvrable() throws ParseException, Exception {
+		return this.isTournoiMinimum4EquipeDisposee() 
+				&& this.isTournoiMinimum1Arbitre() 
+				&& TournoiModele.isAucunTournoiOuvert() 
+				&& this.isDateCouranteDansCreneauTournoi();
+	}
+	
+	public void ouvrirTournoi() throws Exception {
+		if (this.isTournoiOuvrable()) {
+			this.supprimerEquipeIndisposees();
+			this.setEtatTournoi(EtatTournoi.OUVERT);
+			TournoiDAO.getInstance().update(this);
 		}
 	}
 
