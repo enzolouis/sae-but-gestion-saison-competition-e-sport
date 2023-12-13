@@ -3,6 +3,9 @@ package modeles;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -11,11 +14,15 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Random;
 
+import DAOs.ParticiperDAO;
 import DAOs.TournoiDAO;
+import classes.Arbitre;
 import classes.Equipe;
 import classes.EtatTournoi;
 import classes.Match;
+import classes.Nationalite;
 import classes.Notoriete;
+import classes.Participer;
 
 public class TournoiModele {
 		
@@ -33,7 +40,9 @@ public class TournoiModele {
 	private int idTournoi;
 	private List<Match> matches;
 	private Map<Equipe, Integer> participants;
+	private List<Equipe> participantsIndisposees;
 	private Optional<Equipe> vainqueur;
+	private List<Arbitre> arbitres;
 
 	/**
 	 * Constructeur de la classe Tournoi
@@ -53,7 +62,9 @@ public class TournoiModele {
 		this.etat = etat;
 		this.matches= new ArrayList<>();
 		this.participants = new HashMap<>();
+		this.participantsIndisposees = new ArrayList<>();
 		this.vainqueur = Optional.empty();
+		this.arbitres = new ArrayList<>();
 		this.mdp = mdp;
 		this.login = login;
 	}
@@ -61,7 +72,9 @@ public class TournoiModele {
 	public TournoiModele() {		
 		this.matches= new ArrayList<>();
 		this.participants = new HashMap<>();
+		this.participantsIndisposees = new ArrayList<>();
 		this.vainqueur = Optional.empty();
+		this.arbitres = new ArrayList<>();
 	}
 	
 	public TournoiModele(int idTournoi, String nomTournoi, String dateDebut, String dateFin, Notoriete notoriete, EtatTournoi etat) {
@@ -73,7 +86,9 @@ public class TournoiModele {
 		this.etat = etat;
 		this.matches= new ArrayList<>();
 		this.participants = new HashMap<>();
+		this.participantsIndisposees = new ArrayList<>();
 		this.vainqueur = Optional.empty();
+		this.arbitres = new ArrayList<>();
 		this.generateLogin();
 		this.generateMdp();
 	}
@@ -170,7 +185,21 @@ public class TournoiModele {
 	
 	//Ajoute une Equipe donné dans la liste des participans
 	public void ajouterEquipe(Equipe equipe) {
-		this.participants.put(equipe, 0);
+		if (equipe.getDispose()) {
+			this.participants.put(equipe, 0);
+		} else {
+			this.participantsIndisposees.add(equipe);
+		}
+		
+	}
+	
+	public void supprimerEquipe(Equipe equipe) {
+		this.participants.remove(equipe);
+		this.participantsIndisposees.add(equipe);
+	}
+	
+	public void ajouterArbitre(Arbitre arbitre) {
+		this.arbitres.add(arbitre);
 	}
 	
 	//Attribue les points à une Equipe
@@ -197,7 +226,7 @@ public class TournoiModele {
 	//l'ensemble est basé sur le NomTournoi + idTournoi, en UpperCase + 3 lettres générés au hasard
 	private void generateLogin() {
 		this.login = this.nomTournoi.substring(0, 2).toUpperCase() + this.idTournoi + this.generateLetter()+ this.generateLetter() + this.generateLetter();
-		System.out.println(this.login);
+		//System.out.println(this.login);
 	}
 	
 	//Génère un Mot de Passe pour le Tournoi
@@ -206,7 +235,7 @@ public class TournoiModele {
 		for (int i = 0; i<12; i++) {
 			this.mdp += this.generateLetter();
 		}
-		System.out.println(this.mdp);
+		//System.out.println(this.mdp);
 	}
 	
 	//Renvois une lettre au hasard 
@@ -217,11 +246,10 @@ public class TournoiModele {
 	}
 	
 	private static Date getDate(String date) throws ParseException {
-		return new Date(new SimpleDateFormat("dd/mm/yyyy").parse(date).getTime());
+		return new Date(new SimpleDateFormat("dd/MM/yyyy").parse(date).getTime());
 	}
 	
 	
-	// a tester
 	public boolean isNonDupe() throws Exception {
 		// El torn "torn" n'est pas damns a base den dons damns cite function
 		for (TournoiModele t : TournoiDAO.getInstance().getAll()) {
@@ -234,7 +262,8 @@ public class TournoiModele {
 	}
 	
 	public boolean isDateFinSupADateDebut() throws ParseException {
-		return getDateFin().compareTo(getDateDebut()) == 1;
+		// System.out.println(getDateFin().compareTo(getDateDebut()) == 1);
+		return getDateFin().after(getDateDebut());
 	}
 	
 	public boolean isDateFinDateDebutDifferenceInfA30Jours() throws ParseException {
@@ -245,21 +274,32 @@ public class TournoiModele {
 	
 	public boolean isTournoiNonSuperpose() throws Exception {
 		for (TournoiModele t : TournoiDAO.getInstance().getAll()) {
+			// si (la date de debut est plus grande ou egal à la date de début d'un autre tournoi 
+			//     ET la date début est plus petite que la date de fin de l'autre tournoi) (*** ou egal ??)
+			// OU (la date de fin est plus grande que la date de debut d'un autre tournoi
+			//    (ET la date de fin eest plus petit ou egal a la date de fin d'un autre tournoi)
+			// OU (la date de debut d'un tournoi est plus grande ou egal a la date de debut
+			//    (ET la date de debut d'un tournoi est plus petit que la date de fin
+			
+			// before et after existe...
+			
+			System.out.println((getDateDebut().compareTo(t.getDateDebut()) < 0 && getDateFin().compareTo(getDateDebut()) >= 0));
+			System.out.println((t.getDateDebut().compareTo(getDateDebut()) >= 0 && t.getDateDebut().compareTo(getDateFin()) < 0));
+			
 			if ((getDateDebut().compareTo(t.getDateDebut()) >= 0 && getDateDebut().compareTo(t.getDateFin()) < 0) 
-		            && (getDateFin().compareTo(t.getDateDebut()) > 0 && getDateFin().compareTo(t.getDateFin()) <= 0) 
-		           && (t.getDateDebut().compareTo(getDateDebut()) >= 0 && t.getDateDebut().compareTo(getDateFin()) < 0)) {
+		            || (getDateFin().compareTo(t.getDateDebut()) > 0 && getDateFin().compareTo(t.getDateFin()) <= 0) 
+		           || (t.getDateDebut().compareTo(getDateDebut()) >= 0 && t.getDateDebut().compareTo(getDateFin()) < 0)) {
 		            return false;
 			}
 		}
 		
 		return true;
-		
 	}
 	
 	public String getDateString(java.util.Date date) {
 		Calendar c = Calendar.getInstance();
 		c.setTime(date);
-		return c.get(Calendar.DAY_OF_MONTH)+"/"+c.get(Calendar.MONTH)+"/"+c.get(Calendar.YEAR);
+		return c.get(Calendar.DAY_OF_MONTH)+"/"+(Integer.valueOf(c.get(Calendar.MONTH))+1)+"/"+c.get(Calendar.YEAR);
 	}
 	
 	public boolean isTournoiValide() {
@@ -271,6 +311,38 @@ public class TournoiModele {
 			e.printStackTrace();
 		}
 		return false;
+	}
+	
+	public boolean isTournoiMinimum4EquipeDisposee() {		
+		return participants.keySet().stream().filter(e -> e.getDisposition()).count() >= 4;
+	}
+	
+	public boolean isTournoiMinimum1Arbitre() {
+		return arbitres.size() >= 1;
+	}
+	
+	public boolean isDateCouranteDansCreneauTournoi() throws ParseException {
+		LocalDate currentDate = LocalDate.now();
+
+        Date sqlDate = Date.valueOf(LocalDateTime.of(currentDate, LocalTime.MIDNIGHT).toLocalDate());
+        
+		return sqlDate.compareTo(getDateDebut()) != -1 && getDateFin().compareTo(sqlDate) != -1;
+	}
+	
+	public static boolean isAucunTournoiOuvert() throws Exception {
+		for (TournoiModele t : TournoiDAO.getInstance().getAll()) {
+			if (t.getEtatTournoi() == EtatTournoi.OUVERT) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
+	public void supprimerEquipeIndisposees() throws Exception {
+		for (Equipe e : this.participantsIndisposees) {
+			ParticiperDAO.getInstance().delete(new Participer(e.getIdEquipe(), this.getIDTournoi(), 0)); // 0 : arbitraire
+		}
 	}
 
 }

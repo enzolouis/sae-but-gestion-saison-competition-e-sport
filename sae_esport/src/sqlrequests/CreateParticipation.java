@@ -16,19 +16,19 @@ public class CreateParticipation {
 		try {
 		    // Suppression de la table participation
 		    Statement stSupprParticipation = DBConnection.getInstance().createStatement();
-		    stSupprParticipation.executeUpdate("DROP TABLE participation");
-		    System.out.println("✔ Suppression de la table participation réussie.");
+		    stSupprParticipation.executeUpdate("DROP TABLE participer");
+		    System.out.println("✔ Suppression de la table participer réussie.");
 		} catch (SQLException e) {
-		    System.out.println("❌ Suppression de la table participation échouée.");
+		    System.out.println("❌ Suppression de la table participer échouée.");
 		}
 
 		try {
 		    // Suppression de la séquence seqParticipation
 		    Statement stSupprSeqParticipation = DBConnection.getInstance().createStatement();
-		    stSupprSeqParticipation.executeUpdate("DROP SEQUENCE seqParticipation RESTRICT");
-		    System.out.println("✔ Suppression de la séquence seqParticipation réussie.");
+		    stSupprSeqParticipation.executeUpdate("DROP SEQUENCE seqParticiper RESTRICT");
+		    System.out.println("✔ Suppression de la séquence seqParticiper réussie.");
 		} catch (SQLException e) {
-		    System.out.println("❌ Suppression de la séquence seqParticipation échouée.");
+		    System.out.println("❌ Suppression de la séquence seqParticiper échouée.");
 		}
 	}
 	
@@ -36,25 +36,25 @@ public class CreateParticipation {
 		try {
 		    // Création de la séquence de l'id tournoi
 		    Statement stSeqParticipation = DBConnection.getInstance().createStatement();
-		    stSeqParticipation.executeUpdate("CREATE SEQUENCE seqParticipation START WITH 1 INCREMENT BY 1");
-		    System.out.println("✔ Création de la séquence seqParticipation réussie.");
+		    stSeqParticipation.executeUpdate("CREATE SEQUENCE seqParticiper START WITH 1 INCREMENT BY 1");
+		    System.out.println("✔ Création de la séquence seqParticiper réussie.");
 		} catch (SQLException e) {
-		    System.out.println("❌ Création de la séquence seqParticipation échouée.");
+		    System.out.println("❌ Création de la séquence seqParticiper échouée.");
 		}
 
 		try {
 		    // Création de la table participation
 		    Statement stCreateParticipation = DBConnection.getInstance().createStatement();
-		    stCreateParticipation.executeUpdate("CREATE TABLE participation"
+		    stCreateParticipation.executeUpdate("CREATE TABLE participer"
 		            + "(resultat INT,"
 		            + "idTournoi INT,"
 		            + "idEquipe INT,"
 		            + "PRIMARY KEY (idTournoi, idEquipe),"
 		            + "FOREIGN KEY (idTournoi) REFERENCES Tournoi(idTournoi),"
 		            + "FOREIGN KEY (idEquipe) REFERENCES Equipe(idEquipe))");
-		    System.out.println("✔ Création de la table participation réussie.");
+		    System.out.println("✔ Création de la table participer réussie.");
 		} catch (SQLException e) {
-		    System.out.println("❌ Création de la table participation échouée.");
+		    System.out.println("❌ Création de la table participer échouée.");
 		}
 		
 

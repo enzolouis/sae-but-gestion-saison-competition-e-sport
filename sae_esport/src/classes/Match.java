@@ -49,9 +49,12 @@ public class Match {
 	 * */
 	public void remplacerEquipe(Equipe equipeARemplacer, Equipe EquipeAMettre) {
 		for (Equipe i : this.equipes) {
-			if(i == equipeARemplacer) {
-				i = EquipeAMettre;
+			int y = 0; 
+			if(i.equals(equipeARemplacer)) {
+				this.equipes.remove(y);
+				this.equipes.add(EquipeAMettre);
 			}
+			y++;
 		}
 	}
 	
