@@ -69,7 +69,7 @@ public class TournoiListeVue extends CustomJFrame {
         gbl_panelMiddle.rowHeights = new int[] {50, 200, 50};
         gbl_panelMiddle.columnWidths = new int[] {0};
         gbl_panelMiddle.columnWeights = new double[]{1.0};
-        gbl_panelMiddle.rowWeights = new double[]{0.0, 1.0, 1.0};
+        gbl_panelMiddle.rowWeights = new double[]{1.0, 1.0, 1.0};
         JPanel panelMiddle = new CustomJPanel(new EmptyBorder(0, 0, 10, 10));
         panelMiddle.setLayout(gbl_panelMiddle);
         contentPanel.add(panelMiddle);
@@ -79,8 +79,7 @@ public class TournoiListeVue extends CustomJFrame {
         gbc_panelMiddleHeaderCustomJPanel.anchor = GridBagConstraints.BASELINE_LEADING;
         panelMiddle.add(panelMiddleHeaderCustomJPanel, gbc_panelMiddleHeaderCustomJPanel);
         
-        CustomJComboBox<TournoiModele> comboBoxTournoi = new CustomJComboBox<TournoiModele>();
-        comboBoxTournoi.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 11));
+        CustomJComboBox comboBoxTournoi = new CustomJComboBox();
 		try {
 			for (TournoiModele a : TournoiDAO.getInstance().getAll()) {
 				comboBoxTournoi.addItem(a);
@@ -145,7 +144,7 @@ public class TournoiListeVue extends CustomJFrame {
         gbc_panelMiddleBottom.gridy = 2;
         GridBagLayout gbl_panelMiddleBottom = new GridBagLayout();
         gbl_panelMiddleBottom.rowHeights = new int[] {0};
-        gbl_panelMiddleBottom.columnWidths = new int[] {0, 700, 100};
+        gbl_panelMiddleBottom.columnWidths = new int[] {0, 650, 150};
         gbl_panelMiddleBottom.columnWeights = new double[]{0.0};
         gbl_panelMiddleBottom.rowWeights = new double[]{0.0};
         CustomJPanel panelMiddleBottom = new CustomJPanel(new EmptyBorder(10, 10, 10, 10), new FlowLayout(FlowLayout.CENTER, 5, 5));
@@ -160,7 +159,7 @@ public class TournoiListeVue extends CustomJFrame {
     	//button.addActionListener(this.controleur);
     	panelMiddleBottom.add(buttonModify, gbc_buttonModify);
     	
-    	CustomJButton buttonOpen = new CustomJButton("Ouvrir", 15);
+    	CustomJButton buttonOpen = new CustomJButton("Ouvrir le tournoi", 15);
         GridBagConstraints gbc_buttonOpen = new GridBagConstraints();
         gbc_buttonOpen.fill = GridBagConstraints.CENTER;
         gbc_buttonOpen.gridx = 1;
@@ -169,7 +168,7 @@ public class TournoiListeVue extends CustomJFrame {
     	//button.addActionListener(this.controleur);
     	panelMiddleBottom.add(buttonOpen, gbc_buttonOpen);
     	
-    	CustomJButton buttonClose = new CustomJButton("Fermer", 15);
+    	CustomJButton buttonClose = new CustomJButton("Fermer le tournoi", 15);
         GridBagConstraints gbc_buttonClose = new GridBagConstraints();
         gbc_buttonClose.anchor = GridBagConstraints.EAST;
         gbc_buttonClose.gridx = 2;
