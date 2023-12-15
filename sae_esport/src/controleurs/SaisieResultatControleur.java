@@ -16,16 +16,16 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import classes.Match;
 import modeles.SaisieResultatModele;
 import modeles.TournoiModele;
-import vues.ResultatMatchVue;
+import vues.TournoiListeVue;
 
 public class SaisieResultatControleur implements ActionListener {
 	private SaisieResultatModele modele;
-	private ResultatMatchVue vue;
+	private TournoiListeVue vue;
 	
 	
-	public SaisieResultatControleur(ResultatMatchVue vue) {
+	public SaisieResultatControleur(TournoiListeVue vue) {
 		this.vue = vue; 
-		this.modele = new SaisieResultatModele(new Match(0,false),new TournoiModele());
+		this.modele = new SaisieResultatModele(new TournoiModele());
 	}
 
 	@Override
@@ -33,16 +33,13 @@ public class SaisieResultatControleur implements ActionListener {
 		if (e.getSource() instanceof JButton) {
 			JButton bouton = (JButton) e.getSource();
 			switch (bouton.getText()) {
-			case("Annuler"):
-				
-				break;
-			case("Valider"):
-				
-				break;
 			case ("Quitter"):
 				this.vue.dispose();
 				break;
-			}
+			default:
+				//get match
+				//set vainqueur
+			}	
 		}
 	}
 	
