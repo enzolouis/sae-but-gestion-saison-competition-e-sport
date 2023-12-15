@@ -184,9 +184,9 @@ public class TournoiModele {
 	}
 	
 	//Ajoute une Equipe donné dans la liste des participans
-	public void ajouterEquipe(Equipe equipe) {
+	public void ajouterEquipe(Equipe equipe, int resultat) {
 		if (equipe.getDispose()) {
-			this.participants.put(equipe, 0);
+			this.participants.put(equipe, resultat);
 		} else {
 			this.participantsIndisposees.add(equipe);
 		}
