@@ -21,81 +21,46 @@ public class testDAOMatch {
 	MatchDAO matchDAO;
 	
 	@Before
-	public void beforeTests() {
-		
-		try {
-			
-			System.setProperty("derby.system.home", dirProjetJava + "/BDDSAEEsport");
+	public void beforeTests() throws Exception{
+		System.setProperty("derby.system.home", dirProjetJava + "/BDDSAEEsport");
 			this.connection = DriverManager.getConnection("jdbc:derby:BDDSAEEsport;create=true");
 			this.matchDAO = new MatchDAO();
 			connection.setAutoCommit(false);
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 	
 	@After
-	public void afterTests() {
+	public void afterTests() throws Exception{
 		
-		try {
-			
 			connection.setAutoCommit(true);
 			connection.close();
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 	}
 	
 	@Test
 	/// Olivier RODRIGUEZ
 	/// Test de la récupération d'un Arbitre lorsqu'il n'y a pas cet arbitre
-	public void testGetByIdMatchNonExistant() {
-	    
-		try {
-			
-			Optional<Match> match = matchDAO.getById(-1);
+	public void testGetByIdMatchNonExistant()throws Exception {
+	    Optional<Match> match = matchDAO.getById(-1);
 		    assertEquals(Optional.empty(), match);
 		    connection.rollback();
-		    
-		} catch(Exception e) {
-	        e.printStackTrace();
-	    }
-		
 	}
 	
 	
 	@Test
 	/// Olivier RODRIGUEZ
 	/// Test de la récupération d'un administrateur
-	public void testGetByIdMatch() {
-	    
-		try {
-			
-			Match match = new Match(0, false);
+	public void testGetByIdMatch() throws Exception{
+	    Match match = new Match(0, false);
 			matchDAO.add(match);
 			Optional<Match> optional = matchDAO.getById(match.getIDMatch());
 		    assertEquals(optional.get(), match);
 		    connection.rollback();
-		    
-		} catch(Exception e) {
-	        e.printStackTrace();
-	    }
-		
 	}
 	
 	
 	@Test
 	//Test de la récupération des administrateur lorsqu'il y a des administrateurs
-	public void testGetAllMatch() {
-		    
-		try {
-			
-			Match match1 = new Match(0, false);
+	public void testGetAllMatch() throws Exception{
+		    Match match1 = new Match(0, false);
 			Match match2 = new Match(0, false);	
 			this.matchDAO.add(match1);
 			this.matchDAO.add(match2);
@@ -104,70 +69,41 @@ public class testDAOMatch {
 		    assertEquals(listMatch.get(index-2), match1);
 		    assertEquals(listMatch.get(index-1), match2);
 		    connection.rollback();
-			    
-		} catch(Exception e) {
-		    e.printStackTrace();
-		}
-		
 	}
 	
 	@Test
 	/// Olivier RODRIGUEZ
 	/// Test de l'ajout d'administrateur 
-	public void testAddMatch() throws SQLException {
-
-	    try{
-
-	    	Match match = new Match(-1, true); 
+	public void testAddMatch() throws Exception {
+		Match match = new Match(-1, true); 
 	    	matchDAO.add(match);
 	    	assertEquals(match, matchDAO.getById(match.getIDMatch()).get());
 	    	connection.rollback();
-	        
-	    } catch(Exception e) {
-	        e.printStackTrace();
-	    }
-	    
 	}
 	
 	@Test
 	/// Olivier RODRIGUEZ
 	/// Test de la mise à jour d'un administrateur
-	public void testUpdateMatch() throws SQLException {
-		
-	    try{
-	    	
-	    	Match match = new Match(-1, true);
+	public void testUpdateMatch() throws Exception {
+		Match match = new Match(-1, true);
 	        matchDAO.add(match);
 	        match.setIdMatch(3);
 	        matchDAO.update(match);
 	        assertEquals(match, matchDAO.getById(match.getIDMatch()).get());
 	        connection.rollback();
-	        
-	    } catch(Exception e) {
-	        e.printStackTrace();
-	    }
-	    
 	}
 	
 	@Test
 	/// Olivier RODRIGUEZ
 	/// Test de supression d'un administrateur
-	public void testDeleteMatch() throws SQLException { 
-		
-		try{
-			
-			Match match = new Match(-1, true); 
+	public void testDeleteMatch() throws Exception { 
+		Match match = new Match(-1, true); 
 	        matchDAO.add(match);
 	        int size = matchDAO.getAll().size();
 	        matchDAO.delete(match);           
 	        assertEquals(size -1, matchDAO.getAll().size());
 	        assertEquals(Optional.empty(), matchDAO.getById(match.getIDMatch()));
 	        connection.rollback();
-	        
-	    }catch(Exception e){
-	        e.printStackTrace();
-	    }
-
 	}
 
 }

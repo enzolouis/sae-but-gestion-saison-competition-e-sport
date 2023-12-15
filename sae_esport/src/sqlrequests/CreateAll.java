@@ -34,6 +34,8 @@ public class CreateAll {
 		
 		CreateDual.Create();
 		
+		InsertValues.Insert();
+		
 	}
 	
 }
