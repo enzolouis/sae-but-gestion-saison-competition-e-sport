@@ -24,78 +24,42 @@ public class testParticiperDAO {
 	ParticiperDAO participer;
 	
 	@Before
-	public void beforeTests() {
-		
-		try {
-			
-			System.setProperty("derby.system.home", dirProjetJava + "/BDDSAEEsport");
+	public void beforeTests() throws Exception{
+		System.setProperty("derby.system.home", dirProjetJava + "/BDDSAEEsport");
 			this.connection = DriverManager.getConnection("jdbc:derby:BDDSAEEsport;create=true");
 			this.participer = new ParticiperDAO();
 			connection.setAutoCommit(false);
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 	
 	@After
-	public void afterTests() {
-		
-		try {
-			
-			connection.setAutoCommit(true);
+	public void afterTests() throws Exception{
+		connection.setAutoCommit(true);
 			connection.close();
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 	}
 	
 	@Test
 	/// Olivier RODRIGUEZ
 	/// Test de la récupération d'un Arbitre lorsqu'il n'y a pas cet arbitre
-	public void testGetByIdTournoiNonExistant() {
-	    
-		try {
-			
-			Optional<Participer> participer = this.participer.getByIdTournoi(-1);
+	public void testGetByIdTournoiNonExistant() throws Exception{
+	    Optional<Participer> participer = this.participer.getByIdTournoi(-1);
 		    assertEquals(Optional.empty(), participer);
 		    connection.rollback();
-		    
-		} catch(Exception e) {
-	        e.printStackTrace();
-	    }
-		
 	}
 	@Test
 	/// Olivier RODRIGUEZ
 	/// Test de la récupération d'un Arbitre lorsqu'il n'y a pas cet arbitre
-	public void testGetByIdEquipeNonExistant() {
-	    
-		try {
-			
-			Optional<Participer> participer = this.participer.getByIdEquipe(-1);
+	public void testGetByIdEquipeNonExistant() throws Exception{
+	    Optional<Participer> participer = this.participer.getByIdEquipe(-1);
 		    assertEquals(Optional.empty(), participer);
 		    connection.rollback();
-		    
-		} catch(Exception e) {
-	        e.printStackTrace();
-	    }
-		
 	}
 	
 	
 	@Test
 	/// Olivier RODRIGUEZ
 	/// Test de la récupération d'un administrateur
-	public void testGetByIdTournoi() {
-	    
-		try {
-			
-			Participer participer = new Participer(
+	public void testGetByIdTournoi() throws Exception{
+	    Participer participer = new Participer(
 					1,
 					1,
 					15);
@@ -104,17 +68,9 @@ public class testParticiperDAO {
 			Optional<Participer> optional = this.participer.getByIdTournoi(participer.getIdTournoi());
 		    assertEquals(optional.get(), participer);
 		    connection.rollback();
-		    
-		} catch(Exception e) {
-	        e.printStackTrace();
-	    }
-		
 	}
-	public void testGetByIdEquipe() {
-	    
-		try {
-			
-			Participer participer = new Participer(
+	public void testGetByIdEquipe() throws Exception{
+	    Participer participer = new Participer(
 					1,
 					1,
 					15);
@@ -123,21 +79,13 @@ public class testParticiperDAO {
 			Optional<Participer> optional = this.participer.getByIdEquipe(participer.getIdTournoi());
 		    assertEquals(optional.get(), participer);
 		    connection.rollback();
-		    
-		} catch(Exception e) {
-	        e.printStackTrace();
-	    }
-		
 	}
 	
 	
 	@Test
 	//Test de la récupération des administrateur lorsqu'il y a des administrateurs
-	public void testGetAllMatch() {
-		    
-		try {
-			
-			Participer participer1 = new Participer(
+	public void testGetAllMatch() throws Exception{
+		    Participer participer1 = new Participer(
 					1,
 					1,
 					15);
@@ -153,21 +101,13 @@ public class testParticiperDAO {
 		    assertEquals(listMatch.get(index-2), participer1);
 		    assertEquals(listMatch.get(index-1), participer2);
 		    connection.rollback();
-			    
-		} catch(Exception e) {
-		    e.printStackTrace();
-		}
-		
 	}
 	
 	@Test
 	/// Olivier RODRIGUEZ
 	/// Test de l'ajout d'administrateur 
-	public void testAddViaTournoi() throws SQLException {
-
-	    try{
-
-	    	Participer participer1 = new Participer(
+	public void testAddViaTournoi() throws Exception {
+		Participer participer1 = new Participer(
 					1,
 					1,
 					15);
@@ -175,17 +115,9 @@ public class testParticiperDAO {
 	    	this.participer.add(participer1);
 	    	assertEquals(participer1, participer.getByIdTournoi(participer1.getIdTournoi()).get());
 	    	connection.rollback();
-	        
-	    } catch(Exception e) {
-	        e.printStackTrace();
-	    }
-	    
 	}
-	public void testAddViaEquipe() throws SQLException {
-
-	    try{
-
-	    	Participer participer1 = new Participer(
+	public void testAddViaEquipe() throws Exception {
+		Participer participer1 = new Participer(
 					1,
 					1,
 					15);
@@ -193,21 +125,13 @@ public class testParticiperDAO {
 	    	this.participer.add(participer1);
 	    	assertEquals(participer1, participer.getByIdEquipe(participer1.getIdEquipe()).get());
 	    	connection.rollback();
-	        
-	    } catch(Exception e) {
-	        e.printStackTrace();
-	    }
-	    
 	}
 	
 	@Test
 	/// Olivier RODRIGUEZ
 	/// Test de la mise à jour d'un administrateur
-	public void testUpdateTournoi() throws SQLException {
-		
-	    try{
-	    	
-	    	Participer participer1 = new Participer(
+	public void testUpdateTournoi() throws Exception {
+		Participer participer1 = new Participer(
 					1,
 					1,
 					15);
@@ -217,17 +141,9 @@ public class testParticiperDAO {
 	        participer.update(participer1);
 	        assertEquals(participer1, participer.getByIdTournoi(participer1.getIdTournoi()).get());
 	        connection.rollback();
-	        
-	    } catch(Exception e) {
-	        e.printStackTrace();
-	    }
-	    
 	}
-	public void testUpdateEquipe() throws SQLException {
-		
-	    try{
-	    	
-	    	Participer participer1 = new Participer(
+	public void testUpdateEquipe() throws Exception {
+		Participer participer1 = new Participer(
 					1,
 					1,
 					15);
@@ -237,21 +153,13 @@ public class testParticiperDAO {
 	        participer.update(participer1);
 	        assertEquals(participer1, participer.getByIdEquipe(participer1.getIdEquipe()).get());
 	        connection.rollback();
-	        
-	    } catch(Exception e) {
-	        e.printStackTrace();
-	    }
-	    
 	}
 	
 	@Test
 	/// Olivier RODRIGUEZ
 	/// Test de supression d'un administrateur
-	public void testDeleteTournoi() throws SQLException { 
-		
-		try{
-			
-			Participer participer1 = new Participer(
+	public void testDeleteTournoi() throws Exception { 
+		Participer participer1 = new Participer(
 					1,
 					1,
 					15);
@@ -262,17 +170,9 @@ public class testParticiperDAO {
 	        assertEquals(size -1, participer.getAll().size());
 	        assertEquals(Optional.empty(), participer.getByIdTournoi(participer1.getIdTournoi()));
 	        connection.rollback();
-	        
-	    }catch(Exception e){
-	        e.printStackTrace();
-	    }
-
 	}
-	public void testDeleteEquipe() throws SQLException { 
-		
-		try{
-			
-			Participer participer1 = new Participer(
+	public void testDeleteEquipe() throws Exception { 
+		Participer participer1 = new Participer(
 					1,
 					1,
 					15);
@@ -283,11 +183,6 @@ public class testParticiperDAO {
 	        assertEquals(size -1, participer.getAll().size());
 	        assertEquals(Optional.empty(), participer.getByIdEquipe(participer1.getIdEquipe()));
 	        connection.rollback();
-	        
-	    }catch(Exception e){
-	        e.printStackTrace();
-	    }
-
 	}
 
 }

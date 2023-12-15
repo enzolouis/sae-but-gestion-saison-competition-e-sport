@@ -9,11 +9,9 @@ import modeles.TournoiModele;
 
 public class SaisieResultatModele {
 	
-	private Match match;
 	private TournoiModele tournoi;
 	
-	public SaisieResultatModele(Match match, TournoiModele tournoi) {
-		this.match = match;
+	public SaisieResultatModele(TournoiModele tournoi) {
 		this.tournoi = tournoi;
 	}
 	

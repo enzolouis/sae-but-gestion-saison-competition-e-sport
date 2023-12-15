@@ -26,30 +26,40 @@ import classes.Participer;
 
 public class TournoiModele {
 		
-	//Représente le nom ou le titre du Tournoi
+	//identifiant et titre du tournoi
+	private int idTournoi;
 	private String nomTournoi;
-	
-	//Représente les dates d'ouvertures et de fermeture du Tournoi
+	//dates d'ouvertures et de fermeture du Tournoi
 	private String dateDebut;
 	private String dateFin;
-	
+	//login d'arbitre
 	private String login;
 	private String mdp;
+	//notoriete du tournoi
 	private Notoriete notoriete;
+	//etat du tournoi
 	private EtatTournoi etat;
-	private int idTournoi;
+	//liste des matchs sur tournoi 
 	private List<Match> matches;
+	private Match finale;
+	//dictionnaire des participants du tournoi avec l'équipe
+	//en clé et les points de l'équipe en valeur
 	private Map<Equipe, Integer> participants;
+	//liste contenant les équipes indisposées
 	private List<Equipe> participantsIndisposees;
+	//optional contenant le vainqueur
 	private Optional<Equipe> vainqueur;
+	//liste contenant tous les arbitres assignés au tournoi
 	private List<Arbitre> arbitres;
 
 	/**
 	 * Constructeur de la classe Tournoi
-	 * 	@param ID du tournoi
+	 * 	@param id du tournoi
 	 * 	@param nom du tournoi
 	 * 	@param date de début du tournoi, date de son ouverture
 	 * 	@param date de fin, date de sa fermeture
+	 *  @param login utilisé par les arbitres 
+	 *  @param mdp utilisé par les aribtres 
 	 * 	@param notoriété du Tournoi
 	 * 	@param Etat d'ouverture ou fermeture du Tournoi
 	 * */
@@ -93,89 +103,99 @@ public class TournoiModele {
 		this.generateMdp();
 	}
 	
-	/**Donne l'id du tournoi
-	 * */
+	//getters et setters de l'identifiant du tournoi
 	public int getIDTournoi() {
 		return this.idTournoi;
 	}
-	/**Change l'id du tournoi
-		@param id à remplacer 
-	*/
 	public void setIDTournoi(int id) {
 		this.idTournoi = id;
 	}
-	
-	/**
-	 * Donne le nom du tournoi
-	 * 
-	 * */
+
+	//getters et setter du nom du tournoi
 	public String getNomTournoi() {
 		return this.nomTournoi;
 	}
-	/**Change le nom du tournoi
-	 * @param nom à remplacer
-	 * */
 	public void setNomTournoi(String nom) {
 		this.nomTournoi = nom;
 	}
 	
+	//getters et setters de la date de début du tournoi 
+	public Date getDateDebut() throws ParseException {
+			return getDate(this.dateDebut);
+	}
 	public void setDateDebut(String dateD) {
 		this.dateDebut = dateD;
 	}
 	
+	//getters et setters de la date de fin du tournoi
+	public Date getDateFin() throws ParseException {
+		return getDate(this.dateFin);
+	}
 	public void setDateFin(String dateF) {
 		this.dateFin = dateF;
 	}
 	
-	//Donne la date de début du tournoi
-	public Date getDateDebut() throws ParseException {
-		return getDate(this.dateDebut);
-	}
-	
-	//Donne la date de fin du tournoi
-	public Date getDateFin() throws ParseException {
-		return getDate(this.dateFin);
-	}
-	
-	//Donne la Notoriete du tournoi
+	//getters et setters de la notoriété du tournoi
 	public Notoriete getNotoriete() {
 		return this.notoriete;
 	}
-	
-	/**Change la Notoriete du tournoi
-	 * 	@param la valeur de notoriété avec lequel changer
-	 * */
 	public void setNotoriete(Notoriete not) {
 		this.notoriete = not;
 	}
 	
-	//Donne l'etat du tournoi
+	//getters et setters de l'état du tournoi 
 	public EtatTournoi getEtatTournoi() {
 		return this.etat;
 	}
-	/**Change l'etat du tournoi
-	 * 	@param la valeur de l'état du tournoi avec lequel changer
-	 * */
 	public void setEtatTournoi(EtatTournoi etat) {
 		this.etat = etat;
 	}
 	
-	//Donne la liste des match du tournoi
+	//getters et setters de la liste des matchs
 	public List<Match> getMatchs(){
 		return this.matches;
 	}
 	
+	public Map<Equipe,Integer> getEquipes() {
+		return this.participants;
+	}
+	
+	public List<Arbitre> getArbitres() {
+		return this.arbitres;
+	}
+	
 	@Override
 	public String toString() {
-		return this.idTournoi+": "+this.nomTournoi;
+		String infos = getIDTournoi()+": "+getNomTournoi()+"("+getNotoriete()+")\n";
+		try {
+			infos += "Du "+getDateDebut()+" au "+getDateFin()+"\n";
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		infos+="Liste des arbitres:\n";
+		for (Arbitre a : getArbitres()) {
+			infos+=a.toString();
+			infos+="\n";
+		}
+		infos+="Liste des équipes:\n";
+		for (Equipe e : getEquipes().keySet()) {
+			infos+=e.toString();
+			infos+="\n";
+		}
+		return infos;
 	}
 	
 	/**Créé un nouveau match pour le tournoi, 
 	* 	@param la valeur de l'ID du match créée
 	* 	@param le booléan précisant s'il sagit d'une finale, ou non
-	 * */
+	* */
 	public void nouveauMatch(int idMatch, boolean finale) {
-		this.matches.add(new Match(idMatch, finale));
+		if (finale) {
+			this.finale = new Match(idMatch, finale);
+		} else {
+			this.matches.add(new Match(idMatch, finale));
+		}
 	}
 	
 	//Donne la map de participant
@@ -221,14 +241,7 @@ public class TournoiModele {
 	public Optional<Equipe> getVainqueur() {
 		return this.vainqueur;
 	}
-	
-	public List<Arbitre> getArbitres() {
-		return this.arbitres;
-	}
-	
-	public Map<Equipe,Integer> getEquipes() {
-		return this.participants;
-	}
+
 	
 	//Génère un Login pour le Tournoi,
 	//l'ensemble est basé sur le NomTournoi + idTournoi, en UpperCase + 3 lettres générés au hasard
