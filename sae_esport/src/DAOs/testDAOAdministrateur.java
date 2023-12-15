@@ -20,79 +20,52 @@ public class testDAOAdministrateur {
 	AdministrateurDAO adminDAO;
 	
 	@Before
-	public void beforeTests() {
+	public void beforeTests() throws Exception{
 		
-		try {
-			
 			System.setProperty("derby.system.home", dirProjetJava + "/BDDSAEEsport");
 			this.connection = DriverManager.getConnection("jdbc:derby:BDDSAEEsport;create=true");
 			this.adminDAO = new AdministrateurDAO();
 			connection.setAutoCommit(false);
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 	}
 	
 	@After
-	public void afterTests() {
-		
-		try {
-			
+	public void afterTests() throws Exception{
+	
 			connection.setAutoCommit(true);
 			connection.close();
 			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
 	}
 	
 	@Test
 	/// Ryan GAUNAND
 	/// Test de la récupération d'un administrateur lorsqu'il n'y a pas cet administrateur
-	public void testGetByIdAdministrateurNonExistant() {
-	    
-		try {
-			
+	public void testGetByIdAdministrateurNonExistant()throws Exception {
 			Optional<Administrateur> admin = adminDAO.getById(-1);
 		    assertEquals(Optional.empty(), admin);
 		    connection.rollback();
-		    
-		} catch(Exception e) {
-	        e.printStackTrace();
-	    }
-		
+
 	}
 	
 	@Test
 	/// Ryan GAUNAND
 	/// Test de la récupération d'un administrateur
-	public void testGetByIdAdministrateur() {
-	    
-		try {
-			
+	public void testGetByIdAdministrateur()throws Exception {
+
 			Administrateur admin = new Administrateur(0, "Chocola Meilleure", "chocola", "vieillerefdeshojo");
 			adminDAO.add(admin);
 			Optional<Administrateur> optional = adminDAO.getById(admin.getIdAdministrateur());
 		    assertEquals(optional.get(), admin);
 		    connection.rollback();
-		    
-		} catch(Exception e) {
-	        e.printStackTrace();
-	    }
-		
+
 	}
 	
 	
 	@Test
 	//Test de la récupération des administrateur lorsqu'il y a des administrateurs
-	public void testGetAllAdministrateur() {
-		    
-		try {
-			
+	public void testGetAllAdministrateur() throws Exception{
+		
 			Administrateur admin1 = new Administrateur(0, "Chocola Meilleure", "chocola", "vieillerefdeshojo");
 			Administrateur admin2 = new Administrateur(0, "Roméo Wen", "juliette", "motdepasse");	
 			adminDAO.add(admin1);
@@ -102,38 +75,24 @@ public class testDAOAdministrateur {
 		    assertEquals(listAdministrateur.get(index-2), admin1);
 		    assertEquals(listAdministrateur.get(index-1), admin2);
 		    connection.rollback();
-			    
-		} catch(Exception e) {
-		    e.printStackTrace();
-		}
-		
 	}
 	
 	@Test
 	/// Ryan GAUNAND
 	/// Test de l'ajout d'administrateur 
-	public void testAddAdministrateur() throws SQLException {
-
-	    try{
-
+	public void testAddAdministrateur() throws Exception {
+ 
 			Administrateur admin = new Administrateur(-1, "Ryan Add", "r.gaunand", "monMotDePasseSecurise"); 
 	    	adminDAO.add(admin);
 	    	assertEquals(admin, adminDAO.getById(admin.getIdAdministrateur()).get());
 	    	connection.rollback();
-	        
-	    } catch(Exception e) {
-	        e.printStackTrace();
-	    }
-	    
+   
 	}
 	
 	@Test
 	/// Ryan GAUNAND
 	/// Test de la mise à jour d'un administrateur
-	public void testUpdateAdministrateur() throws SQLException {
-		
-	    try{
-	    	
+	public void testUpdateAdministrateur() throws Exception {
 			Administrateur admin = new Administrateur(-1, "Ryan Update", "r.gaunand", "monMotDePasseSecurise");
 	        adminDAO.add(admin);
 	        String newName = "Nayr";
@@ -141,20 +100,13 @@ public class testDAOAdministrateur {
 	        adminDAO.update(admin);
 	        assertEquals(admin, adminDAO.getById(admin.getIdAdministrateur()).get());
 	        connection.rollback();
-	        
-	    } catch(Exception e) {
-	        e.printStackTrace();
-	    }
-	    
+
 	}
 	
 	@Test
 	/// Ryan GAUNAND
 	/// Test de supression d'un administrateur
-	public void testDeleteAdministrateur() throws SQLException { 
-		
-		try{
-			
+	public void testDeleteAdministrateur() throws Exception { 
 			Administrateur admin = new Administrateur(-1, "Ryan Delete", "r.gaunand", "monMotDePasseSecurise"); 
 	        adminDAO.add(admin);
 	        int size = adminDAO.getAll().size();
@@ -162,10 +114,6 @@ public class testDAOAdministrateur {
 	        assertEquals(size -1, adminDAO.getAll().size());
 	        assertEquals(Optional.empty(), adminDAO.getById(admin.getIdAdministrateur()));
 	        connection.rollback();
-	        
-	    }catch(Exception e){
-	        e.printStackTrace();
-	    }
 
 	}
 }

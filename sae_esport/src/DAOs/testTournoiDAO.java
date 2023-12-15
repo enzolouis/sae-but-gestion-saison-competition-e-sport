@@ -24,62 +24,34 @@ public class testTournoiDAO {
 	TournoiDAO tournoi;
 	
 	@Before
-	public void beforeTests() {
-		
-		try {
-			
-			System.setProperty("derby.system.home", dirProjetJava + "/BDDSAEEsport");
+	public void beforeTests()throws Exception {
+		System.setProperty("derby.system.home", dirProjetJava + "/BDDSAEEsport");
 			this.connection = DriverManager.getConnection("jdbc:derby:BDDSAEEsport;create=true");
 			this.tournoi = new TournoiDAO();
 			connection.setAutoCommit(false);
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 	
 	@After
-	public void afterTests() {
-		
-		try {
-			
-			connection.setAutoCommit(true);
+	public void afterTests() throws Exception{
+		connection.setAutoCommit(true);
 			connection.close();
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 	}
 	
 	@Test
 	/// Olivier RODRIGUEZ
 	/// Test de la récupération d'un Arbitre lorsqu'il n'y a pas cet arbitre
-	public void testGetByIdTournoiNonExistant() {
-	    
-		try {
-			
-			Optional<TournoiModele> tournoi = this.tournoi.getById(-1);
+	public void testGetByIdTournoiNonExistant() throws Exception{
+	    Optional<TournoiModele> tournoi = this.tournoi.getById(-1);
 		    assertEquals(Optional.empty(), tournoi);
 		    connection.rollback();
-		    
-		} catch(Exception e) {
-	        e.printStackTrace();
-	    }
-		
 	}
 	
 	
 	@Test
 	/// Olivier RODRIGUEZ
 	/// Test de la récupération d'un administrateur
-	public void testGetByIdTournoi() {
-	    
-		try {
-			
-			TournoiModele tournoi = new TournoiModele(
+	public void testGetByIdTournoi() throws Exception{
+	    TournoiModele tournoi = new TournoiModele(
 					1,
 					"Champers", 
 					"25/12/1988", 
@@ -90,21 +62,13 @@ public class testTournoiDAO {
 			Optional<TournoiModele> optional = this.tournoi.getById(tournoi.getIDTournoi());
 		    assertEquals(optional.get(), tournoi);
 		    connection.rollback();
-		    
-		} catch(Exception e) {
-	        e.printStackTrace();
-	    }
-		
 	}
 	
 	
 	@Test
 	//Test de la récupération des administrateur lorsqu'il y a des administrateurs
-	public void testGetAllTournoi() {
-		    
-		try {
-			
-			TournoiModele tournoi1 = new TournoiModele(
+	public void testGetAllTournoi() throws Exception{
+		    TournoiModele tournoi1 = new TournoiModele(
 					1,
 					"Champers", 
 					"25/12/1988", 
@@ -126,21 +90,13 @@ public class testTournoiDAO {
 		    assertEquals(listMatch.get(index-2), tournoi1);
 		    assertEquals(listMatch.get(index-1), tournoi2);
 		    connection.rollback();
-			    
-		} catch(Exception e) {
-		    e.printStackTrace();
-		}
-		
 	}
 	
 	@Test
 	/// Olivier RODRIGUEZ
 	/// Test de l'ajout d'administrateur 
-	public void testAddTournoi() throws SQLException {
-
-	    try{
-
-	    	TournoiModele tournoi1 = new TournoiModele(
+	public void testAddTournoi() throws Exception {
+		TournoiModele tournoi1 = new TournoiModele(
 					1,
 					"Champers", 
 					"25/12/1988", 
@@ -151,21 +107,13 @@ public class testTournoiDAO {
 	    	this.tournoi.add(tournoi1);
 	    	assertEquals(tournoi1, tournoi.getById(tournoi1.getIDTournoi()).get());
 	    	connection.rollback();
-	        
-	    } catch(Exception e) {
-	        e.printStackTrace();
-	    }
-	    
 	}
 	
 	@Test
 	/// Olivier RODRIGUEZ
 	/// Test de la mise à jour d'un administrateur
-	public void testUpdateTournoi() throws SQLException {
-		
-	    try{
-	    	
-	    	TournoiModele tournoi1 = new TournoiModele(
+	public void testUpdateTournoi() throws Exception {
+		TournoiModele tournoi1 = new TournoiModele(
 					1,
 					"Champers", 
 					"25/12/1988", 
@@ -178,21 +126,13 @@ public class testTournoiDAO {
 	        tournoi.update(tournoi1);
 	        assertEquals(tournoi1, tournoi.getById(tournoi1.getIDTournoi()).get());
 	        connection.rollback();
-	        
-	    } catch(Exception e) {
-	        e.printStackTrace();
-	    }
-	    
 	}
 	
 	@Test
 	/// Olivier RODRIGUEZ
 	/// Test de supression d'un administrateur
-	public void testDeleteTournoi() throws SQLException { 
-		
-		try{
-			
-			TournoiModele tournoi1 = new TournoiModele(
+	public void testDeleteTournoi() throws Exception { 
+		TournoiModele tournoi1 = new TournoiModele(
 					1,
 					"Champers", 
 					"25/12/1988", 
@@ -206,11 +146,6 @@ public class testTournoiDAO {
 	        assertEquals(size -1, tournoi.getAll().size());
 	        assertEquals(Optional.empty(), tournoi.getById(tournoi1.getIDTournoi()));
 	        connection.rollback();
-	        
-	    }catch(Exception e){
-	        e.printStackTrace();
-	    }
-
 	}
 
 }
