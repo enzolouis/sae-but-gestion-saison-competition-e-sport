@@ -562,9 +562,9 @@ public class TestTournoiModele {
 				Notoriete.REGIONAL,
 				EtatTournoi.OUVERT);
 		
-		t.ajouterEquipe(new Equipe(1, "e1", Nationalite.FR, true, 1000, 100));
-		t.ajouterEquipe(new Equipe(2, "e2", Nationalite.FR, true, 1000, 100));
-		t.ajouterEquipe(new Equipe(5, "e5", Nationalite.FR, false, 1000, 100));
+		t.ajouterEquipe(new Equipe(1, "e1", Nationalite.FR, true, 1000, 100),0);
+		t.ajouterEquipe(new Equipe(2, "e2", Nationalite.FR, true, 1000, 100),0);
+		t.ajouterEquipe(new Equipe(5, "e5", Nationalite.FR, false, 1000, 100),0);
 		
 		t.supprimerEquipeIndisposees();
 		
@@ -598,10 +598,10 @@ public class TestTournoiModele {
 		
 		// configuration parfaite d'un tournoi pouvant être lancé
 		// (>= 4 equipe, >= 1 equipe, date dans creneau, aucun tournoi deja ouvert)
-		t.ajouterEquipe(new Equipe(1, "e1", Nationalite.FR, true, 1000, 100));
-		t.ajouterEquipe(new Equipe(2, "e2", Nationalite.FR, true, 1000, 100));
-		t.ajouterEquipe(new Equipe(3, "e3", Nationalite.FR, true, 1000, 100));
-		t.ajouterEquipe(new Equipe(4, "e4", Nationalite.FR, true, 1000, 100));
+		t.ajouterEquipe(new Equipe(1, "e1", Nationalite.FR, true, 1000, 100),0);
+		t.ajouterEquipe(new Equipe(2, "e2", Nationalite.FR, true, 1000, 100),0);
+		t.ajouterEquipe(new Equipe(3, "e3", Nationalite.FR, true, 1000, 100),0);
+		t.ajouterEquipe(new Equipe(4, "e4", Nationalite.FR, true, 1000, 100),0);
 		
 		t.ajouterArbitre(new Arbitre(1, "Albert", "Camus", Nationalite.FR));
 		
@@ -633,10 +633,10 @@ public class TestTournoiModele {
 		
 		// configuration parfaite d'un tournoi pouvant être lancé
 		// (>= 4 equipe, >= 1 equipe, date dans creneau, aucun tournoi deja ouvert)
-		t.ajouterEquipe(new Equipe(1, "e1", Nationalite.FR, true, 1000, 100));
-		t.ajouterEquipe(new Equipe(2, "e2", Nationalite.FR, true, 1000, 100));
-		t.ajouterEquipe(new Equipe(3, "e3", Nationalite.FR, true, 1000, 100));
-		t.ajouterEquipe(new Equipe(4, "e4", Nationalite.FR, true, 1000, 100));
+		t.ajouterEquipe(new Equipe(1, "e1", Nationalite.FR, true, 1000, 100),0);
+		t.ajouterEquipe(new Equipe(2, "e2", Nationalite.FR, true, 1000, 100),0);
+		t.ajouterEquipe(new Equipe(3, "e3", Nationalite.FR, true, 1000, 100),0);
+		t.ajouterEquipe(new Equipe(4, "e4", Nationalite.FR, true, 1000, 100),0);
 		
 		t.ajouterArbitre(new Arbitre(1, "Albert", "Camus", Nationalite.FR));
 		
