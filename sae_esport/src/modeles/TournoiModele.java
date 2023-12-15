@@ -282,19 +282,24 @@ public class TournoiModele {
 	
 	public boolean isTournoiNonSuperpose() throws Exception {
 		for (TournoiModele t : TournoiDAO.getInstance().getAll()) {
-			// si (la date de debut est plus grande ou egal à la date de début d'un autre tournoi 
-			//     ET la date début est plus petite que la date de fin de l'autre tournoi) (*** ou egal ??)
-			// OU (la date de fin est plus grande que la date de debut d'un autre tournoi
-			//    (ET la date de fin eest plus petit ou egal a la date de fin d'un autre tournoi)
-			// OU (la date de debut d'un tournoi est plus grande ou egal a la date de debut
-			//    (ET la date de debut d'un tournoi est plus petit que la date de fin
+			// /* = peut se positionner n'importe ou
+			// 						19/01							  30/01
+			//   					  |									|
+			
+			// Cas 1           			     |----------------------------------|
+			// Cas 2  	|-----------------------------|
+			// Cas 3  	|-------------------------------------------------------|
+			// Cas 4		   					|------------|
+			// Cas 4 optionnel ou pas ?
 			
 			// before et after existe...
 			
-			if ((getDateDebut().compareTo(t.getDateDebut()) >= 0 && getDateDebut().compareTo(t.getDateFin()) < 0) 
-		            || (getDateFin().compareTo(t.getDateDebut()) > 0 && getDateFin().compareTo(t.getDateFin()) <= 0) 
-		           || (t.getDateDebut().compareTo(getDateDebut()) >= 0 && t.getDateDebut().compareTo(getDateFin()) < 0)) {
-		            return false;
+			
+			if ((getDateDebut().compareTo(t.getDateDebut()) >= 0 && getDateDebut().compareTo(t.getDateFin()) <= 0) 
+	                || (getDateFin().compareTo(t.getDateDebut()) >= 0 && getDateFin().compareTo(t.getDateFin()) <= 0) 
+	                || (getDateDebut().compareTo(t.getDateDebut()) <= 0 && getDateFin().compareTo(t.getDateDebut()) >= 0)
+	                || (getDateDebut().compareTo(t.getDateDebut()) >= 0 && getDateFin().compareTo(t.getDateFin()) <= 0)) {
+				return false;
 			}
 		}
 		

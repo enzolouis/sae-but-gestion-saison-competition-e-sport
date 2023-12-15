@@ -311,8 +311,7 @@ public class TestTournoiModele {
 	}
 	
 	@Test
-	public void testTournoiNonSuperpose() throws Exception {
-		
+	public void testTournoiNonSuperposeSansSuperposition() throws Exception {
 		t = new TournoiModele(
 				2,
 				"testTournoiNonSuperpose1", 
@@ -331,14 +330,117 @@ public class TestTournoiModele {
 				"27/12/1888", 
 				Notoriete.REGIONAL,
 				EtatTournoi.FERME);
-		
-		System.out.println("-> "+ t2.isTournoiNonSuperpose());
-		//assertTrue(t2.isTournoiNonSuperpose());
+		System.out.println("-- I --");
+		assertTrue(t2.isTournoiNonSuperpose());
 		
 		DBConnection.getInstance().rollback();
-		// rollback
-		//TournoiDAO.getInstance().delete(t);
 	}
+	
+	@Test
+	public void testTournoiNonSuperposeSuperpositionDateDebutDansCreneau() throws Exception {
+		t = new TournoiModele(
+				2,
+				"testTournoiNonSuperpose1", 
+				"20/11/1888", 
+				"31/11/1888", 
+				Notoriete.REGIONAL,
+				EtatTournoi.FERME);
+		
+		TournoiDAO.getInstance().add(t);
+		
+		
+		TournoiModele t2 = new TournoiModele(
+				2,
+				"testTournoiNonSuperpose2", 
+				"25/11/1888", 
+				"15/12/1888", 
+				Notoriete.REGIONAL,
+				EtatTournoi.FERME);
+		System.out.println("-- II --");
+		assertFalse(t2.isTournoiNonSuperpose());
+		
+		DBConnection.getInstance().rollback();
+	}
+	
+	@Test
+	public void testTournoiNonSuperposeSuperpositionDateFinDansCreneau() throws Exception {
+		t = new TournoiModele(
+				2,
+				"testTournoiNonSuperpose1", 
+				"20/11/1888", 
+				"31/11/1888", 
+				Notoriete.REGIONAL,
+				EtatTournoi.FERME);
+		
+		TournoiDAO.getInstance().add(t);
+		
+		
+		TournoiModele t2 = new TournoiModele(
+				2,
+				"testTournoiNonSuperpose2", 
+				"01/10/1888", 
+				"25/11/1888", 
+				Notoriete.REGIONAL,
+				EtatTournoi.FERME);
+		System.out.println("-- III --");
+		assertFalse(t2.isTournoiNonSuperpose());
+		
+		DBConnection.getInstance().rollback();
+	}
+	
+	@Test
+	public void testTournoiNonSuperposeSuperpositionCreneauEnglobantCreneau() throws Exception {
+		t = new TournoiModele(
+				2,
+				"testTournoiNonSuperpose1", 
+				"20/11/1888", 
+				"31/11/1888", 
+				Notoriete.REGIONAL,
+				EtatTournoi.FERME);
+		
+		TournoiDAO.getInstance().add(t);
+		
+		
+		TournoiModele t2 = new TournoiModele(
+				2,
+				"testTournoiNonSuperpose2", 
+				"15/10/1888", 
+				"15/12/1888", 
+				Notoriete.REGIONAL,
+				EtatTournoi.FERME);
+		System.out.println("-- IIIVV --");
+		assertFalse(t2.isTournoiNonSuperpose());
+		System.out.println("-- IIIVddV --");
+		DBConnection.getInstance().rollback();
+	}
+	
+	@Test
+	public void testTournoiNonSuperposeSuperpositionDateDebutEtDateFinDansCreneau() throws Exception {
+		t = new TournoiModele(
+				2,
+				"testTournoiNonSuperpose1", 
+				"20/11/1888", 
+				"31/11/1888", 
+				Notoriete.REGIONAL,
+				EtatTournoi.FERME);
+		
+		TournoiDAO.getInstance().add(t);
+		
+		
+		TournoiModele t2 = new TournoiModele(
+				2,
+				"testTournoiNonSuperpose2", 
+				"23/11/1888", 
+				"27/11/1888", 
+				Notoriete.REGIONAL,
+				EtatTournoi.FERME);
+		System.out.println("-- IIII --");
+		assertFalse(t2.isTournoiNonSuperpose());
+		
+		DBConnection.getInstance().rollback();
+	}
+	
+	
 	
 	@Test
 	public void testTournoiMinimum4EquipeDisposeeAvecAuMoins4EquipesDisposees() {
