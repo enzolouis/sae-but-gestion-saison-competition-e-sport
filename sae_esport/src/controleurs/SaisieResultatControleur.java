@@ -16,18 +16,34 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import classes.Match;
 import modeles.SaisieResultatModele;
 import modeles.TournoiModele;
+import vues.ResultatMatchVue;
 
 public class SaisieResultatControleur implements ActionListener {
 	private SaisieResultatModele modele;
+	private ResultatMatchVue vue;
 	
-	public SaisieResultatControleur() {
+	
+	public SaisieResultatControleur(ResultatMatchVue vue) {
+		this.vue = vue; 
 		this.modele = new SaisieResultatModele(new Match(0,false),new TournoiModele());
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
+		if (e.getSource() instanceof JButton) {
+			JButton bouton = (JButton) e.getSource();
+			switch (bouton.getText()) {
+			case("Annuler"):
+				
+				break;
+			case("Valider"):
+				
+				break;
+			case ("Quitter"):
+				this.vue.dispose();
+				break;
+			}
+		}
 	}
 	
 }
