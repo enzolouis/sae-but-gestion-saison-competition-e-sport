@@ -89,9 +89,9 @@ public class CreationTournoiControleur implements ActionListener {
 					} else {
 						try {
 							TournoiDAO.getInstance().add(t);
-							for (int i = 0; i < this.vue.comboBoxArbitre.getItemCount(); i++) {
-								TournoiDAO.getInstance().addArbitre(t, this.vue.comboBoxArbitre.getItemAt(i));
-								t.ajouterArbitre(this.vue.comboBoxArbitre.getItemAt(i));
+							for (int i = 0; i < this.vue.listArbitres.getModel().getSize(); i++) {
+								TournoiDAO.getInstance().addArbitre(t, this.vue.listArbitres.getModel().getElementAt(i));
+								t.ajouterArbitre(this.vue.listArbitres.getModel().getElementAt(i));
 							}
 							for (Equipe eq : data) {
 								TournoiDAO.getInstance().addEquipe(t, eq);
