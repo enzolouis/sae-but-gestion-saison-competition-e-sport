@@ -60,9 +60,10 @@ public class ListeTournoisControleur implements ActionListener, MouseListener {
 			JToggleButton toggle = (JToggleButton) e.getSource();
 			if (toggle.isSelected()) {
 				toggle.setIcon(ListeTournoisVue.OEIL_VISIBLE_ICON);
-				
+				this.vue.mdp.setEchoChar((char) 0);
 			} else {
 				toggle.setIcon(ListeTournoisVue.OEIL_INVISIBLE_ICON);
+				this.vue.mdp.setEchoChar('•');
 			}
 		}
 		
