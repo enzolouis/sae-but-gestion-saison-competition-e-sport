@@ -15,6 +15,10 @@ public class SaisieResultatModele {
 		this.tournoi = tournoi;
 	}
 	
+	public TournoiModele getTournoi() {
+		return this.tournoi;
+	}
+	
 	public boolean IsFinaleDemarree() {
 		for (Match i : tournoi.getMatchs()) {
 			if (i.IsItFinale()) {
