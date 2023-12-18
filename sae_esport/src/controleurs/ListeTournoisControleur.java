@@ -19,8 +19,10 @@ import javax.swing.JToggleButton;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import DAOs.ArbitreDAO;
+import DAOs.EquipeDAO;
 import DAOs.TournoiDAO;
 import classes.Arbitre;
+import classes.Equipe;
 import modeles.TournoiModele;
 import vues.IdentificationVue;
 import vues.ListeTournoisVue;
@@ -58,6 +60,7 @@ public class ListeTournoisControleur implements ActionListener, MouseListener {
 			JToggleButton toggle = (JToggleButton) e.getSource();
 			if (toggle.isSelected()) {
 				toggle.setIcon(ListeTournoisVue.OEIL_VISIBLE_ICON);
+				
 			} else {
 				toggle.setIcon(ListeTournoisVue.OEIL_INVISIBLE_ICON);
 			}
@@ -88,15 +91,22 @@ public class ListeTournoisControleur implements ActionListener, MouseListener {
 				vue.dateDebut.setDate(tournoi.getDateDebut());
 				vue.dateFin.setDate(tournoi.getDateFin());
 				
-				for (Arbitre a : ArbitreDAO.getInstance().getAll()) {
-					System.out.println(a);
+				vue.listeEquipesModel.clear();
+				
+				for (Equipe eq : tournoi.getEquipes().keySet()) {
+					vue.listeEquipesModel.addElement(eq);
+				}
+				
+				vue.listeEquipes.setModel(vue.listeEquipesModel);
+				
+				vue.listeArbitresModel.clear();
+				for (Arbitre a : tournoi.getArbitres()) {
 					vue.listeArbitresModel.addElement(a);
 				}
 				
 				vue.listeArbitres.setModel(vue.listeArbitresModel);
 				
 			} catch (Exception e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			
