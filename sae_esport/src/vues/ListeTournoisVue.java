@@ -63,6 +63,9 @@ public class ListeTournoisVue extends CustomJFrame {
 	public CustomJToggleButton activLogins;
 	public CustomJButton boutonOuverture;
 	public CustomJLabel erreurOuverture;
+	public CustomJLabel titreEquipe;
+	public CustomJLabel joueurs;
+	public CustomJLabel disposition;
 	
 	private ListeTournoisControleur controleur;
 	
@@ -156,7 +159,7 @@ public class ListeTournoisVue extends CustomJFrame {
 		CustomJPanel panelListeEquipe = new CustomJPanel();
 		panelListeEquipe.setBorder(new EmptyBorder(5, 5, 0, 5));
 		listeEquipes = new JList<Equipe>();
-		listeEquipes.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 7));
+		listeEquipes.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 9));
 		listeEquipesModel = new DefaultListModel<Equipe>();
 		panelEquipeArbitre.setLayout(new GridLayout(0, 2, 0, 0));
 		panelEquipe.setLayout(new GridLayout(2, 1, 0, 0));
@@ -171,15 +174,25 @@ public class ListeTournoisVue extends CustomJFrame {
 		panelEquipe.add(panelJoueurs);
 		panelEquipeArbitre.add(panelEquipe); 
 		
-		CustomJLabel titreEquipe = new CustomJLabel("aaa", 10);
+		titreEquipe = new CustomJLabel("aaa", 10);
+		titreEquipe.setText("");
+		titreEquipe.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
 		titreEquipe.setBounds(new Rectangle(0, 0, 10, 10));
-		titreEquipe.setBounds(49, 11, 53, 10);
-		CustomJLabel joueurs = new CustomJLabel("bbb", 8);
+		titreEquipe.setBounds(47, 11, 53, 10);
+		joueurs = new CustomJLabel("bbb", 8);
+		joueurs.setText("");
+		joueurs.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 9));
+		joueurs.setVerticalAlignment(SwingConstants.TOP);
+		joueurs.setHorizontalTextPosition(SwingConstants.CENTER);
+		joueurs.setHorizontalAlignment(SwingConstants.LEFT);
 		joueurs.setSize(new Dimension(15, 10));
 		joueurs.setBounds(new Rectangle(10, 10, 10, 10));
-		joueurs.setBounds(42, 37, 84, 10);
-		CustomJLabel disposition = new CustomJLabel("ccc", 8);
-		disposition.setBounds(0, 0, 149, 97);
+		joueurs.setBounds(0, 32, 149, 40);
+		disposition = new CustomJLabel("ccc", 8);
+		disposition.setText("");
+		disposition.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 9));
+		disposition.setHorizontalAlignment(SwingConstants.LEFT);
+		disposition.setBounds(0, 66, 100, 20);
 		panelJoueurs.setLayout(null);
 		panelJoueurs.add(titreEquipe); panelJoueurs.add(joueurs);
 		panelJoueurs.add(disposition);
@@ -188,7 +201,7 @@ public class ListeTournoisVue extends CustomJFrame {
 		panelArbitre.setBorder(new EmptyBorder(5,5,5,5));
 		listeArbitres = new JList<Arbitre>();
 		listeArbitres.setBounds(new Rectangle(0, 0, 140, 0));
-		listeArbitres.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 7));
+		listeArbitres.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 9));
 		listeArbitresModel = new DefaultListModel<Arbitre>();
 		JScrollPane scrollArbitres = new JScrollPane(listeArbitres);
 		panelArbitre.add(scrollArbitres);
@@ -228,22 +241,22 @@ public class ListeTournoisVue extends CustomJFrame {
 		login = new CustomJTextField();
 		login.setEnabled(false);
 		login.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
-		login.setBounds(94, 16, 92, 20);
+		login.setBounds(94, 35, 92, 20);
 		mdp = new CustomJPasswordField();
 		mdp.setEnabled(false);
 		mdp.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
-		mdp.setBounds(94, 46, 92, 20);
+		mdp.setBounds(95, 60, 92, 20);
 		CustomJLabel labelLogin = new CustomJLabel("Login d'arbitre", 11);
 		labelLogin.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 11));
 		labelLogin.setHorizontalAlignment(SwingConstants.RIGHT);
 		labelLogin.setText("Identifiant");
-		labelLogin.setBounds(10, 11, 74, 30);
+		labelLogin.setBounds(10, 30, 74, 30);
 		CustomJLabel labelMdp = new CustomJLabel("Mot de passe d'arbitre", 11);
 		labelMdp.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 11));
 		labelMdp.setHorizontalAlignment(SwingConstants.RIGHT);
 		labelMdp.setText("Mot de passe");
 		labelMdp.setSize(75, 30);
-		labelMdp.setLocation(10, 41);
+		labelMdp.setLocation(10, 55);
 		logins.add(labelLogin); logins.add(labelMdp);
 		
 		logins.setLayout(null);
@@ -253,8 +266,15 @@ public class ListeTournoisVue extends CustomJFrame {
 		activLogins.setBackground(new Color(29, 88, 129));
 		activLogins.setBorder(null);
 		activLogins.setIcon(OEIL_INVISIBLE_ICON);
-		activLogins.setBounds(196, 30, 40, 20);
+		activLogins.setBounds(196, 44, 40, 20);
 		logins.add(activLogins);
+		
+		CustomJLabel labelLogin_1 = new CustomJLabel("Login d'arbitre", 11);
+		labelLogin_1.setText("Login d'arbitre :");
+		labelLogin_1.setHorizontalAlignment(SwingConstants.LEFT);
+		labelLogin_1.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 13));
+		labelLogin_1.setBounds(10, 0, 174, 30);
+		logins.add(labelLogin_1);
 		activLogins.addActionListener(controleur);
 		
 		CustomJLabel labelDateD = new CustomJLabel("Du", 15);
@@ -274,7 +294,6 @@ public class ListeTournoisVue extends CustomJFrame {
 		
 		erreurOuverture = new CustomJLabel("",10);
 		erreurOuverture.setBorder(new EmptyBorder(3, 3, 3, 3));
-		erreurOuverture.setText("dcc c    ");
 		erreurOuverture.setAlignmentX(Component.CENTER_ALIGNMENT);
 		boutonsTournoi.add(erreurOuverture);
 	}
