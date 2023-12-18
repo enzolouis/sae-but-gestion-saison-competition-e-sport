@@ -64,7 +64,9 @@ public class AdministrateurDAO {
 		if (rs.next()) {
 			id = rs.getInt(1);
 		}
+		
 		value.setIdAdministrateur(id);
+		
 		st = DBConnection.getInstance().prepareStatement("INSERT INTO admin VALUES (?, ?, ?, ?)");
 		st.setInt(1, id); st.setString(2, value.getNom());
 		st.setString(3, value.getLogin()); st.setString(4, value.getMotDePasse());
