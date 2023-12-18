@@ -11,6 +11,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Random;
 
@@ -303,15 +304,17 @@ public class TournoiModele {
 			// Cas 2  	|-----------------------------|
 			// Cas 3  	|-------------------------------------------------------|
 			// Cas 4		   					|------------|
-			// Cas 4 optionnel ou pas ?
+			// Cas 4 déclaré optionnel :
+			// || (getDateDebut().compareTo(t.getDateDebut()) >= 0 && getDateFin().compareTo(t.getDateFin()) <= 0)
+			// quand un des deux premier cas est rempli ET que la pré-condition dateDébut < dateFin est rempli
+			// , le cas 4 est forcément rempli		
 			
-			// before et after existe...
+			// pré-condition : date début < date fin
 			
 			
 			if ((getDateDebut().compareTo(t.getDateDebut()) >= 0 && getDateDebut().compareTo(t.getDateFin()) <= 0) 
 	                || (getDateFin().compareTo(t.getDateDebut()) >= 0 && getDateFin().compareTo(t.getDateFin()) <= 0) 
-	                || (getDateDebut().compareTo(t.getDateDebut()) <= 0 && getDateFin().compareTo(t.getDateDebut()) >= 0)
-	                || (getDateDebut().compareTo(t.getDateDebut()) >= 0 && getDateFin().compareTo(t.getDateFin()) <= 0)) {
+	                || (getDateDebut().compareTo(t.getDateDebut()) <= 0 && getDateFin().compareTo(t.getDateDebut()) >= 0)) {
 				return false;
 			}
 		}
@@ -382,5 +385,25 @@ public class TournoiModele {
 			TournoiDAO.getInstance().update(this);
 		}
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(idTournoi, nomTournoi, participants);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		TournoiModele other = (TournoiModele) obj;
+		return idTournoi == other.idTournoi && Objects.equals(nomTournoi, other.nomTournoi)
+				&& Objects.equals(participants, other.participants);
+	}
+	
+	
 
 }
