@@ -71,7 +71,7 @@ public class SaisieResultatControleur implements ActionListener {
 					// TODO Auto-generated catch block
 					e3.printStackTrace();
 				}
-				//Ajout au tournoi
+				modele.getTournoi().nouveauMatch(ma.getIDMatch(), true);
 				break;
 			case ("Fermer le tournoi"):
 				modele.getTournoi().setEtatTournoi(EtatTournoi.FERME);				
