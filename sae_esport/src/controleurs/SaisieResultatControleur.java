@@ -17,15 +17,15 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import classes.Match;
 import modeles.SaisieResultatModele;
 import modeles.TournoiModele;
-import vues.TournoiListeVue;
+import vues.SaisieResultatVue;
 import DAOs.MatchDAO;
 
 public class SaisieResultatControleur implements ActionListener {
 	private SaisieResultatModele modele;
-	private TournoiListeVue vue;
+	private SaisieResultatVue vue;
 	
 	
-	public SaisieResultatControleur(TournoiListeVue vue, TournoiModele tournoi) {
+	public SaisieResultatControleur(SaisieResultatVue vue, TournoiModele tournoi) {
 		this.vue = vue; 
 		this.modele = new SaisieResultatModele(tournoi);
 	}
