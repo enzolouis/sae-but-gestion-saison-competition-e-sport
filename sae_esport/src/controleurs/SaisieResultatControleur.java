@@ -44,8 +44,8 @@ public class SaisieResultatControleur implements ActionListener {
 				break;
 			case ("Ouvrir la Finale"):
 				Match ma = new Match(0,true);
-				Equipe e1;
-				Equipe e2;
+				Equipe e1 = null;
+				Equipe e2 = null;
 				int score= -1;
 				int score2 = -2;
 				Map<Equipe, Integer> equipe = modele.getTournoi().getEquipes();
@@ -65,7 +65,12 @@ public class SaisieResultatControleur implements ActionListener {
 				}
 				ma.AddEquipe(e1);
 				ma.AddEquipe(e2);
-				MatchDAO.getInstance().add(ma);
+				try {
+					MatchDAO.getInstance().add(ma);
+				} catch (Exception e3) {
+					// TODO Auto-generated catch block
+					e3.printStackTrace();
+				}
 				//Ajout au tournoi
 				break;
 			case ("Fermer le tournoi"):
@@ -78,9 +83,9 @@ public class SaisieResultatControleur implements ActionListener {
 				Match m= new Match(idmatch,false);
 				try {
 					m = MatchDAO.getInstance().getById(idmatch).get();
-				} catch (Exception e1) {
+				} catch (Exception ex) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					ex.printStackTrace();
 				}
 				if ( ! modele.IsFinaleDemarree() || m.IsItFinale()) {
 					m.setVainqueur(idequipe);
