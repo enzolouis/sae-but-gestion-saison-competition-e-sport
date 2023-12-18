@@ -58,7 +58,7 @@ public class ListeTournoisVue extends CustomJFrame {
 	public JDateChooser dateDebut;
 	public JDateChooser dateFin;
 	public CustomJTextField login;
-	public CustomJTextField mdp;
+	public CustomJPasswordField mdp;
 	public CustomJToggleButton activLogins;
 	public CustomJButton boutonOuverture;
 	
@@ -82,7 +82,7 @@ public class ListeTournoisVue extends CustomJFrame {
 		
 		controleur = new ListeTournoisControleur(this);
 		
-		setSize(new Dimension(600, 500));
+		setSize(new Dimension(700, 500));
 		
 		CustomJPanel panel = new CustomJPanel();
 		getContentPane().add(panel);
@@ -149,13 +149,13 @@ public class ListeTournoisVue extends CustomJFrame {
 		panelInfos.add(panelAttributs);
 		panelAttributs.setLayout(new BorderLayout(0, 0));
 		panelInfos.add(panelEquipeArbitre);
-		panelEquipeArbitre.setLayout(new GridLayout(0, 2, 0, 0));
 		
 		CustomJPanel panelEquipe = new CustomJPanel();
 		panelEquipe.setBorder(new EmptyBorder(5, 5, 5, 5));
 		listeEquipes = new JList<Equipe>();
-		listeEquipes.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		listeEquipes.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 7));
 		listeEquipesModel = new DefaultListModel<Equipe>();
+		panelEquipeArbitre.setLayout(new GridLayout(0, 2, 0, 0));
 		JScrollPane scrollEquipes = new JScrollPane(listeEquipes);
 		panelEquipe.add(scrollEquipes);
 		CustomJLabel equipeTitre = new CustomJLabel("Equipes", 15);
@@ -167,6 +167,7 @@ public class ListeTournoisVue extends CustomJFrame {
 		CustomJPanel panelArbitre = new CustomJPanel();
 		panelArbitre.setBorder(new EmptyBorder(5,5,5,5));
 		listeArbitres = new JList<Arbitre>();
+		listeArbitres.setBounds(new Rectangle(0, 0, 140, 0));
 		listeArbitres.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 7));
 		listeArbitresModel = new DefaultListModel<Arbitre>();
 		JScrollPane scrollArbitres = new JScrollPane(listeArbitres);
@@ -206,9 +207,11 @@ public class ListeTournoisVue extends CustomJFrame {
 		dates.add(dateDebut); dates.add(dateFin);
 		
 		login = new CustomJTextField();
+		login.setEnabled(false);
 		login.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
 		login.setBounds(94, 16, 92, 20);
-		mdp = new CustomJTextField();
+		mdp = new CustomJPasswordField();
+		mdp.setEnabled(false);
 		mdp.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
 		mdp.setBounds(94, 46, 92, 20);
 		CustomJLabel labelLogin = new CustomJLabel("Login d'arbitre", 11);
