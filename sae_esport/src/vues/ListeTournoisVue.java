@@ -21,6 +21,7 @@ import com.toedter.calendar.JDateChooser;
 import DAOs.TournoiDAO;
 import classes.Arbitre;
 import classes.Equipe;
+import controleurs.ListeTournoisControleur;
 import modeles.TournoiModele;
 
 import java.awt.Dimension;
@@ -29,6 +30,7 @@ import java.awt.FlowLayout;
 import java.awt.Color;
 import javax.swing.JList;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -39,17 +41,28 @@ import javax.swing.JButton;
 
 public class ListeTournoisVue extends CustomJFrame {
 	
+	public static final ImageIcon OEIL_INVISIBLE_ICON = new ImageIcon(new ImageIcon(IdentificationVue.class.getClassLoader().getResource
+			("oeilMotDePasseInvisible.png")).getImage().getScaledInstance(30, 30,  java.awt.Image.SCALE_SMOOTH));
+	
+	public static final ImageIcon OEIL_VISIBLE_ICON = new ImageIcon(new ImageIcon(IdentificationVue.class.getClassLoader().getResource
+			("oeilMotDePasseVisible.png")).getImage().getScaledInstance(30, 30,  java.awt.Image.SCALE_SMOOTH));
+	
+	
 	public JTable tableTournois;
 	public CustomJLabel labelTitre;
 	public DefaultTableModel tableModel;
+	public DefaultListModel<Equipe> listeEquipesModel;
+	public DefaultListModel<Arbitre> listeArbitresModel;
 	public JList<Equipe> listeEquipes;
 	public JList<Arbitre> listeArbitres;
 	public JDateChooser dateDebut;
 	public JDateChooser dateFin;
 	public CustomJTextField login;
 	public CustomJTextField mdp;
-	public JToggleButton activLogins;
+	public CustomJToggleButton activLogins;
 	public CustomJButton boutonOuverture;
+	
+	private ListeTournoisControleur controleur;
 	
 	 public static void main(String[] args) {
 	        EventQueue.invokeLater(new Runnable() {
@@ -65,6 +78,8 @@ public class ListeTournoisVue extends CustomJFrame {
 	    }
 	
 	public ListeTournoisVue() {
+		
+		controleur = new ListeTournoisControleur(this);
 		
 		setSize(new Dimension(600, 500));
 		setResizable(true);
@@ -91,6 +106,7 @@ public class ListeTournoisVue extends CustomJFrame {
 		scrollListe.setPreferredSize(new Dimension(500, 180));
 		scrollListe.setSize(new Dimension(100, 100));
 		tableTournois = new JTable();
+		tableTournois.addMouseListener(controleur);
 		tableTournois.setOpaque(false);
 		tableTournois.setForeground(new Color(44, 47, 51));
 		tableTournois.setSelectionBackground(new Color(198, 224, 242));
@@ -133,6 +149,7 @@ public class ListeTournoisVue extends CustomJFrame {
 		CustomJPanel panelEquipe = new CustomJPanel();
 		panelEquipe.setBorder(new EmptyBorder(5, 5, 5, 5));
 		listeEquipes = new JList<Equipe>();
+		listeEquipesModel = new DefaultListModel<Equipe>();
 		JScrollPane scrollEquipes = new JScrollPane(listeEquipes);
 		panelEquipe.add(scrollEquipes);
 		
@@ -141,6 +158,7 @@ public class ListeTournoisVue extends CustomJFrame {
 		CustomJPanel panelArbitre = new CustomJPanel();
 		panelArbitre.setBorder(new EmptyBorder(5,5,5,5));
 		listeArbitres = new JList<Arbitre>();
+		listeArbitresModel = new DefaultListModel<Arbitre>();
 		JScrollPane scrollArbitres = new JScrollPane(listeArbitres);
 		panelArbitre.add(scrollArbitres);
 		
@@ -190,25 +208,14 @@ public class ListeTournoisVue extends CustomJFrame {
 		
 		logins.setLayout(null);
 		logins.add(login); logins.add(mdp);
-		activLogins = new JToggleButton();
-		activLogins.setFont(new Font("Tahoma", Font.PLAIN, 7));
-		activLogins.setText("Afficher");
-		activLogins.setBounds(193, 30, 65, 20);
+		activLogins = new CustomJToggleButton("", 25, (EmptyBorder) null);
+		activLogins.setFocusPainted(false);
+		activLogins.setBackground(new Color(29, 88, 129));
+		activLogins.setBorder(null);
+		activLogins.setIcon(OEIL_INVISIBLE_ICON);
+		activLogins.setBounds(196, 30, 40, 20);
 		logins.add(activLogins);
-		activLogins.addActionListener((new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (e.getSource() instanceof JToggleButton) {
-					JToggleButton bouton = (JToggleButton) e.getSource();
-					if (bouton.isSelected()) {
-						bouton.setText("Masquer");
-					} else {
-						bouton.setText("Afficher");
-					}
-				}
-			};
-		}
-		));
+		activLogins.addActionListener(controleur);
 		
 		CustomJLabel labelDateD = new CustomJLabel("Du", 15);
 		labelDateD.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -219,7 +226,5 @@ public class ListeTournoisVue extends CustomJFrame {
 		dates.add(labelDateD); dates.add(labelDateF);
 		boutonOuverture = new CustomJButton("Ouvrir", 15);
 		boutonsTournoi.add(boutonOuverture);
-		
 	}
-	
 }
