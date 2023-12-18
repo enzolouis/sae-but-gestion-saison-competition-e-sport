@@ -45,7 +45,7 @@ public class TournoiDAO {
 		while (rs.next()) {
 			SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
 		    SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy");
-			TournoiModele t = new TournoiModele(rs.getInt(1), rs.getString(2), outputFormat.format(inputFormat.parse(rs.getString(3))), outputFormat.format(inputFormat.parse(rs.getString(4))), rs.getString(5), rs.getString(6), classes.Notoriete.valueOf(rs.getString(7)), classes.EtatTournoi.valueOf(rs.getString(8)));
+			TournoiModele t = new TournoiModele(rs.getInt(1), rs.getString(2), outputFormat.format(inputFormat.parse(rs.getString(3))), outputFormat.format(inputFormat.parse(rs.getString(4))), rs.getString(7), rs.getString(8), classes.Notoriete.valueOf(rs.getString(5)), classes.EtatTournoi.valueOf(rs.getString(6)));
 			stParticipants.setInt(1, rs.getInt(1));
 			ResultSet rsParticipants = stParticipants.executeQuery();
 			while (rsParticipants.next()) {
@@ -70,7 +70,7 @@ public class TournoiDAO {
 			if (rs.next()) {
 				SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
 			    SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy");
-				TournoiModele t = new TournoiModele(rs.getInt(1), rs.getString(2), outputFormat.format(inputFormat.parse(rs.getString(3))), outputFormat.format(inputFormat.parse(rs.getString(4))), rs.getString(5), rs.getString(6), classes.Notoriete.valueOf(rs.getString(7)), classes.EtatTournoi.valueOf(rs.getString(8)));
+				TournoiModele t = new TournoiModele(rs.getInt(1), rs.getString(2), outputFormat.format(inputFormat.parse(rs.getString(3))), outputFormat.format(inputFormat.parse(rs.getString(4))), rs.getString(7), rs.getString(8), classes.Notoriete.valueOf(rs.getString(5)), classes.EtatTournoi.valueOf(rs.getString(6)));
 				
 				PreparedStatement stParticipants = DBConnection.getInstance().prepareStatement("SELECT idEquipe, resultat FROM Participer WHERE idTournoi = ?");
 				stParticipants.setInt(1, rs.getInt(1));
@@ -101,7 +101,7 @@ public class TournoiDAO {
 		if (rs.next()) {
 			id = rs.getInt(1);
 		}
-		System.out.println(id);
+
 		value.setIDTournoi(id);
 		
 		st = DBConnection.getInstance().prepareStatement("INSERT INTO tournoi (idTournoi, nom, dateDebut, dateFin, notoriete, ouvert, login, mdp) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
@@ -109,10 +109,10 @@ public class TournoiDAO {
 		st.setString(2, value.getNomTournoi());
 		st.setDate(3, value.getDateDebut()); 
 		st.setDate(4, value.getDateFin());
-		st.setString(5, value.getLogin());
-		st.setString(6, value.getMotDePasse());
-		st.setString(7, value.getNotoriete().toString());
-		st.setString(8, value.getEtatTournoi().toString());
+		st.setString(5, value.getNotoriete().toString());
+		st.setString(6, value.getEtatTournoi().toString());
+		st.setString(7, value.getLogin());
+		st.setString(8, value.getMotDePasse());
 		int rowcount = st.executeUpdate();
 		return rowcount > 0;
 	}
@@ -142,7 +142,6 @@ public class TournoiDAO {
         preparedStatement.setString(6, value.getLogin());
         preparedStatement.setString(7, value.getMotDePasse());
         
-        Integer idE;
         try {
         	preparedStatement.setInt(8, value.getVainqueur().get().getIdEquipe());
         } catch (NoSuchElementException e) {
@@ -167,7 +166,7 @@ public class TournoiDAO {
 		Statement st = DBConnection.getInstance().createStatement();
 		ResultSet rs = st.executeQuery("SELECT * FROM tournoi WHERE ouvert='OUVERT'");
 		if (rs.next()) {
-			return Optional.of(new TournoiModele(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), classes.Notoriete.valueOf(rs.getString(7)), classes.EtatTournoi.valueOf(rs.getString(8))));
+			return Optional.of(new TournoiModele(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(7), rs.getString(8), classes.Notoriete.valueOf(rs.getString(5)), classes.EtatTournoi.valueOf(rs.getString(6))));
 		}
 		return Optional.empty();
 	}
