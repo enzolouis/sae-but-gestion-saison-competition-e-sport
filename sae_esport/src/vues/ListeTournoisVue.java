@@ -8,10 +8,13 @@ import java.awt.GridLayout;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JToggleButton;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
+
+import com.toedter.calendar.JDateChooser;
 
 import DAOs.TournoiDAO;
 import classes.Arbitre;
@@ -24,7 +27,10 @@ import java.awt.FlowLayout;
 import java.awt.Color;
 import javax.swing.JList;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 public class ListeTournoisVue extends CustomJFrame {
 	
@@ -33,6 +39,11 @@ public class ListeTournoisVue extends CustomJFrame {
 	public DefaultTableModel tableModel;
 	public JList<Equipe> listeEquipes;
 	public JList<Arbitre> listeArbitres;
+	public JDateChooser dateDebut;
+	public JDateChooser dateFin;
+	public CustomJTextField login;
+	public CustomJTextField mdp;
+	public JToggleButton activLogins;
 	
 	 public static void main(String[] args) {
 	        EventQueue.invokeLater(new Runnable() {
@@ -143,10 +154,36 @@ public class ListeTournoisVue extends CustomJFrame {
 		infosTournoi.add(logins); infosTournoi.add(dates);
 		
 		labelTitre = new CustomJLabel("Tournoi N°XX (Notoriété)", 15);
+		titreTournoi.add(labelTitre);
 		
+		dateDebut = new JDateChooser();
+		dateDebut.setBounds(59, 5, 70, 20);
+		dateFin = new JDateChooser();
+		dateFin.setBounds(134, 5, 70, 20);
+		dates.setLayout(null);
+		dates.add(dateDebut); dates.add(dateFin);
+		
+		login = new CustomJTextField();
+		login.setBounds(94, 20, 92, 20);
+		mdp = new CustomJTextField();
+		mdp.setBounds(95, 51, 92, 20);
+		CustomJLabel labelLogin = new CustomJLabel("Login d'arbitre", 11);
+		labelLogin.setHorizontalAlignment(SwingConstants.RIGHT);
+		labelLogin.setText("Identifiant");
+		labelLogin.setBounds(10, 15, 74, 30);
+		CustomJLabel labelMdp = new CustomJLabel("Mot de passe d'arbitre", 11);
+		labelMdp.setHorizontalAlignment(SwingConstants.RIGHT);
+		labelMdp.setText("Mot de passe");
+		labelMdp.setSize(75, 30);
+		labelMdp.setLocation(10, 46);
+		logins.add(labelLogin); logins.add(labelMdp);
+		
+		logins.setLayout(null);
+		logins.add(login); logins.add(mdp);
+		activLogins = new JToggleButton();
+		activLogins.setSelected(true);
+		activLogins.setBounds(203, 34, 33, 30);
+		logins.add(activLogins);
 		
 	}
-	
-	
-
 }
