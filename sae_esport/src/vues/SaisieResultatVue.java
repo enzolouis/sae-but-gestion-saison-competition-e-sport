@@ -20,6 +20,9 @@ import javax.swing.border.EmptyBorder;
 import DAOs.ArbitreDAO;
 import DAOs.TournoiDAO;
 import classes.Arbitre;
+import classes.Equipe;
+import classes.Match;
+import controleurs.SaisieResultatControleur;
 import modeles.TournoiModele;
 import style.CustomJButton;
 import style.CustomJComboBox;
@@ -32,7 +35,11 @@ import javax.swing.SwingConstants;
 
 public class SaisieResultatVue extends CustomJFrame {
 	private CustomJPanel contentPanel;
-    //private TournoiListeControleur controleur;
+    private SaisieResultatControleur controleur;
+    private TournoiModele tournoi;
+    
+    private CustomJScrollPane scrollpanelRoundList;
+    private CustomJPanel panelRoundList;
     
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -49,11 +56,12 @@ public class SaisieResultatVue extends CustomJFrame {
     
     public SaisieResultatVue() throws Exception {
     	super(new Dimension(975, 600), "Résultat des matchs");
+    	contentPanel = this.getContentPanel();
     	
     	pack();
     	
-    	//this.controleur = new TournoiListeControleur(this);
-    	contentPanel = this.getContentPanel();
+    	this.tournoi = new TournoiModele();
+    	this.controleur = new SaisieResultatControleur(this, this.tournoi);
         
         // Panel Top : Title
     	CustomJPanel panelTop = new CustomJPanel();
@@ -91,11 +99,13 @@ public class SaisieResultatVue extends CustomJFrame {
         CustomJPanel panelMiddleFinalEquipe = new CustomJPanel(new EmptyBorder(0, 0, 0, 0), new GridLayout(1, 2, 10, 10));
         panelMiddleFinal.add(panelMiddleFinalEquipe);
         CustomJButton button1Finale = new CustomJButton("Équipe n°1", 15);
-    	//button.addActionListener(this.controleur);
+        button1Finale.setActionCommand("IdMatch,IdEquipe");
+        button1Finale.addActionListener(this.controleur);
         panelMiddleFinalEquipe.add(button1Finale);
     	
        	CustomJButton button2Finale = new CustomJButton("Équipe n°2", 15);
-    	//button.addActionListener(this.controleur);
+       	button2Finale.setActionCommand("IdMatch,IdEquipe");
+       	button2Finale.addActionListener(this.controleur);
        	panelMiddleFinalEquipe.add(button2Finale);
         
        	// Panel Middle Match
@@ -120,15 +130,15 @@ public class SaisieResultatVue extends CustomJFrame {
         gbc_middleLabelMatch.gridy = 0;
         panelMiddleMatch.add(middleLabelMatch, gbc_middleLabelMatch);
         
-        CustomJPanel panelRoundList = new CustomJPanel(new EmptyBorder(10, 10, 10, 10), new GridLayout(1, 0, 10, 10)); 
-        CustomJScrollPane scrollpanelRoundList = new CustomJScrollPane(panelRoundList);
-        scrollpanelRoundList.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        scrollpanelRoundList.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+        this.panelRoundList = new CustomJPanel(new EmptyBorder(10, 10, 10, 10), new GridLayout(1, 0, 10, 10)); 
+        this.scrollpanelRoundList = new CustomJScrollPane(this.panelRoundList);
+        this.scrollpanelRoundList.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        this.scrollpanelRoundList.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
         GridBagConstraints gbc_panelRoundList = new GridBagConstraints();
         gbc_panelRoundList.fill = GridBagConstraints.BOTH;
         gbc_panelRoundList.gridx = 0;
         gbc_panelRoundList.gridy = 1;
-        panelMiddleMatch.add(scrollpanelRoundList, gbc_panelRoundList);
+        panelMiddleMatch.add(this.scrollpanelRoundList, gbc_panelRoundList);
         
         GridBagLayout gbl_matchCustomJPanel = new GridBagLayout();
         gbl_matchCustomJPanel.rowHeights = new int[] {30, 0};
@@ -146,29 +156,26 @@ public class SaisieResultatVue extends CustomJFrame {
         gbc_roundListEquipe.gridx = 0;
         gbc_roundListEquipe.gridy = 1;
         
-        for (int i = 1; i <= 10; i++) {
+        for (Match match : this.tournoi.getMatchs()) {
         	// Panel Match : Titre + Panel Liste Equipe
         	CustomJPanel MatchCustomJPanel = new CustomJPanel(new EmptyBorder(0, 0, 0, 0), new GridLayout(2, 1, 0, 0));
         	MatchCustomJPanel.setLayout(gbl_matchCustomJPanel);
-        	panelRoundList.add(MatchCustomJPanel);
+        	this.panelRoundList.add(MatchCustomJPanel);
         	
         	// Numero Round
-            CustomJLabel titleMatchTop = new CustomJLabel("Round n°" + i, 25);
+            CustomJLabel titleMatchTop = new CustomJLabel("Round n°" + match.getIDMatch(), 25);
             MatchCustomJPanel.add(titleMatchTop, gbc_titleMatchTop);
             
             // Panel Equipe Liste
             CustomJPanel MatchEquipeListJPanel = new CustomJPanel(new EmptyBorder(10, 10, 10, 10), new GridLayout(0, 2, 5, 5));
             MatchCustomJPanel.add(MatchEquipeListJPanel, gbc_roundListEquipe);
         	
-        	for (int j = 1; j <= 4; j++) {
+            for (Equipe equipe : match.getEquipes()) {
             	CustomJButton button1 = new CustomJButton("Équipe n°1", 15);
-            	//button.addActionListener(this.controleur);
+            	button1.addActionListener(this.controleur);
+            	button1.setActionCommand(match.getIDMatch() + "," + equipe.getIdEquipe());
             	MatchEquipeListJPanel.add(button1);
-            	
-               	CustomJButton button2 = new CustomJButton("Équipe n°2", 15);
-            	//button.addActionListener(this.controleur);
-            	MatchEquipeListJPanel.add(button2);
-    		}
+			}
 		}
         
         // Panel middle bottom : Action tournoi
@@ -185,7 +192,7 @@ public class SaisieResultatVue extends CustomJFrame {
         gbc_buttonOpen.gridx = 0;
         gbc_buttonOpen.gridy = 0;
         gbc_buttonOpen.anchor = GridBagConstraints.EAST;
-    	//button.addActionListener(this.controleur);
+        buttonOpen.addActionListener(this.controleur);
     	panelMiddleBottom.add(buttonOpen, gbc_buttonOpen);
     	
     	CustomJButton buttonClose = new CustomJButton("Fermer le tournoi", 15);
@@ -193,18 +200,70 @@ public class SaisieResultatVue extends CustomJFrame {
         gbc_buttonClose.anchor = GridBagConstraints.EAST;
         gbc_buttonClose.gridx = 1;
         gbc_buttonClose.gridy = 0;
-    	//button.addActionListener(this.controleur);
+    	buttonOpen.addActionListener(this.controleur);
     	panelMiddleBottom.add(buttonClose, gbc_buttonClose);
         
         // Panel bottom
         CustomJPanel panelBottom = new CustomJPanel(new EmptyBorder(10, 10, 0, 10), new FlowLayout(FlowLayout.CENTER, 5, 5));
         contentPanel.add(panelBottom, BorderLayout.SOUTH);
         
-        //Bouton quitter
+        // Bouton quitter
         CustomJButton btnQuit = new CustomJButton("Quitter", 10);
         btnQuit.setBackground(new Color(231, 76, 60));
         btnQuit.setForeground(new Color(255, 255, 255));
-        //btnQuit.addActionListener(this.controleur);
+        btnQuit.addActionListener(this.controleur);
         panelBottom.add(btnQuit);
+    }
+
+    public void setTournoi(TournoiModele tournoi) {
+    	this.tournoi = tournoi;
+    	
+        this.panelRoundList = new CustomJPanel(new EmptyBorder(10, 10, 10, 10), new GridLayout(1, 0, 10, 10)); 
+        
+        GridBagLayout gbl_matchCustomJPanel = new GridBagLayout();
+        gbl_matchCustomJPanel.rowHeights = new int[] {30, 0};
+        gbl_matchCustomJPanel.columnWidths = new int[] {0};
+        gbl_matchCustomJPanel.columnWeights = new double[]{1.0};
+        gbl_matchCustomJPanel.rowWeights = new double[]{0.0, 0.0};
+        
+        GridBagConstraints gbc_titleMatchTop = new GridBagConstraints();
+        gbc_titleMatchTop.fill = GridBagConstraints.BOTH;
+        gbc_titleMatchTop.gridx = 0;
+        gbc_titleMatchTop.gridy = 0;
+        
+        GridBagConstraints gbc_roundListEquipe = new GridBagConstraints();
+        gbc_roundListEquipe.fill = GridBagConstraints.BOTH;
+        gbc_roundListEquipe.gridx = 0;
+        gbc_roundListEquipe.gridy = 1;
+    	
+        for (Match match : this.tournoi.getMatchs()) {
+        	// Panel Match : Titre + Panel Liste Equipe
+        	CustomJPanel MatchCustomJPanel = new CustomJPanel(new EmptyBorder(0, 0, 0, 0), new GridLayout(2, 1, 0, 0));
+        	MatchCustomJPanel.setLayout(gbl_matchCustomJPanel);
+        	this.panelRoundList.add(MatchCustomJPanel);
+        	
+        	// Numero Round
+            CustomJLabel titleMatchTop = new CustomJLabel("Round n°" + match.getIDMatch(), 25);
+            MatchCustomJPanel.add(titleMatchTop, gbc_titleMatchTop);
+            
+            // Panel Equipe Liste
+            CustomJPanel MatchEquipeListJPanel = new CustomJPanel(new EmptyBorder(10, 10, 10, 10), new GridLayout(0, 2, 5, 5));
+            MatchCustomJPanel.add(MatchEquipeListJPanel, gbc_roundListEquipe);
+        	
+            for (Equipe equipe : match.getEquipes()) {
+            	CustomJButton button1 = new CustomJButton("Équipe n°1", 15);
+            	button1.addActionListener(this.controleur);
+            	button1.setActionCommand(match.getIDMatch() + "," + equipe.getIdEquipe());
+            	MatchEquipeListJPanel.add(button1);
+			}
+		}
+    }
+    
+    public TournoiModele getTournoi() {
+    	return this.tournoi;
+    }
+    
+    public void refreshMatchList() {
+    	
     }
 }
