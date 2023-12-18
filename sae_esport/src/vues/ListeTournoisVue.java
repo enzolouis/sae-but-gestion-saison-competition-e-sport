@@ -78,17 +78,18 @@ public class ListeTournoisVue extends CustomJFrame {
 	    }
 	
 	public ListeTournoisVue() {
+		setTitle("Liste des tournois");
 		
 		controleur = new ListeTournoisControleur(this);
 		
 		setSize(new Dimension(600, 500));
-		setResizable(true);
 		
 		CustomJPanel panel = new CustomJPanel();
 		getContentPane().add(panel);
 		
 		CustomJPanel panelTitre = new CustomJPanel();
 		CustomJLabel titre = new CustomJLabel("Liste des tournois", 20);
+		titre.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 20));
 		panelTitre.add(titre);
 		
 		CustomJPanel panelTournois = new CustomJPanel();
@@ -105,7 +106,11 @@ public class ListeTournoisVue extends CustomJFrame {
 		scrollListe.setForeground(new Color(255, 255, 255));
 		scrollListe.setPreferredSize(new Dimension(500, 180));
 		scrollListe.setSize(new Dimension(100, 100));
-		tableTournois = new JTable();
+		tableTournois = new JTable(){
+				public boolean isCellEditable(int row, int column) {                
+					return false;
+				};};
+		tableTournois.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 11));
 		tableTournois.addMouseListener(controleur);
 		tableTournois.setOpaque(false);
 		tableTournois.setForeground(new Color(44, 47, 51));
@@ -149,18 +154,26 @@ public class ListeTournoisVue extends CustomJFrame {
 		CustomJPanel panelEquipe = new CustomJPanel();
 		panelEquipe.setBorder(new EmptyBorder(5, 5, 5, 5));
 		listeEquipes = new JList<Equipe>();
+		listeEquipes.setFont(new Font("Tahoma", Font.PLAIN, 9));
 		listeEquipesModel = new DefaultListModel<Equipe>();
 		JScrollPane scrollEquipes = new JScrollPane(listeEquipes);
 		panelEquipe.add(scrollEquipes);
+		CustomJLabel equipeTitre = new CustomJLabel("Equipes", 15);
+		equipeTitre.setBorder(new EmptyBorder(5, 5, 5, 5));
+		panelEquipe.add(equipeTitre, BorderLayout.NORTH);
 		
 		panelEquipeArbitre.add(panelEquipe);
 		
 		CustomJPanel panelArbitre = new CustomJPanel();
 		panelArbitre.setBorder(new EmptyBorder(5,5,5,5));
 		listeArbitres = new JList<Arbitre>();
+		listeArbitres.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 7));
 		listeArbitresModel = new DefaultListModel<Arbitre>();
 		JScrollPane scrollArbitres = new JScrollPane(listeArbitres);
 		panelArbitre.add(scrollArbitres);
+		CustomJLabel arbitreTitre = new CustomJLabel("Arbitres", 15);
+		arbitreTitre.setBorder(new EmptyBorder(5, 5, 5, 5));
+		panelArbitre.add(arbitreTitre, BorderLayout.NORTH);
 		
 		panelEquipeArbitre.add(panelArbitre);
 		
@@ -180,26 +193,31 @@ public class ListeTournoisVue extends CustomJFrame {
 		infosTournoi.add(logins); infosTournoi.add(dates);
 		
 		labelTitre = new CustomJLabel("Tournoi N°XX (Notoriété)", 15);
+		labelTitre.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
 		titreTournoi.add(labelTitre);
 		
 		dateDebut = new JDateChooser();
 		dateDebut.setEnabled(false);
-		dateDebut.setBounds(30, 5, 90, 20);
+		dateDebut.setBounds(30, 5, 100, 20);
 		dateFin = new JDateChooser();
 		dateFin.setEnabled(false);
-		dateFin.setBounds(152, 5, 90, 20);
+		dateFin.setBounds(157, 5, 100, 20);
 		dates.setLayout(null);
 		dates.add(dateDebut); dates.add(dateFin);
 		
 		login = new CustomJTextField();
+		login.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
 		login.setBounds(94, 16, 92, 20);
 		mdp = new CustomJTextField();
+		mdp.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 10));
 		mdp.setBounds(94, 46, 92, 20);
 		CustomJLabel labelLogin = new CustomJLabel("Login d'arbitre", 11);
+		labelLogin.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 11));
 		labelLogin.setHorizontalAlignment(SwingConstants.RIGHT);
 		labelLogin.setText("Identifiant");
 		labelLogin.setBounds(10, 11, 74, 30);
 		CustomJLabel labelMdp = new CustomJLabel("Mot de passe d'arbitre", 11);
+		labelMdp.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 11));
 		labelMdp.setHorizontalAlignment(SwingConstants.RIGHT);
 		labelMdp.setText("Mot de passe");
 		labelMdp.setSize(75, 30);
@@ -218,13 +236,14 @@ public class ListeTournoisVue extends CustomJFrame {
 		activLogins.addActionListener(controleur);
 		
 		CustomJLabel labelDateD = new CustomJLabel("Du", 15);
-		labelDateD.setFont(new Font("Tahoma", Font.BOLD, 11));
+		labelDateD.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 11));
 		labelDateD.setBounds(0, 0, 32, 30);
 		CustomJLabel labelDateF = new CustomJLabel("au", 15);
-		labelDateF.setFont(new Font("Tahoma", Font.BOLD, 11));
-		labelDateF.setBounds(118, 0, 32, 30);
+		labelDateF.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 11));
+		labelDateF.setBounds(125, 0, 32, 30);
 		dates.add(labelDateD); dates.add(labelDateF);
 		boutonOuverture = new CustomJButton("Ouvrir", 15);
+		boutonOuverture.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 11));
 		boutonsTournoi.add(boutonOuverture);
 	}
 }
