@@ -1,11 +1,13 @@
 package controleurs;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,6 +15,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JToggleButton;
@@ -23,6 +26,7 @@ import DAOs.EquipeDAO;
 import DAOs.TournoiDAO;
 import classes.Arbitre;
 import classes.Equipe;
+import classes.Joueur;
 import modeles.TournoiModele;
 import vues.IdentificationVue;
 import vues.ListeTournoisVue;
@@ -30,17 +34,14 @@ import vues.ListeTournoisVue;
 public class ListeTournoisControleur implements ActionListener, MouseListener {
 	private TournoiModele modele;
 	private ListeTournoisVue vue;
-	private boolean toggleActivated;
 	
 	public ListeTournoisControleur(ListeTournoisVue vue) {
 		this.modele = new TournoiModele();
 		this.vue = vue;
-		this.toggleActivated = false;
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		
+	public void actionPerformed(ActionEvent e) {		
 		if (e.getSource() instanceof JButton) {
 			JButton bouton = (JButton) e.getSource();
 			
@@ -49,11 +50,32 @@ public class ListeTournoisControleur implements ActionListener, MouseListener {
 				this.vue.setVisible(false);
 				this.vue.dispose();
 				break;
-			case "Ouverture":
-				System.out.println("Ouvrir tournoi");
+			case "Ouvrir":
+				int idTournoi = (int) vue.tableTournois.getValueAt(vue.tableTournois.getSelectedRow(), 0);
+				
+				System.out.println(idTournoi);
+				try {
+					TournoiModele tournoi = TournoiDAO.getInstance().getById(idTournoi).get();
+					this.vue.erreurOuverture.setForeground(new Color(235, 77, 75));
+					if (!TournoiModele.isAucunTournoiOuvert()) {
+						this.vue.erreurOuverture.setText("Un tournoi est déjà ouvert ");
+					}
+					else if (!tournoi.isDateCouranteDansCreneauTournoi()) {
+						this.vue.erreurOuverture.setText("Nous ne sommes pas dans la période du tournoi !");
+					} else if (!tournoi.isTournoiMinimum4EquipeDisposee()) {
+						this.vue.erreurOuverture.setText("Il n'y a pas assez d'équipe disposées pour commencer le tournoi !");
+					} else {
+						// reverification de tout (voir si on supprime ça dans tournoi)
+						tournoi.ouvrirTournoi();
+						this.vue.erreurOuverture.setText("Le tournoi a été ouvert !");
+						this.vue.erreurOuverture.setForeground(new Color(106, 176, 76));
+						
+					}
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 				break;
 			default:
-				System.out.println("Autre tournoi");
 				break;
 			}
 		} else if (e.getSource() instanceof JToggleButton) {
@@ -81,6 +103,11 @@ public class ListeTournoisControleur implements ActionListener, MouseListener {
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getSource() instanceof JTable) {
+			vue.titreEquipe.setText(" ");
+			vue.joueursModel.clear();
+			vue.disposition.setText(" ");
+			this.vue.boutonOuverture.setEnabled(true);
+			this.vue.erreurOuverture.setText(" ");
 			JTable t = (JTable) e.getSource();
 			int idTournoi = (int) t.getValueAt(t.getSelectedRow(), 0);
 
@@ -109,11 +136,22 @@ public class ListeTournoisControleur implements ActionListener, MouseListener {
 				
 			} catch (Exception e1) {
 				e1.printStackTrace();
+			}	
+		} else if (e.getSource() instanceof JList) {
+			JList l = (JList) e.getSource();
+			Equipe e1 = (Equipe) l.getSelectedValue();
+			vue.titreEquipe.setText(e1.getNom());
+			List<String> joueurs = new ArrayList<>();
+			
+			vue.joueursModel.clear();
+			for (Joueur j : e1.getListeJoueurs()) {
+				vue.joueursModel.addElement(j);
 			}
 			
+			vue.joueurs.setModel(vue.joueursModel);
 			
-			
-			
+			vue.disposition.setText(e1.getDispose() ? "• Disposé" : "• Non disposé");
+			vue.disposition.setForeground(e1.getDispose() ? new Color(106, 176, 76) : new Color(235, 77, 75));
 		}
 	}
 

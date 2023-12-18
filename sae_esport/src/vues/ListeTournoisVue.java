@@ -21,6 +21,7 @@ import com.toedter.calendar.JDateChooser;
 import DAOs.TournoiDAO;
 import classes.Arbitre;
 import classes.Equipe;
+import classes.Joueur;
 import controleurs.ListeTournoisControleur;
 import modeles.TournoiModele;
 
@@ -39,6 +40,7 @@ import java.awt.Font;
 import java.awt.Rectangle;
 import javax.swing.JButton;
 import java.awt.Component;
+import javax.swing.border.LineBorder;
 
 public class ListeTournoisVue extends CustomJFrame {
 	
@@ -54,6 +56,7 @@ public class ListeTournoisVue extends CustomJFrame {
 	public DefaultTableModel tableModel;
 	public DefaultListModel<Equipe> listeEquipesModel;
 	public DefaultListModel<Arbitre> listeArbitresModel;
+	public DefaultListModel<Joueur> joueursModel;
 	public JList<Equipe> listeEquipes;
 	public JList<Arbitre> listeArbitres;
 	public JDateChooser dateDebut;
@@ -64,7 +67,7 @@ public class ListeTournoisVue extends CustomJFrame {
 	public CustomJButton boutonOuverture;
 	public CustomJLabel erreurOuverture;
 	public CustomJLabel titreEquipe;
-	public CustomJLabel joueurs;
+	public JList<Joueur> joueurs;
 	public CustomJLabel disposition;
 	
 	private ListeTournoisControleur controleur;
@@ -159,6 +162,7 @@ public class ListeTournoisVue extends CustomJFrame {
 		CustomJPanel panelListeEquipe = new CustomJPanel();
 		panelListeEquipe.setBorder(new EmptyBorder(5, 5, 0, 5));
 		listeEquipes = new JList<Equipe>();
+		listeEquipes.addMouseListener(controleur);
 		listeEquipes.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 9));
 		listeEquipesModel = new DefaultListModel<Equipe>();
 		panelEquipeArbitre.setLayout(new GridLayout(0, 2, 0, 0));
@@ -170,6 +174,7 @@ public class ListeTournoisVue extends CustomJFrame {
 		equipeTitre.setBorder(new EmptyBorder(5, 5, 5, 5));
 		panelListeEquipe.add(equipeTitre, BorderLayout.NORTH);
 		CustomJPanel panelJoueurs = new CustomJPanel();
+		panelJoueurs.setBorder(new EmptyBorder(0, 30, 0, 30));
 		panelJoueurs.setBackground(new Color(44, 47, 51));
 		panelEquipe.add(panelJoueurs);
 		panelEquipeArbitre.add(panelEquipe); 
@@ -178,21 +183,25 @@ public class ListeTournoisVue extends CustomJFrame {
 		titreEquipe.setText("");
 		titreEquipe.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 11));
 		titreEquipe.setBounds(new Rectangle(0, 0, 10, 10));
-		titreEquipe.setBounds(47, 11, 53, 10);
-		joueurs = new CustomJLabel("bbb", 8);
-		joueurs.setText("");
+		titreEquipe.setBounds(48, 0, 53, 14);
+		joueurs = new JList<Joueur>();
+		listeEquipes.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 9));
+		joueursModel = new DefaultListModel<Joueur>();
+		joueurs.setModel(joueursModel);
+		//joueurs = new CustomJLabel("bbb", 8);
+		//joueurs.setText("");
 		joueurs.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 9));
-		joueurs.setVerticalAlignment(SwingConstants.TOP);
-		joueurs.setHorizontalTextPosition(SwingConstants.CENTER);
-		joueurs.setHorizontalAlignment(SwingConstants.LEFT);
-		joueurs.setSize(new Dimension(15, 10));
+		//joueurs.setVerticalAlignment(SwingConstants.TOP);
+		//joueurs.setHorizontalTextPosition(SwingConstants.CENTER);
+		//joueurs.setHorizontalAlignment(SwingConstants.LEFT);
+		//joueurs.setSize(new Dimension(15, 10));
 		joueurs.setBounds(new Rectangle(10, 10, 10, 10));
-		joueurs.setBounds(0, 32, 149, 40);
+		joueurs.setBounds(24, 31, 100, 66);
 		disposition = new CustomJLabel("ccc", 8);
 		disposition.setText("");
-		disposition.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 9));
+		disposition.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 9));
 		disposition.setHorizontalAlignment(SwingConstants.LEFT);
-		disposition.setBounds(0, 66, 100, 20);
+		disposition.setBounds(25, 11, 100, 20);
 		panelJoueurs.setLayout(null);
 		panelJoueurs.add(titreEquipe); panelJoueurs.add(joueurs);
 		panelJoueurs.add(disposition);
@@ -293,6 +302,8 @@ public class ListeTournoisVue extends CustomJFrame {
 		boutonsTournoi.add(boutonOuverture);
 		
 		erreurOuverture = new CustomJLabel("",10);
+		erreurOuverture.setText(" ");
+		erreurOuverture.setForeground(new Color(235, 77, 75));
 		erreurOuverture.setBorder(new EmptyBorder(3, 3, 3, 3));
 		erreurOuverture.setAlignmentX(Component.CENTER_ALIGNMENT);
 		boutonsTournoi.add(erreurOuverture);
