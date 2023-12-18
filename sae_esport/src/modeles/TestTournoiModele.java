@@ -330,7 +330,6 @@ public class TestTournoiModele {
 				"27/12/1888", 
 				Notoriete.REGIONAL,
 				EtatTournoi.FERME);
-		System.out.println("-- I --");
 		assertTrue(t2.isTournoiNonSuperpose());
 		
 		DBConnection.getInstance().rollback();
@@ -356,7 +355,6 @@ public class TestTournoiModele {
 				"15/12/1888", 
 				Notoriete.REGIONAL,
 				EtatTournoi.FERME);
-		System.out.println("-- II --");
 		assertFalse(t2.isTournoiNonSuperpose());
 		
 		DBConnection.getInstance().rollback();
@@ -382,7 +380,6 @@ public class TestTournoiModele {
 				"25/11/1888", 
 				Notoriete.REGIONAL,
 				EtatTournoi.FERME);
-		System.out.println("-- III --");
 		assertFalse(t2.isTournoiNonSuperpose());
 		
 		DBConnection.getInstance().rollback();
@@ -408,9 +405,7 @@ public class TestTournoiModele {
 				"15/12/1888", 
 				Notoriete.REGIONAL,
 				EtatTournoi.FERME);
-		System.out.println("-- IIIVV --");
 		assertFalse(t2.isTournoiNonSuperpose());
-		System.out.println("-- IIIVddV --");
 		DBConnection.getInstance().rollback();
 	}
 	

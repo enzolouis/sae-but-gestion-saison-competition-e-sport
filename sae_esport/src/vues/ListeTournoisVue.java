@@ -5,16 +5,34 @@ import java.awt.EventQueue;
 
 import style.*;
 import java.awt.GridLayout;
+
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
+import DAOs.TournoiDAO;
+import classes.Arbitre;
+import classes.Equipe;
+import modeles.TournoiModele;
+
 import java.awt.Dimension;
 import javax.swing.border.EmptyBorder;
+import java.awt.FlowLayout;
+import java.awt.Color;
+import javax.swing.JList;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
 
 public class ListeTournoisVue extends CustomJFrame {
-	private JTable tableTournois;
+	
+	public JTable tableTournois;
+	public CustomJLabel labelTitre;
+	public DefaultTableModel tableModel;
+	public JList<Equipe> listeEquipes;
+	public JList<Arbitre> listeArbitres;
 	
 	 public static void main(String[] args) {
 	        EventQueue.invokeLater(new Runnable() {
@@ -30,6 +48,7 @@ public class ListeTournoisVue extends CustomJFrame {
 	    }
 	
 	public ListeTournoisVue() {
+		
 		setSize(new Dimension(600, 600));
 		setResizable(true);
 		
@@ -46,34 +65,85 @@ public class ListeTournoisVue extends CustomJFrame {
 		panelTournois.setLayout(new GridLayout(2, 1, 0, 0));
 		
 		CustomJPanel panelListe = new CustomJPanel();
+		panelListe.setOpaque(false);
 		panelListe.setBorder(new EmptyBorder(15, 15, 15, 15));
 		panelTournois.add(panelListe);
+		panelListe.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		JScrollPane scrollListe = new JScrollPane();
+		scrollListe.setForeground(new Color(255, 255, 255));
+		scrollListe.setPreferredSize(new Dimension(500, 180));
+		scrollListe.setSize(new Dimension(100, 100));
+		tableTournois = new JTable();
+		tableTournois.setOpaque(false);
+		tableTournois.setForeground(new Color(44, 47, 51));
+		tableTournois.setSelectionBackground(new Color(198, 224, 242));
+		tableTournois.setGridColor(new Color(44, 47, 51));
+		tableModel = new DefaultTableModel();
+		tableModel.addColumn("ID"); tableModel.addColumn("Titre"); 
+		tableModel.addColumn("Date de début"); tableModel.addColumn("Date de fin");
+		tableModel.addColumn("Notoriété"); tableModel.addColumn("Etat");
+		try {
+			for (TournoiModele t : TournoiDAO.getInstance().getAll()) {
+				tableModel.addRow(new Object[] {t.getIDTournoi(), t.getNomTournoi(),
+						t.getDateDebut(), t.getDateFin(), t.getNotoriete(), t.getEtatTournoi()});
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		JTable colonnesTournoi = new JTable();
-		colonnesTournoi.setSize(new Dimension(20, 20));
-		colonnesTournoi.setBounds(15, 15, 496, 35);
-		DefaultTableModel colonnesModele = new DefaultTableModel();
-		Object [] colonnesNom = {"Identifiant", "Nom", "Date de début", "Date de fin", "Notoriété", "Etat"};
-		colonnesModele.addRow(colonnesNom);
-		panelListe.setLayout(null);
-		colonnesTournoi.setRowHeight(28);
-		colonnesTournoi.setModel(colonnesModele);
-		panelListe.add(colonnesTournoi);
-		
-		JTable tableTournoi = new JTable();
-		tableTournoi.setBounds(15, 61, 496, 163);
-		DefaultTableModel tableModele = new DefaultTableModel();
-		tableTournoi.setModel(tableModele);
-		panelListe.add(tableTournoi);
+		tableTournois.setModel(tableModel);
+		tableTournois.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tableTournois.getColumnModel().getColumn(0).setPreferredWidth(10);
+		tableTournois.getTableHeader().setBackground(new Color(102,172,221));
+		tableTournois.getTableHeader().setForeground(Color.WHITE);
+		scrollListe.setViewportView(tableTournois);
+		panelListe.add(scrollListe);
 		
 		CustomJPanel panelInfos = new CustomJPanel();
 		panelTournois.add(panelInfos);
 		panelInfos.setLayout(new GridLayout(0, 2, 0, 0));
 		
 		CustomJPanel panelEquipeArbitre = new CustomJPanel();
+		panelEquipeArbitre.setBorder(new EmptyBorder(5, 5, 5, 5));
 		CustomJPanel panelAttributs = new CustomJPanel();
-		panelInfos.add(panelEquipeArbitre);
 		panelInfos.add(panelAttributs);
+		panelAttributs.setLayout(new BorderLayout(0, 0));
+		panelInfos.add(panelEquipeArbitre);
+		panelEquipeArbitre.setLayout(new GridLayout(0, 2, 0, 0));
+		
+		CustomJPanel panelEquipe = new CustomJPanel();
+		panelEquipe.setBorder(new EmptyBorder(5, 5, 5, 5));
+		JScrollPane scrollEquipes = new JScrollPane();
+		panelEquipe.add(scrollEquipes);
+		listeEquipes = new JList<Equipe>();
+		scrollEquipes.add(listeEquipes);
+		
+		panelEquipeArbitre.add(panelEquipe);
+		
+		CustomJPanel panelArbitre = new CustomJPanel();
+		panelArbitre.setBorder(new EmptyBorder(5,5,5,5));
+		JScrollPane scrollArbitres = new JScrollPane();
+		panelArbitre.add(scrollArbitres);
+		listeArbitres = new JList<Arbitre>();
+		scrollArbitres.add(listeArbitres);
+		
+		panelEquipeArbitre.add(panelArbitre);
+		
+		CustomJPanel titreTournoi = new CustomJPanel();
+		CustomJPanel boutonsTournoi = new CustomJPanel();
+		CustomJPanel infosTournoi = new CustomJPanel();
+		panelAttributs.add(titreTournoi, BorderLayout.NORTH);
+		panelAttributs.add(boutonsTournoi, BorderLayout.SOUTH);
+		panelAttributs.add(infosTournoi, BorderLayout.CENTER);
+		infosTournoi.setLayout(new GridLayout(2, 0, 0, 0));
+		
+		CustomJPanel logins = new CustomJPanel();
+		CustomJPanel dates = new CustomJPanel();
+		infosTournoi.add(logins); infosTournoi.add(dates);
+		
+		labelTitre = new CustomJLabel("Tournoi N°XX (Notoriété)", 15);
+		
 		
 	}
 	

@@ -56,9 +56,9 @@ public class InsertValues {
 			TournoiDAO.getInstance().add(new TournoiModele(2, "Tournoi nom 3", "12/12/3025", "12/01/3026", 
 								Notoriete.REGIONAL, EtatTournoi.FERME));
 			TournoiDAO.getInstance().add(new TournoiModele(3, "Tournoi nom 4", "12/12/3026", "12/01/3027", 
-								Notoriete.INTERNATIONAL, EtatTournoi.OUVERT));
+								Notoriete.INTERNATIONAL, EtatTournoi.FERME));
 			TournoiDAO.getInstance().add(new TournoiModele(4, "Tournoi nom 5", "12/12/3036", "12/01/3037", 
-								Notoriete.INTERNATIONAL, EtatTournoi.OUVERT));
+								Notoriete.INTERNATIONAL, EtatTournoi.FERME));
 			System.out.println("✔ Insertion de tous les tournois réussie.");
 		} catch (Exception e) {
 			System.out.println("❌ Insertion de tous les arbitres échouée.");
