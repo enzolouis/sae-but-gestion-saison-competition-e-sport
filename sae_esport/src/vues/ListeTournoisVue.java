@@ -132,19 +132,17 @@ public class ListeTournoisVue extends CustomJFrame {
 		
 		CustomJPanel panelEquipe = new CustomJPanel();
 		panelEquipe.setBorder(new EmptyBorder(5, 5, 5, 5));
-		JScrollPane scrollEquipes = new JScrollPane();
-		panelEquipe.add(scrollEquipes);
 		listeEquipes = new JList<Equipe>();
-		scrollEquipes.add(listeEquipes);
+		JScrollPane scrollEquipes = new JScrollPane(listeEquipes);
+		panelEquipe.add(scrollEquipes);
 		
 		panelEquipeArbitre.add(panelEquipe);
 		
 		CustomJPanel panelArbitre = new CustomJPanel();
 		panelArbitre.setBorder(new EmptyBorder(5,5,5,5));
-		JScrollPane scrollArbitres = new JScrollPane();
-		panelArbitre.add(scrollArbitres);
 		listeArbitres = new JList<Arbitre>();
-		scrollArbitres.add(listeArbitres);
+		JScrollPane scrollArbitres = new JScrollPane(listeArbitres);
+		panelArbitre.add(scrollArbitres);
 		
 		panelEquipeArbitre.add(panelArbitre);
 		
