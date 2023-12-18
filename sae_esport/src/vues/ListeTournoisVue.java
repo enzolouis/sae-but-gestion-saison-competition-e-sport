@@ -38,6 +38,7 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.Rectangle;
 import javax.swing.JButton;
+import java.awt.Component;
 
 public class ListeTournoisVue extends CustomJFrame {
 	
@@ -61,7 +62,7 @@ public class ListeTournoisVue extends CustomJFrame {
 	public CustomJPasswordField mdp;
 	public CustomJToggleButton activLogins;
 	public CustomJButton boutonOuverture;
-	public CustomJLabel empty;
+	public CustomJLabel erreurOuverture;
 	
 	private ListeTournoisControleur controleur;
 	
@@ -172,11 +173,11 @@ public class ListeTournoisVue extends CustomJFrame {
 		
 		CustomJLabel titreEquipe = new CustomJLabel("aaa", 10);
 		titreEquipe.setBounds(new Rectangle(0, 0, 10, 10));
-		titreEquipe.setBounds(0, 36, 53, 0);
+		titreEquipe.setBounds(49, 11, 53, 10);
 		CustomJLabel joueurs = new CustomJLabel("bbb", 8);
 		joueurs.setSize(new Dimension(15, 10));
 		joueurs.setBounds(new Rectangle(10, 10, 10, 10));
-		joueurs.setBounds(10, 11, 84, 10);
+		joueurs.setBounds(42, 37, 84, 10);
 		CustomJLabel disposition = new CustomJLabel("ccc", 8);
 		disposition.setBounds(0, 0, 149, 97);
 		panelJoueurs.setLayout(null);
@@ -203,7 +204,6 @@ public class ListeTournoisVue extends CustomJFrame {
 		CustomJPanel infosTournoi = new CustomJPanel();
 		panelAttributs.add(titreTournoi, BorderLayout.NORTH);
 		panelAttributs.add(boutonsTournoi, BorderLayout.SOUTH);
-		boutonsTournoi.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		panelAttributs.add(infosTournoi, BorderLayout.CENTER);
 		
 		CustomJPanel logins = new CustomJPanel();
@@ -265,9 +265,17 @@ public class ListeTournoisVue extends CustomJFrame {
 		labelDateF.setBounds(125, 0, 32, 30);
 		dates.add(labelDateD); dates.add(labelDateF);
 		boutonOuverture = new CustomJButton("Ouvrir", 15);
+		boutonOuverture.setAlignmentX(Component.CENTER_ALIGNMENT);
 		boutonOuverture.setEnabled(false);
 		boutonOuverture.addActionListener(controleur);
+		boutonsTournoi.setLayout(new BoxLayout(boutonsTournoi, BoxLayout.Y_AXIS));
 		boutonOuverture.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 11));
 		boutonsTournoi.add(boutonOuverture);
+		
+		erreurOuverture = new CustomJLabel("",10);
+		erreurOuverture.setBorder(new EmptyBorder(3, 3, 3, 3));
+		erreurOuverture.setText("dcc c    ");
+		erreurOuverture.setAlignmentX(Component.CENTER_ALIGNMENT);
+		boutonsTournoi.add(erreurOuverture);
 	}
 }
