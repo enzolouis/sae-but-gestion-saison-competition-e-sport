@@ -61,6 +61,7 @@ public class ListeTournoisVue extends CustomJFrame {
 	public CustomJPasswordField mdp;
 	public CustomJToggleButton activLogins;
 	public CustomJButton boutonOuverture;
+	public CustomJLabel empty;
 	
 	private ListeTournoisControleur controleur;
 	
@@ -82,7 +83,7 @@ public class ListeTournoisVue extends CustomJFrame {
 		
 		controleur = new ListeTournoisControleur(this);
 		
-		setSize(new Dimension(700, 500));
+		setSize(new Dimension(700, 550));
 		
 		CustomJPanel panel = new CustomJPanel();
 		getContentPane().add(panel);
@@ -151,18 +152,36 @@ public class ListeTournoisVue extends CustomJFrame {
 		panelInfos.add(panelEquipeArbitre);
 		
 		CustomJPanel panelEquipe = new CustomJPanel();
-		panelEquipe.setBorder(new EmptyBorder(5, 5, 5, 5));
+		CustomJPanel panelListeEquipe = new CustomJPanel();
+		panelListeEquipe.setBorder(new EmptyBorder(5, 5, 0, 5));
 		listeEquipes = new JList<Equipe>();
 		listeEquipes.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 7));
 		listeEquipesModel = new DefaultListModel<Equipe>();
 		panelEquipeArbitre.setLayout(new GridLayout(0, 2, 0, 0));
+		panelEquipe.setLayout(new GridLayout(2, 1, 0, 0));
 		JScrollPane scrollEquipes = new JScrollPane(listeEquipes);
-		panelEquipe.add(scrollEquipes);
+		panelListeEquipe.add(scrollEquipes);
+		panelEquipe.add(panelListeEquipe);
 		CustomJLabel equipeTitre = new CustomJLabel("Equipes", 15);
 		equipeTitre.setBorder(new EmptyBorder(5, 5, 5, 5));
-		panelEquipe.add(equipeTitre, BorderLayout.NORTH);
+		panelListeEquipe.add(equipeTitre, BorderLayout.NORTH);
+		CustomJPanel panelJoueurs = new CustomJPanel();
+		panelJoueurs.setBackground(new Color(44, 47, 51));
+		panelEquipe.add(panelJoueurs);
+		panelEquipeArbitre.add(panelEquipe); 
 		
-		panelEquipeArbitre.add(panelEquipe);
+		CustomJLabel titreEquipe = new CustomJLabel("aaa", 10);
+		titreEquipe.setBounds(new Rectangle(0, 0, 10, 10));
+		titreEquipe.setBounds(0, 36, 53, 0);
+		CustomJLabel joueurs = new CustomJLabel("bbb", 8);
+		joueurs.setSize(new Dimension(15, 10));
+		joueurs.setBounds(new Rectangle(10, 10, 10, 10));
+		joueurs.setBounds(10, 11, 84, 10);
+		CustomJLabel disposition = new CustomJLabel("ccc", 8);
+		disposition.setBounds(0, 0, 149, 97);
+		panelJoueurs.setLayout(null);
+		panelJoueurs.add(titreEquipe); panelJoueurs.add(joueurs);
+		panelJoueurs.add(disposition);
 		
 		CustomJPanel panelArbitre = new CustomJPanel();
 		panelArbitre.setBorder(new EmptyBorder(5,5,5,5));
@@ -246,6 +265,8 @@ public class ListeTournoisVue extends CustomJFrame {
 		labelDateF.setBounds(125, 0, 32, 30);
 		dates.add(labelDateD); dates.add(labelDateF);
 		boutonOuverture = new CustomJButton("Ouvrir", 15);
+		boutonOuverture.setEnabled(false);
+		boutonOuverture.addActionListener(controleur);
 		boutonOuverture.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 11));
 		boutonsTournoi.add(boutonOuverture);
 	}
