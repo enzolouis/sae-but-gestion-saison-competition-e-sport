@@ -1,5 +1,7 @@
 package classes;
 
+import java.util.Objects;
+
 public class Joueur {
 	
 	private int idJoueur;
@@ -45,6 +47,23 @@ public class Joueur {
 	 * */
 	public void setIDJoueur(int id) {
 		this.idJoueur = id;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(idEquipe, idJoueur, pseudo);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Joueur other = (Joueur) obj;
+		return idEquipe == other.idEquipe && idJoueur == other.idJoueur && Objects.equals(pseudo, other.pseudo);
 	}
 
 }

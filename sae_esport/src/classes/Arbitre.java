@@ -69,6 +69,16 @@ public class Arbitre {
 	public void setIdArbitre(int id) {
 		this.idArbitre = id;
 	}
+	
+	@Override
+	public String toString() {
+		return this.nom.toUpperCase()+" "+this.prenom+" ("+this.nationalite+")";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(idArbitre, nationalite, nom, prenom);
+	}
 
 	@Override
 	public boolean equals(Object obj) {
@@ -81,11 +91,6 @@ public class Arbitre {
 		Arbitre other = (Arbitre) obj;
 		return idArbitre == other.idArbitre && nationalite == other.nationalite && Objects.equals(nom, other.nom)
 				&& Objects.equals(prenom, other.prenom);
-	}
-	
-	@Override
-	public String toString() {
-		return this.nom.toUpperCase()+" "+this.prenom+" ("+this.nationalite+")";
 	}
 	
 	

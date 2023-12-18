@@ -388,7 +388,8 @@ public class TournoiModele {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(idTournoi, nomTournoi, participants);
+		return Objects.hash(arbitres, dateDebut, dateFin, etat, finale, idTournoi, login, matches, mdp, nomTournoi,
+				notoriete, participants, participantsIndisposees, vainqueur);
 	}
 
 	@Override
@@ -400,9 +401,16 @@ public class TournoiModele {
 		if (getClass() != obj.getClass())
 			return false;
 		TournoiModele other = (TournoiModele) obj;
-		return idTournoi == other.idTournoi && Objects.equals(nomTournoi, other.nomTournoi)
-				&& Objects.equals(participants, other.participants);
+		return Objects.equals(arbitres, other.arbitres) && Objects.equals(dateDebut, other.dateDebut)
+				&& Objects.equals(dateFin, other.dateFin) && etat == other.etat && Objects.equals(finale, other.finale)
+				&& idTournoi == other.idTournoi && Objects.equals(login, other.login)
+				&& Objects.equals(matches, other.matches) && Objects.equals(mdp, other.mdp)
+				&& Objects.equals(nomTournoi, other.nomTournoi) && notoriete == other.notoriete
+				&& Objects.equals(participants, other.participants)
+				&& Objects.equals(participantsIndisposees, other.participantsIndisposees)
+				&& Objects.equals(vainqueur, other.vainqueur);
 	}
+
 	
 	
 

@@ -72,6 +72,11 @@ public class Administrateur {
 	}
 
 	@Override
+	public int hashCode() {
+		return Objects.hash(idAdministrateur, login, motDePasse, nom);
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -83,6 +88,8 @@ public class Administrateur {
 		return idAdministrateur == other.idAdministrateur && Objects.equals(login, other.login)
 				&& Objects.equals(motDePasse, other.motDePasse) && Objects.equals(nom, other.nom);
 	}
+
+	
 	
 	
 

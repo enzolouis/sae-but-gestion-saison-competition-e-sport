@@ -148,23 +148,6 @@ public class Equipe {
 	}
 
 	@Override
-	public int hashCode() {
-		return Objects.hash(joueurs, nom);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Equipe other = (Equipe) obj;
-		return Objects.equals(joueurs, other.joueurs) && Objects.equals(nom, other.nom);
-	}
-
-	@Override
 	public String toString() {
 		String s = "Equipe N°"+idEquipe+": "+nom+" ("+nationalite+")\n";
 		for (Joueur j : this.joueurs) {
@@ -177,6 +160,25 @@ public class Equipe {
 			s+= "Cette équipe est actuellement indisposée";
 		}
 		return s;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(dispose, idEquipe, joueurs, nationalite, nom, pointsSaison, rangSaisonPrecedante);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Equipe other = (Equipe) obj;
+		return dispose == other.dispose && idEquipe == other.idEquipe && Objects.equals(joueurs, other.joueurs)
+				&& nationalite == other.nationalite && Objects.equals(nom, other.nom)
+				&& pointsSaison == other.pointsSaison && rangSaisonPrecedante == other.rangSaisonPrecedante;
 	}
 
 }

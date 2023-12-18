@@ -2,6 +2,7 @@ package classes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Match {
 	private int idMatch;
@@ -64,5 +65,23 @@ public class Match {
 	
 	public int getVainqueur() {
 		return idVainqueur;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(equipes, finale, idMatch, idVainqueur);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Match other = (Match) obj;
+		return Objects.equals(equipes, other.equipes) && finale == other.finale && idMatch == other.idMatch
+				&& idVainqueur == other.idVainqueur;
 	}
 }
