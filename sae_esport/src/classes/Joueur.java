@@ -48,6 +48,11 @@ public class Joueur {
 	public void setIDJoueur(int id) {
 		this.idJoueur = id;
 	}
+	
+	@Override
+	public String toString() {
+		return this.pseudo;
+	}
 
 	@Override
 	public int hashCode() {

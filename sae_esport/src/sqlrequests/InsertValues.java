@@ -2,10 +2,14 @@ package sqlrequests;
 
 import DAOs.AdministrateurDAO;
 import DAOs.ArbitreDAO;
+import DAOs.EquipeDAO;
+import DAOs.JoueurDAO;
 import DAOs.TournoiDAO;
 import classes.Administrateur;
 import classes.Arbitre;
+import classes.Equipe;
 import classes.EtatTournoi;
+import classes.Joueur;
 import classes.Nationalite;
 import classes.Notoriete;
 import modeles.TournoiModele;
@@ -59,8 +63,42 @@ public class InsertValues {
 								Notoriete.INTERNATIONAL, EtatTournoi.FERME));
 			TournoiDAO.getInstance().add(new TournoiModele(4, "Tournoi nom 5", "12/12/3036", "12/01/3037", 
 								Notoriete.INTERNATIONAL, EtatTournoi.FERME));
+			TournoiModele t = new TournoiModele(5, "Tournoi nom 6", "14/12/2023", "30/12/2023", 
+					Notoriete.INTERNATIONAL, EtatTournoi.FERME);
+			Equipe e = new Equipe(0, "e1", Nationalite.FR, true, 2, 10);
+			
+			
+			
+			Equipe e2 = new Equipe(1, "e2", Nationalite.FR, true, 2, 10);
+			Equipe e3 = new Equipe(2, "e3", Nationalite.FR, true, 2, 10);
+			Equipe e4 = new Equipe(3, "e4", Nationalite.FR, true, 2, 10);
+			TournoiDAO.getInstance().add(t);
+			EquipeDAO.getInstance().add(e);
+			Joueur j1 = new Joueur(0, "Enzo", e.getIdEquipe());
+			Joueur j2 = new Joueur(1, "Emile", e.getIdEquipe());
+			Joueur j3 = new Joueur(2, "Emma", e.getIdEquipe());
+			Joueur j4 = new Joueur(3, "Lea", e.getIdEquipe());
+			Joueur j5 = new Joueur(4, "Leo", e.getIdEquipe());
+			JoueurDAO.getInstance().add(j1);
+			JoueurDAO.getInstance().add(j2);
+			JoueurDAO.getInstance().add(j3);
+			JoueurDAO.getInstance().add(j4);
+			JoueurDAO.getInstance().add(j5);
+			
+			EquipeDAO.getInstance().add(e2);
+			EquipeDAO.getInstance().add(e3);
+			EquipeDAO.getInstance().add(e4);
+			TournoiDAO.getInstance().addEquipe(t, e);
+			TournoiDAO.getInstance().addEquipe(t, e2);
+			TournoiDAO.getInstance().addEquipe(t, e3);
+			TournoiDAO.getInstance().addEquipe(t, e4);
+			Arbitre a = new Arbitre(0, "Josm", "ad", Nationalite.FR);
+			ArbitreDAO.getInstance().add(a);
+			TournoiDAO.getInstance().addArbitre(t, a);
+			
 			System.out.println("✔ Insertion de tous les tournois réussie.");
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println("❌ Insertion de tous les arbitres échouée.");
 		}    	
     }
