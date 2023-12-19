@@ -53,16 +53,7 @@ public class InsertValues {
 		}
 	    
 	    try {
-	    	TournoiDAO.getInstance().add(new TournoiModele(0, "Tournoi nom 1", "12/12/3023", "12/01/3024", 
-								Notoriete.INTERNATIONAL, EtatTournoi.FERME));
-			TournoiDAO.getInstance().add(new TournoiModele(1, "Tournoi nom 2", "12/12/3024", "12/01/3025", 
-								Notoriete.NATIONAL, EtatTournoi.FERME));
-			TournoiDAO.getInstance().add(new TournoiModele(2, "Tournoi nom 3", "12/12/3025", "12/01/3026", 
-								Notoriete.REGIONAL, EtatTournoi.FERME));
-			TournoiDAO.getInstance().add(new TournoiModele(3, "Tournoi nom 4", "12/12/3026", "12/01/3027", 
-								Notoriete.INTERNATIONAL, EtatTournoi.FERME));
-			TournoiDAO.getInstance().add(new TournoiModele(4, "Tournoi nom 5", "12/12/3036", "12/01/3037", 
-								Notoriete.INTERNATIONAL, EtatTournoi.FERME));
+	    	
 			TournoiModele t = new TournoiModele(5, "Tournoi nom 6", "14/12/2023", "30/12/2023", 
 					Notoriete.INTERNATIONAL, EtatTournoi.FERME);
 			Equipe e = new Equipe(0, "e1", Nationalite.FR, true, 2, 10);
@@ -95,6 +86,17 @@ public class InsertValues {
 			Arbitre a = new Arbitre(0, "Josm", "ad", Nationalite.FR);
 			ArbitreDAO.getInstance().add(a);
 			TournoiDAO.getInstance().addArbitre(t, a);
+			
+			TournoiDAO.getInstance().add(new TournoiModele(0, "Tournoi nom 1", "12/12/3023", "12/01/3024", 
+					Notoriete.INTERNATIONAL, EtatTournoi.FERME));
+			TournoiDAO.getInstance().add(new TournoiModele(1, "Tournoi nom 2", "12/12/3024", "12/01/3025", 
+								Notoriete.NATIONAL, EtatTournoi.FERME));
+			TournoiDAO.getInstance().add(new TournoiModele(2, "Tournoi nom 3", "12/12/3025", "12/01/3026", 
+								Notoriete.REGIONAL, EtatTournoi.FERME));
+			TournoiDAO.getInstance().add(new TournoiModele(3, "Tournoi nom 4", "12/12/3026", "12/01/3027", 
+								Notoriete.INTERNATIONAL, EtatTournoi.FERME));
+			TournoiDAO.getInstance().add(new TournoiModele(4, "Tournoi nom 5", "12/12/3036", "12/01/3037", 
+								Notoriete.INTERNATIONAL, EtatTournoi.FERME));
 			
 			System.out.println("✔ Insertion de tous les tournois réussie.");
 		} catch (Exception e) {
