@@ -43,35 +43,47 @@ public class SaisieResultatControleur implements ActionListener {
 				this.vue.dispose();
 				break;
 			case ("Ouvrir la Finale"):
-				Match ma = new Match(0,true);
-				Equipe e1 = null;
-				Equipe e2 = null;
-				int score= -1;
-				int score2 = -2;
-				Map<Equipe, Integer> equipe = modele.getTournoi().getEquipes();
-				for (Map.Entry eq : equipe.entrySet()) {
-					if((Integer) eq.getValue() > score) {
-						e2 = e1;
-						score2 = score;
-						e1 = (Equipe) eq.getKey();
-						score = (Integer)eq.getKey();
+				boolean b = true;
+				List<Match> mats = modele.getTournoi().getMatchs();
+				for (Match mat : mats) {
+					if (Integer.valueOf(mat.getVainqueur()) == null ) {
+						b = false;
 					}
-					else {
-						if ((Integer) eq.getValue() > score2) {
-							e2 = (Equipe) eq.getKey();
-							score2 = (Integer)eq.getKey();
+				}
+				if (b) {
+					Match ma = new Match(0,true);
+					Equipe e1 = null;
+					Equipe e2 = null;
+					int score= -1;
+					int score2 = -2;
+					Map<Equipe, Integer> equipe = modele.getTournoi().getEquipes();
+					for (Map.Entry eq : equipe.entrySet()) {
+						if((Integer) eq.getValue() > score) {
+							e2 = e1;
+							score2 = score;
+							e1 = (Equipe) eq.getKey();
+							score = (Integer)eq.getKey();
+						}
+						else {
+							if ((Integer) eq.getValue() > score2) {
+								e2 = (Equipe) eq.getKey();
+								score2 = (Integer)eq.getKey();
+							}
 						}
 					}
+					ma.AddEquipe(e1);
+					ma.AddEquipe(e2);
+					try {
+						MatchDAO.getInstance().add(ma);
+					} catch (Exception e3) {
+						// TODO Auto-generated catch block
+						e3.printStackTrace();
+					}
+					modele.getTournoi().nouveauMatch(ma.getIDMatch(), true);
 				}
-				ma.AddEquipe(e1);
-				ma.AddEquipe(e2);
-				try {
-					MatchDAO.getInstance().add(ma);
-				} catch (Exception e3) {
-					// TODO Auto-generated catch block
-					e3.printStackTrace();
+				else {
+					System.out.print("Tous les matchs ne sont pas finis");
 				}
-				modele.getTournoi().nouveauMatch(ma.getIDMatch(), true);
 				break;
 			case ("Fermer le tournoi"):
 				modele.getTournoi().setEtatTournoi(EtatTournoi.FERME);				
