@@ -50,11 +50,6 @@ public class Joueur {
 	}
 	
 	@Override
-	public String toString() {
-		return this.pseudo;
-	}
-
-	@Override
 	public int hashCode() {
 		return Objects.hash(idEquipe, idJoueur, pseudo);
 	}
@@ -73,7 +68,7 @@ public class Joueur {
 	
 	@Override
 	public String toString() {
-		return idJoueur+" "+pseudo+" ("+idEquipe+")";
+		return idJoueur+": "+pseudo+" ("+idEquipe+")";
 	}
 
 }
