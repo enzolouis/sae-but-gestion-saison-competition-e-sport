@@ -70,5 +70,10 @@ public class Joueur {
 		Joueur other = (Joueur) obj;
 		return idEquipe == other.idEquipe && idJoueur == other.idJoueur && Objects.equals(pseudo, other.pseudo);
 	}
+	
+	@Override
+	public String toString() {
+		return idJoueur+" "+pseudo+" ("+idEquipe+")";
+	}
 
 }
