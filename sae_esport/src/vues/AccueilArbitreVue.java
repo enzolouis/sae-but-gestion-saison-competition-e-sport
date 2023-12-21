@@ -33,7 +33,7 @@ public class AccueilArbitreVue extends CustomJFrame {
     }
     
     public AccueilArbitreVue() {
-    	super(new Dimension(400, 300), "Acceuil Arbitre");
+    	super(new Dimension(400, 300), "Accueil Arbitre");
         
     	pack();
     	
@@ -63,7 +63,7 @@ public class AccueilArbitreVue extends CustomJFrame {
         gbc_panelMiddle.weightx = 1.0;
         gbc_panelMiddle.weighty = 1.0;
         
-        CustomJButton btnCreerUnTournoi = new CustomJButton("Accès aux tournois", 10);
+        CustomJButton btnCreerUnTournoi = new CustomJButton("Accès au tournoi", 10);
         btnCreerUnTournoi.setBackground(new Color(102, 173, 221));
         btnCreerUnTournoi.setForeground(Color.WHITE);
         btnCreerUnTournoi.addActionListener(controleur);
@@ -71,7 +71,7 @@ public class AccueilArbitreVue extends CustomJFrame {
         gbc_panelMiddle.gridy = 0;
         panelMiddle.add(btnCreerUnTournoi, gbc_panelMiddle);
         
-        CustomJButton btnStatistiquesDeLa = new CustomJButton("Statistiques de la saison", 10);
+        CustomJButton btnStatistiquesDeLa = new CustomJButton("Statistiques du tournoi", 10);
         btnStatistiquesDeLa.setBackground(new Color(102, 173, 221));
         btnStatistiquesDeLa.setForeground(Color.WHITE);
         btnStatistiquesDeLa.addActionListener(controleur);
