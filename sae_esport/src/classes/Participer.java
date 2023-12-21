@@ -2,7 +2,7 @@ package classes;
 
 import java.util.Objects;
 
-public class Participer {
+public class Participer implements Comparable<Participer> {
 	private int IDEquipe;
 	private int IDTournoi;
 	private int resultat;
@@ -13,10 +13,10 @@ public class Participer {
 	 * 	@param la valeur de l'ID de l'Equipe
 	 * 	@param la valeur de résultat en points du Tournoi, variant en fonction de la position finale dans le tournoi
 	 * */
-	public Participer(int equipe, int tournoi, int resultat) {
-		this.IDEquipe = equipe;
-		this.IDTournoi= tournoi;
+	public Participer(int resultat, int tournoi, int equipe) {
 		this.resultat = resultat;
+		this.IDTournoi= tournoi;
+		this.IDEquipe = equipe;
 	}
 	
 	//Retourne l'ID de l'Equipe
@@ -54,6 +54,11 @@ public class Participer {
 	public void setResultat(int resultat) {
 		this.resultat = resultat;
 	}
+	
+	@Override
+	public String toString() {
+		return "Participer(tournoi=" + this.IDTournoi + ", equipe="+this.IDEquipe+", resultat="+this.resultat+")";
+	}
 
 	@Override
 	public int hashCode() {
@@ -71,4 +76,11 @@ public class Participer {
 		Participer other = (Participer) obj;
 		return IDEquipe == other.IDEquipe && IDTournoi == other.IDTournoi && resultat == other.resultat;
 	}
+
+	@Override
+	public int compareTo(Participer p) {
+		return this.resultat - p.resultat;
+	}
+	
+	
 }
