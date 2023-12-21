@@ -26,11 +26,8 @@ public class IdentificationControleur implements ActionListener {
 	public void seConnecter() {
 		String login = this.vue.getUtilisateurContenu();
 		String mdp = this.vue.getMotDePasseContenu();
-		System.out.println(login);
-		System.out.println(mdp);
 		if (this.modele.checkLogins(login, mdp)) {
 			if (this.modele.getUtilisateur() == Utilisateur.ADMIN) {
-				System.out.println("ADMIN");
 				AccueilAdministrateurVue vueAdmin;
 				try {
 					vueAdmin = new AccueilAdministrateurVue();
@@ -40,7 +37,6 @@ public class IdentificationControleur implements ActionListener {
 					e1.printStackTrace();
 				}
 			} else {
-				System.out.println("ARBITRE");
 				AccueilArbitreVue vueArbitre;
 				try {
 					vueArbitre = new AccueilArbitreVue();
@@ -80,7 +76,6 @@ public class IdentificationControleur implements ActionListener {
 				seConnecter();
 				break;
 			default:
-				System.out.println("mdp");
 				this.inverserIconMotDePasseMasque(bouton);
 				break;
 			}
