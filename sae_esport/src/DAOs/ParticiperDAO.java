@@ -86,23 +86,23 @@ public class ParticiperDAO {
 	//update un arbitre donné
 	public boolean update(Participer value) throws Exception {
 		
-		PreparedStatement st = DBConnection.getInstance().prepareStatement("UPDATE participer SET idEquipe=?, resultat=? WHERE idTournoi=?");
+		PreparedStatement st = DBConnection.getInstance().prepareStatement("UPDATE participer SET resultat=? WHERE idTournoi=? AND idEquipe=?");
 		 
-		st.setInt(1, value.getIdEquipe()); 
-		st.setInt(2, value.getResultat());
+		st.setInt(1, value.getResultat()); 
+		st.setInt(2, value.getIdTournoi());
 		
-		st.setInt(3, value.getIdTournoi());
+		st.setInt(3, value.getIdEquipe());
 		
 		int rowcount = st.executeUpdate();
 		return rowcount > 0;
-		
 	}
 	
 	//retire un arbitre donné
 	public boolean delete(Participer value) throws Exception {
 		
-		PreparedStatement st = DBConnection.getInstance().prepareStatement("DELETE FROM participer WHERE idEquipe=?");
+		PreparedStatement st = DBConnection.getInstance().prepareStatement("DELETE FROM participer WHERE idEquipe=? AND idTournoi=?");
 		st.setInt(1, value.getIdEquipe());
+		st.setInt(1, value.getIdTournoi());
 		int rowcount = st.executeUpdate();
 		return rowcount > 0;
 	}
