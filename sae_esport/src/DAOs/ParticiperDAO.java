@@ -66,17 +66,10 @@ public class ParticiperDAO {
 	//peu importe l'id que vous mettrez à l'arbitre, il sera changé
 	public boolean add(Participer value) throws Exception {
 
-		PreparedStatement st = DBConnection.getInstance().prepareStatement("SELECT NEXT VALUE FOR idTournoi FROM participer");
-		ResultSet rs = st.executeQuery();
-		int id = 0;
-		if (rs.next()) {
-			id = rs.getInt(1);
-		}
-		value.setIdEquipe(id);
-		st = DBConnection.getInstance().prepareStatement("INSERT INTO participer VALUES (?,?,?)");
-		st.setInt(1, id); 
+		PreparedStatement st = DBConnection.getInstance().prepareStatement("INSERT INTO participer VALUES (?,?,?)");
+		st.setInt(3, value.getIdTournoi()); 
 		st.setInt(2, value.getIdTournoi()); 
-		st.setInt(3, value.getResultat());
+		st.setInt(1, value.getResultat());
 		
 		int rowcount = st.executeUpdate();
 		return rowcount > 0;

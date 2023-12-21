@@ -50,11 +50,6 @@ public class Joueur {
 	}
 	
 	@Override
-	public String toString() {
-		return this.pseudo;
-	}
-
-	@Override
 	public int hashCode() {
 		return Objects.hash(idEquipe, idJoueur, pseudo);
 	}
@@ -69,6 +64,11 @@ public class Joueur {
 			return false;
 		Joueur other = (Joueur) obj;
 		return idEquipe == other.idEquipe && idJoueur == other.idJoueur && Objects.equals(pseudo, other.pseudo);
+	}
+	
+	@Override
+	public String toString() {
+		return idJoueur+": "+pseudo+" ("+idEquipe+")";
 	}
 
 }

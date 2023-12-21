@@ -167,24 +167,7 @@ public class TournoiModele {
 	
 	@Override
 	public String toString() {
-		String infos = getIDTournoi()+": "+getNomTournoi()+"("+getNotoriete()+")\n";
-		try {
-			infos += "Du "+getDateDebut()+" au "+getDateFin()+"\n";
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		infos+="Liste des arbitres:\n";
-		for (Arbitre a : getArbitres()) {
-			infos+=a.toString();
-			infos+="\n";
-		}
-		infos+="Liste des équipes:\n";
-		for (Equipe e : getEquipes().keySet()) {
-			infos+=e.toString();
-			infos+="\n";
-		}
-		return infos;
+		return getIDTournoi()+": "+getNomTournoi()+" ("+getNotoriete()+")\n";
 	}
 	
 	/**Créé un nouveau match pour le tournoi, 

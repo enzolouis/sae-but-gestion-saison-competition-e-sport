@@ -134,19 +134,24 @@ public class EquipeDAO {
 					
 					boolean nouvelleEquipe = true;
 					for (Equipe eq : listEquipes) {
-						if (e.getNom() == eq.getNom()) {
+						if (e.getNom().equals(eq.getNom())) {
 							nouvelleEquipe = false;
+							e.setIdEquipe(eq.getIdEquipe());
 						}
 					}
 					
-					if (nouvelleEquipe) add(e); int id = e.getIdEquipe();
+					if (nouvelleEquipe) {
+						add(e);
+					}
+					
+					int id = e.getIdEquipe();
 					
 					for (int i=4;i<=8;i++) {
 						
 						Joueur j = new Joueur(0,s[i],id);
 						boolean nouveauJoueur = true;
 						for (Joueur jo : listJoueurs) {
-							if (jo.getPseudo() == j.getPseudo()) {
+							if (jo.getPseudo().equals(j.getPseudo())) {
 								nouveauJoueur = false;
 								j.setIDJoueur(jo.getIdJoueur());
 							}
@@ -155,9 +160,8 @@ public class EquipeDAO {
 						if (nouveauJoueur) {
 							JoueurDAO.getInstance().add(j);
 							joueursEquipe.add(j);
+							e.AjouterJoueurs(j);
 						}
-						
-						e.AjouterJoueurs(j);
 						
 					}
 					
@@ -208,6 +212,28 @@ public class EquipeDAO {
 			e.printStackTrace();
 		}
 		return rowcount > 0;
+	}
+	
+	public List<TournoiModele> getTournoisEquipe(Equipe e) {
+		
+		List<TournoiModele> tournois = new ArrayList<TournoiModele>();
+		PreparedStatement st;
+		try {
+			st = DBConnection.getInstance().prepareStatement("SELECT * FROM Participer WHERE idEquipe = ?");
+			st.setInt(1, e.getIdEquipe());
+			ResultSet rs = st.executeQuery();
+			while (rs.next()) {
+				if (TournoiDAO.getInstance().getById(rs.getInt(2)).isPresent()) {
+					tournois.add(TournoiDAO.getInstance().getById(rs.getInt(2)).get());
+				}
+			}
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		return tournois;
+		
 	}
 	
 }
