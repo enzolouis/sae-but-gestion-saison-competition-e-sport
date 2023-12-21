@@ -11,21 +11,19 @@ public class IdentificationModele {
 	}
 	
 	private List<Administrateur> admins;
-	private AdministrateurDAO adminDAO;
 	private TournoiModele tournoiOuvert;
 	private Utilisateur utilisateur = null;
 	
 	public IdentificationModele() throws Exception {
 
-		this.adminDAO = new AdministrateurDAO();
-		this.adminDAO.add(new Administrateur(0, "Admin", "login1", "mdp1"));
-		this.adminDAO.add(new Administrateur(0, "Admin", "login2", "mdp2"));
+		AdministrateurDAO.getInstance().add(new Administrateur(0, "Admin", "login1", "mdp1"));
+		AdministrateurDAO.getInstance().add(new Administrateur(0, "Admin", "login2", "mdp2"));
 		//initalisation des variables
 		this.tournoiOuvert = new TournoiModele(1, "Tournoi test", "20/10/2023", "26/10/2023", Notoriete.INTERNATIONAL, EtatTournoi.OUVERT);
 
 		//recuperer le tournoi ouvert à l'aide du DAO (créer un DAO tournoi)
 		//recuperer les logins d'arbitre, ajouter les check logins
-		this.admins = adminDAO.getAll();
+		this.admins = AdministrateurDAO.getInstance().getAll();
 		
 	}
 	
