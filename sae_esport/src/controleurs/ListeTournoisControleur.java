@@ -25,6 +25,7 @@ import DAOs.ArbitreDAO;
 import DAOs.EquipeDAO;
 import DAOs.TournoiDAO;
 import classes.Arbitre;
+import classes.Disposition;
 import classes.Equipe;
 import classes.Joueur;
 import modeles.TournoiModele;
@@ -150,8 +151,13 @@ public class ListeTournoisControleur implements ActionListener, MouseListener {
 			
 			vue.joueurs.setModel(vue.joueursModel);
 			
-			vue.disposition.setText(e1.getDispose() ? "• Disposé" : "• Non disposé");
-			vue.disposition.setForeground(e1.getDispose() ? new Color(106, 176, 76) : new Color(235, 77, 75));
+			vue.disposition.setText(e1.getDispose().toString());
+			if (e1.getDispose().equals(Disposition.DISPOSEE)) {
+				vue.disposition.setForeground(new Color(106, 176, 76));
+			} else {
+				vue.disposition.setForeground(new Color(235, 77, 75));
+			}
+			
 		}
 	}
 
