@@ -1,4 +1,5 @@
 package controleurs;
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -23,7 +24,8 @@ public class IdentificationControleur implements ActionListener {
 		this.modele = new IdentificationModele();
 	}
 	
-	public void seConnecter() {
+	public void seConnecter() throws Exception {
+		
 		String login = this.vue.getUtilisateurContenu();
 		String mdp = this.vue.getMotDePasseContenu();
 		if (this.modele.checkLogins(login, mdp)) {
@@ -46,6 +48,7 @@ public class IdentificationControleur implements ActionListener {
 					e1.printStackTrace();
 				}
 			}
+			
 		} else {
 			JFrame jFrame = new JFrame();
 			JOptionPane.showMessageDialog(jFrame, "Login faux");
@@ -73,7 +76,12 @@ public class IdentificationControleur implements ActionListener {
 				this.vue.dispose();
 				break;
 			case "Se connecter":
-				seConnecter();
+				try {
+					seConnecter();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				break;
 			default:
 				this.inverserIconMotDePasseMasque(bouton);
@@ -81,7 +89,12 @@ public class IdentificationControleur implements ActionListener {
 			}
 		}
 		else {
-			seConnecter();
+			try {
+				seConnecter();
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		
 	}
