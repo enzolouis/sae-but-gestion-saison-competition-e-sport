@@ -7,6 +7,7 @@ import DAOs.JoueurDAO;
 import DAOs.TournoiDAO;
 import classes.Administrateur;
 import classes.Arbitre;
+import classes.Disposition;
 import classes.Equipe;
 import classes.EtatTournoi;
 import classes.Joueur;
@@ -54,15 +55,15 @@ public class InsertValues {
 	    
 	    try {
 	    	
-			TournoiModele t = new TournoiModele(5, "Tournoi nom 6", "14/12/2023", "30/12/2023", 
+			TournoiModele t = new TournoiModele(5, "Tournoi nom 6", "14/11/2023", "30/11/2023", 
 					Notoriete.INTERNATIONAL, EtatTournoi.FERME);
-			Equipe e = new Equipe(0, "e1", Nationalite.FR, true, 2, 10);
+			Equipe e = new Equipe(0, "e1", Nationalite.FR, Disposition.DISPOSEE, 2, 10);
 			
 			
 			
-			Equipe e2 = new Equipe(1, "e2", Nationalite.FR, true, 2, 10);
-			Equipe e3 = new Equipe(2, "e3", Nationalite.FR, true, 2, 10);
-			Equipe e4 = new Equipe(3, "e4", Nationalite.FR, true, 2, 10);
+			Equipe e2 = new Equipe(1, "e2", Nationalite.FR, Disposition.DISPOSEE, 2, 10);
+			Equipe e3 = new Equipe(2, "e3", Nationalite.FR, Disposition.DISPOSEE, 2, 10);
+			Equipe e4 = new Equipe(3, "e4", Nationalite.FR, Disposition.DISPOSEE, 2, 10);
 			TournoiDAO.getInstance().add(t);
 			EquipeDAO.getInstance().add(e);
 			Joueur j1 = new Joueur(0, "Enzo", e.getIdEquipe());
