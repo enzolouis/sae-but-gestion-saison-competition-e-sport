@@ -18,6 +18,7 @@ import java.util.Random;
 import DAOs.ParticiperDAO;
 import DAOs.TournoiDAO;
 import classes.Arbitre;
+import classes.Disposition;
 import classes.Equipe;
 import classes.EtatTournoi;
 import classes.Match;
@@ -189,7 +190,7 @@ public class TournoiModele {
 	
 	//Ajoute une Equipe donné dans la liste des participans
 	public void ajouterEquipe(Equipe equipe, int resultat) {
-		if (equipe.getDispose()) {
+		if (equipe.getDispose().equals(Disposition.DISPOSEE)) {
 			this.participants.put(equipe, resultat);
 		} else {
 			this.participantsIndisposees.add(equipe);
@@ -323,7 +324,9 @@ public class TournoiModele {
 	}
 	
 	public boolean isTournoiMinimum4EquipeDisposee() {		
-		return participants.keySet().stream().filter(e -> e.getDisposition()).count() >= 4;
+		return participants.keySet()
+				.stream()
+				.filter(e -> e.getDisposition().equals(Disposition.DISPOSEE)).count() >= 4;
 	}
 	
 	public boolean isTournoiMinimum1Arbitre() {
