@@ -51,7 +51,7 @@ public class CreateEquipe {
 		            + "nationalite VARCHAR(50),"
 		            + "rangSaisonPrecedente INTEGER,"
 		            + "pointsSaison INTEGER,"
-		            + "disposee VARCHAR(10))");
+		            + "disposee VARCHAR(14))");
 		    System.out.println("✔ Création de la table equipe réussie.");
 		} catch (SQLException e) {
 		    System.out.println("❌ Création de la table equipe échouée.");
