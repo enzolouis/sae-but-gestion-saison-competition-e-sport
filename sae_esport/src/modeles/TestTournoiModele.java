@@ -24,6 +24,7 @@ import org.junit.Test;
 import DAOs.TournoiDAO;
 import classes.Arbitre;
 import classes.DBConnection;
+import classes.Disposition;
 import classes.Equipe;
 import classes.EtatTournoi;
 import classes.Nationalite;
@@ -198,10 +199,10 @@ public class TestTournoiModele {
 				Notoriete.REGIONAL,
 				EtatTournoi.FERME);
 
-	t.ajouterEquipe(new Equipe(1,"rofl",Nationalite.AD,false,14,12),0);
-	t.majPointsEquipe(new Equipe(1,"rofl",Nationalite.AD,false,14,12), 121);
+	t.ajouterEquipe(new Equipe(1,"rofl",Nationalite.AD,Disposition.NON_DIPOSEE,14,12),0);
+	t.majPointsEquipe(new Equipe(1,"rofl",Nationalite.AD,Disposition.NON_DIPOSEE,14,12), 121);
 	
-	assertTrue(t.getParticipants().containsKey(new Equipe(1,"rofl",Nationalite.AD,false,14,121)));
+	assertTrue(t.getParticipants().containsKey(new Equipe(1,"rofl",Nationalite.AD,Disposition.NON_DIPOSEE,14,121)));
 	}
 	
 	@Test
@@ -440,17 +441,17 @@ public class TestTournoiModele {
 	@Test
 	public void testTournoiMinimum4EquipeDisposeeAvecAuMoins4EquipesDisposees() {
 		TournoiModele t = new TournoiModele();
-		t.ajouterEquipe(new Equipe(1, "e1", Nationalite.FR, true, 1000, 100),0);
-		t.ajouterEquipe(new Equipe(2, "e2", Nationalite.FR, true, 1000, 100),0);
-		t.ajouterEquipe(new Equipe(3, "e3", Nationalite.FR, true, 1000, 100),0);
-		t.ajouterEquipe(new Equipe(4, "e4", Nationalite.FR, true, 1000, 100),0);
+		t.ajouterEquipe(new Equipe(1, "e1", Nationalite.FR, Disposition.DISPOSEE, 1000, 100),0);
+		t.ajouterEquipe(new Equipe(2, "e2", Nationalite.FR, Disposition.DISPOSEE, 1000, 100),0);
+		t.ajouterEquipe(new Equipe(3, "e3", Nationalite.FR, Disposition.DISPOSEE, 1000, 100),0);
+		t.ajouterEquipe(new Equipe(4, "e4", Nationalite.FR, Disposition.DISPOSEE, 1000, 100),0);
 		
 		TournoiModele t2 = new TournoiModele();
-		t2.ajouterEquipe(new Equipe(1, "e1", Nationalite.FR, true, 1000, 100),0);
-		t2.ajouterEquipe(new Equipe(2, "e2", Nationalite.FR, true, 1000, 100),0);
-		t2.ajouterEquipe(new Equipe(3, "e3", Nationalite.FR, true, 1000, 100),0);
-		t2.ajouterEquipe(new Equipe(4, "e4", Nationalite.FR, true, 1000, 100),0);
-		t2.ajouterEquipe(new Equipe(4, "e4", Nationalite.FR, true, 1000, 100),0);
+		t2.ajouterEquipe(new Equipe(1, "e1", Nationalite.FR, Disposition.DISPOSEE, 1000, 100),0);
+		t2.ajouterEquipe(new Equipe(2, "e2", Nationalite.FR, Disposition.DISPOSEE, 1000, 100),0);
+		t2.ajouterEquipe(new Equipe(3, "e3", Nationalite.FR, Disposition.DISPOSEE, 1000, 100),0);
+		t2.ajouterEquipe(new Equipe(4, "e4", Nationalite.FR, Disposition.DISPOSEE, 1000, 100),0);
+		t2.ajouterEquipe(new Equipe(4, "e4", Nationalite.FR, Disposition.DISPOSEE, 1000, 100),0);
 		
 		assertTrue(t.isTournoiMinimum4EquipeDisposee());
 		assertTrue(t2.isTournoiMinimum4EquipeDisposee());
@@ -459,10 +460,10 @@ public class TestTournoiModele {
 	@Test
 	public void testTournoiMinimum4EquipeDisposeeAvecMoinsDe4EquipesDisposees() {
 		TournoiModele t = new TournoiModele();
-		t.ajouterEquipe(new Equipe(1, "e1", Nationalite.FR, true, 1000, 100),0);
-		t.ajouterEquipe(new Equipe(2, "e2", Nationalite.FR, true, 1000, 100),0);
-		t.ajouterEquipe(new Equipe(3, "e3", Nationalite.FR, true, 1000, 100),0);
-		t.ajouterEquipe(new Equipe(4, "e4", Nationalite.FR, false, 1000, 100),0);
+		t.ajouterEquipe(new Equipe(1, "e1", Nationalite.FR, Disposition.DISPOSEE, 1000, 100),0);
+		t.ajouterEquipe(new Equipe(2, "e2", Nationalite.FR, Disposition.DISPOSEE, 1000, 100),0);
+		t.ajouterEquipe(new Equipe(3, "e3", Nationalite.FR, Disposition.DISPOSEE, 1000, 100),0);
+		t.ajouterEquipe(new Equipe(4, "e4", Nationalite.FR, Disposition.NON_DIPOSEE, 1000, 100),0);
 		
 		assertFalse(t.isTournoiMinimum4EquipeDisposee());
 	}
@@ -659,9 +660,9 @@ public class TestTournoiModele {
 				Notoriete.REGIONAL,
 				EtatTournoi.OUVERT);
 		
-		t.ajouterEquipe(new Equipe(1, "e1", Nationalite.FR, true, 1000, 100), 0);
-		t.ajouterEquipe(new Equipe(2, "e2", Nationalite.FR, true, 1000, 100), 0);
-		t.ajouterEquipe(new Equipe(5, "e5", Nationalite.FR, false, 1000, 100), 0);
+		t.ajouterEquipe(new Equipe(1, "e1", Nationalite.FR, Disposition.DISPOSEE, 1000, 100), 0);
+		t.ajouterEquipe(new Equipe(2, "e2", Nationalite.FR, Disposition.DISPOSEE, 1000, 100), 0);
+		t.ajouterEquipe(new Equipe(5, "e5", Nationalite.FR, Disposition.NON_DIPOSEE, 1000, 100), 0);
 		
 		t.supprimerEquipeIndisposees();
 		
@@ -695,10 +696,10 @@ public class TestTournoiModele {
 		
 		// configuration parfaite d'un tournoi pouvant être lancé
 		// (>= 4 equipe, >= 1 equipe, date dans creneau, aucun tournoi deja ouvert)
-		t.ajouterEquipe(new Equipe(1, "e1", Nationalite.FR, true, 1000, 100), 0);
-		t.ajouterEquipe(new Equipe(2, "e2", Nationalite.FR, true, 1000, 100), 0);
-		t.ajouterEquipe(new Equipe(3, "e3", Nationalite.FR, true, 1000, 100), 0);
-		t.ajouterEquipe(new Equipe(4, "e4", Nationalite.FR, true, 1000, 100), 0);
+		t.ajouterEquipe(new Equipe(1, "e1", Nationalite.FR, Disposition.DISPOSEE, 1000, 100), 0);
+		t.ajouterEquipe(new Equipe(2, "e2", Nationalite.FR, Disposition.DISPOSEE, 1000, 100), 0);
+		t.ajouterEquipe(new Equipe(3, "e3", Nationalite.FR, Disposition.DISPOSEE, 1000, 100), 0);
+		t.ajouterEquipe(new Equipe(4, "e4", Nationalite.FR, Disposition.DISPOSEE, 1000, 100), 0);
 		
 		t.ajouterArbitre(new Arbitre(1, "Albert", "Camus", Nationalite.FR));
 		
@@ -730,10 +731,10 @@ public class TestTournoiModele {
 		
 		// configuration parfaite d'un tournoi pouvant être lancé
 		// (>= 4 equipe, >= 1 equipe, date dans creneau, aucun tournoi deja ouvert)
-		t.ajouterEquipe(new Equipe(1, "e1", Nationalite.FR, true, 1000, 100), 0);
-		t.ajouterEquipe(new Equipe(2, "e2", Nationalite.FR, true, 1000, 100), 0);
-		t.ajouterEquipe(new Equipe(3, "e3", Nationalite.FR, true, 1000, 100), 0);
-		t.ajouterEquipe(new Equipe(4, "e4", Nationalite.FR, true, 1000, 100), 0);
+		t.ajouterEquipe(new Equipe(1, "e1", Nationalite.FR, Disposition.DISPOSEE, 1000, 100), 0);
+		t.ajouterEquipe(new Equipe(2, "e2", Nationalite.FR, Disposition.DISPOSEE, 1000, 100), 0);
+		t.ajouterEquipe(new Equipe(3, "e3", Nationalite.FR, Disposition.DISPOSEE, 1000, 100), 0);
+		t.ajouterEquipe(new Equipe(4, "e4", Nationalite.FR, Disposition.DISPOSEE, 1000, 100), 0);
 		
 		t.ajouterArbitre(new Arbitre(1, "Albert", "Camus", Nationalite.FR));
 		
