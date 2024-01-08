@@ -49,7 +49,7 @@ public class testDAOMatch {
 	/// Olivier RODRIGUEZ
 	/// Test de la récupération d'un administrateur
 	public void testGetByIdMatch() throws Exception{
-	    Match match = new Match(0, false);
+	    	Match match = new Match(0, false);
 			matchDAO.add(match);
 			Optional<Match> optional = matchDAO.getById(match.getIDMatch());
 		    assertEquals(optional.get(), match);

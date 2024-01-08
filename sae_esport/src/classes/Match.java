@@ -81,7 +81,8 @@ public class Match {
 		if (getClass() != obj.getClass())
 			return false;
 		Match other = (Match) obj;
-		return Objects.equals(equipes, other.equipes) && finale == other.finale && idMatch == other.idMatch
+		return equipes.containsAll(other.equipes) && other.equipes.containsAll(equipes) && 
+				finale == other.finale && idMatch == other.idMatch
 				&& idVainqueur == other.idVainqueur;
 	}
 }

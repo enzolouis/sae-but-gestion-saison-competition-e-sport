@@ -44,7 +44,7 @@ public class MatchDAO {
 			for (Integer i : id) {
 				ResultSet rs = st.executeQuery("SELECT * FROM matchT WHERE idMatch="+i);
 				if (rs.next()) {
-					return Optional.of(new Match(rs.getInt(2),rs.getBoolean(1)));
+					return Optional.of(new Match(rs.getInt(1),rs.getBoolean(2)));
 				}
 			}
 			return Optional.empty();
@@ -54,14 +54,15 @@ public class MatchDAO {
 			//peu importe l'id que vous mettrez à l'arbitre, il sera changé
 			public boolean add(Match value) throws Exception {
 
-				PreparedStatement st = DBConnection.getInstance().prepareStatement("SELECT NEXT VALUE FOR SeqIdMatch FROM matchT");
+				PreparedStatement st = DBConnection.getInstance().prepareStatement("SELECT NEXT VALUE FOR SeqIdMatch FROM dual");
 				ResultSet rs = st.executeQuery();
 				int id = 0;
 				if (rs.next()) {
 					id = rs.getInt(1);
 				}
 				value.setIdMatch(id);
-				st = DBConnection.getInstance().prepareStatement("INSERT INTO matchT VALUES (?,?)");
+				System.out.println(value.getIDMatch());
+				st = DBConnection.getInstance().prepareStatement("INSERT INTO matchT VALUES (?,?,NULL)");
 				st.setInt(1, id); 
 				st.setBoolean(2, value.IsItFinale()); 
 				
