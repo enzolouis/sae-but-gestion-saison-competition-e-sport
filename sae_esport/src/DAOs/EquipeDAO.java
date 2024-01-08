@@ -83,7 +83,6 @@ public class EquipeDAO {
 		if (rs.next()) {
 			id = rs.getInt(1);
 		}
-		System.out.println(id);
 		value.setIdEquipe(id);
 		st = DBConnection.getInstance().prepareStatement("INSERT INTO equipe VALUES (?,?,?,?,?,?)");
 		st.setInt(1, id); 
