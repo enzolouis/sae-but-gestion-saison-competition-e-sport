@@ -67,9 +67,9 @@ public class ParticiperDAO {
 	public boolean add(Participer value) throws Exception {
 
 		PreparedStatement st = DBConnection.getInstance().prepareStatement("INSERT INTO participer VALUES (?,?,?)");
-		st.setInt(3, value.getIdTournoi()); 
-		st.setInt(2, value.getIdTournoi()); 
 		st.setInt(1, value.getResultat());
+		st.setInt(2, value.getIdTournoi());
+		st.setInt(3, value.getIdEquipe()); 
 		
 		int rowcount = st.executeUpdate();
 		return rowcount > 0;
@@ -83,7 +83,6 @@ public class ParticiperDAO {
 		 
 		st.setInt(1, value.getResultat()); 
 		st.setInt(2, value.getIdTournoi());
-		
 		st.setInt(3, value.getIdEquipe());
 		
 		int rowcount = st.executeUpdate();
