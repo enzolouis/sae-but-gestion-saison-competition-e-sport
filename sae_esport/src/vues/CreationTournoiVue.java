@@ -30,6 +30,7 @@ import javax.swing.JButton;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import java.awt.Rectangle;
+import java.awt.Component;
 
 public class CreationTournoiVue extends CustomJFrame {
 	
@@ -61,7 +62,7 @@ public class CreationTournoiVue extends CustomJFrame {
 	public CreationTournoiVue() {
 		
 		super(new Dimension(500,300));
-		setBounds(new Rectangle(0, 0, 700, 550));
+		setBounds(new Rectangle(0, 0, 800, 550));
 		
 		this.controleur = new CreationTournoiControleur(this);
 		Color backgroundColor = new Color(44, 47, 51);
@@ -291,6 +292,7 @@ public class CreationTournoiVue extends CustomJFrame {
 		this.textFieldEquipesFile.setColumns(10);
 		
 		this.btnImportEquipes = new CustomJButton("Importer", 5);
+		btnImportEquipes.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		btnImportEquipes.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 11));
 		this.btnImportEquipes.addActionListener(controleur);
 		panelEquipes.add(this.btnImportEquipes);
