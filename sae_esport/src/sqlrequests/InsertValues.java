@@ -31,16 +31,17 @@ public class InsertValues {
     	TournoiModele t = new TournoiModele(66, "Big tournoi", "20/12/2023", "20/01/2023", 
 				Notoriete.INTERNATIONAL, EtatTournoi.FERME);
     	TournoiDAO.getInstance().add(t);
+    	System.out.print(t.getIDTournoi());
     	
     	// 4 équipes
-		Equipe e = new Equipe(0, "Maxence Maury-Balliteam", Nationalite.FR, true, 3, 1000);EquipeDAO.getInstance().add(e);
-		Equipe e2 = new Equipe(1, "Ibrateam Zoubairov", Nationalite.FR, true, 1, 2300);EquipeDAO.getInstance().add(e2);
-		Equipe e3 = new Equipe(2, "Equipema Rasoanaivo", Nationalite.FR, true, 2, 2001);EquipeDAO.getInstance().add(e3);
-		Equipe e4 = new Equipe(3, "Stuarteam Barthe", Nationalite.FR, true, 4, 18);EquipeDAO.getInstance().add(e4);
-		Equipe e5 = new Equipe(0, "Peymar", Nationalite.FR, true, 3, 1000);EquipeDAO.getInstance().add(e5);
-		Equipe e6 = new Equipe(1, "Plkk", Nationalite.FR, true, 1, 2300);EquipeDAO.getInstance().add(e6);
-		Equipe e7 = new Equipe(2, "PhaineL", Nationalite.FR, true, 2, 2001);EquipeDAO.getInstance().add(e7);
-		Equipe e8 = new Equipe(3, "Zombie Tsunami", Nationalite.FR, true, 4, 18);EquipeDAO.getInstance().add(e8);
+		Equipe e = new Equipe(0, "Maxence Maury-Balliteam", Nationalite.FR, Disposition.DISPOSEE, 3, 1000);EquipeDAO.getInstance().add(e);
+		Equipe e2 = new Equipe(1, "Ibrateam Zoubairov", Nationalite.FR, Disposition.DISPOSEE, 1, 2300);EquipeDAO.getInstance().add(e2);
+		Equipe e3 = new Equipe(2, "Equipema Rasoanaivo", Nationalite.FR, Disposition.DISPOSEE, 2, 2001);EquipeDAO.getInstance().add(e3);
+		Equipe e4 = new Equipe(3, "Stuarteam Barthe", Nationalite.FR, Disposition.DISPOSEE, 4, 18);EquipeDAO.getInstance().add(e4);
+		Equipe e5 = new Equipe(0, "Peymar", Nationalite.FR, Disposition.DISPOSEE, 3, 1000);EquipeDAO.getInstance().add(e5);
+		Equipe e6 = new Equipe(1, "Plkk", Nationalite.FR, Disposition.DISPOSEE, 1, 2300);EquipeDAO.getInstance().add(e6);
+		Equipe e7 = new Equipe(2, "PhaineL", Nationalite.FR, Disposition.DISPOSEE, 2, 2001);EquipeDAO.getInstance().add(e7);
+		Equipe e8 = new Equipe(3, "Zombie Tsunami", Nationalite.FR, Disposition.DISPOSEE, 4, 18);EquipeDAO.getInstance().add(e8);
 		
 		Joueur je11 = new Joueur(0, "Enzo", e.getIdEquipe());JoueurDAO.getInstance().add(je11);
 		Joueur je12 = new Joueur(1, "Emile", e.getIdEquipe());JoueurDAO.getInstance().add(je12);
@@ -139,7 +140,7 @@ public class InsertValues {
 			TournoiDAO.getInstance().add(new TournoiModele(4, "Tournoi nom 5", "12/12/3036", "12/01/3037", 
 								Notoriete.INTERNATIONAL, EtatTournoi.FERME));
 			
-			System.out.println("✔ Insertion de tous les tournois réussie." + t.getIDTournoi());
+			System.out.println("✔ Insertion de tous les tournois réussie.");
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("❌ Insertion de tous les arbitres échouée.");
