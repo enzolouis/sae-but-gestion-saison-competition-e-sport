@@ -33,6 +33,8 @@ import DAOs.TournoiDAO;
 import classes.Equipe;
 import classes.Match;
 import classes.Participer;
+import controleurs.ConsultationTournoiControleur;
+import controleurs.CreationTournoiControleur;
 import controleurs.IdentificationControleur;
 import modeles.TournoiModele;
 import style.CustomJButton;
@@ -46,6 +48,7 @@ public class ConsultationTournoiVue extends CustomJFrame {
 
 	private JPanel contentPane;
 	private JTable table;
+	private ConsultationTournoiControleur controleur;
 
 	/**
 	 * Launch the application.
@@ -72,12 +75,13 @@ public class ConsultationTournoiVue extends CustomJFrame {
 
 	/**
 	 * Create the frame.
+	 * @throws Exception 
 	 */
-	public ConsultationTournoiVue(TournoiModele tournoiCourant) {
+	public ConsultationTournoiVue(TournoiModele tournoiCourant) throws Exception {
 		super(new Dimension(750, 500), "Consultation du classement du tournoi N°"+tournoiCourant.getIDTournoi());
 		// tournoi en paramètre
 		
-		
+		controleur = new ConsultationTournoiControleur(this);
 		
 		
 		
@@ -109,8 +113,8 @@ public class ConsultationTournoiVue extends CustomJFrame {
 			};};
 		tableClassement.setOpaque(false);
         tableClassement.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 13));
-        tableClassement.setBackground(new Color(0, 0, 0));
-		tableClassement.setForeground(new Color(44, 47, 51));
+        tableClassement.setBackground(new Color(255, 255, 255));
+		tableClassement.setForeground(new Color(102,172,221));
 		tableClassement.setSelectionBackground(new Color(198, 224, 242));
 		tableClassement.setGridColor(new Color(44, 47, 51));
 		tableClassement.setRowHeight(34);
@@ -169,6 +173,7 @@ public class ConsultationTournoiVue extends CustomJFrame {
         contentPane.add(panelQuitterSeconnecter, BorderLayout.SOUTH);
         
         CustomJButton btnQuit = new CustomJButton("Quitter", 5);
+        btnQuit.addActionListener(this.controleur);
         btnQuit.setBackground(new Color(231, 76, 60));
         btnQuit.setForeground(new Color(255, 255, 255));
         //btnQuit.addActionListener(this.controleur);

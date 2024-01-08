@@ -6,7 +6,7 @@ import javax.swing.JButton;
 import style.CustomJFrame;
 import vues.AccueilArbitreVue;
 import vues.ConsultationSaisonVue;
-import vues.ConsultationTournoi;
+import vues.ConsultationTournoiVue;
 import vues.CreationTournoiVue;
 
 public class AccueilArbitreControleur implements ActionListener {
