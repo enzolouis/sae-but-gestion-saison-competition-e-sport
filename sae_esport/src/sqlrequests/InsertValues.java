@@ -1,9 +1,13 @@
 package sqlrequests;
 
+import java.util.Iterator;
+
 import DAOs.AdministrateurDAO;
 import DAOs.ArbitreDAO;
 import DAOs.EquipeDAO;
 import DAOs.JoueurDAO;
+import DAOs.MatchDAO;
+import DAOs.ParticiperDAO;
 import DAOs.TournoiDAO;
 import classes.Administrateur;
 import classes.Arbitre;
@@ -11,14 +15,80 @@ import classes.Disposition;
 import classes.Equipe;
 import classes.EtatTournoi;
 import classes.Joueur;
+import classes.Match;
 import classes.Nationalite;
 import classes.Notoriete;
+import classes.Participer;
 import modeles.TournoiModele;
 
 public class InsertValues {
 
     public static void main(String[] args) throws Exception {
     	InsertValues.Insert();
+    }
+   
+    public static void BigTournoiExemple() throws Exception {
+    	TournoiModele t = new TournoiModele(66, "Big tournoi", "20/12/2023", "20/01/2023", 
+				Notoriete.INTERNATIONAL, EtatTournoi.FERME);
+    	TournoiDAO.getInstance().add(t);
+    	
+    	// 4 équipes
+		Equipe e = new Equipe(0, "Maxence Maury-Balliteam", Nationalite.FR, true, 3, 1000);EquipeDAO.getInstance().add(e);
+		Equipe e2 = new Equipe(1, "Ibrateam Zoubairov", Nationalite.FR, true, 1, 2300);EquipeDAO.getInstance().add(e2);
+		Equipe e3 = new Equipe(2, "Equipema Rasoanaivo", Nationalite.FR, true, 2, 2001);EquipeDAO.getInstance().add(e3);
+		Equipe e4 = new Equipe(3, "Stuarteam Barthe", Nationalite.FR, true, 4, 18);EquipeDAO.getInstance().add(e4);
+		Equipe e5 = new Equipe(0, "Peymar", Nationalite.FR, true, 3, 1000);EquipeDAO.getInstance().add(e5);
+		Equipe e6 = new Equipe(1, "Plkk", Nationalite.FR, true, 1, 2300);EquipeDAO.getInstance().add(e6);
+		Equipe e7 = new Equipe(2, "PhaineL", Nationalite.FR, true, 2, 2001);EquipeDAO.getInstance().add(e7);
+		Equipe e8 = new Equipe(3, "Zombie Tsunami", Nationalite.FR, true, 4, 18);EquipeDAO.getInstance().add(e8);
+		
+		Joueur je11 = new Joueur(0, "Enzo", e.getIdEquipe());JoueurDAO.getInstance().add(je11);
+		Joueur je12 = new Joueur(1, "Emile", e.getIdEquipe());JoueurDAO.getInstance().add(je12);
+		Joueur je13 = new Joueur(2, "Emma", e.getIdEquipe());JoueurDAO.getInstance().add(je13);
+		Joueur je14 = new Joueur(3, "Lea", e.getIdEquipe());JoueurDAO.getInstance().add(je14);
+		Joueur je15 = new Joueur(4, "Leo", e.getIdEquipe());JoueurDAO.getInstance().add(je15);
+		
+		Joueur je21 = new Joueur(5, "Enzo", e2.getIdEquipe());JoueurDAO.getInstance().add(je21);
+		Joueur je22 = new Joueur(6, "Emile", e2.getIdEquipe());JoueurDAO.getInstance().add(je22);
+		Joueur je23 = new Joueur(7, "Emma", e2.getIdEquipe());JoueurDAO.getInstance().add(je23);
+		Joueur je24 = new Joueur(8, "Lea", e2.getIdEquipe());JoueurDAO.getInstance().add(je24);
+		Joueur je25 = new Joueur(9, "Leo", e2.getIdEquipe());JoueurDAO.getInstance().add(je25);
+		
+		Joueur je31 = new Joueur(10, "Enzo", e3.getIdEquipe());JoueurDAO.getInstance().add(je31);
+		Joueur je32 = new Joueur(11, "Emile", e3.getIdEquipe());JoueurDAO.getInstance().add(je32);
+		Joueur je33 = new Joueur(12, "Emma", e3.getIdEquipe());JoueurDAO.getInstance().add(je33);
+		Joueur je34 = new Joueur(13, "Lea", e3.getIdEquipe());JoueurDAO.getInstance().add(je34);
+		Joueur je35 = new Joueur(14, "Leo", e3.getIdEquipe());JoueurDAO.getInstance().add(je35);
+		
+		Joueur j1 = new Joueur(15, "Enzo", e4.getIdEquipe());JoueurDAO.getInstance().add(j1);
+		Joueur j2 = new Joueur(16, "Emile", e4.getIdEquipe());JoueurDAO.getInstance().add(j2);
+		Joueur j3 = new Joueur(17, "Emma", e4.getIdEquipe());JoueurDAO.getInstance().add(j3);
+		Joueur j4 = new Joueur(18, "Lea", e4.getIdEquipe());JoueurDAO.getInstance().add(j4);
+		Joueur j5 = new Joueur(19, "Leo", e4.getIdEquipe());JoueurDAO.getInstance().add(j5);
+		
+		TournoiDAO.getInstance().addEquipe(t, e);
+		TournoiDAO.getInstance().addEquipe(t, e2);
+		TournoiDAO.getInstance().addEquipe(t, e3);
+		TournoiDAO.getInstance().addEquipe(t, e4);
+		TournoiDAO.getInstance().addEquipe(t, e5);
+		TournoiDAO.getInstance().addEquipe(t, e6);
+		TournoiDAO.getInstance().addEquipe(t, e7);
+		TournoiDAO.getInstance().addEquipe(t, e8);
+		
+		
+		// 1 arbitre
+		Arbitre a = new Arbitre(0, "Josman", "José", Nationalite.FR);
+		ArbitreDAO.getInstance().add(a);
+		TournoiDAO.getInstance().addArbitre(t, a);
+		
+		ParticiperDAO.getInstance().update(new Participer(e.getIdEquipe(), t.getIDTournoi(), 1));
+		ParticiperDAO.getInstance().update(new Participer(e2.getIdEquipe(), t.getIDTournoi(), 4));
+		ParticiperDAO.getInstance().update(new Participer(e3.getIdEquipe(), t.getIDTournoi(), 2));
+		ParticiperDAO.getInstance().update(new Participer(e4.getIdEquipe(), t.getIDTournoi(), 3));
+		ParticiperDAO.getInstance().update(new Participer(e5.getIdEquipe(), t.getIDTournoi(), 8));
+		ParticiperDAO.getInstance().update(new Participer(e6.getIdEquipe(), t.getIDTournoi(), 6));
+		ParticiperDAO.getInstance().update(new Participer(e7.getIdEquipe(), t.getIDTournoi(), 7));
+		ParticiperDAO.getInstance().update(new Participer(e8.getIdEquipe(), t.getIDTournoi(), 5));
     }
     
     public static void Insert() {
@@ -55,39 +125,9 @@ public class InsertValues {
 	    
 	    try {
 	    	
-			TournoiModele t = new TournoiModele(5, "Tournoi nom 6", "14/11/2023", "30/11/2023", 
-					Notoriete.INTERNATIONAL, EtatTournoi.FERME);
-			Equipe e = new Equipe(0, "e1", Nationalite.FR, Disposition.DISPOSEE, 2, 10);
-			
-			
-			
-			Equipe e2 = new Equipe(1, "e2", Nationalite.FR, Disposition.DISPOSEE, 2, 10);
-			Equipe e3 = new Equipe(2, "e3", Nationalite.FR, Disposition.DISPOSEE, 2, 10);
-			Equipe e4 = new Equipe(3, "e4", Nationalite.FR, Disposition.DISPOSEE, 2, 10);
-			TournoiDAO.getInstance().add(t);
-			EquipeDAO.getInstance().add(e);
-			Joueur j1 = new Joueur(0, "Enzo", e.getIdEquipe());
-			Joueur j2 = new Joueur(1, "Emile", e.getIdEquipe());
-			Joueur j3 = new Joueur(2, "Emma", e.getIdEquipe());
-			Joueur j4 = new Joueur(3, "Lea", e.getIdEquipe());
-			Joueur j5 = new Joueur(4, "Leo", e.getIdEquipe());
-			JoueurDAO.getInstance().add(j1);
-			JoueurDAO.getInstance().add(j2);
-			JoueurDAO.getInstance().add(j3);
-			JoueurDAO.getInstance().add(j4);
-			JoueurDAO.getInstance().add(j5);
-			
-			EquipeDAO.getInstance().add(e2);
-			EquipeDAO.getInstance().add(e3);
-			EquipeDAO.getInstance().add(e4);
-			TournoiDAO.getInstance().addEquipe(t, e);
-			TournoiDAO.getInstance().addEquipe(t, e2);
-			TournoiDAO.getInstance().addEquipe(t, e3);
-			TournoiDAO.getInstance().addEquipe(t, e4);
-			Arbitre a = new Arbitre(0, "Josm", "ad", Nationalite.FR);
-			ArbitreDAO.getInstance().add(a);
-			TournoiDAO.getInstance().addArbitre(t, a);
-			
+	    	// le laisser en premier
+	    	InsertValues.BigTournoiExemple();
+	    	
 			TournoiDAO.getInstance().add(new TournoiModele(0, "Tournoi nom 1", "12/12/3023", "12/01/3024", 
 					Notoriete.INTERNATIONAL, EtatTournoi.FERME));
 			TournoiDAO.getInstance().add(new TournoiModele(1, "Tournoi nom 2", "12/12/3024", "12/01/3025", 
@@ -99,7 +139,7 @@ public class InsertValues {
 			TournoiDAO.getInstance().add(new TournoiModele(4, "Tournoi nom 5", "12/12/3036", "12/01/3037", 
 								Notoriete.INTERNATIONAL, EtatTournoi.FERME));
 			
-			System.out.println("✔ Insertion de tous les tournois réussie.");
+			System.out.println("✔ Insertion de tous les tournois réussie." + t.getIDTournoi());
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("❌ Insertion de tous les arbitres échouée.");

@@ -11,6 +11,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.util.Iterator;
 
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
@@ -156,7 +157,32 @@ public class SaisieResultatVue extends CustomJFrame {
         gbc_roundListEquipe.gridx = 0;
         gbc_roundListEquipe.gridy = 1;
         
-        for (Match match : this.tournoi.getMatchs()) {
+        // Exemple de représentation de match et Round
+//        for (int i = 1; i <= 6; i++) {
+//        	// Panel Match : Titre + Panel Liste Equipe
+//        	CustomJPanel MatchCustomJPanel = new CustomJPanel(new EmptyBorder(0, 0, 0, 0), new GridLayout(2, 1, 0, 0));
+//        	MatchCustomJPanel.setLayout(gbl_matchCustomJPanel);
+//        	this.panelRoundList.add(MatchCustomJPanel);
+//        	
+//        	// Numero Round
+//            CustomJLabel titleMatchTop = new CustomJLabel("Round n°" + i, 25);
+//            MatchCustomJPanel.add(titleMatchTop, gbc_titleMatchTop);
+//            
+//            // Panel Equipe Liste
+//            CustomJPanel MatchEquipeListJPanel = new CustomJPanel(new EmptyBorder(10, 10, 10, 10), new GridLayout(0, 2, 5, 5));
+//            MatchCustomJPanel.add(MatchEquipeListJPanel, gbc_roundListEquipe);
+//        	
+//            for (int j = 1; j <= 2; j++) {
+//            	CustomJButton button1 = new CustomJButton("Équipe n°" + j, 15);
+//            	button1.addActionListener(this.controleur);
+//            	button1.setActionCommand(j + "," + i);
+//            	MatchEquipeListJPanel.add(button1);
+//			}
+//		}
+        
+        // Version finale à décommenter avec renseignement du bon tournoi
+        for (Match match : TournoiDAO.getInstance().getById(1).get().getMatchs()) {
+        	System.out.print("match");
         	// Panel Match : Titre + Panel Liste Equipe
         	CustomJPanel MatchCustomJPanel = new CustomJPanel(new EmptyBorder(0, 0, 0, 0), new GridLayout(2, 1, 0, 0));
         	MatchCustomJPanel.setLayout(gbl_matchCustomJPanel);

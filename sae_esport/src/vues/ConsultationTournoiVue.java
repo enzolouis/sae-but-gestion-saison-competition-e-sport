@@ -7,9 +7,16 @@ import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
@@ -17,10 +24,15 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
+import DAOs.EquipeDAO;
+import DAOs.ParticiperDAO;
 import DAOs.TournoiDAO;
 import classes.Equipe;
+import classes.Match;
+import classes.Participer;
 import controleurs.IdentificationControleur;
 import modeles.TournoiModele;
 import style.CustomJButton;
@@ -30,7 +42,7 @@ import style.CustomJPanel;
 import style.CustomJSeparator;
 import javax.swing.JTable;
 
-public class ConsultationTournoi extends CustomJFrame {
+public class ConsultationTournoiVue extends CustomJFrame {
 
 	private JPanel contentPane;
 	private JTable table;
@@ -49,7 +61,7 @@ public class ConsultationTournoi extends CustomJFrame {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					ConsultationTournoi frame = new ConsultationTournoi(t);
+					ConsultationTournoiVue frame = new ConsultationTournoiVue(t);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -61,7 +73,7 @@ public class ConsultationTournoi extends CustomJFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ConsultationTournoi(TournoiModele tournoiCourant) {
+	public ConsultationTournoiVue(TournoiModele tournoiCourant) {
 		super(new Dimension(750, 500), "Consultation du classement du tournoi N°"+tournoiCourant.getIDTournoi());
 		// tournoi en paramètre
 		
@@ -91,41 +103,65 @@ public class ConsultationTournoi extends CustomJFrame {
         
         
         
-        JScrollPane scrollListe = new JScrollPane();
-        scrollListe.setOpaque(false);
-        scrollListe.setBackground(new Color(44, 47, 51));
-		scrollListe.setForeground(new Color(255, 255, 255));
-		scrollListe.setPreferredSize(new Dimension(500, 180));
-		scrollListe.setSize(new Dimension(100, 100));
-		
 		JTable tableClassement = new JTable(){
 			public boolean isCellEditable(int row, int column) {                
 				return false;
 			};};
 		tableClassement.setOpaque(false);
-		
-        tableClassement.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 11));
+        tableClassement.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 13));
+        tableClassement.setBackground(new Color(0, 0, 0));
 		tableClassement.setForeground(new Color(44, 47, 51));
 		tableClassement.setSelectionBackground(new Color(198, 224, 242));
 		tableClassement.setGridColor(new Color(44, 47, 51));
+		tableClassement.setRowHeight(34);
 		DefaultTableModel tableModel = new DefaultTableModel();
-		tableModel.addColumn("ID"); tableModel.addColumn("Nom"); 
+		tableModel.addColumn("Top");
+		tableModel.addColumn("Equipe");
+		tableModel.addColumn("Matchs joués");
+		tableModel.addColumn("Point");
+		tableModel.addColumn("Victoires");
+		tableModel.addColumn("Défaites");
+		
 		try {
-			for (Equipe e : tournoiCourant.getEquipes().keySet()) {
-				tableModel.addRow(new Object[] {e.getIdEquipe(), e.getNom()});
+			for (Participer p : ParticiperDAO.getInstance().getAll().stream().filter(p -> p.getIdTournoi() == tournoiCourant.getIDTournoi()).sorted().collect(Collectors.toList())) {
+				System.out.println(p);
+				Equipe e = EquipeDAO.getInstance().getById(p.getIdEquipe()).get();
+				
+				int matchsJoues = 0;
+				int victoire = 0;
+				int defaite = 0;
+				
+				for (Match m : tournoiCourant.getMatchs()) {
+					if (m.getEquipes().stream().map(eq -> eq.getIdEquipe()).collect(Collectors.toList()).contains(e.getIdEquipe())) {
+						matchsJoues++;
+						if (m.getVainqueur() == p.getIdEquipe()) {
+							victoire++;
+						} else {
+							defaite++;
+						}
+					}
+				}
+				
+				tableModel.addRow(new Object[] {p.getResultat(), e.getNom(), matchsJoues, victoire*3+defaite, victoire, defaite});
 			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (Exception e1) {
+			e1.printStackTrace();
 		}
+		
 		
 		tableClassement.setModel(tableModel);
 		tableClassement.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		tableClassement.getColumnModel().getColumn(0).setPreferredWidth(10);
+		tableClassement.getColumnModel().getColumn(1).setPreferredWidth(175);
+		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        for (int x = 0; x<6;x++) {
+        	tableClassement.getColumnModel().getColumn(x).setCellRenderer(centerRenderer);
+        }
+		
 		tableClassement.getTableHeader().setBackground(new Color(102,172,221));
 		tableClassement.getTableHeader().setForeground(Color.WHITE);
-		scrollListe.setViewportView(tableClassement);
-		panelMiddleClassement.add(scrollListe, BorderLayout.CENTER);
+		panelMiddleClassement.add(tableClassement.getTableHeader(), BorderLayout.NORTH);
+		panelMiddleClassement.add(tableClassement, BorderLayout.CENTER);
         
         
         // Bottom Panel : Quitter + Login
