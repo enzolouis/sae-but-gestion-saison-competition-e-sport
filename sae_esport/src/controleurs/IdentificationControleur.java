@@ -1,4 +1,5 @@
 package controleurs;
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -23,14 +24,12 @@ public class IdentificationControleur implements ActionListener {
 		this.modele = new IdentificationModele();
 	}
 	
-	public void seConnecter() {
+	public void seConnecter() throws Exception {
+		
 		String login = this.vue.getUtilisateurContenu();
 		String mdp = this.vue.getMotDePasseContenu();
-		System.out.println(login);
-		System.out.println(mdp);
 		if (this.modele.checkLogins(login, mdp)) {
 			if (this.modele.getUtilisateur() == Utilisateur.ADMIN) {
-				System.out.println("ADMIN");
 				AccueilAdministrateurVue vueAdmin;
 				try {
 					vueAdmin = new AccueilAdministrateurVue();
@@ -40,7 +39,6 @@ public class IdentificationControleur implements ActionListener {
 					e1.printStackTrace();
 				}
 			} else {
-				System.out.println("ARBITRE");
 				AccueilArbitreVue vueArbitre;
 				try {
 					vueArbitre = new AccueilArbitreVue();
@@ -50,6 +48,7 @@ public class IdentificationControleur implements ActionListener {
 					e1.printStackTrace();
 				}
 			}
+			
 		} else {
 			JFrame jFrame = new JFrame();
 			JOptionPane.showMessageDialog(jFrame, "Login faux");
@@ -77,16 +76,25 @@ public class IdentificationControleur implements ActionListener {
 				this.vue.dispose();
 				break;
 			case "Se connecter":
-				seConnecter();
+				try {
+					seConnecter();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				break;
 			default:
-				System.out.println("mdp");
 				this.inverserIconMotDePasseMasque(bouton);
 				break;
 			}
 		}
 		else {
-			seConnecter();
+			try {
+				seConnecter();
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 		
 	}

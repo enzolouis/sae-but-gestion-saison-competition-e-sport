@@ -14,8 +14,7 @@ public class ArbitreDAO {
 	
 	private static ArbitreDAO instance;
 	
-	public ArbitreDAO() {
-		super();
+	private ArbitreDAO() {
 	}
 	
 	public static synchronized ArbitreDAO getInstance() {

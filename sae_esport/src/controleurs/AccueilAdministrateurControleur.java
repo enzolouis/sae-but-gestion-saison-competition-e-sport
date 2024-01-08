@@ -2,7 +2,10 @@ package controleurs;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+
+import style.CustomJFrame;
 import vues.AccueilAdministrateurVue;
+import vues.ConsultationSaisonVue;
 import vues.CreationTournoiVue;
 
 public class AccueilAdministrateurControleur implements ActionListener {
@@ -17,14 +20,20 @@ public class AccueilAdministrateurControleur implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() instanceof JButton) {
 			JButton bouton = (JButton) e.getSource();
+			CustomJFrame frame;
 			switch (bouton.getText()) {
 			case ("Quitter"):
 				this.vue.setVisible(false);
 				this.vue.dispose();
 				break;
 			case ("Créer un tournoi"):
-				CreationTournoiVue frame = new CreationTournoiVue();
+				frame = new CreationTournoiVue();
 				frame.setVisible(true);
+				break;
+			case ("Statistiques de la saison"):
+				frame = new ConsultationSaisonVue();
+				frame.setVisible(true);
+				break;
 			default:
 				break;
 			}

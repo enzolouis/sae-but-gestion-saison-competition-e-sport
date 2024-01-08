@@ -96,8 +96,8 @@ public class IdentificationVue extends CustomJFrame {
         panelMiddleLogin.add(panelUtilisateur);
         
         CustomJLabel labelNomUtilisateur = new CustomJLabel("Nom d'utilisateur :", 12);
-        labelNomUtilisateur.setHorizontalAlignment(SwingConstants.LEFT);
-        labelNomUtilisateur.setPreferredSize(new Dimension(110, 30));
+        labelNomUtilisateur.setHorizontalAlignment(SwingConstants.RIGHT);
+        labelNomUtilisateur.setPreferredSize(new Dimension(120, 30));
         panelUtilisateur.add(labelNomUtilisateur);
         
         JPanel panelTextFieldUtilisateur = new CustomJPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
@@ -123,8 +123,8 @@ public class IdentificationVue extends CustomJFrame {
         panelMiddleLogin.add(panelMotDePasse);
         
         CustomJLabel labelMotDePasse = new CustomJLabel("Mot de passe :", 12);
-        labelMotDePasse.setHorizontalAlignment(SwingConstants.LEFT);
-        labelMotDePasse.setPreferredSize(new Dimension(110, 30));
+        labelMotDePasse.setHorizontalAlignment(SwingConstants.RIGHT);
+        labelMotDePasse.setPreferredSize(new Dimension(120, 30));
         panelMotDePasse.add(labelMotDePasse);
         
         

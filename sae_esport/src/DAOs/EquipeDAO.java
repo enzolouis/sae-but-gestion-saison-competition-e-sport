@@ -13,6 +13,7 @@ import java.io.FileReader;
 
 import classes.Arbitre;
 import classes.DBConnection;
+import classes.Disposition;
 import classes.Equipe;
 import classes.Joueur;
 import classes.Nationalite;
@@ -23,8 +24,7 @@ public class EquipeDAO {
 	
 	private static EquipeDAO instance;
 	
-	public EquipeDAO() {
-		super();
+	private EquipeDAO() {
 	}
 	
 	public static synchronized EquipeDAO getInstance() {
@@ -49,7 +49,7 @@ public class EquipeDAO {
 			while (res.next()) {
 				joueurs.add(new Joueur(res.getInt(1),res.getString(2),res.getInt(3)));
 			}
-			equipes.add(new Equipe(rs.getInt(1),rs.getString(2),classes.Nationalite.valueOf(rs.getString(3)),joueurs,rs.getBoolean(4),rs.getInt(5),rs.getInt(6)));
+			equipes.add(new Equipe(rs.getInt(1),rs.getString(2),classes.Nationalite.valueOf(rs.getString(3)),joueurs,Disposition.valueOf(rs.getString(6)),rs.getInt(4),rs.getInt(5)));
 		}
 		return equipes;
 	}
@@ -67,7 +67,7 @@ public class EquipeDAO {
 					while (res.next()) {
 						joueurs.add(new Joueur(res.getInt(1),res.getString(2),res.getInt(3)));
 					}
-					return Optional.of(new Equipe(rs.getInt(1),rs.getString(2),classes.Nationalite.valueOf(rs.getString(3)),joueurs,rs.getBoolean(4),rs.getInt(5),rs.getInt(6)));
+					return Optional.of(new Equipe(rs.getInt(1),rs.getString(2),classes.Nationalite.valueOf(rs.getString(3)),joueurs,Disposition.valueOf(rs.getString(6)),rs.getInt(4),rs.getInt(5)));
 				}
 			}
 			return Optional.empty();
@@ -89,9 +89,9 @@ public class EquipeDAO {
 		st.setInt(1, id); 
 		st.setString(2, value.getNom()); 
 		st.setString(3, value.getNationalite().toString());
-		st.setBoolean(4, value.getDisposition()); 
-		st.setInt(5, value.getRangSaisonPrecedante()); 
-		st.setInt(6, value.getPointsSaison());
+		st.setString(6, value.getDisposition().toString()); 
+		st.setInt(4, value.getRangSaisonPrecedante()); 
+		st.setInt(5, value.getPointsSaison());
 		List<Joueur> lj = value.getListeJoueurs();
 		JoueurDAO j = new JoueurDAO();
 		for (int i=0;i<lj.size();i++) {
@@ -129,7 +129,7 @@ public class EquipeDAO {
 					
 					List<Joueur> joueursEquipe = new ArrayList<Joueur>();
 					
-					Equipe e = new Equipe(0,s[0],nat,joueursEquipe,true,Integer.parseInt(s[2]),Integer.parseInt(s[3]));
+					Equipe e = new Equipe(0,s[0],nat,joueursEquipe,Disposition.DISPOSEE,Integer.parseInt(s[2]),Integer.parseInt(s[3]));
 					equipesTournoi.add(e);
 					
 					boolean nouvelleEquipe = true;
@@ -174,10 +174,10 @@ public class EquipeDAO {
 	//update un equipe donné
 	public boolean update(Equipe value) throws Exception {
 		
-		PreparedStatement st = DBConnection.getInstance().prepareStatement("UPDATE equipe SET nom=?, nationalite=?, dispose=?, rangsaisonprecedante=?, pointssaison=? WHERE idequipe=?");
+		PreparedStatement st = DBConnection.getInstance().prepareStatement("UPDATE equipe SET nom=?, nationalite=?, disposee=?, rangSaisonPrecedente=?, pointssaison=? WHERE idequipe=?");
 		st.setString(1, value.getNom()); 
-		st.setObject(2, (Object) value.getNationalite()); 
-		st.setBoolean(3, value.getDisposition()); 
+		st.setString(2, value.getNationalite().toString()); 
+		st.setString(3, value.getDisposition().toString()); 
 		st.setInt(4, value.getRangSaisonPrecedante()); 
 		st.setInt(5, value.getPointsSaison());
 		st.setInt(6, value.getIdEquipe());

@@ -1,5 +1,7 @@
 package sqlrequests;
 
+import java.util.Iterator;
+
 import DAOs.AdministrateurDAO;
 import DAOs.ArbitreDAO;
 import DAOs.EquipeDAO;
@@ -9,6 +11,7 @@ import DAOs.ParticiperDAO;
 import DAOs.TournoiDAO;
 import classes.Administrateur;
 import classes.Arbitre;
+import classes.Disposition;
 import classes.Equipe;
 import classes.EtatTournoi;
 import classes.Joueur;
@@ -136,7 +139,7 @@ public class InsertValues {
 			TournoiDAO.getInstance().add(new TournoiModele(4, "Tournoi nom 5", "12/12/3036", "12/01/3037", 
 								Notoriete.INTERNATIONAL, EtatTournoi.FERME));
 			
-			System.out.println("✔ Insertion de tous les tournois réussie.");
+			System.out.println("✔ Insertion de tous les tournois réussie." + t.getIDTournoi());
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("❌ Insertion de tous les arbitres échouée.");

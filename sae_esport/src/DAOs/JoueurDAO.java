@@ -73,7 +73,7 @@ public class JoueurDAO {
 		//update un arbitre donné
 		public boolean update(Joueur value) throws Exception {
 			
-			PreparedStatement st = DBConnection.getInstance().prepareStatement("UPDATE arbitre SET pseudo=? equipe =? WHERE idArbitre=?");
+			PreparedStatement st = DBConnection.getInstance().prepareStatement("UPDATE joueur SET pseudo=?, idEquipe =? WHERE idJoueur=?");
 			st.setString(1, value.getPseudo()); st.setInt(2, value.getIdEquipe()); st.setInt(3, value.getIdJoueur());
 			int rowcount = st.executeUpdate();
 			return rowcount > 0;
@@ -83,7 +83,7 @@ public class JoueurDAO {
 		//retire un arbitre donné
 		public boolean delete(Joueur value) throws Exception {
 			
-			PreparedStatement st = DBConnection.getInstance().prepareStatement("DELETE FROM joueur WHERE idArbitre=?");
+			PreparedStatement st = DBConnection.getInstance().prepareStatement("DELETE FROM joueur WHERE idJoueur=?");
 			st.setInt(1, value.getIdJoueur());
 			int rowcount = st.executeUpdate();
 			return rowcount > 0;

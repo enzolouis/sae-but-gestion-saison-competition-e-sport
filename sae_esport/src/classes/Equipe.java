@@ -10,7 +10,7 @@ public class Equipe {
 	private String nom;
 	private Nationalite nationalite;
 	private List<Joueur> joueurs;
-	private boolean dispose;
+	private Disposition dispose;
 	private int rangSaisonPrecedante;
 	private int pointsSaison;
 	
@@ -26,7 +26,7 @@ public class Equipe {
 	public Equipe(int id, 
 					String nom, 
 					Nationalite nat,
-					boolean dispose, 
+					Disposition dispose, 
 					int rangSaisonPrecedante, 
 					int pointsSaison) {
 		this.idEquipe = id;
@@ -51,7 +51,7 @@ public class Equipe {
 					String nom, 
 					Nationalite nat, 
 					List<Joueur> joueurs,
-					boolean dispose, 
+					Disposition dispose, 
 					int rangSaisonPrecedante, 
 					int pointsSaison) {
 		this.idEquipe = id;
@@ -91,10 +91,10 @@ public class Equipe {
 		this.nationalite = nationalite;
 	}
 	
-	public boolean getDisposition() {
+	public Disposition getDisposition() {
 		return this.dispose;
 	}
-	public void setDisposition(boolean disposition) {
+	public void setDisposition(Disposition disposition) {
 		this.dispose = disposition;
 	}
 	
@@ -136,14 +136,14 @@ public class Equipe {
 	}
 	
 	//Retourne l'ID de l'Equipe
-	public boolean getDispose() {
+	public Disposition getDispose() {
 		return this.dispose;
 	}
 
 	/**Change l'ID de l'Equipe
 	 * 	@param valeur d'ID avec lequel remplacer
 	 * */
-	public void setDispose(boolean d) {
+	public void setDispose(Disposition d) {
 		this.dispose = d;
 	}
 

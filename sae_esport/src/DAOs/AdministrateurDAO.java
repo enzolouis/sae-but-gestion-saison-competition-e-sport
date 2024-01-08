@@ -13,16 +13,13 @@ public class AdministrateurDAO {
 	
 	private static AdministrateurDAO instance;
 	
-	public AdministrateurDAO() {
-		super();
+	private AdministrateurDAO() {
 	}
 	
 	public static synchronized AdministrateurDAO getInstance() {
 		if (instance == null) {
 			instance = new AdministrateurDAO();
 		}
-		System.out.println("Retour getInstance effectué !");
-
 		return instance;
 	}
 		
@@ -36,7 +33,6 @@ public class AdministrateurDAO {
 			administrateur.add(new classes.Administrateur(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4)));
 			
 		}
-		System.out.println("Retour GetAll effectué !");
 		return administrateur;
 	}
 	
@@ -50,8 +46,6 @@ public class AdministrateurDAO {
 				return Optional.of(new classes.Administrateur(i,rs.getString(2),rs.getString(3),rs.getString(4)));
 			}
 		}
-		System.out.println("Retour getByID effectué !");
-
 		return Optional.empty();
 	}
 	
@@ -71,8 +65,6 @@ public class AdministrateurDAO {
 		st.setInt(1, id); st.setString(2, value.getNom());
 		st.setString(3, value.getLogin()); st.setString(4, value.getMotDePasse());
 		int rowcount = st.executeUpdate();
-		
-		System.out.println("Retour Ajout effectué !");
 
 		return rowcount > 0;
 			
@@ -85,7 +77,6 @@ public class AdministrateurDAO {
 		st.setString(1, value.getNom()); st.setString(2, value.getLogin());
 		st.setString(3, value.getMotDePasse()); st.setInt(4, value.getIdAdministrateur());
 		int rowcount = st.executeUpdate();
-		System.out.println("Retour Update effectué !");
 
 		return rowcount > 0;
 		
@@ -97,7 +88,6 @@ public class AdministrateurDAO {
 		PreparedStatement st = DBConnection.getInstance().prepareStatement("DELETE FROM admin WHERE idAdmin=?");
 		st.setInt(1, value.getIdAdministrateur());
 		int rowcount = st.executeUpdate();
-		System.out.println("Retour Delete effectué !");
 
 		return rowcount > 0;
 	}

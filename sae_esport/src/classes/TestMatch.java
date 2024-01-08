@@ -33,8 +33,8 @@ public class TestMatch {
 		match = new Match(1,false);
 		Match comparator = new Match(1,false);
 		
-		match.AddEquipe(new Equipe(1,"rofl",Nationalite.AD,false,14,12));
-		comparator.AddEquipe(new Equipe(1,"rofl",Nationalite.AD,false,14,12));
+		match.AddEquipe(new Equipe(1,"rofl",Nationalite.AD,Disposition.NON_DIPOSEE,14,12));
+		comparator.AddEquipe(new Equipe(1,"rofl",Nationalite.AD,Disposition.NON_DIPOSEE,14,12));
 
 		
 		assertEquals(match.getEquipes(), comparator.getEquipes());
@@ -45,11 +45,11 @@ public class TestMatch {
 		match = new Match(1,false);
 		Match comparator = new Match(1,false);
 		
-		match.AddEquipe(new Equipe(1,"rofl",Nationalite.AD,false,14,12));
-		comparator.AddEquipe(new Equipe(1,"flering",Nationalite.AD,false,14,12));
+		match.AddEquipe(new Equipe(1,"rofl",Nationalite.AD,Disposition.NON_DIPOSEE,14,12));
+		comparator.AddEquipe(new Equipe(1,"flering",Nationalite.AD,Disposition.NON_DIPOSEE,14,12));
 		
-		match.remplacerEquipe(new Equipe(1,"rofl",Nationalite.AD,false,14,12), 
-							new Equipe(1,"flering",Nationalite.AD,false,14,12));
+		match.remplacerEquipe(new Equipe(1,"rofl",Nationalite.AD,Disposition.NON_DIPOSEE,14,12), 
+							new Equipe(1,"flering",Nationalite.AD,Disposition.NON_DIPOSEE,14,12));
 
 		
 		assertEquals(match.getEquipes(), comparator.getEquipes());

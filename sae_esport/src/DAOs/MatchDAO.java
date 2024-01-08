@@ -54,7 +54,7 @@ public class MatchDAO {
 			//peu importe l'id que vous mettrez à l'arbitre, il sera changé
 			public boolean add(Match value) throws Exception {
 
-				PreparedStatement st = DBConnection.getInstance().prepareStatement("SELECT NEXT VALUE FOR setIdMatch FROM matchT");
+				PreparedStatement st = DBConnection.getInstance().prepareStatement("SELECT NEXT VALUE FOR SeqIdMatch FROM matchT");
 				ResultSet rs = st.executeQuery();
 				int id = 0;
 				if (rs.next()) {

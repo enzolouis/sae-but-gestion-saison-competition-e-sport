@@ -12,10 +12,10 @@ public class TestEquipe {
 
 	@Test
 	public void testEquipeSansJoueurs() {
-		e = new Equipe(1,"rofl",Nationalite.AD,false,14,12);
+		e = new Equipe(1,"rofl",Nationalite.AD,Disposition.NON_DIPOSEE,14,12);
 		
 		assertEquals(e.getIdEquipe(),1);
-		assertEquals(e.getDisposition(), false);
+		assertEquals(e.getDisposition(), Disposition.NON_DIPOSEE);
 		assertEquals(e.getNom(),"rofl");
 		assertEquals(e.getNationalite(), Nationalite.AD);
 		assertEquals(e.getRangSaisonPrecedante(),14);
@@ -32,7 +32,7 @@ public class TestEquipe {
 					"rofl",
 					Nationalite.AD,
 					new ArrayList<Joueur>(),
-					false,
+					Disposition.NON_DIPOSEE,
 					14,
 					12);
 		
@@ -51,16 +51,16 @@ public class TestEquipe {
 					"rofl",
 					Nationalite.AD,
 					new ArrayList<Joueur>(),
-					false,
+					Disposition.NON_DIPOSEE,
 					14,
 					12);
 	
-		assertEquals(e.getDisposition(), false);
+		assertEquals(e.getDisposition(), Disposition.NON_DIPOSEE);
 		
-		e.setDisposition(true);;
+		e.setDisposition(Disposition.DISPOSEE);;
 	
-		assertEquals(e.getDisposition(), true);
-		assertNotEquals(e.getDisposition(), false);
+		assertEquals(e.getDisposition(), Disposition.DISPOSEE);
+		assertNotEquals(e.getDisposition(), Disposition.NON_DIPOSEE);
 
 	}
 	
@@ -69,7 +69,7 @@ public class TestEquipe {
 		e = new Equipe(1,
 					"rofl",
 					Nationalite.AD,
-					false,
+					Disposition.NON_DIPOSEE,
 					14,
 					12);
 		
@@ -87,7 +87,7 @@ public class TestEquipe {
 		e = new Equipe(1,
 					"rofl",
 					Nationalite.AD,
-					false,
+					Disposition.NON_DIPOSEE,
 					14,
 					12);
 		
@@ -102,7 +102,7 @@ public class TestEquipe {
 	
 	@Test
 	public void testEquipeAjoutDeJoueur() {
-		e = new Equipe(1,"rofl",Nationalite.AD,false,14,12);
+		e = new Equipe(1,"rofl",Nationalite.AD,Disposition.NON_DIPOSEE,14,12);
 		Joueur j = new Joueur(1,"dorr",1);
 		e.AjouterJoueurs(j);
 		assertEquals(e.getListeJoueurs().get(0),j);
