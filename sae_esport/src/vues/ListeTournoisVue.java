@@ -86,6 +86,9 @@ public class ListeTournoisVue extends CustomJFrame {
 	    }
 	
 	public ListeTournoisVue() {
+		
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		
 		setTitle("Liste des tournois");
 		
 		controleur = new ListeTournoisControleur(this);

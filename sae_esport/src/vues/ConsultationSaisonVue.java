@@ -41,6 +41,8 @@ public class ConsultationSaisonVue extends CustomJFrame {
 	
 	public ConsultationSaisonVue() {
 		
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		
 		controleur = new ConsultationSaisonControleur(this);
 		
 		this.modele = new ConsultationSaisonModele();
