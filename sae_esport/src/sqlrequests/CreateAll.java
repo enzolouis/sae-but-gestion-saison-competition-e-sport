@@ -6,6 +6,9 @@ public class CreateAll {
 		// On drop   en premier les Tables avec le "plus"  de FOREIGN KEY (pas forcément le plus mais voilà)
 		// On create en premier les Tables avec le "moins" de FOREGIN KEY
 		
+		//3 FOREIGN KEY
+		CreateDisputer.Drop();
+		
 		// 2 FOREIGN KEY (Equipe, Tournoi)
 		CreateParticiper.Drop();
 		CreateGerer.Drop();
@@ -31,6 +34,8 @@ public class CreateAll {
 		
 		CreateParticiper.Create();
 		CreateGerer.Create();
+		
+		CreateDisputer.Create();
 		
 		CreateDual.Create();
 		
