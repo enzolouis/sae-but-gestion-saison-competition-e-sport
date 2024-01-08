@@ -7,6 +7,7 @@ import style.CustomJFrame;
 import vues.AccueilAdministrateurVue;
 import vues.ConsultationSaisonVue;
 import vues.CreationTournoiVue;
+import vues.ListeTournoisVue;
 
 public class AccueilAdministrateurControleur implements ActionListener {
 	
@@ -34,6 +35,9 @@ public class AccueilAdministrateurControleur implements ActionListener {
 				frame = new ConsultationSaisonVue();
 				frame.setVisible(true);
 				break;
+			case ("Liste des tournois"):
+				frame = new ListeTournoisVue();
+				frame.setVisible(true);
 			default:
 				break;
 			}
