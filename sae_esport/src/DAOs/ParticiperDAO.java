@@ -81,8 +81,6 @@ public class ParticiperDAO {
 		st.setInt(2, value.getIdTournoi()); 
 		st.setInt(3, value.getIdEquipe()); 
 		st.setInt(1, value.getResultat());
-		st.setInt(2, value.getIdTournoi());
-		st.setInt(3, value.getIdEquipe()); 
 		
 		int rowcount = st.executeUpdate();
 		return rowcount > 0;
