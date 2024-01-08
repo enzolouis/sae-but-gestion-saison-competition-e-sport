@@ -23,6 +23,7 @@ import modeles.SaisieResultatModele;
 import modeles.TournoiModele;
 import vues.SaisieResultatVue;
 import DAOs.MatchDAO;
+import DAOs.TournoiDAO;
 
 public class SaisieResultatControleur implements ActionListener {
 	private SaisieResultatModele modele;
@@ -51,7 +52,7 @@ public class SaisieResultatControleur implements ActionListener {
 					}
 				}
 				if (b) {
-					Match ma = new Match(0,true);
+					Match ma = new Match(0,TournoiDAO.getInstance().getTournoiOuvert().get().getIDTournoi(),false);
 					Equipe e1 = null;
 					Equipe e2 = null;
 					int score= -1;
@@ -92,7 +93,7 @@ public class SaisieResultatControleur implements ActionListener {
 				String[] ids = bouton.getActionCommand().split(",");
 				int idmatch= Integer.valueOf(ids[0]);
 				int idequipe = Integer.valueOf(ids[1]);
-				Match m= new Match(idmatch,false);
+				Match m= new Match(idmatch,TournoiDAO.getInstance().getTournoiOuvert().get().getIDTournoi(),false);
 				try {
 					m = MatchDAO.getInstance().getById(idmatch).get();
 				} catch (Exception ex) {
