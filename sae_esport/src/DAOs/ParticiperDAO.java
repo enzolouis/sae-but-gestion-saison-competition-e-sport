@@ -26,31 +26,42 @@ public class ParticiperDAO {
 		return instance;
 	}
 	
-	//retourne une participation en fonction des tournois, et les resultats correspondant specifique
-			public Optional<Participer> getByIdTournoi(Integer... id) throws Exception {
-				Statement st = DBConnection.getInstance().createStatement();
-				for (Integer i : id) {
-					ResultSet rs = st.executeQuery("SELECT p.idEquipe, p.idTournoi, p.resultat FROM participer p WHERE idTournoi="+i);
-					if (rs.next()) {					//	
-						return Optional.of(new Participer(rs.getInt(1),rs.getInt(2),rs.getInt(3)));
-					}
-				}
-				return Optional.empty();
-			}
-			
-			//retourne une participation en fonction des equipes, et les resultats correspondant specifique
-			public Optional<Participer> getByIdEquipe(Integer... id) throws Exception {
-				Statement st = DBConnection.getInstance().createStatement();
-				for (Integer i : id) {
-					ResultSet rs = st.executeQuery("SELECT p.idEquipe, p.idTournoi, p.resultat FROM participer p WHERE idEquipe="+i);
-					if (rs.next()) {					//	
-						return Optional.of(new Participer(rs.getInt(1),rs.getInt(2),rs.getInt(3)));
-					}
-				}
-				return Optional.empty();
-			}
+	public Optional<Participer> getByIdTournoiIdEquipe (int idEquipe, int idTournoi) throws Exception {
+		
+		PreparedStatement st = DBConnection.getInstance().prepareStatement
+				("SELECT * FROM participer WHERE idTournoi=? AND idEquipe=?");
+		st.setInt(1, idTournoi); st.setInt(2, idEquipe);
+		ResultSet rs = st.executeQuery();
+		if (rs.next()) {
+			return Optional.of(new Participer(rs.getInt(1), idTournoi, idEquipe));
+		}
+		return Optional.empty();
+		
+	}
 	
-	//Renvois l'ensemble des arbitres
+	//retourne la liste des participations d'un tournoi
+	public List<Participer> getByIdTournoi(Integer... id) throws Exception {
+		ArrayList<Participer> participations = new ArrayList<>();
+		Statement st = DBConnection.getInstance().createStatement();
+		ResultSet rs = st.executeQuery("SELECT * FROM participer WHERE idTournoi="+id);
+		while (rs.next()) {	
+			participations.add(new Participer(rs.getInt(1), rs.getInt(2), rs.getInt(3)));
+		}
+		return participations;
+	}
+			
+	//retourne la liste des participations d'une équipe
+	public List<Participer> getByIdEquipe(Integer... id) throws Exception {
+		ArrayList<Participer> participations = new ArrayList<>();
+		Statement st = DBConnection.getInstance().createStatement();
+		ResultSet rs = st.executeQuery("SELECT * FROM participer WHERE idEquipe="+id);
+		while (rs.next()) {					//	
+			participations.add(new Participer(rs.getInt(1),rs.getInt(2),rs.getInt(3)));
+		}
+		return participations;
+	}
+	
+	//renvoie l'ensemble des participations
 	public List<Participer> getAll() throws Exception {
 		String reqSelectParticipation = "SELECT * FROM participer";
 		PreparedStatement st = DBConnection.getInstance().prepareStatement(reqSelectParticipation);
@@ -67,8 +78,8 @@ public class ParticiperDAO {
 	public boolean add(Participer value) throws Exception {
 
 		PreparedStatement st = DBConnection.getInstance().prepareStatement("INSERT INTO participer VALUES (?,?,?)");
-		st.setInt(3, value.getIdTournoi()); 
 		st.setInt(2, value.getIdTournoi()); 
+		st.setInt(3, value.getIdEquipe()); 
 		st.setInt(1, value.getResultat());
 		
 		int rowcount = st.executeUpdate();
@@ -83,7 +94,6 @@ public class ParticiperDAO {
 		 
 		st.setInt(1, value.getResultat()); 
 		st.setInt(2, value.getIdTournoi());
-		
 		st.setInt(3, value.getIdEquipe());
 		
 		int rowcount = st.executeUpdate();
