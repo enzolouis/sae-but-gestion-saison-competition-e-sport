@@ -78,6 +78,7 @@ public class ConsultationTournoiVue extends CustomJFrame {
 	 * @throws Exception 
 	 */
 	public ConsultationTournoiVue(TournoiModele tournoiCourant) throws Exception {
+		
 		super(new Dimension(750, 500), "Consultation du classement du tournoi N°"+tournoiCourant.getIDTournoi());
 		// tournoi en paramètre
 		

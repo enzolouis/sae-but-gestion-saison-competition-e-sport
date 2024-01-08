@@ -70,7 +70,7 @@ public class IdentificationVue extends CustomJFrame {
     }
     
     public IdentificationVue() throws Exception {
-    	super(new Dimension(450, 300), "Identification");
+    	super(new Dimension(450, 300), "Page d'identification");
     	
     	pack();
     	

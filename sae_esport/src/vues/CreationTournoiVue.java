@@ -63,6 +63,8 @@ public class CreationTournoiVue extends CustomJFrame {
 		
 		super(new Dimension(500,300));
 		
+		setTitle("Création de tournoi");
+		
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
 		setBounds(new Rectangle(0, 0, 800, 550));

@@ -33,7 +33,7 @@ public class AccueilAdministrateurVue extends CustomJFrame {
     
     public AccueilAdministrateurVue() {
     	
-    	super(new Dimension(400, 300), "Acceuil Administrateur");
+    	super(new Dimension(400, 300), "Accueil Administrateur");
     	
     	this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         

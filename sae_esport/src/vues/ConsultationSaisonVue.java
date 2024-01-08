@@ -41,6 +41,8 @@ public class ConsultationSaisonVue extends CustomJFrame {
 	
 	public ConsultationSaisonVue() {
 		
+		setTitle("Statistiques de la saison");
+		
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
 		controleur = new ConsultationSaisonControleur(this);
