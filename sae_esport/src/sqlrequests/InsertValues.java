@@ -28,7 +28,7 @@ public class InsertValues {
     }
    
     public static void BigTournoiExemple() throws Exception {
-    	TournoiModele t = new TournoiModele(66, "Big tournoi", "20/12/2023", "20/01/2023", 
+    	TournoiModele t = new TournoiModele(66, "Big tournoi", "20/12/2023", "20/01/2024", 
 				Notoriete.INTERNATIONAL, EtatTournoi.FERME);
     	TournoiDAO.getInstance().add(t);
     	System.out.print(t.getIDTournoi());
