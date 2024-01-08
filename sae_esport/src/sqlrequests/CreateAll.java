@@ -7,7 +7,7 @@ public class CreateAll {
 		// On create en premier les Tables avec le "moins" de FOREGIN KEY
 		
 		// 2 FOREIGN KEY (Equipe, Tournoi)
-		CreateParticipation.Drop();
+		CreateParticiper.Drop();
 		CreateGerer.Drop();
 		
 		// 1 FOREIGN KEY (Equipe pour les 3)
@@ -29,7 +29,7 @@ public class CreateAll {
 		CreateMatch.Create();
 		CreateTournoi.Create();
 		
-		CreateParticipation.Create();
+		CreateParticiper.Create();
 		CreateGerer.Create();
 		
 		CreateDual.Create();
