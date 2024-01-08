@@ -31,6 +31,7 @@ public class InsertValues {
     	TournoiModele t = new TournoiModele(66, "Big tournoi", "20/12/2023", "20/01/2023", 
 				Notoriete.INTERNATIONAL, EtatTournoi.FERME);
     	TournoiDAO.getInstance().add(t);
+    	System.out.print(t.getIDTournoi());
     	
     	// 4 équipes
 		Equipe e = new Equipe(0, "Maxence Maury-Balliteam", Nationalite.FR, Disposition.DISPOSEE, 3, 1000);EquipeDAO.getInstance().add(e);

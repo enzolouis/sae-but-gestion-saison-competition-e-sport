@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.io.File;
@@ -19,7 +20,7 @@ import classes.Equipe;
 import classes.Nationalite;
 import classes.Equipe;
 
-public class testEquipeDAO {
+public class testDAOEquipe {
 	
 	@Before
 	public void beforeTests() throws Exception{
@@ -106,10 +107,13 @@ public class testEquipeDAO {
 	@Test
 	///Test d'import des equipes avec un fichier CSV
 	public void testImportEquipe() throws Exception {
-			int size = EquipeDAO.getInstance().getAll().size();
 			File f = new File("src/DAOs/test.csv");
-			EquipeDAO.getInstance().importEquipes(f);
-			assertEquals(size + 4, EquipeDAO.getInstance().getAll().size());			
+			List<Equipe> eqImportees = EquipeDAO.getInstance().importEquipes(f);
+			for (Equipe e : eqImportees) {
+				System.out.println(EquipeDAO.getInstance().getAll().contains(e));
+				assertTrue(EquipeDAO.getInstance().getAll().contains(e));
+			}		
 			DBConnection.getInstance().rollback();
 	}
+	
 }

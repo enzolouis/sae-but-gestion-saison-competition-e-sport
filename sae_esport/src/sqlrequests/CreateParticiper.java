@@ -5,11 +5,11 @@ import java.sql.Statement;
 
 import classes.DBConnection;
 
-public class CreateParticipation {
+public class CreateParticiper {
 	
 	public static void main(String[] args) {
-		CreateParticipation.Drop();
-		CreateParticipation.Create();
+		CreateParticiper.Drop();
+		CreateParticiper.Create();
 	}
 	
 	public static void Drop() {
