@@ -24,6 +24,7 @@ import modeles.TournoiModele;
 import vues.SaisieResultatVue;
 import DAOs.MatchDAO;
 import DAOs.TournoiDAO;
+import DAOs.EquipeDAO;
 
 public class SaisieResultatControleur implements ActionListener {
 	private SaisieResultatModele modele;
@@ -87,7 +88,27 @@ public class SaisieResultatControleur implements ActionListener {
 				}
 				break;
 			case ("Fermer le tournoi"):
-				modele.getTournoi().setEtatTournoi(EtatTournoi.FERME);				
+				modele.getTournoi().setEtatTournoi(EtatTournoi.FERME);
+				if (modele.IsFinaleDemarree()) {
+					Map<Equipe, Integer> equipe = modele.getTournoi().getEquipes();
+					for (Map.Entry eq : equipe.entrySet()) {
+						Equipe equi =(Equipe) eq.getKey();
+						Equipe equip = null;
+						try {
+							equip = EquipeDAO.getInstance().getById(equi.getIdEquipe()).get();
+						} catch (Exception e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						equip.setPointsSaison((Integer)eq.getValue() + equip.getPointsSaison());
+						try {
+							EquipeDAO.getInstance().update(equip);
+						} catch (Exception e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}
+				}
 				break;
 			default:
 				String[] ids = bouton.getActionCommand().split(",");
