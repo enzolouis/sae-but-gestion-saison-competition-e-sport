@@ -8,7 +8,7 @@ public class Match {
 	private int idMatch;
 	private boolean finale;
 	private List<Equipe> equipes;
-	private Integer idVainqueur;
+	private int idVainqueur;
 	private int idTournoi;
 	
 	public Match(int idMatch, int idTournoi, boolean finale) {
@@ -16,6 +16,7 @@ public class Match {
 		this.idMatch = idMatch;
 		this.idTournoi = idTournoi;
 		this.equipes = new ArrayList<>();
+		this.idVainqueur = 0;
 	}
 	
 	public int getIdTournoi() {
@@ -91,13 +92,8 @@ public class Match {
 		if (getClass() != obj.getClass())
 			return false;
 		Match other = (Match) obj;
-		System.out.println(equipes.containsAll(other.equipes));
-		System.out.println(other.equipes.containsAll(equipes));
-		System.out.println(finale == other.finale);
-		System.out.println(idMatch == other.idMatch);
-		System.out.println(idVainqueur+other.idVainqueur);
-		return equipes.containsAll(other.equipes) && other.equipes.containsAll(equipes) && 
-				finale == other.finale && idMatch == other.idMatch
+		return (equipes.containsAll(other.equipes)) && (other.equipes.containsAll(equipes)) && 
+				(finale == other.finale) && (idMatch == other.idMatch)
 				&& idVainqueur == other.idVainqueur;
 	}
 }
