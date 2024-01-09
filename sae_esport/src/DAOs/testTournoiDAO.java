@@ -12,38 +12,35 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import classes.DBConnection;
+import classes.Disposition;
+import classes.Equipe;
 import classes.EtatTournoi;
 import classes.Joueur;
+import classes.Match;
+import classes.Nationalite;
 import classes.Notoriete;
 import modeles.TournoiModele;
 
 public class testTournoiDAO {
-	String dirProjetJava = System.getProperty("user.dir");
-
-	Connection connection;
-	TournoiDAO tournoi;
 	
 	@Before
 	public void beforeTests()throws Exception {
-		System.setProperty("derby.system.home", dirProjetJava + "/BDDSAEEsport");
-			this.connection = DriverManager.getConnection("jdbc:derby:BDDSAEEsport;create=true");
-			this.tournoi = new TournoiDAO();
-			connection.setAutoCommit(false);
+			DBConnection.getInstance().setAutoCommit(false);
 	}
 	
 	@After
 	public void afterTests() throws Exception{
-		connection.setAutoCommit(true);
-			connection.close();
+		DBConnection.getInstance().setAutoCommit(true);
 	}
 	
 	@Test
 	/// Olivier RODRIGUEZ
 	/// Test de la récupération d'un Arbitre lorsqu'il n'y a pas cet arbitre
 	public void testGetByIdTournoiNonExistant() throws Exception{
-	    Optional<TournoiModele> tournoi = this.tournoi.getById(-1);
-		    assertEquals(Optional.empty(), tournoi);
-		    connection.rollback();
+	    Optional<TournoiModele> tournoi = TournoiDAO.getInstance().getById(-1);
+		assertEquals(Optional.empty(), tournoi);
+		DBConnection.getInstance().rollback();
 	}
 	
 	
@@ -58,16 +55,17 @@ public class testTournoiDAO {
 					"30/12/1988", 
 					Notoriete.REGIONAL,
 					EtatTournoi.FERME);
-			this.tournoi.add(tournoi);
-			Optional<TournoiModele> optional = this.tournoi.getById(tournoi.getIDTournoi());
-		    assertEquals(optional.get(), tournoi);
-		    connection.rollback();
+		TournoiDAO.getInstance().add(tournoi);
+		Optional<TournoiModele> optional = TournoiDAO.getInstance().getById(tournoi.getIDTournoi());
+		assertEquals(optional.get(), tournoi);
+		DBConnection.getInstance().rollback();
 	}
 	
 	
 	@Test
 	//Test de la récupération des administrateur lorsqu'il y a des administrateurs
 	public void testGetAllTournoi() throws Exception{
+
 		    TournoiModele tournoi1 = new TournoiModele(
 					1,
 					"Champers", 
@@ -83,13 +81,14 @@ public class testTournoiDAO {
 					Notoriete.REGIONAL,
 					EtatTournoi.FERME);
 			
-			this.tournoi.add(tournoi1);
-			this.tournoi.add(tournoi2);
-			List<TournoiModele> listMatch = tournoi.getAll();
+			TournoiDAO.getInstance().add(tournoi1);
+			TournoiDAO.getInstance().add(tournoi2);
+			List<TournoiModele> listMatch = TournoiDAO.getInstance().getAll();
 		    int index =  listMatch.size();
 		    assertEquals(listMatch.get(index-2), tournoi1);
 		    assertEquals(listMatch.get(index-1), tournoi2);
-		    connection.rollback();
+		    DBConnection.getInstance().rollback();
+
 	}
 	
 	@Test
@@ -104,9 +103,9 @@ public class testTournoiDAO {
 					Notoriete.REGIONAL,
 					EtatTournoi.FERME);
 	    	
-	    	this.tournoi.add(tournoi1);
-	    	assertEquals(tournoi1, tournoi.getById(tournoi1.getIDTournoi()).get());
-	    	connection.rollback();
+	    	TournoiDAO.getInstance().add(tournoi1);
+	    	assertEquals(tournoi1, TournoiDAO.getInstance().getById(tournoi1.getIDTournoi()).get());
+	    	DBConnection.getInstance().rollback();
 	}
 	
 	@Test
@@ -121,11 +120,11 @@ public class testTournoiDAO {
 					Notoriete.REGIONAL,
 					EtatTournoi.FERME);	
 	    	
-	    	tournoi.add(tournoi1);
-	    	tournoi1.setIDTournoi(3);
-	        tournoi.update(tournoi1);
-	        assertEquals(tournoi1, tournoi.getById(tournoi1.getIDTournoi()).get());
-	        connection.rollback();
+	    	TournoiDAO.getInstance().add(tournoi1);
+	    	tournoi1.setNomTournoi("prout");
+	        TournoiDAO.getInstance().update(tournoi1);
+	        assertEquals(tournoi1, TournoiDAO.getInstance().getById(tournoi1.getIDTournoi()).get());
+	        DBConnection.getInstance().rollback();
 	}
 	
 	@Test
@@ -140,12 +139,32 @@ public class testTournoiDAO {
 					Notoriete.REGIONAL,
 					EtatTournoi.FERME);
 	    	
-	        tournoi.add(tournoi1);
-	        int size = tournoi.getAll().size();
-	        tournoi.delete(tournoi1);           
-	        assertEquals(size -1, tournoi.getAll().size());
-	        assertEquals(Optional.empty(), tournoi.getById(tournoi1.getIDTournoi()));
-	        connection.rollback();
+	        TournoiDAO.getInstance().add(tournoi1);
+	        int size = TournoiDAO.getInstance().getAll().size();
+	        TournoiDAO.getInstance().delete(tournoi1);
+	        assertEquals(size -1, TournoiDAO.getInstance().getAll().size());
+	        assertEquals(Optional.empty(), TournoiDAO.getInstance().getById(tournoi1.getIDTournoi()));
+	        DBConnection.getInstance().rollback();
+	}
+	
+	@Test
+	public void testRecupererMatch() throws Exception {
+		TournoiModele tournoi = new TournoiModele(
+				1,
+				"Champers", 
+				"25/12/1988", 
+				"30/12/1988", 
+				Notoriete.REGIONAL,
+				EtatTournoi.FERME);
+        Match match = new Match(0,1,false);
+        Equipe e = new Equipe(0, "Maxence Maury-Balliteam", Nationalite.FR, Disposition.DISPOSEE, 3, 1000);EquipeDAO.getInstance().add(e);
+		Equipe e2 = new Equipe(1, "Ibrateam Zoubairov", Nationalite.FR, Disposition.DISPOSEE, 1, 2300);EquipeDAO.getInstance().add(e2);
+		match.AddEquipe(e); match.AddEquipe(e2);
+        tournoi.ajouterMatch(match);
+        TournoiDAO.getInstance().add(tournoi);
+        TournoiModele tournoistocke = TournoiDAO.getInstance().getById(tournoi.getIDTournoi()).get();
+        assertTrue(tournoistocke.getMatchs().contains(match));
+        
 	}
 
 }
