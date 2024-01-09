@@ -9,7 +9,7 @@ public class TestSaisieResultatModele {
 	
 	public static void main(String[] args) {
 		TournoiModele t = new TournoiModele();
-		Match ma = new Match(0, false);
+		Match ma = new Match(0, t.getIDTournoi(), false);
 		m = new SaisieResultatModele(t);
 		if (m.IsFinaleDemarree()) {
 			System.out.print("IsFinaleDemarree - tournoi vide erreur");
