@@ -53,6 +53,7 @@ public class AccueilArbitreVue extends CustomJFrame {
         
         CustomJLabel titreFenetre = new CustomJLabel("Page d'arbitrage", 25, new EmptyBorder(10, 10, 10, 10));
         titreFenetre.setFont(Palette.customFont.deriveFont(Font.BOLD, 20));
+        titreFenetre.setForeground(Palette.WHITE);
         panelTitre.add(titreFenetre, BorderLayout.CENTER);
         
         CustomJSeparator separatorTitre = new CustomJSeparator();
@@ -70,16 +71,16 @@ public class AccueilArbitreVue extends CustomJFrame {
         gbc_panelMiddle.weighty = 1.0;
         
         CustomJButton btnCreerUnTournoi = new CustomJButton("Accès au tournoi", 10);
-        btnCreerUnTournoi.setBackground(new Color(102, 173, 221));
-        btnCreerUnTournoi.setForeground(Color.WHITE);
+        btnCreerUnTournoi.setBackground(Palette.BLUEBLUE);
+        btnCreerUnTournoi.setForeground(Palette.WHITE);
         btnCreerUnTournoi.addActionListener(controleur);
         gbc_panelMiddle.gridx = 0;
         gbc_panelMiddle.gridy = 0;
         panelMiddle.add(btnCreerUnTournoi, gbc_panelMiddle);
         
         CustomJButton btnStatistiquesDeLa = new CustomJButton("Statistiques du tournoi", 10);
-        btnStatistiquesDeLa.setBackground(new Color(102, 173, 221));
-        btnStatistiquesDeLa.setForeground(Color.WHITE);
+        btnStatistiquesDeLa.setBackground(Palette.BLUEBLUE);
+        btnStatistiquesDeLa.setForeground(Palette.WHITE);
         btnStatistiquesDeLa.addActionListener(controleur);
         gbc_panelMiddle.gridx = 0;
         gbc_panelMiddle.gridy = 1;
@@ -90,8 +91,8 @@ public class AccueilArbitreVue extends CustomJFrame {
         contentPane.add(panelQuitterSeconnecter, BorderLayout.SOUTH);
         
         CustomJButton btnQuit = new CustomJButton("Quitter", 10);
-        btnQuit.setBackground(new Color(231, 76, 60));
-        btnQuit.setForeground(new Color(255, 255, 255));
+        btnQuit.setBackground(Palette.REDRED);
+        btnQuit.setForeground(Palette.WHITE);
         btnQuit.addActionListener(this.controleur);
         panelQuitterSeconnecter.add(btnQuit, BorderLayout.CENTER); 
     }
