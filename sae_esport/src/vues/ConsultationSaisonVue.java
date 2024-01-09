@@ -8,6 +8,7 @@ import java.awt.Font;
 import style.*;
 
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -42,6 +43,9 @@ public class ConsultationSaisonVue extends CustomJFrame {
 	public ConsultationSaisonVue() {
 		
 		setTitle("Statistiques de la saison");
+		
+		ImageIcon icon = new ImageIcon("src\\logo_app.png");
+    	this.setIconImage(icon.getImage());
 		
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		

@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -84,7 +85,8 @@ public class ConsultationTournoiVue extends CustomJFrame {
 		
 		controleur = new ConsultationTournoiControleur(this);
 		
-		
+		ImageIcon icon = new ImageIcon("src\\logo_app.png");
+    	this.setIconImage(icon.getImage());
 		
     	pack();
     	

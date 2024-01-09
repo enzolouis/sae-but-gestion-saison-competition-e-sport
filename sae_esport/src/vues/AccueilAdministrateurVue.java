@@ -8,6 +8,7 @@ import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
+import javax.swing.ImageIcon;
 import javax.swing.border.EmptyBorder;
 
 import controleurs.AccueilAdministrateurControleur;
@@ -36,7 +37,10 @@ public class AccueilAdministrateurVue extends CustomJFrame {
     	super(new Dimension(400, 300), "Accueil Administrateur");
     	
     	this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        
+    	
+    	ImageIcon icon = new ImageIcon("src\\logo_app.png");
+    	this.setIconImage(icon.getImage());
+    	
     	pack();
     	
     	this.controleur = new AccueilAdministrateurControleur(this);

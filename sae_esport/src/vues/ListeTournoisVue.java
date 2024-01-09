@@ -91,6 +91,9 @@ public class ListeTournoisVue extends CustomJFrame {
 		
 		setTitle("Liste des tournois");
 		
+		ImageIcon icon = new ImageIcon("src\\logo_app.png");
+    	this.setIconImage(icon.getImage());
+		
 		controleur = new ListeTournoisControleur(this);
 		
 		setSize(new Dimension(700, 550));
