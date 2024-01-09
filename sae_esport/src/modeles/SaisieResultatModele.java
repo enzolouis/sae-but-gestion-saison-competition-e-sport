@@ -26,7 +26,6 @@ public class SaisieResultatModele {
 			}
 		}
 		return false;
-	}
-	
+	}	
 	
 }
