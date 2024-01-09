@@ -31,10 +31,13 @@ public class InsertValues {
     	
     	try {
     	
-	    	TournoiModele t = new TournoiModele(66, "Big tournoi", "20/12/2024", "20/01/2025", 
-					Notoriete.INTERNATIONAL, EtatTournoi.FERME);
+	    	TournoiModele t = new TournoiModele(66, "Big tournoi", "20/12/2024", "20/01/2025", Notoriete.INTERNATIONAL, EtatTournoi.FERME);
+	    
+			Match m1 = new Match(0, t.getIDTournoi(), false); t.ajouterMatch(m1);
+			Match m2 = new Match(1, t.getIDTournoi(), false); t.ajouterMatch(m2);
+			Match m3 = new Match(2, t.getIDTournoi(), false); t.ajouterMatch(m3);
+	  
 	    	TournoiDAO.getInstance().add(t);
-	    	System.out.print(t.getIDTournoi());
 	    	
 	    	// 4 équipes
 			Equipe e = new Equipe(0, "Maxence Maury-Balliteam", Nationalite.FR, Disposition.DISPOSEE, 3, 1000);EquipeDAO.getInstance().add(e);
@@ -72,8 +75,7 @@ public class InsertValues {
 			TournoiDAO.getInstance().addEquipe(t, e4);
 			
 			// 1 arbitre
-			Arbitre a = new Arbitre(0, "Josman", "José", Nationalite.FR);
-			ArbitreDAO.getInstance().add(a);
+			Arbitre a = new Arbitre(0, "Josman", "José", Nationalite.FR); ArbitreDAO.getInstance().add(a);
 			TournoiDAO.getInstance().addArbitre(t, a);
 			
 			ParticiperDAO.getInstance().update(new Participer(e.getIdEquipe(), t.getIDTournoi(), 1));
@@ -81,11 +83,11 @@ public class InsertValues {
 			ParticiperDAO.getInstance().update(new Participer(e3.getIdEquipe(), t.getIDTournoi(), 2));
 			ParticiperDAO.getInstance().update(new Participer(e4.getIdEquipe(), t.getIDTournoi(), 3));
 			
-			System.out.println("✔ Insertion du tournoi Big Tournoi réussie.");
+			System.out.println("✔ Insertion du tournoi ("+ t.getIDTournoi() +") Big Tournoi réussie.");
 			
     	} catch (Exception e) {
     		
-    		System.out.println("❌ Insertion du tourno Big Tournoi échouée.");
+    		System.out.println("❌ Insertion du tournoi Big Tournoi échouée.");
     		
     	}
 
