@@ -85,7 +85,6 @@ public class MatchDAO {
 				ResultSet rs = st.executeQuery();
 				int id = 0;
 				if (rs.next()) {
-					System.out.println("dans la boucle de sequence");
 					id = rs.getInt(1);
 				}
 				value.setIdMatch(id);
@@ -101,10 +100,14 @@ public class MatchDAO {
 				st.setInt(4, value.getIdTournoi());
 				int rowcountMatch = st.executeUpdate();
 				
-				st = DBConnection.getInstance().prepareStatement("INSERT INTO disputer VALUEs(?,?,?)");
-				st.setInt(1, id); st.setInt(2, value.getEquipes().get(0).getIdEquipe()); 
-				st.setInt(3, value.getEquipes().get(1).getIdEquipe()); 
-				int rowcountDisputer = st.executeUpdate();
+				int rowcountDisputer = 1;
+				
+				if (!value.getEquipes().isEmpty()) {
+					st = DBConnection.getInstance().prepareStatement("INSERT INTO disputer VALUEs(?,?,?)");
+					st.setInt(1, id); st.setInt(2, value.getEquipes().get(0).getIdEquipe()); 
+					st.setInt(3, value.getEquipes().get(1).getIdEquipe()); 
+					rowcountDisputer = st.executeUpdate();
+				} 
 				
 				return rowcountMatch > 0 && rowcountDisputer > 0;
 				
