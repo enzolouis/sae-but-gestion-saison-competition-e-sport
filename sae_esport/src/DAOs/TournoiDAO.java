@@ -45,7 +45,7 @@ public class TournoiDAO {
 		
 		PreparedStatement stMatchs = DBConnection.getInstance().prepareStatement("SELECT idMatch FROM MatchT Where idTournoi = ?");
 		
-		while (rs.next()) {
+		while (rs.next()) {			
 			SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
 		    SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy");
 			TournoiModele t = new TournoiModele(rs.getInt(1), rs.getString(2), outputFormat.format(inputFormat.parse(rs.getString(3))), outputFormat.format(inputFormat.parse(rs.getString(4))), rs.getString(7), rs.getString(8), classes.Notoriete.valueOf(rs.getString(5)), classes.EtatTournoi.valueOf(rs.getString(6)));
@@ -118,6 +118,10 @@ public class TournoiDAO {
 		}
 
 		value.setIDTournoi(id);
+		
+		for (Match m : value.getMatchs()) {
+			m.setIdTournoi(id);
+		}
 		
 		st = DBConnection.getInstance().prepareStatement("INSERT INTO tournoi (idTournoi, nom, dateDebut, dateFin, notoriete, ouvert, login, mdp) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 		st.setInt(1, id); 
