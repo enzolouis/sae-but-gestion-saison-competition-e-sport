@@ -43,6 +43,8 @@ public class TournoiDAO {
 		
 		PreparedStatement stArbitres = DBConnection.getInstance().prepareStatement("SELECT idArbitre FROM Gerer WHERE idTournoi = ?");
 		
+		PreparedStatement stMatchs = DBConnection.getInstance().prepareStatement("SELECT idMatch FROM MatchT Where idTournoi = ?");
+		
 		while (rs.next()) {
 			SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
 		    SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -56,6 +58,11 @@ public class TournoiDAO {
 			ResultSet rsArbitres = stArbitres.executeQuery();
 			while (rsArbitres.next()) {
 				t.ajouterArbitre(ArbitreDAO.getInstance().getById(rsArbitres.getInt(1)).get());
+			}
+			stMatchs.setInt(1, rs.getInt(1));
+			ResultSet rsMatchs = stMatchs.executeQuery();
+			while (rsMatchs.next()) {
+				t.ajouterMatch(MatchDAO.getInstance().getById(rsMatchs.getInt(1)).get());
 			}
 			
 			tournois.add(t);
@@ -85,6 +92,13 @@ public class TournoiDAO {
 				ResultSet rsArbitres = stArbitres.executeQuery();
 				while (rsArbitres.next()) {
 					t.ajouterArbitre(ArbitreDAO.getInstance().getById(rsArbitres.getInt(1)).get());
+				}
+				
+				PreparedStatement stMatchs = DBConnection.getInstance().prepareStatement("SELECT idMatch FROM MatchT Where idTournoi = ?");
+				stMatchs.setInt(1, rs.getInt(1));
+				ResultSet rsMatchs = stMatchs.executeQuery();
+				while (rsMatchs.next()) {
+					t.ajouterMatch(MatchDAO.getInstance().getById(rsMatchs.getInt(1)).get());
 				}
 				
 				return Optional.of(t);

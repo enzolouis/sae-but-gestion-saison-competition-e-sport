@@ -177,10 +177,14 @@ public class TournoiModele {
 	* */
 	public void nouveauMatch(int idMatch, boolean finale) {
 		if (finale) {
-			this.finale = new Match(idMatch, finale);
+			this.finale = new Match(idMatch, this.idTournoi, finale);
 		} else {
-			this.matches.add(new Match(idMatch, finale));
+			this.matches.add(new Match(idMatch, this.idTournoi, finale));
 		}
+	}
+	
+	public void ajouterMatch(Match m) {
+		this.matches.add(m);
 	}
 	
 	//Donne la map de participant
