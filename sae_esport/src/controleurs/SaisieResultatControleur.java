@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -37,13 +38,19 @@ public class SaisieResultatControleur implements ActionListener {
 	public SaisieResultatControleur(SaisieResultatVue vue, TournoiModele tournoi) {
 		this.vue = vue; 
 		this.modele = new SaisieResultatModele(tournoi);
-		Date dt = tournoi.getDateFin();
+		Date dt=null;
+		try {
+			dt = tournoi.getDateFin();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Calendar c = Calendar.getInstance(); 
 		c.setTime(dt); 
 		c.add(Calendar.DATE, 1);
 		dt = c.getTime();
 	    timer = new Timer();
-		timer.schedule(new ClotureDatePassee(this) , );
+		timer.schedule(new ClotureDatePassee(this) , dt );
 	}
 
 	@Override
