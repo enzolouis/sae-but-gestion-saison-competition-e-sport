@@ -65,7 +65,7 @@ public class SaisieResultatVue extends CustomJFrame {
     	
     	pack();
     	
-    	this.tournoi = new TournoiModele();
+    	this.tournoi = TournoiDAO.getInstance().getById(1).get();
     	this.controleur = new SaisieResultatControleur(this, this.tournoi);
         
         // Panel Top : Title
@@ -186,10 +186,9 @@ public class SaisieResultatVue extends CustomJFrame {
 //		}
         
         // Version finale à décommenter avec renseignement du bon tournoi
-        System.out.println(TournoiDAO.getInstance().getById(1).get().getNomTournoi());
-        System.out.println(TournoiDAO.getInstance().getById(1).get().getMatchs().size());
-        for (Match match : TournoiDAO.getInstance().getById(1).get().getMatchs()) {
-        	System.out.print("match");
+        System.out.println(this.tournoi.getNomTournoi());
+        System.out.println(this.tournoi.getMatchs().size());
+        for (Match match : this.tournoi.getMatchs()) {
         	// Panel Match : Titre + Panel Liste Equipe
         	CustomJPanel MatchCustomJPanel = new CustomJPanel(new EmptyBorder(0, 0, 0, 0), new GridLayout(2, 1, 0, 0));
         	MatchCustomJPanel.setLayout(gbl_matchCustomJPanel);
@@ -204,7 +203,7 @@ public class SaisieResultatVue extends CustomJFrame {
             MatchCustomJPanel.add(MatchEquipeListJPanel, gbc_roundListEquipe);
         	
             for (Equipe equipe : match.getEquipes()) {
-            	CustomJButton button1 = new CustomJButton("Équipe n°1", 15);
+            	CustomJButton button1 = new CustomJButton("Équipe n°" + equipe.getIdEquipe(), 15);
             	button1.addActionListener(this.controleur);
             	button1.setActionCommand(match.getIDMatch() + "," + equipe.getIdEquipe());
             	MatchEquipeListJPanel.add(button1);
