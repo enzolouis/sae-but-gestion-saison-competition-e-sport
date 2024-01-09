@@ -1,8 +1,5 @@
 package modeles;
 
-import java.util.List;
-import java.util.Optional;
-
 import classes.*;
 import DAOs.AdministrateurDAO;
 import DAOs.TournoiDAO;
