@@ -55,6 +55,7 @@ public class AccueilAdministrateurVue extends CustomJFrame {
         
         CustomJLabel titreFenetre = new CustomJLabel("Page d'administration", 25, new EmptyBorder(10, 10, 10, 10));
         titreFenetre.setFont(Palette.customFont.deriveFont(Font.BOLD, 20));
+        titreFenetre.setForeground(Palette.WHITE);
         panelTitre.add(titreFenetre, BorderLayout.CENTER);
         
         CustomJSeparator separatorTitre = new CustomJSeparator();
@@ -72,24 +73,24 @@ public class AccueilAdministrateurVue extends CustomJFrame {
         gbc_panelMiddle.weighty = 1.0;
         
         CustomJButton btnCreerUnTournoi = new CustomJButton("Créer un tournoi", 10);
-        btnCreerUnTournoi.setBackground(new Color(102, 173, 221));
-        btnCreerUnTournoi.setForeground(Color.WHITE);
+        btnCreerUnTournoi.setBackground(Palette.BLUEBLUE);
+        btnCreerUnTournoi.setForeground(Palette.WHITE);
         btnCreerUnTournoi.addActionListener(controleur);
         gbc_panelMiddle.gridx = 0;
         gbc_panelMiddle.gridy = 0;
         panelMiddle.add(btnCreerUnTournoi, gbc_panelMiddle);
         
         CustomJButton btnStatistiquesDeLa = new CustomJButton("Statistiques de la saison", 10);
-        btnStatistiquesDeLa.setBackground(new Color(102, 173, 221));
-        btnStatistiquesDeLa.setForeground(Color.WHITE);
+        btnStatistiquesDeLa.setBackground(Palette.BLUEBLUE);
+        btnStatistiquesDeLa.setForeground(Palette.WHITE);
         btnStatistiquesDeLa.addActionListener(controleur);
         gbc_panelMiddle.gridx = 0;
         gbc_panelMiddle.gridy = 1;
         panelMiddle.add(btnStatistiquesDeLa, gbc_panelMiddle.clone());
         
         CustomJButton btnListeTournois = new CustomJButton("Liste des tournois", 10);
-        btnListeTournois.setBackground(new Color(102, 173, 221));
-        btnListeTournois.setForeground(Color.WHITE);
+        btnListeTournois.setBackground(Palette.BLUEBLUE);
+        btnListeTournois.setForeground(Palette.WHITE);
         btnListeTournois.addActionListener(controleur);
         gbc_panelMiddle.gridx = 0;
         gbc_panelMiddle.gridy = 2;
@@ -100,8 +101,8 @@ public class AccueilAdministrateurVue extends CustomJFrame {
         contentPane.add(panelQuitterSeconnecter, BorderLayout.SOUTH);
         
         CustomJButton btnQuit = new CustomJButton("Quitter", 10);
-        btnQuit.setBackground(new Color(231, 76, 60));
-        btnQuit.setForeground(new Color(255, 255, 255));
+        btnQuit.setBackground(Palette.REDRED);
+        btnQuit.setForeground(Palette.WHITE);
         btnQuit.addActionListener(this.controleur);
         panelQuitterSeconnecter.add(btnQuit, BorderLayout.CENTER); 
     }
