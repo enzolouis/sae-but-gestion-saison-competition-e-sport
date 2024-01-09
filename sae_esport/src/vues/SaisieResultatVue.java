@@ -185,6 +185,8 @@ public class SaisieResultatVue extends CustomJFrame {
 //		}
         
         // Version finale à décommenter avec renseignement du bon tournoi
+        System.out.println(TournoiDAO.getInstance().getById(1).get().getNomTournoi());
+        System.out.println(TournoiDAO.getInstance().getById(1).get().getMatchs().size());
         for (Match match : TournoiDAO.getInstance().getById(1).get().getMatchs()) {
         	System.out.print("match");
         	// Panel Match : Titre + Panel Liste Equipe
