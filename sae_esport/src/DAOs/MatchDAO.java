@@ -33,7 +33,20 @@ public class MatchDAO {
 		ResultSet rs = st.executeQuery();
 		ArrayList<Match> match = new ArrayList<Match>();
 		while (rs.next()) {
-			match.add(new Match(rs.getInt(1),rs.getBoolean(2)));
+			Match m = new Match(rs.getInt(1),rs.getInt(4),rs.getBoolean(2));
+			Integer idVainqueur = rs.getInt(3);
+			if (idVainqueur != null) {
+				m.setVainqueur(idVainqueur);
+			}
+			PreparedStatement stEquipes = DBConnection.getInstance()
+					.prepareStatement("SELECT idEquipe1, idEquipe2 FROM disputer WHERE idMatch = ?");
+			stEquipes.setInt(1, m.getIDMatch());
+			ResultSet rsEquipes = stEquipes.executeQuery();
+			if (rsEquipes.next()) {
+				m.AddEquipe(EquipeDAO.getInstance().getById(rsEquipes.getInt(1)).get());
+				m.AddEquipe(EquipeDAO.getInstance().getById(rsEquipes.getInt(2)).get());
+				match.add(m);
+			}
 		}
 		return match;
 	}
@@ -44,7 +57,20 @@ public class MatchDAO {
 			for (Integer i : id) {
 				ResultSet rs = st.executeQuery("SELECT * FROM matchT WHERE idMatch="+i);
 				if (rs.next()) {
-					return Optional.of(new Match(rs.getInt(1),rs.getBoolean(2)));
+					Match m = new Match(rs.getInt(1),rs.getInt(4),rs.getBoolean(2));
+					Integer idVainqueur = rs.getInt(3);
+					if (idVainqueur != null) {
+						m.setVainqueur(idVainqueur);
+					}
+					PreparedStatement stEquipes = DBConnection.getInstance()
+							.prepareStatement("SELECT idEquipe1, idEquipe2 FROM disputer WHERE idMatch = ?");
+					stEquipes.setInt(1, m.getIDMatch());
+					ResultSet rsEquipes = stEquipes.executeQuery();
+					if (rsEquipes.next()) {
+						m.AddEquipe(EquipeDAO.getInstance().getById(rsEquipes.getInt(1)).get());
+						m.AddEquipe(EquipeDAO.getInstance().getById(rsEquipes.getInt(2)).get());
+						return Optional.of(m);
+					}
 				}
 			}
 			return Optional.empty();
@@ -61,21 +87,29 @@ public class MatchDAO {
 					id = rs.getInt(1);
 				}
 				value.setIdMatch(id);
-				System.out.println(value.getIDMatch());
-				st = DBConnection.getInstance().prepareStatement("INSERT INTO matchT VALUES (?,?,NULL)");
-				st.setInt(1, id); 
-				st.setBoolean(2, value.IsItFinale()); 
 				
-				int rowcount = st.executeUpdate();
-				return rowcount > 0;
+				st = DBConnection.getInstance().prepareStatement("INSERT INTO matchT VALUES (?,?,?,?)");
+				st.setInt(1, id); 
+				st.setBoolean(2, value.IsItFinale());
+				st.setInt(3, value.getVainqueur());
+				st.setInt(4, value.getIdTournoi());
+				int rowcountMatch = st.executeUpdate();
+				
+				st = DBConnection.getInstance().prepareStatement("INSERT INTO disputer VALUEs(?,?,?)");
+				st.setInt(1, id); st.setInt(2, value.getEquipes().get(0).getIdEquipe()); 
+				st.setInt(3, value.getEquipes().get(1).getIdEquipe()); 
+				int rowcountDisputer = st.executeUpdate();
+				
+				return rowcountMatch > 0 && rowcountDisputer > 0;
 				
 			}
 			
 			//update un arbitre donné
 			public boolean update(Match value) throws Exception {
 				
-				PreparedStatement st = DBConnection.getInstance().prepareStatement("UPDATE matchT SET finale=? WHERE idMatch=?");
-				st.setBoolean(1, value.IsItFinale()); st.setInt(2, value.getIDMatch());
+				PreparedStatement st = DBConnection.getInstance()
+						.prepareStatement("UPDATE matchT SET finale=?, idVainqueur=? WHERE idMatch=?");
+				st.setBoolean(1, value.IsItFinale()); st.setInt(2, value.getVainqueur()); st.setInt(3, value.getIDMatch()); 
 				int rowcount = st.executeUpdate();
 				return rowcount > 0;
 				
@@ -83,8 +117,10 @@ public class MatchDAO {
 			
 			//retire un arbitre donné
 			public boolean delete(Match value) throws Exception {
-				
-				PreparedStatement st = DBConnection.getInstance().prepareStatement("DELETE FROM matchT WHERE idMatch=?");
+				PreparedStatement st = DBConnection.getInstance().prepareStatement("DELETE FROM disputer WHERE idMatch=?");
+				st.setInt(1, value.getIDMatch());
+				st.executeUpdate();
+				st = DBConnection.getInstance().prepareStatement("DELETE FROM matchT WHERE idMatch=?");
 				st.setInt(1, value.getIDMatch());
 				int rowcount = st.executeUpdate();
 				return rowcount > 0;

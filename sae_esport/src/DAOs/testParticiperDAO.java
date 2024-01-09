@@ -56,7 +56,7 @@ public class testParticiperDAO {
 	
 	@Test
 	public void testGetByIdEquipe() throws Exception{
-	    Participer participer = new Participer(1,1,15);
+	    Participer participer = new Participer(15,1,1);
 		ParticiperDAO.getInstance().add(participer);
 		List<Participer> participations = ParticiperDAO.getInstance().getByIdEquipe(participer.getIdEquipe());
 		assertTrue(participations.contains(participer));
@@ -67,8 +67,8 @@ public class testParticiperDAO {
 	@Test
 	//Test de la récupération de toutes les participations
 	public void testGetAllParticiper() throws Exception{
-		    Participer participer1 = new Participer(1,1,15);
-			Participer participer2 = new Participer(1,2,15);
+		    Participer participer1 = new Participer(15,1,1);
+			Participer participer2 = new Participer(15,2,1);
 			ParticiperDAO.getInstance().add(participer1);
 			ParticiperDAO.getInstance().add(participer2);
 			List<Participer> participations = ParticiperDAO.getInstance().getAll();
@@ -81,7 +81,7 @@ public class testParticiperDAO {
 	/// Test de l'ajout d'une participation
 	public void testAddViaTournoi() throws Exception {
 		
-		Participer participer = new Participer(1,1,15);
+		Participer participer = new Participer(15,1,1);
 		ParticiperDAO.getInstance().add(participer);
 	    assertEquals(participer, 
 	    		ParticiperDAO.getInstance().
@@ -93,7 +93,7 @@ public class testParticiperDAO {
 	@Test
 	/// Test de la mise à jour d'une participation
 	public void testUpdate() throws Exception {
-		Participer participer = new Participer(1,1,15);
+		Participer participer = new Participer(15,1,1);
 	    ParticiperDAO.getInstance().add(participer);
 	    participer.setResultat(20);
 	    ParticiperDAO.getInstance().update(participer);
@@ -105,7 +105,7 @@ public class testParticiperDAO {
 	@Test
 	/// Test de supression d'une participation
 	public void testDelete() throws Exception { 
-		Participer participer = new Participer(1,1,15);
+		Participer participer = new Participer(15,1,1);
 	    ParticiperDAO.getInstance().add(participer);
 	    int size = ParticiperDAO.getInstance().getAll().size();
 	    ParticiperDAO.getInstance().delete(participer);           

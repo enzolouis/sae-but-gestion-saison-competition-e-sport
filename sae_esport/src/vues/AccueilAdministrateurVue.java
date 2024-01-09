@@ -9,6 +9,7 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
+import javax.swing.ImageIcon;
 import javax.swing.border.EmptyBorder;
 
 import controleurs.AccueilAdministrateurControleur;
@@ -33,8 +34,14 @@ public class AccueilAdministrateurVue extends CustomJFrame {
     }
     
     public AccueilAdministrateurVue() {
-    	super(new Dimension(400, 300), "Acceuil Administrateur");
-        
+    	
+    	super(new Dimension(400, 300), "Accueil Administrateur");
+    	
+    	this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+    	
+    	ImageIcon icon = new ImageIcon("src\\logo_app.png");
+    	this.setIconImage(icon.getImage());
+    	
     	pack();
     	
     	this.controleur = new AccueilAdministrateurControleur(this);
@@ -79,6 +86,14 @@ public class AccueilAdministrateurVue extends CustomJFrame {
         gbc_panelMiddle.gridx = 0;
         gbc_panelMiddle.gridy = 1;
         panelMiddle.add(btnStatistiquesDeLa, gbc_panelMiddle.clone());
+        
+        CustomJButton btnListeTournois = new CustomJButton("Liste des tournois", 10);
+        btnListeTournois.setBackground(new Color(102, 173, 221));
+        btnListeTournois.setForeground(Color.WHITE);
+        btnListeTournois.addActionListener(controleur);
+        gbc_panelMiddle.gridx = 0;
+        gbc_panelMiddle.gridy = 2;
+        panelMiddle.add(btnListeTournois, gbc_panelMiddle.clone());
         
         // Bottom Panel : Quitter & Divers
         CustomJPanel panelQuitterSeconnecter = new CustomJPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));

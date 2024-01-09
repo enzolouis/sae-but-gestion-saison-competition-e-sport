@@ -48,8 +48,10 @@ public class CreateMatch {
 		    stCreateMatch.executeUpdate("CREATE TABLE matchT ("
 		            + "idMatch INT PRIMARY KEY NOT NULL,"
 		            + "finale BOOLEAN,"
-		            + "idEquipe INT,"
-		            + "FOREIGN KEY(IdEquipe) REFERENCES Equipe(idEquipe))");
+		            + "idVainqueur INT,"
+		            + "idTournoi INT,"
+		            + "FOREIGN KEY (idTournoi) REFERENCES Tournoi(idTournoi),"
+		            + "FOREIGN KEY(idVainqueur) REFERENCES Equipe(idEquipe))");
 		    System.out.println("✔ Création de la table match réussie.");
 		} catch (SQLException e) {
 		    System.out.println("❌ Création de la table match échouée.");

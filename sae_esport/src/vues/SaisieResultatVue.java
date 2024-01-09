@@ -13,6 +13,7 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.util.Iterator;
 
+import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -58,6 +59,9 @@ public class SaisieResultatVue extends CustomJFrame {
     public SaisieResultatVue() throws Exception {
     	super(new Dimension(975, 600), "Résultat des matchs");
     	contentPanel = this.getContentPanel();
+    	
+    	ImageIcon icon = new ImageIcon("src\\logo_app.png");
+    	this.setIconImage(icon.getImage());
     	
     	pack();
     	
@@ -182,6 +186,8 @@ public class SaisieResultatVue extends CustomJFrame {
 //		}
         
         // Version finale à décommenter avec renseignement du bon tournoi
+        System.out.println(TournoiDAO.getInstance().getById(1).get().getNomTournoi());
+        System.out.println(TournoiDAO.getInstance().getById(1).get().getMatchs().size());
         for (Match match : TournoiDAO.getInstance().getById(1).get().getMatchs()) {
         	System.out.print("match");
         	// Panel Match : Titre + Panel Liste Equipe

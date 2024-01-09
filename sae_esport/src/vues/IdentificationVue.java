@@ -75,9 +75,10 @@ public class IdentificationVue extends CustomJFrame {
     }
     
     public IdentificationVue() throws Exception {
-    	super(new Dimension(300, 450), "Identification");
+    	super(new Dimension(450, 300), "Page d'identification");
     	
-    	// this.setUndecorated(true);
+    	ImageIcon icon = new ImageIcon("src\\logo_app.png");
+    	this.setIconImage(icon.getImage());
     	
     	pack();
     	

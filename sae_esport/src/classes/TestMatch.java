@@ -12,7 +12,7 @@ public class TestMatch {
 
 	@Test
 	public void testCreateTournoi() {
-		match = new Match(1,false);
+		match = new Match(1,1,false);
 		
 		assertEquals(match.getIDMatch(), 1);
 		assertEquals(match.IsItFinale(), false);
@@ -20,7 +20,7 @@ public class TestMatch {
 	
 	@Test
 	public void testChangementIdMatch() {
-		match = new Match(1,false);
+		match = new Match(1,1,false);
 		
 		match.setIdMatch(3);
 		
@@ -30,8 +30,8 @@ public class TestMatch {
 	
 	@Test
 	public void testAjoutEquipe() {
-		match = new Match(1,false);
-		Match comparator = new Match(1,false);
+		match = new Match(1,1,false);
+		Match comparator = new Match(1,1,false);
 		
 		match.AddEquipe(new Equipe(1,"rofl",Nationalite.AD,Disposition.NON_DIPOSEE,14,12));
 		comparator.AddEquipe(new Equipe(1,"rofl",Nationalite.AD,Disposition.NON_DIPOSEE,14,12));
@@ -40,10 +40,11 @@ public class TestMatch {
 		assertEquals(match.getEquipes(), comparator.getEquipes());
 	}
 	
+	
 	@Test
 	public void testRemplacerEquipe() {
-		match = new Match(1,false);
-		Match comparator = new Match(1,false);
+		match = new Match(1,1,false);
+		Match comparator = new Match(1,1,false);
 		
 		match.AddEquipe(new Equipe(1,"rofl",Nationalite.AD,Disposition.NON_DIPOSEE,14,12));
 		comparator.AddEquipe(new Equipe(1,"flering",Nationalite.AD,Disposition.NON_DIPOSEE,14,12));
@@ -57,7 +58,7 @@ public class TestMatch {
 	
 	@Test
 	public void testAjoutVainqueur() {
-		match = new Match(1,false);
+		match = new Match(1,1,false);
 		
 		match.setVainqueur(3);
 		

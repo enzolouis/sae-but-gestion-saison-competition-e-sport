@@ -4,11 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.Timer;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -16,6 +18,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import classes.ClotureDatePassee;
 import classes.Equipe;
 import classes.Match;
 import classes.EtatTournoi;
@@ -23,15 +26,24 @@ import modeles.SaisieResultatModele;
 import modeles.TournoiModele;
 import vues.SaisieResultatVue;
 import DAOs.MatchDAO;
+import DAOs.TournoiDAO;
+import DAOs.EquipeDAO;
 
 public class SaisieResultatControleur implements ActionListener {
 	private SaisieResultatModele modele;
 	private SaisieResultatVue vue;
-	
+	private Timer timer;
 	
 	public SaisieResultatControleur(SaisieResultatVue vue, TournoiModele tournoi) {
 		this.vue = vue; 
 		this.modele = new SaisieResultatModele(tournoi);
+		Date dt = tournoi.getDateFin();
+		Calendar c = Calendar.getInstance(); 
+		c.setTime(dt); 
+		c.add(Calendar.DATE, 1);
+		dt = c.getTime();
+	    timer = new Timer();
+		timer.schedule(new ClotureDatePassee(this) , );
 	}
 
 	@Override
@@ -51,7 +63,7 @@ public class SaisieResultatControleur implements ActionListener {
 					}
 				}
 				if (b) {
-					Match ma = new Match(0,true);
+					Match ma = new Match(0,TournoiDAO.getInstance().getTournoiOuvert().get().getIDTournoi(),false);
 					Equipe e1 = null;
 					Equipe e2 = null;
 					int score= -1;
@@ -86,13 +98,34 @@ public class SaisieResultatControleur implements ActionListener {
 				}
 				break;
 			case ("Fermer le tournoi"):
-				modele.getTournoi().setEtatTournoi(EtatTournoi.FERME);				
+				modele.getTournoi().setEtatTournoi(EtatTournoi.FERME);
+				if (modele.IsFinaleDemarree()) {
+					Map<Equipe, Integer> equipe = modele.getTournoi().getEquipes();
+					for (Map.Entry eq : equipe.entrySet()) {
+						Equipe equi =(Equipe) eq.getKey();
+						Equipe equip = null;
+						try {
+							equip = EquipeDAO.getInstance().getById(equi.getIdEquipe()).get();
+						} catch (Exception e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						equip.setPointsSaison((Integer)eq.getValue() + equip.getPointsSaison());
+						try {
+							EquipeDAO.getInstance().update(equip);
+						} catch (Exception e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}
+				}
+				timer.cancel();
 				break;
 			default:
 				String[] ids = bouton.getActionCommand().split(",");
 				int idmatch= Integer.valueOf(ids[0]);
 				int idequipe = Integer.valueOf(ids[1]);
-				Match m= new Match(idmatch,false);
+				Match m= new Match(idmatch,TournoiDAO.getInstance().getTournoiOuvert().get().getIDTournoi(),false);
 				try {
 					m = MatchDAO.getInstance().getById(idmatch).get();
 				} catch (Exception ex) {
@@ -106,4 +139,8 @@ public class SaisieResultatControleur implements ActionListener {
 		}
 	}
 	
+	public SaisieResultatModele getModele() {
+		return this.modele;
+	}
 }
+

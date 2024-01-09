@@ -9,6 +9,7 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -35,6 +36,9 @@ public class AccueilArbitreVue extends CustomJFrame {
     
     public AccueilArbitreVue() {
     	super(new Dimension(400, 300), "Accueil Arbitre");
+    	
+    	ImageIcon icon = new ImageIcon("src\\logo_app.png");
+    	this.setIconImage(icon.getImage());
         
     	pack();
     	

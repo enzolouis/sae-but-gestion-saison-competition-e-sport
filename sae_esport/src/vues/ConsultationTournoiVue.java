@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -78,12 +79,14 @@ public class ConsultationTournoiVue extends CustomJFrame {
 	 * @throws Exception 
 	 */
 	public ConsultationTournoiVue(TournoiModele tournoiCourant) {
+		
 		super(new Dimension(750, 500), "Consultation du classement du tournoi N°"+tournoiCourant.getIDTournoi());
 		// tournoi en paramètre
 		
 		controleur = new ConsultationTournoiControleur(this);
 		
-		
+		ImageIcon icon = new ImageIcon("src\\logo_app.png");
+    	this.setIconImage(icon.getImage());
 		
     	pack();
     	

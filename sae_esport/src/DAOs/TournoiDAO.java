@@ -13,6 +13,7 @@ import java.util.Optional;
 import classes.Arbitre;
 import classes.DBConnection;
 import classes.Equipe;
+import classes.Match;
 import modeles.TournoiModele;
 
 public class TournoiDAO {
@@ -42,6 +43,8 @@ public class TournoiDAO {
 		
 		PreparedStatement stArbitres = DBConnection.getInstance().prepareStatement("SELECT idArbitre FROM Gerer WHERE idTournoi = ?");
 		
+		PreparedStatement stMatchs = DBConnection.getInstance().prepareStatement("SELECT idMatch FROM MatchT Where idTournoi = ?");
+		
 		while (rs.next()) {
 			SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
 		    SimpleDateFormat outputFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -55,6 +58,11 @@ public class TournoiDAO {
 			ResultSet rsArbitres = stArbitres.executeQuery();
 			while (rsArbitres.next()) {
 				t.ajouterArbitre(ArbitreDAO.getInstance().getById(rsArbitres.getInt(1)).get());
+			}
+			stMatchs.setInt(1, rs.getInt(1));
+			ResultSet rsMatchs = stMatchs.executeQuery();
+			while (rsMatchs.next()) {
+				t.ajouterMatch(MatchDAO.getInstance().getById(rsMatchs.getInt(1)).get());
 			}
 			
 			tournois.add(t);
@@ -86,6 +94,13 @@ public class TournoiDAO {
 					t.ajouterArbitre(ArbitreDAO.getInstance().getById(rsArbitres.getInt(1)).get());
 				}
 				
+				PreparedStatement stMatchs = DBConnection.getInstance().prepareStatement("SELECT idMatch FROM MatchT Where idTournoi = ?");
+				stMatchs.setInt(1, rs.getInt(1));
+				ResultSet rsMatchs = stMatchs.executeQuery();
+				while (rsMatchs.next()) {
+					t.ajouterMatch(MatchDAO.getInstance().getById(rsMatchs.getInt(1)).get());
+				}
+				
 				return Optional.of(t);
 			}
 		}
@@ -114,6 +129,11 @@ public class TournoiDAO {
 		st.setString(7, value.getLogin());
 		st.setString(8, value.getMotDePasse());
 		int rowcount = st.executeUpdate();
+		
+		for (Match m : value.getMatchs()) {
+			MatchDAO.getInstance().add(m);
+		}
+		
 		return rowcount > 0;
 	}
 	
@@ -162,11 +182,16 @@ public class TournoiDAO {
 		return rowcount > 0;
 	}
 	
-	public Optional<TournoiModele> getTournoiOuvert() throws Exception {
-		Statement st = DBConnection.getInstance().createStatement();
-		ResultSet rs = st.executeQuery("SELECT * FROM tournoi WHERE ouvert='OUVERT'");
-		if (rs.next()) {
-			return Optional.of(new TournoiModele(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(7), rs.getString(8), classes.Notoriete.valueOf(rs.getString(5)), classes.EtatTournoi.valueOf(rs.getString(6))));
+	public Optional<TournoiModele> getTournoiOuvert() {
+		Statement st;
+		try {
+			st = DBConnection.getInstance().createStatement();
+			ResultSet rs = st.executeQuery("SELECT * FROM tournoi WHERE ouvert='OUVERT'");
+			if (rs.next()) {
+				return Optional.of(new TournoiModele(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(7), rs.getString(8), classes.Notoriete.valueOf(rs.getString(5)), classes.EtatTournoi.valueOf(rs.getString(6))));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		return Optional.empty();
 	}

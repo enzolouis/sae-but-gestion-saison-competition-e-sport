@@ -86,7 +86,13 @@ public class ListeTournoisVue extends CustomJFrame {
 	    }
 	
 	public ListeTournoisVue() {
+		
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		
 		setTitle("Liste des tournois");
+		
+		ImageIcon icon = new ImageIcon("src\\logo_app.png");
+    	this.setIconImage(icon.getImage());
 		
 		controleur = new ListeTournoisControleur(this);
 		
@@ -120,7 +126,7 @@ public class ListeTournoisVue extends CustomJFrame {
 					return false;
 				};};
 		tableTournois.setFont(Palette.customFont.deriveFont(Font.PLAIN, 11));
-		tableTournois.addMouseListener(controleur);
+		tableTournois.getSelectionModel().addListSelectionListener(controleur);
 		tableTournois.setOpaque(false);
 		tableTournois.setForeground(new Color(44, 47, 51));
 		tableTournois.setSelectionBackground(new Color(198, 224, 242));
@@ -141,6 +147,7 @@ public class ListeTournoisVue extends CustomJFrame {
 		
 		tableTournois.setModel(tableModel);
 		tableTournois.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tableTournois.getSelectionModel().addListSelectionListener(controleur);
 		tableTournois.getColumnModel().getColumn(0).setPreferredWidth(10);
 		tableTournois.getTableHeader().setBackground(new Color(102,172,221));
 		tableTournois.getTableHeader().setForeground(Color.WHITE);
