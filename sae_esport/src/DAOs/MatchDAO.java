@@ -3,6 +3,7 @@ package DAOs;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -35,7 +36,7 @@ public class MatchDAO {
 		while (rs.next()) {
 			Match m = new Match(rs.getInt(1),rs.getInt(4),rs.getBoolean(2));
 			Integer idVainqueur = rs.getInt(3);
-			if (idVainqueur != null) {
+			if (idVainqueur != 0) {
 				m.setVainqueur(idVainqueur);
 			}
 			PreparedStatement stEquipes = DBConnection.getInstance()
@@ -59,7 +60,7 @@ public class MatchDAO {
 				if (rs.next()) {
 					Match m = new Match(rs.getInt(1),rs.getInt(4),rs.getBoolean(2));
 					Integer idVainqueur = rs.getInt(3);
-					if (idVainqueur != null) {
+					if (idVainqueur != 0) {
 						m.setVainqueur(idVainqueur);
 					}
 					PreparedStatement stEquipes = DBConnection.getInstance()
@@ -69,8 +70,8 @@ public class MatchDAO {
 					if (rsEquipes.next()) {
 						m.AddEquipe(EquipeDAO.getInstance().getById(rsEquipes.getInt(1)).get());
 						m.AddEquipe(EquipeDAO.getInstance().getById(rsEquipes.getInt(2)).get());
-						return Optional.of(m);
 					}
+					return Optional.of(m);
 				}
 			}
 			return Optional.empty();
@@ -84,6 +85,7 @@ public class MatchDAO {
 				ResultSet rs = st.executeQuery();
 				int id = 0;
 				if (rs.next()) {
+					System.out.println("dans la boucle de sequence");
 					id = rs.getInt(1);
 				}
 				value.setIdMatch(id);
@@ -91,7 +93,11 @@ public class MatchDAO {
 				st = DBConnection.getInstance().prepareStatement("INSERT INTO matchT VALUES (?,?,?,?)");
 				st.setInt(1, id); 
 				st.setBoolean(2, value.IsItFinale());
-				st.setInt(3, value.getVainqueur());
+				if (value.getVainqueur() == 0) {
+					st.setNull(3, Types.INTEGER);
+				} else {
+					st.setInt(3, value.getVainqueur());
+				}
 				st.setInt(4, value.getIdTournoi());
 				int rowcountMatch = st.executeUpdate();
 				
