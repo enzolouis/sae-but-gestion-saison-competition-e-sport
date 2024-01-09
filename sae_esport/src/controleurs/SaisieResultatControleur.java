@@ -4,11 +4,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.Timer;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -16,6 +18,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import classes.ClotureDatePassee;
 import classes.Equipe;
 import classes.Match;
 import classes.EtatTournoi;
@@ -29,11 +32,18 @@ import DAOs.EquipeDAO;
 public class SaisieResultatControleur implements ActionListener {
 	private SaisieResultatModele modele;
 	private SaisieResultatVue vue;
-	
+	private Timer timer;
 	
 	public SaisieResultatControleur(SaisieResultatVue vue, TournoiModele tournoi) {
 		this.vue = vue; 
 		this.modele = new SaisieResultatModele(tournoi);
+		Date dt = tournoi.getDateFin();
+		Calendar c = Calendar.getInstance(); 
+		c.setTime(dt); 
+		c.add(Calendar.DATE, 1);
+		dt = c.getTime();
+	    timer = new Timer();
+		timer.schedule(new ClotureDatePassee(this) , );
 	}
 
 	@Override
@@ -109,6 +119,7 @@ public class SaisieResultatControleur implements ActionListener {
 						}
 					}
 				}
+				timer.cancel();
 				break;
 			default:
 				String[] ids = bouton.getActionCommand().split(",");
@@ -128,4 +139,8 @@ public class SaisieResultatControleur implements ActionListener {
 		}
 	}
 	
+	public SaisieResultatModele getModele() {
+		return this.modele;
+	}
 }
+
