@@ -8,7 +8,7 @@ public class Match {
 	private int idMatch;
 	private boolean finale;
 	private List<Equipe> equipes;
-	private int idVainqueur;
+	private Integer idVainqueur;
 	private int idTournoi;
 	
 	public Match(int idMatch, int idTournoi, boolean finale) {

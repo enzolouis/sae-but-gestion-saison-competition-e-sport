@@ -8,6 +8,7 @@ import java.awt.Font;
 import style.*;
 
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -43,6 +44,9 @@ public class ConsultationSaisonVue extends CustomJFrame {
 		
 		setTitle("Statistiques de la saison");
 		
+		ImageIcon icon = new ImageIcon("src\\logo_app.png");
+    	this.setIconImage(icon.getImage());
+		
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
 		controleur = new ConsultationSaisonControleur(this);
@@ -75,10 +79,18 @@ public class ConsultationSaisonVue extends CustomJFrame {
 		table.setSelectionBackground(new Color(198, 224, 242));
 		table.setGridColor(new Color(44, 47, 51));
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table.getSelectionModel().addListSelectionListener(controleur);
 		table.getTableHeader().setBackground(new Color(102,172,221));
 		table.getTableHeader().setForeground(Color.WHITE);
 		
-		tablemodel = new DefaultTableModel();
+		tablemodel = new DefaultTableModel() {
+
+		    @Override
+		    public boolean isCellEditable(int row, int column) {
+		       //all cells false
+		       return false;
+		    }
+		};
 		tablemodel.addColumn("Classement");
 		tablemodel.addColumn("Id");
 		tablemodel.addColumn("Nom d'équipe");
@@ -103,7 +115,7 @@ public class ConsultationSaisonVue extends CustomJFrame {
 			e.printStackTrace();
 		}
 		
-		table.addMouseListener(controleur);
+		
 		
 		CustomJPanel panelInfos = new CustomJPanel();
 		panel.add(panelInfos, BorderLayout.SOUTH);

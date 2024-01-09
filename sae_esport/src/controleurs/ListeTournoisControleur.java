@@ -19,6 +19,8 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JToggleButton;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import DAOs.ArbitreDAO;
@@ -32,7 +34,7 @@ import modeles.TournoiModele;
 import vues.IdentificationVue;
 import vues.ListeTournoisVue;
 
-public class ListeTournoisControleur implements ActionListener, MouseListener {
+public class ListeTournoisControleur implements ActionListener, ListSelectionListener, MouseListener {
 	private TournoiModele modele;
 	private ListeTournoisVue vue;
 	
@@ -103,42 +105,7 @@ public class ListeTournoisControleur implements ActionListener, MouseListener {
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
-		if (e.getSource() instanceof JTable) {
-			vue.titreEquipe.setText(" ");
-			vue.joueursModel.clear();
-			vue.disposition.setText(" ");
-			this.vue.boutonOuverture.setEnabled(true);
-			this.vue.erreurOuverture.setText(" ");
-			JTable t = (JTable) e.getSource();
-			int idTournoi = (int) t.getValueAt(t.getSelectedRow(), 0);
-
-			try {
-				TournoiModele tournoi = TournoiDAO.getInstance().getById(idTournoi).get();
-				vue.labelTitre.setText("Tournoi N°" + tournoi.getIDTournoi() + " ("+tournoi.getNotoriete().toString()+")");
-				vue.login.setText(tournoi.getLogin());
-				vue.mdp.setText(tournoi.getMotDePasse());
-				vue.dateDebut.setDate(tournoi.getDateDebut());
-				vue.dateFin.setDate(tournoi.getDateFin());
-				
-				vue.listeEquipesModel.clear();
-				
-				for (Equipe eq : tournoi.getEquipes().keySet()) {
-					vue.listeEquipesModel.addElement(eq);
-				}
-				
-				vue.listeEquipes.setModel(vue.listeEquipesModel);
-				
-				vue.listeArbitresModel.clear();
-				for (Arbitre a : tournoi.getArbitres()) {
-					vue.listeArbitresModel.addElement(a);
-				}
-				
-				vue.listeArbitres.setModel(vue.listeArbitresModel);
-				
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}	
-		} else if (e.getSource() instanceof JList) {
+		 if (e.getSource() instanceof JList) {
 			JList l = (JList) e.getSource();
 			Equipe e1 = (Equipe) l.getSelectedValue();
 			vue.titreEquipe.setText(e1.getNom());
@@ -177,6 +144,50 @@ public class ListeTournoisControleur implements ActionListener, MouseListener {
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void valueChanged(ListSelectionEvent e) {
+		
+		// récupération de l'identifiant
+		String strSource = e.getSource().toString();
+		int start = strSource.indexOf("{")+1, stop  = strSource.length()-1;
+		int iSelectedIndex = Integer.parseInt(strSource.substring(start, stop));
+		int idTournoi = (int) vue.tableTournois.getValueAt(iSelectedIndex, 0);
+		
+		//remise à blank des fields
+		vue.titreEquipe.setText(" ");
+		vue.joueursModel.clear();
+		vue.disposition.setText(" ");
+		vue.boutonOuverture.setEnabled(true);
+		vue.erreurOuverture.setText(" ");
+		
+		try {
+			TournoiModele tournoi = TournoiDAO.getInstance().getById(idTournoi).get();
+			vue.labelTitre.setText("Tournoi N°" + tournoi.getIDTournoi() + " ("+tournoi.getNotoriete().toString()+")");
+			vue.login.setText(tournoi.getLogin());
+			vue.mdp.setText(tournoi.getMotDePasse());
+			vue.dateDebut.setDate(tournoi.getDateDebut());
+			vue.dateFin.setDate(tournoi.getDateFin());
+			
+			vue.listeEquipesModel.clear();
+			
+			for (Equipe eq : tournoi.getEquipes().keySet()) {
+				vue.listeEquipesModel.addElement(eq);
+			}
+			
+			vue.listeEquipes.setModel(vue.listeEquipesModel);
+			
+			vue.listeArbitresModel.clear();
+			for (Arbitre a : tournoi.getArbitres()) {
+				vue.listeArbitresModel.addElement(a);
+			}
+			
+			vue.listeArbitres.setModel(vue.listeArbitresModel);
+			
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}	
 	}
 	
 }

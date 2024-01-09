@@ -28,6 +28,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JButton;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JList;
 import java.awt.Rectangle;
 import java.awt.Component;
@@ -61,13 +62,13 @@ public class CreationTournoiVue extends CustomJFrame {
 	
 	public CreationTournoiVue() {
 		
-		super(new Dimension(500,300));
-		
+		super(new Dimension(530,300));
+		setBounds(new Rectangle(0, 0, 700, 550));
 		setTitle("Création de tournoi");
-		
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
-		setBounds(new Rectangle(0, 0, 800, 550));
+		ImageIcon icon = new ImageIcon("src\\logo_app.png");
+    	this.setIconImage(icon.getImage());
 		
 		this.controleur = new CreationTournoiControleur(this);
 		Color backgroundColor = new Color(44, 47, 51);
