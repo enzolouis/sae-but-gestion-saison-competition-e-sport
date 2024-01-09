@@ -49,6 +49,8 @@ public class CreateMatch {
 		            + "idMatch INT PRIMARY KEY NOT NULL,"
 		            + "finale BOOLEAN,"
 		            + "idVainqueur INT,"
+		            + "idTournoi INT,"
+		            + "FOREIGN KEY (idTournoi) REFERENCES Tournoi(idTournoi),"
 		            + "FOREIGN KEY(idVainqueur) REFERENCES Equipe(idEquipe))");
 		    System.out.println("✔ Création de la table match réussie.");
 		} catch (SQLException e) {
