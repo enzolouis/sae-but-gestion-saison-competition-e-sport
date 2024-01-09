@@ -69,6 +69,7 @@ public class SaisieResultatVue extends CustomJFrame {
         contentPanel.add(panelTop, BorderLayout.NORTH);
         
         CustomJLabel titleTop = new CustomJLabel("Résultat des matchs", 25);
+        titleTop.setFont(Palette.customFont.deriveFont(Font.BOLD, 20));
         panelTop.add(titleTop);
         
         CustomJSeparator separatorTop = new CustomJSeparator();

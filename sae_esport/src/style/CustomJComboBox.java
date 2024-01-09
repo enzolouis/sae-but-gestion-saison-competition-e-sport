@@ -16,6 +16,8 @@ import javax.swing.JComponent;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
 
+import vues.Palette;
+
 public class CustomJComboBox extends JComboBox {
     private DefaultComboBoxModel model;
     Shape shape;
@@ -27,5 +29,6 @@ public class CustomJComboBox extends JComboBox {
         setBackground(new Color(44, 47, 51));
         setForeground(Color.white);
         setUI(new CustomJComboBoxUI());
+        setFont(Palette.customFont);
     }
 }
