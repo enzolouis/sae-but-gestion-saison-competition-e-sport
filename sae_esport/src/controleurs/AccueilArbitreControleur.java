@@ -3,6 +3,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
+import DAOs.TournoiDAO;
+import modeles.TournoiModele;
 import style.CustomJFrame;
 import vues.AccueilArbitreVue;
 import vues.ConsultationSaisonVue;
@@ -30,6 +32,18 @@ public class AccueilArbitreControleur implements ActionListener {
 			case ("Accès au tournoi"):
 				break;
 			case ("Statistiques du tournoi"):
+				TournoiModele t = null;
+				try {
+					t = TournoiDAO.getInstance().getTournoiOuvert().get();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				frame = new ConsultationTournoiVue(t);
+				frame.setVisible(true);
+			
+				
 				break;
 			default:
 				break;

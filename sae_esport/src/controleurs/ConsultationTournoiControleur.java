@@ -12,7 +12,7 @@ public class ConsultationTournoiControleur implements ActionListener {
 	private ConsultationTournoiVue vue;
 	//private ConsultationTournoiModele modele;
 	
-	public ConsultationTournoiControleur(ConsultationTournoiVue vue) throws Exception {
+	public ConsultationTournoiControleur(ConsultationTournoiVue vue) {
 		//this.modele = new ConsultationTournoiModele();
 		this.vue = vue;
 	}

@@ -12,6 +12,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
+import vues.Palette;
+
 public class CustomJComboBoxRenderer extends JLabel implements ListCellRenderer {
     public CustomJComboBoxRenderer() {
     	super();
@@ -30,6 +32,7 @@ public class CustomJComboBoxRenderer extends JLabel implements ListCellRenderer 
 		}
         
         setForeground(Color.WHITE);
+        setFont(Palette.customFont);
         return this;
     }
 }

@@ -11,6 +11,8 @@ import javax.swing.JButton;
 import javax.swing.JToggleButton;
 import javax.swing.border.EmptyBorder;
 
+import vues.Palette;
+
 public class CustomJToggleButton extends JToggleButton {
 	Shape shape;
 	int round;
@@ -30,6 +32,7 @@ public class CustomJToggleButton extends JToggleButton {
     	setBackground(new Color(29, 88, 129));
     	setForeground(new Color(255, 255, 255));
 		setOpaque(false);
+		setFont(Palette.customFont);
 	}
 	
 	/**
@@ -49,6 +52,7 @@ public class CustomJToggleButton extends JToggleButton {
     	setForeground(new Color(255, 255, 255));
     	setBorder(border);
 		setOpaque(false);
+		setFont(Palette.customFont);
 	}
 
     protected void paintComponent(Graphics g) {

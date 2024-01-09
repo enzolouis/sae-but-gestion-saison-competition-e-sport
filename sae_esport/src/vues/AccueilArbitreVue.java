@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
@@ -51,6 +52,7 @@ public class AccueilArbitreVue extends CustomJFrame {
         contentPane.add(panelTitre, BorderLayout.NORTH);
         
         CustomJLabel titreFenetre = new CustomJLabel("Page d'arbitrage", 25, new EmptyBorder(10, 10, 10, 10));
+        titreFenetre.setFont(Palette.customFont.deriveFont(Font.BOLD, 20));
         panelTitre.add(titreFenetre, BorderLayout.CENTER);
         
         CustomJSeparator separatorTitre = new CustomJSeparator();
