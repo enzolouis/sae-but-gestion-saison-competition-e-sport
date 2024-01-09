@@ -33,7 +33,11 @@ public class MatchDAO {
 		ResultSet rs = st.executeQuery();
 		ArrayList<Match> match = new ArrayList<Match>();
 		while (rs.next()) {
-			Match m = new Match(rs.getInt(1),rs.getInt(3),rs.getBoolean(2));
+			Match m = new Match(rs.getInt(1),rs.getInt(4),rs.getBoolean(2));
+			Integer idVainqueur = rs.getInt(3);
+			if (idVainqueur != null) {
+				m.setVainqueur(idVainqueur);
+			}
 			PreparedStatement stEquipes = DBConnection.getInstance()
 					.prepareStatement("SELECT idEquipe1, idEquipe2 FROM disputer WHERE idMatch = ?");
 			stEquipes.setInt(1, m.getIDMatch());
@@ -53,7 +57,11 @@ public class MatchDAO {
 			for (Integer i : id) {
 				ResultSet rs = st.executeQuery("SELECT * FROM matchT WHERE idMatch="+i);
 				if (rs.next()) {
-					Match m = new Match(rs.getInt(1),rs.getInt(3),rs.getBoolean(2));
+					Match m = new Match(rs.getInt(1),rs.getInt(4),rs.getBoolean(2));
+					Integer idVainqueur = rs.getInt(3);
+					if (idVainqueur != null) {
+						m.setVainqueur(idVainqueur);
+					}
 					PreparedStatement stEquipes = DBConnection.getInstance()
 							.prepareStatement("SELECT idEquipe1, idEquipe2 FROM disputer WHERE idMatch = ?");
 					stEquipes.setInt(1, m.getIDMatch());
@@ -80,9 +88,11 @@ public class MatchDAO {
 				}
 				value.setIdMatch(id);
 				
-				st = DBConnection.getInstance().prepareStatement("INSERT INTO matchT VALUES (?,?,NULL)");
+				st = DBConnection.getInstance().prepareStatement("INSERT INTO matchT VALUES (?,?,?,?)");
 				st.setInt(1, id); 
 				st.setBoolean(2, value.IsItFinale());
+				st.setInt(3, value.getVainqueur());
+				st.setInt(4, value.getIdTournoi());
 				int rowcountMatch = st.executeUpdate();
 				
 				st = DBConnection.getInstance().prepareStatement("INSERT INTO disputer VALUEs(?,?,?)");
