@@ -14,37 +14,6 @@ public class Palette {
 	public static final Color BLUEBLUE = new Color(0, 90, 130);
 	public static final Color REDRED = new Color(30, 40, 45);
     
-    public static final Font customFont2;
-    
-    static {
-        Font loadedFont = null;
-        try {
-            loadedFont = Font.createFont(Font.TRUETYPE_FONT, new File("Tektur-VariableFont_wdth.ttf")).deriveFont(12f);
-            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            ge.registerFont(loadedFont);
-        } catch (IOException | FontFormatException e) {
-            e.printStackTrace();
-            // Gérer l'exception si nécessaire (peut-être fournir une police de secours par défaut, lancer une exception personnalisée, etc.)
-        }
-        customFont2 = loadedFont;
-    }
-    
-    public static final Font customTextFont2;
-    
-    static {
-        Font loadedFont = null;
-        try {
-            loadedFont = Font.createFont(Font.TRUETYPE_FONT, new File("Salsa-Regular.ttf")).deriveFont(12f);
-            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            ge.registerFont(loadedFont);
-        } catch (IOException | FontFormatException e) {
-            e.printStackTrace();
-            // Gérer l'exception si nécessaire (peut-être fournir une police de secours par défaut, lancer une exception personnalisée, etc.)
-        }
-        customTextFont2 = loadedFont;
-    }
-    
-    
     
     public static final Font customFont;
     
