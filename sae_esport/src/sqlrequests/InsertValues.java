@@ -87,7 +87,7 @@ public class InsertValues {
 			
     	} catch (Exception e) {
     		
-    		System.out.println("❌ Insertion du tournoi Big Tournoi échouée.");
+    		System.out.println("❌ Insertion du tournoi Big Tournoi échouée. ⚠ " + e);
     		
     	}
 
@@ -110,7 +110,7 @@ public class InsertValues {
 	    	
 		} catch (Exception e) {
 			
-			System.out.println("❌ Insertion de tous les arbitres échouée.");
+			System.out.println("❌ Insertion de tous les arbitres échouée. ⚠ " + e);
 			
 		}
     	
@@ -127,7 +127,7 @@ public class InsertValues {
 			
 		} catch (Exception e) {
 			
-			System.out.println("❌ Insertion de tous les administrateurs échouée.");
+			System.out.println("❌ Insertion de tous les administrateurs échouée. ⚠ " + e);
 			
 		}
     	
