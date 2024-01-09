@@ -11,6 +11,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import vues.Palette;
+
 @SuppressWarnings("serial")
 public class CustomJPasswordField extends JPasswordField {
     private Shape shape;
@@ -144,7 +146,8 @@ public class CustomJPasswordField extends JPasswordField {
     
     private void setBasicConstructor() {
         setForeground(Color.WHITE);
-        setBackground(new Color(29, 88, 129));
+        setBackground(Palette.BLUEBLUE);
+        setFont(Palette.customTextFont);
     }
 
     public String getPlaceholder() {

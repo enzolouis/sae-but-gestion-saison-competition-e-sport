@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.border.EmptyBorder;
 
+import vues.Palette;
+
 public class CustomJFrame extends JFrame {
 	CustomJPanel contentPanel;
 	
@@ -20,6 +22,7 @@ public class CustomJFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(this.contentPanel);
         setResizable(false);
+        setFont(Palette.customFont);
 	}
 	
 	/**
@@ -36,6 +39,7 @@ public class CustomJFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setContentPane(this.contentPanel);
         setResizable(false);
+        setFont(Palette.customFont);
 	}
 	
 	/**
@@ -54,6 +58,7 @@ public class CustomJFrame extends JFrame {
         //setBounds(100, 100, dimension.height, dimension.width);
         setContentPane(this.contentPanel);
         setResizable(false);
+        setFont(Palette.customFont);
 	}
 	
 	/**
@@ -73,6 +78,7 @@ public class CustomJFrame extends JFrame {
         setBounds(100, 100, dimension.height, dimension.width);
         setContentPane(this.contentPanel);
         setResizable(false);
+        setFont(Palette.customFont);
 	}
 	
 	public CustomJPanel getContentPanel( ) {

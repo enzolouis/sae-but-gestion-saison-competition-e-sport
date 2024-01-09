@@ -78,7 +78,7 @@ public class ConsultationTournoiVue extends CustomJFrame {
 	 * Create the frame.
 	 * @throws Exception 
 	 */
-	public ConsultationTournoiVue(TournoiModele tournoiCourant) throws Exception {
+	public ConsultationTournoiVue(TournoiModele tournoiCourant) {
 		
 		super(new Dimension(750, 500), "Consultation du classement du tournoi N°"+tournoiCourant.getIDTournoi());
 		// tournoi en paramètre
@@ -98,6 +98,7 @@ public class ConsultationTournoiVue extends CustomJFrame {
         contentPane.add(panelTop, BorderLayout.NORTH);
         
         CustomJLabel titleTop = new CustomJLabel("Classement du tournoi "+tournoiCourant.getNomTournoi(), 25);
+        titleTop.setFont(Palette.customFont.deriveFont(Font.BOLD, 20));
         panelTop.add(titleTop);
         
         CustomJSeparator separatorTop = new CustomJSeparator();
@@ -115,7 +116,7 @@ public class ConsultationTournoiVue extends CustomJFrame {
 				return false;
 			};};
 		tableClassement.setOpaque(false);
-        tableClassement.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 13));
+        tableClassement.setFont(Palette.customFont.deriveFont(Font.PLAIN, 11));
         tableClassement.setBackground(new Color(255, 255, 255));
 		tableClassement.setForeground(new Color(102,172,221));
 		tableClassement.setSelectionBackground(new Color(198, 224, 242));
@@ -125,13 +126,12 @@ public class ConsultationTournoiVue extends CustomJFrame {
 		tableModel.addColumn("Top");
 		tableModel.addColumn("Equipe");
 		tableModel.addColumn("Matchs joués");
-		tableModel.addColumn("Point");
+		tableModel.addColumn("Points");
 		tableModel.addColumn("Victoires");
 		tableModel.addColumn("Défaites");
 		
 		try {
 			for (Participer p : ParticiperDAO.getInstance().getAll().stream().filter(p -> p.getIdTournoi() == tournoiCourant.getIDTournoi()).sorted().collect(Collectors.toList())) {
-				System.out.println(p);
 				Equipe e = EquipeDAO.getInstance().getById(p.getIdEquipe()).get();
 				
 				int matchsJoues = 0;
@@ -167,6 +167,7 @@ public class ConsultationTournoiVue extends CustomJFrame {
 		
 		tableClassement.getTableHeader().setBackground(new Color(102,172,221));
 		tableClassement.getTableHeader().setForeground(Color.WHITE);
+		tableClassement.getTableHeader().setFont(Palette.customFont.deriveFont(Font.PLAIN, 11));
 		panelMiddleClassement.add(tableClassement.getTableHeader(), BorderLayout.NORTH);
 		panelMiddleClassement.add(tableClassement, BorderLayout.CENTER);
         

@@ -2,10 +2,16 @@ package style;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
+import java.io.File;
+import java.io.IOException;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+
+import vues.Palette;
 
 public class CustomJLabel extends JLabel {
 	
@@ -20,9 +26,11 @@ public class CustomJLabel extends JLabel {
 	public CustomJLabel(String label, int fontScale) {
 		super(label);
 		
+		setFont(Palette.customTextFont);
+		
         setHorizontalAlignment(SwingConstants.CENTER);
-        setForeground(new Color(102, 173, 221));
-        setFont(new Font("Tahoma", Font.BOLD, fontScale));
+        setForeground(Palette.WHITE);
+        //setFont(new Font("Tahoma", Font.BOLD, fontScale));
         setBorder(new EmptyBorder(0, 0, 0, 0));
 	}
 	
@@ -38,9 +46,13 @@ public class CustomJLabel extends JLabel {
 	public CustomJLabel(String label, int fontScale, EmptyBorder border) {
 		super(label);
 		
+		//create the font
+
+		setFont(Palette.customFont);
+		
         setHorizontalAlignment(SwingConstants.CENTER);
-        setForeground(new Color(102, 173, 221));
-        setFont(new Font("Tahoma", Font.BOLD, fontScale));
+        setForeground(Palette.BLUE);
+        //setFont(new Font("Tahoma", Font.BOLD, fontScale));
         setBorder(border);
 	}
 }

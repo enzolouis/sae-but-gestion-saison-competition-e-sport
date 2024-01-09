@@ -9,6 +9,8 @@ import java.awt.GridLayout;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import vues.Palette;
+
 public class CustomJPanel extends JPanel {
 	
 	/**
@@ -19,7 +21,7 @@ public class CustomJPanel extends JPanel {
     public CustomJPanel() {
     	super();
     	
-    	this.setBackground(new Color(44, 47, 51));
+    	this.setBackground(Palette.BLACK);
     	this.setBorder(new EmptyBorder(0, 0, 0, 0));
     	this.setLayout(new BorderLayout(0, 0));
     }
@@ -34,7 +36,7 @@ public class CustomJPanel extends JPanel {
 	public CustomJPanel(FlowLayout layout) {
     	super();
     	
-    	this.setBackground(new Color(44, 47, 51));
+    	this.setBackground(Palette.BLACK);
     	this.setBorder(new EmptyBorder(0, 0, 0, 0));
     	this.setLayout(layout);
 	}
@@ -49,7 +51,7 @@ public class CustomJPanel extends JPanel {
     public CustomJPanel(EmptyBorder border) {
     	super();
     	
-    	this.setBackground(new Color(44, 47, 51));
+    	this.setBackground(Palette.BLACK);
     	this.setLayout(new BorderLayout(0, 0));
     	this.setBorder(border);
     }
@@ -65,7 +67,7 @@ public class CustomJPanel extends JPanel {
     public CustomJPanel(EmptyBorder border, GridLayout layout) {
     	super();
     	
-    	this.setBackground(new Color(44, 47, 51));
+    	this.setBackground(Palette.BLACK);
     	this.setBorder(border);
     	this.setLayout(layout);
     }
@@ -81,7 +83,7 @@ public class CustomJPanel extends JPanel {
     public CustomJPanel(EmptyBorder border, FlowLayout layout) {
     	super();
     	
-    	this.setBackground(new Color(44, 47, 51));
+    	this.setBackground(Palette.BLACK);
     	this.setBorder(border);
     	this.setLayout(layout);
     }
@@ -97,7 +99,7 @@ public class CustomJPanel extends JPanel {
     public CustomJPanel(EmptyBorder border, GridBagLayout layout) {
     	super();
     	
-    	this.setBackground(new Color(44, 47, 51));
+    	this.setBackground(Palette.BLACK);
     	this.setBorder(border);
     	this.setLayout(layout);
     }

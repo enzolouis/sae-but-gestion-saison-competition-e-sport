@@ -10,6 +10,8 @@ import java.awt.geom.RoundRectangle2D;
 import javax.swing.JButton;
 import javax.swing.border.EmptyBorder;
 
+import vues.Palette;
+
 public class CustomJButton extends JButton {
 	Shape shape;
 	int round;
@@ -27,8 +29,10 @@ public class CustomJButton extends JButton {
 		super(label);
 		this.round = round;
     	setBackground(new Color(29, 88, 129));
-    	setForeground(new Color(255, 255, 255));
+    	setForeground(Palette.WHITE);
 		setOpaque(false);
+		setFont(Palette.customFont);
+		setFocusPainted(false);
 	}
 	
 	/**
@@ -45,9 +49,11 @@ public class CustomJButton extends JButton {
 		super(label);
 		this.round = round;
     	setBackground(new Color(29, 88, 129));
-    	setForeground(new Color(255, 255, 255));
+    	setForeground(Palette.WHITE);
     	setBorder(border);
 		setOpaque(false);
+		setFont(Palette.customFont);
+		setFocusPainted(false);
 	}
 
     protected void paintComponent(Graphics g) {

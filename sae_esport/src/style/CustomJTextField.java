@@ -10,6 +10,8 @@ import java.awt.geom.RoundRectangle2D;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import vues.Palette;
+
 @SuppressWarnings("serial")
 public class CustomJTextField extends JTextField {
     private Shape shape;
@@ -143,7 +145,8 @@ public class CustomJTextField extends JTextField {
     
     private void setBasicConstructor() {
         setForeground(Color.WHITE);
-        setBackground(new Color(29, 88, 129));
+        setBackground(Palette.BLUEBLUE);
+        setFont(Palette.customTextFont);
     }
 
     public String getPlaceholder() {

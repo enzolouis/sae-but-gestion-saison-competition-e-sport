@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -55,6 +56,7 @@ public class ChoixArbitreVue extends CustomJFrame {
         contentPanel.add(panelTop, BorderLayout.NORTH);
         
         CustomJLabel titleTop = new CustomJLabel("Choix des arbitres", 25);
+        titleTop.setFont(Palette.customFont.deriveFont(Font.BOLD, 20));
         panelTop.add(titleTop);
         
         CustomJSeparator separatorTop = new CustomJSeparator();
