@@ -46,8 +46,8 @@ public class IdentificationVue extends CustomJFrame {
     private JPanel contentPane;
     private IdentificationControleur controleur;
     
-    private JTextField textFieldUtilisateur;
-    private JPasswordField textFieldMotDePasse;
+    private CustomJTextField textFieldUtilisateur;
+    private CustomJPasswordField textFieldMotDePasse;
     
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -75,7 +75,7 @@ public class IdentificationVue extends CustomJFrame {
     }
     
     public IdentificationVue() throws Exception {
-    	super(new Dimension(450, 300), "Page d'identification");
+    	super(new Dimension(300, 450), "Identification");
     	
     	ImageIcon icon = new ImageIcon("src\\logo_app.png");
     	this.setIconImage(icon.getImage());
@@ -89,7 +89,7 @@ public class IdentificationVue extends CustomJFrame {
     	CustomJPanel panelTop = new CustomJPanel();
         contentPane.add(panelTop, BorderLayout.NORTH);
         
-        CustomJLabel titleTop = new CustomJLabel("CONNEXION", 25);
+        CustomJLabel titleTop = new CustomJLabel("IDENTIFICATION", 25);
         titleTop.setFont(Palette.customFont.deriveFont(Font.BOLD, 20));
         panelTop.add(titleTop);
         
@@ -126,8 +126,10 @@ public class IdentificationVue extends CustomJFrame {
         //textFieldUtilisateur = new CustomJTextField(10, (EmptyBorder) null, "Login");
         //panelTextFieldUtilisateur.add(textFieldUtilisateur);
         
-        textFieldUtilisateur = new JTextField();
-        //textFieldUtilisateur.setPlaceholder("toto");
+        textFieldUtilisateur = new CustomJTextField();
+        textFieldUtilisateur.setBorderColor(Palette.BLUEBLUE);
+        textFieldUtilisateur.setBorderRadius(0); // si on laisse par defaut ca se dessine sur le placeholder
+        textFieldUtilisateur.setPlaceholder("Login");
         textFieldUtilisateur.addActionListener(controleur);
         textFieldUtilisateur.setForeground(Color.WHITE);
         textFieldUtilisateur.setColumns(13);
@@ -145,8 +147,10 @@ public class IdentificationVue extends CustomJFrame {
         panelTextFieldMotDePasse.setBackground(Palette.BLUEBLUE);
         panelMotDePasse.add(panelTextFieldMotDePasse);
 
-        textFieldMotDePasse = new JPasswordField();
-        //textFieldMotDePasse.setPlaceholder("arbitre1234");
+        textFieldMotDePasse = new CustomJPasswordField();
+        textFieldMotDePasse.setPlaceholder("Password");
+        textFieldMotDePasse.setBorderColor(Palette.BLUEBLUE);
+        textFieldMotDePasse.setBorderRadius(0); // si on laisse par defaut ca se dessine sur le placeholder
         textFieldMotDePasse.addActionListener(controleur);
         textFieldMotDePasse.setForeground(Color.WHITE);
         textFieldMotDePasse.setColumns(10);

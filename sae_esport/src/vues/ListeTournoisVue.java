@@ -102,10 +102,13 @@ public class ListeTournoisVue extends CustomJFrame {
 		getContentPane().add(panel);
 		
 		CustomJPanel panelTitre = new CustomJPanel();
-		CustomJLabel titre = new CustomJLabel("Liste des tournois", 20);
+		CustomJLabel titre = new CustomJLabel("LES TOURNOIS", 20);
 		titre.setFont(Palette.customFont.deriveFont(Font.BOLD, 20));
 		
 		panelTitre.add(titre);
+		
+		CustomJSeparator separatorTop = new CustomJSeparator();
+		panelTitre.add(separatorTop, BorderLayout.SOUTH);
 		
 		CustomJPanel panelTournois = new CustomJPanel();
 		panel.add(panelTitre, BorderLayout.NORTH);	
@@ -184,7 +187,7 @@ public class ListeTournoisVue extends CustomJFrame {
 		panelListeEquipe.add(equipeTitre, BorderLayout.NORTH);
 		CustomJPanel panelJoueurs = new CustomJPanel();
 		panelJoueurs.setBorder(new EmptyBorder(0, 30, 0, 30));
-		panelJoueurs.setBackground(new Color(44, 47, 51));
+		panelJoueurs.setBackground(Palette.BLACK);
 		panelEquipe.add(panelJoueurs);
 		panelEquipeArbitre.add(panelEquipe); 
 		
