@@ -1,4 +1,4 @@
-package DAOs;
+package tests;
 
 import static org.junit.Assert.*;
 
@@ -14,13 +14,15 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import DAOs.EquipeDAO;
 import classes.DBConnection;
 import classes.Disposition;
 import classes.Equipe;
 import classes.Nationalite;
+import sqlrequests.CreateAll;
 import classes.Equipe;
 
-public class testDAOEquipe {
+public class TestEquipeDAO {
 	
 	@Before
 	public void beforeTests() throws Exception{
@@ -85,7 +87,7 @@ public class testDAOEquipe {
 	public void testUpdateMatch() throws Exception {
 		Equipe equipe1 = new Equipe(1,"rofl",Nationalite.AD,Disposition.NON_DIPOSEE,14,12);
 	        EquipeDAO.getInstance().add(equipe1);
-	        equipe1.setIdEquipe(3);
+	        equipe1.setDispose(Disposition.DISPOSEE);
 	        EquipeDAO.getInstance().update(equipe1);
 	        assertEquals(equipe1, EquipeDAO.getInstance().getById(equipe1.getIdEquipe()).get());
 	        DBConnection.getInstance().rollback();
@@ -107,6 +109,7 @@ public class testDAOEquipe {
 	@Test
 	///Test d'import des equipes avec un fichier CSV
 	public void testImportEquipe() throws Exception {
+			CreateAll.main(null);
 			File f = new File("src/DAOs/test.csv");
 			List<Equipe> eqImportees = EquipeDAO.getInstance().importEquipes(f);
 			for (Equipe e : eqImportees) {
