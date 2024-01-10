@@ -18,6 +18,7 @@ public class Palette {
 	public static final Color REDERRORFOREGROUND = new Color(235, 77, 75);
 	public static final Color REDERRORBACKGROUND = new Color(254, 220, 222);
 	public static final Color REDERRORBORDER 	 = new Color(255, 144, 144);
+	public static final Color BLACKDARKER        = new Color(10, 60, 80);
 	
     public static final Font customFont;
     
