@@ -167,14 +167,6 @@ public class Equipe {
 		if (getClass() != obj.getClass())
 			return false;
 		Equipe other = (Equipe) obj;
-		System.out.println("disp"+(dispose == other.dispose));
-		System.out.println("idEquipe"+(idEquipe == other.idEquipe));
-		System.out.println(joueurs.containsAll(other.joueurs));
-		System.out.println(other.joueurs.containsAll(joueurs));
-		System.out.println(nationalite == other.nationalite);
-		System.out.println(nom.equals(other.nom));
-		System.out.println(pointsSaison == other.pointsSaison);
-		System.out.println(rangSaisonPrecedante == other.rangSaisonPrecedante);
 		return dispose == other.dispose && idEquipe == other.idEquipe && joueurs.containsAll(other.joueurs)
 				&& other.joueurs.containsAll(joueurs) && nationalite == other.nationalite &&
 				nom.equals(other.nom) && pointsSaison == other.pointsSaison
