@@ -19,6 +19,9 @@ public class Palette {
 	public static final Color BLACKPLUS = new Color(10, 60, 80);
 	public static final Color BLACKMOINS2 = new Color(8, 50, 65);
 	public static final Color FULLBLACK = new Color(0, 0, 15);
+	
+	public static final Color GREEN = new Color(10, 200, 185);
+	public static final Color ERRORCOLOR = new Color(235, 77, 75);
     
     
     public static final Font customFont;
