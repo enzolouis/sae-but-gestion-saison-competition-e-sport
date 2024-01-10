@@ -27,6 +27,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 
 public class ConsultationSaisonVue extends CustomJFrame {
 	
@@ -58,8 +59,17 @@ public class ConsultationSaisonVue extends CustomJFrame {
 		
 		CustomJPanel panel = new CustomJPanel();
 		getContentPane().add(panel);
+		
+		CustomJPanel panelTitre = new CustomJPanel();
+		panelTitre.setBackground(Palette.BLACK);
 		CustomJLabel labelTitre = new CustomJLabel("Classement de saison", 22);
-		panel.add(labelTitre, BorderLayout.NORTH);
+		labelTitre.setFont(Palette.customFont.deriveFont(Font.BOLD, 20));
+		CustomJSeparator separator = new CustomJSeparator();
+		panelTitre.setLayout(new BorderLayout(0, 0));
+		panelTitre.add(labelTitre, BorderLayout.CENTER);
+		panelTitre.add(separator, BorderLayout.SOUTH);
+		
+		panel.add(panelTitre, BorderLayout.NORTH);
 		
 		CustomJPanel panelEquipes = new CustomJPanel();
 		panelEquipes.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -91,6 +101,19 @@ public class ConsultationSaisonVue extends CustomJFrame {
 		       return false;
 		    }
 		};
+		
+		table.setBorder(null);
+		table.setOpaque(false);
+		table.setFont(Palette.customFont.deriveFont(Font.PLAIN, 12));
+		table.setBackground(Palette.BLACKDARKER);
+        table.setForeground(Palette.WHITE);
+        table.setSelectionBackground(Palette.WHITE);
+        table.setGridColor(Palette.WHITE);
+		table.setRowHeight(34);
+		table.getTableHeader().setBackground(Palette.BLACKLIGHTER);
+		table.getTableHeader().setForeground(Color.WHITE);
+		table.getTableHeader().setFont(Palette.customFont.deriveFont(Font.PLAIN, 11));
+		
 		tablemodel.addColumn("Classement");
 		tablemodel.addColumn("Id");
 		tablemodel.addColumn("Nom d'équipe");
@@ -115,7 +138,7 @@ public class ConsultationSaisonVue extends CustomJFrame {
 			e.printStackTrace();
 		}
 		
-		
+		table.getColumnModel().removeColumn(table.getColumnModel().getColumn(1));
 		
 		CustomJPanel panelInfos = new CustomJPanel();
 		panel.add(panelInfos, BorderLayout.SOUTH);
@@ -128,9 +151,17 @@ public class ConsultationSaisonVue extends CustomJFrame {
 		listetournois = new JList<TournoiModele>();
 		listetournoismodele = new DefaultListModel<TournoiModele>();
 		listetournois.setModel(listetournoismodele);
+		
+		listetournois.setBackground(Palette.BLACKDARKER);
+		listetournois.setForeground(Palette.WHITE);
+		listetournois.setFont(Palette.customTextFont);
+		listetournois.setBorder(new EmptyBorder(3,3,3,3));
+		
 		scrollTournois.setViewportView(listetournois);
-		panelTournois.add(scrollTournois);	
-		panelTournois.add(new CustomJLabel("Tournois disputés", 15), BorderLayout.NORTH);
+		panelTournois.add(scrollTournois);
+		CustomJLabel labelTournois = new CustomJLabel("Tournois disputés", 20);
+		labelTournois.setFont(Palette.customFont);
+		panelTournois.add(labelTournois, BorderLayout.NORTH);
 		panelInfos.add(panelTournois);	
 		
 		CustomJPanel panelJoueurs = new CustomJPanel();
@@ -140,10 +171,27 @@ public class ConsultationSaisonVue extends CustomJFrame {
 		listejoueurs = new JList<Joueur>();
 		listejoueursmodele = new DefaultListModel<Joueur>();
 		listejoueurs.setModel(listejoueursmodele);
+		
+		listejoueurs.setBackground(Palette.BLACKDARKER);
+		listejoueurs.setForeground(Palette.WHITE);
+		listejoueurs.setFont(Palette.customTextFont);
+		listejoueurs.setBorder(new EmptyBorder(3,3,3,3));
+		
 		scrollJoueurs.setViewportView(listejoueurs);
 		panelJoueurs.add(scrollJoueurs);
-		panelJoueurs.add(new CustomJLabel("Joueurs", 15), BorderLayout.NORTH);
+		CustomJLabel labelJoueurs = new CustomJLabel("Joueurs de l'équipe", 20);
+		labelJoueurs.setFont(Palette.customFont);
+		panelJoueurs.add(labelJoueurs, BorderLayout.NORTH);
 		panelInfos.add(panelJoueurs);
+		
+		CustomJPanel panelQuitter = new CustomJPanel();
+		panelQuitter.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		CustomJButton btnQuitter = new CustomJButton("Quitter", 15);
+		btnQuitter.setBackground(new Color(30,40,45));
+		btnQuitter.addActionListener(controleur);
+		panelQuitter.setBorder(new EmptyBorder(10,10,10,10));
+		panelQuitter.add(btnQuitter);
+		getContentPane().add(panelQuitter, BorderLayout.SOUTH);
 		
 		
 	}

@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -16,7 +17,7 @@ import classes.Joueur;
 import modeles.TournoiModele;
 import vues.ConsultationSaisonVue;
 
-public class ConsultationSaisonControleur implements ListSelectionListener {
+public class ConsultationSaisonControleur implements ListSelectionListener, ActionListener {
 	
 	private ConsultationSaisonVue vue;
 	
@@ -27,10 +28,7 @@ public class ConsultationSaisonControleur implements ListSelectionListener {
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
 		
-		String strSource = e.getSource().toString();
-		int start = strSource.indexOf("{")+1, stop  = strSource.length()-1;
-		int iSelectedIndex = Integer.parseInt(strSource.substring(start, stop));
-		int idEquipe = (int) vue.table.getValueAt(iSelectedIndex, 1);
+		int idEquipe = (int) vue.table.getModel().getValueAt(vue.table.getSelectedRow(), 1);
 		try {
 			vue.listejoueursmodele.clear();
 			vue.listetournoismodele.clear();
@@ -43,6 +41,16 @@ public class ConsultationSaisonControleur implements ListSelectionListener {
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
+		}
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		JButton source = (JButton) e.getSource();
+		switch (source.getText()) {
+		case "Quitter":
+			vue.dispose();
 		}
 	}
 
