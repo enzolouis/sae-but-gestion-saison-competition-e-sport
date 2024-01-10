@@ -2,6 +2,7 @@ package vues;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
@@ -24,9 +25,12 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
+import javax.swing.UIDefaults;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 import DAOs.EquipeDAO;
 import DAOs.ParticiperDAO;
@@ -97,7 +101,7 @@ public class ConsultationTournoiVue extends CustomJFrame {
     	CustomJPanel panelTop = new CustomJPanel();
         contentPane.add(panelTop, BorderLayout.NORTH);
         
-        CustomJLabel titleTop = new CustomJLabel("Classement du tournoi "+tournoiCourant.getNomTournoi(), 25);
+        CustomJLabel titleTop = new CustomJLabel("CLASSEMENT DE "+tournoiCourant.getNomTournoi().toUpperCase(), 25);
         titleTop.setFont(Palette.customFont.deriveFont(Font.BOLD, 20));
         panelTop.add(titleTop);
         
@@ -105,7 +109,7 @@ public class ConsultationTournoiVue extends CustomJFrame {
         panelTop.add(separatorTop, BorderLayout.SOUTH);
     	
         // Middle Panel : Login
-    	CustomJPanel panelMiddleClassement = new CustomJPanel(new EmptyBorder(10, 10, 10, 10), new GridLayout(2, 0, 0, 0));
+    	CustomJPanel panelMiddleClassement = new CustomJPanel(new EmptyBorder(20, 0, 5, 0), new GridLayout(2, 0, 0, 0));
         contentPane.add(panelMiddleClassement, BorderLayout.CENTER);
         panelMiddleClassement.setLayout(new BorderLayout(0, 0));
         
@@ -115,13 +119,16 @@ public class ConsultationTournoiVue extends CustomJFrame {
 			public boolean isCellEditable(int row, int column) {                
 				return false;
 			};};
+		tableClassement.setBorder(null);
 		tableClassement.setOpaque(false);
-        tableClassement.setFont(Palette.customFont.deriveFont(Font.PLAIN, 11));
-        tableClassement.setBackground(new Color(255, 255, 255));
-		tableClassement.setForeground(new Color(102,172,221));
-		tableClassement.setSelectionBackground(new Color(198, 224, 242));
-		tableClassement.setGridColor(new Color(44, 47, 51));
+        tableClassement.setFont(Palette.customFont.deriveFont(Font.PLAIN, 12));
+        tableClassement.setBackground(Palette.BLACKPLUS);
+		tableClassement.setForeground(Palette.WHITE);
+		tableClassement.setSelectionBackground(Palette.WHITE);
+		tableClassement.setGridColor(Palette.WHITE);
 		tableClassement.setRowHeight(34);
+		
+		
 		DefaultTableModel tableModel = new DefaultTableModel();
 		tableModel.addColumn("Top");
 		tableModel.addColumn("Equipe");
@@ -159,13 +166,10 @@ public class ConsultationTournoiVue extends CustomJFrame {
 		tableClassement.setModel(tableModel);
 		tableClassement.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tableClassement.getColumnModel().getColumn(1).setPreferredWidth(175);
-		DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-        for (int x = 0; x<6;x++) {
-        	tableClassement.getColumnModel().getColumn(x).setCellRenderer(centerRenderer);
-        }
+        EvenOddRenderer renderer = new EvenOddRenderer();
+		tableClassement.setDefaultRenderer(Object.class, renderer);
 		
-		tableClassement.getTableHeader().setBackground(new Color(102,172,221));
+		tableClassement.getTableHeader().setBackground(Palette.BLACKMOINS2);
 		tableClassement.getTableHeader().setForeground(Color.WHITE);
 		tableClassement.getTableHeader().setFont(Palette.customFont.deriveFont(Font.PLAIN, 11));
 		panelMiddleClassement.add(tableClassement.getTableHeader(), BorderLayout.NORTH);

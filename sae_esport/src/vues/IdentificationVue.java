@@ -2,6 +2,7 @@ package vues;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
@@ -48,6 +49,7 @@ public class IdentificationVue extends CustomJFrame {
     
     private CustomJTextField textFieldUtilisateur;
     private CustomJPasswordField textFieldMotDePasse;
+    public CustomJLabel erreurOuverture;
     
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -113,6 +115,15 @@ public class IdentificationVue extends CustomJFrame {
         lblNewLabel.setIcon(LOGO);
         panelImageApp.add(lblNewLabel, BorderLayout.NORTH);
         
+        CustomJPanel panelErreur = new CustomJPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        erreurOuverture = new CustomJLabel("",10);
+		erreurOuverture.setText(" ");
+		erreurOuverture.setForeground(new Color(235, 77, 75));
+		erreurOuverture.setBorder(new EmptyBorder(3, 3, 3, 3));
+		erreurOuverture.setAlignmentX(Component.CENTER_ALIGNMENT);
+		panelErreur.add(erreurOuverture);
+		
+        
         // Utilisateur
         CustomJPanel panelUtilisateur = new CustomJPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
         
@@ -125,6 +136,8 @@ public class IdentificationVue extends CustomJFrame {
         // a fix
         //textFieldUtilisateur = new CustomJTextField(10, (EmptyBorder) null, "Login");
         //panelTextFieldUtilisateur.add(textFieldUtilisateur);
+        
+        
         
         textFieldUtilisateur = new CustomJTextField();
         textFieldUtilisateur.setBorderColor(Palette.BLUEBLUE);
@@ -168,11 +181,12 @@ public class IdentificationVue extends CustomJFrame {
         panelTextFieldMotDePasse.add(btnMotDePasseVisibilite);
         
         JPanel panelUtilisateurEtMotDePasse = new CustomJPanel();
-        panelUtilisateurEtMotDePasse.setBorder(new EmptyBorder(20, 0, 20, 0));
+        panelUtilisateurEtMotDePasse.setBorder(new EmptyBorder(20, 0, 10, 0));
         panelMiddleLogin.add(panelUtilisateurEtMotDePasse);
+        panelUtilisateurEtMotDePasse.add(panelErreur);
         panelUtilisateurEtMotDePasse.add(panelUtilisateur);
         panelUtilisateurEtMotDePasse.add(panelMotDePasse);
-        panelUtilisateurEtMotDePasse.setLayout(new GridLayout(2, 0, 0, 0));
+        panelUtilisateurEtMotDePasse.setLayout(new GridLayout(3, 0, 0, 0));
         
         
         

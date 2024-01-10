@@ -189,7 +189,7 @@ public class ListeTournoisVue extends CustomJFrame {
 		panelJoueurs.setBorder(new EmptyBorder(0, 30, 0, 30));
 		panelJoueurs.setBackground(Palette.BLACK);
 		panelEquipe.add(panelJoueurs);
-		panelEquipeArbitre.add(panelEquipe); 
+		panelEquipeArbitre.add(panelEquipe);
 		
 		titreEquipe = new CustomJLabel("aaa", 10);
 		titreEquipe.setText("");

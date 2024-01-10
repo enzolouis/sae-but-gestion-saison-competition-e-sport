@@ -13,6 +13,12 @@ public class Palette {
 	public static final Color BLUE = new Color(200, 150, 60);
 	public static final Color BLUEBLUE = new Color(0, 90, 130);
 	public static final Color REDRED = new Color(30, 40, 45);
+	
+	
+	public static final Color BLACKMOINS = new Color(5, 35, 47);
+	public static final Color BLACKPLUS = new Color(10, 60, 80);
+	public static final Color BLACKMOINS2 = new Color(8, 50, 65);
+	public static final Color FULLBLACK = new Color(0, 0, 15);
     
     
     public static final Font customFont;

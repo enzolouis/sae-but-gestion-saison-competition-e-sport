@@ -1,12 +1,16 @@
 package controleurs;
+import java.awt.Color;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
+import DAOs.TournoiDAO;
 import modeles.IdentificationModele;
+import modeles.TournoiModele;
 import modeles.IdentificationModele.Utilisateur;
 import vues.AccueilAdministrateurVue;
 import vues.AccueilArbitreVue;
@@ -50,8 +54,22 @@ public class IdentificationControleur implements ActionListener {
 			}
 			
 		} else {
-			JFrame jFrame = new JFrame();
-			JOptionPane.showMessageDialog(jFrame, "Login faux");
+			this.vue.erreurOuverture.setText("Les informations sont fausses.");
+			// compteur de 3 secondes
+			int 
+			ActionListener action = new ActionListener() {			    
+	    		@Override
+			    public void actionPerformed(ActionEvent e) {
+	    			// do nothing...
+			    }
+			};
+			Timer t = new Timer(1000, action);
+			t.start();
+			t
+			
+			
+			
+			this.vue.erreurOuverture.setText("");
 		}
 	}
 	
