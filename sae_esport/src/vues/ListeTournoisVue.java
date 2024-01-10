@@ -128,12 +128,15 @@ public class ListeTournoisVue extends CustomJFrame {
 				public boolean isCellEditable(int row, int column) {                
 					return false;
 				};};
-		tableTournois.setFont(Palette.customFont.deriveFont(Font.PLAIN, 11));
 		tableTournois.getSelectionModel().addListSelectionListener(controleur);
+		tableTournois.setBorder(null);
 		tableTournois.setOpaque(false);
-		tableTournois.setForeground(new Color(44, 47, 51));
-		tableTournois.setSelectionBackground(new Color(198, 224, 242));
-		tableTournois.setGridColor(new Color(44, 47, 51));
+		tableTournois.setFont(Palette.customFont.deriveFont(Font.PLAIN, 12));
+		tableTournois.setForeground(Palette.WHITE);
+		tableTournois.setSelectionBackground(Palette.WHITE);
+		tableTournois.setGridColor(Palette.WHITE);
+		tableTournois.setRowHeight(34);
+		
 		tableModel = new DefaultTableModel();
 		tableModel.addColumn("ID"); tableModel.addColumn("Titre"); 
 		tableModel.addColumn("Date de début"); tableModel.addColumn("Date de fin");
@@ -152,9 +155,14 @@ public class ListeTournoisVue extends CustomJFrame {
 		tableTournois.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tableTournois.getSelectionModel().addListSelectionListener(controleur);
 		tableTournois.getColumnModel().getColumn(0).setPreferredWidth(10);
-		tableTournois.getTableHeader().setBackground(new Color(102,172,221));
+		
+		EvenOddRenderer renderer = new EvenOddRenderer();
+		tableTournois.setDefaultRenderer(Object.class, renderer);
+		
+		tableTournois.getTableHeader().setBackground(Palette.BLACKLIGHTER);
 		tableTournois.getTableHeader().setForeground(Color.WHITE);
 		tableTournois.getTableHeader().setFont(Palette.customFont.deriveFont(Font.PLAIN, 11));
+		
 		scrollListe.setViewportView(tableTournois);
 		panelListe.add(scrollListe);
 		
