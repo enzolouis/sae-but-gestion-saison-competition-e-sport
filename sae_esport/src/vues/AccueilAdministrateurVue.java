@@ -1,7 +1,6 @@
 package vues;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
@@ -36,18 +35,14 @@ public class AccueilAdministrateurVue extends CustomJFrame {
     public AccueilAdministrateurVue() {
     	
     	super(new Dimension(400, 300), "Accueil Administrateur");
-    	
-    	this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-    	
+    	setDefaultCloseOperation(EXIT_ON_CLOSE);
     	ImageIcon icon = new ImageIcon("src\\logo_app.png");
-    	this.setIconImage(icon.getImage());
+    	setIconImage(icon.getImage());
+    	controleur = new AccueilAdministrateurControleur(this);
+    	contentPane = getContentPanel();
+        setContentPane(contentPane);
     	
     	pack();
-    	
-    	this.controleur = new AccueilAdministrateurControleur(this);
-
-        contentPane = this.getContentPanel();
-        setContentPane(contentPane);
         
         // Top Panel : Titre
         CustomJPanel panelTitre = new CustomJPanel();
