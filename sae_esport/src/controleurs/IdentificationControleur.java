@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
+import javax.swing.border.LineBorder;
 
 import DAOs.TournoiDAO;
 import modeles.IdentificationModele;
@@ -21,6 +22,7 @@ public class IdentificationControleur implements ActionListener {
 	private IdentificationVue vue;
 	private IdentificationModele modele;
 	private boolean isMotDePasseCache;
+	private Timer animationErreur;
 	
 	public IdentificationControleur(IdentificationVue vue) throws Exception {
 		this.isMotDePasseCache = true;
@@ -54,22 +56,28 @@ public class IdentificationControleur implements ActionListener {
 			}
 			
 		} else {
-			this.vue.erreurOuverture.setText("Les informations sont fausses.");
+			this.vue.erreurOuverture.setText("Login et/ou mot de passe faux.");
+			this.vue.panelErreur.setBackground(new Color(0xfedcde));
+			this.vue.panelErreur.setBorder(new LineBorder(new Color(0xff9090), 1));
 			// compteur de 3 secondes
-			int 
-			ActionListener action = new ActionListener() {			    
+			
+			ActionListener action = new ActionListener() {
+				int compteur = 1;
 	    		@Override
 			    public void actionPerformed(ActionEvent e) {
-	    			// do nothing...
+	    			compteur++;
+	    			if (compteur == 3) {
+	    				animationErreur.stop();
+	    				vue.erreurOuverture.setText("");
+	    				vue.panelErreur.setBackground(null);
+	    				vue.panelErreur.setBorder(null);
+	    			}
 			    }
 			};
-			Timer t = new Timer(1000, action);
-			t.start();
-			t
+			animationErreur = new Timer(2000, action);
+			animationErreur.start();
 			
 			
-			
-			this.vue.erreurOuverture.setText("");
 		}
 	}
 	

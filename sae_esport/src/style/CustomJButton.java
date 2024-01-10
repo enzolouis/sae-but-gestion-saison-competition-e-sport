@@ -10,11 +10,34 @@ import java.awt.geom.RoundRectangle2D;
 import javax.swing.JButton;
 import javax.swing.border.EmptyBorder;
 
+import controleurs.ControleurAnimation;
 import vues.Palette;
 
 public class CustomJButton extends JButton {
 	Shape shape;
 	int round;
+	ControleurAnimation anim = new ControleurAnimation();
+	Color initialBackground;
+	
+	public Color getInitialBackground() {
+		return this.initialBackground;
+	}
+	
+	
+	
+	// nouveau
+	public void setBackground(Color c, boolean changeInitialBackground) {
+		if (changeInitialBackground) {
+			this.initialBackground = c;
+		}
+		super.setBackground(c);
+	}
+	
+	@Override
+	public void setBackground(Color c) {
+		this.initialBackground = c;
+		super.setBackground(c);
+	}
 	
 	/**
 	* Ryan GAUNAND <br>
@@ -28,6 +51,8 @@ public class CustomJButton extends JButton {
 	public CustomJButton(String label, int round) {
 		super(label);
 		this.round = round;
+		this.initialBackground = this.getBackground();
+		this.addMouseListener(anim);
     	setBackground(new Color(29, 88, 129));
     	setForeground(Palette.WHITE);
 		setOpaque(false);
@@ -48,6 +73,8 @@ public class CustomJButton extends JButton {
 	public CustomJButton(String label, int round, EmptyBorder border) {
 		super(label);
 		this.round = round;
+		this.initialBackground = this.getBackground();
+		this.addMouseListener(anim);
     	setBackground(new Color(29, 88, 129));
     	setForeground(Palette.WHITE);
     	setBorder(border);

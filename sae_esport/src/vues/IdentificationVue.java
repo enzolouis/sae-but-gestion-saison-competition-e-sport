@@ -31,6 +31,7 @@ import style.CustomJPasswordField;
 import style.CustomJSeparator;
 import style.CustomJTextField;
 import java.awt.Rectangle;
+import javax.swing.border.LineBorder;
 
 public class IdentificationVue extends CustomJFrame {
 
@@ -50,6 +51,7 @@ public class IdentificationVue extends CustomJFrame {
     private CustomJTextField textFieldUtilisateur;
     private CustomJPasswordField textFieldMotDePasse;
     public CustomJLabel erreurOuverture;
+    public CustomJPanel panelErreur;
     
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -115,7 +117,7 @@ public class IdentificationVue extends CustomJFrame {
         lblNewLabel.setIcon(LOGO);
         panelImageApp.add(lblNewLabel, BorderLayout.NORTH);
         
-        CustomJPanel panelErreur = new CustomJPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        panelErreur = new CustomJPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
         erreurOuverture = new CustomJLabel("",10);
 		erreurOuverture.setText(" ");
 		erreurOuverture.setForeground(new Color(235, 77, 75));
