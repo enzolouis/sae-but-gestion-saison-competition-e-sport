@@ -120,7 +120,7 @@ public class IdentificationVue extends CustomJFrame {
         panelErreur = new CustomJPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
         erreurOuverture = new CustomJLabel("",10);
 		erreurOuverture.setText(" ");
-		erreurOuverture.setForeground(new Color(235, 77, 75));
+		erreurOuverture.setForeground(Palette.REDERRORFOREGROUND);
 		erreurOuverture.setBorder(new EmptyBorder(3, 3, 3, 3));
 		erreurOuverture.setAlignmentX(Component.CENTER_ALIGNMENT);
 		panelErreur.add(erreurOuverture);
@@ -131,7 +131,7 @@ public class IdentificationVue extends CustomJFrame {
         
         
         JPanel panelTextFieldUtilisateur = new CustomJPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        panelTextFieldUtilisateur.setBackground(Palette.BLUEBLUE);
+        panelTextFieldUtilisateur.setBackground(Palette.BLUE);
         panelTextFieldUtilisateur.setBorder(null);
         panelUtilisateur.add(panelTextFieldUtilisateur);
         
@@ -142,14 +142,14 @@ public class IdentificationVue extends CustomJFrame {
         
         
         textFieldUtilisateur = new CustomJTextField();
-        textFieldUtilisateur.setBorderColor(Palette.BLUEBLUE);
+        textFieldUtilisateur.setBorderColor(Palette.BLUE);
         textFieldUtilisateur.setBorderRadius(0); // si on laisse par defaut ca se dessine sur le placeholder
         textFieldUtilisateur.setPlaceholder("Login");
         textFieldUtilisateur.addActionListener(controleur);
         textFieldUtilisateur.setForeground(Color.WHITE);
         textFieldUtilisateur.setColumns(13);
         textFieldUtilisateur.setBorder(null);
-        textFieldUtilisateur.setBackground(Palette.BLUEBLUE);
+        textFieldUtilisateur.setBackground(Palette.BLUE);
         textFieldUtilisateur.setFont(Palette.customTextFont);
         panelTextFieldUtilisateur.add(textFieldUtilisateur);
         
@@ -159,25 +159,25 @@ public class IdentificationVue extends CustomJFrame {
         // 
         JPanel panelTextFieldMotDePasse = new CustomJPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
         panelTextFieldMotDePasse.setBorder(null);
-        panelTextFieldMotDePasse.setBackground(Palette.BLUEBLUE);
+        panelTextFieldMotDePasse.setBackground(Palette.BLUE);
         panelMotDePasse.add(panelTextFieldMotDePasse);
 
         textFieldMotDePasse = new CustomJPasswordField();
         textFieldMotDePasse.setPlaceholder("Password");
-        textFieldMotDePasse.setBorderColor(Palette.BLUEBLUE);
+        textFieldMotDePasse.setBorderColor(Palette.BLUE);
         textFieldMotDePasse.setBorderRadius(0); // si on laisse par defaut ca se dessine sur le placeholder
         textFieldMotDePasse.addActionListener(controleur);
         textFieldMotDePasse.setForeground(Color.WHITE);
         textFieldMotDePasse.setColumns(10);
         textFieldMotDePasse.setBorder(new EmptyBorder(5, 5, 5, 5));
-        textFieldMotDePasse.setBackground(Palette.BLUEBLUE);
+        textFieldMotDePasse.setBackground(Palette.BLUE);
         textFieldMotDePasse.setFont(Palette.customTextFont);
         panelTextFieldMotDePasse.add(textFieldMotDePasse);
         
         
         JButton btnMotDePasseVisibilite = new CustomJButton("", 25, (EmptyBorder) null);
         btnMotDePasseVisibilite.addActionListener(controleur);
-        btnMotDePasseVisibilite.setBackground(Palette.BLUEBLUE);
+        btnMotDePasseVisibilite.setBackground(Palette.BLUE);
         btnMotDePasseVisibilite.setBorder(null);
         btnMotDePasseVisibilite.setIcon(OEIL_INVISIBLE_ICON);
         panelTextFieldMotDePasse.add(btnMotDePasseVisibilite);
@@ -197,12 +197,12 @@ public class IdentificationVue extends CustomJFrame {
         contentPane.add(panelQuitterSeconnecter, BorderLayout.SOUTH);
         
         CustomJButton btnQuit = new CustomJButton("Quitter", 5);
-        btnQuit.setBackground(Palette.REDRED);
+        btnQuit.setBackground(Palette.REDQUIT);
         btnQuit.addActionListener(this.controleur);
         panelQuitterSeconnecter.add(btnQuit);
         
         CustomJButton btnLogin = new CustomJButton("Se connecter", 5);
-        btnLogin.setBackground(Palette.BLUEBLUE);
+        btnLogin.setBackground(Palette.BLUE);
         btnLogin.addActionListener(controleur);
         panelQuitterSeconnecter.add(btnLogin);
     }

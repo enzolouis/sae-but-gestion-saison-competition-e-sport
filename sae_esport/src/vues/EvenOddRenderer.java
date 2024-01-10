@@ -18,14 +18,14 @@ class EvenOddRenderer implements TableCellRenderer {
     Color foreground, background;
     if (isSelected) {
       foreground = Palette.WHITE;
-      background = Palette.BLACKMOINS2;
+      background = Palette.BLACKLIGHTER;
     } else {
       if (row % 2 == 0) {
         foreground = Palette.WHITE;
         background = Palette.BLACK;
       } else {
         foreground = Palette.WHITE;
-        background = Palette.BLACKMOINS2;
+        background = Palette.BLACKLIGHTER;
       }
     }
     renderer.setForeground(foreground);

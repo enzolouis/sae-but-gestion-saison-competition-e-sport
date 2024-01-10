@@ -165,7 +165,7 @@ public class CustomJTextField extends JTextField {
     	this.borderColor = getForeground();
     	this.radius = 15;
         setForeground(Color.WHITE);
-        setBackground(Palette.BLUEBLUE);
+        setBackground(Palette.BLUE);
         setFont(Palette.customTextFont);
     }
 

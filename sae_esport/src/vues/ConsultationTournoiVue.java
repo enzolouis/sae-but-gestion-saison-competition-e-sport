@@ -122,7 +122,6 @@ public class ConsultationTournoiVue extends CustomJFrame {
 		tableClassement.setBorder(null);
 		tableClassement.setOpaque(false);
         tableClassement.setFont(Palette.customFont.deriveFont(Font.PLAIN, 12));
-        tableClassement.setBackground(Palette.BLACKPLUS);
 		tableClassement.setForeground(Palette.WHITE);
 		tableClassement.setSelectionBackground(Palette.WHITE);
 		tableClassement.setGridColor(Palette.WHITE);
@@ -169,7 +168,7 @@ public class ConsultationTournoiVue extends CustomJFrame {
         EvenOddRenderer renderer = new EvenOddRenderer();
 		tableClassement.setDefaultRenderer(Object.class, renderer);
 		
-		tableClassement.getTableHeader().setBackground(Palette.BLACKMOINS2);
+		tableClassement.getTableHeader().setBackground(Palette.BLACKLIGHTER);
 		tableClassement.getTableHeader().setForeground(Color.WHITE);
 		tableClassement.getTableHeader().setFont(Palette.customFont.deriveFont(Font.PLAIN, 11));
 		panelMiddleClassement.add(tableClassement.getTableHeader(), BorderLayout.NORTH);

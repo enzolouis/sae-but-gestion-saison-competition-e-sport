@@ -94,7 +94,6 @@ public class CreationTournoiVue extends CustomJFrame {
 		contentPane.add(panelTitre, BorderLayout.NORTH);
 		panelTitre.setLayout(new BorderLayout(0, 0));
 		JSeparator separatorTitre = new CustomJSeparator();
-		separatorTitre.setForeground(Palette.BLUE);
 		panelTitre.add(separatorTitre, BorderLayout.SOUTH);
 		
 		JLabel lblCreationDeTournoi = new JLabel("CRÉATION DE TOURNOI");
@@ -138,7 +137,7 @@ public class CreationTournoiVue extends CustomJFrame {
 		
 		this.textFieldNom = new JTextField();
 		textFieldNom.setFont(Palette.customFont.deriveFont(Font.PLAIN, 11));
-		textFieldNom.setBackground(Palette.BLUEBLUE);
+		textFieldNom.setBackground(Palette.BLUE);
 		textFieldNom.setBorder(BorderFactory.createEmptyBorder());
 		textFieldNom.setBounds(130, 10, 150, 30);
 		textFieldNom.setPreferredSize(new Dimension(110, 30));
@@ -163,7 +162,7 @@ public class CreationTournoiVue extends CustomJFrame {
 		panelNotoriete.add(lbNotoriete);
 		
 		this.comboBoxNotoriete = new JComboBox<Notoriete>();
-		comboBoxNotoriete.setBackground(Palette.BLUEBLUE);
+		comboBoxNotoriete.setBackground(Palette.BLUE);
 		comboBoxNotoriete.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Palette.BLACK));
 		comboBoxNotoriete.setFont(Palette.customFont.deriveFont(Font.PLAIN, 11));
 		comboBoxNotoriete.setForeground(Palette.WHITE);
@@ -198,7 +197,7 @@ public class CreationTournoiVue extends CustomJFrame {
 		dateChooserDebut.setForeground(Palette.WHITE);
 		dateChooserDebut.setFont(Palette.customTextFont.deriveFont(Font.PLAIN, 11));
 		for(Component c : dateChooserDebut.getComponents()){
-			((JComponent)c).setBackground(Palette.BLUEBLUE);
+			((JComponent)c).setBackground(Palette.BLUE);
 		}
 		dateChooserDebut.setBounds(130, 10, 150, 30);
 		this.dateChooserDebut.setPreferredSize(new Dimension(100, 30));
@@ -222,7 +221,7 @@ public class CreationTournoiVue extends CustomJFrame {
 		this.dateChooserFin = new JDateChooser();
 		dateChooserFin.setFont(Palette.customTextFont.deriveFont(Font.PLAIN, 11));
 		for(Component c : dateChooserFin.getComponents()){
-			((JComponent)c).setBackground(Palette.BLUEBLUE);
+			((JComponent)c).setBackground(Palette.BLUE);
 		}
 		dateChooserFin.setBounds(130, 10, 150, 30);
 		this.dateChooserFin.setPreferredSize(new Dimension(100, 30));
@@ -253,7 +252,7 @@ public class CreationTournoiVue extends CustomJFrame {
 		panelArbitre.add(panelChoixArbitre, BorderLayout.CENTER);
 		
 		this.comboBoxArbitre = new JComboBox<Arbitre>();
-		comboBoxArbitre.setBackground(Palette.BLUEBLUE);
+		comboBoxArbitre.setBackground(Palette.BLUE);
 		comboBoxArbitre.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Palette.BLACK));
 		comboBoxArbitre.setFont(Palette.customTextFont.deriveFont(Font.BOLD, 11));
 		comboBoxArbitre.setForeground(Palette.WHITE);
@@ -285,7 +284,7 @@ public class CreationTournoiVue extends CustomJFrame {
 		this.listArbitres = new JList<Arbitre>();
 		this.listArbitres.setVisibleRowCount(8);
 		listArbitres.setFont(Palette.customTextFont.deriveFont(Font.BOLD, 11));
-		listArbitres.setBackground(Palette.BLUEBLUE);
+		listArbitres.setBackground(Palette.BLUE);
 		listArbitres.setForeground(Palette.WHITE);
 		listArbitres.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.listArbitres.setModel(modeleList);
@@ -324,7 +323,7 @@ public class CreationTournoiVue extends CustomJFrame {
 		this.textFieldEquipesFile = new JTextField();
 		this.textFieldEquipesFile.setEnabled(false);
 		this.textFieldEquipesFile.setEditable(false);
-		textFieldEquipesFile.setBackground(Palette.BLUEBLUE);
+		textFieldEquipesFile.setBackground(Palette.BLUE);
 		textFieldEquipesFile.setForeground(Palette.WHITE);
 		panelEquipes.add(this.textFieldEquipesFile);
 		this.textFieldEquipesFile.setColumns(10);
@@ -348,7 +347,7 @@ public class CreationTournoiVue extends CustomJFrame {
 		 
 		JButton btnQuitter = new CustomJButton("Quitter", 5);
 		btnQuitter.setFont(Palette.customFont.deriveFont(Font.PLAIN, 11));
-		btnQuitter.setBackground(Palette.REDRED);
+		btnQuitter.setBackground(Palette.REDQUIT);
         btnQuitter.setForeground(Palette.WHITE);
 		btnQuitter.addActionListener(controleur);
 		panelQuitter.add(btnQuitter);
@@ -377,7 +376,7 @@ public class CreationTournoiVue extends CustomJFrame {
 		messageCreation.setMaximumSize(new Dimension(100, 14));
 		messageCreation.setMinimumSize(new Dimension(100, 30));
 		messageCreation.setBounds(new Rectangle(0, 0, 100, 0));
-		messageCreation.setForeground(Palette.ERRORCOLOR);
+		messageCreation.setForeground(Palette.REDERRORFOREGROUND);
 		messageCreation.setFont(Palette.customTextFont.deriveFont(11f));
 		panelMessage.add(messageCreation);
 		panelValidation.add(panelMessage);

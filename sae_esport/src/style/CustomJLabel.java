@@ -30,7 +30,6 @@ public class CustomJLabel extends JLabel {
 		
         setHorizontalAlignment(SwingConstants.CENTER);
         setForeground(Palette.WHITE);
-        //setFont(new Font("Tahoma", Font.BOLD, fontScale));
         setBorder(new EmptyBorder(0, 0, 0, 0));
 	}
 	
@@ -45,14 +44,11 @@ public class CustomJLabel extends JLabel {
 	*/
 	public CustomJLabel(String label, int fontScale, EmptyBorder border) {
 		super(label);
-		
-		//create the font
 
-		setFont(Palette.customFont);
+		setFont(Palette.customTextFont);
 		
         setHorizontalAlignment(SwingConstants.CENTER);
-        setForeground(Palette.BLUE);
-        //setFont(new Font("Tahoma", Font.BOLD, fontScale));
+        setForeground(Palette.WHITE);
         setBorder(border);
 	}
 }

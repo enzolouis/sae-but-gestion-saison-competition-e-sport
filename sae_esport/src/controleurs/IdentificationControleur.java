@@ -16,6 +16,7 @@ import modeles.IdentificationModele.Utilisateur;
 import vues.AccueilAdministrateurVue;
 import vues.AccueilArbitreVue;
 import vues.IdentificationVue;
+import vues.Palette;
 
 public class IdentificationControleur implements ActionListener {
 	
@@ -57,8 +58,8 @@ public class IdentificationControleur implements ActionListener {
 			
 		} else {
 			this.vue.erreurOuverture.setText("Login et/ou mot de passe faux.");
-			this.vue.panelErreur.setBackground(new Color(0xfedcde));
-			this.vue.panelErreur.setBorder(new LineBorder(new Color(0xff9090), 1));
+			this.vue.panelErreur.setBackground(Palette.REDERRORBACKGROUND);
+			this.vue.panelErreur.setBorder(new LineBorder(Palette.REDERRORBORDER, 1));
 			// compteur de 3 secondes
 			
 			ActionListener action = new ActionListener() {

@@ -73,7 +73,7 @@ public class AccueilAdministrateurVue extends CustomJFrame {
         gbc_panelMiddle.weighty = 1.0;
         
         CustomJButton btnCreerUnTournoi = new CustomJButton("Créer un tournoi", 10);
-        btnCreerUnTournoi.setBackground(Palette.BLUEBLUE);
+        btnCreerUnTournoi.setBackground(Palette.BLUE);
         btnCreerUnTournoi.setForeground(Palette.WHITE);
         btnCreerUnTournoi.addActionListener(controleur);
         gbc_panelMiddle.gridx = 0;
@@ -81,7 +81,7 @@ public class AccueilAdministrateurVue extends CustomJFrame {
         panelMiddle.add(btnCreerUnTournoi, gbc_panelMiddle);
         
         CustomJButton btnStatistiquesDeLa = new CustomJButton("Statistiques de la saison", 10);
-        btnStatistiquesDeLa.setBackground(Palette.BLUEBLUE);
+        btnStatistiquesDeLa.setBackground(Palette.BLUE);
         btnStatistiquesDeLa.setForeground(Palette.WHITE);
         btnStatistiquesDeLa.addActionListener(controleur);
         gbc_panelMiddle.gridx = 0;
@@ -89,7 +89,7 @@ public class AccueilAdministrateurVue extends CustomJFrame {
         panelMiddle.add(btnStatistiquesDeLa, gbc_panelMiddle.clone());
         
         CustomJButton btnListeTournois = new CustomJButton("Liste des tournois", 10);
-        btnListeTournois.setBackground(Palette.BLUEBLUE);
+        btnListeTournois.setBackground(Palette.BLUE);
         btnListeTournois.setForeground(Palette.WHITE);
         btnListeTournois.addActionListener(controleur);
         gbc_panelMiddle.gridx = 0;
@@ -101,7 +101,7 @@ public class AccueilAdministrateurVue extends CustomJFrame {
         contentPane.add(panelQuitterSeconnecter, BorderLayout.SOUTH);
         
         CustomJButton btnQuit = new CustomJButton("Quitter", 10);
-        btnQuit.setBackground(Palette.REDRED);
+        btnQuit.setBackground(Palette.REDQUIT);
         btnQuit.setForeground(Palette.WHITE);
         btnQuit.addActionListener(this.controleur);
         panelQuitterSeconnecter.add(btnQuit, BorderLayout.CENTER); 
