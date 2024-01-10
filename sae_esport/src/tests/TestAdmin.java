@@ -1,8 +1,10 @@
-package classes;
+package tests;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import classes.Administrateur;
 
 public class TestAdmin {
 	
