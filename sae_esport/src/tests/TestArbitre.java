@@ -1,8 +1,11 @@
-package classes;
+package tests;
 
 import static org.junit.Assert.*;
 
 import org.junit.*;
+
+import classes.Arbitre;
+import classes.Nationalite;
 
 public class TestArbitre {
 	
