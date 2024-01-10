@@ -1,4 +1,4 @@
-package DAOs;
+package tests;
 
 import static org.junit.Assert.*;
 
@@ -12,9 +12,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import DAOs.JoueurDAO;
 import classes.Joueur;
 
-public class testJoueurDAO {
+public class TestJoueurDAO {
 
 	String dirProjetJava = System.getProperty("user.dir");
 	Connection connection;
