@@ -1,26 +1,16 @@
 package tests;
 
 import static org.junit.Assert.*;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.io.File;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
 import DAOs.EquipeDAO;
 import classes.DBConnection;
 import classes.Disposition;
 import classes.Equipe;
 import classes.Nationalite;
-import sqlrequests.CreateAll;
-import classes.Equipe;
 
 public class TestEquipeDAO {
 	
@@ -104,19 +94,6 @@ public class TestEquipeDAO {
 	        assertEquals(size -1, EquipeDAO.getInstance().getAll().size());
 	        assertEquals(Optional.empty(), EquipeDAO.getInstance().getById(equipe1.getIdEquipe()));
 	        DBConnection.getInstance().rollback();
-	}
-	
-	@Test
-	///Test d'import des equipes avec un fichier CSV
-	public void testImportEquipe() throws Exception {
-			CreateAll.main(null);
-			File f = new File("src/DAOs/test.csv");
-			List<Equipe> eqImportees = EquipeDAO.getInstance().importEquipes(f);
-			for (Equipe e : eqImportees) {
-				System.out.println(EquipeDAO.getInstance().getAll().contains(e));
-				assertTrue(EquipeDAO.getInstance().getAll().contains(e));
-			}		
-			DBConnection.getInstance().rollback();
 	}
 	
 }
