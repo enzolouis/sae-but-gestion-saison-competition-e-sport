@@ -1,4 +1,4 @@
-package DAOs;
+package tests;
 
 import static org.junit.Assert.assertEquals;
 import java.sql.Connection;
@@ -11,10 +11,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import DAOs.AdministrateurDAO;
 import classes.Administrateur;
 import classes.DBConnection;
 
-public class testDAOAdministrateur {
+public class TestAdminDAO {
 	
 	@Before
 	public void beforeTests() throws Exception{
