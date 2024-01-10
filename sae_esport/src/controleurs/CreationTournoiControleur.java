@@ -1,5 +1,6 @@
 package controleurs;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -20,6 +21,7 @@ import classes.Notoriete;
 import classes.Equipe;
 import modeles.TournoiModele;
 import vues.CreationTournoiVue;
+import vues.Palette;
 
 public class CreationTournoiControleur implements ActionListener {
 	private CreationTournoiVue vue;
@@ -73,8 +75,7 @@ public class CreationTournoiControleur implements ActionListener {
 				if (this.vue.textFieldNom.getText().equals("") || this.vue.dateChooserDebut.getDate() == null 
 				|| this.vue.dateChooserFin.getDate() == null || this.vue.textFieldEquipesFile.getText().equals("")
 				|| this.vue.comboBoxArbitre.getItemCount() == 0) {
-					JFrame jFrame = new JFrame();
-					JOptionPane.showMessageDialog(jFrame, "Un des champs nécessaires n'a pas été rempli");
+					vue.messageCreation.setText("Un des champs nécessaires n'a pas été rempli.");
 				} else {
 					String nom = this.vue.textFieldNom.getText();
 					String  dateDebut = this.modele.getDateString(this.vue.dateChooserDebut.getDate());
@@ -82,10 +83,7 @@ public class CreationTournoiControleur implements ActionListener {
 					Notoriete not = (Notoriete) this.vue.comboBoxNotoriete.getSelectedItem();
 					TournoiModele t = new TournoiModele(0, nom, dateDebut, dateFin, not, EtatTournoi.FERME);
 					if (!t.isTournoiValide()) {
-						JFrame jFrame = new JFrame();
-						JOptionPane.showMessageDialog(jFrame, "Le tournoi est invalide, vérifiez que les dates"
-								+" ne soient pas invalides \n (date de fin antérieur à la date de début ou durée de "+
-								"tournoi supérieure à 30 jours) \n ou qu'un tournoi n'existe pas sur ce créneau.");
+						vue.messageCreation.setText("<html> Les dates sont invalides. Vérifiez qu'un tournoi <br> n'existe pas sur ce créneau.");
 					} else {
 						try {
 							TournoiDAO.getInstance().add(t);
@@ -101,16 +99,19 @@ public class CreationTournoiControleur implements ActionListener {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 							}
-						JFrame jFrame = new JFrame();
-						try {
-							JOptionPane.showMessageDialog(jFrame, "Le tournoi N°"+t.getIDTournoi()+" "+t.getNomTournoi()+" a été ajouté"
-									+ " à la base de données\n Login: "+t.getLogin()+"\n Mot de passe: "+t.getMotDePasse()
-									+"\n Du "+t.getDateDebut()+" au "+t.getDateFin());
-						} catch (Exception e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						} 
-						this.vue.dispose();
+						vue.messageCreation.setForeground(Palette.GREEN);
+						vue.messageCreation.setText("Le tournoi N°"+t.getIDTournoi()+" a été créé.");
+						vue.btnAddArbitre.setEnabled(false);
+						vue.btnImportEquipes.setEnabled(false);
+						vue.textFieldEquipesFile.setEnabled(false);
+						vue.textFieldNom.setEnabled(false);
+						vue.btnSupprimerArbitre.setEnabled(false);
+						vue.btnValider.setEnabled(false);
+						vue.btnViderArbitres.setEnabled(false);
+						vue.dateChooserDebut.setEnabled(false);
+						vue.dateChooserFin.setEnabled(false);
+						vue.comboBoxArbitre.setEnabled(false);
+						vue.comboBoxNotoriete.setEnabled(false);
 					}
 				}
 				break;

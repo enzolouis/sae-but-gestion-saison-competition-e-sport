@@ -55,6 +55,7 @@ public class CreationTournoiVue extends CustomJFrame {
 	public DefaultListModel<Arbitre> modeleList;
 	public JList<Arbitre> listArbitres;
 	private CreationTournoiControleur controleur;
+	public JLabel messageCreation;
 	
 	public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -67,8 +68,8 @@ public class CreationTournoiVue extends CustomJFrame {
 	
 	public CreationTournoiVue() {
 		
-		super(new Dimension(530,300));
-		setBounds(new Rectangle(0, 0, 700, 550));
+		super(new Dimension(530,350));
+		setBounds(new Rectangle(0, 0, 700, 580));
 		setTitle("Création de tournoi");
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
@@ -339,7 +340,7 @@ public class CreationTournoiVue extends CustomJFrame {
 		panelValidation.setBorder(new EmptyBorder(20, 20, 20, 20));
 		panelValidation.setBackground(backgroundColor);
 		contentPane.add(panelValidation, BorderLayout.SOUTH);
-		panelValidation.setLayout(new GridLayout(0, 2, 0, 0));
+		panelValidation.setLayout(new GridLayout(2, 2, 0, 0));
 		
 		JPanel panelQuitter = new JPanel();
 		panelQuitter.setBackground(backgroundColor);
@@ -362,6 +363,24 @@ public class CreationTournoiVue extends CustomJFrame {
         btnValider.setBackground(Palette.GREEN);
         btnValider.addActionListener(controleur);
 		panelValider.add(this.btnValider);
+		
+		JPanel panelEmpty = new JPanel();
+		panelEmpty.setBackground(Palette.BLACK);
+		panelValidation.add(panelEmpty);
+		
+		JPanel panelMessage = new JPanel();
+		panelMessage.setBackground(Palette.BLACK);
+		messageCreation = new JLabel(" ");
+		messageCreation.setVerticalAlignment(SwingConstants.TOP);
+		messageCreation.setHorizontalAlignment(SwingConstants.CENTER);
+		messageCreation.setPreferredSize(new Dimension(300, 30));
+		messageCreation.setMaximumSize(new Dimension(100, 14));
+		messageCreation.setMinimumSize(new Dimension(100, 30));
+		messageCreation.setBounds(new Rectangle(0, 0, 100, 0));
+		messageCreation.setForeground(Palette.ERRORCOLOR);
+		messageCreation.setFont(Palette.customTextFont.deriveFont(11f));
+		panelMessage.add(messageCreation);
+		panelValidation.add(panelMessage);
 
 	}
 
