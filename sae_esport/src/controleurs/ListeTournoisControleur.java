@@ -33,6 +33,7 @@ import classes.Joueur;
 import modeles.TournoiModele;
 import vues.IdentificationVue;
 import vues.ListeTournoisVue;
+import vues.Palette;
 
 public class ListeTournoisControleur implements ActionListener, ListSelectionListener, MouseListener {
 	private TournoiModele modele;
@@ -84,10 +85,10 @@ public class ListeTournoisControleur implements ActionListener, ListSelectionLis
 		} else if (e.getSource() instanceof JToggleButton) {
 			JToggleButton toggle = (JToggleButton) e.getSource();
 			if (toggle.isSelected()) {
-				toggle.setIcon(ListeTournoisVue.OEIL_VISIBLE_ICON);
+				toggle.setIcon(Palette.OEIL_VISIBLE_ICON);
 				this.vue.mdp.setEchoChar((char) 0);
 			} else {
-				toggle.setIcon(ListeTournoisVue.OEIL_INVISIBLE_ICON);
+				toggle.setIcon(Palette.OEIL_INVISIBLE_ICON);
 				this.vue.mdp.setEchoChar('•');
 			}
 		}

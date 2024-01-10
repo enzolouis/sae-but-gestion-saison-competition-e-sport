@@ -60,7 +60,7 @@ public class IdentificationControleur implements ActionListener {
 			this.vue.erreurOuverture.setText("Login et/ou mot de passe faux.");
 			this.vue.panelErreur.setBackground(Palette.REDERRORBACKGROUND);
 			this.vue.panelErreur.setBorder(new LineBorder(Palette.REDERRORBORDER, 1));
-			// compteur de 3 secondes
+			// compteur de quelques secondes
 			
 			ActionListener action = new ActionListener() {
 				int compteur = 1;
@@ -77,18 +77,16 @@ public class IdentificationControleur implements ActionListener {
 			};
 			animationErreur = new Timer(2000, action);
 			animationErreur.start();
-			
-			
 		}
 	}
 	
 	public void inverserIconMotDePasseMasque(JButton btn) {
 		this.isMotDePasseCache = !this.isMotDePasseCache;
 		if (isMotDePasseCache) {
-			btn.setIcon(IdentificationVue.OEIL_INVISIBLE_ICON);
+			btn.setIcon(Palette.OEIL_INVISIBLE_ICON);
 			this.vue.getMotDePasse().setEchoChar('•');
 		} else {
-			btn.setIcon(IdentificationVue.OEIL_VISIBLE_ICON);
+			btn.setIcon(Palette.OEIL_VISIBLE_ICON);
 			this.vue.getMotDePasse().setEchoChar((char) 0);
 		}
 	}
