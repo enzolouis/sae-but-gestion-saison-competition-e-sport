@@ -434,7 +434,6 @@ public class TestTournoiModele {
 				"27/11/1888", 
 				Notoriete.REGIONAL,
 				EtatTournoi.FERME);
-		System.out.println("-- IIII --");
 		assertFalse(t2.isTournoiNonSuperpose());
 		
 		DBConnection.getInstance().rollback();
@@ -748,8 +747,6 @@ public class TestTournoiModele {
 		
 		t.ouvrirTournoi();
 		assertEquals(t.getEtatTournoi(), EtatTournoi.OUVERT);
-		
-		System.out.println(TournoiDAO.getInstance().getById(t.getIDTournoi()).get().getEtatTournoi());
 		
 		DBConnection.getInstance().rollback();
 	}

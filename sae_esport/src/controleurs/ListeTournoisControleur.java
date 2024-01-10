@@ -56,8 +56,6 @@ public class ListeTournoisControleur implements ActionListener, ListSelectionLis
 				break;
 			case "Ouvrir":
 				int idTournoi = (int) vue.tableTournois.getValueAt(vue.tableTournois.getSelectedRow(), 0);
-				
-				System.out.println(idTournoi);
 				try {
 					TournoiModele tournoi = TournoiDAO.getInstance().getById(idTournoi).get();
 					this.vue.erreurOuverture.setForeground(new Color(235, 77, 75));

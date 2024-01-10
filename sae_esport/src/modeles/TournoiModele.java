@@ -236,7 +236,6 @@ public class TournoiModele {
 	//l'ensemble est basé sur le NomTournoi + idTournoi, en UpperCase + 3 lettres générés au hasard
 	private void generateLogin() {
 		this.login = this.nomTournoi.substring(0, 2).toUpperCase() + this.idTournoi + this.generateLetter()+ this.generateLetter() + this.generateLetter();
-		//System.out.println(this.login);
 	}
 	
 	//Génère un Mot de Passe pour le Tournoi
@@ -245,7 +244,6 @@ public class TournoiModele {
 		for (int i = 0; i<12; i++) {
 			this.mdp += this.generateLetter();
 		}
-		//System.out.println(this.mdp);
 	}
 	
 	//Renvois une lettre au hasard 
@@ -272,7 +270,6 @@ public class TournoiModele {
 	}
 	
 	public boolean isDateFinSupADateDebut() throws ParseException {
-		// System.out.println(getDateFin().compareTo(getDateDebut()) == 1);
 		return getDateFin().after(getDateDebut());
 	}
 	
