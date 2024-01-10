@@ -39,9 +39,7 @@ public class Palette {
         }
         customFont = loadedFont;
     }
-    
-    //police de corps de texte
-    public static final Font customTextFont;
+
     
     static {
         Font loadedFont = null;
