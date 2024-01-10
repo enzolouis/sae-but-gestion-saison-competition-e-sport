@@ -42,15 +42,7 @@ import javax.swing.JButton;
 import java.awt.Component;
 import javax.swing.border.LineBorder;
 
-public class ListeTournoisVue extends CustomJFrame {
-	
-	public static final ImageIcon OEIL_INVISIBLE_ICON = new ImageIcon(new ImageIcon(IdentificationVue.class.getClassLoader().getResource
-			("oeilMotDePasseInvisible.png")).getImage().getScaledInstance(30, 30,  java.awt.Image.SCALE_SMOOTH));
-	
-	public static final ImageIcon OEIL_VISIBLE_ICON = new ImageIcon(new ImageIcon(IdentificationVue.class.getClassLoader().getResource
-			("oeilMotDePasseVisible.png")).getImage().getScaledInstance(30, 30,  java.awt.Image.SCALE_SMOOTH));
-	
-	
+public class ListeTournoisVue extends CustomJFrame {	
 	public JTable tableTournois;
 	public CustomJLabel labelTitre;
 	public DefaultTableModel tableModel;
@@ -296,7 +288,7 @@ public class ListeTournoisVue extends CustomJFrame {
 		activLogins.setFocusPainted(false);
 		activLogins.setBackground(new Color(29, 88, 129));
 		activLogins.setBorder(null);
-		activLogins.setIcon(OEIL_INVISIBLE_ICON);
+		activLogins.setIcon(Palette.OEIL_INVISIBLE_ICON);
 		activLogins.setBounds(196, 44, 40, 20);
 		logins.add(activLogins);
 		

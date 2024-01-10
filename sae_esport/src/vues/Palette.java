@@ -7,6 +7,8 @@ import java.awt.GraphicsEnvironment;
 import java.io.File;
 import java.io.IOException;
 
+import javax.swing.ImageIcon;
+
 public class Palette {
 	public static final Color BLACK 			 = new Color(6, 40, 50);
 	public static final Color BLACKLIGHTER 		 = new Color(8, 50, 65);
@@ -21,6 +23,7 @@ public class Palette {
 	public static final Color BLACKDARKER        = new Color(10, 60, 80);
 	
     public static final Font customFont;
+    public static final Font customTextFont;
     
     static {
         Font loadedFont = null;
@@ -34,8 +37,6 @@ public class Palette {
         customFont = loadedFont;
     }
     
-    public static final Font customTextFont;
-    
     static {
         Font loadedFont = null;
         try {
@@ -48,9 +49,12 @@ public class Palette {
         customTextFont = loadedFont;
     }
     
-    
-    
-    
+    public static final ImageIcon OEIL_INVISIBLE_ICON = new ImageIcon(new ImageIcon(IdentificationVue.class.getClassLoader().getResource
+			("oeilMotDePasseInvisible.png")).getImage().getScaledInstance(30, 30,  java.awt.Image.SCALE_SMOOTH));
 	
+	public static final ImageIcon OEIL_VISIBLE_ICON = new ImageIcon(new ImageIcon(IdentificationVue.class.getClassLoader().getResource
+			("oeilMotDePasseVisible.png")).getImage().getScaledInstance(30, 30,  java.awt.Image.SCALE_SMOOTH));
 	
+	public static final ImageIcon LOGO = new ImageIcon(new ImageIcon(IdentificationVue.class.getClassLoader().getResource
+			("logo_app.png")).getImage().getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH));
 }

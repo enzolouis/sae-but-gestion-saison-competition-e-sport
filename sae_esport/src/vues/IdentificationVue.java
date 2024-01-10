@@ -35,14 +35,7 @@ import javax.swing.border.LineBorder;
 
 public class IdentificationVue extends CustomJFrame {
 
-	public static final ImageIcon OEIL_INVISIBLE_ICON = new ImageIcon(new ImageIcon(IdentificationVue.class.getClassLoader().getResource
-			("oeilMotDePasseInvisible.png")).getImage().getScaledInstance(30, 30,  java.awt.Image.SCALE_SMOOTH));
 	
-	public static final ImageIcon OEIL_VISIBLE_ICON = new ImageIcon(new ImageIcon(IdentificationVue.class.getClassLoader().getResource
-			("oeilMotDePasseVisible.png")).getImage().getScaledInstance(30, 30,  java.awt.Image.SCALE_SMOOTH));
-	
-	public static final ImageIcon LOGO = new ImageIcon(new ImageIcon(IdentificationVue.class.getClassLoader().getResource
-			("logo_app.png")).getImage().getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH));
 	
 	
     private JPanel contentPane;
@@ -102,20 +95,19 @@ public class IdentificationVue extends CustomJFrame {
     	
         // Middle Panel : Login
     	CustomJPanel panelMiddleLogin = new CustomJPanel(new EmptyBorder(10, 10, 10, 10), new GridLayout(2, 0, 0, 0));
-    	GridLayout gridLayout = (GridLayout) panelMiddleLogin.getLayout();
         contentPane.add(panelMiddleLogin, BorderLayout.CENTER);
         
         JPanel panelImageApp = new CustomJPanel();
         
         panelMiddleLogin.add(panelImageApp);
         
-        JLabel lblNewLabel = new JLabel("");
-        lblNewLabel.setBorder(new EmptyBorder(10, 0, 0, 0));
+        JLabel labelIconApp = new JLabel("");
+        labelIconApp.setBorder(new EmptyBorder(10, 0, 0, 0));
         
-        lblNewLabel.setPreferredSize(new Dimension(120, 120));
-        lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        lblNewLabel.setIcon(LOGO);
-        panelImageApp.add(lblNewLabel, BorderLayout.NORTH);
+        labelIconApp.setPreferredSize(new Dimension(120, 120));
+        labelIconApp.setHorizontalAlignment(SwingConstants.CENTER);
+        labelIconApp.setIcon(Palette.LOGO);
+        panelImageApp.add(labelIconApp, BorderLayout.NORTH);
         
         panelErreur = new CustomJPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
         erreurOuverture = new CustomJLabel("",10);
@@ -135,22 +127,10 @@ public class IdentificationVue extends CustomJFrame {
         panelTextFieldUtilisateur.setBorder(null);
         panelUtilisateur.add(panelTextFieldUtilisateur);
         
-        // a fix
-        //textFieldUtilisateur = new CustomJTextField(10, (EmptyBorder) null, "Login");
-        //panelTextFieldUtilisateur.add(textFieldUtilisateur);
-        
-        
-        
-        textFieldUtilisateur = new CustomJTextField();
+        textFieldUtilisateur = new CustomJTextField(13, (EmptyBorder) null, "Login");
         textFieldUtilisateur.setBorderColor(Palette.BLUE);
         textFieldUtilisateur.setBorderRadius(0); // si on laisse par defaut ca se dessine sur le placeholder
-        textFieldUtilisateur.setPlaceholder("Login");
         textFieldUtilisateur.addActionListener(controleur);
-        textFieldUtilisateur.setForeground(Color.WHITE);
-        textFieldUtilisateur.setColumns(13);
-        textFieldUtilisateur.setBorder(null);
-        textFieldUtilisateur.setBackground(Palette.BLUE);
-        textFieldUtilisateur.setFont(Palette.customTextFont);
         panelTextFieldUtilisateur.add(textFieldUtilisateur);
         
         // Mot de passe
@@ -179,7 +159,7 @@ public class IdentificationVue extends CustomJFrame {
         btnMotDePasseVisibilite.addActionListener(controleur);
         btnMotDePasseVisibilite.setBackground(Palette.BLUE);
         btnMotDePasseVisibilite.setBorder(null);
-        btnMotDePasseVisibilite.setIcon(OEIL_INVISIBLE_ICON);
+        btnMotDePasseVisibilite.setIcon(Palette.OEIL_INVISIBLE_ICON);
         panelTextFieldMotDePasse.add(btnMotDePasseVisibilite);
         
         JPanel panelUtilisateurEtMotDePasse = new CustomJPanel();
