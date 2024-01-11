@@ -15,6 +15,7 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
+import classes.Equipe;
 import classes.Joueur;
 import controleurs.ConsultationSaisonControleur;
 import modeles.ConsultationSaisonModele;
@@ -121,13 +122,14 @@ public class ConsultationSaisonVue extends CustomJFrame {
 		
 		//remplissage de la table avec le classement des équipes
 		try {
-			for (int i = 0; i<modele.classement().size(); i++) {
-				tablemodel.addRow(new Object[] {i+1,
-						modele.classement().get(i).getIdEquipe(),
-						modele.classement().get(i).getNom(), 
-						modele.classement().get(i).getNationalite(), 
-						modele.classement().get(i).getPointsSaison(),
-						modele.classement().get(i).getRangSaisonPrecedante()}); 
+			for (Equipe e : modele.classementRanked()) {
+				tablemodel.addRow(new Object[] {
+						modele.classementWithRank().get(e),
+						e.getIdEquipe(),
+						e.getNom(), 
+						e.getNationalite(), 
+						e.getPointsSaison(),
+						e.getRangSaisonPrecedante()}); 
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
