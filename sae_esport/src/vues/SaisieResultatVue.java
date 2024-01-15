@@ -33,6 +33,9 @@ import style.CustomJLabel;
 import style.CustomJPanel;
 import style.CustomJScrollPane;
 import style.CustomJSeparator;
+import style.Palette;
+
+import javax.swing.SwingConstants;
 
 public class SaisieResultatVue extends CustomJFrame {
 	private CustomJPanel contentPanel;
@@ -61,9 +64,6 @@ public class SaisieResultatVue extends CustomJFrame {
     	super(new Dimension(550, 500), "Résultat des matchs");
     	contentPanel = this.getContentPanel();
     	
-    	ImageIcon icon = new ImageIcon("src\\logo_app.png");
-    	this.setIconImage(icon.getImage());
-    	
     	pack();
     	
     	this.tournoi = TournoiDAO.getInstance().getById(1).get();
@@ -73,7 +73,7 @@ public class SaisieResultatVue extends CustomJFrame {
     	CustomJPanel panelTop = new CustomJPanel();
         contentPanel.add(panelTop, BorderLayout.NORTH);
         
-        CustomJLabel titleTop = new CustomJLabel("Résultat des matchs", 25);
+        CustomJLabel titleTop = new CustomJLabel("RÉSULTAT DES MATCHS", 25);
         titleTop.setFont(Palette.customFont.deriveFont(Font.BOLD, 20));
         panelTop.add(titleTop);
         
@@ -318,4 +318,14 @@ public class SaisieResultatVue extends CustomJFrame {
     public TournoiModele getTournoi() {
     	return this.tournoi;
     }
+    
+    public void refreshMatchList() {
+    	
+    }
+    
+    public void closeCurrentWindow() {
+		super.closeCurrentWindow();
+		AccueilArbitreVue frame = new AccueilArbitreVue();
+		frame.setVisible(true);
+	}
 }

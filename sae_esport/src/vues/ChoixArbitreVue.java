@@ -11,7 +11,6 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
 
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -23,6 +22,7 @@ import style.CustomJPanel;
 import style.CustomJScrollPane;
 import style.CustomJSeparator;
 import style.CustomJTextField;
+import style.Palette;
 
 public class ChoixArbitreVue extends CustomJFrame {
 
@@ -44,9 +44,6 @@ public class ChoixArbitreVue extends CustomJFrame {
     
     public ChoixArbitreVue() throws Exception {
     	super(new Dimension(600, 600), "Choix d'arbitre");
-    	
-    	ImageIcon icon = new ImageIcon("src\\logo_app.png");
-    	this.setIconImage(icon.getImage());
     	
     	this.controleur = new ChoixArbitreControleur(this);
     	contentPanel = this.getContentPanel();

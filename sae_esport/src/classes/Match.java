@@ -19,15 +19,9 @@ public class Match {
 		this.idVainqueur = 0;
 	}
 	
-	public int getIdTournoi() {
-		return idTournoi;
-	}
-
-	public void setIdTournoi(int idTournoi) {
-		this.idTournoi = idTournoi;
-	}
-
-	//Retourne l'ID du match
+	/**
+	 * Change l'ID du match
+	 * */
 	public int getIDMatch() {
 		return this.idMatch;
 	}
@@ -38,42 +32,70 @@ public class Match {
 		this.idMatch = id;
 	}
 	
-	//Retourne le boolean exprimant si le match est une finale ou non
+	/**
+	 * renvoie l'id du tournoi
+	 * */
+	public int getIdTournoi() {
+		return idTournoi;
+	}
+
+	/**
+	 * Change l'ID du tournoi
+	 * @param nouvel id du tournoi
+	 * */
+	public void setIdTournoi(int idTournoi) {
+		this.idTournoi = idTournoi;
+	}
+
+	/**
+	 * renvoie un booléen indiquant si le match est une finale ou non
+	 * */
 	public boolean IsItFinale() {
 		return this.finale;
 	}
 	
-	/**Ajoute une Equipe au match
-	 * 	@param l'Equipe à ajouter au match
+	/**
+	 * Ajoute une Equipe au match
+	 * @param la nouvelle équipe à ajouter au match
 	 * */
 	public void AddEquipe(Equipe equipe) {
 		this.equipes.add(equipe);
 	}
 	
-	//Retourne les Equipes participant au Match
+	/**
+	 * Renvoie la liste des équipes du tournoi
+	 * */
 	public List<Equipe> getEquipes(){
 		return this.equipes;
 	}
 	
-	/**Remplace une des Equipes du Match
-	 * 	@param Equipe deja en place, qui est à remplacer
-	 * 	@param Equipe qui va remplacer la 1e valeur
+	/**
+	 * Remplace une des Equipes du Match
+	 * @param Equipe deja en place, qui est à remplacer
+	 * @param Equipe qui va remplacer la 1e valeur
 	 * */
 	public void remplacerEquipe(Equipe equipeARemplacer, Equipe EquipeAMettre) {
-		for (Equipe i : this.equipes) {
-			int y = 0; 
-			if(i.equals(equipeARemplacer)) {
-				this.equipes.remove(y);
+		for (Equipe e : this.equipes) {
+			int ind = 0; 
+			if(e.equals(equipeARemplacer)) {
+				this.equipes.remove(ind);
 				this.equipes.add(EquipeAMettre);
 			}
-			y++;
+			ind++;
 		}
 	}
 	
+	/**
+	 * Change l'ID du vainqueur
+	 * @param identifiant du vainqueur
+	 * */
 	public void setVainqueur(int idVainqueur) {
 		this.idVainqueur = idVainqueur;
 	}
 	
+	/**
+	 * Renvoie l'id du vainqueur
+	 * */
 	public int getVainqueur() {
 		return idVainqueur;
 	}

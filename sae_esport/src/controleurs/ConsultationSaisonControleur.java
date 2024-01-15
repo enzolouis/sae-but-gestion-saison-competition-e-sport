@@ -45,7 +45,7 @@ public class ConsultationSaisonControleur implements ListSelectionListener, Acti
 		JButton source = (JButton) e.getSource();
 		switch (source.getText()) {
 		case "Quitter":
-			vue.dispose();
+			this.vue.closeCurrentWindow();
 		}
 	}
 

@@ -5,42 +5,28 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.JToggleButton;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
-import DAOs.ArbitreDAO;
-import DAOs.EquipeDAO;
 import DAOs.TournoiDAO;
 import classes.Arbitre;
 import classes.Disposition;
 import classes.Equipe;
 import classes.Joueur;
 import modeles.TournoiModele;
-import vues.IdentificationVue;
+import style.Palette;
 import vues.ListeTournoisVue;
-import vues.Palette;
 
 public class ListeTournoisControleur implements ActionListener, ListSelectionListener, MouseListener {
-	private TournoiModele modele;
+
 	private ListeTournoisVue vue;
 	
 	public ListeTournoisControleur(ListeTournoisVue vue) {
-		this.modele = new TournoiModele();
+
 		this.vue = vue;
 	}
 
@@ -51,8 +37,7 @@ public class ListeTournoisControleur implements ActionListener, ListSelectionLis
 			
 			switch (bouton.getText()) {
 			case "Fermer":
-				this.vue.setVisible(false);
-				this.vue.dispose();
+				this.vue.closeCurrentWindow();
 				break;
 			case "Ouvrir":
 				int idTournoi = (int) vue.tableTournois.getValueAt(vue.tableTournois.getSelectedRow(), 0);
@@ -105,24 +90,27 @@ public class ListeTournoisControleur implements ActionListener, ListSelectionLis
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
 		 if (e.getSource() instanceof JList) {
-			JList l = (JList) e.getSource();
+			@SuppressWarnings("unchecked")
+			JList<Equipe> l = (JList<Equipe>) e.getSource();
 			Equipe e1 = (Equipe) l.getSelectedValue();
-			vue.titreEquipe.setText(e1.getNom());
-			List<String> joueurs = new ArrayList<>();
-			
-			vue.joueursModel.clear();
-			for (Joueur j : e1.getListeJoueurs()) {
-				vue.joueursModel.addElement(j);
+			if (e1 != null) {
+				vue.titreEquipe.setText(e1.getNom());
+				
+				vue.joueursModel.clear();
+				for (Joueur j : e1.getListeJoueurs()) {
+					vue.joueursModel.addElement(j);
+				}
+				
+				vue.joueurs.setModel(vue.joueursModel);
+				
+				vue.disposition.setText(e1.getDisposition().toString());
+				if (e1.getDisposition().equals(Disposition.DISPOSEE)) {
+					vue.disposition.setForeground(new Color(106, 176, 76));
+				} else {
+					vue.disposition.setForeground(new Color(235, 77, 75));
+				}
 			}
 			
-			vue.joueurs.setModel(vue.joueursModel);
-			
-			vue.disposition.setText(e1.getDispose().toString());
-			if (e1.getDispose().equals(Disposition.DISPOSEE)) {
-				vue.disposition.setForeground(new Color(106, 176, 76));
-			} else {
-				vue.disposition.setForeground(new Color(235, 77, 75));
-			}
 			
 		}
 	}
@@ -171,7 +159,7 @@ public class ListeTournoisControleur implements ActionListener, ListSelectionLis
 			
 			vue.listeEquipesModel.clear();
 			
-			for (Equipe eq : tournoi.getEquipes().keySet()) {
+			for (Equipe eq : tournoi.getParticipants().keySet()) {
 				vue.listeEquipesModel.addElement(eq);
 			}
 			

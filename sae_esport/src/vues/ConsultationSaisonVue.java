@@ -8,7 +8,6 @@ import java.awt.Font;
 import style.*;
 
 import javax.swing.DefaultListModel;
-import javax.swing.ImageIcon;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -21,7 +20,6 @@ import controleurs.ConsultationSaisonControleur;
 import modeles.ConsultationSaisonModele;
 import modeles.TournoiModele;
 
-import java.awt.Rectangle;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
 import java.awt.Dimension;
@@ -44,12 +42,10 @@ public class ConsultationSaisonVue extends CustomJFrame {
 	public ConsultationSaisonVue() {
 		
 		//paramétrage de la page
-		setTitle("Statistiques de la saison");
-		ImageIcon icon = new ImageIcon("src\\logo_app.png");
-    	this.setIconImage(icon.getImage());
+		super(new Dimension(600, 600), "Statistiques de la saison");
+		
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		setBounds(new Rectangle(0, 0, 600, 600));
-		setResizable(true);
+		//setBounds(new Rectangle(0, 0, 600, 600));
 		
 		//instanciation du controleur et du modèle
 		controleur = new ConsultationSaisonControleur(this);
@@ -63,7 +59,7 @@ public class ConsultationSaisonVue extends CustomJFrame {
 		CustomJPanel panelTitre = new CustomJPanel();
 		panelTitre.setLayout(new BorderLayout(0, 0));
 		panelTitre.setBackground(Palette.BLACK);
-		CustomJLabel labelTitre = new CustomJLabel("Classement de saison", 22);
+		CustomJLabel labelTitre = new CustomJLabel("CLASSEMENT DE SAISON", 25);
 		labelTitre.setFont(Palette.customFont.deriveFont(Font.BOLD, 20));
 		panelTitre.add(labelTitre, BorderLayout.CENTER);
 		CustomJSeparator separator = new CustomJSeparator();
@@ -206,6 +202,12 @@ public class ConsultationSaisonVue extends CustomJFrame {
             }
         });
 		
+	}
+	
+	public void closeCurrentWindow() {
+		super.closeCurrentWindow();
+		AccueilAdministrateurVue frame = new AccueilAdministrateurVue();
+		frame.setVisible(true);
 	}
 
 }

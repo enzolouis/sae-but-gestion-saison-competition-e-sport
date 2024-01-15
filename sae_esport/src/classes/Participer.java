@@ -3,15 +3,16 @@ package classes;
 import java.util.Objects;
 
 public class Participer implements Comparable<Participer> {
+	
 	private int IDEquipe;
 	private int IDTournoi;
 	private int resultat;
 	
 	/**
-	 * Constructeur d'arbitres
+	 * Constructeur de participation
+	 * 	@param la valeur de résultat en points du Tournoi, variant en fonction de la position finale dans le tournoi
 	 * 	@param la valeur de l'ID du Tournoi
 	 * 	@param la valeur de l'ID de l'Equipe
-	 * 	@param la valeur de résultat en points du Tournoi, variant en fonction de la position finale dans le tournoi
 	 * */
 	public Participer(int resultat, int tournoi, int equipe) {
 		this.resultat = resultat;
@@ -19,37 +20,45 @@ public class Participer implements Comparable<Participer> {
 		this.IDEquipe = equipe;
 	}
 	
-	//Retourne l'ID de l'Equipe
+	/**
+	 * renvoie l'id de l'équipe
+	 * */
 	public int getIdEquipe() {
 		return this.IDEquipe;
 	}
 	/**
-	 * Change l'ID de l'Equipe
-	 * 	@param la valeur de l'ID de l'Equipe à remplacer
+	 * set l'id de l'Equipe
+	 * 	@param le nouvel id d'équipe
 	 * */
 	public void setIdEquipe(int equipe) {
 		this.IDEquipe = equipe;
 	}
 	
-	//Retourne l'ID du Tournoi
+	/**
+	 * renvoie l'id du tournoi
+	 * */
 	public int getIdTournoi() {
 		return this.IDTournoi;
 	}
+	
 	/**
-	 * Change l'ID du Tournoi
-	 * 	@param la valeur de l'ID du Tournoi à remplacer
+	 * set l'ID du Tournoi
+	 * @param la valeur de l'ID du Tournoi à remplacer
 	 * */
 	public void setIdTournoi(int tournoi) {
 		this.IDTournoi = tournoi;
 	}
 	
-	//Retourne le résultat du Tournoi
+	/**
+	 * renvoie le résultat du tournoi
+	 * */
 	public int getResultat() {
 		return this.resultat;
 	}
+	
 	/**
-	 * Change la valeur du Résultat
-	 * 	@param la valeur du Résultat à remplacer
+	 * set le résultat
+	 * @param la valeur du Résultat à remplacer
 	 * */
 	public void setResultat(int resultat) {
 		this.resultat = resultat;

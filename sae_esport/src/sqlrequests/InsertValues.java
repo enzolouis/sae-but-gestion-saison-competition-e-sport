@@ -1,12 +1,9 @@
 package sqlrequests;
 
-import java.util.Iterator;
-
 import DAOs.AdministrateurDAO;
 import DAOs.ArbitreDAO;
 import DAOs.EquipeDAO;
 import DAOs.JoueurDAO;
-import DAOs.MatchDAO;
 import DAOs.ParticiperDAO;
 import DAOs.TournoiDAO;
 import classes.Administrateur;
@@ -38,10 +35,10 @@ public class InsertValues {
 			Match m3 = new Match(3, t.getIDTournoi(), false); 
 	    	
 	    	// 4 équipes
-			Equipe e = new Equipe(0, "Maxence Maury-Balliteam", Nationalite.FR, Disposition.DISPOSEE, 3, 1000);EquipeDAO.getInstance().add(e);
-			Equipe e2 = new Equipe(1, "Ibrateam Zoubairov", Nationalite.FR, Disposition.DISPOSEE, 1, 1000);EquipeDAO.getInstance().add(e2);
-			Equipe e3 = new Equipe(2, "Equipema Rasoanaivo", Nationalite.FR, Disposition.DISPOSEE, 2, 2001);EquipeDAO.getInstance().add(e3);
-			Equipe e4 = new Equipe(3, "Stuarteam Barthe", Nationalite.FR, Disposition.DISPOSEE, 4, 18);EquipeDAO.getInstance().add(e4);
+			Equipe e = new Equipe(0, "Maxence Maury-Balliteam", Nationalite.FR, Disposition.DISPOSEE, 3, 1000); EquipeDAO.getInstance().add(e);
+			Equipe e2 = new Equipe(1, "Ibrateam Zoubairov", Nationalite.FR, Disposition.DISPOSEE, 1, 1000); EquipeDAO.getInstance().add(e2);
+			Equipe e3 = new Equipe(2, "Equipema Rasoanaivo", Nationalite.FR, Disposition.DISPOSEE, 2, 2001); EquipeDAO.getInstance().add(e3);
+			Equipe e4 = new Equipe(3, "Stuarteam Barthe", Nationalite.FR, Disposition.DISPOSEE, 4, 18); EquipeDAO.getInstance().add(e4);
 			
 			m1.AddEquipe(e);
 			m1.AddEquipe(e2);
@@ -79,7 +76,7 @@ public class InsertValues {
 			Joueur j3 = new Joueur(17, "Sophie", e4.getIdEquipe());JoueurDAO.getInstance().add(j3);
 			Joueur j4 = new Joueur(18, "Samy", e4.getIdEquipe());JoueurDAO.getInstance().add(j4);
 			Joueur j5 = new Joueur(19, "Soul", e4.getIdEquipe());JoueurDAO.getInstance().add(j5);
-			
+
 			TournoiDAO.getInstance().addEquipe(t, e);
 			TournoiDAO.getInstance().addEquipe(t, e2);
 			TournoiDAO.getInstance().addEquipe(t, e3);

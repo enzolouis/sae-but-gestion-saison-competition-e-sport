@@ -17,8 +17,8 @@ import classes.EtatTournoi;
 import classes.Notoriete;
 import classes.Equipe;
 import modeles.TournoiModele;
+import style.Palette;
 import vues.CreationTournoiVue;
-import vues.Palette;
 
 public class CreationTournoiControleur implements ActionListener {
 	private CreationTournoiVue vue;
@@ -33,8 +33,11 @@ public class CreationTournoiControleur implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
 		if (e.getSource() instanceof JButton) {
+			
 			JButton bouton = (JButton) e.getSource();
+			
 			switch (bouton.getText()) {
 			case ("Ajouter"):
 				Arbitre a = (Arbitre) this.vue.comboBoxArbitre.getSelectedItem();
@@ -66,12 +69,10 @@ public class CreationTournoiControleur implements ActionListener {
 				}
 				break;
 			case ("Quitter"):
-				this.vue.dispose();
+				this.vue.closeCurrentWindow();
 				break;
 			case ("Valider"):
-				if (this.vue.textFieldNom.getText().equals("") || this.vue.dateChooserDebut.getDate() == null 
-				|| this.vue.dateChooserFin.getDate() == null || this.vue.textFieldEquipesFile.getText().equals("")
-				|| this.vue.comboBoxArbitre.getItemCount() == 0) {
+				if (checkAllFields()) {
 					vue.messageCreation.setText("Un des champs nécessaires n'a pas été rempli.");
 				} else {
 					String nom = this.vue.textFieldNom.getText();
@@ -116,11 +117,20 @@ public class CreationTournoiControleur implements ActionListener {
 		}
 	}
 	
+	/**
+	 * vérifie si un des fields est vide
+	 * */
 	public boolean checkAllFields() {
-		return this.vue.textFieldEquipesFile.getText().isEmpty() ||
-				this.vue.textFieldNom.getText().isEmpty();
+
+		return (this.vue.textFieldNom.getText().equals("") || this.vue.dateChooserDebut.getDate() == null 
+				|| this.vue.dateChooserFin.getDate() == null || this.vue.textFieldEquipesFile.getText().equals("")
+				|| this.vue.comboBoxArbitre.getItemCount() == 0);
 	}
 	
+	/**
+	 * renvoie la liste complète des informations pour un tournoi
+	 * @param le tournoi à consulter
+	 * */
 	public String infosTournoi(TournoiModele t) {
 		String infos = t.getIDTournoi()+": "+t.getNomTournoi()+"("+t.getNotoriete()+")\n";
 		try {
@@ -135,7 +145,7 @@ public class CreationTournoiControleur implements ActionListener {
 			infos+="\n";
 		}
 		infos+="Liste des équipes:\n";
-		for (Equipe e : t.getEquipes().keySet()) {
+		for (Equipe e : t.getParticipants().keySet()) {
 			infos+=e.toString();
 			infos+="\n";
 		}

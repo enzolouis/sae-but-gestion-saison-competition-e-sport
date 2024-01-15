@@ -24,37 +24,29 @@ import classes.Disposition;
 import classes.Equipe;
 import classes.EtatTournoi;
 import classes.Match;
-import classes.Nationalite;
 import classes.Notoriete;
 import classes.Participer;
 
 public class TournoiModele {
 		
-	//identifiant et titre du tournoi
-	private int idTournoi;
-	private String nomTournoi;
-	//dates d'ouvertures et de fermeture du Tournoi
-	private String dateDebut;
-	private String dateFin;
-	//login d'arbitre
-	private String login;
-	private String mdp;
-	//notoriete du tournoi
-	private Notoriete notoriete;
-	//etat du tournoi
-	private EtatTournoi etat;
-	//liste des matchs sur tournoi 
-	private List<Match> matches;
-	private Match finale;
+	private int idTournoi;				//id de tournoi
+	private String nomTournoi;			//nom de tournoi
+	private String dateDebut;			//date de début de tournoi
+	private String dateFin;				//date de fin de tournoi
+	private String login;				//login d'arbitres
+	private String mdp;					//mot de passe d'arbitres
+	private Notoriete notoriete;		//notoriété du tournoi
+	private EtatTournoi etat;			//état du tournoi
+	private List<Match> matches;		//liste des matchs du tournoi
+	private Match finale;				//finale du tournoi
+	private Optional<Equipe> vainqueur; //vainqueur du tournoi
+	private List<Arbitre> arbitres;		//liste de tous les arbitres du tournoi
+	
 	//dictionnaire des participants du tournoi avec l'équipe
 	//en clé et les points de l'équipe en valeur
 	private Map<Equipe, Integer> participants;
 	//liste contenant les équipes indisposées
 	private List<Equipe> participantsIndisposees;
-	//optional contenant le vainqueur
-	private Optional<Equipe> vainqueur;
-	//liste contenant tous les arbitres assignés au tournoi
-	private List<Arbitre> arbitres;
 
 	/**
 	 * Constructeur de la classe Tournoi
@@ -83,7 +75,10 @@ public class TournoiModele {
 		this.login = login;
 	}
 	
-	public TournoiModele() {		
+	/**
+	 * Constructeur d'un tournoi vide
+	 * */
+	public TournoiModele() {
 		this.matches= new ArrayList<>();
 		this.participants = new HashMap<>();
 		this.participantsIndisposees = new ArrayList<>();
@@ -91,6 +86,15 @@ public class TournoiModele {
 		this.arbitres = new ArrayList<>();
 	}
 	
+	/**
+	 * Constructeur de la classe Tournoi générant les logins
+	 * 	@param id du tournoi
+	 * 	@param nom du tournoi
+	 * 	@param date de début du tournoi, date de son ouverture
+	 * 	@param date de fin, date de sa fermeture
+	 * 	@param notoriété du Tournoi
+	 * 	@param Etat d'ouverture ou fermeture du Tournoi
+	 * */
 	public TournoiModele(int idTournoi, String nomTournoi, String dateDebut, String dateFin, Notoriete notoriete, EtatTournoi etat) {
 		this.idTournoi = idTournoi;
 		this.nomTournoi = nomTournoi;
@@ -107,63 +111,106 @@ public class TournoiModele {
 		this.generateMdp();
 	}
 	
-	//getters et setters de l'identifiant du tournoi
+	/**
+	 * renvoie l'id du tournoi
+	 * */
 	public int getIDTournoi() {
 		return this.idTournoi;
+		
+	/**
+	 * set l'id du tournoi
+	 * @param nouvel identifiant
+	 * */
 	}
 	public void setIDTournoi(int id) {
 		this.idTournoi = id;
 	}
 
-	//getters et setter du nom du tournoi
+	/**
+	 * renvoie le nom du tournoi
+	 * */
 	public String getNomTournoi() {
 		return this.nomTournoi;
 	}
+	
+	/**
+	 * set le nom du tournoi
+	 * @param nouveau nom
+	 * */
 	public void setNomTournoi(String nom) {
 		this.nomTournoi = nom;
 	}
 	
-	//getters et setters de la date de début du tournoi 
+	/**
+	 * renvoie la date de début
+	 * */
 	public Date getDateDebut() throws ParseException {
-			return getDate(this.dateDebut);
+		return getDate(this.dateDebut);
 	}
+	
+	/**
+	 * modifie la date de début
+	 * @param nouvelle date de début
+	 * */
 	public void setDateDebut(String dateD) {
 		this.dateDebut = dateD;
 	}
 	
-	//getters et setters de la date de fin du tournoi
+	/**
+	 * renvoie la date de fin
+	 * */
 	public Date getDateFin() throws ParseException {
 		return getDate(this.dateFin);
 	}
+	
+	/**
+	 * renvoie la date de fin du tournoi
+	 * @param nouvelle date de fin
+	 * */
 	public void setDateFin(String dateF) {
 		this.dateFin = dateF;
 	}
 	
-	//getters et setters de la notoriété du tournoi
+	/**
+	 * renvoie la notoriété du tournoi
+	 * */
 	public Notoriete getNotoriete() {
 		return this.notoriete;
 	}
+	
+	/**
+	 * modifie la notoriété du tournoi
+	 * @param nouvelle notoriété
+	 * */
 	public void setNotoriete(Notoriete not) {
 		this.notoriete = not;
 	}
 	
-	//getters et setters de l'état du tournoi 
+	/**
+	 * renvoie l'état du tournoi
+	 * */
 	public EtatTournoi getEtatTournoi() {
 		return this.etat;
 	}
+	
+	/**
+	 * modifie l'état du tournoi
+	 * @param nouvel état
+	 * */
 	public void setEtatTournoi(EtatTournoi etat) {
 		this.etat = etat;
 	}
 	
-	//getters et setters de la liste des matchs
+	/**
+	 * renvoie la liste des matchs
+	 * */
 	public List<Match> getMatchs(){
 		return this.matches;
 	}
 	
-	public Map<Equipe,Integer> getEquipes() {
-		return this.participants;
-	}
-	
+	/**
+	 * renvoie la liste des arbitres
+	 * */
 	public List<Arbitre> getArbitres() {
 		return this.arbitres;
 	}
@@ -185,18 +232,26 @@ public class TournoiModele {
 		}
 	}
 	
+	/**
+	 * ajoute un match au tournoi
+	 * @param nouveau match
+	 * */
 	public void ajouterMatch(Match m) {
 		this.matches.add(m);
 	}
 	
-	//Donne la map de participant
+	/**
+	 * renvoie le dictionnaire des équipes participant avec leurs points
+	 * */
 	public Map<Equipe, Integer> getParticipants(){
 		return this.participants;
 	}
 	
-	//Ajoute une Equipe donné dans la liste des participans
+	/**
+	 * ajoute une équipe au tournoi
+	 * */
 	public void ajouterEquipe(Equipe equipe, int resultat) {
-		if (equipe.getDispose().equals(Disposition.DISPOSEE)) {
+		if (equipe.getDisposition().equals(Disposition.DISPOSEE)) {
 			this.participants.put(equipe, resultat);
 		} else {
 			this.participantsIndisposees.add(equipe);
@@ -204,44 +259,64 @@ public class TournoiModele {
 		
 	}
 	
-	public void supprimerEquipe(Equipe equipe) {
+	/**
+	 * rend une équipe indiposée
+	 * @param équipe à indisposer
+	 * */
+	public void rendreIndisposé(Equipe equipe) {
 		this.participants.remove(equipe);
 		this.participantsIndisposees.add(equipe);
 	}
 	
+	/**
+	 * ajoute un arbitre
+	 * @param arbitre à ajouter
+	 * */
 	public void ajouterArbitre(Arbitre arbitre) {
 		this.arbitres.add(arbitre);
 	}
 	
-	//Attribue les points à une Equipe
+	/**
+	 * met à jour les points d'une équipe inscrite au tournoi
+	 * @param equipe dont les points sont à supprimer
+	 * @param points à mettre
+	 * */
 	public void majPointsEquipe(Equipe equipeARemplacer, int points) {
 		this.participants.put(equipeARemplacer, points);
 	}
 
-	//Donne le Login du Tournoi
+	/**
+	 * renvoie le login d'arbitre du tournoi
+	 * */
 	public String getLogin() {
 		return this.login;	}
 	
-	//Donne le Mot de Passe du Tournoi
+	/**
+	 * renvoie le mot de passe d'arbitre du tournoi
+	 * */
 	public String getMotDePasse() {
 		return this.mdp;
 	}
 
-	//Donne l'Equipe vainqueur du Tournoi, 
-	//retourne un false si aucuns vainqueur n'est encore attribué
+	/**
+	 * renvoie le vainqueur du tournoi, sera empty si aucun joueur n'est déterminé
+	 * */
 	public Optional<Equipe> getVainqueur() {
 		return this.vainqueur;
 	}
 
 	
-	//Génère un Login pour le Tournoi,
-	//l'ensemble est basé sur le NomTournoi + idTournoi, en UpperCase + 3 lettres générés au hasard
+	/**
+	 * génère le login d'arbitre du torunoi
+	 * */
 	private void generateLogin() {
 		this.login = this.nomTournoi.substring(0, 2) + this.idTournoi + this.generateLetter()+ this.generateLetter() + this.generateLetter();
 		this.login = this.login.toUpperCase();
 	}
 	
-	//Génère un Mot de Passe pour le Tournoi
+	/**
+	 * génère le mot de passe du tournois
+	 * */
 	private void generateMdp() {
 		
 		String motdepasse = "";
@@ -252,62 +327,62 @@ public class TournoiModele {
 		motdepasse += r.nextInt(100);
 		List<String> letters = Arrays.asList(motdepasse);
 		Collections.shuffle(letters);
+		this.mdp = "";
 		for (String letter : letters) {
 			this.mdp+=letter;
 		}
 		
 	}
 	
-	//Renvois une lettre au hasard 
-	//Utilisé pour la génération de Mot de passe et ID du Tournoi
+	/**
+	 * renvoie une lettre au hasard
+	 * */
 	private char generateLetter() {
 		Random r = new Random();
 		return (char)(r.nextInt(26) + 'a');
 	}
 	
+	/**
+	 * renvoie une date depuis une chaîne de caractères
+	 * @param date en chaîne de caractère
+	 * */
 	private static Date getDate(String date) throws ParseException {
 		return new Date(new SimpleDateFormat("dd/MM/yyyy").parse(date).getTime());
 	}
 	
-	
+	/**
+	 * renvoie un booléen indiquant s'il n'y a pas déjà un tournoi
+	 * avec le même nom que le tournoi actuel dans la bdd
+	 * */
 	public boolean isNonDupe() throws Exception {
-		// El torn "torn" n'est pas damns a base den dons damns cite function
 		for (TournoiModele t : TournoiDAO.getInstance().getAll()) {
 			if (t.getNomTournoi().equals(getNomTournoi())) {
 				return false;
 			}
 		}
-		
 		return true;
 	}
 	
+	/**
+	 * renvoie un bool indiquant de la dateFin > dateDebut
+	 * */
 	public boolean isDateFinSupADateDebut() throws ParseException {
 		return getDateFin().after(getDateDebut());
 	}
 	
+	/**
+	 * renvoie un bool indiquant que la durée du tournoi est inf à 30j
+	 * */
 	public boolean isDateFinDateDebutDifferenceInfA30Jours() throws ParseException {
 		// 30 jours = 2592000000 milisecond
-		
 		return getDateFin().getTime() - getDateDebut().getTime() < 2592000000L;
 	}
 	
+	/**
+	 * renvoie un bool indiquant qu'aucun tournoi n'existe sur le même créneau que celui ci
+	 * */
 	public boolean isTournoiNonSuperpose() throws Exception {
 		for (TournoiModele t : TournoiDAO.getInstance().getAll()) {
-			// /* = peut se positionner n'importe ou
-			// 						19/01							  30/01
-			//   					  |									|
-			
-			// Cas 1           			     |----------------------------------|
-			// Cas 2  	|-----------------------------|
-			// Cas 3  	|-------------------------------------------------------|
-			// Cas 4		   					|------------|
-			// Cas 4 déclaré optionnel :
-			// || (getDateDebut().compareTo(t.getDateDebut()) >= 0 && getDateFin().compareTo(t.getDateFin()) <= 0)
-			// quand un des deux premier cas est rempli ET que la pré-condition dateDébut < dateFin est rempli
-			// , le cas 4 est forcément rempli		
-			
-			// pré-condition : date début < date fin
-			
 			
 			if ((getDateDebut().compareTo(t.getDateDebut()) >= 0 && getDateDebut().compareTo(t.getDateFin()) <= 0) 
 	                || (getDateFin().compareTo(t.getDateDebut()) >= 0 && getDateFin().compareTo(t.getDateFin()) <= 0) 
@@ -319,12 +394,18 @@ public class TournoiModele {
 		return true;
 	}
 	
+	/**
+	 * renvoie le string de la date
+	 * */
 	public String getDateString(java.util.Date date) {
 		Calendar c = Calendar.getInstance();
 		c.setTime(date);
 		return c.get(Calendar.DAY_OF_MONTH)+"/"+(Integer.valueOf(c.get(Calendar.MONTH))+1)+"/"+c.get(Calendar.YEAR);
 	}
 	
+	/**
+	 * renvoie si un tournoi respecte toutes les restrictions de validité
+	 * */
 	public boolean isTournoiValide() {
 		try {
 			return this.isDateFinDateDebutDifferenceInfA30Jours() && this.isDateFinSupADateDebut()
@@ -336,16 +417,25 @@ public class TournoiModele {
 		return false;
 	}
 	
+	/**
+	 * renvoie si le tournoi a au min 4 équipes dispoées
+	 * */
 	public boolean isTournoiMinimum4EquipeDisposee() {		
 		return participants.keySet()
 				.stream()
 				.filter(e -> e.getDisposition().equals(Disposition.DISPOSEE)).count() >= 4;
 	}
 	
+	/**
+	 * renvoie si le tournoi a au min 1 arbitre
+	 * */
 	public boolean isTournoiMinimum1Arbitre() {
 		return arbitres.size() >= 1;
 	}
 	
+	/**
+	 * renvoie si nous sommes aujourd'hui dans le créneau du tournoi
+	 * */
 	public boolean isDateCouranteDansCreneauTournoi() throws ParseException {
 		LocalDate currentDate = LocalDate.now();
 
@@ -354,6 +444,9 @@ public class TournoiModele {
 		return sqlDate.compareTo(getDateDebut()) != -1 && getDateFin().compareTo(sqlDate) != -1;
 	}
 	
+	/**
+	 * renvoie si un tournoi est ouvert
+	 * */
 	public static boolean isAucunTournoiOuvert() throws Exception {
 		for (TournoiModele t : TournoiDAO.getInstance().getAll()) {
 			if (t.getEtatTournoi() == EtatTournoi.OUVERT) {
@@ -364,12 +457,18 @@ public class TournoiModele {
 		return true;
 	}
 	
+	/**
+	 * supprime la participation des équipes indiposées de la bdd
+	 * */
 	public void supprimerEquipeIndisposees() throws Exception {
 		for (Equipe e : this.participantsIndisposees) {
 			ParticiperDAO.getInstance().delete(new Participer(e.getIdEquipe(), this.getIDTournoi(), 0)); // 0 : arbitraire
 		}
 	}
 	
+	/**
+	 * renvoie si le tournoi est ouvrable
+	 * */
 	public boolean isTournoiOuvrable() throws ParseException, Exception {
 		return this.isTournoiMinimum4EquipeDisposee() 
 				&& this.isTournoiMinimum1Arbitre() 
@@ -377,6 +476,9 @@ public class TournoiModele {
 				&& this.isDateCouranteDansCreneauTournoi();
 	}
 	
+	/**
+	 * ouvre un tournoi
+	 * */
 	public void ouvrirTournoi() throws Exception {
 		if (this.isTournoiOuvrable()) {
 			this.supprimerEquipeIndisposees();

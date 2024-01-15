@@ -7,21 +7,15 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
-import java.awt.Insets;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JSeparator;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import controleurs.ChoixArbitreControleur;
 import controleurs.IdentificationControleur;
 import style.CustomJButton;
 import style.CustomJFrame;
@@ -30,17 +24,11 @@ import style.CustomJPanel;
 import style.CustomJPasswordField;
 import style.CustomJSeparator;
 import style.CustomJTextField;
-import java.awt.Rectangle;
-import javax.swing.border.LineBorder;
+import style.Palette;
 
 public class IdentificationVue extends CustomJFrame {
-
-	
-	
-	
     private JPanel contentPane;
     private IdentificationControleur controleur;
-    
     private CustomJTextField textFieldUtilisateur;
     private CustomJPasswordField textFieldMotDePasse;
     public CustomJLabel erreurOuverture;
@@ -71,11 +59,8 @@ public class IdentificationVue extends CustomJFrame {
     	return textFieldMotDePasse;
     }
     
-    public IdentificationVue() throws Exception {
+    public IdentificationVue() {
     	super(new Dimension(300, 450), "Identification");
-    	
-    	ImageIcon icon = new ImageIcon("src\\logo_app.png");
-    	this.setIconImage(icon.getImage());
     	
     	pack();
     	

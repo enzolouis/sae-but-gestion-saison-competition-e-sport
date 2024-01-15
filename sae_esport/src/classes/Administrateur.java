@@ -22,7 +22,9 @@ public class Administrateur {
 		this.motDePasse = mdp;
 	}
 
-	//Retourne le nom l'Administrateur
+	/**
+	 * Renvoie le nom de l'administrateur
+	 * */
 	public String getNom() {
 		return nom;
 	}
@@ -35,17 +37,23 @@ public class Administrateur {
 		this.nom = nom;
 	}
 	
-	//Retourne le Login de l'Administrateur
+	/**
+	 * Renvoie le login de l'administrateur
+	 * */
 	public String getLogin() {
 		return login;
 	}
 
-	//Retourne le Mot de Passe de l'Administrateur
+	/**
+	 * Renvoie le mot de passe de l'administrateur
+	 * */
 	public String getMotDePasse() {
 		return motDePasse;
 	}
 
-	//Retourne l'ID de l'Administrateur
+	/**
+	 * Renvoie l'identifiant de l'administrateur
+	 * */
 	public int getIdAdministrateur() {
 		return this.idAdministrateur;
 	}

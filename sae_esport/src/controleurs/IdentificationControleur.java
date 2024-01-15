@@ -1,4 +1,5 @@
 package controleurs;
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -6,10 +7,10 @@ import javax.swing.Timer;
 import javax.swing.border.LineBorder;
 import modeles.IdentificationModele;
 import modeles.IdentificationModele.Utilisateur;
+import style.Palette;
 import vues.AccueilAdministrateurVue;
 import vues.AccueilArbitreVue;
 import vues.IdentificationVue;
-import vues.Palette;
 
 public class IdentificationControleur implements ActionListener {
 	
@@ -18,24 +19,27 @@ public class IdentificationControleur implements ActionListener {
 	private boolean isMotDePasseCache;
 	private Timer animationErreur;
 	
-	public IdentificationControleur(IdentificationVue vue) throws Exception {
+	public IdentificationControleur(IdentificationVue vue) {
 		this.isMotDePasseCache = true;
 		this.vue = vue;
 		this.modele = new IdentificationModele();
 	}
 	
+	/**
+	 * tente de se connecter à l'application avec les logins dans les fields
+	 * */
 	public void seConnecter() throws Exception {
 		
 		String login = this.vue.getUtilisateurContenu();
 		String mdp = this.vue.getMotDePasseContenu();
 		if (this.modele.checkLogins(login, mdp)) {
+			this.vue.closeCurrentWindow();
 			if (this.modele.getUtilisateur() == Utilisateur.ADMIN) {
 				AccueilAdministrateurVue vueAdmin;
 				try {
 					vueAdmin = new AccueilAdministrateurVue();
 					vueAdmin.setVisible(true);
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			} else {
@@ -73,6 +77,9 @@ public class IdentificationControleur implements ActionListener {
 		}
 	}
 	
+	/**
+	 * masque le mot de passe ou le démasque selon son état actuel
+	 * */
 	public void inverserIconMotDePasseMasque(JButton btn) {
 		this.isMotDePasseCache = !this.isMotDePasseCache;
 		if (isMotDePasseCache) {
@@ -88,10 +95,11 @@ public class IdentificationControleur implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() instanceof JButton) {
 			JButton bouton = (JButton) e.getSource();
+			
 			switch (bouton.getText()) {
+			
 			case "Quitter":
-				this.vue.setVisible(false);
-				this.vue.dispose();
+				this.vue.closeCurrentWindow();
 				break;
 			case "Se connecter":
 				try {
@@ -105,6 +113,7 @@ public class IdentificationControleur implements ActionListener {
 				this.inverserIconMotDePasseMasque(bouton);
 				break;
 			}
+			
 		}
 		else {
 			try {

@@ -5,17 +5,11 @@ import java.awt.EventQueue;
 
 import style.*;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JToggleButton;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
-
 import com.toedter.calendar.JDateChooser;
 
 import DAOs.TournoiDAO;
@@ -32,15 +26,10 @@ import java.awt.Color;
 import javax.swing.JList;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
-import javax.swing.ImageIcon;
-import javax.swing.JCheckBox;
-import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.Rectangle;
-import javax.swing.JButton;
 import java.awt.Component;
-import javax.swing.border.LineBorder;
 
 public class ListeTournoisVue extends CustomJFrame {	
 	public JTable tableTournois;
@@ -78,17 +67,12 @@ public class ListeTournoisVue extends CustomJFrame {
 	    }
 	
 	public ListeTournoisVue() {
+		super(new Dimension(500, 700), "Liste des tournois");
 		
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
-		setTitle("Liste des tournois");
-		
-		ImageIcon icon = new ImageIcon("src\\logo_app.png");
-    	this.setIconImage(icon.getImage());
 		
 		controleur = new ListeTournoisControleur(this);
-		
-		setSize(new Dimension(700, 550));
 		
 		CustomJPanel panel = new CustomJPanel();
 		getContentPane().add(panel);
@@ -113,7 +97,7 @@ public class ListeTournoisVue extends CustomJFrame {
 		panelTournois.add(panelListe);
 		panelListe.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		JScrollPane scrollListe = new JScrollPane();
-		scrollListe.setForeground(new Color(255, 255, 255));
+		scrollListe.setForeground(Palette.WHITE);
 		scrollListe.setPreferredSize(new Dimension(500, 180));
 		scrollListe.setSize(new Dimension(100, 100));
 		tableTournois = new JTable(){
@@ -192,10 +176,14 @@ public class ListeTournoisVue extends CustomJFrame {
 		panelEquipeArbitre.add(panelEquipe);
 		
 		titreEquipe = new CustomJLabel("aaa", 10);
+		titreEquipe.setMinimumSize(new Dimension(150, 14));
+		titreEquipe.setMaximumSize(new Dimension(150, 14));
+		titreEquipe.setSize(new Dimension(150, 14));
+		titreEquipe.setPreferredSize(new Dimension(200, 14));
 		titreEquipe.setText("");
 		titreEquipe.setFont(Palette.customFont.deriveFont(Font.BOLD, 11));
 		titreEquipe.setBounds(new Rectangle(0, 0, 10, 10));
-		titreEquipe.setBounds(48, 0, 53, 14);
+		titreEquipe.setBounds(0, 0, 150, 14);
 		joueurs = new JList<Joueur>();
 		listeEquipes.setFont(Palette.customFont.deriveFont(Font.PLAIN, 9));
 		joueursModel = new DefaultListModel<Joueur>();
@@ -203,16 +191,16 @@ public class ListeTournoisVue extends CustomJFrame {
 		//joueurs = new CustomJLabel("bbb", 8);
 		//joueurs.setText("");
 		joueurs.setFont(Palette.customFont.deriveFont(Font.PLAIN, 9));
-		//joueurs.setVerticalAlignment(SwingConstants.TOP);
+		joueurs.setBackground(Palette.BLACK);
+		joueurs.setForeground(Palette.WHITE);//joueurs.setVerticalAlignment(SwingConstants.TOP);
 		//joueurs.setHorizontalTextPosition(SwingConstants.CENTER);
 		//joueurs.setHorizontalAlignment(SwingConstants.LEFT);
 		//joueurs.setSize(new Dimension(15, 10));
-		joueurs.setBounds(new Rectangle(10, 10, 10, 10));
-		joueurs.setBounds(24, 31, 100, 66);
+		//joueurs.setBounds(new Rectangle(10, 20, 10, 20));
+		joueurs.setBounds(24, 31, 50, 80);
 		disposition = new CustomJLabel("ccc", 8);
 		disposition.setText("");
 		disposition.setFont(Palette.customFont.deriveFont(Font.BOLD, 9));
-		disposition.setHorizontalAlignment(SwingConstants.LEFT);
 		disposition.setBounds(25, 11, 100, 20);
 		panelJoueurs.setLayout(null);
 		panelJoueurs.add(titreEquipe); panelJoueurs.add(joueurs);
@@ -321,5 +309,12 @@ public class ListeTournoisVue extends CustomJFrame {
 		erreurOuverture.setBorder(new EmptyBorder(3, 3, 3, 3));
 		erreurOuverture.setAlignmentX(Component.CENTER_ALIGNMENT);
 		boutonsTournoi.add(erreurOuverture);
+	}
+	
+
+	public void closeCurrentWindow() {
+		super.closeCurrentWindow();
+		AccueilAdministrateurVue frame = new AccueilAdministrateurVue();
+		frame.setVisible(true);
 	}
 }

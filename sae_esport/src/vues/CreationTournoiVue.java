@@ -24,8 +24,9 @@ import classes.Notoriete;
 import controleurs.CreationTournoiControleur;
 import style.CustomJButton;
 import style.CustomJFrame;
+import style.CustomJLabel;
 import style.CustomJSeparator;
-import style.CustomJTextField;
+import style.Palette;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -33,11 +34,11 @@ import java.awt.EventQueue;
 import javax.swing.JButton;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
-import javax.swing.ImageIcon;
 import javax.swing.JList;
 import java.awt.Rectangle;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.Date;
 import java.awt.Component;
 
 public class CreationTournoiVue extends CustomJFrame {
@@ -70,13 +71,9 @@ public class CreationTournoiVue extends CustomJFrame {
 	
 	public CreationTournoiVue() {
 		
-		super(new Dimension(530,350));
+		super(new Dimension(530,350), "Création de tournoi");
 		setBounds(new Rectangle(0, 0, 700, 580));
-		setTitle("Création de tournoi");
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		
-		ImageIcon icon = new ImageIcon("src\\logo_app.png");
-    	this.setIconImage(icon.getImage());
 		
 		this.controleur = new CreationTournoiControleur(this);
 		Color backgroundColor = Palette.BLACK;
@@ -98,9 +95,7 @@ public class CreationTournoiVue extends CustomJFrame {
 		JSeparator separatorTitre = new CustomJSeparator();
 		panelTitre.add(separatorTitre, BorderLayout.SOUTH);
 		
-		JLabel lblCreationDeTournoi = new JLabel("CRÉATION DE TOURNOI");
-		lblCreationDeTournoi.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCreationDeTournoi.setForeground(policeColor);
+		CustomJLabel lblCreationDeTournoi = new CustomJLabel("CRÉATION DE TOURNOI", 25);
 		lblCreationDeTournoi.setFont(Palette.customFont.deriveFont(Font.BOLD, 20));
 		lblCreationDeTournoi.setBorder(new EmptyBorder(10, 10, 10, 10));
 		panelTitre.add(lblCreationDeTournoi, BorderLayout.CENTER);
@@ -203,6 +198,7 @@ public class CreationTournoiVue extends CustomJFrame {
 		panelDateDebut.add(lblDateDeDbut);
 		
 		this.dateChooserDebut = new JDateChooser();
+		this.dateChooserDebut.getJCalendar().setMinSelectableDate(new Date());
 		dateChooserDebut.setForeground(Palette.WHITE);
 		dateChooserDebut.setFont(Palette.customTextFont.deriveFont(Font.PLAIN, 11));
 		for(Component c : dateChooserDebut.getComponents()){
@@ -228,6 +224,7 @@ public class CreationTournoiVue extends CustomJFrame {
 		panelDateFin.add(lblDateDeFin);
 		
 		this.dateChooserFin = new JDateChooser();
+		this.dateChooserFin.getJCalendar().setMinSelectableDate(new Date());
 		dateChooserFin.setFont(Palette.customTextFont.deriveFont(Font.PLAIN, 11));
 		for(Component c : dateChooserFin.getComponents()){
 			((JComponent)c).setBackground(Palette.BLUE);
@@ -389,6 +386,12 @@ public class CreationTournoiVue extends CustomJFrame {
 		panelMessage.add(messageCreation);
 		panelValidation.add(panelMessage);
 
+	}
+	
+	public void closeCurrentWindow() {
+		super.closeCurrentWindow();
+		AccueilAdministrateurVue frame = new AccueilAdministrateurVue();
+		frame.setVisible(true);
 	}
 
 }

@@ -2,9 +2,6 @@ package tests;
 
 import static org.junit.Assert.*;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,7 +15,6 @@ import classes.DBConnection;
 import classes.Disposition;
 import classes.Equipe;
 import classes.EtatTournoi;
-import classes.Joueur;
 import classes.Match;
 import classes.Nationalite;
 import classes.Notoriete;

@@ -7,6 +7,7 @@ import style.CustomJFrame;
 import vues.AccueilAdministrateurVue;
 import vues.ConsultationSaisonVue;
 import vues.CreationTournoiVue;
+import vues.IdentificationVue;
 import vues.ListeTournoisVue;
 
 public class AccueilAdministrateurControleur implements ActionListener {
@@ -19,28 +20,40 @@ public class AccueilAdministrateurControleur implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
 		if (e.getSource() instanceof JButton) {
+			
 			JButton bouton = (JButton) e.getSource();
 			CustomJFrame frame;
+			
 			switch (bouton.getText()) {
 			case ("Quitter"):
-				this.vue.setVisible(false);
-				this.vue.dispose();
+				this.vue.closeCurrentWindow();
+				break;
+			case "Se déconnecter":
+				this.vue.closeCurrentWindow();
+				frame = new IdentificationVue();
+				frame.setVisible(true);
 				break;
 			case ("Créer un tournoi"):
+				this.vue.closeCurrentWindow();
 				frame = new CreationTournoiVue();
 				frame.setVisible(true);
 				break;
 			case ("Statistiques de la saison"):
+				this.vue.closeCurrentWindow();
 				frame = new ConsultationSaisonVue();
 				frame.setVisible(true);
 				break;
 			case ("Liste des tournois"):
+				this.vue.closeCurrentWindow();
 				frame = new ListeTournoisVue();
 				frame.setVisible(true);
+				break;
 			default:
 				break;
 			}
+	
 		}
 	}
 

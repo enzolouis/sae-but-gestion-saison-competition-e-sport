@@ -16,19 +16,15 @@ public class Equipe {
 	
 	
 	
-	/**Constructeur, SANS une liste de joueurs déja donné
+	/**Constructeur SANS une liste de joueurs déja donné
 	*	@param l'ID de l'Equipe
 	*	@param la Nationalite de l'Equipe
 	*	@param la Disposition d'une Equipe, en boolean
 	*	@param le Rang de l'Equipe sur leurs Saison précédente
 	*	@param leurs valeur de Points sur la Saison courante
 	*/
-	public Equipe(int id, 
-					String nom, 
-					Nationalite nat,
-					Disposition dispose, 
-					int rangSaisonPrecedante, 
-					int pointsSaison) {
+	public Equipe(int id, String nom, Nationalite nat,Disposition dispose, 
+				int rangSaisonPrecedante, int pointsSaison) {
 		this.idEquipe = id;
 		this.nom = nom;
 		this.nationalite = nat;
@@ -39,7 +35,7 @@ public class Equipe {
 		
 	}
 	
-	/**Constructeur, AVEC une liste de joueurs déja donné
+	/**Constructeur AVEC une liste de joueurs déja donné
 	*	@param l'ID de l'Equipe
 	*	@param la Nationalite de l'Equipe
 	*	@param la Disposition d'une Equipe, en boolean
@@ -47,13 +43,9 @@ public class Equipe {
 	*	@param le Rang de l'Equipe sur leurs Saison précédente
 	*	@param leurs valeur de Points sur la Saison courante
 	*/
-	public Equipe(int id, 
-					String nom, 
-					Nationalite nat, 
-					List<Joueur> joueurs,
-					Disposition dispose, 
-					int rangSaisonPrecedante, 
-					int pointsSaison) {
+	public Equipe(int id, String nom, Nationalite nat, List<Joueur> joueurs,
+				Disposition dispose, int rangSaisonPrecedante, int pointsSaison) {
+		
 		this.idEquipe = id;
 		this.nom = nom;
 		this.nationalite = nat;
@@ -67,58 +59,90 @@ public class Equipe {
 		}
 	}
 
-	//Retourne le nom l'Equipe
+	/**
+	 * Renvoie le nom de l'équipe
+	 * */
 	public String getNom() {
 		return nom;
 	}
+	
 	/**
-	 * Change le nom de l'Equipe
-	 * 	@param le nom de l'Equipe à remplacer
+	 * Change le nom de l'équipe
+	 * 	@param le nouveau nom de l'équipe
 	 * */
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
 		
-	//Retourne la Nationalite de l'Equipe
+	/**
+	 * Renvoie la nationalité de l'équipe
+	 * */
 	public Nationalite getNationalite() {
 		return nationalite;
 	}
+	
 	/**
-	 * Change la Nationalite de l'Equipe
-	 * 	@param la valeur Nationalite avec lequel remplacer l'Equipe
+	 * Change la nationalité de l'Equipe
+	 * 	@param la nouvelle nationalité de l'équipe
 	 * */
 	public void setNationalite(Nationalite nationalite) {
 		this.nationalite = nationalite;
 	}
 	
+	/**
+	 * Renvoie la disposition de l'équipe
+	 * */
 	public Disposition getDisposition() {
 		return this.dispose;
 	}
+	
+	/**
+	 * Change la disposition de l'équipe
+	 * @param la nouvelle disposition de l'équipe
+	 * */
 	public void setDisposition(Disposition disposition) {
 		this.dispose = disposition;
 	}
 	
-	//Retourne la liste de joueurs
+	/**
+	 * Renvoie la liste des joueurs de l'équipe
+	 * */
 	public List<Joueur> getListeJoueurs(){
 		return this.joueurs;
 	}
-	public void AjouterJoueurs(Joueur joueur){
+	
+	/**
+	 * Ajoute un joueur à l'équipe
+	 * @param le nouveau joueur de l'équipe
+	 * */
+	public void ajouterJoueur(Joueur joueur){
 		this.joueurs.add(joueur);
 	}
 	
+	/**
+	 * Renvoie les points de l'équipe pour la saison actuelle
+	 * */
 	public int getPointsSaison(){
 		return this.pointsSaison;
 	}
-	//Fixe une valeur de points donné, peut être utilisé pour la correction de scores
+	
+	/**
+	 * Permet de changer les points de l'équipe pour la saison actuelle
+	 * */
 	public void setPointsSaison(int pointsSaison){
 		this.pointsSaison = pointsSaison;
 	}
-	//Ajout de points à l'equipe, différencier avec le set
+	
+	/**
+	 * Permet d'ajouter des points à l'équipe pour la saison actuelle
+	 * */
 	public void ajoutDePoints(int points){
 		this.pointsSaison += points;
 	}
 	
-	//Retourne le Rang de la Saison précendente de l'Equipe
+	/**
+	 *	renvoie le rang de l'équipe lors du rang de la saison précédente
+	 * */
 	public int getRangSaisonPrecedante(){
 		return this.rangSaisonPrecedante;
 	}
@@ -134,23 +158,10 @@ public class Equipe {
 	public void setIdEquipe(int id) {
 		this.idEquipe = id;
 	}
-	
-	//Retourne l'ID de l'Equipe
-	public Disposition getDispose() {
-		return this.dispose;
-	}
-
-	/**Change l'ID de l'Equipe
-	 * 	@param valeur d'ID avec lequel remplacer
-	 * */
-	public void setDispose(Disposition d) {
-		this.dispose = d;
-	}
 
 	@Override
 	public String toString() {
-		String s = nom+" ("+nationalite+")";
-		return s;
+		return nom+" ("+nationalite+")";
 	}
 
 	@Override

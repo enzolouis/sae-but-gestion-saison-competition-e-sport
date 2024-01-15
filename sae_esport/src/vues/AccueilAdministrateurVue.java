@@ -8,7 +8,6 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
-import javax.swing.ImageIcon;
 import javax.swing.border.EmptyBorder;
 
 import controleurs.AccueilAdministrateurControleur;
@@ -17,6 +16,7 @@ import style.CustomJFrame;
 import style.CustomJLabel;
 import style.CustomJPanel;
 import style.CustomJSeparator;
+import style.Palette;
 
 public class AccueilAdministrateurVue extends CustomJFrame {
 
@@ -35,20 +35,20 @@ public class AccueilAdministrateurVue extends CustomJFrame {
     public AccueilAdministrateurVue() {
     	
     	super(new Dimension(400, 300), "Accueil Administrateur");
-    	setDefaultCloseOperation(EXIT_ON_CLOSE);
-    	ImageIcon icon = new ImageIcon("src\\logo_app.png");
-    	setIconImage(icon.getImage());
-    	controleur = new AccueilAdministrateurControleur(this);
-    	contentPane = getContentPanel();
-        setContentPane(contentPane);
+    	
+    	this.setDefaultCloseOperation(EXIT_ON_CLOSE);
     	
     	pack();
+    	
+    	this.controleur = new AccueilAdministrateurControleur(this);
+
+        contentPane = super.getContentPanel();
         
         // Top Panel : Titre
         CustomJPanel panelTitre = new CustomJPanel();
         contentPane.add(panelTitre, BorderLayout.NORTH);
         
-        CustomJLabel titreFenetre = new CustomJLabel("Page d'administration", 25, new EmptyBorder(10, 10, 10, 10));
+        CustomJLabel titreFenetre = new CustomJLabel("PAGE D'ADMINISTRATION", 25);
         titreFenetre.setFont(Palette.customFont.deriveFont(Font.BOLD, 20));
         titreFenetre.setForeground(Palette.WHITE);
         panelTitre.add(titreFenetre, BorderLayout.CENTER);
@@ -58,6 +58,8 @@ public class AccueilAdministrateurVue extends CustomJFrame {
         
         // Middle Panel : Actions / Sujet
         CustomJPanel panelMiddle = new CustomJPanel(new EmptyBorder(5, 5, 5, 5));
+        
+        
         
         GridBagLayout gbl_panelMiddle = new GridBagLayout(); 
         panelMiddle.setLayout(gbl_panelMiddle);
@@ -94,6 +96,12 @@ public class AccueilAdministrateurVue extends CustomJFrame {
         // Bottom Panel : Quitter & Divers
         CustomJPanel panelQuitterSeconnecter = new CustomJPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
         contentPane.add(panelQuitterSeconnecter, BorderLayout.SOUTH);
+        
+        CustomJButton btnDeconnexion = new CustomJButton("Se déconnecter", 10);
+        btnDeconnexion.setBackground(Palette.REDQUIT);
+        btnDeconnexion.setForeground(Palette.WHITE);
+        btnDeconnexion.addActionListener(this.controleur);
+        panelQuitterSeconnecter.add(btnDeconnexion, BorderLayout.CENTER); 
         
         CustomJButton btnQuit = new CustomJButton("Quitter", 10);
         btnQuit.setBackground(Palette.REDQUIT);

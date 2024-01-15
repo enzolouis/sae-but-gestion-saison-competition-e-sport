@@ -11,8 +11,6 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import vues.Palette;
-
 @SuppressWarnings("serial")
 public class CustomJPasswordField extends JPasswordField {
     private Shape shape;

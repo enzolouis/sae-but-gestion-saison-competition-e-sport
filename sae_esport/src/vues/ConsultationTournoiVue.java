@@ -9,7 +9,6 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.util.stream.Collectors;
 
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
@@ -28,6 +27,9 @@ import style.CustomJFrame;
 import style.CustomJLabel;
 import style.CustomJPanel;
 import style.CustomJSeparator;
+import style.EvenOddRenderer;
+import style.Palette;
+
 import javax.swing.JTable;
 
 public class ConsultationTournoiVue extends CustomJFrame {
@@ -68,9 +70,6 @@ public class ConsultationTournoiVue extends CustomJFrame {
 		// tournoi en paramètre
 		
 		controleur = new ConsultationTournoiControleur(this);
-		
-		ImageIcon icon = new ImageIcon("src\\logo_app.png");
-    	this.setIconImage(icon.getImage());
 		
     	pack();
     	
@@ -165,6 +164,12 @@ public class ConsultationTournoiVue extends CustomJFrame {
         btnQuit.setForeground(new Color(255, 255, 255));
         //btnQuit.addActionListener(this.controleur);
         panelQuitterSeconnecter.add(btnQuit);
+	}
+	
+	public void closeCurrentWindow() {
+		super.closeCurrentWindow();
+		AccueilArbitreVue frame = new AccueilArbitreVue();
+		frame.setVisible(true);
 	}
 
 }

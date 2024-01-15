@@ -6,12 +6,9 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Duration;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -30,7 +27,6 @@ import classes.EtatTournoi;
 import classes.Nationalite;
 import classes.Notoriete;
 import modeles.TournoiModele;
-
 
 public class TestTournoiModele {
 	
@@ -201,7 +197,7 @@ public class TestTournoiModele {
 				Notoriete.REGIONAL,
 				EtatTournoi.FERME);
 
-	Equipe e = new Equipe(1,"rofl",Nationalite.AD,Disposition.NON_DIPOSEE,14,12);
+	Equipe e = new Equipe(1,"rofl",Nationalite.AD,Disposition.NON_DISPOSEE,14,12);
 	t.ajouterEquipe(e,0);
 	t.majPointsEquipe(e, 121);
 	assertTrue(t.getParticipants().containsKey(e));
@@ -466,7 +462,7 @@ public class TestTournoiModele {
 		t.ajouterEquipe(new Equipe(1, "e1", Nationalite.FR, Disposition.DISPOSEE, 1000, 100),0);
 		t.ajouterEquipe(new Equipe(2, "e2", Nationalite.FR, Disposition.DISPOSEE, 1000, 100),0);
 		t.ajouterEquipe(new Equipe(3, "e3", Nationalite.FR, Disposition.DISPOSEE, 1000, 100),0);
-		t.ajouterEquipe(new Equipe(4, "e4", Nationalite.FR, Disposition.NON_DIPOSEE, 1000, 100),0);
+		t.ajouterEquipe(new Equipe(4, "e4", Nationalite.FR, Disposition.NON_DISPOSEE, 1000, 100),0);
 		
 		assertFalse(t.isTournoiMinimum4EquipeDisposee());
 	}
@@ -665,7 +661,7 @@ public class TestTournoiModele {
 		
 		t.ajouterEquipe(new Equipe(1, "e1", Nationalite.FR, Disposition.DISPOSEE, 1000, 100), 0);
 		t.ajouterEquipe(new Equipe(2, "e2", Nationalite.FR, Disposition.DISPOSEE, 1000, 100), 0);
-		t.ajouterEquipe(new Equipe(5, "e5", Nationalite.FR, Disposition.NON_DIPOSEE, 1000, 100), 0);
+		t.ajouterEquipe(new Equipe(5, "e5", Nationalite.FR, Disposition.NON_DISPOSEE, 1000, 100), 0);
 		
 		t.supprimerEquipeIndisposees();
 		

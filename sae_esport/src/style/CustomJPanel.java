@@ -9,8 +9,6 @@ import java.awt.GridLayout;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import vues.Palette;
-
 public class CustomJPanel extends JPanel {
 	
 	/**
