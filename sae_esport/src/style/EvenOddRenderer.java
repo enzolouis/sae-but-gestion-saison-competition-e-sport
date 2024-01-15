@@ -1,4 +1,4 @@
-package vues;
+package style;
 import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JLabel;
@@ -6,7 +6,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 
-class EvenOddRenderer implements TableCellRenderer {
+public class EvenOddRenderer implements TableCellRenderer {
 
   public static final DefaultTableCellRenderer DEFAULT_RENDERER = new DefaultTableCellRenderer();
 

@@ -30,6 +30,8 @@ import style.CustomJPanel;
 import style.CustomJPasswordField;
 import style.CustomJSeparator;
 import style.CustomJTextField;
+import style.Palette;
+
 import java.awt.Rectangle;
 import javax.swing.border.LineBorder;
 

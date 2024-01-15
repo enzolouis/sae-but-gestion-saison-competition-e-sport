@@ -10,8 +10,6 @@ import java.awt.geom.RoundRectangle2D;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import vues.Palette;
-
 @SuppressWarnings("serial")
 public class CustomJTextField extends JTextField {
     private Shape shape;

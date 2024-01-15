@@ -9,10 +9,10 @@ import javax.swing.Timer;
 import javax.swing.border.LineBorder;
 import modeles.IdentificationModele;
 import modeles.IdentificationModele.Utilisateur;
+import style.Palette;
 import vues.AccueilAdministrateurVue;
 import vues.AccueilArbitreVue;
 import vues.IdentificationVue;
-import vues.Palette;
 
 public class IdentificationControleur implements ActionListener {
 	
@@ -32,6 +32,8 @@ public class IdentificationControleur implements ActionListener {
 		String login = this.vue.getUtilisateurContenu();
 		String mdp = this.vue.getMotDePasseContenu();
 		if (this.modele.checkLogins(login, mdp)) {
+			this.vue.setVisible(false);
+			this.vue.dispose();
 			if (this.modele.getUtilisateur() == Utilisateur.ADMIN) {
 				AccueilAdministrateurVue vueAdmin;
 				try {

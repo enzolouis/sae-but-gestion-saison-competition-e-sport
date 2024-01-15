@@ -11,7 +11,6 @@ import javax.swing.JButton;
 import javax.swing.border.EmptyBorder;
 
 import controleurs.ControleurAnimation;
-import vues.Palette;
 
 public class CustomJButton extends JButton {
 	Shape shape;

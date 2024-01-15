@@ -26,6 +26,7 @@ import style.CustomJButton;
 import style.CustomJFrame;
 import style.CustomJSeparator;
 import style.CustomJTextField;
+import style.Palette;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;

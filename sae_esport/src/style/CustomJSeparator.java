@@ -4,8 +4,6 @@ import java.awt.Color;
 
 import javax.swing.JSeparator;
 
-import vues.Palette;
-
 public class CustomJSeparator extends JSeparator {
 	
 	/**

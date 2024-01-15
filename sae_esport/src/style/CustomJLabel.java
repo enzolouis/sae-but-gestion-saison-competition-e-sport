@@ -11,8 +11,6 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import vues.Palette;
-
 public class CustomJLabel extends JLabel {
 	
 	/**

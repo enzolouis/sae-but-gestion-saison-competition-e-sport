@@ -33,6 +33,8 @@ import style.CustomJLabel;
 import style.CustomJPanel;
 import style.CustomJScrollPane;
 import style.CustomJSeparator;
+import style.Palette;
+
 import javax.swing.SwingConstants;
 
 public class SaisieResultatVue extends CustomJFrame {

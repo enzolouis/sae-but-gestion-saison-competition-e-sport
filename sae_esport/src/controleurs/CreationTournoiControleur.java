@@ -17,8 +17,8 @@ import classes.EtatTournoi;
 import classes.Notoriete;
 import classes.Equipe;
 import modeles.TournoiModele;
+import style.Palette;
 import vues.CreationTournoiVue;
-import vues.Palette;
 
 public class CreationTournoiControleur implements ActionListener {
 	private CreationTournoiVue vue;

@@ -28,17 +28,7 @@ public class MenuMotionControleur implements MouseMotionListener, MouseListener 
 	
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		
 		CustomJPanel target = (CustomJPanel) e.getSource();
-		System.out.println(target.getLocationOnScreen().getX() + " " + (target.getLocationOnScreen().getX() + target.getWidth()));
-		//System.out.println(this.view.getContentPane().getLocation());
-		//System.out.println(this.vue.getMousePosition());
-		//System.out.println(MouseInfo.getPointerInfo().getLocation());
-		
-		//target.setLocation((int)MouseInfo.getPointerInfo().getLocation().getX()-target.getWidth()/2, (int)MouseInfo.getPointerInfo().getLocation().getY()-target.getHeight()/2);
-		//target.setLocation((int)MouseInfo.getPointerInfo().getLocation().getX(), (int)MouseInfo.getPointerInfo().getLocation().getY());
-		//System.out.println((int)this.vue.getMousePosition().getX() + "::"+ (int)this.vue.getMousePosition().getY());
-		
 		this.vue.setLocation(e.getXOnScreen() - offsetX, e.getYOnScreen() - offsetY);
 	}
 

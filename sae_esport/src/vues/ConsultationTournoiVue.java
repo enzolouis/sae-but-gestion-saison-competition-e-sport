@@ -28,6 +28,9 @@ import style.CustomJFrame;
 import style.CustomJLabel;
 import style.CustomJPanel;
 import style.CustomJSeparator;
+import style.EvenOddRenderer;
+import style.Palette;
+
 import javax.swing.JTable;
 
 public class ConsultationTournoiVue extends CustomJFrame {
