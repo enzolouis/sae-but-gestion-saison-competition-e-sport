@@ -18,35 +18,49 @@ public class Joueur {
 		this.idEquipe = idEquipe;
 		this.pseudo = pseudo;
 	}
-
+	
+	/**
+	 * renvoie l'identifiant du joueur
+	 * */
+	public int getIdJoueur() {
+		return this.idJoueur;
+	}
+	
+	/**
+	 * set l'ID du Joueur
+	 * @param l'ID du Joueur avec lequel remplacer
+	 * */
+	public void setIDJoueur(int id) {
+		this.idJoueur = id;
+	}
+	
+	/**
+	 * renvoie l'identifiant de l'équipe
+	 * */
 	public int getIdEquipe() {
 		return idEquipe;
 	}
 
+	/**
+	 * set l'identifiant de l'équipe
+	 * @param nouvel identifiant de l'équipe
+	 * */
 	public void setIdEquipe(int idEquipe) {
 		this.idEquipe = idEquipe;
 	}
 
-	//Retourne le Pseudo du Joueur
+	/**
+	 * renvoie le pseudo du joueur
+	 * */
 	public String getPseudo() {
 		return pseudo;
 	}
-	/**Change me Pseudo du Joueur
-	 * 	@param le Pseudo avec lequel remplacer
+	
+	/**
+	 * set le pseudo du joueur
 	 * */
 	public void setPseudo(String pseudo) {
 		this.pseudo = pseudo;
-	}
-
-	//Retourne l'ID du Joueur
-	public int getIdJoueur() {
-		return this.idJoueur;
-	}
-	/**Change l'ID du Joueur
-	 * 	@param l'ID du Joueur avec lequel remplacer
-	 * */
-	public void setIDJoueur(int id) {
-		this.idJoueur = id;
 	}
 	
 	@Override
