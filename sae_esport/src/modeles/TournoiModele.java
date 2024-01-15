@@ -348,8 +348,18 @@ public class TournoiModele {
 	 * renvoie une date depuis une chaîne de caractères
 	 * @param date en chaîne de caractère
 	 * */
-	private static Date getDate(String date) throws ParseException {
-		return new Date(new SimpleDateFormat("dd/MM/yyyy").parse(date).getTime());
+	private static Date getDate(String date) {
+		try {
+			return new Date(new SimpleDateFormat("dd/MM/yyyy").parse(date).getTime());
+		} catch (ParseException e) {
+			try {
+				return new Date(new SimpleDateFormat("yyyy-MM-dd").parse(date).getTime());
+			} catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		return null;
 	}
 	
 	/**
@@ -498,18 +508,18 @@ public class TournoiModele {
 						if (!equipesAttribuees.contains(e2)) {
 							Match m = new Match(0, this.idTournoi, false);
 							m.AddEquipe(e); m.AddEquipe(e2);
-							MatchDAO.getInstance().add(m);
 							this.ajouterMatch(m); 
-							TournoiDAO.getInstance().update(this);
+							MatchDAO.getInstance().add(m);
 						}
 					}
 				}
 			}
 			
+			System.out.println(this.idTournoi);
 			TournoiDAO.getInstance().update(this);
 			
 			for (Match m : this.getMatchs()) {
-				System.out.println(m);
+				System.out.println(m.getIdTournoi());
 			}
 			
 		}
