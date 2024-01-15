@@ -38,7 +38,7 @@ public class TestEquipeDAO {
 	/// Olivier RODRIGUEZ
 	/// Test de la récupération d'un administrateur
 	public void testGetByIdMatch() throws Exception{
-	    Equipe equipe = new Equipe(1,"rofl",Nationalite.AD,Disposition.NON_DIPOSEE,14,12);
+	    Equipe equipe = new Equipe(1,"rofl",Nationalite.AD,Disposition.NON_DISPOSEE,14,12);
 			EquipeDAO.getInstance().add(equipe);
 			Optional<Equipe> optional = EquipeDAO.getInstance().getById(equipe.getIdEquipe());
 		    assertEquals(optional.get(), equipe);
@@ -49,8 +49,8 @@ public class TestEquipeDAO {
 	@Test
 	//Test de la récupération des Equipes lorsqu'il y a des administrateurs
 	public void testGetAllMatch() throws Exception{
-		    Equipe equipe1 = new Equipe(1,"rofl",Nationalite.AD,Disposition.NON_DIPOSEE,14,12);
-			Equipe equipe2 = new Equipe(1,"rofl",Nationalite.AD,Disposition.NON_DIPOSEE,14,12);
+		    Equipe equipe1 = new Equipe(1,"rofl",Nationalite.AD,Disposition.NON_DISPOSEE,14,12);
+			Equipe equipe2 = new Equipe(1,"rofl",Nationalite.AD,Disposition.NON_DISPOSEE,14,12);
 
 			EquipeDAO.getInstance().add(equipe1);
 			EquipeDAO.getInstance().add(equipe2);
@@ -65,7 +65,7 @@ public class TestEquipeDAO {
 	/// Olivier RODRIGUEZ
 	/// Test de l'ajout d'Equipe 
 	public void testAddEquipe() throws Exception {
-		Equipe equipe1 = new Equipe(1,"rofl",Nationalite.AD,Disposition.NON_DIPOSEE,14,12);
+		Equipe equipe1 = new Equipe(1,"rofl",Nationalite.AD,Disposition.NON_DISPOSEE,14,12);
 	    	EquipeDAO.getInstance().add(equipe1);
 	    	assertEquals(equipe1, EquipeDAO.getInstance().getById(equipe1.getIdEquipe()).get());
 	    	DBConnection.getInstance().rollback();
@@ -75,7 +75,7 @@ public class TestEquipeDAO {
 	/// Olivier RODRIGUEZ
 	/// Test de la mise à jour d'un administrateur
 	public void testUpdateMatch() throws Exception {
-		Equipe equipe1 = new Equipe(1,"rofl",Nationalite.AD,Disposition.NON_DIPOSEE,14,12);
+		Equipe equipe1 = new Equipe(1,"rofl",Nationalite.AD,Disposition.NON_DISPOSEE,14,12);
 	        EquipeDAO.getInstance().add(equipe1);
 	        equipe1.setDispose(Disposition.DISPOSEE);
 	        EquipeDAO.getInstance().update(equipe1);
@@ -87,7 +87,7 @@ public class TestEquipeDAO {
 	/// Olivier RODRIGUEZ
 	/// Test de supression d'un administrateur
 	public void testDeleteMatch() throws Exception { 
-		Equipe equipe1 = new Equipe(1,"rofl",Nationalite.AD,Disposition.NON_DIPOSEE,14,12);
+		Equipe equipe1 = new Equipe(1,"rofl",Nationalite.AD,Disposition.NON_DISPOSEE,14,12);
 	        EquipeDAO.getInstance().add(equipe1);
 	        int size = EquipeDAO.getInstance().getAll().size();
 	        EquipeDAO.getInstance().delete(equipe1);           
