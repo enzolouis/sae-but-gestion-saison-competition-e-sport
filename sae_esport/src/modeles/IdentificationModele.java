@@ -16,11 +16,12 @@ public class IdentificationModele {
 		
 	}
 	
+	/**
+	 * renvoie si un couple de login et de mdp sont valides et set le type de droits d'utilisateur
+	 * @param login
+	 * @param mot de passe
+	 * */
 	public boolean checkLogins(String login, String motDePasse) throws Exception {
-		//if (this.tournoiOuvert.getLogin() == login && this.tournoiOuvert.getMotDePasse() == motDePasse) {
-		//	this.utilisateur = Utilisateur.ARBITRE;
-		//	    JOptionPane.showMessageDialog(jFrametest, "Arbitre login");
-		//}
 		
 		if (TournoiDAO.getInstance().getTournoiOuvert().isPresent()) {
 			if (TournoiDAO.getInstance().getTournoiOuvert().get().getLogin().equals(login) && 
@@ -40,6 +41,9 @@ public class IdentificationModele {
 		return false;
 	}
 	
+	/**
+	 * renvoie le type d'utilisateur
+	 * */
 	public Utilisateur getUtilisateur() {
 		return this.utilisateur;
 	}
