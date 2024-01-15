@@ -89,9 +89,6 @@ public class ConsultationTournoiVue extends CustomJFrame {
 		
 		controleur = new ConsultationTournoiControleur(this);
 		
-		ImageIcon icon = new ImageIcon("src\\logo_app.png");
-    	this.setIconImage(icon.getImage());
-		
     	pack();
     	
     	//this.controleur = new IdentificationControleur(this);

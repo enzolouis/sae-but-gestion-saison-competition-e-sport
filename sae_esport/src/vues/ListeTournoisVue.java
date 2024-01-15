@@ -83,9 +83,6 @@ public class ListeTournoisVue extends CustomJFrame {
 		
 		setTitle("Liste des tournois");
 		
-		ImageIcon icon = new ImageIcon("src\\logo_app.png");
-    	this.setIconImage(icon.getImage());
-		
 		controleur = new ListeTournoisControleur(this);
 		
 		setSize(new Dimension(700, 550));
@@ -113,7 +110,7 @@ public class ListeTournoisVue extends CustomJFrame {
 		panelTournois.add(panelListe);
 		panelListe.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		JScrollPane scrollListe = new JScrollPane();
-		scrollListe.setForeground(new Color(255, 255, 255));
+		scrollListe.setForeground(Palette.WHITE);
 		scrollListe.setPreferredSize(new Dimension(500, 180));
 		scrollListe.setSize(new Dimension(100, 100));
 		tableTournois = new JTable(){

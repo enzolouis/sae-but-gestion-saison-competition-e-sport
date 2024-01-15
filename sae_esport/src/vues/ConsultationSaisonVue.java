@@ -45,9 +45,6 @@ public class ConsultationSaisonVue extends CustomJFrame {
 		
 		setTitle("Statistiques de la saison");
 		
-		ImageIcon icon = new ImageIcon("src\\logo_app.png");
-    	this.setIconImage(icon.getImage());
-		
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
 		controleur = new ConsultationSaisonControleur(this);

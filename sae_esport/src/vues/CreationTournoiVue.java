@@ -68,13 +68,9 @@ public class CreationTournoiVue extends CustomJFrame {
 	
 	public CreationTournoiVue() {
 		
-		super(new Dimension(530,350));
+		super(new Dimension(530,350), "Création de tournoi");
 		setBounds(new Rectangle(0, 0, 700, 580));
-		setTitle("Création de tournoi");
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		
-		ImageIcon icon = new ImageIcon("src\\logo_app.png");
-    	this.setIconImage(icon.getImage());
 		
 		this.controleur = new CreationTournoiControleur(this);
 		Color backgroundColor = Palette.BLACK;

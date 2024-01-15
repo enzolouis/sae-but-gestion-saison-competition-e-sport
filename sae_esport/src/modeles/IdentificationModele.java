@@ -12,7 +12,7 @@ public class IdentificationModele {
 	
 	private Utilisateur utilisateur = null;
 	
-	public IdentificationModele() throws Exception {
+	public IdentificationModele() {
 		
 	}
 	

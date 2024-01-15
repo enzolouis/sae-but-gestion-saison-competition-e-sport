@@ -56,5 +56,11 @@ public class Palette {
 			("oeilMotDePasseVisible.png")).getImage().getScaledInstance(30, 30,  java.awt.Image.SCALE_SMOOTH));
 	
 	public static final ImageIcon LOGO = new ImageIcon(new ImageIcon(IdentificationVue.class.getClassLoader().getResource
-			("logo_app.png")).getImage().getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH));
+			("logoApp.png")).getImage().getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH));
+	
+	public static final ImageIcon MINIMIZE = new ImageIcon(new ImageIcon(IdentificationVue.class.getClassLoader().getResource
+			("minimize.png")).getImage().getScaledInstance(20, 20,  java.awt.Image.SCALE_SMOOTH));
+	
+	public static final ImageIcon CLOSE = new ImageIcon(new ImageIcon(IdentificationVue.class.getClassLoader().getResource
+			("close.png")).getImage().getScaledInstance(20, 20,  java.awt.Image.SCALE_SMOOTH));
 }

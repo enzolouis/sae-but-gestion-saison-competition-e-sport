@@ -60,9 +60,6 @@ public class SaisieResultatVue extends CustomJFrame {
     	super(new Dimension(975, 600), "Résultat des matchs");
     	contentPanel = this.getContentPanel();
     	
-    	ImageIcon icon = new ImageIcon("src\\logo_app.png");
-    	this.setIconImage(icon.getImage());
-    	
     	pack();
     	
     	this.tournoi = TournoiDAO.getInstance().getById(1).get();

@@ -66,6 +66,7 @@ public class TournoiModele {
 	 * 	@param Etat d'ouverture ou fermeture du Tournoi
 	 * */
 	public TournoiModele(int idTournoi, String nomTournoi, String dateDebut, String dateFin, String login, String mdp, Notoriete notoriete, EtatTournoi etat) {
+		System.out.println("TournoiModeleTOUT");
 		this.idTournoi = idTournoi;
 		this.nomTournoi = nomTournoi;
 		this.dateDebut = dateDebut;
@@ -81,7 +82,8 @@ public class TournoiModele {
 		this.login = login;
 	}
 	
-	public TournoiModele() {		
+	public TournoiModele() {
+		System.out.println("TournoiModeleVIDE");
 		this.matches= new ArrayList<>();
 		this.participants = new HashMap<>();
 		this.participantsIndisposees = new ArrayList<>();
@@ -90,6 +92,7 @@ public class TournoiModele {
 	}
 	
 	public TournoiModele(int idTournoi, String nomTournoi, String dateDebut, String dateFin, Notoriete notoriete, EtatTournoi etat) {
+		System.out.println("TournoiModeleMID");
 		this.idTournoi = idTournoi;
 		this.nomTournoi = nomTournoi;
 		this.dateDebut = dateDebut;

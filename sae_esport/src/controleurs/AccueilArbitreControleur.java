@@ -10,6 +10,7 @@ import vues.AccueilArbitreVue;
 import vues.ConsultationSaisonVue;
 import vues.ConsultationTournoiVue;
 import vues.CreationTournoiVue;
+import vues.IdentificationVue;
 
 public class AccueilArbitreControleur implements ActionListener {
 	
@@ -28,6 +29,12 @@ public class AccueilArbitreControleur implements ActionListener {
 			case ("Quitter"):
 				this.vue.setVisible(false);
 				this.vue.dispose();
+				break;
+			case "Se déconnecter":
+				this.vue.setVisible(false);
+				this.vue.dispose();
+				frame = new IdentificationVue();
+				frame.setVisible(true);
 				break;
 			case ("Accès au tournoi"):
 				break;

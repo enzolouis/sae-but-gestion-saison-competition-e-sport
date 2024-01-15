@@ -39,15 +39,11 @@ public class AccueilAdministrateurVue extends CustomJFrame {
     	
     	this.setDefaultCloseOperation(EXIT_ON_CLOSE);
     	
-    	ImageIcon icon = new ImageIcon("src\\logo_app.png");
-    	this.setIconImage(icon.getImage());
-    	
     	pack();
     	
     	this.controleur = new AccueilAdministrateurControleur(this);
 
-        contentPane = this.getContentPanel();
-        setContentPane(contentPane);
+        contentPane = super.getContentPanel();
         
         // Top Panel : Titre
         CustomJPanel panelTitre = new CustomJPanel();
@@ -99,6 +95,12 @@ public class AccueilAdministrateurVue extends CustomJFrame {
         // Bottom Panel : Quitter & Divers
         CustomJPanel panelQuitterSeconnecter = new CustomJPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
         contentPane.add(panelQuitterSeconnecter, BorderLayout.SOUTH);
+        
+        CustomJButton btnDeconnexion = new CustomJButton("Se déconnecter", 10);
+        btnDeconnexion.setBackground(Palette.REDQUIT);
+        btnDeconnexion.setForeground(Palette.WHITE);
+        btnDeconnexion.addActionListener(this.controleur);
+        panelQuitterSeconnecter.add(btnDeconnexion, BorderLayout.CENTER); 
         
         CustomJButton btnQuit = new CustomJButton("Quitter", 10);
         btnQuit.setBackground(Palette.REDQUIT);

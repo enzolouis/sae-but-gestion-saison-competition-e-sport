@@ -1,5 +1,6 @@
 package controleurs;
 import java.awt.Color;
+import java.awt.Frame;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,7 +26,7 @@ public class IdentificationControleur implements ActionListener {
 	private boolean isMotDePasseCache;
 	private Timer animationErreur;
 	
-	public IdentificationControleur(IdentificationVue vue) throws Exception {
+	public IdentificationControleur(IdentificationVue vue) {
 		this.isMotDePasseCache = true;
 		this.vue = vue;
 		this.modele = new IdentificationModele();
@@ -42,7 +43,6 @@ public class IdentificationControleur implements ActionListener {
 					vueAdmin = new AccueilAdministrateurVue();
 					vueAdmin.setVisible(true);
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			} else {
@@ -95,7 +95,16 @@ public class IdentificationControleur implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() instanceof JButton) {
 			JButton bouton = (JButton) e.getSource();
+			if (bouton.getIcon() == Palette.CLOSE) {
+				this.vue.setVisible(false);
+				this.vue.dispose();
+			}
+			if (bouton.getIcon() == Palette.MINIMIZE) {
+				this.vue.setState(Frame.ICONIFIED);
+			}
+			
 			switch (bouton.getText()) {
+			
 			case "Quitter":
 				this.vue.setVisible(false);
 				this.vue.dispose();
@@ -112,6 +121,7 @@ public class IdentificationControleur implements ActionListener {
 				this.inverserIconMotDePasseMasque(bouton);
 				break;
 			}
+			
 		}
 		else {
 			try {

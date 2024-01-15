@@ -45,9 +45,6 @@ public class ChoixArbitreVue extends CustomJFrame {
     public ChoixArbitreVue() throws Exception {
     	super(new Dimension(600, 600), "Choix d'arbitre");
     	
-    	ImageIcon icon = new ImageIcon("src\\logo_app.png");
-    	this.setIconImage(icon.getImage());
-    	
     	this.controleur = new ChoixArbitreControleur(this);
     	contentPanel = this.getContentPanel();
         

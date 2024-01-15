@@ -7,6 +7,7 @@ import style.CustomJFrame;
 import vues.AccueilAdministrateurVue;
 import vues.ConsultationSaisonVue;
 import vues.CreationTournoiVue;
+import vues.IdentificationVue;
 import vues.ListeTournoisVue;
 
 public class AccueilAdministrateurControleur implements ActionListener {
@@ -27,6 +28,12 @@ public class AccueilAdministrateurControleur implements ActionListener {
 				this.vue.setVisible(false);
 				this.vue.dispose();
 				break;
+			case "Se déconnecter":
+				this.vue.setVisible(false);
+				this.vue.dispose();
+				frame = new IdentificationVue();
+				frame.setVisible(true);
+				break;
 			case ("Créer un tournoi"):
 				frame = new CreationTournoiVue();
 				frame.setVisible(true);
@@ -38,6 +45,7 @@ public class AccueilAdministrateurControleur implements ActionListener {
 			case ("Liste des tournois"):
 				frame = new ListeTournoisVue();
 				frame.setVisible(true);
+				break;
 			default:
 				break;
 			}

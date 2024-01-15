@@ -34,13 +34,8 @@ import java.awt.Rectangle;
 import javax.swing.border.LineBorder;
 
 public class IdentificationVue extends CustomJFrame {
-
-	
-	
-	
     private JPanel contentPane;
     private IdentificationControleur controleur;
-    
     private CustomJTextField textFieldUtilisateur;
     private CustomJPasswordField textFieldMotDePasse;
     public CustomJLabel erreurOuverture;
@@ -71,11 +66,8 @@ public class IdentificationVue extends CustomJFrame {
     	return textFieldMotDePasse;
     }
     
-    public IdentificationVue() throws Exception {
+    public IdentificationVue() {
     	super(new Dimension(300, 450), "Identification");
-    	
-    	ImageIcon icon = new ImageIcon("src\\logo_app.png");
-    	this.setIconImage(icon.getImage());
     	
     	pack();
     	
