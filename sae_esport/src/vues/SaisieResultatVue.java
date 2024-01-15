@@ -58,7 +58,10 @@ public class SaisieResultatVue extends CustomJFrame {
     	
     	pack();
     	
-    	this.tournoi = TournoiDAO.getInstance().getById(1).get();
+    	this.tournoi = TournoiDAO.getInstance().getTournoiOuvert().get();
+    	System.out.println(this.tournoi.getNomTournoi());
+    	System.out.println(this.tournoi.getIDTournoi());
+    	System.out.println(this.tournoi.getMatchs().size());
     	this.controleur = new SaisieResultatControleur(this, this.tournoi);
         
         // Panel Top : Title
