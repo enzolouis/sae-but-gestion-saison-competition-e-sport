@@ -11,12 +11,14 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Random;
 
+import DAOs.MatchDAO;
 import DAOs.ParticiperDAO;
 import DAOs.TournoiDAO;
 import classes.Arbitre;
@@ -346,8 +348,18 @@ public class TournoiModele {
 	 * renvoie une date depuis une chaîne de caractères
 	 * @param date en chaîne de caractère
 	 * */
-	private static Date getDate(String date) throws ParseException {
-		return new Date(new SimpleDateFormat("dd/MM/yyyy").parse(date).getTime());
+	private static Date getDate(String date) {
+		try {
+			return new Date(new SimpleDateFormat("dd/MM/yyyy").parse(date).getTime());
+		} catch (ParseException e) {
+			try {
+				return new Date(new SimpleDateFormat("yyyy-MM-dd").parse(date).getTime());
+			} catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		return null;
 	}
 	
 	/**
@@ -480,11 +492,38 @@ public class TournoiModele {
 	 * ouvre un tournoi
 	 * */
 	public void ouvrirTournoi() throws Exception {
+		
 		if (this.isTournoiOuvrable()) {
+			
 			this.supprimerEquipeIndisposees();
 			this.setEtatTournoi(EtatTournoi.OUVERT);
+			
+			ArrayList<Equipe> equipes = new ArrayList<>();
+			equipes.addAll(participants.keySet());
+			ArrayList<Equipe> equipesAttribuees = new ArrayList<>();
+			for (Equipe e : equipes) {
+				if (!equipesAttribuees.contains(e)) {
+					equipesAttribuees.add(e);
+					for (Equipe e2 : equipes) {
+						if (!equipesAttribuees.contains(e2)) {
+							Match m = new Match(0, this.idTournoi, false);
+							m.AddEquipe(e); m.AddEquipe(e2);
+							this.ajouterMatch(m); 
+							MatchDAO.getInstance().add(m);
+						}
+					}
+				}
+			}
+			
+			System.out.println(this.idTournoi);
 			TournoiDAO.getInstance().update(this);
+			
+			for (Match m : this.getMatchs()) {
+				System.out.println(m.getIdTournoi());
+			}
+			
 		}
+		
 	}
 
 	@Override

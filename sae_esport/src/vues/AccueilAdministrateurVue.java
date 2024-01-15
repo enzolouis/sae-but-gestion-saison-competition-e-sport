@@ -8,7 +8,6 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
-import javax.swing.ImageIcon;
 import javax.swing.border.EmptyBorder;
 
 import controleurs.AccueilAdministrateurControleur;
