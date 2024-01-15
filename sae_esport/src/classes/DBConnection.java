@@ -11,20 +11,15 @@ public class DBConnection {
 	private DBConnection() {
 		String dirProjetJava = System.getProperty("user.dir");
 		System.setProperty("derby.system.home", dirProjetJava+"/BDDSAEEsport");
-		
-		try {
-			DriverManager.registerDriver(new org.apache.derby.jdbc.EmbeddedDriver());
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
 		String urlConnexion = "jdbc:derby:BDDSAEEsport;create=true";
 		
 		try {
+			DriverManager.registerDriver(new org.apache.derby.jdbc.EmbeddedDriver());
 			DBConnection.instance = DriverManager.getConnection(urlConnexion);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 	}
 
 	public static synchronized Connection getInstance()
