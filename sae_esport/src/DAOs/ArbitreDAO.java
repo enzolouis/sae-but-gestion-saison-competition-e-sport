@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import classes.Arbitre;
 import classes.DBConnection;
+import modeles.TournoiModele;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,7 +25,9 @@ public class ArbitreDAO {
 		return instance;
 	}
 	
-	//Renvois l'ensemble des arbitres
+	/**
+	 * renvoie l'ensemble des arbitres
+	 * */
 	public List<Arbitre> getAll() throws Exception {
 		String reqSelectArbitre = "SELECT * FROM arbitre";
 		PreparedStatement st = DBConnection.getInstance().prepareStatement(reqSelectArbitre);
@@ -36,7 +39,10 @@ public class ArbitreDAO {
 		return arbitres;
 	}
 	
-	//retourne un Arbitre specifique
+	/**
+	 * renvoie l'arbitre du premier id reconnu
+	 * @param identifiant(s) de l'arbitre
+	 * */
 	public Optional<Arbitre> getById(Integer... id) throws Exception {
 		Statement st = DBConnection.getInstance().createStatement();
 		for (Integer i : id) {
@@ -48,8 +54,10 @@ public class ArbitreDAO {
 		return Optional.empty();
 	}
 	
-	//ajoute un arbitre à la liste
-	//peu importe l'id que vous mettrez à l'arbitre, il sera changé
+	/**
+	 * ajoute un arbitre à la bdd
+	 * @param arbitre à ajouter
+	 * */
 	public boolean add(Arbitre value) throws Exception {
 
 		PreparedStatement st = DBConnection.getInstance().prepareStatement("SELECT NEXT VALUE FOR seqIdArbitre FROM arbitre");
@@ -67,7 +75,10 @@ public class ArbitreDAO {
 		
 	}
 	
-	//update un arbitre donné
+	/**
+	 * met à jour l'arbitre dans la bdd
+	 * @param abitre à mettre à j
+	 * */
 	public boolean update(Arbitre value) throws Exception {
 		
 		PreparedStatement st = DBConnection.getInstance().prepareStatement("UPDATE arbitre SET nom=?, prenom=?, nationalite=? WHERE idArbitre=?");
@@ -78,7 +89,10 @@ public class ArbitreDAO {
 		
 	}
 	
-	//retire un arbitre donné
+	/**
+	 * supprime l'arbitre de la bdd
+	 * @param arbitre à supp
+	 * */
 	public boolean delete(Arbitre value) throws Exception {
 		
 		PreparedStatement st = DBConnection.getInstance().prepareStatement("DELETE FROM arbitre WHERE idArbitre=?");
@@ -86,5 +100,21 @@ public class ArbitreDAO {
 		int rowcount = st.executeUpdate();
 		return rowcount > 0;
 	}
-
+	
+	/**
+	 * renvoie la liste des marchitres arbitrés par l'arbitre
+	 * @param identifiant(s) de l'arbitre
+	 * */
+	public List<TournoiModele> getTournoisOfArbitre(Arbitre value) throws Exception {
+		ArrayList<TournoiModele> tournois = new ArrayList<>();
+		String reqSelectArbitre = "SELECT idTournoi FROM tournoi WHERE idArbitre = ?";
+		PreparedStatement st = DBConnection.getInstance().prepareStatement(reqSelectArbitre);
+		st.setInt(1, value.getIdArbitre());
+		ResultSet rs = st.executeQuery();
+		while (rs.next()) {
+			tournois.add(TournoiDAO.getInstance().getById(rs.getInt(1)).get());
+			}
+		return tournois;
+	}
+	
 }
