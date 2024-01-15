@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Optional;
 
 import classes.DBConnection;
-import classes.Joueur;
 import classes.Match;
 
 public class MatchDAO {

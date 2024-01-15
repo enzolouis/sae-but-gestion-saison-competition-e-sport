@@ -10,15 +10,12 @@ import java.util.Optional;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-
-import classes.Arbitre;
 import classes.DBConnection;
 import classes.Disposition;
 import classes.Equipe;
 import classes.Joueur;
 import classes.Nationalite;
 import modeles.TournoiModele;
-import sqlrequests.CreateDual;
 
 public class EquipeDAO {
 	
