@@ -68,7 +68,7 @@ public class Joueur {
 	
 	@Override
 	public String toString() {
-		return idJoueur+": "+pseudo+" ("+idEquipe+")";
+		return idJoueur+": "+pseudo;
 	}
 
 }
