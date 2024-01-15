@@ -5,26 +5,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.JToggleButton;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
-import DAOs.ArbitreDAO;
-import DAOs.EquipeDAO;
 import DAOs.TournoiDAO;
 import classes.Arbitre;
 import classes.Disposition;
@@ -32,15 +19,14 @@ import classes.Equipe;
 import classes.Joueur;
 import modeles.TournoiModele;
 import style.Palette;
-import vues.IdentificationVue;
 import vues.ListeTournoisVue;
 
 public class ListeTournoisControleur implements ActionListener, ListSelectionListener, MouseListener {
-	private TournoiModele modele;
+
 	private ListeTournoisVue vue;
 	
 	public ListeTournoisControleur(ListeTournoisVue vue) {
-		this.modele = new TournoiModele();
+
 		this.vue = vue;
 	}
 
@@ -105,7 +91,8 @@ public class ListeTournoisControleur implements ActionListener, ListSelectionLis
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
 		 if (e.getSource() instanceof JList) {
-			JList l = (JList) e.getSource();
+			@SuppressWarnings("unchecked")
+			JList<Equipe> l = (JList<Equipe>) e.getSource();
 			Equipe e1 = (Equipe) l.getSelectedValue();
 			if (e1 != null) {
 				vue.titreEquipe.setText(e1.getNom());
