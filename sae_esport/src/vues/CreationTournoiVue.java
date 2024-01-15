@@ -25,7 +25,6 @@ import controleurs.CreationTournoiControleur;
 import style.CustomJButton;
 import style.CustomJFrame;
 import style.CustomJSeparator;
-import style.CustomJTextField;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -33,11 +32,11 @@ import java.awt.EventQueue;
 import javax.swing.JButton;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
-import javax.swing.ImageIcon;
 import javax.swing.JList;
 import java.awt.Rectangle;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.Date;
 import java.awt.Component;
 
 public class CreationTournoiVue extends CustomJFrame {
@@ -199,6 +198,7 @@ public class CreationTournoiVue extends CustomJFrame {
 		panelDateDebut.add(lblDateDeDbut);
 		
 		this.dateChooserDebut = new JDateChooser();
+		this.dateChooserDebut.getJCalendar().setMinSelectableDate(new Date());
 		dateChooserDebut.setForeground(Palette.WHITE);
 		dateChooserDebut.setFont(Palette.customTextFont.deriveFont(Font.PLAIN, 11));
 		for(Component c : dateChooserDebut.getComponents()){
@@ -224,6 +224,7 @@ public class CreationTournoiVue extends CustomJFrame {
 		panelDateFin.add(lblDateDeFin);
 		
 		this.dateChooserFin = new JDateChooser();
+		this.dateChooserDebut.getJCalendar().setMinSelectableDate(new Date());
 		dateChooserFin.setFont(Palette.customTextFont.deriveFont(Font.PLAIN, 11));
 		for(Component c : dateChooserFin.getComponents()){
 			((JComponent)c).setBackground(Palette.BLUE);
