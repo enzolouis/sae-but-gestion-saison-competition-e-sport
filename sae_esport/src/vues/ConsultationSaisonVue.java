@@ -55,7 +55,7 @@ public class ConsultationSaisonVue extends CustomJFrame {
 		
 		//création du panel principal
 		CustomJPanel panel = new CustomJPanel();
-		getContentPane().add(panel);
+		getContentPanel().add(panel);
 		
 		//ajout du titre
 		CustomJPanel panelTitre = new CustomJPanel();
@@ -187,7 +187,7 @@ public class ConsultationSaisonVue extends CustomJFrame {
 		btnQuitter.addActionListener(controleur);
 		panelQuitter.setBorder(new EmptyBorder(10,10,10,10));
 		panelQuitter.add(btnQuitter);
-		getContentPane().add(panelQuitter, BorderLayout.SOUTH);
+		getContentPanel().add(panelQuitter, BorderLayout.SOUTH);
 		
 	}
 

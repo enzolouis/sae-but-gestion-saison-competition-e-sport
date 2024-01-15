@@ -86,7 +86,7 @@ public class ListeTournoisVue extends CustomJFrame {
 		controleur = new ListeTournoisControleur(this);
 		
 		CustomJPanel panel = new CustomJPanel();
-		getContentPane().add(panel);
+		getContentPanel().add(panel);
 		
 		CustomJPanel panelTitre = new CustomJPanel();
 		CustomJLabel titre = new CustomJLabel("LES TOURNOIS", 20);
