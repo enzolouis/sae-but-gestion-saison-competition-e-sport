@@ -189,10 +189,14 @@ public class ListeTournoisVue extends CustomJFrame {
 		panelEquipeArbitre.add(panelEquipe);
 		
 		titreEquipe = new CustomJLabel("aaa", 10);
+		titreEquipe.setMinimumSize(new Dimension(150, 14));
+		titreEquipe.setMaximumSize(new Dimension(150, 14));
+		titreEquipe.setSize(new Dimension(150, 14));
+		titreEquipe.setPreferredSize(new Dimension(200, 14));
 		titreEquipe.setText("");
 		titreEquipe.setFont(Palette.customFont.deriveFont(Font.BOLD, 11));
 		titreEquipe.setBounds(new Rectangle(0, 0, 10, 10));
-		titreEquipe.setBounds(48, 0, 53, 14);
+		titreEquipe.setBounds(0, 0, 150, 14);
 		joueurs = new JList<Joueur>();
 		listeEquipes.setFont(Palette.customFont.deriveFont(Font.PLAIN, 9));
 		joueursModel = new DefaultListModel<Joueur>();
@@ -200,7 +204,8 @@ public class ListeTournoisVue extends CustomJFrame {
 		//joueurs = new CustomJLabel("bbb", 8);
 		//joueurs.setText("");
 		joueurs.setFont(Palette.customFont.deriveFont(Font.PLAIN, 9));
-		//joueurs.setVerticalAlignment(SwingConstants.TOP);
+		joueurs.setBackground(Palette.BLACK);
+		joueurs.setForeground(Palette.WHITE);//joueurs.setVerticalAlignment(SwingConstants.TOP);
 		//joueurs.setHorizontalTextPosition(SwingConstants.CENTER);
 		//joueurs.setHorizontalAlignment(SwingConstants.LEFT);
 		//joueurs.setSize(new Dimension(15, 10));
@@ -209,7 +214,6 @@ public class ListeTournoisVue extends CustomJFrame {
 		disposition = new CustomJLabel("ccc", 8);
 		disposition.setText("");
 		disposition.setFont(Palette.customFont.deriveFont(Font.BOLD, 9));
-		disposition.setHorizontalAlignment(SwingConstants.LEFT);
 		disposition.setBounds(25, 11, 100, 20);
 		panelJoueurs.setLayout(null);
 		panelJoueurs.add(titreEquipe); panelJoueurs.add(joueurs);
