@@ -210,9 +210,9 @@ public class TournoiDAO {
 			st = DBConnection.getInstance().createStatement();
 			ResultSet rs = st.executeQuery("SELECT * FROM tournoi WHERE ouvert='OUVERT'");
 			if (rs.next()) {
-				return Optional.of(new TournoiModele(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(7), rs.getString(8), classes.Notoriete.valueOf(rs.getString(5)), classes.EtatTournoi.valueOf(rs.getString(6))));
+				return this.getById(rs.getInt(1));
 			}
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return Optional.empty();
