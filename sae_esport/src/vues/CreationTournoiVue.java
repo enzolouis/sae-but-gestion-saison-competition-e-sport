@@ -36,6 +36,8 @@ import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JList;
 import java.awt.Rectangle;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.Component;
 
 public class CreationTournoiVue extends CustomJFrame {
@@ -132,6 +134,13 @@ public class CreationTournoiVue extends CustomJFrame {
 		panelNom.add(lbNom);
 		
 		this.textFieldNom = new JTextField();
+		textFieldNom.addKeyListener(new KeyAdapter() {
+	        @Override
+	        public void keyTyped(KeyEvent e) {
+	            if (textFieldNom.getText().length() >= 30) // limit to 3 characters
+	                e.consume();
+	        }
+	    });;
 		textFieldNom.setFont(Palette.customFont.deriveFont(Font.PLAIN, 11));
 		textFieldNom.setBackground(Palette.BLUE);
 		textFieldNom.setBorder(BorderFactory.createEmptyBorder());
@@ -258,7 +267,6 @@ public class CreationTournoiVue extends CustomJFrame {
 				this.comboBoxArbitre.addItem(a);
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

@@ -1,8 +1,10 @@
-package classes;
+package tests;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import classes.Joueur;
 
 public class TestJoueur {
 	private Joueur j;

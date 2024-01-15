@@ -7,7 +7,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -238,17 +240,25 @@ public class TournoiModele {
 	//Génère un Login pour le Tournoi,
 	//l'ensemble est basé sur le NomTournoi + idTournoi, en UpperCase + 3 lettres générés au hasard
 	private void generateLogin() {
-		this.login = this.nomTournoi.substring(0, 2).toUpperCase() + this.idTournoi + this.generateLetter()+ this.generateLetter() + this.generateLetter();
-		//System.out.println(this.login);
+		this.login = this.nomTournoi.substring(0, 2) + this.idTournoi + this.generateLetter()+ this.generateLetter() + this.generateLetter();
+		this.login = this.login.toUpperCase();
 	}
 	
 	//Génère un Mot de Passe pour le Tournoi
 	private void generateMdp() {
-		this.mdp = "";
-		for (int i = 0; i<12; i++) {
-			this.mdp += this.generateLetter();
+		
+		String motdepasse = "";
+		for (int i = 0; i<7; i++) {
+			motdepasse += this.generateLetter();
 		}
-		//System.out.println(this.mdp);
+		Random r = new Random();
+		motdepasse += r.nextInt(100);
+		List<String> letters = Arrays.asList(motdepasse);
+		Collections.shuffle(letters);
+		for (String letter : letters) {
+			this.mdp+=letter;
+		}
+		
 	}
 	
 	//Renvois une lettre au hasard 
@@ -275,7 +285,6 @@ public class TournoiModele {
 	}
 	
 	public boolean isDateFinSupADateDebut() throws ParseException {
-		// System.out.println(getDateFin().compareTo(getDateDebut()) == 1);
 		return getDateFin().after(getDateDebut());
 	}
 	

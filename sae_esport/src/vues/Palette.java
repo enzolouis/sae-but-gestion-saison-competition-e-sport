@@ -10,6 +10,8 @@ import java.io.IOException;
 import javax.swing.ImageIcon;
 
 public class Palette {
+	
+	//couleurs de la palette
 	public static final Color BLACK 			 = new Color(6, 40, 50);
 	public static final Color BLACKLIGHTER 		 = new Color(8, 50, 65);
 	public static final Color WHITE 			 = new Color(205, 250, 250);
@@ -22,6 +24,7 @@ public class Palette {
 	public static final Color REDERRORBORDER 	 = new Color(255, 144, 144);
 	public static final Color BLACKDARKER        = new Color(10, 60, 80);
 	
+	//police de titre
     public static final Font customFont;
     public static final Font customTextFont;
     
@@ -36,6 +39,7 @@ public class Palette {
         }
         customFont = loadedFont;
     }
+
     
     static {
         Font loadedFont = null;

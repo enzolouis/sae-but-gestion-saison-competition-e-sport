@@ -1,4 +1,4 @@
-package DAOs;
+package tests;
 
 import static org.junit.Assert.*;
 
@@ -12,6 +12,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import DAOs.EquipeDAO;
+import DAOs.TournoiDAO;
 import classes.DBConnection;
 import classes.Disposition;
 import classes.Equipe;
@@ -22,7 +24,7 @@ import classes.Nationalite;
 import classes.Notoriete;
 import modeles.TournoiModele;
 
-public class testTournoiDAO {
+public class TestTournoiDAO {
 	
 	@Before
 	public void beforeTests()throws Exception {

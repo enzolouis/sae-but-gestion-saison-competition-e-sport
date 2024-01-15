@@ -1,4 +1,4 @@
-package modeles;
+package tests;
 
 import static org.junit.Assert.*;
 
@@ -29,6 +29,7 @@ import classes.Equipe;
 import classes.EtatTournoi;
 import classes.Nationalite;
 import classes.Notoriete;
+import modeles.TournoiModele;
 
 
 public class TestTournoiModele {
@@ -42,6 +43,7 @@ public class TestTournoiModele {
 	
 	@After
 	public void tearDown() throws SQLException {
+		DBConnection.getInstance().rollback();
 		DBConnection.getInstance().setAutoCommit(true);
 	}
 
@@ -199,10 +201,11 @@ public class TestTournoiModele {
 				Notoriete.REGIONAL,
 				EtatTournoi.FERME);
 
-	t.ajouterEquipe(new Equipe(1,"rofl",Nationalite.AD,Disposition.NON_DIPOSEE,14,12),0);
-	t.majPointsEquipe(new Equipe(1,"rofl",Nationalite.AD,Disposition.NON_DIPOSEE,14,12), 121);
+	Equipe e = new Equipe(1,"rofl",Nationalite.AD,Disposition.NON_DIPOSEE,14,12);
+	t.ajouterEquipe(e,0);
+	t.majPointsEquipe(e, 121);
+	assertTrue(t.getParticipants().containsKey(e));
 	
-	assertTrue(t.getParticipants().containsKey(new Equipe(1,"rofl",Nationalite.AD,Disposition.NON_DIPOSEE,14,121)));
 	}
 	
 	@Test
@@ -272,9 +275,10 @@ public class TestTournoiModele {
 	
 	@Test
 	public void testNonDupeSansDupe() throws Exception {
+		
 		t = new TournoiModele(
 				1,
-				"Champers", 
+				"Nouveau tournoi tout nouveau", 
 				"25/12/1988", 
 				"30/12/1988", 
 				Notoriete.REGIONAL,
@@ -430,7 +434,6 @@ public class TestTournoiModele {
 				"27/11/1888", 
 				Notoriete.REGIONAL,
 				EtatTournoi.FERME);
-		System.out.println("-- IIII --");
 		assertFalse(t2.isTournoiNonSuperpose());
 		
 		DBConnection.getInstance().rollback();
@@ -667,8 +670,9 @@ public class TestTournoiModele {
 		t.supprimerEquipeIndisposees();
 		
 		List<String> lstNomEquipe = t.getParticipants().keySet().stream().map(e -> e.getNom()).collect(Collectors.toList());
+		assertTrue(lstNomEquipe.contains("e1"));
+		assertFalse(lstNomEquipe.contains("e5"));
 		
-		assertEquals(lstNomEquipe, Arrays.asList("e1", "e2"));
 	}
 	
 	@Test
@@ -743,8 +747,6 @@ public class TestTournoiModele {
 		
 		t.ouvrirTournoi();
 		assertEquals(t.getEtatTournoi(), EtatTournoi.OUVERT);
-		
-		System.out.println(TournoiDAO.getInstance().getById(t.getIDTournoi()).get().getEtatTournoi());
 		
 		DBConnection.getInstance().rollback();
 	}

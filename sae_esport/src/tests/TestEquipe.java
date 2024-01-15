@@ -1,4 +1,4 @@
-package classes;
+package tests;
 
 import static org.junit.Assert.*;
 
@@ -6,6 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+
+import classes.Disposition;
+import classes.Equipe;
+import classes.Joueur;
+import classes.Nationalite;
 
 public class TestEquipe {
 	private Equipe e;
@@ -37,7 +42,7 @@ public class TestEquipe {
 					12);
 		
 		assertEquals(e.getIdEquipe(),1);
-		assertEquals(e.getDisposition(), false);
+		assertEquals(e.getDisposition(), Disposition.NON_DIPOSEE);
 		assertEquals(e.getNom(),"rofl");
 		assertEquals(e.getNationalite(), Nationalite.AD);
 		assertEquals(e.getRangSaisonPrecedante(),14);

@@ -1,10 +1,15 @@
-package classes;
+package tests;
 
 import static org.junit.Assert.*;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import classes.Disposition;
+import classes.Equipe;
+import classes.Match;
+import classes.Nationalite;
 
 public class TestMatch {
 

@@ -26,10 +26,10 @@ public class Administrateur {
 	public String getNom() {
 		return nom;
 	}
-
+	
 	/**
-	 * Change le nom de l'Administrateur
-	 * 	@param le nom de l'Administrateur à remplacer
+	 * setter de l'identifiant de l'administrateur
+	 * 	@param ID de l'Administrateur
 	 * */
 	public void setNom(String nom) {
 		this.nom = nom;
@@ -39,33 +39,20 @@ public class Administrateur {
 	public String getLogin() {
 		return login;
 	}
-	/**
-	 * Change le Login de l'Administrateur
-	 * 	@param le Login de l'Administrateur à remplacer
-	 * */
-	public void setLogin(String login) {
-		this.login = login;
-	}
 
 	//Retourne le Mot de Passe de l'Administrateur
 	public String getMotDePasse() {
 		return motDePasse;
-	}
-	/**
-	 * Change le Mot de passe de l'Administrateur
-	 * 	@param le Mot de Passe de l'Administrateur à remplacer
-	 * */
-	public void setMotDePasse(String motDePasse) {
-		this.motDePasse = motDePasse;
 	}
 
 	//Retourne l'ID de l'Administrateur
 	public int getIdAdministrateur() {
 		return this.idAdministrateur;
 	}
+	
 	/**
-	 * Change l'ID de l'Administrateur
-	 * 	@param la valeur de l'ID de l'Administrateur à remplacer
+	 * setter de l'identifiant de l'administrateur
+	 * 	@param ID de l'Administrateur
 	 * */
 	public void setIdAdministrateur(int id) {
 		this.idAdministrateur = id;
@@ -88,9 +75,5 @@ public class Administrateur {
 		return idAdministrateur == other.idAdministrateur && Objects.equals(login, other.login)
 				&& Objects.equals(motDePasse, other.motDePasse) && Objects.equals(nom, other.nom);
 	}
-
 	
-	
-	
-
 }

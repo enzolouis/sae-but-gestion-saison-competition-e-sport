@@ -2,35 +2,18 @@ package vues;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
-import javax.swing.SwingConstants;
-import javax.swing.UIDefaults;
-import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 
 import DAOs.EquipeDAO;
 import DAOs.ParticiperDAO;
@@ -39,8 +22,6 @@ import classes.Equipe;
 import classes.Match;
 import classes.Participer;
 import controleurs.ConsultationTournoiControleur;
-import controleurs.CreationTournoiControleur;
-import controleurs.IdentificationControleur;
 import modeles.TournoiModele;
 import style.CustomJButton;
 import style.CustomJFrame;
@@ -52,7 +33,6 @@ import javax.swing.JTable;
 public class ConsultationTournoiVue extends CustomJFrame {
 
 	private JPanel contentPane;
-	private JTable table;
 	private ConsultationTournoiControleur controleur;
 
 	/**

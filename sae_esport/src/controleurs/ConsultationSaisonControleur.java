@@ -2,17 +2,12 @@ package controleurs;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
-import javax.swing.JTable;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import DAOs.EquipeDAO;
-import DAOs.TournoiDAO;
-import classes.Equipe;
 import classes.Joueur;
 import modeles.TournoiModele;
 import vues.ConsultationSaisonVue;

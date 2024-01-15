@@ -167,9 +167,10 @@ public class Equipe {
 		if (getClass() != obj.getClass())
 			return false;
 		Equipe other = (Equipe) obj;
-		return dispose == other.dispose && idEquipe == other.idEquipe && Objects.equals(joueurs, other.joueurs)
-				&& nationalite == other.nationalite && Objects.equals(nom, other.nom)
-				&& pointsSaison == other.pointsSaison && rangSaisonPrecedante == other.rangSaisonPrecedante;
+		return dispose == other.dispose && idEquipe == other.idEquipe && joueurs.containsAll(other.joueurs)
+				&& other.joueurs.containsAll(joueurs) && nationalite == other.nationalite &&
+				nom.equals(other.nom) && pointsSaison == other.pointsSaison
+				&& rangSaisonPrecedante == other.rangSaisonPrecedante;
 	}
 
 }

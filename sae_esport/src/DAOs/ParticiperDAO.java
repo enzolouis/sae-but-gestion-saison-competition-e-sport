@@ -42,10 +42,14 @@ public class ParticiperDAO {
 	//retourne la liste des participations d'un tournoi
 	public List<Participer> getByIdTournoi(Integer... id) throws Exception {
 		ArrayList<Participer> participations = new ArrayList<>();
-		Statement st = DBConnection.getInstance().createStatement();
-		ResultSet rs = st.executeQuery("SELECT * FROM participer WHERE idTournoi="+id);
-		while (rs.next()) {	
-			participations.add(new Participer(rs.getInt(1), rs.getInt(2), rs.getInt(3)));
+		PreparedStatement st = DBConnection.getInstance()
+				.prepareStatement("SELECT * FROM participer WHERE idTournoi=?");
+		for (Integer i : id) {
+			st.setInt(1, i);
+			ResultSet rs = st.executeQuery();
+			while (rs.next()) {					//	
+				participations.add(new Participer(rs.getInt(1),rs.getInt(2),rs.getInt(3)));
+			}
 		}
 		return participations;
 	}
@@ -53,10 +57,14 @@ public class ParticiperDAO {
 	//retourne la liste des participations d'une équipe
 	public List<Participer> getByIdEquipe(Integer... id) throws Exception {
 		ArrayList<Participer> participations = new ArrayList<>();
-		Statement st = DBConnection.getInstance().createStatement();
-		ResultSet rs = st.executeQuery("SELECT * FROM participer WHERE idEquipe="+id);
-		while (rs.next()) {					//	
-			participations.add(new Participer(rs.getInt(1),rs.getInt(2),rs.getInt(3)));
+		PreparedStatement st = DBConnection.getInstance()
+				.prepareStatement("SELECT * FROM participer WHERE idEquipe=?");
+		for (Integer i : id) {
+			st.setInt(1, i);
+			ResultSet rs = st.executeQuery();
+			while (rs.next()) {					//	
+				participations.add(new Participer(rs.getInt(1),rs.getInt(2),rs.getInt(3)));
+			}
 		}
 		return participations;
 	}
@@ -105,7 +113,7 @@ public class ParticiperDAO {
 		
 		PreparedStatement st = DBConnection.getInstance().prepareStatement("DELETE FROM participer WHERE idEquipe=? AND idTournoi=?");
 		st.setInt(1, value.getIdEquipe());
-		st.setInt(1, value.getIdTournoi());
+		st.setInt(2, value.getIdTournoi());
 		int rowcount = st.executeUpdate();
 		return rowcount > 0;
 	}

@@ -1,8 +1,10 @@
-package classes;
+package tests;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import classes.Participer;
 
 public class TestParticiper {
 
@@ -10,7 +12,7 @@ public class TestParticiper {
 	
 	@Test
 	public void testCreationParticiper() {
-		participer = new Participer(1,1,5);
+		participer = new Participer(5,1,1);
 		
 		assertEquals(participer.getIdEquipe(),1);
 		assertEquals(participer.getIdTournoi(),1);

@@ -1,4 +1,4 @@
-package DAOs;
+package tests;
 
 import static org.junit.Assert.assertEquals;
 
@@ -12,11 +12,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import DAOs.ArbitreDAO;
 import classes.Arbitre;
 import classes.DBConnection;
 import classes.Nationalite;
 
-public class testDAOArbitre {
+public class TestArbitreDAO {
 	
 	@Before
 	public void beforeTests() throws Exception{

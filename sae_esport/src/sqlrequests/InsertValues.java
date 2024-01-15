@@ -39,7 +39,7 @@ public class InsertValues {
 	    	
 	    	// 4 équipes
 			Equipe e = new Equipe(0, "Maxence Maury-Balliteam", Nationalite.FR, Disposition.DISPOSEE, 3, 1000);EquipeDAO.getInstance().add(e);
-			Equipe e2 = new Equipe(1, "Ibrateam Zoubairov", Nationalite.FR, Disposition.DISPOSEE, 1, 2300);EquipeDAO.getInstance().add(e2);
+			Equipe e2 = new Equipe(1, "Ibrateam Zoubairov", Nationalite.FR, Disposition.DISPOSEE, 1, 1000);EquipeDAO.getInstance().add(e2);
 			Equipe e3 = new Equipe(2, "Equipema Rasoanaivo", Nationalite.FR, Disposition.DISPOSEE, 2, 2001);EquipeDAO.getInstance().add(e3);
 			Equipe e4 = new Equipe(3, "Stuarteam Barthe", Nationalite.FR, Disposition.DISPOSEE, 4, 18);EquipeDAO.getInstance().add(e4);
 			
