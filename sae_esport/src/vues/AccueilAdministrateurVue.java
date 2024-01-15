@@ -107,6 +107,6 @@ public class AccueilAdministrateurVue extends CustomJFrame {
         btnQuit.setBackground(Palette.REDQUIT);
         btnQuit.setForeground(Palette.WHITE);
         btnQuit.addActionListener(this.controleur);
-        panelQuitterSeconnecter.add(btnQuit, BorderLayout.CENTER); 
+        panelQuitterSeconnecter.add(btnQuit, BorderLayout.CENTER);
     }
 }

@@ -50,6 +50,7 @@ public class ListeTournoisVue extends CustomJFrame {
 	public CustomJLabel titreEquipe;
 	public JList<Joueur> joueurs;
 	public CustomJLabel disposition;
+	public CustomJPanel panelErreur;
 	
 	private ListeTournoisControleur controleur;
 	
@@ -231,7 +232,7 @@ public class ListeTournoisVue extends CustomJFrame {
 		CustomJPanel logins = new CustomJPanel();
 		CustomJPanel dates = new CustomJPanel();
 		dates.setMaximumSize(new Dimension(2147483647, 15000));
-		infosTournoi.setLayout(new BoxLayout(infosTournoi, BoxLayout.Y_AXIS));
+		infosTournoi.setLayout(new GridLayout(0, 1, 0, 0));
 		infosTournoi.add(logins); infosTournoi.add(dates);
 		
 		labelTitre = new CustomJLabel("Tournoi N°XX (Notoriété)", 15);
@@ -240,11 +241,11 @@ public class ListeTournoisVue extends CustomJFrame {
 		
 		dateDebut = new JDateChooser();
 		dateDebut.setEnabled(false);
-		dateDebut.setBounds(30, 5, 100, 20);
+		dateDebut.setBounds(49, 5, 100, 20);
 		dateDebut.setFont(Palette.customFont.deriveFont(Font.PLAIN, 11));
 		dateFin = new JDateChooser();
 		dateFin.setEnabled(false);
-		dateFin.setBounds(157, 5, 100, 20);
+		dateFin.setBounds(172, 5, 100, 20);
 		dateFin.setFont(Palette.customFont.deriveFont(Font.PLAIN, 11));
 		dates.setLayout(null);
 		dates.add(dateDebut); dates.add(dateFin);
@@ -290,25 +291,27 @@ public class ListeTournoisVue extends CustomJFrame {
 		
 		CustomJLabel labelDateD = new CustomJLabel("Du", 15);
 		labelDateD.setFont(Palette.customFont.deriveFont(Font.PLAIN, 11));
-		labelDateD.setBounds(0, 0, 32, 30);
+		labelDateD.setBounds(20, 0, 32, 30);
 		CustomJLabel labelDateF = new CustomJLabel("au", 15);
 		labelDateF.setFont(Palette.customFont.deriveFont(Font.PLAIN, 11));
-		labelDateF.setBounds(125, 0, 32, 30);
+		labelDateF.setBounds(143, 0, 32, 30);
 		dates.add(labelDateD); dates.add(labelDateF);
+		boutonsTournoi.setLayout(new BoxLayout(boutonsTournoi, BoxLayout.Y_AXIS));
 		boutonOuverture = new CustomJButton("Ouvrir", 15);
+		boutonsTournoi.add(boutonOuverture);
 		boutonOuverture.setAlignmentX(Component.CENTER_ALIGNMENT);
 		boutonOuverture.setEnabled(false);
 		boutonOuverture.addActionListener(controleur);
-		boutonsTournoi.setLayout(new BoxLayout(boutonsTournoi, BoxLayout.Y_AXIS));
-		boutonOuverture.setFont(Palette.customFont.deriveFont(Font.PLAIN, 11));
-		boutonsTournoi.add(boutonOuverture);
-		
-		erreurOuverture = new CustomJLabel("",10);
+		boutonOuverture.setFont(Palette.customFont.deriveFont(Font.PLAIN, 11));		
+
+        panelErreur = new CustomJPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        erreurOuverture = new CustomJLabel("",10);
 		erreurOuverture.setText(" ");
-		erreurOuverture.setForeground(new Color(235, 77, 75));
+		erreurOuverture.setForeground(Palette.REDERRORFOREGROUND);
 		erreurOuverture.setBorder(new EmptyBorder(3, 3, 3, 3));
 		erreurOuverture.setAlignmentX(Component.CENTER_ALIGNMENT);
-		boutonsTournoi.add(erreurOuverture);
+		panelErreur.add(erreurOuverture);
+		boutonsTournoi.add(panelErreur);
 	}
 	
 

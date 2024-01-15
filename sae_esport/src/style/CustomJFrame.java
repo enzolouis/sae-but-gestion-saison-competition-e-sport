@@ -120,7 +120,7 @@ public class CustomJFrame extends JFrame {
 		
 		
 		CustomJLabel logo = new CustomJLabel(frameTitle, 11);
-		logo.setBorder(new EmptyBorder(0, 15, 0, 0));
+		logo.setBorder(new EmptyBorder(0, 7, 0, 0));
 		if (frameTitle.equals("Identification")) {
 			logo.setIcon(new ImageIcon(Palette.LOGO.getImage().getScaledInstance(20, 20,  java.awt.Image.SCALE_SMOOTH)));
 		} else {
@@ -175,7 +175,7 @@ public class CustomJFrame extends JFrame {
         
 	}
 	
-	public CustomJPanel getContentPanel( ) {
+	public CustomJPanel getContentPanel() {
 		return this.contentPanel;
 	}
 	

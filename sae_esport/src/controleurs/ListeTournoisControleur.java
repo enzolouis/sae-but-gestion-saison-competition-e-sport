@@ -9,6 +9,8 @@ import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JToggleButton;
+import javax.swing.Timer;
+import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -45,17 +47,25 @@ public class ListeTournoisControleur implements ActionListener, ListSelectionLis
 					TournoiModele tournoi = TournoiDAO.getInstance().getById(idTournoi).get();
 					this.vue.erreurOuverture.setForeground(new Color(235, 77, 75));
 					if (!TournoiModele.isAucunTournoiOuvert()) {
+						this.vue.panelErreur.setBackground(Palette.REDERRORBACKGROUND);
+						this.vue.panelErreur.setBorder(new LineBorder(Palette.REDERRORBORDER, 1));
 						this.vue.erreurOuverture.setText("Un tournoi est déjà ouvert ");
 					}
 					else if (!tournoi.isDateCouranteDansCreneauTournoi()) {
+						this.vue.panelErreur.setBackground(Palette.REDERRORBACKGROUND);
+						this.vue.panelErreur.setBorder(new LineBorder(Palette.REDERRORBORDER, 1));
 						this.vue.erreurOuverture.setText("Nous ne sommes pas dans la période du tournoi !");
 					} else if (!tournoi.isTournoiMinimum4EquipeDisposee()) {
+						this.vue.panelErreur.setBackground(Palette.REDERRORBACKGROUND);
+						this.vue.panelErreur.setBorder(new LineBorder(Palette.REDERRORBORDER, 1));
 						this.vue.erreurOuverture.setText("Il n'y a pas assez d'équipe disposées pour commencer le tournoi !");
 					} else {
 						// reverification de tout (voir si on supprime ça dans tournoi)
 						tournoi.ouvrirTournoi();
+						this.vue.panelErreur.setBackground(Palette.GREENLIGHTER);
+						this.vue.panelErreur.setBorder(new LineBorder(Palette.GREEN, 1));
 						this.vue.erreurOuverture.setText("Le tournoi a été ouvert !");
-						this.vue.erreurOuverture.setForeground(new Color(106, 176, 76));
+						this.vue.erreurOuverture.setForeground(Palette.GREEN);
 						
 					}
 				} catch (Exception e1) {

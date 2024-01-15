@@ -28,7 +28,7 @@ public class InsertValues {
     	
     	try {
     	
-	    	TournoiModele t = new TournoiModele(66, "Big tournoi", "20/12/2024", "20/01/2025", Notoriete.INTERNATIONAL, EtatTournoi.FERME);
+	    	TournoiModele t = new TournoiModele(66, "Big tournoi", "20/12/2023", "20/01/2025", Notoriete.INTERNATIONAL, EtatTournoi.FERME);
 	    	
 			Match m1 = new Match(1, t.getIDTournoi(), false);
 			Match m2 = new Match(2, t.getIDTournoi(), false); 
