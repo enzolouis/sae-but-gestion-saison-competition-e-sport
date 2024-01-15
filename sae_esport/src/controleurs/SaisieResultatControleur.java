@@ -95,10 +95,10 @@ public class SaisieResultatControleur implements ActionListener {
 						Map<Equipe, Integer> equipe = modele.getTournoi().getParticipants();
 						for (Map.Entry eq : equipe.entrySet()) {
 							if((Integer) eq.getValue() > score1) {
-								equipe1 = (Equipe) eq.getKey();
-								score1 = (Integer)eq.getValue();
 								equipe2 = equipe1;
 								score2 = score1;
+								equipe1 = (Equipe) eq.getKey();
+								score1 = (Integer) eq.getValue();
 							}
 							else {
 								if ((Integer) eq.getValue() > score2) {
@@ -114,7 +114,7 @@ public class SaisieResultatControleur implements ActionListener {
 						
 						this.modele.getTournoi().ajouterMatch(matchFinale);
 						
-						this.vue.OpenButtonFinal();
+						this.vue.OpenButtonFinal(matchFinale.getIDMatch(), equipe1, equipe2);
 						this.stateTournoi = STATE.IS_FINALE;
 						
 						MatchDAO.getInstance().add(matchFinale);
