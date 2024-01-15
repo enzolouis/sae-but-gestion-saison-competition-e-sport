@@ -107,22 +107,24 @@ public class ListeTournoisControleur implements ActionListener, ListSelectionLis
 		 if (e.getSource() instanceof JList) {
 			JList l = (JList) e.getSource();
 			Equipe e1 = (Equipe) l.getSelectedValue();
-			vue.titreEquipe.setText(e1.getNom());
-			List<String> joueurs = new ArrayList<>();
-			
-			vue.joueursModel.clear();
-			for (Joueur j : e1.getListeJoueurs()) {
-				vue.joueursModel.addElement(j);
+			if (e1 != null) {
+				vue.titreEquipe.setText(e1.getNom());
+				
+				vue.joueursModel.clear();
+				for (Joueur j : e1.getListeJoueurs()) {
+					vue.joueursModel.addElement(j);
+				}
+				
+				vue.joueurs.setModel(vue.joueursModel);
+				
+				vue.disposition.setText(e1.getDisposition().toString());
+				if (e1.getDisposition().equals(Disposition.DISPOSEE)) {
+					vue.disposition.setForeground(new Color(106, 176, 76));
+				} else {
+					vue.disposition.setForeground(new Color(235, 77, 75));
+				}
 			}
 			
-			vue.joueurs.setModel(vue.joueursModel);
-			
-			vue.disposition.setText(e1.getDispose().toString());
-			if (e1.getDispose().equals(Disposition.DISPOSEE)) {
-				vue.disposition.setForeground(new Color(106, 176, 76));
-			} else {
-				vue.disposition.setForeground(new Color(235, 77, 75));
-			}
 			
 		}
 	}
@@ -171,7 +173,7 @@ public class ListeTournoisControleur implements ActionListener, ListSelectionLis
 			
 			vue.listeEquipesModel.clear();
 			
-			for (Equipe eq : tournoi.getEquipes().keySet()) {
+			for (Equipe eq : tournoi.getParticipants().keySet()) {
 				vue.listeEquipesModel.addElement(eq);
 			}
 			
