@@ -92,7 +92,7 @@ public class SaisieResultatControleur implements ActionListener {
 						int score1 = -1;
 						int score2 = -1;
 						
-						Map<Equipe, Integer> equipe = modele.getTournoi().getEquipes();
+						Map<Equipe, Integer> equipe = modele.getTournoi().getParticipants();
 						for (Map.Entry eq : equipe.entrySet()) {
 							if((Integer) eq.getValue() > score1) {
 								equipe1 = (Equipe) eq.getKey();
@@ -132,7 +132,7 @@ public class SaisieResultatControleur implements ActionListener {
 				modele.getTournoi().setEtatTournoi(EtatTournoi.FERME);
 			
 				if (modele.IsFinaleDemarree()) {
-					Map<Equipe, Integer> equipe = modele.getTournoi().getEquipes();
+					Map<Equipe, Integer> equipe = modele.getTournoi().getParticipants();
 					for (Map.Entry eq : equipe.entrySet()) {
 						Equipe equi =(Equipe) eq.getKey();
 						Equipe equip = null;
