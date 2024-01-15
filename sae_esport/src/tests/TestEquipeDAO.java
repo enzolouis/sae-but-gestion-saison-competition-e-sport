@@ -77,7 +77,7 @@ public class TestEquipeDAO {
 	public void testUpdateMatch() throws Exception {
 		Equipe equipe1 = new Equipe(1,"rofl",Nationalite.AD,Disposition.NON_DISPOSEE,14,12);
 	        EquipeDAO.getInstance().add(equipe1);
-	        equipe1.setDispose(Disposition.DISPOSEE);
+	        equipe1.setDisposition(Disposition.DISPOSEE);
 	        EquipeDAO.getInstance().update(equipe1);
 	        assertEquals(equipe1, EquipeDAO.getInstance().getById(equipe1.getIdEquipe()).get());
 	        DBConnection.getInstance().rollback();

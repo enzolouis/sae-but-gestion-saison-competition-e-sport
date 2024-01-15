@@ -109,7 +109,7 @@ public class TestEquipe {
 	public void testEquipeAjoutDeJoueur() {
 		e = new Equipe(1,"rofl",Nationalite.AD,Disposition.NON_DISPOSEE,14,12);
 		Joueur j = new Joueur(1,"dorr",1);
-		e.AjouterJoueurs(j);
+		e.ajouterJoueur(j);
 		assertEquals(e.getListeJoueurs().get(0),j);
 	}
 
