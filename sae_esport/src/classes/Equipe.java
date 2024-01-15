@@ -149,8 +149,7 @@ public class Equipe {
 
 	@Override
 	public String toString() {
-		String s = nom+" ("+nationalite+")";
-		return s;
+		return nom+" ("+nationalite+")";
 	}
 
 	@Override
