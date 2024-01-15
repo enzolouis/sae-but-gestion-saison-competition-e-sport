@@ -8,7 +8,6 @@ import java.awt.Font;
 import style.*;
 
 import javax.swing.DefaultListModel;
-import javax.swing.ImageIcon;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -21,7 +20,6 @@ import controleurs.ConsultationSaisonControleur;
 import modeles.ConsultationSaisonModele;
 import modeles.TournoiModele;
 
-import java.awt.Rectangle;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
 import java.awt.Dimension;

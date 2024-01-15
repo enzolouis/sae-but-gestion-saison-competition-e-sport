@@ -5,17 +5,11 @@ import java.awt.EventQueue;
 
 import style.*;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JToggleButton;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
-
 import com.toedter.calendar.JDateChooser;
 
 import DAOs.TournoiDAO;
@@ -32,15 +26,10 @@ import java.awt.Color;
 import javax.swing.JList;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
-import javax.swing.ImageIcon;
-import javax.swing.JCheckBox;
-import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.Rectangle;
-import javax.swing.JButton;
 import java.awt.Component;
-import javax.swing.border.LineBorder;
 
 public class ListeTournoisVue extends CustomJFrame {	
 	public JTable tableTournois;

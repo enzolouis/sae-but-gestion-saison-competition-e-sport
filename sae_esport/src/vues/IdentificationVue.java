@@ -7,21 +7,15 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
-import java.awt.Insets;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JSeparator;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import controleurs.ChoixArbitreControleur;
 import controleurs.IdentificationControleur;
 import style.CustomJButton;
 import style.CustomJFrame;
@@ -31,9 +25,6 @@ import style.CustomJPasswordField;
 import style.CustomJSeparator;
 import style.CustomJTextField;
 import style.Palette;
-
-import java.awt.Rectangle;
-import javax.swing.border.LineBorder;
 
 public class IdentificationVue extends CustomJFrame {
     private JPanel contentPane;

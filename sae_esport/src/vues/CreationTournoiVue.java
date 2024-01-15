@@ -26,7 +26,6 @@ import style.CustomJButton;
 import style.CustomJFrame;
 import style.CustomJLabel;
 import style.CustomJSeparator;
-import style.CustomJTextField;
 import style.Palette;
 
 import java.awt.Dimension;
@@ -225,7 +224,7 @@ public class CreationTournoiVue extends CustomJFrame {
 		panelDateFin.add(lblDateDeFin);
 		
 		this.dateChooserFin = new JDateChooser();
-		this.dateChooserDebut.getJCalendar().setMinSelectableDate(new Date());
+		this.dateChooserFin.getJCalendar().setMinSelectableDate(new Date());
 		dateChooserFin.setFont(Palette.customTextFont.deriveFont(Font.PLAIN, 11));
 		for(Component c : dateChooserFin.getComponents()){
 			((JComponent)c).setBackground(Palette.BLUE);
