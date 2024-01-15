@@ -51,8 +51,7 @@ public class ListeTournoisControleur implements ActionListener, ListSelectionLis
 			
 			switch (bouton.getText()) {
 			case "Fermer":
-				this.vue.setVisible(false);
-				this.vue.dispose();
+				this.vue.closeCurrentWindow();
 				break;
 			case "Ouvrir":
 				int idTournoi = (int) vue.tableTournois.getValueAt(vue.tableTournois.getSelectedRow(), 0);

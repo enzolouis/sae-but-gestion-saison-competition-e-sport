@@ -47,7 +47,7 @@ public class AccueilArbitreVue extends CustomJFrame {
         CustomJPanel panelTitre = new CustomJPanel();
         contentPane.add(panelTitre, BorderLayout.NORTH);
         
-        CustomJLabel titreFenetre = new CustomJLabel("Page d'arbitrage", 25, new EmptyBorder(10, 10, 10, 10));
+        CustomJLabel titreFenetre = new CustomJLabel("PAGE D'ARBITRAGE", 25);
         titreFenetre.setFont(Palette.customFont.deriveFont(Font.BOLD, 20));
         titreFenetre.setForeground(Palette.WHITE);
         panelTitre.add(titreFenetre, BorderLayout.CENTER);

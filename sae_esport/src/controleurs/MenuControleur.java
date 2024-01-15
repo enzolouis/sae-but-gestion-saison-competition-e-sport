@@ -34,8 +34,7 @@ public class MenuControleur implements ActionListener {
 		if (e.getSource() instanceof JButton) {
 			JButton bouton = (JButton) e.getSource();
 			if (bouton.getIcon() == Palette.CLOSE) {
-				this.vue.setVisible(false);
-				this.vue.dispose();
+				this.vue.closeCurrentWindow();
 			}
 			if (bouton.getIcon() == Palette.MINIMIZE) {
 				this.vue.setState(Frame.ICONIFIED);

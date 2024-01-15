@@ -30,12 +30,10 @@ public class AccueilArbitreControleur implements ActionListener {
 			switch (bouton.getText()) {
 			
 			case ("Quitter"):
-				this.vue.setVisible(false);
-				this.vue.dispose();
+				this.vue.closeCurrentWindow();
 				break;
 			case "Se déconnecter":
-				this.vue.setVisible(false);
-				this.vue.dispose();
+				this.vue.closeCurrentWindow();
 				frame = new IdentificationVue();
 				frame.setVisible(true);
 				break;
@@ -43,6 +41,7 @@ public class AccueilArbitreControleur implements ActionListener {
 				break;
 			
 			case ("Statistiques du tournoi"):
+				this.vue.closeCurrentWindow();
 				TournoiModele t = null;
 				try {
 					t = TournoiDAO.getInstance().getTournoiOuvert().get();

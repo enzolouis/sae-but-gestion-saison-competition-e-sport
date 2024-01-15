@@ -67,4 +67,10 @@ public class Palette {
 	
 	public static final ImageIcon CLOSE = new ImageIcon(new ImageIcon(Palette.class.getClassLoader().getResource
 			("close.png")).getImage().getScaledInstance(20, 20,  java.awt.Image.SCALE_SMOOTH));
+	
+	public static final ImageIcon ADMIN = new ImageIcon(new ImageIcon(Palette.class.getClassLoader().getResource
+			("admin_logo.png")).getImage().getScaledInstance(20, 20,  java.awt.Image.SCALE_SMOOTH));
+	
+	public static final ImageIcon ARBITRE = new ImageIcon(new ImageIcon(Palette.class.getClassLoader().getResource
+			("arbitre_logo.png")).getImage().getScaledInstance(20, 20,  java.awt.Image.SCALE_SMOOTH));
 }

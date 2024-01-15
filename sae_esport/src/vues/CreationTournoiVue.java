@@ -24,6 +24,7 @@ import classes.Notoriete;
 import controleurs.CreationTournoiControleur;
 import style.CustomJButton;
 import style.CustomJFrame;
+import style.CustomJLabel;
 import style.CustomJSeparator;
 import style.CustomJTextField;
 import style.Palette;
@@ -95,9 +96,7 @@ public class CreationTournoiVue extends CustomJFrame {
 		JSeparator separatorTitre = new CustomJSeparator();
 		panelTitre.add(separatorTitre, BorderLayout.SOUTH);
 		
-		JLabel lblCreationDeTournoi = new JLabel("CRÉATION DE TOURNOI");
-		lblCreationDeTournoi.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCreationDeTournoi.setForeground(policeColor);
+		CustomJLabel lblCreationDeTournoi = new CustomJLabel("CRÉATION DE TOURNOI", 25);
 		lblCreationDeTournoi.setFont(Palette.customFont.deriveFont(Font.BOLD, 20));
 		lblCreationDeTournoi.setBorder(new EmptyBorder(10, 10, 10, 10));
 		panelTitre.add(lblCreationDeTournoi, BorderLayout.CENTER);
@@ -388,6 +387,12 @@ public class CreationTournoiVue extends CustomJFrame {
 		panelMessage.add(messageCreation);
 		panelValidation.add(panelMessage);
 
+	}
+	
+	public void closeCurrentWindow() {
+		super.closeCurrentWindow();
+		AccueilAdministrateurVue frame = new AccueilAdministrateurVue();
+		frame.setVisible(true);
 	}
 
 }

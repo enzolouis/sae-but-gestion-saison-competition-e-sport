@@ -32,8 +32,7 @@ public class IdentificationControleur implements ActionListener {
 		String login = this.vue.getUtilisateurContenu();
 		String mdp = this.vue.getMotDePasseContenu();
 		if (this.modele.checkLogins(login, mdp)) {
-			this.vue.setVisible(false);
-			this.vue.dispose();
+			this.vue.closeCurrentWindow();
 			if (this.modele.getUtilisateur() == Utilisateur.ADMIN) {
 				AccueilAdministrateurVue vueAdmin;
 				try {
@@ -92,19 +91,11 @@ public class IdentificationControleur implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() instanceof JButton) {
 			JButton bouton = (JButton) e.getSource();
-			if (bouton.getIcon() == Palette.CLOSE) {
-				this.vue.setVisible(false);
-				this.vue.dispose();
-			}
-			if (bouton.getIcon() == Palette.MINIMIZE) {
-				this.vue.setState(Frame.ICONIFIED);
-			}
 			
 			switch (bouton.getText()) {
 			
 			case "Quitter":
-				this.vue.setVisible(false);
-				this.vue.dispose();
+				this.vue.closeCurrentWindow();
 				break;
 			case "Se connecter":
 				try {

@@ -44,11 +44,10 @@ public class ConsultationSaisonVue extends CustomJFrame {
 	public ConsultationSaisonVue() {
 		
 		//paramétrage de la page
-		setTitle("Statistiques de la saison");
+		super(new Dimension(600, 600), "Statistiques de la saison");
 		
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		setBounds(new Rectangle(0, 0, 600, 600));
-		setResizable(true);
+		//setBounds(new Rectangle(0, 0, 600, 600));
 		
 		//instanciation du controleur et du modèle
 		controleur = new ConsultationSaisonControleur(this);
@@ -62,7 +61,7 @@ public class ConsultationSaisonVue extends CustomJFrame {
 		CustomJPanel panelTitre = new CustomJPanel();
 		panelTitre.setLayout(new BorderLayout(0, 0));
 		panelTitre.setBackground(Palette.BLACK);
-		CustomJLabel labelTitre = new CustomJLabel("Classement de saison", 22);
+		CustomJLabel labelTitre = new CustomJLabel("CLASSEMENT DE SAISON", 25);
 		labelTitre.setFont(Palette.customFont.deriveFont(Font.BOLD, 20));
 		panelTitre.add(labelTitre, BorderLayout.CENTER);
 		CustomJSeparator separator = new CustomJSeparator();
@@ -205,6 +204,12 @@ public class ConsultationSaisonVue extends CustomJFrame {
             }
         });
 		
+	}
+	
+	public void closeCurrentWindow() {
+		super.closeCurrentWindow();
+		AccueilAdministrateurVue frame = new AccueilAdministrateurVue();
+		frame.setVisible(true);
 	}
 
 }

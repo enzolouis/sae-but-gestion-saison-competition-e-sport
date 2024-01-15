@@ -78,14 +78,12 @@ public class ListeTournoisVue extends CustomJFrame {
 	    }
 	
 	public ListeTournoisVue() {
+		super(new Dimension(500, 700), "Liste des tournois");
 		
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
-		setTitle("Liste des tournois");
 		
 		controleur = new ListeTournoisControleur(this);
-		
-		setSize(new Dimension(700, 550));
 		
 		CustomJPanel panel = new CustomJPanel();
 		getContentPane().add(panel);
@@ -209,8 +207,8 @@ public class ListeTournoisVue extends CustomJFrame {
 		//joueurs.setHorizontalTextPosition(SwingConstants.CENTER);
 		//joueurs.setHorizontalAlignment(SwingConstants.LEFT);
 		//joueurs.setSize(new Dimension(15, 10));
-		joueurs.setBounds(new Rectangle(10, 10, 10, 10));
-		joueurs.setBounds(24, 31, 100, 66);
+		//joueurs.setBounds(new Rectangle(10, 20, 10, 20));
+		joueurs.setBounds(24, 31, 50, 80);
 		disposition = new CustomJLabel("ccc", 8);
 		disposition.setText("");
 		disposition.setFont(Palette.customFont.deriveFont(Font.BOLD, 9));
@@ -322,5 +320,12 @@ public class ListeTournoisVue extends CustomJFrame {
 		erreurOuverture.setBorder(new EmptyBorder(3, 3, 3, 3));
 		erreurOuverture.setAlignmentX(Component.CENTER_ALIGNMENT);
 		boutonsTournoi.add(erreurOuverture);
+	}
+	
+
+	public void closeCurrentWindow() {
+		super.closeCurrentWindow();
+		AccueilAdministrateurVue frame = new AccueilAdministrateurVue();
+		frame.setVisible(true);
 	}
 }

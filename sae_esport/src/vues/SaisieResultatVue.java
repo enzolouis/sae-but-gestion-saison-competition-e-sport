@@ -71,7 +71,7 @@ public class SaisieResultatVue extends CustomJFrame {
     	CustomJPanel panelTop = new CustomJPanel();
         contentPanel.add(panelTop, BorderLayout.NORTH);
         
-        CustomJLabel titleTop = new CustomJLabel("Résultat des matchs", 25);
+        CustomJLabel titleTop = new CustomJLabel("RÉSULTAT DES MATCHS", 25);
         titleTop.setFont(Palette.customFont.deriveFont(Font.BOLD, 20));
         panelTop.add(titleTop);
         
@@ -297,4 +297,10 @@ public class SaisieResultatVue extends CustomJFrame {
     public void refreshMatchList() {
     	
     }
+    
+    public void closeCurrentWindow() {
+		super.closeCurrentWindow();
+		AccueilArbitreVue frame = new AccueilArbitreVue();
+		frame.setVisible(true);
+	}
 }

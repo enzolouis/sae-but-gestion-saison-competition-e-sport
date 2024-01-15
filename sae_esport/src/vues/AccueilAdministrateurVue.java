@@ -49,7 +49,7 @@ public class AccueilAdministrateurVue extends CustomJFrame {
         CustomJPanel panelTitre = new CustomJPanel();
         contentPane.add(panelTitre, BorderLayout.NORTH);
         
-        CustomJLabel titreFenetre = new CustomJLabel("Page d'administration", 25, new EmptyBorder(10, 10, 10, 10));
+        CustomJLabel titreFenetre = new CustomJLabel("PAGE D'ADMINISTRATION", 25);
         titreFenetre.setFont(Palette.customFont.deriveFont(Font.BOLD, 20));
         titreFenetre.setForeground(Palette.WHITE);
         panelTitre.add(titreFenetre, BorderLayout.CENTER);
@@ -59,6 +59,8 @@ public class AccueilAdministrateurVue extends CustomJFrame {
         
         // Middle Panel : Actions / Sujet
         CustomJPanel panelMiddle = new CustomJPanel(new EmptyBorder(5, 5, 5, 5));
+        
+        
         
         GridBagLayout gbl_panelMiddle = new GridBagLayout(); 
         panelMiddle.setLayout(gbl_panelMiddle);

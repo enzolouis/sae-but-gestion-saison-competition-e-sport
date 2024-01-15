@@ -59,7 +59,7 @@ public class SaisieResultatControleur implements ActionListener {
 			JButton bouton = (JButton) e.getSource();
 			switch (bouton.getText()) {
 			case ("Quitter"):
-				this.vue.dispose();
+				this.vue.closeCurrentWindow();
 				break;
 			case ("Ouvrir la Finale"):
 				boolean b = true;

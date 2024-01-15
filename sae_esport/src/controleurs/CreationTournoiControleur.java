@@ -66,7 +66,7 @@ public class CreationTournoiControleur implements ActionListener {
 				}
 				break;
 			case ("Quitter"):
-				this.vue.dispose();
+				this.vue.closeCurrentWindow();
 				break;
 			case ("Valider"):
 				if (this.vue.textFieldNom.getText().equals("") || this.vue.dateChooserDebut.getDate() == null 

@@ -19,8 +19,7 @@ public class ChoixArbitreControleur implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		JButton bouton = (JButton) e.getSource();
 		if (bouton.getText().equals("Quitter")) {
-			this.vue.setVisible(false);
-			this.vue.dispose();
+			this.vue.closeCurrentWindow();
 		}
 	}
 	

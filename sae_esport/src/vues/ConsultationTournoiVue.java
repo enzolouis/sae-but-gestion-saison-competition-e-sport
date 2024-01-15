@@ -166,5 +166,11 @@ public class ConsultationTournoiVue extends CustomJFrame {
         //btnQuit.addActionListener(this.controleur);
         panelQuitterSeconnecter.add(btnQuit);
 	}
+	
+	public void closeCurrentWindow() {
+		super.closeCurrentWindow();
+		AccueilArbitreVue frame = new AccueilArbitreVue();
+		frame.setVisible(true);
+	}
 
 }

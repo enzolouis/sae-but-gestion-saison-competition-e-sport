@@ -20,10 +20,7 @@ public class ConsultationTournoiControleur implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		JButton bouton = (JButton) e.getSource();
 		if (bouton.getText().equals("Quitter")) {
-			this.vue.setVisible(false);
-			this.vue.dispose();
-		} else if (bouton.getText().equals("sdqz")) {
-			
+			this.vue.closeCurrentWindow();
 		}
 	}
 	

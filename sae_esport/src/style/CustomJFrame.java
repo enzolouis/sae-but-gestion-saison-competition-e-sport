@@ -6,6 +6,8 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Frame;
 import java.awt.GridLayout;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -119,7 +121,28 @@ public class CustomJFrame extends JFrame {
 		
 		CustomJLabel logo = new CustomJLabel(frameTitle, 11);
 		logo.setBorder(new EmptyBorder(0, 15, 0, 0));
-		logo.setIcon(new ImageIcon(Palette.LOGO.getImage().getScaledInstance(20, 20,  java.awt.Image.SCALE_SMOOTH)));
+		if (frameTitle.equals("Identification")) {
+			logo.setIcon(new ImageIcon(Palette.LOGO.getImage().getScaledInstance(20, 20,  java.awt.Image.SCALE_SMOOTH)));
+		} else {
+			List<String> adminPages = Arrays.asList("Accueil Administrateur", "Statistiques de la saison", 
+					"Création de tournoi", "Liste des tournois");
+			List<String> arbitrePages = Arrays.asList("Accueil Arbitre", "Consultation du classement du tournoi", 
+					"Résultat des matchs");
+
+			for (String s : adminPages) {
+				if (frameTitle.contains(s)) {
+					System.out.println(s);
+					logo.setIcon(new ImageIcon(Palette.ADMIN.getImage().getScaledInstance(20, 20,  java.awt.Image.SCALE_SMOOTH)));
+				}
+			}
+			for (String s : arbitrePages) {
+				if (frameTitle.contains(s)) {
+					System.out.println(s);
+					logo.setIcon(new ImageIcon(Palette.ARBITRE.getImage().getScaledInstance(20, 20,  java.awt.Image.SCALE_SMOOTH)));
+				}
+			}
+		}
+		
 		
 		
 		CustomJPanel fermerEnlever = new CustomJPanel();
@@ -141,6 +164,7 @@ public class CustomJFrame extends JFrame {
 		fermerEnlever.add(fermer);
 		
 		this.contentMenu.add(logo, BorderLayout.WEST);
+		
 		this.contentMenu.add(fermerEnlever, BorderLayout.EAST);
 		this.contentMenu.setForeground(Palette.WHITE);
 		
@@ -153,5 +177,10 @@ public class CustomJFrame extends JFrame {
 	
 	public CustomJPanel getContentPanel( ) {
 		return this.contentPanel;
+	}
+	
+	public void closeCurrentWindow() {
+		this.setVisible(false);
+		this.dispose();
 	}
 }
