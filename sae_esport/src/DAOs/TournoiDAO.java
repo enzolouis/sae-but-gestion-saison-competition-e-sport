@@ -14,6 +14,7 @@ import classes.Arbitre;
 import classes.DBConnection;
 import classes.Equipe;
 import classes.Match;
+import classes.Participer;
 import modeles.TournoiModele;
 
 public class TournoiDAO {
@@ -30,7 +31,9 @@ public class TournoiDAO {
 		return instance;
 	}
 	
-	//Renvois l'ensemble des arbitres
+	/**
+	 * renvoie l'ensemble des tournois
+	 * */
 	public List<TournoiModele> getAll() throws Exception {
 		
 		ArrayList<TournoiModele> tournois = new ArrayList<>();
@@ -70,7 +73,10 @@ public class TournoiDAO {
 		return tournois;
 	}
 	
-	//retourne un Arbitre specifique
+	/**
+	 * renvoie le tournoi du premier id reconnu
+	 * @param identifiant(s) du tournoi
+	 * */
 	public Optional<TournoiModele> getById(Integer... id) throws Exception {
 		Statement st = DBConnection.getInstance().createStatement();
 		for (Integer i : id) {
@@ -107,7 +113,10 @@ public class TournoiDAO {
 		return Optional.empty();
 	}
 	
-	//ajoute un arbitre à la liste
+	/**
+	 * ajoute un tournoi à la bdd
+	 * @param identifiant(s) de l'arbitre
+	 * */
 	public boolean add(TournoiModele value) throws Exception {
 		
 		PreparedStatement st = DBConnection.getInstance().prepareStatement("SELECT NEXT VALUE FOR seqIdTournoi FROM dual");
@@ -141,7 +150,10 @@ public class TournoiDAO {
 		return rowcount > 0;
 	}
 	
-	//update un arbitre donné
+	/**
+	 * mettre à jour un tournoi
+	 * @param tournoi à maj
+	 * */
 	public boolean update(TournoiModele value) throws Exception {
 	    // Construction de la requête UPDATE
 	    String query = "UPDATE tournoi SET "
@@ -177,7 +189,10 @@ public class TournoiDAO {
         return rowcount > 0;
 	}
 	
-	//retire un arbitre donné
+	/**
+	 * supprime de la bdd un tournoi donné
+	 * @param tournoi à supp
+	 * */
 	public boolean delete(TournoiModele value) throws Exception {
 		PreparedStatement st = DBConnection.getInstance().prepareStatement("DELETE FROM tournoi WHERE idTournoi=?");
 		st.setInt(1, value.getIDTournoi());
@@ -186,6 +201,9 @@ public class TournoiDAO {
 		return rowcount > 0;
 	}
 	
+	/**
+	 * renvoie le tournoi actuellement ouvert (ou un empty si aucun tournoi n'est ouvert)
+	 * */
 	public Optional<TournoiModele> getTournoiOuvert() {
 		Statement st;
 		try {
@@ -200,6 +218,11 @@ public class TournoiDAO {
 		return Optional.empty();
 	}
 	
+	/**
+	 * ajoute un arbitre à un tournoi et renvoie si l'ajout s'est fait
+	 * @param tournoi où ajouter l'arbitre
+	 * @param arbitre à ajouter
+	 * */
 	public boolean addArbitre(TournoiModele t, Arbitre a) throws Exception {
 
 		PreparedStatement stAddGerer = DBConnection.getInstance().prepareStatement("INSERT INTO gerer VALUES (?,?)");
@@ -209,6 +232,11 @@ public class TournoiDAO {
 		
 	}
 	
+	/**
+	 * retire un arbitre d'un tournoi et renvoie si la suppression s'est faite
+	 * @param tournoi où supprimer l'arbitre
+	 * @param arbitre à supprimer
+	 * */
 	public boolean deleteArbitre(TournoiModele t, Arbitre a) throws Exception {
 		
 		PreparedStatement stDelGerer = DBConnection.getInstance().prepareStatement("DELETE FROM gerer WHERE idTournoi=? AND idArbitre = ?");
@@ -218,19 +246,30 @@ public class TournoiDAO {
 		
 	}
 	
+	/**
+	 * ajoute une équipe au tournoi et renvoie si l'ajout s'est fait
+	 * @param tournoi où ajouter l'équipe
+	 * @param équipe à ajouter
+	 * */
 	public boolean addEquipe (TournoiModele t, Equipe e) throws Exception {
-		PreparedStatement stAddParticiper = DBConnection.getInstance().prepareStatement("INSERT INTO participer VALUES(0,?,?)");
-		stAddParticiper.setInt(1,t.getIDTournoi()); stAddParticiper.setInt(2, e.getIdEquipe());
-		int rowcount = stAddParticiper.executeUpdate();
-		return rowcount > 0;
+		
+		Participer p = new Participer(0, t.getIDTournoi(), e.getIdEquipe());
+		return ParticiperDAO.getInstance().add(p);
+
 	}
 	
+	/**
+	 * supprimer une équipe au tournoi et renvoie si la suppressio s'est faite
+	 * @param tournoi où supprimer l'équipe
+	 * @param équipe à supprimer
+	 * */
 	public boolean deleteEquipe (TournoiModele t, Equipe e) throws Exception {
 		
-		PreparedStatement stDelEquipe = DBConnection.getInstance().prepareStatement("DELETE FROM participer WHERE idTournoi=? AND idEquipe = ?");
-		stDelEquipe.setInt(1, t.getIDTournoi()); stDelEquipe.setInt(2, e.getIdEquipe());
-		int rowcount = stDelEquipe.executeUpdate();
-		return rowcount > 0;
+		Optional<Participer> p = ParticiperDAO.getInstance().getByIdTournoiIdEquipe(e.getIdEquipe(), t.getIDTournoi());
+		if (p.isPresent()) {
+			return ParticiperDAO.getInstance().delete(p.get());
+		}
+		return false;
 		
 	}
 

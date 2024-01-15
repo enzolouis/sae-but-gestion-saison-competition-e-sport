@@ -24,6 +24,11 @@ public class ParticiperDAO {
 		return instance;
 	}
 	
+	/**
+	 * récupère la participation d'une équipe à un tournoi
+	 * @param id de l'équipe
+	 * @param id du tournoi
+	 * */
 	public Optional<Participer> getByIdTournoiIdEquipe (int idEquipe, int idTournoi) throws Exception {
 		
 		PreparedStatement st = DBConnection.getInstance().prepareStatement
@@ -37,7 +42,10 @@ public class ParticiperDAO {
 		
 	}
 	
-	//retourne la liste des participations d'un tournoi
+	/**
+	 * renvoie la liste des participants du tournoi du premier id reconnu
+	 * @param identifiant(s) du tournoi
+	 * */
 	public List<Participer> getByIdTournoi(Integer... id) throws Exception {
 		ArrayList<Participer> participations = new ArrayList<>();
 		PreparedStatement st = DBConnection.getInstance()
@@ -52,7 +60,10 @@ public class ParticiperDAO {
 		return participations;
 	}
 			
-	//retourne la liste des participations d'une équipe
+	/**
+	 * renvoie la liste des participations de l'équipe du premier id reconnu
+	 * @param identifiant(s) de l'équipe
+	 * */
 	public List<Participer> getByIdEquipe(Integer... id) throws Exception {
 		ArrayList<Participer> participations = new ArrayList<>();
 		PreparedStatement st = DBConnection.getInstance()
@@ -67,7 +78,9 @@ public class ParticiperDAO {
 		return participations;
 	}
 	
-	//renvoie l'ensemble des participations
+	/**
+	 * renvoie toutes les participations
+	 * */
 	public List<Participer> getAll() throws Exception {
 		String reqSelectParticipation = "SELECT * FROM participer";
 		PreparedStatement st = DBConnection.getInstance().prepareStatement(reqSelectParticipation);
@@ -79,21 +92,25 @@ public class ParticiperDAO {
 		return participations;
 	}
 	
-	//ajoute un arbitre à la liste
-	//peu importe l'id que vous mettrez à l'arbitre, il sera changé
+	/**
+	 * ajoute une participation à la bdd
+	 * @param participation à ajouter
+	 * */
 	public boolean add(Participer value) throws Exception {
 
 		PreparedStatement st = DBConnection.getInstance().prepareStatement("INSERT INTO participer VALUES (?,?,?)");
 		st.setInt(2, value.getIdTournoi()); 
 		st.setInt(3, value.getIdEquipe()); 
 		st.setInt(1, value.getResultat());
-		
 		int rowcount = st.executeUpdate();
 		return rowcount > 0;
 		
 	}
 	
-	//update un arbitre donné
+	/**
+	 * met à jour une participation
+	 * @param participation à update
+	 * */
 	public boolean update(Participer value) throws Exception {
 		
 		PreparedStatement st = DBConnection.getInstance().prepareStatement("UPDATE participer SET resultat=? WHERE idTournoi=? AND idEquipe=?");
@@ -106,7 +123,10 @@ public class ParticiperDAO {
 		return rowcount > 0;
 	}
 	
-	//retire un arbitre donné
+	/**
+	 * supprime une participation dans la bdd
+	 * @param participation à supprimer
+	 * */
 	public boolean delete(Participer value) throws Exception {
 		
 		PreparedStatement st = DBConnection.getInstance().prepareStatement("DELETE FROM participer WHERE idEquipe=? AND idTournoi=?");

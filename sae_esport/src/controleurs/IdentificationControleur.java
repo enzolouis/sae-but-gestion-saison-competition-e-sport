@@ -1,7 +1,5 @@
 package controleurs;
-import java.awt.Color;
 import java.awt.Frame;
-import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -27,6 +25,9 @@ public class IdentificationControleur implements ActionListener {
 		this.modele = new IdentificationModele();
 	}
 	
+	/**
+	 * tente de se connecter à l'application avec les logins dans les fields
+	 * */
 	public void seConnecter() throws Exception {
 		
 		String login = this.vue.getUtilisateurContenu();
@@ -76,6 +77,9 @@ public class IdentificationControleur implements ActionListener {
 		}
 	}
 	
+	/**
+	 * masque le mot de passe ou le démasque selon son état actuel
+	 * */
 	public void inverserIconMotDePasseMasque(JButton btn) {
 		this.isMotDePasseCache = !this.isMotDePasseCache;
 		if (isMotDePasseCache) {

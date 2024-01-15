@@ -20,9 +20,12 @@ public class AccueilAdministrateurControleur implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
 		if (e.getSource() instanceof JButton) {
+			
 			JButton bouton = (JButton) e.getSource();
 			CustomJFrame frame;
+			
 			switch (bouton.getText()) {
 			case ("Quitter"):
 				this.vue.closeCurrentWindow();
@@ -50,6 +53,7 @@ public class AccueilAdministrateurControleur implements ActionListener {
 			default:
 				break;
 			}
+	
 		}
 	}
 

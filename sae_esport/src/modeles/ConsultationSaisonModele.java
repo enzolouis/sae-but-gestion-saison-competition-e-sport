@@ -3,7 +3,6 @@ package modeles;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 import DAOs.EquipeDAO;
@@ -11,6 +10,9 @@ import classes.Equipe;
 
 public class ConsultationSaisonModele {
 	
+	/**
+	 * renvoie la liste du classement de la saison par ordre de points
+	 * */
 	public List<Equipe> classementRanked() throws Exception {
 		
 		return EquipeDAO.getInstance().getAll()
@@ -26,6 +28,10 @@ public class ConsultationSaisonModele {
 		
 	}
 	
+	/**
+	 * renvoie le dictionnaire des équipes de la saison
+	 * avec en clé l'équipe et en valeur leur rang exact
+	 * */
 	public Map<Equipe,Integer> classementWithRank() throws Exception {
 		
 		HashMap<Equipe,Integer> classement = new HashMap<Equipe,Integer>();

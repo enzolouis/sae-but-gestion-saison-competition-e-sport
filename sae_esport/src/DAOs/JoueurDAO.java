@@ -25,7 +25,9 @@ public class JoueurDAO {
 		return instance;
 	}
 	
-	//Renvois l'ensemble des joueurs
+	/**
+	 * renvoie l'ensemble des joueurs
+	 * */
 	public List<Joueur> getAll() throws Exception {
 		
 		PreparedStatement st = DBConnection.getInstance().prepareStatement("SELECT * FROM joueur");
@@ -38,7 +40,10 @@ public class JoueurDAO {
 		
 	}
 	
-	//retourne un joueur specifique
+	/**
+	 * renvoie le joueur du premier id reconnu
+	 * @param identifiant(s) du joueur
+	 * */
 	public Optional<Joueur> getById(Integer... id) throws Exception {
 		
 		Statement st = DBConnection.getInstance().createStatement();
@@ -51,42 +56,49 @@ public class JoueurDAO {
 		
 		return Optional.empty();
 	}
-	
-	//ajoute un arbitre à la liste
-		//peu importe l'id que vous mettrez à l'arbitre, il sera changé
-		public boolean add(Joueur value) throws Exception {
 
-			PreparedStatement st = DBConnection.getInstance().prepareStatement("SELECT NEXT VALUE FOR seQIDJoueur FROM DUAL");
-			ResultSet rs = st.executeQuery();
-			int id = 0;
-			if (rs.next()) {
-				id = rs.getInt(1);
-			}
-			value.setIDJoueur(id);
-			st = DBConnection.getInstance().prepareStatement("INSERT INTO joueur VALUES (?,?, ?)");
-			st.setInt(1, id); st.setString(2, value.getPseudo()); st.setInt(3, value.getIdEquipe());
-			int rowcount = st.executeUpdate();
-			return rowcount > 0;
-			
+	/**
+	 * ajoute un joueur à la bdd
+	 * @param joueur à ajouter
+	 * */
+	public boolean add(Joueur value) throws Exception {
+
+		PreparedStatement st = DBConnection.getInstance().prepareStatement("SELECT NEXT VALUE FOR seQIDJoueur FROM DUAL");
+		ResultSet rs = st.executeQuery();
+		int id = 0;
+		if (rs.next()) {
+			id = rs.getInt(1);
 		}
+		value.setIDJoueur(id);
+		st = DBConnection.getInstance().prepareStatement("INSERT INTO joueur VALUES (?,?, ?)");
+		st.setInt(1, id); st.setString(2, value.getPseudo()); st.setInt(3, value.getIdEquipe());
+		int rowcount = st.executeUpdate();
+		return rowcount > 0;
+			
+	}
 		
-		//update un arbitre donné
-		public boolean update(Joueur value) throws Exception {
+	/**
+	 * met à j dans la bdd un joueur
+	 * @param joueur à mettre à jour
+	 * */
+	public boolean update(Joueur value) throws Exception {
 			
-			PreparedStatement st = DBConnection.getInstance().prepareStatement("UPDATE joueur SET pseudo=?, idEquipe =? WHERE idJoueur=?");
-			st.setString(1, value.getPseudo()); st.setInt(2, value.getIdEquipe()); st.setInt(3, value.getIdJoueur());
-			int rowcount = st.executeUpdate();
-			return rowcount > 0;
+		PreparedStatement st = DBConnection.getInstance().prepareStatement("UPDATE joueur SET pseudo=?, idEquipe =? WHERE idJoueur=?");
+		st.setString(1, value.getPseudo()); st.setInt(2, value.getIdEquipe()); st.setInt(3, value.getIdJoueur());			int rowcount = st.executeUpdate();
+		return rowcount > 0;
 			
-		}
+	}
 		
-		//retire un arbitre donné
-		public boolean delete(Joueur value) throws Exception {
+	/**
+	 * supprimer le joueur de la bdd
+	 * @param joueur à supprimer
+	 * */
+	public boolean delete(Joueur value) throws Exception {
 			
-			PreparedStatement st = DBConnection.getInstance().prepareStatement("DELETE FROM joueur WHERE idJoueur=?");
-			st.setInt(1, value.getIdJoueur());
-			int rowcount = st.executeUpdate();
-			return rowcount > 0;
-			
-		}
+		PreparedStatement st = DBConnection.getInstance().prepareStatement("DELETE FROM joueur WHERE idJoueur=?");
+		st.setInt(1, value.getIdJoueur());
+		int rowcount = st.executeUpdate();
+		return rowcount > 0;
+
+	}
 }

@@ -46,10 +46,13 @@ public class Arbitre {
 		this.prenom = prenom;
 	}
 
-	//Retourne la Nationalite de l'Arbitre
+	/**
+	 * Renvoie la nationalité de l'arbitre
+	 * */
 	public Nationalite getNationalite() {
 		return nationalite;
 	}
+	
 	/**
 	 * Change la Nationalite de l'Arbitre
 	 * 	@param la valeur Nationalite avec lequel remplacer l'Arbitre
@@ -58,7 +61,9 @@ public class Arbitre {
 		this.nationalite = nationalite;
 	}
 
-	//Retourne l'ID de l'Arbitre
+	/**
+	 * Renvoie l'ID de l'arbitre
+	 * */
 	public int getIdArbitre() {
 		return this.idArbitre;
 	}
