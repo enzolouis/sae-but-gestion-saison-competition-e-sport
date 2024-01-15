@@ -1,4 +1,4 @@
-package vues;
+package style;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -53,18 +53,18 @@ public class Palette {
         customTextFont = loadedFont;
     }
     
-    public static final ImageIcon OEIL_INVISIBLE_ICON = new ImageIcon(new ImageIcon(IdentificationVue.class.getClassLoader().getResource
+    public static final ImageIcon OEIL_INVISIBLE_ICON = new ImageIcon(new ImageIcon(Palette.class.getClassLoader().getResource
 			("oeilMotDePasseInvisible.png")).getImage().getScaledInstance(30, 30,  java.awt.Image.SCALE_SMOOTH));
 	
-	public static final ImageIcon OEIL_VISIBLE_ICON = new ImageIcon(new ImageIcon(IdentificationVue.class.getClassLoader().getResource
+	public static final ImageIcon OEIL_VISIBLE_ICON = new ImageIcon(new ImageIcon(Palette.class.getClassLoader().getResource
 			("oeilMotDePasseVisible.png")).getImage().getScaledInstance(30, 30,  java.awt.Image.SCALE_SMOOTH));
 	
-	public static final ImageIcon LOGO = new ImageIcon(new ImageIcon(IdentificationVue.class.getClassLoader().getResource
+	public static final ImageIcon LOGO = new ImageIcon(new ImageIcon(Palette.class.getClassLoader().getResource
 			("logoApp.png")).getImage().getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH));
 	
-	public static final ImageIcon MINIMIZE = new ImageIcon(new ImageIcon(IdentificationVue.class.getClassLoader().getResource
+	public static final ImageIcon MINIMIZE = new ImageIcon(new ImageIcon(Palette.class.getClassLoader().getResource
 			("minimize.png")).getImage().getScaledInstance(20, 20,  java.awt.Image.SCALE_SMOOTH));
 	
-	public static final ImageIcon CLOSE = new ImageIcon(new ImageIcon(IdentificationVue.class.getClassLoader().getResource
+	public static final ImageIcon CLOSE = new ImageIcon(new ImageIcon(Palette.class.getClassLoader().getResource
 			("close.png")).getImage().getScaledInstance(20, 20,  java.awt.Image.SCALE_SMOOTH));
 }

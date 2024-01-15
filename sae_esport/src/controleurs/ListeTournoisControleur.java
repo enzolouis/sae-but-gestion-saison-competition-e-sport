@@ -31,9 +31,9 @@ import classes.Disposition;
 import classes.Equipe;
 import classes.Joueur;
 import modeles.TournoiModele;
+import style.Palette;
 import vues.IdentificationVue;
 import vues.ListeTournoisVue;
-import vues.Palette;
 
 public class ListeTournoisControleur implements ActionListener, ListSelectionListener, MouseListener {
 	private TournoiModele modele;

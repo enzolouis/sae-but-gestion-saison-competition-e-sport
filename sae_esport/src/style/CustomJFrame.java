@@ -14,7 +14,6 @@ import javax.swing.border.EmptyBorder;
 
 import controleurs.MenuControleur;
 import controleurs.MenuMotionControleur;
-import vues.Palette;
 
 public class CustomJFrame extends JFrame {
 	CustomJPanel contentMenu;

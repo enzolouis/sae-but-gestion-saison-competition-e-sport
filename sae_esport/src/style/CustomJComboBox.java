@@ -16,8 +16,6 @@ import javax.swing.JComponent;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
 
-import vues.Palette;
-
 public class CustomJComboBox extends JComboBox {
     private DefaultComboBoxModel model;
     Shape shape;

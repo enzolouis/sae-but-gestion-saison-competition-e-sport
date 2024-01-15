@@ -14,11 +14,11 @@ import DAOs.TournoiDAO;
 import modeles.IdentificationModele;
 import modeles.TournoiModele;
 import style.CustomJFrame;
+import style.Palette;
 import modeles.IdentificationModele.Utilisateur;
 import vues.AccueilAdministrateurVue;
 import vues.AccueilArbitreVue;
 import vues.IdentificationVue;
-import vues.Palette;
 
 public class MenuControleur implements ActionListener {
 	

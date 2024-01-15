@@ -23,6 +23,7 @@ import style.CustomJPanel;
 import style.CustomJScrollPane;
 import style.CustomJSeparator;
 import style.CustomJTextField;
+import style.Palette;
 
 public class ChoixArbitreVue extends CustomJFrame {
 

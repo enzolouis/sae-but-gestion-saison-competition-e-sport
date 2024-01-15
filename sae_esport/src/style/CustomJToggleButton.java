@@ -11,8 +11,6 @@ import javax.swing.JButton;
 import javax.swing.JToggleButton;
 import javax.swing.border.EmptyBorder;
 
-import vues.Palette;
-
 public class CustomJToggleButton extends JToggleButton {
 	Shape shape;
 	int round;

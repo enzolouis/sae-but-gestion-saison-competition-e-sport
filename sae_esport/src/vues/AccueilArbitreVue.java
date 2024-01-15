@@ -18,6 +18,7 @@ import style.CustomJFrame;
 import style.CustomJLabel;
 import style.CustomJPanel;
 import style.CustomJSeparator;
+import style.Palette;
 
 public class AccueilArbitreVue extends CustomJFrame {
 
