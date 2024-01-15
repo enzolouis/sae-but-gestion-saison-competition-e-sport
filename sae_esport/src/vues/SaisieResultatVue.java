@@ -10,18 +10,12 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
-import javax.sound.midi.VoiceStatus;
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import DAOs.EquipeDAO;
 import DAOs.TournoiDAO;
 import classes.Equipe;
 import classes.Match;
@@ -34,8 +28,6 @@ import style.CustomJPanel;
 import style.CustomJScrollPane;
 import style.CustomJSeparator;
 import style.Palette;
-
-import javax.swing.SwingConstants;
 
 public class SaisieResultatVue extends CustomJFrame {
 	private CustomJPanel contentPanel;
@@ -172,6 +164,9 @@ public class SaisieResultatVue extends CustomJFrame {
         this.matchsUi = new ArrayList<>();
         boolean inFinale = false;
         boolean canFinale = true;
+        Match finalMatch = null;
+        Equipe finalEquipe1 = null;
+        Equipe finalEquipe2 = null;
         for (Match match : this.tournoi.getMatchs()) {
         	if (!match.IsItFinale()) {
             	ArrayList<CustomJButton> equipesList = new ArrayList<CustomJButton>();
@@ -211,6 +206,17 @@ public class SaisieResultatVue extends CustomJFrame {
             	this.matchsUi.add(equipesList);
         	} else {
         		inFinale = true;
+        		finalMatch = match;
+        		
+        		for (Equipe equipe : finalMatch.getEquipes()) {
+					if (finalEquipe1 == null) {
+						System.out.println("Equipe 1 - " + equipe.getIdEquipe());
+						finalEquipe1 = equipe;
+					} else {
+						System.out.println("Equipe 2 - " + equipe.getIdEquipe());
+						finalEquipe2 = equipe;
+					}
+				}
 			}
 		}
         
@@ -255,7 +261,7 @@ public class SaisieResultatVue extends CustomJFrame {
         if (canFinale && !inFinale) {
         	this.openFinalButton.setEnabled(true);
 		} else if (inFinale) {
-        	OpenButtonFinal();
+        	OpenButtonFinal(finalMatch.getIDMatch(), finalEquipe1, finalEquipe2);
         }
     }
     
@@ -300,12 +306,22 @@ public class SaisieResultatVue extends CustomJFrame {
 		}
     }
     
-    public void OpenButtonFinal() {
+    public void OpenButtonFinal(Integer matchId, Equipe equipe1, Equipe equipe2) {
     	this.openFinalButton.setEnabled(false);
         this.closeFinalButton.setEnabled(true);
-    	
+        boolean equipeFinale1Set = false;
+        
     	for (CustomJButton customJButton : buttonEquipeFinale) {
 			customJButton.setEnabled(true);
+			
+			if (equipeFinale1Set == false) {
+				equipeFinale1Set = true;
+				customJButton.setText("Équipe n°" + equipe1.getIdEquipe());
+				customJButton.setActionCommand(matchId + "," + equipe1.getIdEquipe());
+			} else {
+				customJButton.setText("Équipe n°" + equipe2.getIdEquipe());
+				customJButton.setActionCommand(matchId + "," + equipe2.getIdEquipe());
+			}
 		}
     	
 		for (ArrayList<CustomJButton> match : matchsUi) {
