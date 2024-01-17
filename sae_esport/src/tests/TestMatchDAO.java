@@ -58,7 +58,7 @@ public class TestMatchDAO {
 	/// Test de la récupération d'un administrateur
 	public void testGetByIdMatch() throws Exception{
 	    	Match match = new Match(0, 1, false);
-	    	match.AddEquipe(e); match.AddEquipe(e2);
+	    	match.addEquipe(e); match.addEquipe(e2);
 			matchDAO.add(match);
 			Optional<Match> optional = matchDAO.getById(match.getIDMatch());
 		    assertEquals(optional.get(), match);
@@ -70,9 +70,9 @@ public class TestMatchDAO {
 	//Test de la récupération des administrateur lorsqu'il y a des administrateurs
 	public void testGetAllMatch() throws Exception{
 		    Match match1 = new Match(0, 1, false);
-		    match1.AddEquipe(e); match1.AddEquipe(e2);
+		    match1.addEquipe(e); match1.addEquipe(e2);
 			Match match2 = new Match(0, 1, false);	
-			match2.AddEquipe(e); match2.AddEquipe(e2);
+			match2.addEquipe(e); match2.addEquipe(e2);
 			this.matchDAO.add(match1);
 			this.matchDAO.add(match2);
 			List<Match> listMatch = matchDAO.getAll();
@@ -87,7 +87,7 @@ public class TestMatchDAO {
 	/// Test de l'ajout d'administrateur 
 	public void testAddMatch() throws Exception {
 		Match match = new Match(-1, 1, true); 
-		match.AddEquipe(e); match.AddEquipe(e2);
+		match.addEquipe(e); match.addEquipe(e2);
 	    	matchDAO.add(match);
 	    	assertEquals(match, matchDAO.getById(match.getIDMatch()).get());
 	    	connection.rollback();
@@ -98,7 +98,7 @@ public class TestMatchDAO {
 	/// Test de la mise à jour d'un administrateur
 	public void testUpdateMatch() throws Exception {
 		Match match = new Match(-1, 1, true);
-		match.AddEquipe(e); match.AddEquipe(e2);
+		match.addEquipe(e); match.addEquipe(e2);
 	        matchDAO.add(match);
 	        match.setVainqueur(e.getIdEquipe());
 	        matchDAO.update(match);
@@ -111,7 +111,7 @@ public class TestMatchDAO {
 	/// Test de supression d'un administrateur
 	public void testDeleteMatch() throws Exception { 
 			Match match = new Match(-1, 1, true);
-			match.AddEquipe(e); match.AddEquipe(e2);
+			match.addEquipe(e); match.addEquipe(e2);
 	        matchDAO.add(match);
 	        int size = matchDAO.getAll().size();
 	        matchDAO.delete(match);           

@@ -157,7 +157,7 @@ public class TestTournoiDAO {
         Match match = new Match(0,1,false);
         Equipe e = new Equipe(0, "Maxence Maury-Balliteam", Nationalite.FR, Disposition.DISPOSEE, 3, 1000);EquipeDAO.getInstance().add(e);
 		Equipe e2 = new Equipe(1, "Ibrateam Zoubairov", Nationalite.FR, Disposition.DISPOSEE, 1, 2300);EquipeDAO.getInstance().add(e2);
-		match.AddEquipe(e); match.AddEquipe(e2);
+		match.addEquipe(e); match.addEquipe(e2);
         tournoi.ajouterMatch(match);
         TournoiDAO.getInstance().add(tournoi);
         TournoiModele tournoistocke = TournoiDAO.getInstance().getById(tournoi.getIDTournoi()).get();

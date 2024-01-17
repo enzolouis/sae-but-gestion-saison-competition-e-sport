@@ -11,7 +11,7 @@ public class TestSaisieResultatModele {
 		TournoiModele t = new TournoiModele();
 		Match ma = new Match(0, t.getIDTournoi(), false);
 		m = new SaisieResultatModele(t);
-		if (m.IsFinaleDemarree()) {
+		if (m.isFinaleDemarree()) {
 			System.out.print("IsFinaleDemarree - tournoi vide erreur");
 		}
 		else {
@@ -20,14 +20,14 @@ public class TestSaisieResultatModele {
 		t.nouveauMatch(ma.getIDMatch(),ma.IsItFinale());
 		t.nouveauMatch(1,false);
 		t.nouveauMatch(2, false);
-		if (m.IsFinaleDemarree()) {
+		if (m.isFinaleDemarree()) {
 			System.out.print("IsFinaleDemarree - tournoi non vide sans finale erreur");
 		}
 		else {
 			System.out.print("IsFinaleDemarree - tournoi non vide sans finale OK");
 		}
 		t.nouveauMatch(3, true);
-		if (m.IsFinaleDemarree()) {
+		if (m.isFinaleDemarree()) {
 			System.out.print("IsFinaleDemarree - tournoi avec finale OK");
 		}
 		else {
