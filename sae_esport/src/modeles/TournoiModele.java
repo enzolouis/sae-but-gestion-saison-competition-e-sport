@@ -235,6 +235,7 @@ public class TournoiModele {
 	}
 	
 	/**
+	 * 
 	 * ajoute un match au tournoi
 	 * @param nouveau match
 	 * */
@@ -503,32 +504,27 @@ public class TournoiModele {
 			this.supprimerEquipeIndisposees();
 			this.setEtatTournoi(EtatTournoi.OUVERT);
 			
+			this.matches = new ArrayList<Match>();
+			
 			ArrayList<Equipe> equipes = new ArrayList<>();
-			equipes.addAll(participants.keySet());
 			ArrayList<Equipe> equipesAttribuees = new ArrayList<>();
+			equipes.addAll(participants.keySet());
 			for (Equipe e : equipes) {
-				if (!equipesAttribuees.contains(e)) {
-					equipesAttribuees.add(e);
-					for (Equipe e2 : equipes) {
-						if (!equipesAttribuees.contains(e2)) {
-							Match m = new Match(0, this.idTournoi, false);
-							m.AddEquipe(e); m.AddEquipe(e2);
-							this.ajouterMatch(m); 
-							MatchDAO.getInstance().add(m);
-						}
+				for (Equipe e2 : equipes) {
+					if (!e.equals(e2) && !equipesAttribuees.contains(e2) && !equipesAttribuees.contains(e)) {
+						Match m = new Match(0, this.idTournoi, false);
+						m.addEquipe(e); m.addEquipe(e2);
+						this.ajouterMatch(m); 
+						MatchDAO.getInstance().add(m);
 					}
 				}
+				equipesAttribuees.add(e);
 			}
 			
-			System.out.println(this.idTournoi);
 			TournoiDAO.getInstance().update(this);
 			
-			for (Match m : this.getMatchs()) {
-				System.out.println(m.getIdTournoi());
-			}
-			
 		}
-		
+			
 	}
 
 	@Override
