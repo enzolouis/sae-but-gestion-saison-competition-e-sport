@@ -9,6 +9,7 @@ import style.CustomJFrame;
 import vues.AccueilArbitreVue;
 import vues.ConsultationTournoiVue;
 import vues.IdentificationVue;
+import vues.SaisieResultatVue;
 
 public class AccueilArbitreControleur implements ActionListener {
 	
@@ -37,6 +38,14 @@ public class AccueilArbitreControleur implements ActionListener {
 				frame.setVisible(true);
 				break;
 			case ("Accès au tournoi"):
+				this.vue.closeCurrentWindow();
+				try {
+					frame = new SaisieResultatVue();
+					frame.setVisible(true);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				break;
 			
 			case ("Statistiques du tournoi"):
