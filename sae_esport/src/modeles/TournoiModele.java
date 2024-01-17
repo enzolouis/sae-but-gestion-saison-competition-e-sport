@@ -306,6 +306,11 @@ public class TournoiModele {
 	public Optional<Equipe> getVainqueur() {
 		return this.vainqueur;
 	}
+	
+	public void addPoints(Equipe e, int pointsAAjouter) {
+		int points = this.participants.get(e);
+		this.participants.put(e, points+pointsAAjouter);
+	}
 
 	
 	/**
