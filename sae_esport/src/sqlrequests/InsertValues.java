@@ -28,29 +28,14 @@ public class InsertValues {
     	
     	try {
     	
-	    	TournoiModele t = new TournoiModele(66, "Big tournoi", "20/12/2024", "20/01/2025", Notoriete.INTERNATIONAL, EtatTournoi.FERME);
-	    	
-			Match m1 = new Match(1, t.getIDTournoi(), false);
-			Match m2 = new Match(2, t.getIDTournoi(), false); 
-			Match m3 = new Match(3, t.getIDTournoi(), false); 
+	    	TournoiModele t = new TournoiModele(66, "Big tournoi", "20/12/2023", "20/01/2024", Notoriete.INTERNATIONAL, EtatTournoi.FERME);
 	    	
 	    	// 4 équipes
 			Equipe e = new Equipe(0, "Maxence Maury-Balliteam", Nationalite.FR, Disposition.DISPOSEE, 3, 1000); EquipeDAO.getInstance().add(e);
 			Equipe e2 = new Equipe(1, "Ibrateam Zoubairov", Nationalite.FR, Disposition.DISPOSEE, 1, 1000); EquipeDAO.getInstance().add(e2);
 			Equipe e3 = new Equipe(2, "Equipema Rasoanaivo", Nationalite.FR, Disposition.DISPOSEE, 2, 2001); EquipeDAO.getInstance().add(e3);
 			Equipe e4 = new Equipe(3, "Stuarteam Barthe", Nationalite.FR, Disposition.DISPOSEE, 4, 18); EquipeDAO.getInstance().add(e4);
-			
-			m1.AddEquipe(e);
-			m1.AddEquipe(e2);
-			m2.AddEquipe(e);
-			m2.AddEquipe(e3);
-			m3.AddEquipe(e);
-			m3.AddEquipe(e4);
-			
-	    	t.ajouterMatch(m1);
-	    	t.ajouterMatch(m2);
-	    	t.ajouterMatch(m3);
-			
+	
 	    	TournoiDAO.getInstance().add(t);
 	
 			Joueur je11 = new Joueur(0, "Marie", e.getIdEquipe());JoueurDAO.getInstance().add(je11);
