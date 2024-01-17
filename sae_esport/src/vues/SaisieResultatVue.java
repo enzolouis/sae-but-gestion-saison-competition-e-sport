@@ -20,7 +20,6 @@ import DAOs.TournoiDAO;
 import classes.Equipe;
 import classes.Match;
 import controleurs.SaisieResultatControleur;
-import controleurs.SaisieResultatControleur.STATE;
 import modeles.TournoiModele;
 import style.CustomJButton;
 import style.CustomJFrame;
@@ -62,9 +61,6 @@ public class SaisieResultatVue extends CustomJFrame {
     	pack();
     	
     	this.tournoi = TournoiDAO.getInstance().getTournoiOuvert().get();
-    	System.out.println(this.tournoi.getNomTournoi());
-    	System.out.println(this.tournoi.getIDTournoi());
-    	System.out.println(this.tournoi.getMatchs().size());
     	this.controleur = new SaisieResultatControleur(this, this.tournoi);
         
         // Panel Top : Title
@@ -281,7 +277,9 @@ public class SaisieResultatVue extends CustomJFrame {
     }
     
     public void RefreshMatch(CustomJButton buttonVainqueur) {
+    	
     	boolean canFinale = true;
+    	boolean inFinale = false;
 		String[] originalIds = buttonVainqueur.getActionCommand().split(",");
 		int idmatchVainqueur = Integer.valueOf(originalIds[0]);
 		int idequipeVainqueur = Integer.valueOf(originalIds[1]);
@@ -307,6 +305,7 @@ public class SaisieResultatVue extends CustomJFrame {
 			System.out.println(customJButton.getActionCommand());
 			String[] newIds = customJButton.getActionCommand().split(",");
 			if (!newIds[0].equals("IdMatch")) {
+				inFinale = true;
 				int idmatch = Integer.valueOf(newIds[0]);
 				int idequipe = Integer.valueOf(newIds[1]);
 					
@@ -331,10 +330,10 @@ public class SaisieResultatVue extends CustomJFrame {
 				}
 			}
 			
-			
-			if (canFinale) {
+			if (canFinale && !inFinale) {
 				this.openFinalButton.setEnabled(true);
 			}
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -371,12 +370,14 @@ public class SaisieResultatVue extends CustomJFrame {
     }
     
     public void closeCurrentWindow() {
+    	
 		super.closeCurrentWindow();
 		AccueilArbitreVue frame = new AccueilArbitreVue();
 		frame.setVisible(true);
 	}
     
     public void disableButtons() {
+    	
     	for (ArrayList<CustomJButton> l : matchsUi) {
     		for (CustomJButton bouton : l) {
     			bouton.setEnabled(false);
@@ -384,6 +385,8 @@ public class SaisieResultatVue extends CustomJFrame {
     	}
     	buttonEquipeFinale.get(0).setEnabled(false);
     	buttonEquipeFinale.get(1).setEnabled(false);
+    	closeFinalButton.setEnabled(false);
+    	openFinalButton.setEnabled(false);
     }
     
 }
