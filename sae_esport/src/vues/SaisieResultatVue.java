@@ -20,6 +20,7 @@ import DAOs.TournoiDAO;
 import classes.Equipe;
 import classes.Match;
 import controleurs.SaisieResultatControleur;
+import controleurs.SaisieResultatControleur.STATE;
 import modeles.TournoiModele;
 import style.CustomJButton;
 import style.CustomJFrame;
@@ -55,6 +56,8 @@ public class SaisieResultatVue extends CustomJFrame {
     public SaisieResultatVue() throws Exception {
     	super(new Dimension(550, 500), "Résultat des matchs");
     	contentPanel = this.getContentPanel();
+    	
+    	this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     	
     	pack();
     	
@@ -170,8 +173,14 @@ public class SaisieResultatVue extends CustomJFrame {
         Match finalMatch = null;
         Equipe finalEquipe1 = null;
         Equipe finalEquipe2 = null;
+        int nbMatch = 0;
+        
         for (Match match : this.tournoi.getMatchs()) {
+        	
+        	nbMatch++;
+        	
         	if (!match.IsItFinale()) {
+        		
             	ArrayList<CustomJButton> equipesList = new ArrayList<CustomJButton>();
 
             	// Panel Match : Titre + Panel Liste Equipe
@@ -180,7 +189,7 @@ public class SaisieResultatVue extends CustomJFrame {
             	panelRoundList.add(MatchCustomJPanel);
             	
             	// Numero Round
-                CustomJLabel titleMatchTop = new CustomJLabel("Round n°" + match.getIDMatch(), 25);
+                CustomJLabel titleMatchTop = new CustomJLabel("Match n°"+nbMatch, 25);
                 MatchCustomJPanel.add(titleMatchTop, gbc_titleMatchTop);
                 
                 // Panel Equipe Liste
@@ -188,7 +197,8 @@ public class SaisieResultatVue extends CustomJFrame {
                 MatchCustomJPanel.add(MatchEquipeListJPanel, gbc_roundListEquipe);
                 
                 for (Equipe equipe : match.getEquipes()) {
-                	CustomJButton button1 = new CustomJButton("Équipe n°" + equipe.getIdEquipe(), 15);
+                	
+                	CustomJButton button1 = new CustomJButton(equipe.getNom(), 15);
                 	equipesList.add(button1);
                 	button1.addActionListener(this.controleur);
                 	button1.setActionCommand(match.getIDMatch() + "," + equipe.getIdEquipe());
@@ -207,7 +217,9 @@ public class SaisieResultatVue extends CustomJFrame {
     			}
                 
             	this.matchsUi.add(equipesList);
+            	
         	} else {
+        		
         		inFinale = true;
         		finalMatch = match;
         		
@@ -242,7 +254,7 @@ public class SaisieResultatVue extends CustomJFrame {
     	panelMiddleBottom.add(this.openFinalButton, gbc_buttonOpen);
     	
     	this.closeFinalButton = new CustomJButton("Fermer le tournoi", 15);
-        this.closeFinalButton.setEnabled(false);
+        this.closeFinalButton.setEnabled(true);
         GridBagConstraints gbc_buttonClose = new GridBagConstraints();
         gbc_buttonClose.anchor = GridBagConstraints.EAST;
         gbc_buttonClose.gridx = 1;
@@ -280,6 +292,7 @@ public class SaisieResultatVue extends CustomJFrame {
 				int idmatch = Integer.valueOf(newIds[0]);
 				int idequipe = Integer.valueOf(newIds[1]);
 				
+				System.out.println(idmatchVainqueur+""+idmatch);
 				if (idmatchVainqueur == idmatch) {
 					if (idequipeVainqueur == idequipe) {
 						customJButton.setBackground(new Color(50, 168, 80));
@@ -288,6 +301,25 @@ public class SaisieResultatVue extends CustomJFrame {
 					}
 				}
 			}
+		}
+		
+		for (CustomJButton customJButton : buttonEquipeFinale) {
+			System.out.println(customJButton.getActionCommand());
+			String[] newIds = customJButton.getActionCommand().split(",");
+			if (!newIds[0].equals("IdMatch")) {
+				int idmatch = Integer.valueOf(newIds[0]);
+				int idequipe = Integer.valueOf(newIds[1]);
+					
+				System.out.println(idmatchVainqueur+""+idmatch);
+				if (idmatchVainqueur == idmatch) {
+					if (idequipeVainqueur == idequipe) {
+						customJButton.setBackground(new Color(50, 168, 80));
+					} else {
+						customJButton.setBackground(new Color(231, 76, 60));
+					}
+				}
+			}
+			
 		}
 		
 		try {
@@ -319,10 +351,10 @@ public class SaisieResultatVue extends CustomJFrame {
 			
 			if (equipeFinale1Set == false) {
 				equipeFinale1Set = true;
-				customJButton.setText("Équipe n°" + equipe1.getIdEquipe());
+				customJButton.setText(equipe1.getNom());
 				customJButton.setActionCommand(matchId + "," + equipe1.getIdEquipe());
 			} else {
-				customJButton.setText("Équipe n°" + equipe2.getIdEquipe());
+				customJButton.setText(equipe2.getNom());
 				customJButton.setActionCommand(matchId + "," + equipe2.getIdEquipe());
 			}
 		}
@@ -338,13 +370,20 @@ public class SaisieResultatVue extends CustomJFrame {
     	return this.tournoi;
     }
     
-    public void refreshMatchList() {
-    	
-    }
-    
     public void closeCurrentWindow() {
 		super.closeCurrentWindow();
 		AccueilArbitreVue frame = new AccueilArbitreVue();
 		frame.setVisible(true);
 	}
+    
+    public void disableButtons() {
+    	for (ArrayList<CustomJButton> l : matchsUi) {
+    		for (CustomJButton bouton : l) {
+    			bouton.setEnabled(false);
+    		}
+    	}
+    	buttonEquipeFinale.get(0).setEnabled(false);
+    	buttonEquipeFinale.get(1).setEnabled(false);
+    }
+    
 }
