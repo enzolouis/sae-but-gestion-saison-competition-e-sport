@@ -39,10 +39,11 @@ public class SaisieResultatControleur implements ActionListener {
 	private Timer timer;
 	private STATE stateTournoi;
 	public enum STATE {
-		  NOT_FINALE, IS_FINALE
+		  NOT_FINALE, IS_FINALE, IS_OVER
 	}
 	
 	public SaisieResultatControleur(SaisieResultatVue vue, TournoiModele tournoi) {
+		
 		this.stateTournoi = STATE.NOT_FINALE;
 		this.vue = vue; 
 		this.modele = new SaisieResultatModele(tournoi);
@@ -73,10 +74,12 @@ public class SaisieResultatControleur implements ActionListener {
 			JButton bouton = (JButton) e.getSource();
 			switch (bouton.getText()) {
 			case ("Quitter"):
+				this.vue.dispose();
 				this.vue.closeCurrentWindow();
 				break;
 			case ("Ouvrir la finale"):
 				try {
+					
 					boolean canOpenFinal = true;
 					List<Match> matchsTournoi;
 					matchsTournoi = TournoiDAO.getInstance().getById(modele.getTournoi().getIDTournoi()).get().getMatchs();
@@ -92,18 +95,18 @@ public class SaisieResultatControleur implements ActionListener {
 						int score1 = -1;
 						int score2 = -1;
 						
-						Map<Equipe, Integer> equipe = modele.getTournoi().getParticipants();
-						for (Map.Entry eq : equipe.entrySet()) {
-							if((Integer) eq.getValue() > score1) {
+						Map<Equipe, Integer> equipes = modele.getTournoi().getParticipants();
+						for (Equipe eq : equipes.keySet()) {
+							System.out.println(equipes.get(eq));
+							if(equipes.get(eq) > score1) {
 								equipe2 = equipe1;
 								score2 = score1;
-								equipe1 = (Equipe) eq.getKey();
-								score1 = (Integer) eq.getValue();
-							}
-							else {
-								if ((Integer) eq.getValue() > score2) {
-									equipe2 = (Equipe) eq.getKey();
-									score2 = (Integer) eq.getValue();
+								equipe1 = eq;
+								score1 = equipes.get(eq);
+							} else {
+								if (equipes.get(eq) > score2) {
+									equipe2 = eq;
+									score2 = equipes.get(eq);
 								}
 							}
 						}
@@ -111,13 +114,13 @@ public class SaisieResultatControleur implements ActionListener {
 						Match matchFinale = new Match(4, modele.getTournoi().getIDTournoi(), true);
 						matchFinale.AddEquipe(equipe1);
 						matchFinale.AddEquipe(equipe2);
+						MatchDAO.getInstance().add(matchFinale);
 						
 						this.modele.getTournoi().ajouterMatch(matchFinale);
 						
 						this.vue.OpenButtonFinal(matchFinale.getIDMatch(), equipe1, equipe2);
 						this.stateTournoi = STATE.IS_FINALE;
 						
-						MatchDAO.getInstance().add(matchFinale);
 						TournoiDAO.getInstance().update(this.modele.getTournoi());
 					}
 					else {
@@ -129,49 +132,64 @@ public class SaisieResultatControleur implements ActionListener {
 				
 				break;
 			case ("Fermer le tournoi"):
+				
 				modele.getTournoi().setEtatTournoi(EtatTournoi.FERME);
 			
-				if (modele.IsFinaleDemarree()) {
-					Map<Equipe, Integer> equipe = modele.getTournoi().getParticipants();
-					for (Map.Entry eq : equipe.entrySet()) {
-						Equipe equi =(Equipe) eq.getKey();
-						Equipe equip = null;
+				if (stateTournoi == STATE.IS_OVER) {
+					
+					Map<Equipe, Integer> equipes = modele.getTournoi().getParticipants();
+					for (Equipe eq : modele.getTournoi().getParticipants().keySet()) {
 						try {
-							equip = EquipeDAO.getInstance().getById(equi.getIdEquipe()).get();
-						} catch (Exception e1) {
-							e1.printStackTrace();
-						}
-						
-						equip.setPointsSaison((Integer) eq.getValue() + equip.getPointsSaison());
-						try {
-							EquipeDAO.getInstance().update(equip);
+							eq.setPointsSaison(eq.getPointsSaison() + equipes.get(eq));
+							System.out.println(eq.getPointsSaison());
+							EquipeDAO.getInstance().update(eq);
 							TournoiDAO.getInstance().update(modele.getTournoi());
+							EquipeDAO.getInstance().getById(eq.getIdEquipe()).get().getPointsSaison();
 						} catch (Exception e1) {
 							e1.printStackTrace();
 						}
+				
 					}
 				}
 				
+				this.vue.disableButtons();
+				
 				timer.cancel();
 				break;
+				
 			default:
-				if (this.stateTournoi == STATE.NOT_FINALE) {
-					String[] ids = bouton.getActionCommand().split(",");
-					int idmatch = Integer.valueOf(ids[0]);
-					int idequipe = Integer.valueOf(ids[1]);
-					Match match = null;
-					
-					try {
-						match = MatchDAO.getInstance().getById(idmatch).get();
+				
+				System.out.println("a");
+				String[] ids = bouton.getActionCommand().split(",");
+				int idmatch = Integer.valueOf(ids[0]);
+				int idequipe = Integer.valueOf(ids[1]);
+				Match match = null;
+				Equipe equipe = null;
+				
+				try {
+					match = MatchDAO.getInstance().getById(idmatch).get();
+					equipe = EquipeDAO.getInstance().getById(idequipe).get();
+					if (match.getVainqueur() == 0) {
+						this.modele.getTournoi().addPoints(equipe, 1);
 						match.setVainqueur(idequipe);
-						MatchDAO.getInstance().update(match);
-						this.vue.RefreshMatch((CustomJButton) bouton);
-					} catch (Exception exception) {
-						exception.printStackTrace();
+					} else {
+						this.modele.getTournoi().addPoints(
+								EquipeDAO.getInstance().getById(match.getVainqueur()).get(), -1);
+						this.modele.getTournoi().addPoints(equipe, 1);
+						match.setVainqueur(idequipe);
 					}
-				} else if (this.stateTournoi == STATE.IS_FINALE) {
-					
+					match.setVainqueur(idequipe);
+					equipe = EquipeDAO.getInstance().getById(idequipe).get();
+					MatchDAO.getInstance().update(match);
+					this.vue.RefreshMatch((CustomJButton) bouton);
+				} catch (Exception exception) {
+					exception.printStackTrace();
 				}
+				
+				if (stateTournoi == STATE.IS_FINALE) {
+					stateTournoi = STATE.IS_OVER;
+				}
+				
 			}	
 		}
 	}
