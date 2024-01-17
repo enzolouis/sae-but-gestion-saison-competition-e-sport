@@ -11,6 +11,7 @@ import java.awt.GridBagLayout;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import DAOs.TournoiDAO;
 import controleurs.AccueilArbitreControleur;
 import style.CustomJButton;
 import style.CustomJFrame;
@@ -35,6 +36,8 @@ public class AccueilArbitreVue extends CustomJFrame {
     
     public AccueilArbitreVue() {
     	super(new Dimension(400, 300), "Accueil Arbitre");
+    	
+    	this.setDefaultCloseOperation(EXIT_ON_CLOSE);
     	
     	pack();
     	
@@ -65,13 +68,15 @@ public class AccueilArbitreVue extends CustomJFrame {
         gbc_panelMiddle.weightx = 1.0;
         gbc_panelMiddle.weighty = 1.0;
         
-        CustomJButton btnCreerUnTournoi = new CustomJButton("Accès au tournoi", 10);
-        btnCreerUnTournoi.setBackground(Palette.BLUE);
-        btnCreerUnTournoi.setForeground(Palette.WHITE);
-        btnCreerUnTournoi.addActionListener(controleur);
+        CustomJButton btnAccesAuTournoi = new CustomJButton("Accès au tournoi", 10);
+        btnAccesAuTournoi.setBackground(Palette.BLUE);
+        btnAccesAuTournoi.setForeground(Palette.WHITE);
+        btnAccesAuTournoi.addActionListener(controleur);
         gbc_panelMiddle.gridx = 0;
         gbc_panelMiddle.gridy = 0;
-        panelMiddle.add(btnCreerUnTournoi, gbc_panelMiddle);
+        panelMiddle.add(btnAccesAuTournoi, gbc_panelMiddle);
+        
+        btnAccesAuTournoi.setEnabled(TournoiDAO.getInstance().getTournoiOuvert().isPresent());
         
         CustomJButton btnStatistiquesDeLa = new CustomJButton("Statistiques du tournoi", 10);
         btnStatistiquesDeLa.setBackground(Palette.BLUE);
@@ -80,6 +85,8 @@ public class AccueilArbitreVue extends CustomJFrame {
         gbc_panelMiddle.gridx = 0;
         gbc_panelMiddle.gridy = 1;
         panelMiddle.add(btnStatistiquesDeLa, gbc_panelMiddle.clone());
+        
+        btnStatistiquesDeLa.setEnabled(TournoiDAO.getInstance().getTournoiOuvert().isPresent());
         
         // Bottom Panel : Quitter & Divers
         CustomJPanel panelQuitterSeconnecter = new CustomJPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
