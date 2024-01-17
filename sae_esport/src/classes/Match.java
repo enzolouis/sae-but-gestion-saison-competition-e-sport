@@ -58,7 +58,7 @@ public class Match {
 	 * Ajoute une Equipe au match
 	 * @param la nouvelle équipe à ajouter au match
 	 * */
-	public void AddEquipe(Equipe equipe) {
+	public void addEquipe(Equipe equipe) {
 		this.equipes.add(equipe);
 	}
 	
@@ -103,6 +103,11 @@ public class Match {
 	@Override
 	public int hashCode() {
 		return Objects.hash(equipes, finale, idMatch, idVainqueur);
+	}
+	
+	@Override
+	public String toString() {
+		return equipes.get(0).toString()+" "+equipes.get(1).toString();
 	}
 
 	@Override
