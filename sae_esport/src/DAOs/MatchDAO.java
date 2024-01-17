@@ -45,8 +45,8 @@ public class MatchDAO {
 			stEquipes.setInt(1, m.getIDMatch());
 			ResultSet rsEquipes = stEquipes.executeQuery();
 			if (rsEquipes.next()) {
-				m.AddEquipe(EquipeDAO.getInstance().getById(rsEquipes.getInt(1)).get());
-				m.AddEquipe(EquipeDAO.getInstance().getById(rsEquipes.getInt(2)).get());
+				m.addEquipe(EquipeDAO.getInstance().getById(rsEquipes.getInt(1)).get());
+				m.addEquipe(EquipeDAO.getInstance().getById(rsEquipes.getInt(2)).get());
 				match.add(m);
 			}
 		}
@@ -72,8 +72,8 @@ public class MatchDAO {
 				stEquipes.setInt(1, m.getIDMatch());
 				ResultSet rsEquipes = stEquipes.executeQuery();
 				if (rsEquipes.next()) {
-					m.AddEquipe(EquipeDAO.getInstance().getById(rsEquipes.getInt(1)).get());
-					m.AddEquipe(EquipeDAO.getInstance().getById(rsEquipes.getInt(2)).get());
+					m.addEquipe(EquipeDAO.getInstance().getById(rsEquipes.getInt(1)).get());
+					m.addEquipe(EquipeDAO.getInstance().getById(rsEquipes.getInt(2)).get());
 				}
 				return Optional.of(m);
 			}
