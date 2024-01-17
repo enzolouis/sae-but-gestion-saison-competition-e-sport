@@ -20,7 +20,7 @@ public class ClotureDatePassee extends TimerTask {
 	  @Override
 	  public void run() {
 		  c.getModele().getTournoi().setEtatTournoi(EtatTournoi.FERME);
-			if (c.getModele().IsFinaleDemarree()) {
+			if (c.getModele().isFinaleDemarree()) {
 				Map<Equipe, Integer> equipe = c.getModele().getTournoi().getParticipants();
 				for (Map.Entry eq : equipe.entrySet()) {
 					Equipe equi =(Equipe) eq.getKey();
