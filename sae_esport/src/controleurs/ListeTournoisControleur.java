@@ -76,7 +76,7 @@ public class ListeTournoisControleur implements ActionListener, ListSelectionLis
 					} else if (!tournoi.isTournoiMinimum4EquipeDisposee()) {
 						this.vue.panelErreur.setBackground(Palette.REDERRORBACKGROUND);
 						this.vue.panelErreur.setBorder(new LineBorder(Palette.REDERRORBORDER, 1));
-						this.vue.erreurOuverture.setText("Il n'y a pas assez d'équipe disposées pour commencer le tournoi !");
+						this.vue.erreurOuverture.setText("Pas assez d'équipe disposées !");
 					} else {
 						// reverification de tout
 						
@@ -207,7 +207,7 @@ public class ListeTournoisControleur implements ActionListener, ListSelectionLis
 		
 		try {
 			TournoiModele tournoi = TournoiDAO.getInstance().getById(idTournoi).get();
-			vue.labelTitre.setText("Tournoi N°" + tournoi.getIDTournoi() + " ("+tournoi.getNotoriete().toString()+")");
+			vue.labelTitre.setText("Tournoi " + tournoi.getNomTournoi() + " ("+tournoi.getNotoriete().toString()+")");
 			vue.login.setText(tournoi.getLogin());
 			vue.mdp.setText(tournoi.getMotDePasse());
 			vue.dateDebut.setDate(tournoi.getDateDebut());

@@ -96,7 +96,8 @@ public class ConsultationTournoiVue extends CustomJFrame {
 		tableModel.addColumn("Points");
 		tableModel.addColumn("Victoires");
 		tableModel.addColumn("Défaites");
-			
+		
+		/*
 		for (Equipe e : tournoiCourant.classementTournoi()
 				.keySet()
 				.stream()
@@ -133,6 +134,7 @@ public class ConsultationTournoiVue extends CustomJFrame {
 					matchsJoues, tournoiCourant.getParticipants().get(e), victoires, defaites});
 			
 		}	
+		*/
 		
 		this.controleur.setUpTableModel();
 		

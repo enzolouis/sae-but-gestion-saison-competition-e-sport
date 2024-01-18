@@ -5,6 +5,7 @@ import java.sql.Connection;
 
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
+import javax.swing.JFrame;
 
 import DAOs.ArbitreDAO;
 import DAOs.TournoiDAO;
@@ -13,6 +14,7 @@ import classes.Nationalite;
 import modeles.TournoiModele;
 import style.CustomJButton;
 import style.Palette;
+import vues.AccueilAdministrateurVue;
 import vues.ChoixArbitreVue;
 
 public class ChoixArbitreControleur implements ActionListener {
