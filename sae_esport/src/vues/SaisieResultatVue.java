@@ -39,19 +39,6 @@ public class SaisieResultatVue extends CustomJFrame {
     private CustomJButton openFinalButton;
     private CustomJButton closeFinalButton;
     
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                	SaisieResultatVue frame = new SaisieResultatVue();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-    
     public SaisieResultatVue() throws Exception {
     	super(new Dimension(550, 500), "Résultat des matchs");
     	contentPanel = this.getContentPanel();
@@ -302,7 +289,7 @@ public class SaisieResultatVue extends CustomJFrame {
 		}
 		
 		for (CustomJButton customJButton : buttonEquipeFinale) {
-			System.out.println(customJButton.getActionCommand());
+			System.out.println("boutonfinaleactioncmnd"+customJButton.getActionCommand());
 			String[] newIds = customJButton.getActionCommand().split(",");
 			if (!newIds[0].equals("IdMatch")) {
 				inFinale = true;
@@ -341,6 +328,7 @@ public class SaisieResultatVue extends CustomJFrame {
     }
     
     public void OpenButtonFinal(Integer matchId, Equipe equipe1, Equipe equipe2) {
+    	
     	this.openFinalButton.setEnabled(false);
         this.closeFinalButton.setEnabled(true);
         boolean equipeFinale1Set = false;

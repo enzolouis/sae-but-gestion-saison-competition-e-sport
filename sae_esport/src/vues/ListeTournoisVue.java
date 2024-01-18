@@ -54,21 +54,10 @@ public class ListeTournoisVue extends CustomJFrame {
 	
 	private ListeTournoisControleur controleur;
 	
-	 public static void main(String[] args) {
-	        EventQueue.invokeLater(new Runnable() {
-	            public void run() {
-	                try {
-	        			ListeTournoisVue frame = new ListeTournoisVue();
-	                    frame.setVisible(true);
-	                } catch (Exception e) {
-	                    e.printStackTrace();
-	                }
-	            }
-	        });
-	    }
-	
 	public ListeTournoisVue() {
 		super(new Dimension(500, 700), "Liste des tournois");
+		setMinimumSize(new Dimension(500, 600));
+		setBounds(new Rectangle(100, 100, 700, 600));
 		
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
@@ -186,6 +175,11 @@ public class ListeTournoisVue extends CustomJFrame {
 		titreEquipe.setBounds(new Rectangle(0, 0, 10, 10));
 		titreEquipe.setBounds(0, 0, 150, 14);
 		joueurs = new JList<Joueur>();
+		joueurs.setBounds(new Rectangle(0, 0, 200, 0));
+		joueurs.setMinimumSize(new Dimension(400, 0));
+		joueurs.setMaximumSize(new Dimension(400, 0));
+		joueurs.setPreferredSize(new Dimension(400, 0));
+		joueurs.setSize(new Dimension(400, 0));
 		listeEquipes.setFont(Palette.customFont.deriveFont(Font.PLAIN, 9));
 		joueursModel = new DefaultListModel<Joueur>();
 		joueurs.setModel(joueursModel);
@@ -198,7 +192,7 @@ public class ListeTournoisVue extends CustomJFrame {
 		//joueurs.setHorizontalAlignment(SwingConstants.LEFT);
 		//joueurs.setSize(new Dimension(15, 10));
 		//joueurs.setBounds(new Rectangle(10, 20, 10, 20));
-		joueurs.setBounds(24, 31, 50, 80);
+		joueurs.setBounds(24, 31, 96, 80);
 		disposition = new CustomJLabel("ccc", 8);
 		disposition.setText("");
 		disposition.setFont(Palette.customFont.deriveFont(Font.BOLD, 9));
@@ -208,12 +202,16 @@ public class ListeTournoisVue extends CustomJFrame {
 		panelJoueurs.add(disposition);
 		
 		CustomJPanel panelArbitre = new CustomJPanel();
+		panelArbitre.setPreferredSize(new Dimension(0, 100));
 		panelArbitre.setBorder(new EmptyBorder(5,5,5,5));
 		listeArbitres = new JList<Arbitre>();
-		listeArbitres.setBounds(new Rectangle(0, 0, 140, 0));
+		listeArbitres.setPreferredSize(new Dimension(100, 100));
 		listeArbitres.setFont(Palette.customFont.deriveFont(Font.PLAIN, 9));
 		listeArbitresModel = new DefaultListModel<Arbitre>();
 		JScrollPane scrollArbitres = new JScrollPane(listeArbitres);
+		scrollArbitres.setMaximumSize(new Dimension(100, 100));
+		scrollArbitres.setSize(new Dimension(0, 50));
+		scrollArbitres.setPreferredSize(new Dimension(258, 50));
 		panelArbitre.add(scrollArbitres);
 		CustomJLabel arbitreTitre = new CustomJLabel("Arbitres", 15);
 		arbitreTitre.setBorder(new EmptyBorder(5, 5, 5, 5));

@@ -188,21 +188,6 @@ public class ConsultationSaisonVue extends CustomJFrame {
 		getContentPanel().add(panelQuitter, BorderLayout.SOUTH);
 		
 	}
-
-	public static void main(String[] args) {
-		
-		EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-        			ConsultationSaisonVue frame = new ConsultationSaisonVue();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-		
-	}
 	
 	public void closeCurrentWindow() {
 		super.closeCurrentWindow();

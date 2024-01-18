@@ -60,15 +60,6 @@ public class CreationTournoiVue extends CustomJFrame {
 	private CreationTournoiControleur controleur;
 	public JLabel messageCreation;
 	
-	public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                CreationTournoiVue frame = new CreationTournoiVue();
-                frame.setVisible(true);
-            }
-        });
-    }
-	
 	public CreationTournoiVue() {
 		
 		super(new Dimension(530,350), "Création de tournoi");

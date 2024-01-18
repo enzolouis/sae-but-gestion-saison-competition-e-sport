@@ -22,15 +22,7 @@ public class AccueilAdministrateurVue extends CustomJFrame {
 
     private CustomJPanel contentPane;
     private AccueilAdministrateurControleur controleur;
-    
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-        		AccueilAdministrateurVue frame = new AccueilAdministrateurVue();
-                frame.setVisible(true);
-            }
-        });
-    }
+  
     
     public AccueilAdministrateurVue() {
     	
@@ -93,6 +85,13 @@ public class AccueilAdministrateurVue extends CustomJFrame {
         gbc_panelMiddle.gridy = 2;
         panelMiddle.add(btnListeTournois, gbc_panelMiddle.clone());
         
+        CustomJButton btnArbitres = new CustomJButton("Gérer les arbitres", 10);
+        btnArbitres.setBackground(Palette.BLUE);
+        btnArbitres.setForeground(Palette.WHITE);
+        btnArbitres.addActionListener(controleur);
+        gbc_panelMiddle.gridx = 0;
+        gbc_panelMiddle.gridy = 3;
+        panelMiddle.add(btnArbitres, gbc_panelMiddle.clone());
         // Bottom Panel : Quitter & Divers
         CustomJPanel panelQuitterSeconnecter = new CustomJPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
         contentPane.add(panelQuitterSeconnecter, BorderLayout.SOUTH);

@@ -7,6 +7,9 @@ import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.swing.JPanel;
@@ -15,6 +18,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import DAOs.EquipeDAO;
+import DAOs.MatchDAO;
 import DAOs.ParticiperDAO;
 import DAOs.TournoiDAO;
 import classes.Equipe;
@@ -36,29 +40,6 @@ public class ConsultationTournoiVue extends CustomJFrame {
 
 	private JPanel contentPane;
 	private ConsultationTournoiControleur controleur;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TournoiModele t = null;
-					try {
-						t = TournoiDAO.getInstance().getAll().get(0);
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					ConsultationTournoiVue frame = new ConsultationTournoiVue(t);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
@@ -114,32 +95,43 @@ public class ConsultationTournoiVue extends CustomJFrame {
 		tableModel.addColumn("Points");
 		tableModel.addColumn("Victoires");
 		tableModel.addColumn("Défaites");
-		
-		try {
-			for (Participer p : ParticiperDAO.getInstance().getAll().stream().filter(p -> p.getIdTournoi() == tournoiCourant.getIDTournoi()).sorted().collect(Collectors.toList())) {
-				Equipe e = EquipeDAO.getInstance().getById(p.getIdEquipe()).get();
-				
-				int matchsJoues = 0;
-				int victoire = 0;
-				int defaite = 0;
-				
-				for (Match m : tournoiCourant.getMatchs()) {
-					if (m.getEquipes().stream().map(eq -> eq.getIdEquipe()).collect(Collectors.toList()).contains(e.getIdEquipe())) {
+			
+		for (Equipe e : tournoiCourant.classementTournoi()
+				.keySet()
+				.stream()
+				.sorted((e1,e2) -> { if (tournoiCourant.classementTournoi().get(e1) 
+											> tournoiCourant.classementTournoi().get(e2)) {
+										return 1;
+									} else if (tournoiCourant.classementTournoi().get(e1) 
+											== tournoiCourant.classementTournoi().get(e2)) {
+										return 0;
+									} else {
+										return -1;
+									}
+									})
+				.collect(Collectors.toList())) {
+			
+			
+			int matchsJoues = 0; int victoires = 0; int defaites = 0;
+			
+			for (Match m : tournoiCourant.getMatchs()) {
+				if (m.getEquipes().contains(e)) {
+					if (m.getVainqueur() != 0) {
 						matchsJoues++;
-						if (m.getVainqueur() == p.getIdEquipe()) {
-							victoire++;
+						if (m.getVainqueur() == e.getIdEquipe()) {
+							victoires++;
 						} else {
-							defaite++;
+							defaites++;
 						}
 					}
+					
 				}
-				
-				tableModel.addRow(new Object[] {p.getResultat(), e.getNom(), matchsJoues, victoire*3+defaite, victoire, defaite});
 			}
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		}
-		
+			
+			tableModel.addRow(new Object[] {tournoiCourant.classementTournoi().get(e), e.getNom(), 
+					matchsJoues, tournoiCourant.getParticipants().get(e), victoires, defaites});
+			
+		}	
 		
 		tableClassement.setModel(tableModel);
 		tableClassement.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

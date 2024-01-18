@@ -25,15 +25,6 @@ public class AccueilArbitreVue extends CustomJFrame {
     private JPanel contentPane;
     private AccueilArbitreControleur controleur;
     
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-        		AccueilArbitreVue frame = new AccueilArbitreVue();
-				frame.setVisible(true);
-            }
-        });
-    }
-    
     public AccueilArbitreVue() {
     	super(new Dimension(400, 300), "Accueil Arbitre");
     	
