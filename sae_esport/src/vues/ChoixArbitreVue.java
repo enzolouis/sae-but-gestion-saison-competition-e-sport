@@ -66,7 +66,7 @@ public class ChoixArbitreVue extends CustomJFrame {
     	CustomJPanel panelTop = new CustomJPanel();
         contentPanel.add(panelTop, BorderLayout.NORTH);
         
-        CustomJLabel titleTop = new CustomJLabel("Gestion des arbitres", 25);
+        CustomJLabel titleTop = new CustomJLabel("GESTION DES ARBITRES", 25);
         titleTop.setFont(Palette.customFont.deriveFont(Font.BOLD, 20));
         panelTop.add(titleTop);
         

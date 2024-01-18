@@ -97,7 +97,7 @@ public class CustomJFrame extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setContentPane(this.contentMenuEtPanel);
     	setMinimumSize(dimension);
-        setBounds(100, 100, dimension.height, dimension.width);
+        setBounds(Palette.SCREEN_WIDTH/2-dimension.width/2, Palette.SCREEN_HEIGHT/2-dimension.height/2, dimension.height, dimension.width);
         
         setResizable(false);
         setFont(Palette.customFont);
