@@ -63,7 +63,7 @@ public class CreationTournoiVue extends CustomJFrame {
 	public CreationTournoiVue() {
 		
 		super(new Dimension(530,350), "Création de tournoi");
-		setBounds(new Rectangle(0, 0, 700, 580));
+		setBounds(new Rectangle(Palette.SCREEN_WIDTH/2-700/2, Palette.SCREEN_HEIGHT/2-580/2, 700, 580));
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
 		this.controleur = new CreationTournoiControleur(this);
