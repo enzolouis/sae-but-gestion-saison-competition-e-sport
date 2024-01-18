@@ -152,7 +152,7 @@ public class TournoiDAO {
 		}
 		
 		for (Arbitre a : value.getArbitres()) {
-			st = DBConnection.getInstance().prepareStatement("INSERT INTO gerer VALUES(?,?))");
+			st = DBConnection.getInstance().prepareStatement("INSERT INTO gerer VALUES(?,?)");
 			st.setInt(1, value.getIDTournoi()); st.setInt(2, a.getIdArbitre());
 			st.executeUpdate();
 		}

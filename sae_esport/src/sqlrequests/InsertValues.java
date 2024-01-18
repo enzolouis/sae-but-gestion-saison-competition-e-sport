@@ -29,7 +29,7 @@ public class InsertValues {
     	try {
     	
     		//*
-	    	TournoiModele t = new TournoiModele(66, "Big tournoi", "20/12/2023", "20/01/2024", Notoriete.INTERNATIONAL, EtatTournoi.FERME);
+	    	TournoiModele t = new TournoiModele(66, "Big tournoi", "20/12/2023", "17/01/2024", Notoriete.INTERNATIONAL, EtatTournoi.FERME);
 	    	
 	    	// 4 équipes
 			Equipe e = new Equipe(0, "Maxence Maury-Balliteam", Nationalite.FR, Disposition.DISPOSEE, 3, 0); EquipeDAO.getInstance().add(e);
@@ -131,7 +131,7 @@ public class InsertValues {
     
     public static void Insert() {
     	
-    	//InsertValues.BigTournoiExemple();
+    	InsertValues.BigTournoiExemple();
     	InsertValues.InsererArbitres();
     	InsertValues.insererAdmins();
     	
