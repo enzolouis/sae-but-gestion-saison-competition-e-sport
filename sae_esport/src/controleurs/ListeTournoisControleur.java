@@ -9,7 +9,6 @@ import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JToggleButton;
-import javax.swing.Timer;
 import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -18,6 +17,7 @@ import DAOs.TournoiDAO;
 import classes.Arbitre;
 import classes.Disposition;
 import classes.Equipe;
+import classes.EtatTournoi;
 import classes.Joueur;
 import modeles.TournoiModele;
 import style.Palette;
@@ -92,13 +92,11 @@ public class ListeTournoisControleur implements ActionListener, ListSelectionLis
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
 		 if (e.getSource() instanceof JList) {
 			@SuppressWarnings("unchecked")
 			JList<Equipe> l = (JList<Equipe>) e.getSource();
@@ -127,13 +125,11 @@ public class ListeTournoisControleur implements ActionListener, ListSelectionLis
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -166,6 +162,11 @@ public class ListeTournoisControleur implements ActionListener, ListSelectionLis
 			vue.mdp.setText(tournoi.getMotDePasse());
 			vue.dateDebut.setDate(tournoi.getDateDebut());
 			vue.dateFin.setDate(tournoi.getDateFin());
+			if (tournoi.getEtatTournoi().equals(EtatTournoi.FERME)) {
+				vue.boutonOuverture.setEnabled(true);
+			} else {
+				vue.boutonOuverture.setEnabled(false);
+			}
 			
 			vue.listeEquipesModel.clear();
 			

@@ -1,5 +1,4 @@
 package controleurs;
-import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -48,7 +47,6 @@ public class IdentificationControleur implements ActionListener {
 					vueArbitre = new AccueilArbitreVue();
 					vueArbitre.setVisible(true);
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -105,7 +103,6 @@ public class IdentificationControleur implements ActionListener {
 				try {
 					seConnecter();
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				break;
@@ -119,7 +116,6 @@ public class IdentificationControleur implements ActionListener {
 			try {
 				seConnecter();
 			} catch (Exception e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}
