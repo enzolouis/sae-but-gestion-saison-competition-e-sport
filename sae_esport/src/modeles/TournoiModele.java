@@ -489,7 +489,7 @@ public class TournoiModele {
 	 * */
 	public void supprimerEquipeIndisposees() throws Exception {
 		for (Equipe e : this.participantsIndisposees) {
-			ParticiperDAO.getInstance().delete(new Participer(e.getIdEquipe(), this.getIDTournoi(), 0)); // 0 : arbitraire
+			ParticiperDAO.getInstance().delete(new Participer(0, this.getIDTournoi(), e.getIdEquipe())); // 0 : arbitraire
 		}
 	}
 	
@@ -509,6 +509,12 @@ public class TournoiModele {
 	public void ouvrirTournoi() throws Exception {
 		
 		if (this.isTournoiOuvrable()) {
+			
+			for (Equipe e : this.participants.keySet()) {
+				if (e.getDisposition().equals(Disposition.NON_DISPOSEE)) {
+					this.rendreIndisposé(e);
+				}
+			}
 			
 			this.supprimerEquipeIndisposees();
 			this.setEtatTournoi(EtatTournoi.OUVERT);

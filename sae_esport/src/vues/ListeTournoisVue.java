@@ -60,7 +60,7 @@ public class ListeTournoisVue extends CustomJFrame {
 	public ListeTournoisVue() {
 		super(new Dimension(500, 700), "Liste des tournois");
 		setMinimumSize(new Dimension(500, 600));
-		setBounds(new Rectangle(Palette.SCREEN_WIDTH/2-700/2, Palette.SCREEN_HEIGHT/2-600/2, 700, 600));
+		setBounds(new Rectangle(Palette.SCREEN_WIDTH/2-700/2, Palette.SCREEN_HEIGHT/2-600/2, 700, 650));
 		
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
