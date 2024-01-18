@@ -147,6 +147,16 @@ public class TournoiDAO {
 			MatchDAO.getInstance().add(m);
 		}
 		
+		for (Equipe e : value.getParticipants().keySet()) {
+			ParticiperDAO.getInstance().add(new Participer(value.getParticipants().get(e), id, e.getIdEquipe()));
+		}
+		
+		for (Arbitre a : value.getArbitres()) {
+			st = DBConnection.getInstance().prepareStatement("INSERT INTO gerer VALUES(?,?))");
+			st.setInt(1, value.getIDTournoi()); st.setInt(2, a.getIdArbitre());
+			st.executeUpdate();
+		}
+		
 		return rowcount > 0;
 	}
 	
@@ -177,13 +187,41 @@ public class TournoiDAO {
         preparedStatement.setString(5, value.getEtatTournoi().toString());
         preparedStatement.setString(6, value.getLogin());
         preparedStatement.setString(7, value.getMotDePasse());
-        
         try {
         	preparedStatement.setInt(8, value.getVainqueur().get().getIdEquipe());
         } catch (NoSuchElementException e) {
         	preparedStatement.setObject(8, null);
         }
         preparedStatement.setInt(9, value.getIDTournoi());
+        
+        for (Match m : value.getMatchs()) {
+			MatchDAO.getInstance().update(m);
+		}
+		
+		for (Equipe e : value.getParticipants().keySet()) {
+			if (value.getParticipants().containsKey(e)) {
+				ParticiperDAO.getInstance().update(new Participer(value.getParticipants().get(e), value.getIDTournoi(), e.getIdEquipe()));	
+			}
+		}
+		
+		List<Arbitre> arbitres = new ArrayList<Arbitre>();
+		arbitres.addAll(value.getArbitres());
+		
+		PreparedStatement stArbitres = DBConnection.getInstance().prepareStatement("SELECT idArbitre FROM Gerer WHERE idTournoi = ?");
+		stArbitres.setInt(1, value.getIDTournoi());
+		ResultSet rsArbitres = stArbitres.executeQuery();
+		
+		while (rsArbitres.next()) {
+			arbitres.remove(ArbitreDAO.getInstance().getById(rsArbitres.getInt(1)).get());
+		}
+		
+		stArbitres = DBConnection.getInstance().prepareStatement("DELETE FROM Gerer WHERE idTournoi = ? AND idArbitre = ?");
+		stArbitres.setInt(1, value.getIDTournoi());
+		
+		for (Arbitre a : arbitres) {
+			stArbitres.setInt(2, a.getIdArbitre());
+			stArbitres.executeUpdate();
+		}
 
         int rowcount = preparedStatement.executeUpdate();
         return rowcount > 0;

@@ -28,13 +28,14 @@ public class InsertValues {
     	
     	try {
     	
+    		//*
 	    	TournoiModele t = new TournoiModele(66, "Big tournoi", "20/12/2023", "20/01/2024", Notoriete.INTERNATIONAL, EtatTournoi.FERME);
 	    	
 	    	// 4 équipes
-			Equipe e = new Equipe(0, "Maxence Maury-Balliteam", Nationalite.FR, Disposition.DISPOSEE, 3, 1000); EquipeDAO.getInstance().add(e);
-			Equipe e2 = new Equipe(1, "Ibrateam Zoubairov", Nationalite.FR, Disposition.DISPOSEE, 1, 1000); EquipeDAO.getInstance().add(e2);
-			Equipe e3 = new Equipe(2, "Equipema Rasoanaivo", Nationalite.FR, Disposition.DISPOSEE, 2, 2001); EquipeDAO.getInstance().add(e3);
-			Equipe e4 = new Equipe(3, "Stuarteam Barthe", Nationalite.FR, Disposition.DISPOSEE, 4, 18); EquipeDAO.getInstance().add(e4);
+			Equipe e = new Equipe(0, "Maxence Maury-Balliteam", Nationalite.FR, Disposition.DISPOSEE, 3, 0); EquipeDAO.getInstance().add(e);
+			Equipe e2 = new Equipe(1, "Ibrateam Zoubairov", Nationalite.FR, Disposition.DISPOSEE, 1, 0); EquipeDAO.getInstance().add(e2);
+			Equipe e3 = new Equipe(2, "Equipema Rasoanaivo", Nationalite.FR, Disposition.DISPOSEE, 2, 0); EquipeDAO.getInstance().add(e3);
+			Equipe e4 = new Equipe(3, "Stuarteam Barthe", Nationalite.FR, Disposition.DISPOSEE, 4, 0); EquipeDAO.getInstance().add(e4);
 	
 	    	TournoiDAO.getInstance().add(t);
 	
@@ -71,12 +72,14 @@ public class InsertValues {
 			Arbitre a = new Arbitre(0, "Josman", "José", Nationalite.FR); ArbitreDAO.getInstance().add(a);
 			TournoiDAO.getInstance().addArbitre(t, a);
 			
-			ParticiperDAO.getInstance().update(new Participer(e.getIdEquipe(), t.getIDTournoi(), 1));
-			ParticiperDAO.getInstance().update(new Participer(e2.getIdEquipe(), t.getIDTournoi(), 4));
-			ParticiperDAO.getInstance().update(new Participer(e3.getIdEquipe(), t.getIDTournoi(), 2));
-			ParticiperDAO.getInstance().update(new Participer(e4.getIdEquipe(), t.getIDTournoi(), 3));
+			ParticiperDAO.getInstance().update(new Participer(e.getIdEquipe(), t.getIDTournoi(), 0));
+			ParticiperDAO.getInstance().update(new Participer(e2.getIdEquipe(), t.getIDTournoi(), 0));
+			ParticiperDAO.getInstance().update(new Participer(e3.getIdEquipe(), t.getIDTournoi(), 0));
+			ParticiperDAO.getInstance().update(new Participer(e4.getIdEquipe(), t.getIDTournoi(), 0));
 			
 			System.out.println("✔ Insertion du tournoi ("+ t.getIDTournoi() +") Big Tournoi réussie.");
+			
+			//*
 			
     	} catch (Exception e) {
     		
@@ -128,7 +131,7 @@ public class InsertValues {
     
     public static void Insert() {
     	
-    	InsertValues.BigTournoiExemple();
+    	//InsertValues.BigTournoiExemple();
     	InsertValues.InsererArbitres();
     	InsertValues.insererAdmins();
     	

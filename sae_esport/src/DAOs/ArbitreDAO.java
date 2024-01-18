@@ -95,7 +95,10 @@ public class ArbitreDAO {
 	 * */
 	public boolean delete(Arbitre value) throws Exception {
 		
-		PreparedStatement st = DBConnection.getInstance().prepareStatement("DELETE FROM arbitre WHERE idArbitre=?");
+		PreparedStatement st = DBConnection.getInstance().prepareStatement("DELETE FROM gerer WHERE idArbitre=?");
+		st.setInt(1, value.getIdArbitre());
+		st.executeUpdate();
+		st = DBConnection.getInstance().prepareStatement("DELETE FROM arbitre WHERE idArbitre=?");
 		st.setInt(1, value.getIdArbitre());
 		int rowcount = st.executeUpdate();
 		return rowcount > 0;
@@ -107,7 +110,7 @@ public class ArbitreDAO {
 	 * */
 	public List<TournoiModele> getTournoisOfArbitre(Arbitre value) throws Exception {
 		ArrayList<TournoiModele> tournois = new ArrayList<>();
-		String reqSelectArbitre = "SELECT idTournoi FROM tournoi WHERE idArbitre = ?";
+		String reqSelectArbitre = "SELECT idTournoi FROM gerer WHERE idArbitre = ?";
 		PreparedStatement st = DBConnection.getInstance().prepareStatement(reqSelectArbitre);
 		st.setInt(1, value.getIdArbitre());
 		ResultSet rs = st.executeQuery();

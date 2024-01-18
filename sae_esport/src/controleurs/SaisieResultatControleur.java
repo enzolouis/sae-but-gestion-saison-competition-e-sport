@@ -47,7 +47,7 @@ public class SaisieResultatControleur implements ActionListener {
 		
 		this.stateTournoi = FINALESTATE.NOT_FINALE;
 		this.vue = vue; 
-		this.modele = new SaisieResultatModele(tournoi);
+		this.modele = new SaisieResultatModele();
 		
 		Date dt = null;
 		try {
@@ -85,17 +85,17 @@ public class SaisieResultatControleur implements ActionListener {
 			case ("Ouvrir la finale"):
 				
 				try {
+					
 					if (modele.canOpenFinale()) {
 						
-						List<Equipe> finalistes = modele.getFinalistes();
-						Equipe equipe1 = finalistes.get(0); Equipe equipe2 = finalistes.get(1);
-						
 						Match finale = modele.createFinale();
-						
-						this.vue.OpenButtonFinal(finale.getIDMatch(), equipe1, equipe2);
+						MatchDAO.getInstance().add(finale);
+						this.vue.OpenButtonFinal(finale.getIDMatch(), 
+								finale.getEquipes().get(0), finale.getEquipes().get(1));
 						this.stateTournoi = FINALESTATE.IS_FINALE;
 						
-						TournoiDAO.getInstance().update(this.modele.getTournoi());	
+						TournoiDAO.getInstance().update(this.modele.getTournoi());
+						
 					}
 
 				} catch (Exception e1) {

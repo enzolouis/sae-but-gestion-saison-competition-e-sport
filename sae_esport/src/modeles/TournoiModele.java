@@ -17,7 +17,9 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Random;
+import java.util.stream.Collectors;
 
+import DAOs.EquipeDAO;
 import DAOs.MatchDAO;
 import DAOs.ParticiperDAO;
 import DAOs.TournoiDAO;
@@ -279,6 +281,10 @@ public class TournoiModele {
 		this.arbitres.add(arbitre);
 	}
 	
+	public void retirerArbitre(Arbitre arbitre) {
+		this.arbitres.remove(arbitre);
+	}
+ 	
 	/**
 	 * met à jour les points d'une équipe inscrite au tournoi
 	 * @param equipe dont les points sont à supprimer
@@ -313,7 +319,6 @@ public class TournoiModele {
 		this.participants.put(e, points+pointsAAjouter);
 	}
 
-	
 	/**
 	 * génère le login d'arbitre du torunoi
 	 * */
@@ -525,6 +530,55 @@ public class TournoiModele {
 			
 		}
 			
+	}
+	
+	public Map<Equipe, Integer> classementTournoi() {
+		
+		List<Equipe> classement = this.getParticipants().keySet()
+				.stream()
+				.filter(e -> this.getParticipants().get(e) != null)
+				.sorted((e1, e2) -> {if (this.getParticipants().get(e1) < this.getParticipants().get(e2)) {
+										return 1;
+									} else if (getParticipants().get(e1) == this.getParticipants().get(e2)) {
+										return 0;
+									} else {
+										return -1;
+									}
+								}).collect(Collectors.toList());
+		
+		System.out.println(classement.size());
+		
+		for(Equipe e : classement) {
+			System.out.println(e+" "+getParticipants().get(e));
+		}
+		
+		HashMap<Equipe,Integer> classementAvecRang = new HashMap<Equipe,Integer>();
+		
+		int rang = 1;
+		int nbPointsPerRank = getParticipants().get(classement.get(0));
+		int nbTeamPerRank = 1;
+		
+		classementAvecRang.put(classement.get(0), 1);
+		
+		for (Equipe e : classement.subList(1, classement.size())) {
+			
+			if (getParticipants().get(e) == nbPointsPerRank) {
+				nbTeamPerRank++;
+				classementAvecRang.put(e, rang);
+			} else {
+				rang+=nbTeamPerRank;
+				nbPointsPerRank= getParticipants().get(e);
+				nbTeamPerRank=1;
+				classementAvecRang.put(e, rang);
+			}
+		}
+		
+		for(Equipe e : classementAvecRang.keySet()) {
+			System.out.println(e+" "+classementAvecRang.get(e));
+		}
+		
+		return classementAvecRang;
+		
 	}
 
 	@Override

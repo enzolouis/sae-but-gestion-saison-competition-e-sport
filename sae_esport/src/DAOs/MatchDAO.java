@@ -125,9 +125,21 @@ public class MatchDAO {
 	 * */
 	public boolean update(Match value) throws Exception {
 		
-		PreparedStatement st = DBConnection.getInstance()
-				.prepareStatement("UPDATE matchT SET finale=?, idVainqueur=? WHERE idMatch=?");
-		st.setBoolean(1, value.IsItFinale()); st.setInt(2, value.getVainqueur()); st.setInt(3, value.getIDMatch()); 
+		PreparedStatement st;
+		
+		if (value.getVainqueur() == 0) {
+			st = DBConnection.getInstance()
+					.prepareStatement("UPDATE matchT SET finale=? WHERE idMatch=?");
+			st.setBoolean(1, value.IsItFinale()); st.setInt(2, value.getIDMatch()); 
+			int rowcount = st.executeUpdate();
+			return rowcount > 0;
+		} else {
+			st = DBConnection.getInstance()
+					.prepareStatement("UPDATE matchT SET finale=?, idVainqueur=? WHERE idMatch=?");
+			st.setBoolean(1, value.IsItFinale()); st.setInt(2, value.getVainqueur()); st.setInt(3, value.getIDMatch()); 
+			
+		}
+
 		int rowcount = st.executeUpdate();
 		return rowcount > 0;
 				
