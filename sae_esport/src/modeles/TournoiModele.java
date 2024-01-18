@@ -550,12 +550,6 @@ public class TournoiModele {
 									}
 								}).collect(Collectors.toList());
 		
-		System.out.println(classement.size());
-		
-		for(Equipe e : classement) {
-			System.out.println(e+" "+getParticipants().get(e));
-		}
-		
 		HashMap<Equipe,Integer> classementAvecRang = new HashMap<Equipe,Integer>();
 		
 		int rang = 1;
@@ -575,10 +569,6 @@ public class TournoiModele {
 				nbTeamPerRank=1;
 				classementAvecRang.put(e, rang);
 			}
-		}
-		
-		for(Equipe e : classementAvecRang.keySet()) {
-			System.out.println(e+" "+classementAvecRang.get(e));
 		}
 		
 		return classementAvecRang;

@@ -133,13 +133,11 @@ public class CustomJFrame extends JFrame {
 
 			for (String s : adminPages) {
 				if (frameTitle.contains(s)) {
-					System.out.println(s);
 					logo.setIcon(new ImageIcon(Palette.ADMIN.getImage().getScaledInstance(20, 20,  java.awt.Image.SCALE_SMOOTH)));
 				}
 			}
 			for (String s : arbitrePages) {
 				if (frameTitle.contains(s)) {
-					System.out.println(s);
 					logo.setIcon(new ImageIcon(Palette.ARBITRE.getImage().getScaledInstance(20, 20,  java.awt.Image.SCALE_SMOOTH)));
 				}
 			}

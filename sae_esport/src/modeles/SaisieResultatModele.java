@@ -134,30 +134,6 @@ public class SaisieResultatModele {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		/*
-		System.out.println("update");
-		Map<Equipe, Integer> equipes = new HashMap<>();
-		equipes.putAll(tournoi.getParticipants());
-		for (Equipe eq : equipes.keySet()) {
-			try {
-				System.out.println("eq"+eq+tournoi.classementTournoi().get(eq));
-				if (tournoi.classementTournoi().get(eq) == 1) {
-					eq.setPointsSaison(eq.getPointsSaison() + 10);
-				} else if (tournoi.classementTournoi().get(eq) == 2) {
-					eq.setPointsSaison(eq.getPointsSaison() + 5);
-				} else if (tournoi.classementTournoi().get(eq) == 3) {
-					eq.setPointsSaison(eq.getPointsSaison() + 2);
-				} else {
-					eq.setPointsSaison(eq.getPointsSaison() + 1);
-				}
-				EquipeDAO.getInstance().update(eq);
-				System.out.println("eq"+eq.getPointsSaison());
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
-		}
-		*/
 	}
 	
 	public void annulerTournoi() {
@@ -173,7 +149,7 @@ public class SaisieResultatModele {
 	}
 	
 	public void finirTournoi() {
-		
+
 		updatePointsSaison();
 		tournoi.setEtatTournoi(EtatTournoi.TERMINE);
 		try {
@@ -187,7 +163,6 @@ public class SaisieResultatModele {
 	
 	public void choixVainqueurMatch(JButton bouton) {
 		
-		System.out.println(bouton.getActionCommand());
 		String[] ids = bouton.getActionCommand().split(",");
 		int idmatch = Integer.valueOf(ids[0]);
 		int idequipe = Integer.valueOf(ids[1]);
@@ -197,12 +172,9 @@ public class SaisieResultatModele {
 			nbPoints = 10;
 		}
 		
-		System.out.println("on est sur"+nbPoints);
-		
 		try {
 			
 			match = MatchDAO.getInstance().getById(idmatch).get();
-			System.out.println(idequipe);
 			if (match.getVainqueur() == 0) {
 				tournoi.addPoints(EquipeDAO.getInstance().getById(idequipe).get(), nbPoints);
 			} else {
@@ -224,10 +196,7 @@ public class SaisieResultatModele {
 		String s = "";
 		for (Equipe e : tournoi.getParticipants().keySet()) {
 			s+=e.toString()+": "+tournoi.getParticipants().get(e)+"\n";
-		}
-		System.out.println(s);
-		
-		
+		}		
 	}
 	
 }

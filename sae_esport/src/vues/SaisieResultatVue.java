@@ -159,8 +159,6 @@ public class SaisieResultatVue extends CustomJFrame {
         int nbMatch = 0;
         
         for (Match match : this.tournoi.getMatchs()) {
-        	System.out.println(match.getEquipes());
-        	
         	nbMatch++;
         	
         	if (!match.IsItFinale()) {
@@ -209,10 +207,8 @@ public class SaisieResultatVue extends CustomJFrame {
         		
         		for (Equipe equipe : finalMatch.getEquipes()) {
 					if (finalEquipe1 == null) {
-						System.out.println("Equipe 1 - " + equipe.getIdEquipe());
 						finalEquipe1 = equipe;
 					} else {
-						System.out.println("Equipe 2 - " + equipe.getIdEquipe());
 						finalEquipe2 = equipe;
 					}
 				}
@@ -278,7 +274,6 @@ public class SaisieResultatVue extends CustomJFrame {
 				int idmatch = Integer.valueOf(newIds[0]);
 				int idequipe = Integer.valueOf(newIds[1]);
 				
-				System.out.println(idmatchVainqueur+""+idmatch);
 				if (idmatchVainqueur == idmatch) {
 					if (idequipeVainqueur == idequipe) {
 						customJButton.setBackground(new Color(50, 168, 80));
@@ -290,14 +285,12 @@ public class SaisieResultatVue extends CustomJFrame {
 		}
 		
 		for (CustomJButton customJButton : buttonEquipeFinale) {
-			System.out.println("boutonfinaleactioncmnd"+customJButton.getActionCommand());
 			String[] newIds = customJButton.getActionCommand().split(",");
 			if (!newIds[0].equals("IdMatch")) {
 				inFinale = true;
 				int idmatch = Integer.valueOf(newIds[0]);
 				int idequipe = Integer.valueOf(newIds[1]);
-					
-				System.out.println(idmatchVainqueur+""+idmatch);
+				
 				if (idmatchVainqueur == idmatch) {
 					if (idequipeVainqueur == idequipe) {
 						customJButton.setBackground(new Color(50, 168, 80));
@@ -311,7 +304,6 @@ public class SaisieResultatVue extends CustomJFrame {
 		
 		try {
 			for (Match match : TournoiDAO.getInstance().getById(this.tournoi.getIDTournoi()).get().getMatchs()) {
-				System.out.println(this.tournoi.getIDTournoi() + " - " + match.getIDMatch() + " " + (match.getVainqueur()));
 				if ((Integer) match.getVainqueur() == 0) {
 					canFinale = false;
 					break;

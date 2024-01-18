@@ -32,7 +32,6 @@ public class ListeTournoisControleur implements ActionListener, ListSelectionLis
 	private ListeTournoisVue vue;
 	
 	public ListeTournoisControleur(ListeTournoisVue vue) {
-
 		this.vue = vue;
 		
 	}
@@ -54,7 +53,6 @@ public class ListeTournoisControleur implements ActionListener, ListSelectionLis
 	@Override
 	public void actionPerformed(ActionEvent e) {		
 		if (e.getSource() instanceof JButton) {
-			System.out.println("COUCOU");
 			JButton bouton = (JButton) e.getSource();
 			
 			switch (bouton.getText()) {
@@ -62,10 +60,6 @@ public class ListeTournoisControleur implements ActionListener, ListSelectionLis
 				this.vue.closeCurrentWindow();
 				break;
 			case "Ouvrir":
-				// bouton disable pas besoin de check
-				//if (vue.tableTournois.getSelectedRow() == -1)
-				//	return;
-				
 				int idTournoi = (int) vue.tableTournois.getValueAt(vue.tableTournois.getSelectedRow(), 0);
 				try {
 					TournoiModele tournoi = TournoiDAO.getInstance().getById(idTournoi).get();
@@ -84,7 +78,7 @@ public class ListeTournoisControleur implements ActionListener, ListSelectionLis
 						this.vue.panelErreur.setBorder(new LineBorder(Palette.REDERRORBORDER, 1));
 						this.vue.erreurOuverture.setText("Il n'y a pas assez d'équipe disposées pour commencer le tournoi !");
 					} else {
-						// reverification de tout (voir si on supprime ça dans tournoi)
+						// reverification de tout
 						
 						tournoi.ouvrirTournoi();
 						this.setUpTableModel();
@@ -107,7 +101,6 @@ public class ListeTournoisControleur implements ActionListener, ListSelectionLis
 				try {
 					EquipeDAO.getInstance().update(eq);
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				break;
@@ -120,7 +113,6 @@ public class ListeTournoisControleur implements ActionListener, ListSelectionLis
 				try {
 					EquipeDAO.getInstance().update(eq1);
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				break;
@@ -198,11 +190,7 @@ public class ListeTournoisControleur implements ActionListener, ListSelectionLis
 		try {
 		// récupération de l'identifiant
 		String strSource = e.getSource().toString();
-		System.out.println(strSource);
 		int start = strSource.indexOf("{")+1, stop  = strSource.length()-1;
-		System.out.println(start);
-		System.out.println(stop);
-		System.out.println("coucouu"+strSource.substring(start, stop));
 		int iSelectedIndex = Integer.parseInt(strSource.substring(start, stop));
 		idTournoi = (int) vue.tableTournois.getValueAt(iSelectedIndex, 0);
 		} catch (Exception e1) {
