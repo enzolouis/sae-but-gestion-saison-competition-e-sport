@@ -1,10 +1,14 @@
 package controleurs;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 
 import style.CustomJFrame;
+
 import vues.AccueilAdministrateurVue;
+import vues.ChoixArbitreVue;
 import vues.ConsultationSaisonVue;
 import vues.CreationTournoiVue;
 import vues.IdentificationVue;
@@ -28,28 +32,45 @@ public class AccueilAdministrateurControleur implements ActionListener {
 			
 			switch (bouton.getText()) {
 			case ("Quitter"):
+				
 				this.vue.closeCurrentWindow();
 				break;
+				
 			case "Se déconnecter":
+				
 				this.vue.closeCurrentWindow();
 				frame = new IdentificationVue();
 				frame.setVisible(true);
 				break;
+				
 			case ("Créer un tournoi"):
+				
 				this.vue.closeCurrentWindow();
 				frame = new CreationTournoiVue();
 				frame.setVisible(true);
 				break;
+				
 			case ("Statistiques de la saison"):
+				
 				this.vue.closeCurrentWindow();
 				frame = new ConsultationSaisonVue();
 				frame.setVisible(true);
 				break;
+				
 			case ("Liste des tournois"):
+				
 				this.vue.closeCurrentWindow();
 				frame = new ListeTournoisVue();
 				frame.setVisible(true);
 				break;
+				
+			case ("Gérer les arbitres"):
+				
+				this.vue.closeCurrentWindow();
+				frame = new ChoixArbitreVue();
+				frame.setVisible(true);
+				break;
+				
 			default:
 				break;
 			}
