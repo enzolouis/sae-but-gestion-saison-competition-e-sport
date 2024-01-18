@@ -26,6 +26,7 @@ import java.awt.Color;
 import javax.swing.JList;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
+import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.Rectangle;
@@ -48,6 +49,7 @@ public class ListeTournoisVue extends CustomJFrame {
 	public CustomJButton boutonOuverture;
 	public CustomJLabel erreurOuverture;
 	public CustomJLabel titreEquipe;
+	public CustomJButton boutonRendreDisposee;
 	public JList<Joueur> joueurs;
 	public CustomJLabel disposition;
 	public CustomJPanel panelErreur;
@@ -107,15 +109,8 @@ public class ListeTournoisVue extends CustomJFrame {
 		tableModel.addColumn("ID"); tableModel.addColumn("Titre"); 
 		tableModel.addColumn("Date de début"); tableModel.addColumn("Date de fin");
 		tableModel.addColumn("Notoriété"); tableModel.addColumn("Etat");
-		try {
-			for (TournoiModele t : TournoiDAO.getInstance().getAll()) {
-				tableModel.addRow(new Object[] {t.getIDTournoi(), t.getNomTournoi(),
-						t.getDateDebut(), t.getDateFin(), t.getNotoriete(), t.getEtatTournoi()});
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+		this.controleur.setUpTableModel();
 		
 		tableTournois.setModel(tableModel);
 		tableTournois.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -197,9 +192,16 @@ public class ListeTournoisVue extends CustomJFrame {
 		disposition.setText("");
 		disposition.setFont(Palette.customFont.deriveFont(Font.BOLD, 9));
 		disposition.setBounds(25, 11, 100, 20);
-		panelJoueurs.setLayout(null);
-		panelJoueurs.add(titreEquipe); panelJoueurs.add(joueurs);
-		panelJoueurs.add(disposition);
+		
+		boutonRendreDisposee = new CustomJButton("", 15);
+		boutonRendreDisposee.setFont(Palette.customFont.deriveFont(Font.BOLD, 9));
+		boutonRendreDisposee.setVisible(false);
+		boutonRendreDisposee.addActionListener(controleur);
+		panelJoueurs.setLayout(new BorderLayout());
+		
+		panelJoueurs.add(titreEquipe, BorderLayout.NORTH); 
+		panelJoueurs.add(joueurs, BorderLayout.CENTER);
+		panelJoueurs.add(boutonRendreDisposee, BorderLayout.SOUTH);
 		
 		CustomJPanel panelArbitre = new CustomJPanel();
 		panelArbitre.setPreferredSize(new Dimension(0, 100));

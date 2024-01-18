@@ -9,10 +9,14 @@ import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JToggleButton;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
+import javax.swing.Timer;
 import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import DAOs.EquipeDAO;
 import DAOs.TournoiDAO;
 import classes.Arbitre;
 import classes.Disposition;
@@ -30,11 +34,27 @@ public class ListeTournoisControleur implements ActionListener, ListSelectionLis
 	public ListeTournoisControleur(ListeTournoisVue vue) {
 
 		this.vue = vue;
+		
+	}
+	
+	public void setUpTableModel() {
+		this.vue.tableModel.setRowCount(0);
+		
+		try {
+			for (TournoiModele t : TournoiDAO.getInstance().getAll()) {
+				this.vue.tableModel.addRow(new Object[] {t.getIDTournoi(), t.getNomTournoi(),
+						t.getDateDebut(), t.getDateFin(), t.getNotoriete(), t.getEtatTournoi()});
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {		
 		if (e.getSource() instanceof JButton) {
+			System.out.println("COUCOU");
 			JButton bouton = (JButton) e.getSource();
 			
 			switch (bouton.getText()) {
@@ -42,6 +62,10 @@ public class ListeTournoisControleur implements ActionListener, ListSelectionLis
 				this.vue.closeCurrentWindow();
 				break;
 			case "Ouvrir":
+				// bouton disable pas besoin de check
+				//if (vue.tableTournois.getSelectedRow() == -1)
+				//	return;
+				
 				int idTournoi = (int) vue.tableTournois.getValueAt(vue.tableTournois.getSelectedRow(), 0);
 				try {
 					TournoiModele tournoi = TournoiDAO.getInstance().getById(idTournoi).get();
@@ -61,7 +85,10 @@ public class ListeTournoisControleur implements ActionListener, ListSelectionLis
 						this.vue.erreurOuverture.setText("Il n'y a pas assez d'équipe disposées pour commencer le tournoi !");
 					} else {
 						// reverification de tout (voir si on supprime ça dans tournoi)
+						
 						tournoi.ouvrirTournoi();
+						this.setUpTableModel();
+						this.vue.boutonOuverture.setEnabled(false);
 						this.vue.panelErreur.setBackground(Palette.GREENLIGHTER);
 						this.vue.panelErreur.setBorder(new LineBorder(Palette.GREEN, 1));
 						this.vue.erreurOuverture.setText("Le tournoi a été ouvert !");
@@ -72,7 +99,30 @@ public class ListeTournoisControleur implements ActionListener, ListSelectionLis
 					e1.printStackTrace();
 				}
 				break;
-			default:
+			case "<html><p style='text-align:center'>Rendre<br>indisposée</p></html>":
+				bouton.setBackground(Palette.REDERRORBACKGROUND);
+				bouton.setText("<html><p style='text-align:center'>Rendre<br>disposée</p></html>");
+				Equipe eq = (Equipe) vue.listeEquipes.getSelectedValue();
+				eq.setDisposition(Disposition.NON_DISPOSEE);
+				try {
+					EquipeDAO.getInstance().update(eq);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				break;
+			case "<html><p style='text-align:center'>Rendre<br>disposée</p></html>":
+				bouton.setBackground(Palette.GREEN);
+				bouton.setText("<html><p style='text-align:center'>Rendre<br>indisposée</p></html>");
+				Equipe eq1 = (Equipe) vue.listeEquipes.getSelectedValue();
+				eq1.setDisposition(Disposition.DISPOSEE);
+				
+				try {
+					EquipeDAO.getInstance().update(eq1);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				break;
 			}
 		} else if (e.getSource() instanceof JToggleButton) {
@@ -111,11 +161,14 @@ public class ListeTournoisControleur implements ActionListener, ListSelectionLis
 				
 				vue.joueurs.setModel(vue.joueursModel);
 				
-				vue.disposition.setText(e1.getDisposition().toString());
+				vue.boutonRendreDisposee.setVisible(true);
+				
 				if (e1.getDisposition().equals(Disposition.DISPOSEE)) {
-					vue.disposition.setForeground(new Color(106, 176, 76));
+					vue.boutonRendreDisposee.setText("<html><p style='text-align:center'>Rendre<br>indisposée</p></html>");
+					vue.boutonRendreDisposee.setBackground(Palette.GREEN);
 				} else {
-					vue.disposition.setForeground(new Color(235, 77, 75));
+					vue.boutonRendreDisposee.setText("<html><p style='text-align:center'>Rendre<br>disposée</p></html>");
+					vue.boutonRendreDisposee.setBackground(Palette.REDERRORBACKGROUND);
 				}
 			}
 			
@@ -141,17 +194,26 @@ public class ListeTournoisControleur implements ActionListener, ListSelectionLis
 
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
-		
+		int idTournoi;
+		try {
 		// récupération de l'identifiant
 		String strSource = e.getSource().toString();
+		System.out.println(strSource);
 		int start = strSource.indexOf("{")+1, stop  = strSource.length()-1;
+		System.out.println(start);
+		System.out.println(stop);
+		System.out.println("coucouu"+strSource.substring(start, stop));
 		int iSelectedIndex = Integer.parseInt(strSource.substring(start, stop));
-		int idTournoi = (int) vue.tableTournois.getValueAt(iSelectedIndex, 0);
+		idTournoi = (int) vue.tableTournois.getValueAt(iSelectedIndex, 0);
+		} catch (Exception e1) {
+			return;
+		}
 		
 		//remise à blank des fields
 		vue.titreEquipe.setText(" ");
 		vue.joueursModel.clear();
 		vue.disposition.setText(" ");
+		vue.boutonRendreDisposee.setVisible(false);
 		vue.boutonOuverture.setEnabled(true);
 		vue.erreurOuverture.setText(" ");
 		
@@ -171,6 +233,10 @@ public class ListeTournoisControleur implements ActionListener, ListSelectionLis
 			vue.listeEquipesModel.clear();
 			
 			for (Equipe eq : tournoi.getParticipants().keySet()) {
+				vue.listeEquipesModel.addElement(eq);
+			}
+			
+			for (Equipe eq : tournoi.getParticipantsIndisposees()) {
 				vue.listeEquipesModel.addElement(eq);
 			}
 			

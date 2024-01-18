@@ -37,7 +37,7 @@ public class SaisieResultatControleur implements ActionListener {
 	
 	private SaisieResultatModele modele;
 	private SaisieResultatVue vue;
-	private Timer timer;
+	public Timer timer;
 	private FINALESTATE stateTournoi;
 	public enum FINALESTATE {
 		  NOT_FINALE, IS_FINALE, FINALE_OVER
@@ -64,6 +64,7 @@ public class SaisieResultatControleur implements ActionListener {
 	    timer = new Timer();
 		timer.schedule(new ClotureDatePassee(this), dt);
 		
+		
 		if (modele.isFinaleDemarree()) {
 			this.stateTournoi = FINALESTATE.IS_FINALE;
 		}
@@ -78,7 +79,6 @@ public class SaisieResultatControleur implements ActionListener {
 			switch (bouton.getText()) {
 			
 			case ("Quitter"):
-				this.vue.dispose();
 				this.vue.closeCurrentWindow();
 				break;
 				

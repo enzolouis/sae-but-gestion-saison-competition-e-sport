@@ -40,6 +40,7 @@ public class ConsultationTournoiVue extends CustomJFrame {
 
 	private JPanel contentPane;
 	private ConsultationTournoiControleur controleur;
+	public DefaultTableModel tableModel;
 
 	/**
 	 * Create the frame.
@@ -88,7 +89,7 @@ public class ConsultationTournoiVue extends CustomJFrame {
 		tableClassement.setRowHeight(34);
 		
 		
-		DefaultTableModel tableModel = new DefaultTableModel();
+		tableModel = new DefaultTableModel();
 		tableModel.addColumn("Top");
 		tableModel.addColumn("Equipe");
 		tableModel.addColumn("Matchs joués");
@@ -132,6 +133,8 @@ public class ConsultationTournoiVue extends CustomJFrame {
 					matchsJoues, tournoiCourant.getParticipants().get(e), victoires, defaites});
 			
 		}	
+		
+		this.controleur.setUpTableModel();
 		
 		tableClassement.setModel(tableModel);
 		tableClassement.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
