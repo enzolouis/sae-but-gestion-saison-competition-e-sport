@@ -180,8 +180,7 @@ public class Equipe {
 		Equipe other = (Equipe) obj;
 		return dispose == other.dispose && idEquipe == other.idEquipe && joueurs.containsAll(other.joueurs)
 				&& other.joueurs.containsAll(joueurs) && nationalite == other.nationalite &&
-				nom.equals(other.nom) && pointsSaison == other.pointsSaison
-				&& rangSaisonPrecedante == other.rangSaisonPrecedante;
+				nom.equals(other.nom) && rangSaisonPrecedante == other.rangSaisonPrecedante;
 	}
 
 }
