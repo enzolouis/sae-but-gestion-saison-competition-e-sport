@@ -17,7 +17,7 @@ public class Palette {
 	public static final Color WHITE 			 = new Color(205, 250, 250);
 	public static final Color GOLD 				 = new Color(200, 150, 60);
 	public static final Color BLUE 				 = new Color(0, 90, 130);
-	public static final Color REDQUIT 			 = new Color(30, 40, 45);
+	public static final Color REDQUIT 			 = new Color(60, 70, 75);
 	public static final Color GREEN 			 = new Color(10, 200, 185);
 	public static final Color GREENLIGHTER 		 = new Color(210, 253, 250);
 	public static final Color REDERRORFOREGROUND = new Color(235, 77, 75);

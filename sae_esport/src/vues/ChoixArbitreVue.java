@@ -57,7 +57,7 @@ public class ChoixArbitreVue extends CustomJFrame {
     public ChoixArbitreVue() {
    
     	
-    	super(new Dimension(600, 630), "Choix d'arbitre");
+    	super(new Dimension(600, 630), "Gestion des arbitre");
     	
     	this.controleur = new ChoixArbitreControleur(this);
     	contentPanel = this.getContentPanel();
@@ -66,7 +66,7 @@ public class ChoixArbitreVue extends CustomJFrame {
     	CustomJPanel panelTop = new CustomJPanel();
         contentPanel.add(panelTop, BorderLayout.NORTH);
         
-        CustomJLabel titleTop = new CustomJLabel("Choix des arbitres", 25);
+        CustomJLabel titleTop = new CustomJLabel("Gestion des arbitres", 25);
         titleTop.setFont(Palette.customFont.deriveFont(Font.BOLD, 20));
         panelTop.add(titleTop);
         
@@ -219,8 +219,7 @@ public class ChoixArbitreVue extends CustomJFrame {
         
         //Bouton quitter
         CustomJButton btnQuit = new CustomJButton("Quitter", 10);
-        btnQuit.setBackground(new Color(231, 76, 60));
-        btnQuit.setForeground(new Color(255, 255, 255));
+        btnQuit.setBackground(Palette.REDQUIT);
         btnQuit.addActionListener(this.controleur);
         panelBottom.setLayout(new GridLayout(1, 2, 0, 0));
         panelBtnQuitter.add(btnQuit);
@@ -238,5 +237,11 @@ public class ChoixArbitreVue extends CustomJFrame {
         panelBottom.add(panelErreur);
         
     }
+    
+    public void closeCurrentWindow() {
+		super.closeCurrentWindow();
+		AccueilAdministrateurVue frame = new AccueilAdministrateurVue();
+		frame.setVisible(true);
+	}
     
 }
