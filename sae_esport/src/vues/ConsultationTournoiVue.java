@@ -7,6 +7,8 @@ import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.swing.JPanel;
@@ -36,6 +38,7 @@ public class ConsultationTournoiVue extends CustomJFrame {
 
 	private JPanel contentPane;
 	private ConsultationTournoiControleur controleur;
+	public DefaultTableModel tableModel;
 
 	/**
 	 * Launch the application.
@@ -107,7 +110,7 @@ public class ConsultationTournoiVue extends CustomJFrame {
 		tableClassement.setRowHeight(34);
 		
 		
-		DefaultTableModel tableModel = new DefaultTableModel();
+		tableModel = new DefaultTableModel();
 		tableModel.addColumn("Top");
 		tableModel.addColumn("Equipe");
 		tableModel.addColumn("Matchs joués");
@@ -115,31 +118,7 @@ public class ConsultationTournoiVue extends CustomJFrame {
 		tableModel.addColumn("Victoires");
 		tableModel.addColumn("Défaites");
 		
-		try {
-			for (Participer p : ParticiperDAO.getInstance().getAll().stream().filter(p -> p.getIdTournoi() == tournoiCourant.getIDTournoi()).sorted().collect(Collectors.toList())) {
-				Equipe e = EquipeDAO.getInstance().getById(p.getIdEquipe()).get();
-				
-				int matchsJoues = 0;
-				int victoire = 0;
-				int defaite = 0;
-				
-				for (Match m : tournoiCourant.getMatchs()) {
-					if (m.getEquipes().stream().map(eq -> eq.getIdEquipe()).collect(Collectors.toList()).contains(e.getIdEquipe())) {
-						matchsJoues++;
-						if (m.getVainqueur() == p.getIdEquipe()) {
-							victoire++;
-						} else {
-							defaite++;
-						}
-					}
-				}
-				
-				tableModel.addRow(new Object[] {p.getResultat(), e.getNom(), matchsJoues, victoire*3+defaite, victoire, defaite});
-			}
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		}
-		
+		this.controleur.setUpTableModel();
 		
 		tableClassement.setModel(tableModel);
 		tableClassement.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);

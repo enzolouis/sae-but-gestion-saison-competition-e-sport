@@ -10,6 +10,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -17,6 +18,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import DAOs.TournoiDAO;
+import classes.DBConnection;
 import classes.Equipe;
 import classes.Match;
 import controleurs.SaisieResultatControleur;
@@ -57,8 +59,6 @@ public class SaisieResultatVue extends CustomJFrame {
     	contentPanel = this.getContentPanel();
     	
     	this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-    	
-    	pack();
     	
     	this.tournoi = TournoiDAO.getInstance().getTournoiOuvert().get();
     	this.controleur = new SaisieResultatControleur(this, this.tournoi);
@@ -172,6 +172,7 @@ public class SaisieResultatVue extends CustomJFrame {
         int nbMatch = 0;
         
         for (Match match : this.tournoi.getMatchs()) {
+        	System.out.println(match.getEquipes());
         	
         	nbMatch++;
         	
@@ -370,10 +371,10 @@ public class SaisieResultatVue extends CustomJFrame {
     }
     
     public void closeCurrentWindow() {
-    	
 		super.closeCurrentWindow();
 		AccueilArbitreVue frame = new AccueilArbitreVue();
 		frame.setVisible(true);
+		this.controleur.timer.cancel();
 	}
     
     public void disableButtons() {

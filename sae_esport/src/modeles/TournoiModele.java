@@ -250,6 +250,10 @@ public class TournoiModele {
 		return this.participants;
 	}
 	
+	public List<Equipe> getParticipantsIndisposees() {
+		return this.participantsIndisposees;
+	}
+	
 	/**
 	 * ajoute une équipe au tournoi
 	 * */

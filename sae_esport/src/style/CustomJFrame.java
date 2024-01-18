@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Frame;
 import java.awt.GridLayout;
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.border.EmptyBorder;
 
+import classes.DBConnection;
 import controleurs.MenuControleur;
 import controleurs.MenuMotionControleur;
 
@@ -182,5 +184,11 @@ public class CustomJFrame extends JFrame {
 	public void closeCurrentWindow() {
 		this.setVisible(false);
 		this.dispose();
+		/*try {
+			DBConnection.getInstance().close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
 	}
 }

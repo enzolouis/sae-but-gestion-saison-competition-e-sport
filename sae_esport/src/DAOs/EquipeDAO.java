@@ -222,7 +222,7 @@ public class EquipeDAO {
 		int rowcount = 0;
 		try {
 			PreparedStatement st = DBConnection.getInstance().prepareStatement("INSERT INTO participer VALUES (0,?,?)");
-			st.setInt(1, tournoi.getIDTournoi()); st.setInt(2, equipe.getIdEquipe()); 
+			st.setInt(1, tournoi.getIDTournoi()); st.setInt(2, equipe.getIdEquipe());
 			rowcount = st.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

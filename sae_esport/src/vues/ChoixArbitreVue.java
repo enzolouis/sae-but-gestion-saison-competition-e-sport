@@ -14,6 +14,8 @@ import java.awt.Insets;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import DAOs.ArbitreDAO;
+import classes.Arbitre;
 import controleurs.ChoixArbitreControleur;
 import style.CustomJButton;
 import style.CustomJFrame;
@@ -71,7 +73,7 @@ public class ChoixArbitreVue extends CustomJFrame {
         panelMiddle.setLayout(gbl_panelMiddle);
         
         // Panel middle --> Panel Liste : Ligne 1 et 2
-        CustomJPanel panelArbitreList = new CustomJPanel(new EmptyBorder(10, 10, 10, 10), new GridLayout(0, 4, 10, 10)); 
+        CustomJPanel panelArbitreList = new CustomJPanel(new EmptyBorder(10, 10, 10, 10), new GridLayout(0, 3, 10, 10)); 
         CustomJScrollPane scrollpanelArbitreList = new CustomJScrollPane(panelArbitreList);
         
         GridBagConstraints gbc_scrollpanelArbitreList = new GridBagConstraints();
@@ -81,11 +83,11 @@ public class ChoixArbitreVue extends CustomJFrame {
         gbc_scrollpanelArbitreList.gridy = 0;
         panelMiddle.add(scrollpanelArbitreList, gbc_scrollpanelArbitreList);
         
-        for (int i = 1; i <= 100; i++) {
-        	CustomJButton button = new CustomJButton("Arbitre n°" + i, 15);
+        for (Arbitre a : ArbitreDAO.getInstance().getAll()) {
+        	CustomJButton button = new CustomJButton(a.getPrenom() + " " + a.getNom() + "(" + a.getNationalite() + ")", 15);
         	button.addActionListener(this.controleur);
         	panelArbitreList.add(button);
-		}
+        }
         
         // Panel middle --> Panel Action : Ligne 3
         CustomJPanel panelArbitreActions = new CustomJPanel(new EmptyBorder(0, 0, 0, 0), new GridLayout(2, 3, 10, 10));

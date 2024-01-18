@@ -16,6 +16,9 @@ import javax.swing.JPasswordField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import DAOs.ArbitreDAO;
+import DAOs.TournoiDAO;
+import classes.DBConnection;
 import controleurs.IdentificationControleur;
 import style.CustomJButton;
 import style.CustomJFrame;
@@ -64,9 +67,18 @@ public class IdentificationVue extends CustomJFrame {
     	
     	pack();
     	
+    	// a garder : permet une premiere instance a la base de donnees et eviter de faire l'instance au moment du clique
+    	// sur "Se connecter" (lag)
+    	try {
+			TournoiDAO.getInstance().getAll();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
     	this.controleur = new IdentificationControleur(this);
     	contentPane = super.getContentPanel();
-        
+    	
         // Panel Top : Title
     	CustomJPanel panelTop = new CustomJPanel();
         contentPane.add(panelTop, BorderLayout.NORTH);
