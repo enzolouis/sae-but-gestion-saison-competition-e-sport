@@ -23,6 +23,10 @@ public class ChoixArbitreControleur implements ActionListener {
 	
 	private Arbitre arbSelec;
 	
+	/*
+	 * Effectue la construction de la vue
+	 * @param vue de la page, permettant l'activation de ActionEvent
+	 * */
 	public ChoixArbitreControleur(ChoixArbitreVue vue) {
 		this.vue = vue;
 		this.arbSelec = null;

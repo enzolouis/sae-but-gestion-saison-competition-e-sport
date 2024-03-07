@@ -16,6 +16,10 @@ public class ConsultationSaisonControleur implements ListSelectionListener, Acti
 	
 	private ConsultationSaisonVue vue;
 	
+	/*
+	 * Effectue la construction de la vue
+	 * @param vue de la page, permettant l'activation de ActionEvent
+	 * */
 	public ConsultationSaisonControleur(ConsultationSaisonVue vue) {
 		this.vue = vue;
 	}

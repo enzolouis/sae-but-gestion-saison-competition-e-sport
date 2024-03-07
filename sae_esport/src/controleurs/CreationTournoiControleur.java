@@ -26,6 +26,10 @@ public class CreationTournoiControleur implements ActionListener {
 	private List<Equipe> data;
 	
 	// remplacer identificationvue par CreationTournoiVue
+	/*
+	 * Effectue la construction de la vue
+	 * @param vue de la page, permettant l'activation de ActionEvent
+	 * */
 	public CreationTournoiControleur(CreationTournoiVue vue) {
 		this.vue = vue;
 		this.modele = new TournoiModele();

@@ -8,6 +8,9 @@ public class DBConnection {
 	
 	private static Connection instance;
 	
+	/*
+	 * Initie la connexion à la base de données
+	 * */
 	private DBConnection() {
 		String dirProjetJava = System.getProperty("user.dir");
 		System.setProperty("derby.system.home", dirProjetJava+"/BDDSAEEsport");

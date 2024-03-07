@@ -18,6 +18,10 @@ public class IdentificationControleur implements ActionListener {
 	private boolean isMotDePasseCache;
 	private Timer animationErreur;
 	
+	/*
+	 * Effectue la construction de la vue
+	 * @param vue de la page, permettant l'activation de ActionEvent
+	 * */
 	public IdentificationControleur(IdentificationVue vue) {
 		this.isMotDePasseCache = true;
 		this.vue = vue;
@@ -77,6 +81,7 @@ public class IdentificationControleur implements ActionListener {
 	
 	/**
 	 * masque le mot de passe ou le démasque selon son état actuel
+	 * @param le bouton de l'oeil, permettant d'afficher ou de cacher le mot de passe
 	 * */
 	public void inverserIconMotDePasseMasque(JButton btn) {
 		this.isMotDePasseCache = !this.isMotDePasseCache;
