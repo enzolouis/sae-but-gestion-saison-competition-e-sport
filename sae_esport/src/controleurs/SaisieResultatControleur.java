@@ -43,6 +43,11 @@ public class SaisieResultatControleur implements ActionListener {
 		  NOT_FINALE, IS_FINALE, FINALE_OVER
 	}
 	
+	/*
+	 * Mise en place de la vue, pour permettre les réactions avec Action Listener 
+	 * @param Valeur retourné
+	 * @param les paramètres de tournoi à manipuler dans cette vue
+	 * */
 	public SaisieResultatControleur(SaisieResultatVue vue, TournoiModele tournoi) {
 		
 		this.stateTournoi = FINALESTATE.NOT_FINALE;
@@ -128,6 +133,10 @@ public class SaisieResultatControleur implements ActionListener {
 		}
 	}
 	
+	
+	/*
+	 * Retourne le résultat 
+	 * */
 	public SaisieResultatModele getModele() {
 		return this.modele;
 	}

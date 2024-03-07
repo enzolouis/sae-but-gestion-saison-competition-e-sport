@@ -18,7 +18,7 @@ public class AccueilAdministrateurControleur implements ActionListener {
 	
 	private AccueilAdministrateurVue vue;
 	
-	/*
+	/**
 	 * Effectue la construction de la vue
 	 * @param vue de la page, permettant l'activation de ActionEvent
 	 * */

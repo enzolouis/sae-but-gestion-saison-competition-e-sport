@@ -23,7 +23,7 @@ public class ChoixArbitreControleur implements ActionListener {
 	
 	private Arbitre arbSelec;
 	
-	/*
+	/**
 	 * Effectue la construction de la vue
 	 * @param vue de la page, permettant l'activation de ActionEvent
 	 * */
@@ -118,6 +118,9 @@ public class ChoixArbitreControleur implements ActionListener {
 		
 	}
 	
+	/**
+	 * 
+	 * */
 	public boolean checkArbitreDeletable(Arbitre a) {
 		try {
 			for (TournoiModele t : ArbitreDAO.getInstance().getTournoisOfArbitre(a)) {
@@ -126,7 +129,6 @@ public class ChoixArbitreControleur implements ActionListener {
 				}
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return true;

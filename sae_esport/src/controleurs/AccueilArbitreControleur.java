@@ -15,7 +15,7 @@ public class AccueilArbitreControleur implements ActionListener {
 	
 	private AccueilArbitreVue vue;
 	
-	/*
+	/**
 	 * Effectue la construction de la vue
 	 * @param vue de la page, permettant l'activation de ActionEvent
 	 * */
