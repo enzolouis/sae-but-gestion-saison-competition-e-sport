@@ -4,13 +4,9 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 
-import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
-import javax.swing.SwingConstants;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 
 public class CustomJComboBoxRenderer extends JLabel implements ListCellRenderer {
     public CustomJComboBoxRenderer() {

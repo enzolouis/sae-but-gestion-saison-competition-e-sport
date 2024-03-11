@@ -2,36 +2,20 @@ package controleurs;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
 import java.util.Timer;
 
-import javax.security.auth.Destroyable;
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileNameExtensionFilter;
-
 import classes.ClotureDatePassee;
-import classes.Equipe;
 import classes.Match;
-import classes.EtatTournoi;
 import modeles.SaisieResultatModele;
 import modeles.TournoiModele;
 import style.CustomJButton;
 import vues.SaisieResultatVue;
 import DAOs.MatchDAO;
 import DAOs.TournoiDAO;
-import DAOs.EquipeDAO;
 
 public class SaisieResultatControleur implements ActionListener {
 	

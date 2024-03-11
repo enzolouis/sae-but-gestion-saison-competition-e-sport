@@ -16,9 +16,7 @@ import javax.swing.JPasswordField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import DAOs.ArbitreDAO;
 import DAOs.TournoiDAO;
-import classes.DBConnection;
 import controleurs.IdentificationControleur;
 import style.CustomJButton;
 import style.CustomJFrame;

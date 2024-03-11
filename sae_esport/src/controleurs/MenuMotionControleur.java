@@ -1,13 +1,8 @@
 package controleurs;
 
-import java.awt.MouseInfo;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.lang.annotation.Target;
-
-import javax.swing.JButton;
-
 import style.CustomJFrame;
 import style.CustomJPanel;
 

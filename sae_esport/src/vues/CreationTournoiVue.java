@@ -29,8 +29,6 @@ import style.CustomJSeparator;
 import style.Palette;
 
 import java.awt.Dimension;
-import java.awt.EventQueue;
-
 import javax.swing.JButton;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;

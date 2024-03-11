@@ -1,8 +1,6 @@
 package vues;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import style.*;
 import java.awt.GridLayout;
 
@@ -12,13 +10,10 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import com.toedter.calendar.JDateChooser;
 
-import DAOs.TournoiDAO;
 import classes.Arbitre;
 import classes.Equipe;
 import classes.Joueur;
 import controleurs.ListeTournoisControleur;
-import modeles.TournoiModele;
-
 import java.awt.Dimension;
 import javax.swing.border.EmptyBorder;
 import java.awt.FlowLayout;
@@ -26,11 +21,9 @@ import java.awt.Color;
 import javax.swing.JList;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
-import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.Rectangle;
-import java.awt.Toolkit;
 import java.awt.Component;
 
 public class ListeTournoisVue extends CustomJFrame {	

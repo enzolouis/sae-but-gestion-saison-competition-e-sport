@@ -1,7 +1,5 @@
 package style;
 
-import java.awt.Color;
-
 import javax.swing.JSeparator;
 
 public class CustomJSeparator extends JSeparator {

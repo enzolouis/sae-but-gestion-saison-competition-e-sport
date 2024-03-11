@@ -7,7 +7,6 @@ import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.awt.geom.RoundRectangle2D;
 
-import javax.swing.JButton;
 import javax.swing.JToggleButton;
 import javax.swing.border.EmptyBorder;
 

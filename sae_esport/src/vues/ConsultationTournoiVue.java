@@ -3,27 +3,14 @@ package vues;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import javax.swing.JPanel;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import DAOs.EquipeDAO;
-import DAOs.MatchDAO;
-import DAOs.ParticiperDAO;
-import DAOs.TournoiDAO;
-import classes.Equipe;
-import classes.Match;
-import classes.Participer;
 import controleurs.ConsultationTournoiControleur;
 import modeles.TournoiModele;
 import style.CustomJButton;
