@@ -24,15 +24,14 @@ public class ClotureDatePassee extends TimerTask {
 				Map<Equipe, Integer> equipe_list = c.getModele().getTournoi().getParticipants();
 				for (Map.Entry e : equipe_list.entrySet()) {
 					Equipe equipe =(Equipe) e.getKey();
-					Equipe equipe2 = null;
+					Equipe equipeModif = null;
 					try {
-						equipe2 = EquipeDAO.getInstance().getById(equipe.getIdEquipe()).get();
+						equipeModif = EquipeDAO.getInstance().getById(equipe.getIdEquipe()).get();
 					} catch (Exception e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-					equipe2.setPointsSaison((Integer)e.getValue() + equipe2.getPointsSaison());
-					updateEquipe(equipe2);
+					equipeModif.setPointsSaison((Integer)e.getValue() + equipeModif.getPointsSaison());
+					updateEquipe(equipeModif);
 				}
 			}
 	  }
@@ -41,7 +40,6 @@ public class ClotureDatePassee extends TimerTask {
 		  try {
 				EquipeDAO.getInstance().update(e);
 			} catch (Exception e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 	  }
