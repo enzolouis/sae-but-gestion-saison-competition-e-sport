@@ -11,6 +11,9 @@ public class ClotureDatePassee extends TimerTask {
 	
 	SaisieResultatControleur c;
 	
+	/**
+	 * Constructeur du controleur de résultats
+	 * */
 	public ClotureDatePassee (SaisieResultatControleur c) {
 		this.c = c;
 	}
@@ -28,6 +31,15 @@ public class ClotureDatePassee extends TimerTask {
 					try {
 						equipeModif = EquipeDAO.getInstance().getById(equipe.getIdEquipe()).get();
 					} catch (Exception e1) {
+<<<<<<< Updated upstream
+=======
+						e1.printStackTrace();
+					}
+					equip.setPointsSaison((Integer)eq.getValue() + equip.getPointsSaison());
+					try {
+						EquipeDAO.getInstance().update(equip);
+					} catch (Exception e1) {
+>>>>>>> Stashed changes
 						e1.printStackTrace();
 					}
 					equipeModif.setPointsSaison((Integer)e.getValue() + equipeModif.getPointsSaison());

@@ -18,18 +18,32 @@ public class CustomJPasswordField extends JPasswordField {
     private Color borderColor;
     private int radius;
     
+    /**
+     * Changement de la couleur des bordures d'une fenêtre d'une couleur à une autre
+     * @param valeur couleur avec lequel remplacer
+     * */
     public void setBorderColor(Color newColor) {
     	this.borderColor = newColor;
     }
     
+    /**
+     * Retourne la valeur de la couleur de des bordures de la fenêtre
+     * */
     public Color getBorderColor() {
     	return this.borderColor;
     }
     
+    /**
+     * Changement de l'épaisseur des bordures de la fenêtre 
+     * @param valeur d'épaisseur de la fonction
+     * */
     public void setBorderRadius(int radius) {
     	this.radius = radius;
     }
     
+    /**
+     * Retourne la valeur d'épaisseur de la fenêtre
+     * */
     public int getBorderRadius() {
     	return radius;
     }
@@ -144,7 +158,7 @@ public class CustomJPasswordField extends JPasswordField {
     
 	/**
 	* Ryan GAUNAND <br>
-	* Création d'un JTextField avec la définition de la taile, 
+	* Création d'un JTextField avec la définition de la taille, 
 	* de bordure vide, d'un texte de renseignement et
 	* l'application automatique de la charte graphique de l'application.
 	*
@@ -168,10 +182,17 @@ public class CustomJPasswordField extends JPasswordField {
         setFont(Palette.customTextFont);
     }
 
+    /**
+     * Retourne le texte de renseignement
+     * */
     public String getPlaceholder() {
         return placeholder;
     }
 
+    /**
+     * Change la valeur du texte de renseignement
+     * @param le texte de remplacement
+     * */
     public void setPlaceholder(final String s) {
         placeholder = s;
     }
@@ -196,6 +217,12 @@ public class CustomJPasswordField extends JPasswordField {
          g.drawRoundRect(0, 0, getWidth()-1, getHeight()-1, getBorderRadius(), getBorderRadius());
     }
     
+    /**
+     * Vérifie si la taille de la fenêtre corresponds aux valeurs de largeur et hauteur donné
+     * 
+     * @param largeur
+     * @param hauteur
+     * */
     public boolean contains(int x, int y) {
          if (shape == null || !shape.getBounds().equals(getBounds())) {
              shape = new RoundRectangle2D.Float(0, 0, getWidth()-1, getHeight()-1, getBorderRadius(), getBorderRadius());

@@ -12,7 +12,7 @@ public class ConsultationTournoiControleur implements ActionListener {
 	private ConsultationTournoiVue vue;
 	private ConsultationTournoiModele modele;
 	
-	/*
+	/**
 	 * Effectue la construction de la vue
 	 * @param vue de la page, permettant l'activation de ActionEvent
 	 * */
@@ -29,7 +29,7 @@ public class ConsultationTournoiControleur implements ActionListener {
 		}
 	}
 	
-	/*
+	/**
 	 * Effectue la mise en place de la table des classements
 	 * */
 	public void setUpTableModel() {

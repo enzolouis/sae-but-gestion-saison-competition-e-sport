@@ -181,12 +181,5 @@ public class CustomJFrame extends JFrame {
 	
 	public void closeCurrentWindow() {
 		this.setVisible(false);
-		this.dispose();
-		/*try {
-			DBConnection.getInstance().close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
 	}
 }

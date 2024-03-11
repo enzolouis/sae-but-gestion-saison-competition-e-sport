@@ -16,7 +16,7 @@ public class ConsultationSaisonControleur implements ListSelectionListener, Acti
 	
 	private ConsultationSaisonVue vue;
 	
-	/*
+	/**
 	 * Effectue la construction de la vue
 	 * @param vue de la page, permettant l'activation de ActionEvent
 	 * */
@@ -38,14 +38,12 @@ public class ConsultationSaisonControleur implements ListSelectionListener, Acti
 				vue.listejoueursmodele.addElement(j);
 			}
 		} catch (Exception e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 		JButton source = (JButton) e.getSource();
 		switch (source.getText()) {
 		case "Quitter":

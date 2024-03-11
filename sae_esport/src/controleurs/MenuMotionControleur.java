@@ -15,11 +15,9 @@ public class MenuMotionControleur implements MouseMotionListener, MouseListener 
 	
 	private CustomJFrame vue;
 	
-	private double positionXinitiale;
-	private double positionYinitiale;
-	
 	private int offsetX;
 	private int offsetY;
+	
 	
 	public MenuMotionControleur(CustomJFrame vue) {
 		this.vue = vue;
@@ -28,23 +26,16 @@ public class MenuMotionControleur implements MouseMotionListener, MouseListener 
 	
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		CustomJPanel target = (CustomJPanel) e.getSource();
 		this.vue.setLocation(e.getXOnScreen() - offsetX, e.getYOnScreen() - offsetY);
 	}
 
 
 	@Override
-	public void mouseMoved(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mouseMoved(MouseEvent e) {}
 
 
 	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mouseClicked(MouseEvent e) {}
 
 
 	@Override
@@ -54,23 +45,4 @@ public class MenuMotionControleur implements MouseMotionListener, MouseListener 
 	}
 
 
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 }

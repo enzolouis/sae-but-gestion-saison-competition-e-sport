@@ -24,6 +24,10 @@ public class MenuControleur implements ActionListener {
 	
 	private CustomJFrame vue;
 	
+	/**
+	 * Construction de la vue,pour permettre les réactions avec Action Listener
+	 * @param Jframe ou la vue sera placé
+	 * */
 	public MenuControleur(CustomJFrame vue) {
 		this.vue = vue;
 	}

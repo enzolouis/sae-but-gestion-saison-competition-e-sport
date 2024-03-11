@@ -11,6 +11,13 @@ public class Match {
 	private int idVainqueur;
 	private int idTournoi;
 	
+	/**
+	 * Constructeur de Match d'un Tournoi, commencant avec sa liste d'équipes vide
+	 * 
+	 * @param id du match
+	 * @param id du Tournoi auquel le match est lié
+	 * @param booléen vérifiant si le match est la finale du Tournoi
+	 * */
 	public Match(int idMatch, int idTournoi, boolean finale) {
 		this.finale = finale;
 		this.idMatch = idMatch;
