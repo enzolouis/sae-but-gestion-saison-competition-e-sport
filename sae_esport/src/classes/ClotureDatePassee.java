@@ -32,13 +32,17 @@ public class ClotureDatePassee extends TimerTask {
 						e1.printStackTrace();
 					}
 					equipe2.setPointsSaison((Integer)e.getValue() + equipe2.getPointsSaison());
-					try {
-						EquipeDAO.getInstance().update(equipe);
-					} catch (Exception e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+					updateEquipe(equipe2);
 				}
+			}
+	  }
+	  
+	  private void updateEquipe(Equipe e) {
+		  try {
+				EquipeDAO.getInstance().update(e);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
 	  }
 
