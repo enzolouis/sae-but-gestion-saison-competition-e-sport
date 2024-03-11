@@ -4,7 +4,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import style.CustomJFrame;
-import style.CustomJPanel;
 
 public class MenuMotionControleur implements MouseMotionListener, MouseListener {
 	
@@ -37,6 +36,27 @@ public class MenuMotionControleur implements MouseMotionListener, MouseListener 
 	public void mousePressed(MouseEvent e) {
 		offsetX = e.getXOnScreen() - this.vue.getX();
         offsetY = e.getYOnScreen() - this.vue.getY();
+	}
+
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

@@ -36,86 +36,104 @@ public class CreationTournoiControleur implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
 		if (e.getSource() instanceof JButton) {
-			
 			JButton bouton = (JButton) e.getSource();
 			
 			switch (bouton.getText()) {
-			case ("Ajouter"):
-				Arbitre a = (Arbitre) this.vue.comboBoxArbitre.getSelectedItem();
-				if (!this.vue.modeleList.contains(a)) {
-					this.vue.modeleList.addElement(a);
+				case "Quitter":
+					this.vue.closeCurrentWindow();
+					break;
+				case "Ajouter":
+					ajouterArbitreSelectionne();
+					break;
+				case "Vider":
+					viderListeArbitres();
+					break;
+				case "Supprimer":
+					supprimerArbitreSelectionne();
+					break;
+				case "Importer":
+					importFichierCSV();
+					break;
+				case "Valider":
+					validerCreationTournoi();
+					break;
 				}
-				break;
-			case ("Vider"):
-				this.vue.modeleList.removeAllElements();
-				break;
-			case ("Supprimer"):
-				for (Arbitre arb : this.vue.listArbitres.getSelectedValuesList()) {
-					this.vue.modeleList.removeElement(arb);
-				}
-				break;
-			case ("Importer"):
-				JFileChooser fc = new JFileChooser();
-				fc.setAcceptAllFileFilterUsed(false);
-				fc.addChoosableFileFilter(new FileNameExtensionFilter("CSV Documents", "csv"));
-				int chose = fc.showOpenDialog(this.vue);
-				if (chose == JFileChooser.APPROVE_OPTION) {
-					File file = fc.getSelectedFile();
-					this.vue.textFieldEquipesFile.setText(file.getName());
-					try {
-						data = EquipeDAO.getInstance().importEquipes(file);
-					} catch (Exception e1) {
-						e1.printStackTrace();
+		}
+	}
+
+	private void validerCreationTournoi() {
+		if (checkAllFields()) {
+			vue.messageCreation.setText("Un des champs nécessaires n'a pas été rempli.");
+		} else {
+			String nom = this.vue.textFieldNom.getText();
+			String  dateDebut = this.modele.getDateString(this.vue.dateChooserDebut.getDate());
+			String dateFin =   this.modele.getDateString(this.vue.dateChooserFin.getDate());
+			Notoriete not = (Notoriete) this.vue.comboBoxNotoriete.getSelectedItem();
+			TournoiModele t = new TournoiModele(0, nom, dateDebut, dateFin, not, EtatTournoi.FERME);
+			if (!t.isTournoiValide()) {
+				vue.messageCreation.setText("<html> Les dates sont invalides. Vérifiez qu'un tournoi <br> n'existe pas sur ce créneau.");
+			} else {
+				try {
+					TournoiDAO.getInstance().add(t);
+					for (int i = 0; i < this.vue.listArbitres.getModel().getSize(); i++) {
+						TournoiDAO.getInstance().addArbitre(t, this.vue.listArbitres.getModel().getElementAt(i));
+						t.ajouterArbitre(this.vue.listArbitres.getModel().getElementAt(i));
 					}
-				}
-				break;
-			case ("Quitter"):
-				this.vue.closeCurrentWindow();
-				break;
-			case ("Valider"):
-				if (checkAllFields()) {
-					vue.messageCreation.setText("Un des champs nécessaires n'a pas été rempli.");
-				} else {
-					String nom = this.vue.textFieldNom.getText();
-					String  dateDebut = this.modele.getDateString(this.vue.dateChooserDebut.getDate());
-					String dateFin =   this.modele.getDateString(this.vue.dateChooserFin.getDate());
-					Notoriete not = (Notoriete) this.vue.comboBoxNotoriete.getSelectedItem();
-					TournoiModele t = new TournoiModele(0, nom, dateDebut, dateFin, not, EtatTournoi.FERME);
-					if (!t.isTournoiValide()) {
-						vue.messageCreation.setText("<html> Les dates sont invalides. Vérifiez qu'un tournoi <br> n'existe pas sur ce créneau.");
-					} else {
-						try {
-							TournoiDAO.getInstance().add(t);
-							for (int i = 0; i < this.vue.listArbitres.getModel().getSize(); i++) {
-								TournoiDAO.getInstance().addArbitre(t, this.vue.listArbitres.getModel().getElementAt(i));
-								t.ajouterArbitre(this.vue.listArbitres.getModel().getElementAt(i));
-							}
-							for (Equipe eq : data) {
-								TournoiDAO.getInstance().addEquipe(t, eq);
-								t.ajouterEquipe(eq, 0);
-							}
-						} catch (Exception e1) {
-							e1.printStackTrace();
-							}
-						vue.messageCreation.setForeground(Palette.GREEN);
-						vue.messageCreation.setText("Le tournoi N°"+t.getIDTournoi()+" a été créé.");
-						vue.btnAddArbitre.setEnabled(false);
-						vue.btnImportEquipes.setEnabled(false);
-						vue.textFieldEquipesFile.setEnabled(false);
-						vue.textFieldNom.setEnabled(false);
-						vue.btnSupprimerArbitre.setEnabled(false);
-						vue.btnValider.setEnabled(false);
-						vue.btnViderArbitres.setEnabled(false);
-						vue.dateChooserDebut.setEnabled(false);
-						vue.dateChooserFin.setEnabled(false);
-						vue.comboBoxArbitre.setEnabled(false);
-						vue.comboBoxNotoriete.setEnabled(false);
+					for (Equipe eq : data) {
+						TournoiDAO.getInstance().addEquipe(t, eq);
+						t.ajouterEquipe(eq, 0);
 					}
-				}
-				break;
+				} catch (Exception e1) {
+					e1.printStackTrace();
+					}
+				vue.messageCreation.setForeground(Palette.GREEN);
+				vue.messageCreation.setText("Le tournoi N°"+t.getIDTournoi()+" a été créé.");
+				vue.btnAddArbitre.setEnabled(false);
+				vue.btnImportEquipes.setEnabled(false);
+				vue.textFieldEquipesFile.setEnabled(false);
+				vue.textFieldNom.setEnabled(false);
+				vue.btnSupprimerArbitre.setEnabled(false);
+				vue.btnValider.setEnabled(false);
+				vue.btnViderArbitres.setEnabled(false);
+				vue.dateChooserDebut.setEnabled(false);
+				vue.dateChooserFin.setEnabled(false);
+				vue.comboBoxArbitre.setEnabled(false);
+				vue.comboBoxNotoriete.setEnabled(false);
 			}
+		}
+	}
+
+	private void importFichierCSV() {
+		JFileChooser fc = new JFileChooser();
+		fc.setAcceptAllFileFilterUsed(false);
+		fc.addChoosableFileFilter(new FileNameExtensionFilter("CSV Documents", "csv"));
+		int chose = fc.showOpenDialog(this.vue);
+		if (chose == JFileChooser.APPROVE_OPTION) {
+			File file = fc.getSelectedFile();
+			this.vue.textFieldEquipesFile.setText(file.getName());
+			try {
+				data = EquipeDAO.getInstance().importEquipes(file);
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		}
+	}
+
+	private void supprimerArbitreSelectionne() {
+		for (Arbitre arb : this.vue.listArbitres.getSelectedValuesList()) {
+			this.vue.modeleList.removeElement(arb);
+		}
+	}
+
+	private void viderListeArbitres() {
+		this.vue.modeleList.removeAllElements();
+	}
+
+	private void ajouterArbitreSelectionne() {
+		Arbitre a = (Arbitre) this.vue.comboBoxArbitre.getSelectedItem();
+		if (!this.vue.modeleList.contains(a)) {
+			this.vue.modeleList.addElement(a);
 		}
 	}
 	

@@ -26,7 +26,6 @@ public class ConsultationSaisonControleur implements ListSelectionListener, Acti
 
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
-		
 		int idEquipe = (int) vue.table.getModel().getValueAt(vue.table.getSelectedRow(), 1);
 		try {
 			vue.listejoueursmodele.clear();
@@ -45,10 +44,8 @@ public class ConsultationSaisonControleur implements ListSelectionListener, Acti
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton source = (JButton) e.getSource();
-		switch (source.getText()) {
-		case "Quitter":
+		if (source.getText().equals("Quitter")) {
 			this.vue.closeCurrentWindow();
 		}
 	}
-
 }

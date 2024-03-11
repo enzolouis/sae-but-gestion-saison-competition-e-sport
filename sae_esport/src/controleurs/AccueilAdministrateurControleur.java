@@ -28,58 +28,73 @@ public class AccueilAdministrateurControleur implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
 		if (e.getSource() instanceof JButton) {
-			
 			JButton bouton = (JButton) e.getSource();
-			CustomJFrame frame;
 			
 			switch (bouton.getText()) {
-			case ("Quitter"):
-				
-				this.vue.closeCurrentWindow();
-				break;
-				
-			case "Se déconnecter":
-				
-				this.vue.closeCurrentWindow();
-				frame = new IdentificationVue();
-				frame.setVisible(true);
-				break;
-				
-			case ("Créer un tournoi"):
-				
-				this.vue.closeCurrentWindow();
-				frame = new CreationTournoiVue();
-				frame.setVisible(true);
-				break;
-				
-			case ("Statistiques de la saison"):
-				
-				this.vue.closeCurrentWindow();
-				frame = new ConsultationSaisonVue();
-				frame.setVisible(true);
-				break;
-				
-			case ("Liste des tournois"):
-				
-				this.vue.closeCurrentWindow();
-				frame = new ListeTournoisVue();
-				frame.setVisible(true);
-				break;
-				
-			case ("Gérer les arbitres"):
-				
-				this.vue.closeCurrentWindow();
-				frame = new ChoixArbitreVue();
-				frame.setVisible(true);
-				break;
-				
-			default:
-				break;
+				case "Quitter":
+					this.vue.closeCurrentWindow();
+					break;
+					
+				case "Se déconnecter":
+					deconnecter();
+					break;
+					
+				case "Créer un tournoi":
+					ouvrirCreerTournoi();
+					break;
+					
+				case "Statistiques de la saison":
+					ouvrirStatistiquesSaison();
+					break;
+					
+				case "Liste des tournois":
+					ouvrirListeTournois();
+					break;
+					
+				case "Gérer les arbitres":
+					ouvrirGererArbitres();
+					break;
+					
+				default:
+					break;
 			}
-	
 		}
+	}
+
+	private void ouvrirGererArbitres() {
+		CustomJFrame frame;
+		this.vue.closeCurrentWindow();
+		frame = new ChoixArbitreVue();
+		frame.setVisible(true);
+	}
+
+	private void ouvrirListeTournois() {
+		CustomJFrame frame;
+		this.vue.closeCurrentWindow();
+		frame = new ListeTournoisVue();
+		frame.setVisible(true);
+	}
+
+	private void ouvrirStatistiquesSaison() {
+		CustomJFrame frame;
+		this.vue.closeCurrentWindow();
+		frame = new ConsultationSaisonVue();
+		frame.setVisible(true);
+	}
+
+	private void ouvrirCreerTournoi() {
+		CustomJFrame frame;
+		this.vue.closeCurrentWindow();
+		frame = new CreationTournoiVue();
+		frame.setVisible(true);
+	}
+
+	private void deconnecter() {
+		CustomJFrame frame;
+		this.vue.closeCurrentWindow();
+		frame = new IdentificationVue();
+		frame.setVisible(true);
 	}
 
 }

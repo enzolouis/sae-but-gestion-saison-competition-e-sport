@@ -25,50 +25,59 @@ public class AccueilArbitreControleur implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
 		if (e.getSource() instanceof JButton) {
-			
 			JButton bouton = (JButton) e.getSource();
-			CustomJFrame frame;
 			
 			switch (bouton.getText()) {
-			
-			case ("Quitter"):
-				this.vue.closeCurrentWindow();
-				break;
-			case "Se déconnecter":
-				this.vue.closeCurrentWindow();
-				frame = new IdentificationVue();
-				frame.setVisible(true);
-				break;
-			case ("Accès au tournoi"):
-				this.vue.closeCurrentWindow();
-				try {
-					frame = new SaisieResultatVue();
-					frame.setVisible(true);
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
-				break;
-			
-			case ("Statistiques du tournoi"):
-				this.vue.closeCurrentWindow();
-				TournoiModele t = null;
-				try {
-					t = TournoiDAO.getInstance().getTournoiOuvert().get();
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
+				case "Quitter":
+					this.vue.closeCurrentWindow();
+					break;
+				case "Se déconnecter":
+					deconnecter();
+					break;
+				case "Accès au tournoi":
+					ouvrirAccesTournoi();
+					break;
 				
-				frame = new ConsultationTournoiVue(t);
-				frame.setVisible(true);
-				break;
-				
-			default:
-				break;
-				
+				case "Statistiques du tournoi":
+					ouvrirStatistiquesTournoi();
+					break;
+					
+				default:
+					break;
 			}
 		}
 	}
 
+	private void ouvrirStatistiquesTournoi() {
+		CustomJFrame frame;
+		this.vue.closeCurrentWindow();
+		TournoiModele t = null;
+		try {
+			t = TournoiDAO.getInstance().getTournoiOuvert().get();
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+		
+		frame = new ConsultationTournoiVue(t);
+		frame.setVisible(true);
+	}
+
+	private void ouvrirAccesTournoi() {
+		CustomJFrame frame;
+		this.vue.closeCurrentWindow();
+		try {
+			frame = new SaisieResultatVue();
+			frame.setVisible(true);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+	}
+
+	private void deconnecter() {
+		CustomJFrame frame;
+		this.vue.closeCurrentWindow();
+		frame = new IdentificationVue();
+		frame.setVisible(true);
+	}
 }

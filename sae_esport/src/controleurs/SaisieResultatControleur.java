@@ -61,59 +61,62 @@ public class SaisieResultatControleur implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
 		if (e.getSource() instanceof JButton) {
-			
 			JButton bouton = (JButton) e.getSource();
 			switch (bouton.getText()) {
 			
-			case ("Quitter"):
+			case "Quitter":
 				this.vue.closeCurrentWindow();
 				break;
 				
-			case ("Ouvrir la finale"):
-				
-				try {
-					
-					if (modele.canOpenFinale()) {
-						
-						Match finale = modele.createFinale();
-						MatchDAO.getInstance().add(finale);
-						this.vue.OpenButtonFinal(finale.getIDMatch(), 
-								finale.getEquipes().get(0), finale.getEquipes().get(1));
-						this.stateTournoi = FINALESTATE.IS_FINALE;
-						
-						TournoiDAO.getInstance().update(this.modele.getTournoi());
-						
-					}
-
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
-				
+			case "Ouvrir la finale":
+				ouvrirFinale();
 				break;
 				
-			case ("Fermer le tournoi"):
-			
-				if (stateTournoi == FINALESTATE.FINALE_OVER) {
-					modele.finirTournoi();
-				} else {
-					modele.annulerTournoi();
-				}
-				this.vue.disableButtons();
-				timer.cancel();
+			case "Fermer le tournoi":
+				fermerTournoi();
 				break;
-				
 			default:
-				
-				modele.choixVainqueurMatch(bouton);
-				
-				this.vue.RefreshMatch((CustomJButton) bouton);
-				if (stateTournoi == FINALESTATE.IS_FINALE) {
-					stateTournoi = FINALESTATE.FINALE_OVER;
-				}
-				
+				choisirVainqueur(bouton);
 			}	
+		}
+	}
+
+	private void choisirVainqueur(JButton bouton) {
+		modele.choixVainqueurMatch(bouton);
+		
+		this.vue.RefreshMatch((CustomJButton) bouton);
+		if (stateTournoi == FINALESTATE.IS_FINALE) {
+			stateTournoi = FINALESTATE.FINALE_OVER;
+		}
+	}
+
+	private void fermerTournoi() {
+		if (stateTournoi == FINALESTATE.FINALE_OVER) {
+			modele.finirTournoi();
+		} else {
+			modele.annulerTournoi();
+		}
+		this.vue.disableButtons();
+		timer.cancel();
+	}
+
+	private void ouvrirFinale() {
+		try {
+			if (modele.canOpenFinale()) {
+				
+				Match finale = modele.createFinale();
+				MatchDAO.getInstance().add(finale);
+				this.vue.OpenButtonFinal(finale.getIDMatch(), 
+						finale.getEquipes().get(0), finale.getEquipes().get(1));
+				this.stateTournoi = FINALESTATE.IS_FINALE;
+				
+				TournoiDAO.getInstance().update(this.modele.getTournoi());
+				
+			}
+
+		} catch (Exception e1) {
+			e1.printStackTrace();
 		}
 	}
 	

@@ -32,51 +32,57 @@ public class IdentificationControleur implements ActionListener {
 	 * tente de se connecter à l'application avec les logins dans les fields
 	 * */
 	public void seConnecter() throws Exception {
-		
 		String login = this.vue.getUtilisateurContenu();
 		String mdp = this.vue.getMotDePasseContenu();
 		if (this.modele.checkLogins(login, mdp)) {
-			this.vue.closeCurrentWindow();
-			if (this.modele.getUtilisateur() == Utilisateur.ADMIN) {
-				AccueilAdministrateurVue vueAdmin;
-				try {
-					vueAdmin = new AccueilAdministrateurVue();
-					vueAdmin.setVisible(true);
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
-			} else {
-				AccueilArbitreVue vueArbitre;
-				try {
-					vueArbitre = new AccueilArbitreVue();
-					vueArbitre.setVisible(true);
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
-			}
-			
+			seConnecterSuccess();
 		} else {
-			this.vue.erreurOuverture.setText("Login et/ou mot de passe faux.");
-			this.vue.panelErreur.setBackground(Palette.REDERRORBACKGROUND);
-			this.vue.panelErreur.setBorder(new LineBorder(Palette.REDERRORBORDER, 1));
-			// compteur de quelques secondes
-			
-			ActionListener action = new ActionListener() {
-				int compteur = 1;
-	    		@Override
-			    public void actionPerformed(ActionEvent e) {
-	    			compteur++;
-	    			if (compteur == 3) {
-	    				animationErreur.stop();
-	    				vue.erreurOuverture.setText("");
-	    				vue.panelErreur.setBackground(null);
-	    				vue.panelErreur.setBorder(null);
-	    			}
-			    }
-			};
-			animationErreur = new Timer(2000, action);
-			animationErreur.start();
+			seConnecterFailure();
 		}
+	}
+
+	private void seConnecterSuccess() {
+		this.vue.closeCurrentWindow();
+		if (this.modele.getUtilisateur() == Utilisateur.ADMIN) {
+			AccueilAdministrateurVue vueAdmin;
+			try {
+				vueAdmin = new AccueilAdministrateurVue();
+				vueAdmin.setVisible(true);
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		} else {
+			AccueilArbitreVue vueArbitre;
+			try {
+				vueArbitre = new AccueilArbitreVue();
+				vueArbitre.setVisible(true);
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		}
+	}
+
+	private void seConnecterFailure() {
+		this.vue.erreurOuverture.setText("Login et/ou mot de passe faux.");
+		this.vue.panelErreur.setBackground(Palette.REDERRORBACKGROUND);
+		this.vue.panelErreur.setBorder(new LineBorder(Palette.REDERRORBORDER, 1));
+		// compteur de quelques secondes
+		
+		ActionListener action = new ActionListener() {
+			int compteur = 1;
+			@Override
+		    public void actionPerformed(ActionEvent e) {
+				compteur++;
+				if (compteur == 3) {
+					animationErreur.stop();
+					vue.erreurOuverture.setText("");
+					vue.panelErreur.setBackground(null);
+					vue.panelErreur.setBorder(null);
+				}
+		    }
+		};
+		animationErreur = new Timer(2000, action);
+		animationErreur.start();
 	}
 	
 	/**

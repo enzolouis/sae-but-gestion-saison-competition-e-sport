@@ -57,66 +57,18 @@ public class ListeTournoisControleur implements ActionListener, ListSelectionLis
 			JButton bouton = (JButton) e.getSource();
 			
 			switch (bouton.getText()) {
-			case "Fermer":
-				this.vue.closeCurrentWindow();
-				break;
-			case "Ouvrir":
-				int idTournoi = (int) vue.tableTournois.getValueAt(vue.tableTournois.getSelectedRow(), 0);
-				try {
-					TournoiModele tournoi = TournoiDAO.getInstance().getById(idTournoi).get();
-					this.vue.erreurOuverture.setForeground(new Color(235, 77, 75));
-					if (!TournoiModele.isAucunTournoiOuvert()) {
-						this.vue.panelErreur.setBackground(Palette.REDERRORBACKGROUND);
-						this.vue.panelErreur.setBorder(new LineBorder(Palette.REDERRORBORDER, 1));
-						this.vue.erreurOuverture.setText("Un tournoi est déjà ouvert ");
-					}
-					else if (!tournoi.isDateCouranteDansCreneauTournoi()) {
-						this.vue.panelErreur.setBackground(Palette.REDERRORBACKGROUND);
-						this.vue.panelErreur.setBorder(new LineBorder(Palette.REDERRORBORDER, 1));
-						this.vue.erreurOuverture.setText("Nous ne sommes pas dans la période du tournoi !");
-					} else if (!tournoi.isTournoiMinimum4EquipeDisposee()) {
-						this.vue.panelErreur.setBackground(Palette.REDERRORBACKGROUND);
-						this.vue.panelErreur.setBorder(new LineBorder(Palette.REDERRORBORDER, 1));
-						this.vue.erreurOuverture.setText("Pas assez d'équipe disposées !");
-					} else {
-						// reverification de tout
-						
-						tournoi.ouvrirTournoi();
-						this.setUpTableModel();
-						this.vue.boutonOuverture.setEnabled(false);
-						this.vue.panelErreur.setBackground(Palette.GREENLIGHTER);
-						this.vue.panelErreur.setBorder(new LineBorder(Palette.GREEN, 1));
-						this.vue.erreurOuverture.setText("Le tournoi a été ouvert !");
-						this.vue.erreurOuverture.setForeground(Palette.GREEN);
-						
-					}
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
-				break;
-			case "<html><p style='text-align:center'>Rendre<br>indisposée</p></html>":
-				bouton.setBackground(Palette.REDERRORBACKGROUND);
-				bouton.setText("<html><p style='text-align:center'>Rendre<br>disposée</p></html>");
-				Equipe eq = (Equipe) vue.listeEquipes.getSelectedValue();
-				eq.setDisposition(Disposition.NON_DISPOSEE);
-				try {
-					EquipeDAO.getInstance().update(eq);
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
-				break;
-			case "<html><p style='text-align:center'>Rendre<br>disposée</p></html>":
-				bouton.setBackground(Palette.GREEN);
-				bouton.setText("<html><p style='text-align:center'>Rendre<br>indisposée</p></html>");
-				Equipe eq1 = (Equipe) vue.listeEquipes.getSelectedValue();
-				eq1.setDisposition(Disposition.DISPOSEE);
-				
-				try {
-					EquipeDAO.getInstance().update(eq1);
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
-				break;
+				case "Fermer":
+					this.vue.closeCurrentWindow();
+					break;
+				case "Ouvrir":
+					ouvrirTournoi();
+					break;
+				case "<html><p style='text-align:center'>Rendre<br>indisposée</p></html>":
+					rendreIndisposee(bouton);
+					break;
+				case "<html><p style='text-align:center'>Rendre<br>disposée</p></html>":
+					rendreDisposee(bouton);
+					break;
 			}
 		} else if (e.getSource() instanceof JToggleButton) {
 			JToggleButton toggle = (JToggleButton) e.getSource();
@@ -133,6 +85,66 @@ public class ListeTournoisControleur implements ActionListener, ListSelectionLis
 		
 	}
 
+	private void rendreDisposee(JButton bouton) {
+		bouton.setBackground(Palette.GREEN);
+		bouton.setText("<html><p style='text-align:center'>Rendre<br>indisposée</p></html>");
+		Equipe eq1 = (Equipe) vue.listeEquipes.getSelectedValue();
+		eq1.setDisposition(Disposition.DISPOSEE);
+		
+		try {
+			EquipeDAO.getInstance().update(eq1);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+	}
+
+	private void rendreIndisposee(JButton bouton) {
+		bouton.setBackground(Palette.REDERRORBACKGROUND);
+		bouton.setText("<html><p style='text-align:center'>Rendre<br>disposée</p></html>");
+		Equipe eq = (Equipe) vue.listeEquipes.getSelectedValue();
+		eq.setDisposition(Disposition.NON_DISPOSEE);
+		try {
+			EquipeDAO.getInstance().update(eq);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+	}
+
+	private void ouvrirTournoi() {
+		int idTournoi = (int) vue.tableTournois.getValueAt(vue.tableTournois.getSelectedRow(), 0);
+		try {
+			TournoiModele tournoi = TournoiDAO.getInstance().getById(idTournoi).get();
+			this.vue.erreurOuverture.setForeground(new Color(235, 77, 75));
+			if (!TournoiModele.isAucunTournoiOuvert()) {
+				this.vue.panelErreur.setBackground(Palette.REDERRORBACKGROUND);
+				this.vue.panelErreur.setBorder(new LineBorder(Palette.REDERRORBORDER, 1));
+				this.vue.erreurOuverture.setText("Un tournoi est déjà ouvert ");
+			}
+			else if (!tournoi.isDateCouranteDansCreneauTournoi()) {
+				this.vue.panelErreur.setBackground(Palette.REDERRORBACKGROUND);
+				this.vue.panelErreur.setBorder(new LineBorder(Palette.REDERRORBORDER, 1));
+				this.vue.erreurOuverture.setText("Nous ne sommes pas dans la période du tournoi !");
+			} else if (!tournoi.isTournoiMinimum4EquipeDisposee()) {
+				this.vue.panelErreur.setBackground(Palette.REDERRORBACKGROUND);
+				this.vue.panelErreur.setBorder(new LineBorder(Palette.REDERRORBORDER, 1));
+				this.vue.erreurOuverture.setText("Pas assez d'équipe disposées !");
+			} else {
+				// reverification de tout
+				
+				tournoi.ouvrirTournoi();
+				this.setUpTableModel();
+				this.vue.boutonOuverture.setEnabled(false);
+				this.vue.panelErreur.setBackground(Palette.GREENLIGHTER);
+				this.vue.panelErreur.setBorder(new LineBorder(Palette.GREEN, 1));
+				this.vue.erreurOuverture.setText("Le tournoi a été ouvert !");
+				this.vue.erreurOuverture.setForeground(Palette.GREEN);
+				
+			}
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+	}
+
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		
@@ -141,7 +153,6 @@ public class ListeTournoisControleur implements ActionListener, ListSelectionLis
 	@Override
 	public void mousePressed(MouseEvent e) {
 		 if (e.getSource() instanceof JList) {
-			@SuppressWarnings("unchecked")
 			JList<Equipe> l = (JList<Equipe>) e.getSource();
 			Equipe e1 = (Equipe) l.getSelectedValue();
 			if (e1 != null) {
@@ -225,6 +236,24 @@ public class ListeTournoisControleur implements ActionListener, ListSelectionLis
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}	
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
