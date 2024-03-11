@@ -12,9 +12,7 @@ public class IdentificationModele {
 	
 	private Utilisateur utilisateur = null;
 	
-	public IdentificationModele() {
-		
-	}
+	public IdentificationModele() {}
 	
 	/**
 	 * renvoie si un couple de login et de mdp sont valides et set le type de droits d'utilisateur

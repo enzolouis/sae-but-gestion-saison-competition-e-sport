@@ -18,6 +18,10 @@ public class ChoixArbitreControleur implements ActionListener {
 	
 	private Arbitre arbSelec;
 	
+	/**
+	 * Effectue la construction de la vue
+	 * @param vue de la page, permettant l'activation de ActionEvent
+	 * */
 	public ChoixArbitreControleur(ChoixArbitreVue vue) {
 		this.vue = vue;
 		this.arbSelec = null;
@@ -48,7 +52,6 @@ public class ChoixArbitreControleur implements ActionListener {
 					this.vue.boutonsArbitres.add(boutonNew);
 					this.vue.panelArbitreList.add(boutonNew);
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				this.vue.erreur.setText("Arbitre créé!");
@@ -85,7 +88,6 @@ public class ChoixArbitreControleur implements ActionListener {
 				}
 				
 			} catch (Exception e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			
@@ -100,7 +102,6 @@ public class ChoixArbitreControleur implements ActionListener {
 					this.vue.listTournoisModele.addElement(t);
 				}
 			} catch (Exception e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			this.vue.btnSupprimer.setEnabled(true);
@@ -109,6 +110,10 @@ public class ChoixArbitreControleur implements ActionListener {
 		
 	}
 	
+	/**
+	 * Verification si un arbitre est valide pour la suppression 
+	 * @param arbitre à verifier
+	 * */
 	public boolean checkArbitreDeletable(Arbitre a) {
 		try {
 			for (TournoiModele t : ArbitreDAO.getInstance().getTournoisOfArbitre(a)) {
@@ -117,7 +122,6 @@ public class ChoixArbitreControleur implements ActionListener {
 				}
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return true;

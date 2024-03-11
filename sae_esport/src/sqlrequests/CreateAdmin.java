@@ -12,6 +12,9 @@ public class CreateAdmin {
 		CreateAdmin.Create();
 	}
 	
+	/**
+	 * Supprime la table admin, ainsi que sa séquence
+	 * */
 	public static void Drop() {
 		try {
             // Suppression de la table admin
@@ -32,6 +35,9 @@ public class CreateAdmin {
         }
 	}
 	
+	/**
+	 * Créée la table admin, ainsi que sa séquence
+	 * */
 	public static void Create() {
         try {
             // Création de la séquence de l'identifiant admin

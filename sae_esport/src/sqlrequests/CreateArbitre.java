@@ -12,6 +12,9 @@ public class CreateArbitre {
 		CreateArbitre.Create();
 	}
 	
+	/**
+	 * Supprimme la table Arbitre, ainsi que sa séquence
+	 * */
 	public static void Drop() {
 		try {
 		    // Suppression de la table arbitre
@@ -32,6 +35,9 @@ public class CreateArbitre {
 		}
 	}
 	
+	/**
+	 * Créée la table Arbitre, ainsi que sa séquence
+	 * */
 	public static void Create() {
 		try {
 		    // Création de la séquence de l'identifiant arbitre

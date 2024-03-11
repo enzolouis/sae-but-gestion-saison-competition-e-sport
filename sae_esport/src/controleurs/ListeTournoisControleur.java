@@ -28,6 +28,11 @@ public class ListeTournoisControleur implements ActionListener, ListSelectionLis
 
 	private ListeTournoisVue vue;
 	
+
+	/**
+	 * Effectue la construction de la vue
+	 * @param vue de la page, permettant l'activation de ActionEvent
+	 * */
 	public ListeTournoisControleur(ListeTournoisVue vue) {
 		this.vue = vue;
 		
@@ -42,7 +47,6 @@ public class ListeTournoisControleur implements ActionListener, ListSelectionLis
 						t.getDateDebut(), t.getDateFin(), t.getNotoriete(), t.getEtatTournoi()});
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -163,22 +167,6 @@ public class ListeTournoisControleur implements ActionListener, ListSelectionLis
 			
 			
 		}
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

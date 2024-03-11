@@ -12,6 +12,10 @@ public class ConsultationTournoiControleur implements ActionListener {
 	private ConsultationTournoiVue vue;
 	private ConsultationTournoiModele modele;
 	
+	/**
+	 * Effectue la construction de la vue
+	 * @param vue de la page, permettant l'activation de ActionEvent
+	 * */
 	public ConsultationTournoiControleur(ConsultationTournoiVue vue) {
 		this.modele = new ConsultationTournoiModele();
 		this.vue = vue;
@@ -25,6 +29,9 @@ public class ConsultationTournoiControleur implements ActionListener {
 		}
 	}
 	
+	/**
+	 * Effectue la mise en place de la table des classements
+	 * */
 	public void setUpTableModel() {
 		try {
 			int classement = 0;
@@ -45,7 +52,6 @@ public class ConsultationTournoiControleur implements ActionListener {
 				this.vue.tableModel.addRow(o);
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

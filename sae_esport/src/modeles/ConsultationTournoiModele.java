@@ -13,9 +13,12 @@ import classes.Match;
 import classes.Participer;
 
 public class ConsultationTournoiModele {
-	public ConsultationTournoiModele() {
-		
-	}
+	
+	public ConsultationTournoiModele() {}
+	
+	/**
+	 * Effetue le classement des Equipes du Tournoi en cours
+	 * */
 	public List<Object[]> classementTournoiCourant() throws Exception {
 		TournoiModele tournoiCourant = TournoiDAO.getInstance().getTournoiOuvert().get();
 		
@@ -41,7 +44,7 @@ public class ConsultationTournoiModele {
 					}
 				}
 			}
-			/* p.getResultat() */
+
 			listStats.add(new Object[] {null, e.getNom(), matchsJoues, victoire*3+defaite, victoire, defaite});
 		}
 		listStats.sort(new Comparator<Object[]>() {

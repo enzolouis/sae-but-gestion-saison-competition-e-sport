@@ -15,6 +15,10 @@ public class AccueilArbitreControleur implements ActionListener {
 	
 	private AccueilArbitreVue vue;
 	
+	/**
+	 * Effectue la construction de la vue
+	 * @param vue de la page, permettant l'activation de ActionEvent
+	 * */
 	public AccueilArbitreControleur(AccueilArbitreVue vue) {
 		this.vue = vue;
 	}
@@ -43,7 +47,6 @@ public class AccueilArbitreControleur implements ActionListener {
 					frame = new SaisieResultatVue();
 					frame.setVisible(true);
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				break;

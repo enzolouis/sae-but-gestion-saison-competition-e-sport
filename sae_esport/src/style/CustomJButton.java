@@ -18,13 +18,20 @@ public class CustomJButton extends JButton {
 	ControleurAnimation anim = new ControleurAnimation();
 	Color initialBackground;
 	
+	/**
+	 * retourne la valeur initiale de l'arrière plan (background)
+	 * */
 	public Color getInitialBackground() {
 		return this.initialBackground;
 	}
 	
 	
 	
-	// nouveau
+	/**
+	 * Mise en place d'une nouvelle couleur d'arrière-plan
+	 * @param c : couleur auquel changer l'arrière-plan
+	 * @param valeur initiale de couleur d'arrière-plan 
+	 * */
 	public void setBackground(Color c, boolean changeInitialBackground) {
 		if (changeInitialBackground) {
 			this.initialBackground = c;

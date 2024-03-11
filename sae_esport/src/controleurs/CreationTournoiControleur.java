@@ -25,7 +25,10 @@ public class CreationTournoiControleur implements ActionListener {
 	private TournoiModele modele;
 	private List<Equipe> data;
 	
-	// remplacer identificationvue par CreationTournoiVue
+	/**
+	 * Effectue la construction de la vue
+	 * @param vue de la page, permettant l'activation de ActionEvent
+	 * */
 	public CreationTournoiControleur(CreationTournoiVue vue) {
 		this.vue = vue;
 		this.modele = new TournoiModele();
@@ -94,7 +97,6 @@ public class CreationTournoiControleur implements ActionListener {
 								t.ajouterEquipe(eq, 0);
 							}
 						} catch (Exception e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 							}
 						vue.messageCreation.setForeground(Palette.GREEN);
@@ -136,7 +138,6 @@ public class CreationTournoiControleur implements ActionListener {
 		try {
 			infos += "Du "+t.getDateDebut()+" au "+t.getDateFin()+"\n";
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		infos+="Liste des arbitres:\n";

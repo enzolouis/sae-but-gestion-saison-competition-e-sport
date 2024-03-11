@@ -21,6 +21,9 @@ public class SaisieResultatModele {
 	
 	private TournoiModele tournoi;
 	
+	/**
+	 * Constructeur du modèle de Tournoi, basé sur l'instance DAO du Tournoi
+	 * */
 	public SaisieResultatModele() {
 		this.tournoi = TournoiDAO.getInstance().getTournoiOuvert().get();
 	}
@@ -118,8 +121,10 @@ public class SaisieResultatModele {
 		
 	}
 	
+	/**
+	 * Mise à jour des points des équipes en fonction de leurs participation
+	 * */
 	public void updatePointsSaison() {
-		
 		try {
 			for (Equipe eq : EquipeDAO.getInstance().getAll()) {
 				
@@ -131,18 +136,19 @@ public class SaisieResultatModele {
 				EquipeDAO.getInstance().update(eq);
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
+	/**
+	 * 
+	 * */
 	public void annulerTournoi() {
 		
 		tournoi.setEtatTournoi(EtatTournoi.ANNULE);
 		try {
 			TournoiDAO.getInstance().update(tournoi);
 		} catch (Exception e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
@@ -155,7 +161,6 @@ public class SaisieResultatModele {
 		try {
 			TournoiDAO.getInstance().update(tournoi);
 		} catch (Exception e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		
@@ -191,12 +196,7 @@ public class SaisieResultatModele {
 
 		} catch (Exception exception) {
 			exception.printStackTrace();
-		}
-		
-		String s = "";
-		for (Equipe e : tournoi.getParticipants().keySet()) {
-			s+=e.toString()+": "+tournoi.getParticipants().get(e)+"\n";
-		}		
+		}	
 	}
 	
 }
