@@ -18,6 +18,9 @@ public class ArbitreDAO {
 	private ArbitreDAO() {
 	}
 	
+	/**
+	 * Mise en place d'une instance d'arbitres, pour intéragir avec la bdd
+	 * */
 	public static synchronized ArbitreDAO getInstance() {
 		if (instance == null) {
 			instance = new ArbitreDAO();
