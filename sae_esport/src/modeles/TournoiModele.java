@@ -97,7 +97,12 @@ public class TournoiModele {
 	 * 	@param notoriété du Tournoi
 	 * 	@param Etat d'ouverture ou fermeture du Tournoi
 	 * */
-	public TournoiModele(int idTournoi, String nomTournoi, String dateDebut, String dateFin, Notoriete notoriete, EtatTournoi etat) {
+	public TournoiModele(int idTournoi, 
+						String nomTournoi, 
+						String dateDebut, 
+						String dateFin, 
+						Notoriete notoriete, 
+						EtatTournoi etat) {
 		this.idTournoi = idTournoi;
 		this.nomTournoi = nomTournoi;
 		this.dateDebut = dateDebut;
@@ -235,7 +240,6 @@ public class TournoiModele {
 	}
 	
 	/**
-	 * 
 	 * ajoute un match au tournoi
 	 * @param nouveau match
 	 * */
@@ -436,7 +440,6 @@ public class TournoiModele {
 			return this.isDateFinDateDebutDifferenceInfA30Jours() && this.isDateFinSupADateDebut()
 					&& this.isNonDupe() && this.isTournoiNonSuperpose();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return false;
