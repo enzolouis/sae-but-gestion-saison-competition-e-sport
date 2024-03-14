@@ -18,6 +18,9 @@ public class JoueurDAO {
 		super();
 	}
 	
+	/**
+	 * Mise en place d'une instance de joueurs, pour intéragir avec la bdd correspondante
+	 * */
 	public static synchronized JoueurDAO getInstance() {
 		if (instance == null) {
 			instance = new JoueurDAO();

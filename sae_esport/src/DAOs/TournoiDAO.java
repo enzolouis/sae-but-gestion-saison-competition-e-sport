@@ -23,6 +23,9 @@ public class TournoiDAO {
 	public TournoiDAO() {
 	}
 	
+	/**
+	 * Mise en place d'une instance de tournois, pour intéragir avec la bdd correspondante
+	 * */
 	public static synchronized TournoiDAO getInstance() {
 		if (instance == null) {
 			instance = new TournoiDAO();

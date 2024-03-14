@@ -19,6 +19,9 @@ public class MatchDAO {
 		super();
 	}
 	
+	/**
+	 * Mise en place d'une instance de matchs, pour intéragir avec la bdd correspondante
+	 * */
 	public static synchronized MatchDAO getInstance() {
 		if (instance == null) {
 			instance = new MatchDAO();

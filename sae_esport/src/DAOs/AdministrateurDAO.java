@@ -18,6 +18,9 @@ public class AdministrateurDAO {
 	private AdministrateurDAO() {
 	}
 	
+	/**
+	 * Mise en place d'une instance d'administrateurs, pour intéragir avec la bdd correspondante
+	 * */
 	public static synchronized AdministrateurDAO getInstance() {
 		if (instance == null) {
 			instance = new AdministrateurDAO();

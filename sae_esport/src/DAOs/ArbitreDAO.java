@@ -19,7 +19,7 @@ public class ArbitreDAO {
 	}
 	
 	/**
-	 * Mise en place d'une instance d'arbitres, pour intéragir avec la bdd
+	 * Mise en place d'une instance d'arbitres, pour intéragir avec la bdd correspondante
 	 * */
 	public static synchronized ArbitreDAO getInstance() {
 		if (instance == null) {
@@ -44,7 +44,7 @@ public class ArbitreDAO {
 	
 	/**
 	 * renvoie l'arbitre du premier id reconnu
-	 * @param identifiant(s) de l'arbitre
+	 * @param identifiant(s) de(s) l'arbitre(s)
 	 * */
 	public Optional<Arbitre> getById(Integer... id) throws Exception {
 		Statement st = DBConnection.getInstance().createStatement();

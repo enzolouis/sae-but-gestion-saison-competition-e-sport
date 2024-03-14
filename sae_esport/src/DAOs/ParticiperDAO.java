@@ -17,6 +17,9 @@ public class ParticiperDAO {
 		super();
 	}
 	
+	/**
+	 * Mise en place d'une instance de participation, pour intéragir avec la bdd correspondante
+	 * */
 	public static synchronized ParticiperDAO getInstance() {
 		if (instance == null) {
 			instance = new ParticiperDAO();

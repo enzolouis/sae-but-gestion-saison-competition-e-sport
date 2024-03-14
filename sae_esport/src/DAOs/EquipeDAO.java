@@ -24,6 +24,9 @@ public class EquipeDAO {
 	private EquipeDAO() {
 	}
 	
+	/**
+	 * Mise en place d'une instance d'équipes, pour intéragir avec la bdd correspondante
+	 * */
 	public static synchronized EquipeDAO getInstance() {
 		if (instance == null) {
 			instance = new EquipeDAO();
