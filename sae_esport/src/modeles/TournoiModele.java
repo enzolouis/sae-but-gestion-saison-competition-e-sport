@@ -151,7 +151,7 @@ public class TournoiModele {
 	/**
 	 * renvoie la date de début
 	 * */
-	public Date getDateDebut() throws ParseException {
+	public Date getDateDebut() {
 		return getDate(this.dateDebut);
 	}
 	
@@ -166,7 +166,7 @@ public class TournoiModele {
 	/**
 	 * renvoie la date de fin
 	 * */
-	public Date getDateFin() throws ParseException {
+	public Date getDateFin() {
 		return getDate(this.dateFin);
 	}
 	
@@ -372,7 +372,6 @@ public class TournoiModele {
 			try {
 				return new Date(new SimpleDateFormat("yyyy-MM-dd").parse(date).getTime());
 			} catch (ParseException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}
@@ -383,7 +382,7 @@ public class TournoiModele {
 	 * renvoie un booléen indiquant s'il n'y a pas déjà un tournoi
 	 * avec le même nom que le tournoi actuel dans la bdd
 	 * */
-	public boolean isNonDupe() throws Exception {
+	public boolean isNonDupe() {
 		for (TournoiModele t : TournoiDAO.getInstance().getAll()) {
 			if (t.getNomTournoi().equals(getNomTournoi())) {
 				return false;
@@ -395,14 +394,14 @@ public class TournoiModele {
 	/**
 	 * renvoie un bool indiquant de la dateFin > dateDebut
 	 * */
-	public boolean isDateFinSupADateDebut() throws ParseException {
+	public boolean isDateFinSupADateDebut() {
 		return getDateFin().after(getDateDebut());
 	}
 	
 	/**
 	 * renvoie un bool indiquant que la durée du tournoi est inf à 30j
 	 * */
-	public boolean isDateFinDateDebutDifferenceInfA30Jours() throws ParseException {
+	public boolean isDateFinDateDebutDifferenceInfA30Jours() {
 		// 30 jours = 2592000000 milisecond
 		return getDateFin().getTime() - getDateDebut().getTime() < 2592000000L;
 	}
@@ -410,7 +409,7 @@ public class TournoiModele {
 	/**
 	 * renvoie un bool indiquant qu'aucun tournoi n'existe sur le même créneau que celui ci
 	 * */
-	public boolean isTournoiNonSuperpose() throws Exception {
+	public boolean isTournoiNonSuperpose() {
 		for (TournoiModele t : TournoiDAO.getInstance().getAll()) {
 			
 			if ((getDateDebut().compareTo(t.getDateDebut()) >= 0 && getDateDebut().compareTo(t.getDateFin()) <= 0) 
@@ -464,7 +463,7 @@ public class TournoiModele {
 	/**
 	 * renvoie si nous sommes aujourd'hui dans le créneau du tournoi
 	 * */
-	public boolean isDateCouranteDansCreneauTournoi() throws ParseException {
+	public boolean isDateCouranteDansCreneauTournoi() {
 		LocalDate currentDate = LocalDate.now();
 
         Date sqlDate = Date.valueOf(LocalDateTime.of(currentDate, LocalTime.MIDNIGHT).toLocalDate());
@@ -475,7 +474,7 @@ public class TournoiModele {
 	/**
 	 * renvoie si un tournoi est ouvert
 	 * */
-	public static boolean isAucunTournoiOuvert() throws Exception {
+	public static boolean isAucunTournoiOuvert() {
 		for (TournoiModele t : TournoiDAO.getInstance().getAll()) {
 			if (t.getEtatTournoi() == EtatTournoi.OUVERT) {
 				return false;
@@ -488,7 +487,7 @@ public class TournoiModele {
 	/**
 	 * supprime la participation des équipes indiposées de la bdd
 	 * */
-	public void supprimerEquipeIndisposees() throws Exception {
+	public void supprimerEquipeIndisposees() {
 		for (Equipe e : this.participantsIndisposees) {
 			ParticiperDAO.getInstance().delete(new Participer(0, this.getIDTournoi(), e.getIdEquipe())); // 0 : arbitraire
 		}
@@ -497,7 +496,7 @@ public class TournoiModele {
 	/**
 	 * renvoie si le tournoi est ouvrable
 	 * */
-	public boolean isTournoiOuvrable() throws ParseException, Exception {
+	public boolean isTournoiOuvrable() {
 		return this.isTournoiMinimum4EquipeDisposee() 
 				&& this.isTournoiMinimum1Arbitre() 
 				&& TournoiModele.isAucunTournoiOuvert() 
@@ -507,7 +506,7 @@ public class TournoiModele {
 	/**
 	 * ouvre un tournoi
 	 * */
-	public void ouvrirTournoi() throws Exception {
+	public void ouvrirTournoi() {
 		
 		if (this.isTournoiOuvrable()) {
 			
