@@ -38,6 +38,9 @@ public class ListeTournoisControleur implements ActionListener, ListSelectionLis
 		
 	}
 	
+	/**
+	 * Mise en place d'un model de table, listant les tournois de la bdd
+	 * */
 	public void setUpTableModel() {
 		this.vue.tableModel.setRowCount(0);
 		
@@ -239,21 +242,12 @@ public class ListeTournoisControleur implements ActionListener, ListSelectionLis
 	}
 
 	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mouseReleased(MouseEvent e) {}
 
 	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mouseEntered(MouseEvent e) {}
 
 	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mouseExited(MouseEvent e) {}
 	
 }
