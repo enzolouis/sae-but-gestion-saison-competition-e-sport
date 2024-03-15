@@ -2,7 +2,6 @@ package controleurs;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
@@ -38,12 +37,7 @@ public class SaisieResultatControleur implements ActionListener {
 		this.vue = vue; 
 		this.modele = new SaisieResultatModele();
 		
-		Date dt = null;
-		try {
-			dt = tournoi.getDateFin();
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		Date dt = tournoi.getDateFin();
 		
 		Calendar c = Calendar.getInstance(); 
 		c.setTime(dt); 
@@ -62,17 +56,18 @@ public class SaisieResultatControleur implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() instanceof JButton) {
-			JButton bouton = (JButton) e.getSource();
-			switch (bouton.getText()) {
 			
-			case "Quitter":
+			JButton bouton = (JButton) e.getSource();
+			
+			switch (bouton.getText()) {
+
+			case ("Quitter"):
+				this.vue.dispose();
 				this.vue.closeCurrentWindow();
 				break;
-				
 			case "Ouvrir la finale":
 				ouvrirFinale();
 				break;
-				
 			case "Fermer le tournoi":
 				fermerTournoi();
 				break;
@@ -102,7 +97,7 @@ public class SaisieResultatControleur implements ActionListener {
 	}
 
 	private void ouvrirFinale() {
-		try {
+
 			if (modele.canOpenFinale()) {
 				
 				Match finale = modele.createFinale();
@@ -115,9 +110,6 @@ public class SaisieResultatControleur implements ActionListener {
 				
 			}
 
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		}
 	}
 	
 	

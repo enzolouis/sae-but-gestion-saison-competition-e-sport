@@ -3,7 +3,6 @@ package controleurs;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.text.ParseException;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -152,12 +151,9 @@ public class CreationTournoiControleur implements ActionListener {
 	 * @param le tournoi à consulter
 	 * */
 	public String infosTournoi(TournoiModele t) {
-		String infos = t.getIDTournoi()+": "+t.getNomTournoi()+"("+t.getNotoriete()+")\n";
-		try {
-			infos += "Du "+t.getDateDebut()+" au "+t.getDateFin()+"\n";
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+		
+		String infos = "Du "+t.getDateDebut()+" au "+t.getDateFin()+"\n";
+
 		infos+="Liste des arbitres:\n";
 		for (Arbitre a : t.getArbitres()) {
 			infos+=a.toString();

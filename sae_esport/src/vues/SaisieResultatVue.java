@@ -38,6 +38,7 @@ public class SaisieResultatVue extends CustomJFrame {
     private CustomJButton closeFinalButton;
     
     public SaisieResultatVue() throws Exception {
+    	
     	super(new Dimension(550, 500), "Résultat des matchs");
     	contentPanel = this.getContentPanel();
     	
