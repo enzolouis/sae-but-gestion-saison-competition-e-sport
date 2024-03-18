@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import classes.DBConnection;
-import modeles.TournoiModele;
 
 public class CreateTournoi {
 	

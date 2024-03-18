@@ -1,6 +1,7 @@
 package classes;
 
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.TimerTask;
 
 import DAOs.EquipeDAO;
@@ -24,7 +25,7 @@ public class ClotureDatePassee extends TimerTask {
 		  c.getModele().getTournoi().setEtatTournoi(EtatTournoi.FERME);
 			if (c.getModele().isFinaleDemarree()) {
 				Map<Equipe, Integer> equipe_list = c.getModele().getTournoi().getParticipants();
-				for (Map.Entry e : equipe_list.entrySet()) {
+				for (Entry<Equipe,Integer> e : equipe_list.entrySet()) {
 					Equipe equipe =(Equipe) e.getKey();
 					Equipe equipeModif = null;
 					equipeModif = EquipeDAO.getInstance().getById(equipe.getIdEquipe()).get();

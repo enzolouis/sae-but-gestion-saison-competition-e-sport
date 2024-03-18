@@ -154,6 +154,7 @@ public class ListeTournoisControleur implements ActionListener, ListSelectionLis
 	@Override
 	public void mousePressed(MouseEvent e) {
 		 if (e.getSource() instanceof JList) {
+			@SuppressWarnings("unchecked")
 			JList<Equipe> l = (JList<Equipe>) e.getSource();
 			Equipe e1 = (Equipe) l.getSelectedValue();
 			if (e1 != null) {

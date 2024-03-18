@@ -12,7 +12,6 @@ import classes.Disposition;
 import classes.Equipe;
 import classes.EtatTournoi;
 import classes.Joueur;
-import classes.Match;
 import classes.Nationalite;
 import classes.Notoriete;
 import classes.Participer;
