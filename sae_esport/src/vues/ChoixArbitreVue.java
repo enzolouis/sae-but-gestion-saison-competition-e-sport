@@ -37,31 +37,31 @@ import javax.swing.JList;
 
 public class ChoixArbitreVue extends CustomJFrame {
 
-	public CustomJPanel contentPanel;
-	public ChoixArbitreControleur controleur;
-	public ArrayList<JButton> boutonsArbitres = new ArrayList<>();
-	public JTextField textFieldNom;
-	public JTextField textFieldPrenom;
-	public JComboBox<Nationalite> comboBoxNationalite;
-	public JList<TournoiModele> listTournois;
-	public DefaultListModel<TournoiModele> listTournoisModele;
-	public JPanel panelErreur;
-	public JLabel erreur;
-	public JButton btnSupprimer;
-	public CustomJPanel panelArbitreList;
-	public JLabel lbNomArbitre;
-	public CustomJScrollPane scrollpanelArbitreList;
+    public CustomJPanel contentPanel;
+    public ChoixArbitreControleur controleur;
+    public ArrayList<JButton> boutonsArbitres = new ArrayList<>();
+    public JTextField textFieldNom;
+    public JTextField textFieldPrenom;
+    public JComboBox<Nationalite> comboBoxNationalite;
+    public JList<TournoiModele> listTournois;
+    public DefaultListModel<TournoiModele> listTournoisModele;
+    public JPanel panelErreur;
+    public JLabel erreur;
+    public JButton btnSupprimer;
+    public CustomJPanel panelArbitreList;
+    public JLabel lbNomArbitre;
+    public CustomJScrollPane scrollpanelArbitreList;
     
     public ChoixArbitreVue() {
    
-    	
-    	super(new Dimension(600, 630), "Gestion des arbitre");
-    	
-    	this.controleur = new ChoixArbitreControleur(this);
-    	contentPanel = this.getContentPanel();
+        
+        super(new Dimension(600, 630), "Gestion des arbitre");
+        
+        this.controleur = new ChoixArbitreControleur(this);
+        contentPanel = this.getContentPanel();
         
         // Panel Top : Title
-    	CustomJPanel panelTop = new CustomJPanel();
+        CustomJPanel panelTop = new CustomJPanel();
         contentPanel.add(panelTop, BorderLayout.NORTH);
         
         CustomJLabel titleTop = new CustomJLabel("GESTION DES ARBITRES", 25);
@@ -94,17 +94,17 @@ public class ChoixArbitreVue extends CustomJFrame {
         panelMiddle.add(scrollpanelArbitreList, gbc_scrollpanelArbitreList);
         
         try {
-			for (Arbitre a : ArbitreDAO.getInstance().getAll()) {
-				CustomJButton button = new CustomJButton(a.toString(), 15);
-				boutonsArbitres.add(button);
-				button.setActionCommand(""+a.getIdArbitre());
-				button.addActionListener(this.controleur);
-				panelArbitreList.add(button);
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+            for (Arbitre a : ArbitreDAO.getInstance().getAll()) {
+                CustomJButton button = new CustomJButton(a.toString(), 15);
+                boutonsArbitres.add(button);
+                button.setActionCommand(""+a.getIdArbitre());
+                button.addActionListener(this.controleur);
+                panelArbitreList.add(button);
+            }
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         
         // Panel d'actions par rapport aux arbitres
         CustomJPanel panelArbitreActions = new CustomJPanel(new EmptyBorder(0, 0, 0, 0), new GridLayout(2, 3, 10, 10));
@@ -240,9 +240,9 @@ public class ChoixArbitreVue extends CustomJFrame {
     }
     
     public void closeCurrentWindow() {
-		super.closeCurrentWindow();
-		AccueilAdministrateurVue frame = new AccueilAdministrateurVue();
-		frame.setVisible(true);
-	}
+        super.closeCurrentWindow();
+        AccueilAdministrateurVue frame = new AccueilAdministrateurVue();
+        frame.setVisible(true);
+    }
     
 }

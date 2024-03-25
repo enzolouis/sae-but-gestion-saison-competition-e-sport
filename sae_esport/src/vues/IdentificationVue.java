@@ -49,36 +49,36 @@ public class IdentificationVue extends CustomJFrame {
     }
     
     public String getUtilisateurContenu() {
-    	return textFieldUtilisateur.getText();
+        return textFieldUtilisateur.getText();
     }
     
     public String getMotDePasseContenu() {
-    	return String.valueOf(textFieldMotDePasse.getPassword());
+        return String.valueOf(textFieldMotDePasse.getPassword());
     }
     
     public JPasswordField getMotDePasse() {
-    	return textFieldMotDePasse;
+        return textFieldMotDePasse;
     }
     
     public IdentificationVue() {
-    	super(new Dimension(300, 450), "Identification");
-    	
-    	pack();
-    	
-    	// a garder : permet une premiere instance a la base de donnees et eviter de faire l'instance au moment du clique
-    	// sur "Se connecter" (lag)
-    	try {
-			TournoiDAO.getInstance().getAll();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	
-    	this.controleur = new IdentificationControleur(this);
-    	contentPane = super.getContentPanel();
-    	
+        super(new Dimension(300, 450), "Identification");
+        
+        pack();
+        
+        // a garder : permet une premiere instance a la base de donnees et eviter de faire l'instance au moment du clique
+        // sur "Se connecter" (lag)
+        try {
+            TournoiDAO.getInstance().getAll();
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
+        this.controleur = new IdentificationControleur(this);
+        contentPane = super.getContentPanel();
+        
         // Panel Top : Title
-    	CustomJPanel panelTop = new CustomJPanel();
+        CustomJPanel panelTop = new CustomJPanel();
         contentPane.add(panelTop, BorderLayout.NORTH);
         
         CustomJLabel titleTop = new CustomJLabel("IDENTIFICATION", 25);
@@ -87,9 +87,9 @@ public class IdentificationVue extends CustomJFrame {
         
         CustomJSeparator separatorTop = new CustomJSeparator();
         panelTop.add(separatorTop, BorderLayout.SOUTH);
-    	
+        
         // Middle Panel : Login
-    	CustomJPanel panelMiddleLogin = new CustomJPanel(new EmptyBorder(10, 10, 10, 10), new GridLayout(2, 0, 0, 0));
+        CustomJPanel panelMiddleLogin = new CustomJPanel(new EmptyBorder(10, 10, 10, 10), new GridLayout(2, 0, 0, 0));
         contentPane.add(panelMiddleLogin, BorderLayout.CENTER);
         
         JPanel panelImageApp = new CustomJPanel();
@@ -106,12 +106,12 @@ public class IdentificationVue extends CustomJFrame {
         
         panelErreur = new CustomJPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
         erreurOuverture = new CustomJLabel("",10);
-		erreurOuverture.setText(" ");
-		erreurOuverture.setForeground(Palette.REDERRORFOREGROUND);
-		erreurOuverture.setBorder(new EmptyBorder(3, 3, 3, 3));
-		erreurOuverture.setAlignmentX(Component.CENTER_ALIGNMENT);
-		panelErreur.add(erreurOuverture);
-		
+        erreurOuverture.setText(" ");
+        erreurOuverture.setForeground(Palette.REDERRORFOREGROUND);
+        erreurOuverture.setBorder(new EmptyBorder(3, 3, 3, 3));
+        erreurOuverture.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panelErreur.add(erreurOuverture);
+        
         
         // Utilisateur
         CustomJPanel panelUtilisateur = new CustomJPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));

@@ -25,14 +25,14 @@ public class AccueilArbitreVue extends CustomJFrame {
     private AccueilArbitreControleur controleur;
     
     public AccueilArbitreVue() {
-    	super(new Dimension(400, 300), "Accueil Arbitre");
-    	
-    	this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-    	
-    	pack();
-    	
-    	this.controleur = new AccueilArbitreControleur(this);
-    	
+        super(new Dimension(400, 300), "Accueil Arbitre");
+        
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        
+        pack();
+        
+        this.controleur = new AccueilArbitreControleur(this);
+        
         contentPane = this.getContentPanel();
         
         // Top Panel : Titre

@@ -24,14 +24,14 @@ public class AccueilAdministrateurVue extends CustomJFrame {
   
     
     public AccueilAdministrateurVue() {
-    	
-    	super(new Dimension(400, 300), "Accueil Administrateur");
-    	
-    	this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-    	
-    	pack();
-    	
-    	this.controleur = new AccueilAdministrateurControleur(this);
+        
+        super(new Dimension(400, 300), "Accueil Administrateur");
+        
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        
+        pack();
+        
+        this.controleur = new AccueilAdministrateurControleur(this);
 
         contentPane = super.getContentPanel();
         
@@ -82,7 +82,7 @@ public class AccueilAdministrateurVue extends CustomJFrame {
         btnListeTournois.setActionCommand("listeTournois");
         btnListeTournois.setBackground(Palette.BLUE);
         btnListeTournois.setForeground(Palette.WHITE);
-        btnListeTournois.addActionListener(controleur);	
+        btnListeTournois.addActionListener(controleur); 
         gbc_panelMiddle.gridx = 0;
         gbc_panelMiddle.gridy = 2;
         panelMiddle.add(btnListeTournois, gbc_panelMiddle.clone());
