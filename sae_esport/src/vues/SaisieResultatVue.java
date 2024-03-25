@@ -221,6 +221,7 @@ public class SaisieResultatVue extends CustomJFrame {
         panelMiddle.add(panelMiddleBottom, gbc_panelMiddleBottom);
     	
         this.openFinalButton = new CustomJButton("Ouvrir la finale", 15);
+        this.openFinalButton.setActionCommand("ouvrirFinale");
         this.openFinalButton.setEnabled(false);
         GridBagConstraints gbc_buttonOpen = new GridBagConstraints();
         gbc_buttonOpen.fill = GridBagConstraints.CENTER;
@@ -231,6 +232,7 @@ public class SaisieResultatVue extends CustomJFrame {
     	panelMiddleBottom.add(this.openFinalButton, gbc_buttonOpen);
     	
     	this.closeFinalButton = new CustomJButton("Fermer le tournoi", 15);
+        this.closeFinalButton.setActionCommand("fermerTournoi");
         this.closeFinalButton.setEnabled(true);
         GridBagConstraints gbc_buttonClose = new GridBagConstraints();
         gbc_buttonClose.anchor = GridBagConstraints.EAST;
@@ -245,6 +247,7 @@ public class SaisieResultatVue extends CustomJFrame {
         
         // Bouton quitter
         CustomJButton btnQuit = new CustomJButton("Quitter", 10);
+        btnQuit.setActionCommand("quitter");
         btnQuit.setBackground(new Color(231, 76, 60));
         btnQuit.setForeground(new Color(255, 255, 255));
         btnQuit.addActionListener(this.controleur);

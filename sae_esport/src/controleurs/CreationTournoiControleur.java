@@ -38,23 +38,23 @@ public class CreationTournoiControleur implements ActionListener {
 		if (e.getSource() instanceof JButton) {
 			JButton bouton = (JButton) e.getSource();
 			
-			switch (bouton.getText()) {
-				case "Quitter":
+			switch (bouton.getActionCommand()) {
+				case "quitter":
 					this.vue.closeCurrentWindow();
 					break;
-				case "Ajouter":
+				case "ajouter":
 					ajouterArbitreSelectionne();
 					break;
-				case "Vider":
+				case "vider":
 					viderListeArbitres();
 					break;
-				case "Supprimer":
+				case "supprimer":
 					supprimerArbitreSelectionne();
 					break;
-				case "Importer":
+				case "importer":
 					importFichierCSV();
 					break;
-				case "Valider":
+				case "valider":
 					validerCreationTournoi();
 					break;
 				}

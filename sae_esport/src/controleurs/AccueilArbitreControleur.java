@@ -28,18 +28,18 @@ public class AccueilArbitreControleur implements ActionListener {
 		if (e.getSource() instanceof JButton) {
 			JButton bouton = (JButton) e.getSource();
 			
-			switch (bouton.getText()) {
-				case "Quitter":
+			switch (bouton.getActionCommand()) {
+				case "quitter":
 					this.vue.closeCurrentWindow();
 					break;
-				case "Se déconnecter":
+				case "deconnecter":
 					deconnecter();
 					break;
-				case "Accès au tournoi":
+				case "accesTournoi":
 					ouvrirAccesTournoi();
 					break;
 				
-				case "Statistiques du tournoi":
+				case "statsTournoi":
 					ouvrirStatistiquesTournoi();
 					break;
 					

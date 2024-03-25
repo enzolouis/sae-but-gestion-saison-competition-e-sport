@@ -30,16 +30,16 @@ public class ChoixArbitreControleur implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton bouton = (JButton) e.getSource();
-		switch (bouton.getText()) {
-			case "Quitter":
+		switch (bouton.getActionCommand()) {
+			case "quitter":
 				this.vue.closeCurrentWindow();
 				break;
 				
-			case "Ajouter cet arbitre":
+			case "ajouterArbitre":
 				ajouterArbitreCourant();
 				break;
 				
-			case "Supprimer cet arbitre": 
+			case "suppArbitre": 
 				supprimerArbitreCourant();
 				break;
 				

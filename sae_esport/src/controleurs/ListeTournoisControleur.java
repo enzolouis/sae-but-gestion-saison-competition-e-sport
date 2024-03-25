@@ -57,17 +57,14 @@ public class ListeTournoisControleur implements ActionListener, ListSelectionLis
 		if (e.getSource() instanceof JButton) {
 			JButton bouton = (JButton) e.getSource();
 			
-			switch (bouton.getText()) {
-				case "Fermer":
-					this.vue.closeCurrentWindow();
-					break;
-				case "Ouvrir":
+			switch (bouton.getActionCommand()) {
+				case "ouvrir":
 					ouvrirTournoi();
 					break;
-				case "<html><p style='text-align:center'>Rendre<br>indisposée</p></html>":
+				case "setIndisposée":
 					rendreIndisposee(bouton);
 					break;
-				case "<html><p style='text-align:center'>Rendre<br>disposée</p></html>":
+				case "setDisposée":
 					rendreDisposee(bouton);
 					break;
 			}
@@ -89,6 +86,7 @@ public class ListeTournoisControleur implements ActionListener, ListSelectionLis
 	private void rendreDisposee(JButton bouton) {
 		bouton.setBackground(Palette.GREEN);
 		bouton.setText("<html><p style='text-align:center'>Rendre<br>indisposée</p></html>");
+		bouton.setActionCommand("setIndisposée");
 		Equipe eq1 = (Equipe) vue.listeEquipes.getSelectedValue();
 		eq1.setDisposition(Disposition.DISPOSEE);
 		
@@ -102,6 +100,7 @@ public class ListeTournoisControleur implements ActionListener, ListSelectionLis
 	private void rendreIndisposee(JButton bouton) {
 		bouton.setBackground(Palette.REDERRORBACKGROUND);
 		bouton.setText("<html><p style='text-align:center'>Rendre<br>disposée</p></html>");
+		bouton.setActionCommand("setDisposée");
 		Equipe eq = (Equipe) vue.listeEquipes.getSelectedValue();
 		eq.setDisposition(Disposition.NON_DISPOSEE);
 		try {
@@ -171,9 +170,11 @@ public class ListeTournoisControleur implements ActionListener, ListSelectionLis
 				
 				if (e1.getDisposition().equals(Disposition.DISPOSEE)) {
 					vue.boutonRendreDisposee.setText("<html><p style='text-align:center'>Rendre<br>indisposée</p></html>");
+					vue.boutonRendreDisposee.setActionCommand("setIndisposée");
 					vue.boutonRendreDisposee.setBackground(Palette.GREEN);
 				} else {
 					vue.boutonRendreDisposee.setText("<html><p style='text-align:center'>Rendre<br>disposée</p></html>");
+					vue.boutonRendreDisposee.setActionCommand("setDisposée");
 					vue.boutonRendreDisposee.setBackground(Palette.REDERRORBACKGROUND);
 				}
 			}

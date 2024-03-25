@@ -105,12 +105,12 @@ public class IdentificationControleur implements ActionListener {
 		if (e.getSource() instanceof JButton) {
 			JButton bouton = (JButton) e.getSource();
 			
-			switch (bouton.getText()) {
+			switch (bouton.getActionCommand()) {
 			
-			case "Quitter":
+			case "quitter":
 				this.vue.closeCurrentWindow();
 				break;
-			case "Se connecter":
+			case "connecter":
 				try {
 					seConnecter();
 				} catch (Exception e1) {

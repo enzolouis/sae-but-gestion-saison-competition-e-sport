@@ -44,7 +44,7 @@ public class ConsultationSaisonControleur implements ListSelectionListener, Acti
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton source = (JButton) e.getSource();
-		if (source.getText().equals("Quitter")) {
+		if (source.getActionCommand().equals("quitter")) {
 			this.vue.closeCurrentWindow();
 		}
 	}

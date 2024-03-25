@@ -292,6 +292,7 @@ public class ListeTournoisVue extends CustomJFrame {
 		dates.add(labelDateD); dates.add(labelDateF);
 		boutonsTournoi.setLayout(new BoxLayout(boutonsTournoi, BoxLayout.Y_AXIS));
 		boutonOuverture = new CustomJButton("Ouvrir", 15);
+		boutonOuverture.setActionCommand("ouvrir");
 		boutonsTournoi.add(boutonOuverture);
 		boutonOuverture.setAlignmentX(Component.CENTER_ALIGNMENT);
 		boutonOuverture.setEnabled(false);

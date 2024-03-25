@@ -24,7 +24,7 @@ public class ConsultationTournoiControleur implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton bouton = (JButton) e.getSource();
-		if (bouton.getText().equals("Quitter")) {
+		if (bouton.getActionCommand().equals("quitter")) {
 			this.vue.closeCurrentWindow();
 		}
 	}

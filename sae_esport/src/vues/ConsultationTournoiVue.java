@@ -143,6 +143,7 @@ public class ConsultationTournoiVue extends CustomJFrame {
         contentPane.add(panelQuitterSeconnecter, BorderLayout.SOUTH);
         
         CustomJButton btnQuit = new CustomJButton("Quitter", 5);
+        btnQuit.setActionCommand("quitter");
         btnQuit.addActionListener(this.controleur);
         btnQuit.setBackground(new Color(231, 76, 60));
         btnQuit.setForeground(new Color(255, 255, 255));
