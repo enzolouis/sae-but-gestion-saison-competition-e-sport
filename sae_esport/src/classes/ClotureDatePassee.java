@@ -18,22 +18,21 @@ public class ClotureDatePassee extends TimerTask {
 		this.c = c;
 	}
 	
-	
-
-	  @Override
-	  public void run() {
-		  c.getModele().getTournoi().setEtatTournoi(EtatTournoi.FERME);
-			if (c.getModele().isFinaleDemarree()) {
-				Map<Equipe, Integer> equipe_list = c.getModele().getTournoi().getParticipants();
-				for (Entry<Equipe,Integer> e : equipe_list.entrySet()) {
-					Equipe equipe =(Equipe) e.getKey();
-					Equipe equipeModif = null;
-					equipeModif = EquipeDAO.getInstance().getById(equipe.getIdEquipe()).get();
-					equipeModif.setPointsSaison((Integer)e.getValue() + equipeModif.getPointsSaison());
-					updateEquipe(equipeModif);
-				}
+	 @Override
+	 public void run() {
+		 
+		 c.getModele().getTournoi().setEtatTournoi(EtatTournoi.FERME);
+		 if (c.getModele().isFinaleDemarree()) {
+			Map<Equipe, Integer> equipe_list = c.getModele().getTournoi().getParticipants();
+			for (Entry<Equipe,Integer> e : equipe_list.entrySet()) {
+				Equipe equipe =(Equipe) e.getKey();
+				Equipe equipeModif = null;
+				equipeModif = EquipeDAO.getInstance().getById(equipe.getIdEquipe()).get();
+				equipeModif.setPointsSaison((Integer)e.getValue() + equipeModif.getPointsSaison());
+				updateEquipe(equipeModif);
 			}
-	  }
+		 }
+	 }
 	  
 	  private void updateEquipe(Equipe e) {
 		  try {
