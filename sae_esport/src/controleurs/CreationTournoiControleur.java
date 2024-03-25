@@ -37,15 +37,25 @@ public class CreationTournoiControleur implements ActionListener {
 			
 			JButton bouton = (JButton) e.getSource();
 			
-			switch (bouton.getText()) {
-			
-			case ("Ajouter"):
-				
-				//récupére l'arbitre séléctionné et le supprime de la combo box de séléction
-				Arbitre a1 = (Arbitre) this.vue.comboBoxArbitre.getSelectedItem();
-				if (!this.vue.modeleList.contains(a1)) {
-					this.vue.modeleList.addElement(a1);
-					this.vue.comboBoxArbitre.removeItem(this.vue.comboBoxArbitre.getSelectedItem());
+			switch (bouton.getActionCommand()) {
+				case "quitter":
+					this.vue.closeCurrentWindow();
+					break;
+				case "ajouter":
+					ajouterArbitreSelectionne();
+					break;
+				case "vider":
+					viderListeArbitres();
+					break;
+				case "supprimer":
+					supprimerArbitreSelectionne();
+					break;
+				case "importer":
+					importFichierCSV();
+					break;
+				case "valider":
+					validerCreationTournoi();
+					break;
 				}
 				break;
 				

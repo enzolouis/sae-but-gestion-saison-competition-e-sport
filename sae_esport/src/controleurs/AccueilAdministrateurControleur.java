@@ -31,28 +31,28 @@ public class AccueilAdministrateurControleur implements ActionListener {
 		if (e.getSource() instanceof JButton) {
 			JButton bouton = (JButton) e.getSource();
 			
-			switch (bouton.getText()) {
-				case "Quitter":
+			switch (bouton.getActionCommand()) {
+				case "quitter":
 					this.vue.closeCurrentWindow();
 					break;
 					
-				case "Se déconnecter":
+				case "deconnecter":
 					deconnecter();
 					break;
 					
-				case "Créer un tournoi":
+				case "creerTournoi":
 					ouvrirCreerTournoi();
 					break;
 					
-				case "Statistiques de la saison":
+				case "statsSaison":
 					ouvrirStatistiquesSaison();
 					break;
 					
-				case "Liste des tournois":
+				case "listeTournois":
 					ouvrirListeTournois();
 					break;
 					
-				case "Gérer les arbitres":
+				case "gererArbitres":
 					ouvrirGererArbitres();
 					break;
 					

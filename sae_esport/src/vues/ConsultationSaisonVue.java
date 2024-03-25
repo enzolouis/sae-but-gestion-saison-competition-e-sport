@@ -180,6 +180,7 @@ public class ConsultationSaisonVue extends CustomJFrame {
 		CustomJPanel panelQuitter = new CustomJPanel();
 		panelQuitter.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		CustomJButton btnQuitter = new CustomJButton("Quitter", 15);
+        btnQuitter.setActionCommand("quitter");
 		btnQuitter.setBackground(new Color(30,40,45));
 		btnQuitter.addActionListener(controleur);
 		panelQuitter.setBorder(new EmptyBorder(10,10,10,10));

@@ -142,6 +142,7 @@ public class ChoixArbitreVue extends CustomJFrame {
         panelTournois.add(panelBoutonSupprimer, BorderLayout.SOUTH);
         
         btnSupprimer = new CustomJButton("Supprimer cet arbitre",15);
+        btnSupprimer.setActionCommand("suppArbitre");
         btnSupprimer.setBackground(Palette.REDQUIT);
         btnSupprimer.addActionListener(controleur);
         btnSupprimer.setEnabled(false);
@@ -205,6 +206,7 @@ public class ChoixArbitreVue extends CustomJFrame {
         panelAjout.add(panelBoutonAjouter, BorderLayout.SOUTH);
         
         JButton btnAjouterArbitre = new CustomJButton("Ajouter cet arbitre",15);
+        btnAjouterArbitre.setActionCommand("ajouterArbitre");
         btnAjouterArbitre.addActionListener(controleur);
         panelBoutonAjouter.add(btnAjouterArbitre);
         
@@ -217,6 +219,7 @@ public class ChoixArbitreVue extends CustomJFrame {
         
         //Bouton quitter
         CustomJButton btnQuit = new CustomJButton("Quitter", 10);
+        btnQuit.setActionCommand("quitter");
         btnQuit.setBackground(Palette.REDQUIT);
         btnQuit.addActionListener(this.controleur);
         panelBottom.setLayout(new GridLayout(1, 2, 0, 0));

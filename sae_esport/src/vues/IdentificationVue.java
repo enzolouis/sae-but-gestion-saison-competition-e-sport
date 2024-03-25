@@ -172,11 +172,13 @@ public class IdentificationVue extends CustomJFrame {
         contentPane.add(panelQuitterSeconnecter, BorderLayout.SOUTH);
         
         CustomJButton btnQuit = new CustomJButton("Quitter", 5);
+        btnQuit.setActionCommand("quitter");
         btnQuit.setBackground(Palette.REDQUIT);
         btnQuit.addActionListener(this.controleur);
         panelQuitterSeconnecter.add(btnQuit);
         
         CustomJButton btnLogin = new CustomJButton("Se connecter", 5);
+        btnLogin.setActionCommand("connecter");
         btnLogin.setBackground(Palette.BLUE);
         btnLogin.addActionListener(controleur);
         panelQuitterSeconnecter.add(btnLogin);

@@ -275,6 +275,7 @@ public class CreationTournoiVue extends CustomJFrame {
 		}
 		
 		this.btnAddArbitre = new CustomJButton("Ajouter", 5);
+		this.btnAddArbitre.setActionCommand("ajouter");
 		btnAddArbitre.setFont(Palette.customFont.deriveFont(Font.PLAIN, 11));
 		this.btnAddArbitre.addActionListener(controleur);
 		panelChoixArbitre.add(this.btnAddArbitre);
@@ -309,11 +310,13 @@ public class CreationTournoiVue extends CustomJFrame {
 		panelListeArbitres.add(panelBtnsArbitre, BorderLayout.SOUTH);
 		
 		this.btnViderArbitres = new CustomJButton("Vider", 5);
+		this.btnViderArbitres.setActionCommand("vider");
 		btnViderArbitres.setFont(Palette.customFont.deriveFont(Font.PLAIN, 11));
 		this.btnViderArbitres.addActionListener(controleur);
 		panelBtnsArbitre.add(btnViderArbitres);
 		
 		this.btnSupprimerArbitre = new CustomJButton("Supprimer", 5);
+		this.btnSupprimerArbitre.setActionCommand("supprimer");
 		btnSupprimerArbitre.setFont(Palette.customFont.deriveFont(Font.PLAIN, 11));
 		this.btnSupprimerArbitre.addActionListener(controleur);
 		panelBtnsArbitre.add(this.btnSupprimerArbitre);
@@ -337,6 +340,7 @@ public class CreationTournoiVue extends CustomJFrame {
 		this.textFieldEquipesFile.setColumns(10);
 		
 		this.btnImportEquipes = new CustomJButton("Importer", 5);
+		this.btnImportEquipes.setActionCommand("importer");
 		btnImportEquipes.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		btnImportEquipes.setFont(Palette.customFont.deriveFont(Font.PLAIN, 11));
 		this.btnImportEquipes.addActionListener(controleur);
@@ -354,6 +358,7 @@ public class CreationTournoiVue extends CustomJFrame {
 		panelValidation.add(panelQuitter);
 		 
 		JButton btnQuitter = new CustomJButton("Quitter", 5);
+        btnQuitter.setActionCommand("quitter");
 		btnQuitter.setFont(Palette.customFont.deriveFont(Font.PLAIN, 11));
 		btnQuitter.setBackground(Palette.REDQUIT);
         btnQuitter.setForeground(Palette.WHITE);
@@ -365,6 +370,7 @@ public class CreationTournoiVue extends CustomJFrame {
 		panelValidation.add(panelValider);
 		
 		this.btnValider = new CustomJButton("Valider", 5);
+		this.btnValider.setActionCommand("valider");
 		btnValider.setFont(Palette.customFont.deriveFont(Font.PLAIN, 11));
 		btnValider.setForeground(Palette.WHITE);
         btnValider.setBackground(Palette.GREEN);
