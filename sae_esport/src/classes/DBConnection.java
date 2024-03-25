@@ -12,6 +12,7 @@ public class DBConnection {
 	 * Initie la connexion à la base de données
 	 * */
 	private DBConnection() {
+		
 		String dirProjetJava = System.getProperty("user.dir");
 		System.setProperty("derby.system.home", dirProjetJava+"/BDDSAEEsport");
 		String urlConnexion = "jdbc:derby:BDDSAEEsport;create=true";
