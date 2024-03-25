@@ -20,14 +20,11 @@ import style.Palette;
 import vues.CreationTournoiVue;
 
 public class CreationTournoiControleur implements ActionListener {
-	private CreationTournoiVue vue;
-	private TournoiModele modele;
-	private List<Equipe> data;
 	
-	/**
-	 * Effectue la construction de la vue
-	 * @param vue de la page, permettant l'activation de ActionEvent
-	 * */
+	private CreationTournoiVue vue;	//vue de la création de tournoi
+	private TournoiModele modele;	//modèle de gestion des tournois 
+	private List<Equipe> data;		//liste des équipes importées dans le tournoi
+	
 	public CreationTournoiControleur(CreationTournoiVue vue) {
 		this.vue = vue;
 		this.modele = new TournoiModele();
@@ -35,7 +32,9 @@ public class CreationTournoiControleur implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
 		if (e.getSource() instanceof JButton) {
+			
 			JButton bouton = (JButton) e.getSource();
 			
 			switch (bouton.getActionCommand()) {
@@ -65,7 +64,7 @@ public class CreationTournoiControleur implements ActionListener {
 	/**
 	 * vérifie si un des fields est vide
 	 * */
-	public boolean checkAllFields() {
+	public boolean checkForEmptyField() {
 
 		return (this.vue.textFieldNom.getText().equals("") || this.vue.dateChooserDebut.getDate() == null 
 				|| this.vue.dateChooserFin.getDate() == null || this.vue.textFieldEquipesFile.getText().equals("")
@@ -77,9 +76,8 @@ public class CreationTournoiControleur implements ActionListener {
 	 * @param le tournoi à consulter
 	 * */
 	public String infosTournoi(TournoiModele t) {
-		
-		String infos = "Du "+t.getDateDebut()+" au "+t.getDateFin()+"\n";
-
+		String infos = t.getIDTournoi()+": "+t.getNomTournoi()+"("+t.getNotoriete()+")\n";
+		infos += "Du "+t.getDateDebut()+" au "+t.getDateFin()+"\n";
 		infos+="Liste des arbitres:\n";
 		for (Arbitre a : t.getArbitres()) {
 			infos+=a.toString();
