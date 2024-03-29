@@ -25,14 +25,14 @@ public class AccueilArbitreVue extends CustomJFrame {
     private AccueilArbitreControleur controleur;
     
     public AccueilArbitreVue() {
-        super(new Dimension(400, 300), "Accueil Arbitre");
-        
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        
-        pack();
-        
-        this.controleur = new AccueilArbitreControleur(this);
-        
+    	super(new Dimension(400, 300), "Accueil Arbitre");
+    	
+    	this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+    	
+    	pack();
+    	
+    	this.controleur = new AccueilArbitreControleur(this);
+    	
         contentPane = this.getContentPanel();
         
         // Top Panel : Titre
@@ -59,7 +59,6 @@ public class AccueilArbitreVue extends CustomJFrame {
         gbc_panelMiddle.weighty = 1.0;
         
         CustomJButton btnAccesAuTournoi = new CustomJButton("Accès au tournoi", 10);
-        btnAccesAuTournoi.setActionCommand("accesTournoi");
         btnAccesAuTournoi.setBackground(Palette.BLUE);
         btnAccesAuTournoi.setForeground(Palette.WHITE);
         btnAccesAuTournoi.addActionListener(controleur);
@@ -70,7 +69,6 @@ public class AccueilArbitreVue extends CustomJFrame {
         btnAccesAuTournoi.setEnabled(TournoiDAO.getInstance().getTournoiOuvert().isPresent());
         
         CustomJButton btnStatistiquesDeLa = new CustomJButton("Statistiques du tournoi", 10);
-        btnStatistiquesDeLa.setActionCommand("statsTournoi");
         btnStatistiquesDeLa.setBackground(Palette.BLUE);
         btnStatistiquesDeLa.setForeground(Palette.WHITE);
         btnStatistiquesDeLa.addActionListener(controleur);
@@ -85,14 +83,15 @@ public class AccueilArbitreVue extends CustomJFrame {
         contentPane.add(panelQuitterSeconnecter, BorderLayout.SOUTH);
         
         CustomJButton btnDeconnexion = new CustomJButton("Se déconnecter", 10);
-        btnDeconnexion.setActionCommand("deconnecter");
         btnDeconnexion.setBackground(Palette.REDQUIT);
         btnDeconnexion.setForeground(Palette.WHITE);
         btnDeconnexion.addActionListener(this.controleur);
         panelQuitterSeconnecter.add(btnDeconnexion, BorderLayout.CENTER); 
         
         CustomJButton btnQuit = new CustomJButton("Quitter", 10);
-        btnQuit.setActionCommand("quitter");
+     // Définir la taille préférée en utilisant la largeur souhaitée et la hauteur actuelle
+        btnQuit.setPreferredSize(new Dimension(btnDeconnexion.getPreferredSize().width, btnQuit.getPreferredSize().height));
+        
         btnQuit.setBackground(Palette.REDQUIT);
         btnQuit.setForeground(Palette.WHITE);
         btnQuit.addActionListener(this.controleur);
