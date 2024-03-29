@@ -24,14 +24,14 @@ public class AccueilAdministrateurVue extends CustomJFrame {
   
     
     public AccueilAdministrateurVue() {
-        
-        super(new Dimension(400, 300), "Accueil Administrateur");
-        
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        
-        pack();
-        
-        this.controleur = new AccueilAdministrateurControleur(this);
+    	
+    	super(new Dimension(400, 300), "Accueil Administrateur");
+    	
+    	this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+    	
+    	pack();
+    	
+    	this.controleur = new AccueilAdministrateurControleur(this);
 
         contentPane = super.getContentPanel();
         
