@@ -130,7 +130,9 @@ public class SaisieResultatModele {
 				
 				int resultat = 0;
 				for (Participer p : ParticiperDAO.getInstance().getByIdEquipe(eq.getIdEquipe())) {
-					resultat+=p.getResultat();
+					float facteurNot = TournoiDAO.getInstance().getById(p.getIdTournoi())
+							.get().getNotoriete().getBase();
+					resultat+=p.getResultat()*facteurNot;
 				}
 				eq.setPointsSaison(resultat);
 				EquipeDAO.getInstance().update(eq);
