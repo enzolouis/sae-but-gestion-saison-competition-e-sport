@@ -61,6 +61,9 @@ public class Palette {
 	public static final ImageIcon OEIL_VISIBLE_ICON = new ImageIcon(new ImageIcon(Palette.class.getClassLoader().getResource
 			("oeilMotDePasseVisible.png")).getImage().getScaledInstance(30, 30,  java.awt.Image.SCALE_SMOOTH));
 	
+	public static final ImageIcon ACCOUNT_LOGO = new ImageIcon(new ImageIcon(Palette.class.getClassLoader().getResource
+			("account.png")).getImage().getScaledInstance(30, 30,  java.awt.Image.SCALE_SMOOTH));
+	
 	public static final ImageIcon LOGO = new ImageIcon(new ImageIcon(Palette.class.getClassLoader().getResource
 			("logoApp.png")).getImage().getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH));
 	

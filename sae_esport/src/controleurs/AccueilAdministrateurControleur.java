@@ -57,6 +57,7 @@ public class AccueilAdministrateurControleur implements ActionListener {
 					break;
 					
 				default:
+					System.out.println(bouton.getActionCommand());
 					break;
 			}
 		}

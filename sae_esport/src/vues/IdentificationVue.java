@@ -117,22 +117,38 @@ public class IdentificationVue extends CustomJFrame {
         CustomJPanel panelUtilisateur = new CustomJPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
         
         
-        JPanel panelTextFieldUtilisateur = new CustomJPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        JPanel panelTextFieldUtilisateur = new CustomJPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
         panelTextFieldUtilisateur.setBackground(Palette.BLUE);
         panelTextFieldUtilisateur.setBorder(null);
         panelUtilisateur.add(panelTextFieldUtilisateur);
         
-        textFieldUtilisateur = new CustomJTextField(13, (EmptyBorder) null, "Login");
+        textFieldUtilisateur = new CustomJTextField();//13, (EmptyBorder) null, "Login");
         textFieldUtilisateur.setBorderColor(Palette.BLUE);
         textFieldUtilisateur.setBorderRadius(0); // si on laisse par defaut ca se dessine sur le placeholder
         textFieldUtilisateur.addActionListener(controleur);
+        
+        textFieldUtilisateur.setPlaceholder("Login");
+        textFieldUtilisateur.setForeground(Color.WHITE);
+        textFieldUtilisateur.setColumns(10);
+        textFieldUtilisateur.setBorder(new EmptyBorder(5, 5, 5, 5));
+        textFieldUtilisateur.setBackground(Palette.BLUE);
+        textFieldUtilisateur.setFont(Palette.customFont);
+        
         panelTextFieldUtilisateur.add(textFieldUtilisateur);
+        
+        JButton btnCompte = new CustomJButton("", 25, (EmptyBorder) null);
+        btnCompte.setEnabled(false);
+        btnCompte.setBackground(Palette.BLUE);
+        btnCompte.setBorder(null);
+        btnCompte.setIcon(Palette.ACCOUNT_LOGO);
+        panelTextFieldUtilisateur.add(btnCompte);
         
         // Mot de passe
         CustomJPanel panelMotDePasse = new CustomJPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
         
         // 
         JPanel panelTextFieldMotDePasse = new CustomJPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        panelTextFieldMotDePasse.setMinimumSize(new Dimension(10, 10));
         panelTextFieldMotDePasse.setBorder(null);
         panelTextFieldMotDePasse.setBackground(Palette.BLUE);
         panelMotDePasse.add(panelTextFieldMotDePasse);
@@ -146,7 +162,7 @@ public class IdentificationVue extends CustomJFrame {
         textFieldMotDePasse.setColumns(10);
         textFieldMotDePasse.setBorder(new EmptyBorder(5, 5, 5, 5));
         textFieldMotDePasse.setBackground(Palette.BLUE);
-        textFieldMotDePasse.setFont(Palette.customTextFont);
+        textFieldMotDePasse.setFont(Palette.customFont);
         panelTextFieldMotDePasse.add(textFieldMotDePasse);
         
         
