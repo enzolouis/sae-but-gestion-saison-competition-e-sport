@@ -26,7 +26,7 @@ public class Palette {
 	public static final Color REDERRORBORDER 	 = new Color(255, 144, 144);
 	public static final Color BLACKDARKER        = new Color(10, 60, 80);
 	
-	//police de titre
+	//polices
     public static final Font customFont;
     public static final Font customTextFont;
     
@@ -56,28 +56,28 @@ public class Palette {
     }
     
     public static final ImageIcon OEIL_INVISIBLE_ICON = new ImageIcon(new ImageIcon(Palette.class.getClassLoader().getResource
-			("oeilMotDePasseInvisible.png")).getImage().getScaledInstance(30, 30,  java.awt.Image.SCALE_SMOOTH));
+			("assets/hidden-eye.png")).getImage().getScaledInstance(30, 30,  java.awt.Image.SCALE_SMOOTH));
 	
 	public static final ImageIcon OEIL_VISIBLE_ICON = new ImageIcon(new ImageIcon(Palette.class.getClassLoader().getResource
-			("oeilMotDePasseVisible.png")).getImage().getScaledInstance(30, 30,  java.awt.Image.SCALE_SMOOTH));
+			("assets/visible-eye.png")).getImage().getScaledInstance(30, 30,  java.awt.Image.SCALE_SMOOTH));
 	
 	public static final ImageIcon ACCOUNT_LOGO = new ImageIcon(new ImageIcon(Palette.class.getClassLoader().getResource
-			("account.png")).getImage().getScaledInstance(30, 30,  java.awt.Image.SCALE_SMOOTH));
+			("assets/account.png")).getImage().getScaledInstance(30, 30,  java.awt.Image.SCALE_SMOOTH));
 	
 	public static final ImageIcon LOGO = new ImageIcon(new ImageIcon(Palette.class.getClassLoader().getResource
-			("logoApp.png")).getImage().getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH));
+			("assets/app-logo.png")).getImage().getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH));
 	
 	public static final ImageIcon MINIMIZE = new ImageIcon(new ImageIcon(Palette.class.getClassLoader().getResource
-			("minimize.png")).getImage().getScaledInstance(20, 20,  java.awt.Image.SCALE_SMOOTH));
+			("assets/minimize.png")).getImage().getScaledInstance(20, 20,  java.awt.Image.SCALE_SMOOTH));
 	
 	public static final ImageIcon CLOSE = new ImageIcon(new ImageIcon(Palette.class.getClassLoader().getResource
-			("close.png")).getImage().getScaledInstance(20, 20,  java.awt.Image.SCALE_SMOOTH));
+			("assets/close.png")).getImage().getScaledInstance(20, 20,  java.awt.Image.SCALE_SMOOTH));
 	
 	public static final ImageIcon ADMIN = new ImageIcon(new ImageIcon(Palette.class.getClassLoader().getResource
-			("admin_logo.png")).getImage().getScaledInstance(20, 20,  java.awt.Image.SCALE_SMOOTH));
+			("assets/app-logo-admin.png")).getImage().getScaledInstance(20, 20,  java.awt.Image.SCALE_SMOOTH));
 	
 	public static final ImageIcon ARBITRE = new ImageIcon(new ImageIcon(Palette.class.getClassLoader().getResource
-			("arbitre_logo.png")).getImage().getScaledInstance(20, 20,  java.awt.Image.SCALE_SMOOTH));
+			("assets/app-logo-referee.png")).getImage().getScaledInstance(20, 20,  java.awt.Image.SCALE_SMOOTH));
 	
 	public static final int SCREEN_WIDTH = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 	public static final int SCREEN_HEIGHT = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();

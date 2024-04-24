@@ -248,9 +248,8 @@ public class SaisieResultatVue extends CustomJFrame {
         // Bouton quitter
         CustomJButton btnQuit = new CustomJButton("Quitter", 10);
         btnQuit.setActionCommand("quitter");
-        btnQuit.setBackground(new Color(231, 76, 60));
-        btnQuit.setForeground(new Color(255, 255, 255));
         btnQuit.addActionListener(this.controleur);
+        btnQuit.setBackground(Palette.REDQUIT);
         panelBottom.add(btnQuit);
         
         if (canFinale && !inFinale) {

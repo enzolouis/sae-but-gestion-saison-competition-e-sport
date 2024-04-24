@@ -59,9 +59,7 @@ public class ConsultationTournoiVue extends CustomJFrame {
         // Middle Panel : Login
     	CustomJPanel panelMiddleClassement = new CustomJPanel(new EmptyBorder(20, 0, 5, 0), new GridLayout(2, 0, 0, 0));
         contentPane.add(panelMiddleClassement, BorderLayout.CENTER);
-        panelMiddleClassement.setLayout(new BorderLayout(0, 0));
-        
-        
+        panelMiddleClassement.setLayout(new BorderLayout(0, 0));        
         
 		JTable tableClassement = new JTable(){
 			public boolean isCellEditable(int row, int column) {                
@@ -75,7 +73,6 @@ public class ConsultationTournoiVue extends CustomJFrame {
 		tableClassement.setGridColor(Palette.WHITE);
 		tableClassement.setRowHeight(34);
 		
-		
 		tableModel = new DefaultTableModel();
 		tableModel.addColumn("Top");
 		tableModel.addColumn("Equipe");
@@ -83,45 +80,6 @@ public class ConsultationTournoiVue extends CustomJFrame {
 		tableModel.addColumn("Points");
 		tableModel.addColumn("Victoires");
 		tableModel.addColumn("Défaites");
-		
-		/*
-		for (Equipe e : tournoiCourant.classementTournoi()
-				.keySet()
-				.stream()
-				.sorted((e1,e2) -> { if (tournoiCourant.classementTournoi().get(e1) 
-											> tournoiCourant.classementTournoi().get(e2)) {
-										return 1;
-									} else if (tournoiCourant.classementTournoi().get(e1) 
-											== tournoiCourant.classementTournoi().get(e2)) {
-										return 0;
-									} else {
-										return -1;
-									}
-									})
-				.collect(Collectors.toList())) {
-			
-			
-			int matchsJoues = 0; int victoires = 0; int defaites = 0;
-			
-			for (Match m : tournoiCourant.getMatchs()) {
-				if (m.getEquipes().contains(e)) {
-					if (m.getVainqueur() != 0) {
-						matchsJoues++;
-						if (m.getVainqueur() == e.getIdEquipe()) {
-							victoires++;
-						} else {
-							defaites++;
-						}
-					}
-					
-				}
-			}
-			
-			tableModel.addRow(new Object[] {tournoiCourant.classementTournoi().get(e), e.getNom(), 
-					matchsJoues, tournoiCourant.getParticipants().get(e), victoires, defaites});
-			
-		}	
-		*/
 		
 		this.controleur.setUpTableModel();
 		
@@ -137,7 +95,6 @@ public class ConsultationTournoiVue extends CustomJFrame {
 		panelMiddleClassement.add(tableClassement.getTableHeader(), BorderLayout.NORTH);
 		panelMiddleClassement.add(tableClassement, BorderLayout.CENTER);
         
-        
         // Bottom Panel : Quitter + Login
         CustomJPanel panelQuitterSeconnecter = new CustomJPanel(new EmptyBorder(10, 10, 10, 10), new FlowLayout(FlowLayout.CENTER, 5, 5));
         contentPane.add(panelQuitterSeconnecter, BorderLayout.SOUTH);
@@ -145,9 +102,7 @@ public class ConsultationTournoiVue extends CustomJFrame {
         CustomJButton btnQuit = new CustomJButton("Quitter", 5);
         btnQuit.setActionCommand("quitter");
         btnQuit.addActionListener(this.controleur);
-        btnQuit.setBackground(new Color(231, 76, 60));
-        btnQuit.setForeground(new Color(255, 255, 255));
-        //btnQuit.addActionListener(this.controleur);
+		btnQuit.setBackground(Palette.REDQUIT);
         panelQuitterSeconnecter.add(btnQuit);
 	}
 	

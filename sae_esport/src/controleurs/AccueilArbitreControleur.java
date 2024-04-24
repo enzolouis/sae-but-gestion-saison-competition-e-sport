@@ -32,17 +32,19 @@ public class AccueilArbitreControleur implements ActionListener {
 				case "quitter":
 					this.vue.closeCurrentWindow();
 					break;
+
 				case "deconnecter":
 					deconnecter();
 					break;
+
 				case "accesTournoi":
 					ouvrirAccesTournoi();
 					break;
-				
+
 				case "statsTournoi":
 					ouvrirStatistiquesTournoi();
 					break;
-					
+
 				default:
 					break;
 			}
