@@ -9,27 +9,27 @@ import style.Palette;
 
 public class MenuControleur implements ActionListener {
 
-	private CustomJFrame vue;
+    private CustomJFrame vue;
 
-	/**
-	 * Construction de la vue,pour permettre les réactions avec Action Listener
-	 * 
-	 * @param Jframe ou la vue sera placé
-	 */
-	public MenuControleur(CustomJFrame vue) {
-		this.vue = vue;
-	}
+    /**
+     * Construction de la vue,pour permettre les réactions avec Action Listener
+     * 
+     * @param Jframe ou la vue sera placé
+     */
+    public MenuControleur(CustomJFrame vue) {
+        this.vue = vue;
+    }
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() instanceof JButton) {
-			JButton bouton = (JButton) e.getSource();
-			if (bouton.getIcon() == Palette.CLOSE) {
-				this.vue.closeCurrentWindow();
-			}
-			if (bouton.getIcon() == Palette.MINIMIZE) {
-				this.vue.setState(Frame.ICONIFIED);
-			}
-		}
-	}
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() instanceof JButton) {
+            JButton bouton = (JButton) e.getSource();
+            if (bouton.getIcon() == Palette.CLOSE) {
+                this.vue.closeCurrentWindow();
+            }
+            if (bouton.getIcon() == Palette.MINIMIZE) {
+                this.vue.setState(Frame.ICONIFIED);
+            }
+        }
+    }
 }

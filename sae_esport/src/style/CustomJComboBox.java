@@ -5,12 +5,10 @@ import java.awt.Font;
 import java.awt.Shape;
 import javax.swing.JComboBox;
 
-@SuppressWarnings("rawtypes")
 public class CustomJComboBox extends JComboBox {
 
     Shape shape;
 
-    @SuppressWarnings("unchecked")
     public CustomJComboBox() {
         super();
         setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 20));

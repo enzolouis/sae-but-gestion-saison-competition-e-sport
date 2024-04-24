@@ -10,7 +10,6 @@ import java.awt.geom.RoundRectangle2D;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-@SuppressWarnings("serial")
 public class CustomJTextField extends JTextField {
     private Shape shape;
     private String placeholder;

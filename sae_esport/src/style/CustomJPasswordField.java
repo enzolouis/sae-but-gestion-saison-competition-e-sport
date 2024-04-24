@@ -10,7 +10,6 @@ import java.awt.geom.RoundRectangle2D;
 import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 
-@SuppressWarnings("serial")
 public class CustomJPasswordField extends JPasswordField {
     private Shape shape;
     private String placeholder;
