@@ -34,7 +34,7 @@ public class IdentificationVue extends CustomJFrame {
     private CustomJPasswordField textFieldMotDePasse;
     public CustomJLabel erreurOuverture;
     public CustomJPanel panelErreur;
-    
+
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -47,106 +47,105 @@ public class IdentificationVue extends CustomJFrame {
             }
         });
     }
-    
+
     public String getUtilisateurContenu() {
-    	return textFieldUtilisateur.getText();
+        return textFieldUtilisateur.getText();
     }
-    
+
     public String getMotDePasseContenu() {
-    	return String.valueOf(textFieldMotDePasse.getPassword());
+        return String.valueOf(textFieldMotDePasse.getPassword());
     }
-    
+
     public JPasswordField getMotDePasse() {
-    	return textFieldMotDePasse;
+        return textFieldMotDePasse;
     }
-    
+
     public IdentificationVue() {
-    	super(new Dimension(300, 450), "Identification");
-    	
-    	pack();
-    	
-    	// a garder : permet une premiere instance a la base de donnees et eviter de faire l'instance au moment du clique
-    	// sur "Se connecter" (lag)
-    	try {
-			TournoiDAO.getInstance().getAll();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	
-    	this.controleur = new IdentificationControleur(this);
-    	contentPane = super.getContentPanel();
-    	
+        super(new Dimension(300, 450), "Identification");
+
+        pack();
+
+        // a garder : permet une premiere instance a la base de donnees et eviter de
+        // faire l'instance au moment du clique
+        // sur "Se connecter" (lag)
+        try {
+            TournoiDAO.getInstance().getAll();
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        this.controleur = new IdentificationControleur(this);
+        contentPane = super.getContentPanel();
+
         // Panel Top : Title
-    	CustomJPanel panelTop = new CustomJPanel();
+        CustomJPanel panelTop = new CustomJPanel();
         contentPane.add(panelTop, BorderLayout.NORTH);
-        
+
         CustomJLabel titleTop = new CustomJLabel("IDENTIFICATION", 25);
         titleTop.setFont(Palette.customFont.deriveFont(Font.BOLD, 20));
         panelTop.add(titleTop);
-        
+
         CustomJSeparator separatorTop = new CustomJSeparator();
         panelTop.add(separatorTop, BorderLayout.SOUTH);
-    	
+
         // Middle Panel : Login
-    	CustomJPanel panelMiddleLogin = new CustomJPanel(new EmptyBorder(10, 10, 10, 10), new GridLayout(2, 0, 0, 0));
+        CustomJPanel panelMiddleLogin = new CustomJPanel(new EmptyBorder(10, 10, 10, 10), new GridLayout(2, 0, 0, 0));
         contentPane.add(panelMiddleLogin, BorderLayout.CENTER);
-        
+
         JPanel panelImageApp = new CustomJPanel();
-        
+
         panelMiddleLogin.add(panelImageApp);
-        
+
         JLabel labelIconApp = new JLabel("");
         labelIconApp.setBorder(new EmptyBorder(10, 0, 0, 0));
-        
+
         labelIconApp.setPreferredSize(new Dimension(120, 120));
         labelIconApp.setHorizontalAlignment(SwingConstants.CENTER);
         labelIconApp.setIcon(Palette.LOGO);
         panelImageApp.add(labelIconApp, BorderLayout.NORTH);
-        
+
         panelErreur = new CustomJPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        erreurOuverture = new CustomJLabel("",10);
-		erreurOuverture.setText(" ");
-		erreurOuverture.setForeground(Palette.REDERRORFOREGROUND);
-		erreurOuverture.setBorder(new EmptyBorder(3, 3, 3, 3));
-		erreurOuverture.setAlignmentX(Component.CENTER_ALIGNMENT);
-		panelErreur.add(erreurOuverture);
-		
-        
+        erreurOuverture = new CustomJLabel("", 10);
+        erreurOuverture.setText(" ");
+        erreurOuverture.setForeground(Palette.REDERRORFOREGROUND);
+        erreurOuverture.setBorder(new EmptyBorder(3, 3, 3, 3));
+        erreurOuverture.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panelErreur.add(erreurOuverture);
+
         // Utilisateur
         CustomJPanel panelUtilisateur = new CustomJPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        
-        
+
         JPanel panelTextFieldUtilisateur = new CustomJPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
         panelTextFieldUtilisateur.setBackground(Palette.BLUE);
         panelTextFieldUtilisateur.setBorder(null);
         panelUtilisateur.add(panelTextFieldUtilisateur);
-        
-        textFieldUtilisateur = new CustomJTextField();//13, (EmptyBorder) null, "Login");
+
+        textFieldUtilisateur = new CustomJTextField();// 13, (EmptyBorder) null, "Login");
         textFieldUtilisateur.setBorderColor(Palette.BLUE);
         textFieldUtilisateur.setBorderRadius(0); // si on laisse par defaut ca se dessine sur le placeholder
         textFieldUtilisateur.addActionListener(controleur);
-        
+
         textFieldUtilisateur.setPlaceholder("Login");
         textFieldUtilisateur.setForeground(Color.WHITE);
         textFieldUtilisateur.setColumns(10);
         textFieldUtilisateur.setBorder(new EmptyBorder(5, 5, 5, 5));
         textFieldUtilisateur.setBackground(Palette.BLUE);
         textFieldUtilisateur.setFont(Palette.customFont);
-        
+
         panelTextFieldUtilisateur.add(textFieldUtilisateur);
-        
+
         JButton btnCompte = new CustomJButton("", 25, (EmptyBorder) null);
         btnCompte.setEnabled(false);
         btnCompte.setBackground(Palette.BLUE);
         btnCompte.setBorder(null);
         btnCompte.setIcon(Palette.ACCOUNT_LOGO);
         panelTextFieldUtilisateur.add(btnCompte);
-        
+
         // Mot de passe
         CustomJPanel panelMotDePasse = new CustomJPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
-        
-        // 
+
+        //
         JPanel panelTextFieldMotDePasse = new CustomJPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
         panelTextFieldMotDePasse.setMinimumSize(new Dimension(10, 10));
         panelTextFieldMotDePasse.setBorder(null);
@@ -164,15 +163,14 @@ public class IdentificationVue extends CustomJFrame {
         textFieldMotDePasse.setBackground(Palette.BLUE);
         textFieldMotDePasse.setFont(Palette.customFont);
         panelTextFieldMotDePasse.add(textFieldMotDePasse);
-        
-        
+
         JButton btnMotDePasseVisibilite = new CustomJButton("", 25, (EmptyBorder) null);
         btnMotDePasseVisibilite.addActionListener(controleur);
         btnMotDePasseVisibilite.setBackground(Palette.BLUE);
         btnMotDePasseVisibilite.setBorder(null);
         btnMotDePasseVisibilite.setIcon(Palette.OEIL_INVISIBLE_ICON);
         panelTextFieldMotDePasse.add(btnMotDePasseVisibilite);
-        
+
         JPanel panelUtilisateurEtMotDePasse = new CustomJPanel();
         panelUtilisateurEtMotDePasse.setBorder(new EmptyBorder(20, 0, 10, 0));
         panelMiddleLogin.add(panelUtilisateurEtMotDePasse);
@@ -180,28 +178,27 @@ public class IdentificationVue extends CustomJFrame {
         panelUtilisateurEtMotDePasse.add(panelUtilisateur);
         panelUtilisateurEtMotDePasse.add(panelMotDePasse);
         panelUtilisateurEtMotDePasse.setLayout(new GridLayout(3, 0, 0, 0));
-        
-        
-        
+
         // Bottom Panel : Quitter + Login
-        CustomJPanel panelQuitterSeconnecter = new CustomJPanel(new EmptyBorder(10, 10, 10, 10), new FlowLayout(FlowLayout.CENTER, 5, 5));
+        CustomJPanel panelQuitterSeconnecter = new CustomJPanel(new EmptyBorder(10, 10, 10, 10),
+                new FlowLayout(FlowLayout.CENTER, 5, 5));
         contentPane.add(panelQuitterSeconnecter, BorderLayout.SOUTH);
-        
+
         CustomJButton btnQuit = new CustomJButton("Quitter", 5);
         btnQuit.setActionCommand("quitter");
         btnQuit.setBackground(Palette.REDQUIT);
         btnQuit.addActionListener(this.controleur);
         panelQuitterSeconnecter.add(btnQuit);
-        
+
         CustomJButton btnLogin = new CustomJButton("Se connecter", 5);
         btnLogin.setActionCommand("connecter");
         btnLogin.setBackground(Palette.BLUE);
         btnLogin.addActionListener(controleur);
         panelQuitterSeconnecter.add(btnLogin);
-        
-        
-     // Définir la taille préférée en utilisant la largeur souhaitée et la hauteur actuelle
+
+        // Définir la taille préférée en utilisant la largeur souhaitée et la hauteur
+        // actuelle
         btnQuit.setPreferredSize(new Dimension(btnLogin.getPreferredSize().width, btnQuit.getPreferredSize().height));
-         
+
     }
 }

@@ -1,4 +1,5 @@
 package controleurs;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -12,25 +13,26 @@ import vues.AccueilArbitreVue;
 import vues.IdentificationVue;
 
 public class IdentificationControleur implements ActionListener {
-	
+
 	private IdentificationVue vue;
 	private IdentificationModele modele;
 	private boolean isMotDePasseCache;
 	private Timer animationErreur;
-	
+
 	/**
 	 * Effectue la construction de la vue
+	 * 
 	 * @param vue de la page, permettant l'activation de ActionEvent
-	 * */
+	 */
 	public IdentificationControleur(IdentificationVue vue) {
 		this.isMotDePasseCache = true;
 		this.vue = vue;
 		this.modele = new IdentificationModele();
 	}
-	
+
 	/**
 	 * tente de se connecter à l'application avec les logins dans les fields
-	 * */
+	 */
 	public void seConnecter() throws Exception {
 		String login = this.vue.getUtilisateurContenu();
 		String mdp = this.vue.getMotDePasseContenu();
@@ -67,11 +69,12 @@ public class IdentificationControleur implements ActionListener {
 		this.vue.panelErreur.setBackground(Palette.REDERRORBACKGROUND);
 		this.vue.panelErreur.setBorder(new LineBorder(Palette.REDERRORBORDER, 1));
 		// compteur de quelques secondes
-		
+
 		ActionListener action = new ActionListener() {
 			int compteur = 1;
+
 			@Override
-		    public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) {
 				compteur++;
 				if (compteur == 3) {
 					animationErreur.stop();
@@ -79,16 +82,18 @@ public class IdentificationControleur implements ActionListener {
 					vue.panelErreur.setBackground(null);
 					vue.panelErreur.setBorder(null);
 				}
-		    }
+			}
 		};
 		animationErreur = new Timer(2000, action);
 		animationErreur.start();
 	}
-	
+
 	/**
 	 * masque le mot de passe ou le démasque selon son état actuel
-	 * @param le bouton de l'oeil, permettant d'afficher ou de cacher le mot de passe
-	 * */
+	 * 
+	 * @param le bouton de l'oeil, permettant d'afficher ou de cacher le mot de
+	 *           passe
+	 */
 	public void inverserIconMotDePasseMasque(JButton btn) {
 		this.isMotDePasseCache = !this.isMotDePasseCache;
 		if (isMotDePasseCache) {
@@ -99,39 +104,37 @@ public class IdentificationControleur implements ActionListener {
 			this.vue.getMotDePasse().setEchoChar((char) 0);
 		}
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() instanceof JButton) {
 			JButton bouton = (JButton) e.getSource();
-			
+
 			switch (bouton.getActionCommand()) {
-			
-			case "quitter":
-				this.vue.closeCurrentWindow();
-				break;
-			case "connecter":
-				try {
-					seConnecter();
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				}
-				break;
-			default:
-				this.inverserIconMotDePasseMasque(bouton);
-				break;
+
+				case "quitter":
+					this.vue.closeCurrentWindow();
+					break;
+				case "connecter":
+					try {
+						seConnecter();
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
+					break;
+				default:
+					this.inverserIconMotDePasseMasque(bouton);
+					break;
 			}
-			
-		}
-		else {
+
+		} else {
 			try {
 				seConnecter();
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
 		}
-		
-	}
 
+	}
 
 }

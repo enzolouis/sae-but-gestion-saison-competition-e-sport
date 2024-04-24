@@ -17,37 +17,38 @@ import DAOs.MatchDAO;
 import DAOs.TournoiDAO;
 
 public class SaisieResultatControleur implements ActionListener {
-	
+
 	private SaisieResultatModele modele;
 	private SaisieResultatVue vue;
 	public Timer timer;
 	private FINALESTATE stateTournoi;
+
 	public enum FINALESTATE {
-		  NOT_FINALE, IS_FINALE, FINALE_OVER
+		NOT_FINALE, IS_FINALE, FINALE_OVER
 	}
-	
+
 	/**
-	 * Mise en place de la vue, pour permettre les réactions avec Action Listener 
+	 * Mise en place de la vue, pour permettre les réactions avec Action Listener
+	 * 
 	 * @param Valeur retourné
-	 * @param les paramètres de tournoi à manipuler dans cette vue
-	 * */
+	 * @param les    paramètres de tournoi à manipuler dans cette vue
+	 */
 	public SaisieResultatControleur(SaisieResultatVue vue, TournoiModele tournoi) {
-		
+
 		this.stateTournoi = FINALESTATE.NOT_FINALE;
-		this.vue = vue; 
+		this.vue = vue;
 		this.modele = new SaisieResultatModele();
-		
+
 		Date dt = tournoi.getDateFin();
-		
-		Calendar c = Calendar.getInstance(); 
-		c.setTime(dt); 
+
+		Calendar c = Calendar.getInstance();
+		c.setTime(dt);
 		c.add(Calendar.DATE, 1);
 		dt = c.getTime();
-		
-	    timer = new Timer();
+
+		timer = new Timer();
 		timer.schedule(new ClotureDatePassee(this), dt);
-		
-		
+
 		if (modele.isFinaleDemarree()) {
 			this.stateTournoi = FINALESTATE.IS_FINALE;
 		}
@@ -56,30 +57,29 @@ public class SaisieResultatControleur implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() instanceof JButton) {
-			
-			JButton bouton = (JButton) e.getSource();
-			
-			switch (bouton.getActionCommand()) {
 
-			case "quitter":
-				this.vue.dispose();
-				this.vue.closeCurrentWindow();
-				break;
-			case "ouvrirFinale":
-				ouvrirFinale();
-				break;
-			case "fermerTournoi":
-				fermerTournoi();
-				break;
-			default:
-				choisirVainqueur(bouton);
-			}	
+			JButton bouton = (JButton) e.getSource();
+
+			switch (bouton.getActionCommand()) {
+				case "quitter":
+					this.vue.dispose();
+					this.vue.closeCurrentWindow();
+					break;
+				case "ouvrirFinale":
+					ouvrirFinale();
+					break;
+				case "fermerTournoi":
+					fermerTournoi();
+					break;
+				default:
+					choisirVainqueur(bouton);
+			}
 		}
 	}
 
 	private void choisirVainqueur(JButton bouton) {
 		modele.choixVainqueurMatch(bouton);
-		
+
 		this.vue.RefreshMatch((CustomJButton) bouton);
 		if (stateTournoi == FINALESTATE.IS_FINALE) {
 			stateTournoi = FINALESTATE.FINALE_OVER;
@@ -98,26 +98,24 @@ public class SaisieResultatControleur implements ActionListener {
 
 	private void ouvrirFinale() {
 
-			if (modele.canOpenFinale()) {
-				
-				Match finale = modele.createFinale();
-				MatchDAO.getInstance().add(finale);
-				this.vue.OpenButtonFinal(finale.getIDMatch(), 
-						finale.getEquipes().get(0), finale.getEquipes().get(1));
-				this.stateTournoi = FINALESTATE.IS_FINALE;
-				
-				TournoiDAO.getInstance().update(this.modele.getTournoi());
-				
-			}
+		if (modele.canOpenFinale()) {
+
+			Match finale = modele.createFinale();
+			MatchDAO.getInstance().add(finale);
+			this.vue.OpenButtonFinal(finale.getIDMatch(),
+					finale.getEquipes().get(0), finale.getEquipes().get(1));
+			this.stateTournoi = FINALESTATE.IS_FINALE;
+
+			TournoiDAO.getInstance().update(this.modele.getTournoi());
+
+		}
 
 	}
-	
-	
+
 	/**
 	 * Retourne le résultat attendus du modèle
-	 * */
+	 */
 	public SaisieResultatModele getModele() {
 		return this.modele;
 	}
 }
-

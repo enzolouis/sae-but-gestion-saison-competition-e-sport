@@ -15,47 +15,48 @@ import vues.IdentificationVue;
 import vues.ListeTournoisVue;
 
 public class AccueilAdministrateurControleur implements ActionListener {
-	
+
 	private AccueilAdministrateurVue vue;
-	
+
 	/**
 	 * Effectue la construction de la vue
+	 * 
 	 * @param vue de la page, permettant l'activation de ActionEvent
-	 * */
+	 */
 	public AccueilAdministrateurControleur(AccueilAdministrateurVue vue) {
 		this.vue = vue;
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() instanceof JButton) {
 			JButton bouton = (JButton) e.getSource();
-			
+
 			switch (bouton.getActionCommand()) {
 				case "quitter":
 					this.vue.closeCurrentWindow();
 					break;
-					
+
 				case "deconnecter":
 					deconnecter();
 					break;
-					
+
 				case "creerTournoi":
 					ouvrirCreerTournoi();
 					break;
-					
+
 				case "statsSaison":
 					ouvrirStatistiquesSaison();
 					break;
-					
+
 				case "listeTournois":
 					ouvrirListeTournois();
 					break;
-					
+
 				case "gererArbitres":
 					ouvrirGererArbitres();
 					break;
-					
+
 				default:
 					System.out.println(bouton.getActionCommand());
 					break;

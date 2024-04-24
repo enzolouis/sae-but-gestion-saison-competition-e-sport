@@ -13,13 +13,14 @@ import modeles.TournoiModele;
 import vues.ConsultationSaisonVue;
 
 public class ConsultationSaisonControleur implements ListSelectionListener, ActionListener {
-	
+
 	private ConsultationSaisonVue vue;
-	
+
 	/**
 	 * Effectue la construction de la vue
+	 * 
 	 * @param vue de la page, permettant l'activation de ActionEvent
-	 * */
+	 */
 	public ConsultationSaisonControleur(ConsultationSaisonVue vue) {
 		this.vue = vue;
 	}
@@ -30,7 +31,8 @@ public class ConsultationSaisonControleur implements ListSelectionListener, Acti
 		try {
 			vue.listejoueursmodele.clear();
 			vue.listetournoismodele.clear();
-			for (TournoiModele t : EquipeDAO.getInstance().getTournoisEquipe(EquipeDAO.getInstance().getById(idEquipe).get())) {
+			for (TournoiModele t : EquipeDAO.getInstance()
+					.getTournoisEquipe(EquipeDAO.getInstance().getById(idEquipe).get())) {
 				vue.listetournoismodele.addElement(t);
 			}
 			for (Joueur j : EquipeDAO.getInstance().getById(idEquipe).get().getListeJoueurs()) {

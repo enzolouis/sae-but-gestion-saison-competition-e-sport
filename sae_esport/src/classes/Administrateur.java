@@ -3,18 +3,19 @@ package classes;
 import java.util.Objects;
 
 public class Administrateur {
-	
+
 	private int idAdministrateur;
 	private String nom;
 	private String login;
 	private String motDePasse;
-	
+
 	/**
 	 * Constructeur de la classe Administrateur
-	 * 	@param ID de l'Administrateur
-	 * 	@param Nom de l'Administrateur
-	 * 	@param Mot de passe de l'Administrateur
-	 * */
+	 * 
+	 * @param ID  de l'Administrateur
+	 * @param Nom de l'Administrateur
+	 * @param Mot de passe de l'Administrateur
+	 */
 	public Administrateur(int id, String nom, String login, String mdp) {
 		this.idAdministrateur = id;
 		this.nom = nom;
@@ -24,44 +25,46 @@ public class Administrateur {
 
 	/**
 	 * Renvoie le nom de l'administrateur
-	 * */
+	 */
 	public String getNom() {
 		return nom;
 	}
-	
+
 	/**
 	 * setter de l'identifiant de l'administrateur
-	 * 	@param ID de l'Administrateur
-	 * */
+	 * 
+	 * @param ID de l'Administrateur
+	 */
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
-	
+
 	/**
 	 * Renvoie le login de l'administrateur
-	 * */
+	 */
 	public String getLogin() {
 		return login;
 	}
 
 	/**
 	 * Renvoie le mot de passe de l'administrateur
-	 * */
+	 */
 	public String getMotDePasse() {
 		return motDePasse;
 	}
 
 	/**
 	 * Renvoie l'identifiant de l'administrateur
-	 * */
+	 */
 	public int getIdAdministrateur() {
 		return this.idAdministrateur;
 	}
-	
+
 	/**
 	 * setter de l'identifiant de l'administrateur
-	 * 	@param ID de l'Administrateur
-	 * */
+	 * 
+	 * @param ID de l'Administrateur
+	 */
 	public void setIdAdministrateur(int id) {
 		this.idAdministrateur = id;
 	}
@@ -83,5 +86,5 @@ public class Administrateur {
 		return idAdministrateur == other.idAdministrateur && Objects.equals(login, other.login)
 				&& Objects.equals(motDePasse, other.motDePasse) && Objects.equals(nom, other.nom);
 	}
-	
+
 }

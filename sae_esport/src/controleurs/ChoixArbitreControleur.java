@@ -1,4 +1,5 @@
 package controleurs;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -15,18 +16,19 @@ import vues.ChoixArbitreVue;
 public class ChoixArbitreControleur implements ActionListener {
 
 	private ChoixArbitreVue vue;
-	
+
 	private Arbitre arbSelec;
-	
+
 	/**
 	 * Effectue la construction de la vue
+	 * 
 	 * @param vue de la page, permettant l'activation de ActionEvent
-	 * */
+	 */
 	public ChoixArbitreControleur(ChoixArbitreVue vue) {
 		this.vue = vue;
 		this.arbSelec = null;
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton bouton = (JButton) e.getSource();
@@ -34,15 +36,15 @@ public class ChoixArbitreControleur implements ActionListener {
 			case "quitter":
 				this.vue.closeCurrentWindow();
 				break;
-				
+
 			case "ajouterArbitre":
 				ajouterArbitreCourant();
 				break;
-				
-			case "suppArbitre": 
+
+			case "suppArbitre":
 				supprimerArbitreCourant();
 				break;
-				
+
 			default:
 				selectionerArbitre(bouton);
 		}
@@ -70,44 +72,44 @@ public class ChoixArbitreControleur implements ActionListener {
 					t.retirerArbitre(this.arbSelec);
 					TournoiDAO.getInstance().update(t);
 				}
-				
+
 				ArbitreDAO.getInstance().delete(this.arbSelec);
 				for (JButton b : this.vue.boutonsArbitres) {
-					if (b.getActionCommand().equals(""+this.arbSelec.getIdArbitre())) {
+					if (b.getActionCommand().equals("" + this.arbSelec.getIdArbitre())) {
 						b.setEnabled(false);
 					}
 				}
 				this.vue.erreur.setText("Cet arbitre a été supprimé.");
 				this.vue.erreur.setForeground(Palette.GREEN);
-		        this.vue.panelErreur.setBackground(Palette.GREENLIGHTER);
-		        this.vue.panelErreur.setBorder(new LineBorder(Palette.GREEN, 1));
+				this.vue.panelErreur.setBackground(Palette.GREENLIGHTER);
+				this.vue.panelErreur.setBorder(new LineBorder(Palette.GREEN, 1));
 			} else {
 				this.vue.erreur.setText("Cet arbitre n'est pas supprimable!");
-		        this.vue.panelErreur.setBackground(Palette.REDERRORBACKGROUND);
-		        this.vue.erreur.setForeground(Palette.REDERRORFOREGROUND);
-		        this.vue.panelErreur.setBorder(new LineBorder(Palette.REDERRORBORDER, 1));
+				this.vue.panelErreur.setBackground(Palette.REDERRORBACKGROUND);
+				this.vue.erreur.setForeground(Palette.REDERRORFOREGROUND);
+				this.vue.panelErreur.setBorder(new LineBorder(Palette.REDERRORBORDER, 1));
 			}
-			
+
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
 	}
 
 	private void ajouterArbitreCourant() {
-		if (this.vue.textFieldNom.getText().equals("") || this.vue.textFieldPrenom.getText().equals("") 
+		if (this.vue.textFieldNom.getText().equals("") || this.vue.textFieldPrenom.getText().equals("")
 				|| this.vue.comboBoxNationalite.getSelectedIndex() == -1) {
 			this.vue.erreur.setText("Champs de saisie manquant.");
-		    this.vue.panelErreur.setBackground(Palette.REDERRORBACKGROUND);
-		    this.vue.erreur.setForeground(Palette.REDERRORFOREGROUND);
-		    this.vue.panelErreur.setBorder(new LineBorder(Palette.REDERRORBORDER, 1));
+			this.vue.panelErreur.setBackground(Palette.REDERRORBACKGROUND);
+			this.vue.erreur.setForeground(Palette.REDERRORFOREGROUND);
+			this.vue.panelErreur.setBorder(new LineBorder(Palette.REDERRORBORDER, 1));
 		} else {
-			Arbitre a = new Arbitre(0, this.vue.textFieldNom.getText(), 
+			Arbitre a = new Arbitre(0, this.vue.textFieldNom.getText(),
 					this.vue.textFieldPrenom.getText(), (Nationalite) this.vue.comboBoxNationalite.getSelectedItem());
 			try {
 				ArbitreDAO.getInstance().add(a);
-				CustomJButton boutonNew = new CustomJButton(a.toString(),15);
+				CustomJButton boutonNew = new CustomJButton(a.toString(), 15);
 				boutonNew.addActionListener(this);
-				boutonNew.setActionCommand(""+a.getIdArbitre());
+				boutonNew.setActionCommand("" + a.getIdArbitre());
 				this.vue.boutonsArbitres.add(boutonNew);
 				this.vue.panelArbitreList.add(boutonNew);
 			} catch (Exception e1) {
@@ -115,17 +117,19 @@ public class ChoixArbitreControleur implements ActionListener {
 			}
 			this.vue.erreur.setText("Arbitre créé!");
 			this.vue.erreur.setForeground(Palette.GREEN);
-		    this.vue.panelErreur.setBackground(Palette.GREENLIGHTER);
-		    this.vue.panelErreur.setBorder(new LineBorder(Palette.GREEN, 1));
-		    this.vue.textFieldNom.setText(""); this.vue.textFieldPrenom.setText("");
-		    this.vue.comboBoxNationalite.setSelectedIndex(-1);
+			this.vue.panelErreur.setBackground(Palette.GREENLIGHTER);
+			this.vue.panelErreur.setBorder(new LineBorder(Palette.GREEN, 1));
+			this.vue.textFieldNom.setText("");
+			this.vue.textFieldPrenom.setText("");
+			this.vue.comboBoxNationalite.setSelectedIndex(-1);
 		}
 	}
-	
+
 	/**
-	 * Verification si un arbitre est valide pour la suppression 
+	 * Verification si un arbitre est valide pour la suppression
+	 * 
 	 * @param arbitre à verifier
-	 * */
+	 */
 	public boolean checkArbitreDeletable(Arbitre a) {
 		try {
 			for (TournoiModele t : ArbitreDAO.getInstance().getTournoisOfArbitre(a)) {

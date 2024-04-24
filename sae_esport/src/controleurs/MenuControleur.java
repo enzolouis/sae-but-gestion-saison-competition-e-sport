@@ -1,4 +1,5 @@
 package controleurs;
+
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,18 +8,18 @@ import style.CustomJFrame;
 import style.Palette;
 
 public class MenuControleur implements ActionListener {
-	
+
 	private CustomJFrame vue;
-	
+
 	/**
 	 * Construction de la vue,pour permettre les réactions avec Action Listener
+	 * 
 	 * @param Jframe ou la vue sera placé
-	 * */
+	 */
 	public MenuControleur(CustomJFrame vue) {
 		this.vue = vue;
 	}
-	
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() instanceof JButton) {

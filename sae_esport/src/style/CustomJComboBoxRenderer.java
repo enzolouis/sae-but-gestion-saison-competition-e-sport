@@ -11,21 +11,22 @@ import javax.swing.ListCellRenderer;
 @SuppressWarnings("rawtypes")
 public class CustomJComboBoxRenderer extends JLabel implements ListCellRenderer {
     public CustomJComboBoxRenderer() {
-    	super();
+        super();
         setOpaque(true);
     }
-     
+
     @Override
-    public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-    	setText(" " + value.toString() + "  ");
+    public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
+            boolean cellHasFocus) {
+        setText(" " + value.toString() + "  ");
         setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 15));
-        
+
         if (isSelected) {
-        	setBackground(new Color(102, 173, 221));
-        } else {			
-        	setBackground(new Color(29, 88, 129));
-		}
-        
+            setBackground(new Color(102, 173, 221));
+        } else {
+            setBackground(new Color(29, 88, 129));
+        }
+
         setForeground(Color.WHITE);
         setFont(Palette.customFont);
         return this;

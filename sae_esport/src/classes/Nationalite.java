@@ -1,4 +1,5 @@
 package classes;
+
 public enum Nationalite {
     // Afghanistan:
     AF("Afghanistan"),
@@ -388,7 +389,7 @@ public enum Nationalite {
     ZM("Zambia"),
     // Zimbabwe:
     ZW("Zimbabwe");
-    
+
     private String country;
 
     Nationalite(String country) {
@@ -398,5 +399,5 @@ public enum Nationalite {
     public String getCountry() {
         return country;
     }
-    
+
 }

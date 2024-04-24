@@ -6,23 +6,24 @@ import java.sql.Statement;
 import classes.DBConnection;
 
 public class CreateAdmin {
-	
-	public static void main(String[] args) {
-		CreateAdmin.Drop();
-		CreateAdmin.Create();
-	}
-	
-	/**
-	 * Supprime la table admin, ainsi que sa séquence
-	 * */
-	public static void Drop() {
-		try {
+
+    public static void main(String[] args) {
+        CreateAdmin.Drop();
+        CreateAdmin.Create();
+    }
+
+    /**
+     * Supprime la table admin, ainsi que sa séquence
+     */
+    public static void Drop() {
+        try {
             // Suppression de la table admin
             Statement stSupprAdmin = DBConnection.getInstance().createStatement();
             stSupprAdmin.executeUpdate("DROP TABLE admin");
             System.out.println("✔ Suppression de la table ADMIN réussie.");
         } catch (SQLException e) {
-            System.out.println("❌ Suppression de la table ADMIN échouée. (=> raison possible : première initialisation de la base de données, relancez et plus d'erreur)");
+            System.out.println(
+                    "❌ Suppression de la table ADMIN échouée. (=> raison possible : première initialisation de la base de données, relancez et plus d'erreur)");
         }
 
         try {
@@ -33,12 +34,12 @@ public class CreateAdmin {
         } catch (SQLException e) {
             System.out.println("❌ Suppression de la séquence seqIdAdmin échouée.");
         }
-	}
-	
-	/**
-	 * Créée la table admin, ainsi que sa séquence
-	 * */
-	public static void Create() {
+    }
+
+    /**
+     * Créée la table admin, ainsi que sa séquence
+     */
+    public static void Create() {
         try {
             // Création de la séquence de l'identifiant admin
             Statement stSeqAdmin = DBConnection.getInstance().createStatement();
@@ -60,5 +61,5 @@ public class CreateAdmin {
         } catch (SQLException e) {
             System.out.println("❌ Création de la table admin échouée.");
         }
-	}
+    }
 }
