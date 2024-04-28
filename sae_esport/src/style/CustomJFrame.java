@@ -3,11 +3,13 @@ package style;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.util.Arrays;
 import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import controleurs.MenuControleur;
@@ -97,7 +99,7 @@ public class CustomJFrame extends JFrame {
 
         setResizable(false);
         setFont(Palette.customFont);
-        setIconImage(Palette.LOGO.getImage());
+        setIconImage(Palette.LOGO_LARGE.getImage());
     }
 
     public void setupMenuEtMainPanel(String frameTitle) {
@@ -109,13 +111,14 @@ public class CustomJFrame extends JFrame {
         this.contentMenuEtPanel = new CustomJPanel();
         this.contentMenuEtPanel.setLayout(new BorderLayout());
 
-        this.contentMenu = new CustomJPanel(new EmptyBorder(1, 1, 1, 1));
-        this.contentMenu.setBackground(Palette.BLACKLIGHTER);
+        this.contentMenu = new CustomJPanel();
+        this.contentMenu.setBackground(Palette.WHITE);
         this.contentMenu.setLayout(new BorderLayout());
         this.contentMenu.addMouseMotionListener(controleurMotionMenu);
         this.contentMenu.addMouseListener(controleurMotionMenu);
 
         CustomJLabel logo = new CustomJLabel(frameTitle, 11);
+        logo.setFont(logo.getFont().deriveFont(Font.BOLD, 11));
         logo.setBorder(new EmptyBorder(0, 7, 0, 0));
         if (frameTitle.equals("Identification")) {
             logo.setIcon(new ImageIcon(Palette.LOGO.getImage().getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH)));
@@ -140,18 +143,20 @@ public class CustomJFrame extends JFrame {
         }
 
         CustomJPanel fermerEnlever = new CustomJPanel();
-        fermerEnlever.setBackground(Palette.BLACKLIGHTER);
-        fermerEnlever.setLayout(new FlowLayout());
-        CustomJButton enlever = new CustomJButton("", 10);
-        enlever.setBorder(new EmptyBorder(0, 10, 0, 10));
+        fermerEnlever.setBackground(Palette.WHITE);
+        fermerEnlever.setLayout(new FlowLayout(SwingConstants.CENTER, 0, 0));
+        CustomJButton enlever = new CustomJButton("", 0);
+        enlever.setPreferredSize(new Dimension(50, 30));
+        enlever.setBorder(new EmptyBorder(0, 0, 0, 0));
         enlever.setIcon(Palette.MINIMIZE);
-        enlever.setBackground(Palette.GREEN);
+        enlever.setBackground(Palette.WHITE);
         enlever.addActionListener(controleurMenu);
 
-        CustomJButton fermer = new CustomJButton("", 10);
+        CustomJButton fermer = new CustomJButton("", 0);
+        fermer.setPreferredSize(new Dimension(50, 30));
         fermer.setIcon(Palette.CLOSE);
-        fermer.setBackground(Palette.REDERRORFOREGROUND);
-        fermer.setBorder(new EmptyBorder(0, 10, 0, 10));
+        fermer.setBackground(Palette.WHITE);
+        fermer.setBorder(new EmptyBorder(0, 0, 0, 0));
         fermer.addActionListener(controleurMenu);
 
         fermerEnlever.add(enlever);
@@ -162,7 +167,7 @@ public class CustomJFrame extends JFrame {
         this.contentMenu.add(fermerEnlever, BorderLayout.EAST);
         this.contentMenu.setForeground(Palette.WHITE);
 
-        this.contentPanel = new CustomJPanel(new EmptyBorder(10, 30, 30, 30));
+        this.contentPanel = new CustomJPanel(new EmptyBorder(10, 20, 30, 20));
 
         this.contentMenuEtPanel.add(this.contentMenu, BorderLayout.NORTH);
         this.contentMenuEtPanel.add(this.contentPanel, BorderLayout.CENTER);

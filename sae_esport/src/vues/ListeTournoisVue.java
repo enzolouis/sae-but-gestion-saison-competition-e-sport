@@ -253,6 +253,7 @@ public class ListeTournoisVue extends CustomJFrame {
         login.setEnabled(false);
         login.setFont(Palette.customFont.deriveFont(Font.PLAIN, 10));
         login.setBounds(94, 35, 92, 20);
+        login.setBackground(Palette.GOLD);
         mdp = new CustomJPasswordField();
         mdp.setEnabled(false);
         mdp.setFont(Palette.customFont.deriveFont(Font.PLAIN, 10));
@@ -276,7 +277,6 @@ public class ListeTournoisVue extends CustomJFrame {
         logins.add(mdp);
         activLogins = new CustomJToggleButton("", 25, (EmptyBorder) null);
         activLogins.setFocusPainted(false);
-        activLogins.setBackground(new Color(29, 88, 129));
         activLogins.setBorder(null);
         activLogins.setIcon(Palette.OEIL_INVISIBLE_ICON);
         activLogins.setBounds(196, 44, 40, 20);

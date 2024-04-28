@@ -1,6 +1,7 @@
 package style;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -9,6 +10,7 @@ import java.awt.geom.RoundRectangle2D;
 
 import javax.swing.JButton;
 import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.basic.BasicButtonUI;
 
 import controleurs.ControleurAnimation;
 
@@ -58,11 +60,13 @@ public class CustomJButton extends JButton {
         this.round = round;
         this.initialBackground = this.getBackground();
         this.addMouseListener(anim);
-        setBackground(new Color(29, 88, 129));
+        setBackground(Palette.BLUE);
         setForeground(Palette.WHITE);
         setOpaque(false);
         setFont(Palette.customFont);
         setFocusPainted(false);
+        setUI(new BasicButtonUI());
+        setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
 
     /**
@@ -80,12 +84,14 @@ public class CustomJButton extends JButton {
         this.round = round;
         this.initialBackground = this.getBackground();
         this.addMouseListener(anim);
-        setBackground(new Color(29, 88, 129));
+        setBackground(Palette.BLUE);
         setForeground(Palette.WHITE);
         setBorder(border);
         setOpaque(false);
         setFont(Palette.customFont);
         setFocusPainted(false);
+        setUI(new BasicButtonUI());
+        setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
     }
 
     protected void paintComponent(Graphics g) {

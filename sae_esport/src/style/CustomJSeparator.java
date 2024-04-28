@@ -1,5 +1,7 @@
 package style;
 
+import java.awt.Color;
+
 import javax.swing.JSeparator;
 
 public class CustomJSeparator extends JSeparator {
@@ -13,7 +15,7 @@ public class CustomJSeparator extends JSeparator {
     public CustomJSeparator() {
         super();
 
-        setBackground(Palette.GOLD);
-        setForeground(Palette.GOLD);
+        //setBackground(Palette.SMOOTH_GREY);
+        setForeground(Palette.SMOOTH_GREY);
     }
 }

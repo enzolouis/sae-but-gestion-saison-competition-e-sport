@@ -180,8 +180,10 @@ public class CustomJPasswordField extends JPasswordField {
     private void setBasicConstructor() {
         this.borderColor = getForeground();
         this.radius = 15;
-        setForeground(Color.WHITE);
-        setBackground(Palette.BLUE);
+        setCaretColor(Palette.BLACKLIGHTER);
+        setOpaque(false);
+        setForeground(Palette.BLACKLIGHTER);
+        setBackground(Palette.WHITE);
         setFont(Palette.customTextFont);
     }
 
@@ -217,8 +219,13 @@ public class CustomJPasswordField extends JPasswordField {
     }
 
     protected void paintBorder(Graphics g) {
+        System.out.println("test1");
+        
+        if (this.getBorderColor() == null) {
+        System.out.println("test2");
         g.setColor(this.getBorderColor());
-        g.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, getBorderRadius(), getBorderRadius());
+            g.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, getBorderRadius(), getBorderRadius());
+        }
     }
 
     /**

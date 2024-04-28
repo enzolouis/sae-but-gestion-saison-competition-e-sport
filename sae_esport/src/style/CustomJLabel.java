@@ -20,7 +20,7 @@ public class CustomJLabel extends JLabel {
         setFont(Palette.customTextFont);
 
         setHorizontalAlignment(SwingConstants.CENTER);
-        setForeground(Palette.WHITE);
+        setForeground(Palette.BLACKLIGHTER);
         setBorder(new EmptyBorder(0, 0, 0, 0));
     }
 
@@ -40,7 +40,7 @@ public class CustomJLabel extends JLabel {
         setFont(Palette.customTextFont);
 
         setHorizontalAlignment(SwingConstants.CENTER);
-        setForeground(Palette.WHITE);
+        setForeground(Palette.BLACKLIGHTER);
         setBorder(border);
     }
 }
