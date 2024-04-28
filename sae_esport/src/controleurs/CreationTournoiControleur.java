@@ -63,7 +63,6 @@ public class CreationTournoiControleur implements ActionListener {
     }
 
     private void validerCreationTournoi() {
-
         String nom = this.vue.textFieldNom.getText();
 
         if (checkForEmptyField()) {
@@ -71,7 +70,6 @@ public class CreationTournoiControleur implements ActionListener {
         } else if (nom.length() < 3) {
             vue.messageCreation.setText("Le nom de votre tournoi doit contenir au moins 3 caractères.");
         } else {
-
             String dateDebut = this.modele.getDateString(this.vue.dateChooserDebut.getDate());
             String dateFin = this.modele.getDateString(this.vue.dateChooserFin.getDate());
             Notoriete not = (Notoriete) this.vue.comboBoxNotoriete.getSelectedItem();
@@ -81,7 +79,6 @@ public class CreationTournoiControleur implements ActionListener {
                 vue.messageCreation.setText(
                         "<html> Les dates sont invalides. Vérifiez qu'un tournoi <br> n'existe pas sur ce créneau.");
             } else {
-
                 TournoiDAO.getInstance().add(t);
                 for (int i = 0; i < this.vue.listArbitres.getModel().getSize(); i++) {
                     TournoiDAO.getInstance().addArbitre(t, this.vue.listArbitres.getModel().getElementAt(i));
@@ -93,13 +90,11 @@ public class CreationTournoiControleur implements ActionListener {
                 }
 
                 disableAllFields(t);
-
             }
         }
     }
 
     private void importFichierCSV() {
-
         JFileChooser fc = new JFileChooser();
         fc.setAcceptAllFileFilterUsed(false);
         fc.addChoosableFileFilter(new FileNameExtensionFilter("CSV Documents", "csv"));
@@ -114,26 +109,36 @@ public class CreationTournoiControleur implements ActionListener {
     }
 
     private void supprimerArbitreSelectionne() {
-        for (Arbitre arb : this.vue.listArbitres.getSelectedValuesList()) {
-            this.vue.modeleList.removeElement(arb);
+        for (Arbitre a : this.vue.listArbitres.getSelectedValuesList()) {
+            this.vue.comboBoxArbitre.addItem(a);
+            this.vue.modeleList.removeElement(a);
         }
     }
 
     private void viderListeArbitres() {
+        try {
+            for (Object a : this.vue.modeleList.toArray()) {
+                this.vue.comboBoxArbitre.addItem((Arbitre) a);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
         this.vue.modeleList.removeAllElements();
     }
 
     private void ajouterArbitreSelectionne() {
         Arbitre a = (Arbitre) this.vue.comboBoxArbitre.getSelectedItem();
-        this.vue.modeleList.addElement(a);
-        this.vue.comboBoxArbitre.removeItem(a);
+		if (!this.vue.modeleList.contains(a)) {
+			this.vue.modeleList.addElement(a);
+			this.vue.comboBoxArbitre.removeItem(a);
+		}
     }
 
     /**
      * vérifie si un des fields est vide
      */
     public boolean checkForEmptyField() {
-
         boolean nomVide = this.vue.textFieldNom.getText().equals("");
         boolean dateDebutVide = this.vue.dateChooserDebut.getDate() == null;
         boolean dateFinVide = this.vue.dateChooserFin == null;
@@ -141,7 +146,6 @@ public class CreationTournoiControleur implements ActionListener {
         boolean arbitresVide = this.vue.modeleList.isEmpty();
 
         return nomVide || dateDebutVide || dateFinVide || equipesVide || arbitresVide;
-
     }
 
     public void disableAllFields(TournoiModele t) {
