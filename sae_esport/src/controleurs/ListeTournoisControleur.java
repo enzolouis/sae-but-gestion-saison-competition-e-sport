@@ -83,7 +83,7 @@ public class ListeTournoisControleur implements ActionListener, ListSelectionLis
     }
 
     private void rendreDisposee(JButton bouton) {
-        bouton.setBackground(Palette.GREEN);
+        bouton.setBackground(Palette.SECONDARY_BACKGROUND);
         bouton.setText("<html><p style='text-align:center'>Rendre<br>indisposée</p></html>");
         bouton.setActionCommand("setIndisposée");
         Equipe eq1 = (Equipe) vue.listeEquipes.getSelectedValue();
@@ -97,7 +97,7 @@ public class ListeTournoisControleur implements ActionListener, ListSelectionLis
     }
 
     private void rendreIndisposee(JButton bouton) {
-        bouton.setBackground(Palette.REDERRORBACKGROUND);
+        bouton.setBackground(Palette.TIERTIARY_BACKGROUND);
         bouton.setText("<html><p style='text-align:center'>Rendre<br>disposée</p></html>");
         bouton.setActionCommand("setDisposée");
         Equipe eq = (Equipe) vue.listeEquipes.getSelectedValue();
@@ -115,16 +115,16 @@ public class ListeTournoisControleur implements ActionListener, ListSelectionLis
             TournoiModele tournoi = TournoiDAO.getInstance().getById(idTournoi).get();
             this.vue.erreurOuverture.setForeground(new Color(235, 77, 75));
             if (!TournoiModele.isAucunTournoiOuvert()) {
-                this.vue.panelErreur.setBackground(Palette.REDERRORBACKGROUND);
-                this.vue.panelErreur.setBorder(new LineBorder(Palette.REDERRORBORDER, 1));
+                this.vue.panelErreur.setBackground(Palette.ERROR_BACKGROUND);
+                this.vue.panelErreur.setBorder(new LineBorder(Palette.ERROR_BORDER, 1));
                 this.vue.erreurOuverture.setText("Un tournoi est déjà ouvert ");
             } else if (!tournoi.isDateCouranteDansCreneauTournoi()) {
-                this.vue.panelErreur.setBackground(Palette.REDERRORBACKGROUND);
-                this.vue.panelErreur.setBorder(new LineBorder(Palette.REDERRORBORDER, 1));
+                this.vue.panelErreur.setBackground(Palette.ERROR_BACKGROUND);
+                this.vue.panelErreur.setBorder(new LineBorder(Palette.ERROR_BORDER, 1));
                 this.vue.erreurOuverture.setText("Nous ne sommes pas dans la période du tournoi !");
             } else if (!tournoi.isTournoiMinimum4EquipeDisposee()) {
-                this.vue.panelErreur.setBackground(Palette.REDERRORBACKGROUND);
-                this.vue.panelErreur.setBorder(new LineBorder(Palette.REDERRORBORDER, 1));
+                this.vue.panelErreur.setBackground(Palette.ERROR_BACKGROUND);
+                this.vue.panelErreur.setBorder(new LineBorder(Palette.ERROR_BORDER, 1));
                 this.vue.erreurOuverture.setText("Pas assez d'équipe disposées !");
             } else {
                 // reverification de tout
@@ -132,10 +132,10 @@ public class ListeTournoisControleur implements ActionListener, ListSelectionLis
                 tournoi.ouvrirTournoi();
                 this.setUpTableModel();
                 this.vue.boutonOuverture.setEnabled(false);
-                this.vue.panelErreur.setBackground(Palette.GREENLIGHTER);
-                this.vue.panelErreur.setBorder(new LineBorder(Palette.GREEN, 1));
+                this.vue.panelErreur.setBackground(Palette.SUCCESS_BACKGROUND);
+                this.vue.panelErreur.setBorder(new LineBorder(Palette.SUCCESS_BORDER, 1));
                 this.vue.erreurOuverture.setText("Le tournoi a été ouvert !");
-                this.vue.erreurOuverture.setForeground(Palette.GREEN);
+                this.vue.erreurOuverture.setForeground(Palette.SUCCESS_FOREGROUND);
 
             }
         } catch (Exception e1) {
@@ -169,12 +169,12 @@ public class ListeTournoisControleur implements ActionListener, ListSelectionLis
                     vue.boutonRendreDisposee
                             .setText("<html><p style='text-align:center'>Rendre<br>indisposée</p></html>");
                     vue.boutonRendreDisposee.setActionCommand("setIndisposée");
-                    vue.boutonRendreDisposee.setBackground(Palette.GREEN);
+                    vue.boutonRendreDisposee.setBackground(Palette.SECONDARY_BACKGROUND);
                 } else {
                     vue.boutonRendreDisposee
                             .setText("<html><p style='text-align:center'>Rendre<br>disposée</p></html>");
                     vue.boutonRendreDisposee.setActionCommand("setDisposée");
-                    vue.boutonRendreDisposee.setBackground(Palette.REDERRORBACKGROUND);
+                    vue.boutonRendreDisposee.setBackground(Palette.TIERTIARY_BACKGROUND);
                 }
             }
 

@@ -66,8 +66,8 @@ public class IdentificationControleur implements ActionListener {
 
     private void seConnecterFailure() {
         this.vue.erreurOuverture.setText("Login et/ou mot de passe faux.");
-        this.vue.panelErreur.setBackground(Palette.REDERRORBACKGROUND);
-        this.vue.panelErreur.setBorder(new LineBorder(Palette.REDERRORBORDER, 1));
+        this.vue.panelErreur.setBackground(Palette.ERROR_BACKGROUND);
+        this.vue.panelErreur.setBorder(new LineBorder(Palette.ERROR_BORDER, 1));
         // compteur de quelques secondes
 
         ActionListener action = new ActionListener() {

@@ -15,7 +15,7 @@ public class CustomJSeparator extends JSeparator {
     public CustomJSeparator() {
         super();
 
-        //setBackground(Palette.SMOOTH_GREY);
-        setForeground(Palette.SMOOTH_GREY);
+        //setBackground(Palette.QUATERNARY_FOREGROUND);
+        setForeground(Palette.QUATERNARY_FOREGROUND);
     }
 }

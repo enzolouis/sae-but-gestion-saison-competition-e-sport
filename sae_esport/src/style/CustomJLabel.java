@@ -17,10 +17,10 @@ public class CustomJLabel extends JLabel {
     public CustomJLabel(String label, int fontScale) {
         super(label);
 
-        setFont(Palette.customTextFont);
+        setFont(Palette.FONT);
 
         setHorizontalAlignment(SwingConstants.CENTER);
-        setForeground(Palette.BLACKLIGHTER);
+        setForeground(Palette.PRIMARY_FOREGROUND);
         setBorder(new EmptyBorder(0, 0, 0, 0));
     }
 
@@ -37,10 +37,10 @@ public class CustomJLabel extends JLabel {
     public CustomJLabel(String label, int fontScale, EmptyBorder border) {
         super(label);
 
-        setFont(Palette.customTextFont);
+        setFont(Palette.FONT);
 
         setHorizontalAlignment(SwingConstants.CENTER);
-        setForeground(Palette.BLACKLIGHTER);
+        setForeground(Palette.PRIMARY_FOREGROUND);
         setBorder(border);
     }
 }

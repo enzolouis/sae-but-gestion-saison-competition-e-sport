@@ -18,15 +18,15 @@ public class EvenOddRenderer implements TableCellRenderer {
         ((JLabel) renderer).setOpaque(true);
         Color foreground, background;
         if (isSelected) {
-            foreground = Palette.WHITE;
-            background = Palette.BLACKDARKER;
+            foreground = Palette.PRIMARY_FOREGROUND;
+            background = Palette.QUATERNARY_BACKGROUND;
         } else {
             if (row % 2 == 0) {
-                foreground = Palette.WHITE;
-                background = Palette.BLACK;
+                foreground = Palette.PRIMARY_FOREGROUND;
+                background = Palette.PRIMARY_BACKGROUND;
             } else {
-                foreground = Palette.WHITE;
-                background = Palette.BLACKLIGHTER;
+                foreground = Palette.PRIMARY_FOREGROUND;
+                background = Palette.SECONDARY_BACKGROUND;
             }
         }
         renderer.setForeground(foreground);

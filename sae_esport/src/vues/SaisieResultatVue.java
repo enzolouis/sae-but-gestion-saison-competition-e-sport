@@ -52,7 +52,7 @@ public class SaisieResultatVue extends CustomJFrame {
         contentPanel.add(panelTop, BorderLayout.NORTH);
 
         CustomJLabel titleTop = new CustomJLabel("RÉSULTAT DES MATCHS", 25);
-        titleTop.setFont(Palette.customFont.deriveFont(Font.BOLD, 20));
+        titleTop.setFont(Palette.FONT.deriveFont(Font.BOLD, 20));
         panelTop.add(titleTop);
 
         CustomJSeparator separatorTop = new CustomJSeparator();
@@ -254,7 +254,7 @@ public class SaisieResultatVue extends CustomJFrame {
         CustomJButton btnQuit = new CustomJButton("Quitter", 10);
         btnQuit.setActionCommand("quitter");
         btnQuit.addActionListener(this.controleur);
-        btnQuit.setBackground(Palette.REDQUIT);
+        btnQuit.setBackground(Palette.TIERTIARY_BACKGROUND);
         panelBottom.add(btnQuit);
 
         if (canFinale && !inFinale) {

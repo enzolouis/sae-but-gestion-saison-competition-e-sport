@@ -57,9 +57,8 @@ public class ConsultationSaisonVue extends CustomJFrame {
         // ajout du titre
         CustomJPanel panelTitre = new CustomJPanel();
         panelTitre.setLayout(new BorderLayout(0, 0));
-        panelTitre.setBackground(Palette.BLACK);
         CustomJLabel labelTitre = new CustomJLabel("CLASSEMENT DE SAISON", 25);
-        labelTitre.setFont(Palette.customFont.deriveFont(Font.BOLD, 20));
+        labelTitre.setFont(Palette.FONT.deriveFont(Font.BOLD, 20));
         panelTitre.add(labelTitre, BorderLayout.CENTER);
         CustomJSeparator separator = new CustomJSeparator();
         panelTitre.add(separator, BorderLayout.SOUTH);
@@ -83,15 +82,15 @@ public class ConsultationSaisonVue extends CustomJFrame {
 
         table.setBorder(null);
         table.setOpaque(false);
-        table.setFont(Palette.customFont.deriveFont(Font.PLAIN, 12));
-        table.setBackground(Palette.BLACKDARKER);
-        table.setForeground(Palette.WHITE);
-        table.setSelectionBackground(Palette.WHITE);
-        table.setGridColor(Palette.WHITE);
+        table.setFont(Palette.FONT.deriveFont(Font.PLAIN, 12));
+        table.setBackground(Palette.QUATERNARY_BACKGROUND);
+        table.setForeground(Palette.SECONDARY_FOREGROUND);
+        table.setSelectionBackground(Palette.QUATERNARY_BACKGROUND);
+        table.setGridColor(Palette.QUATERNARY_BACKGROUND);
         table.setRowHeight(34);
-        table.getTableHeader().setBackground(Palette.BLACKLIGHTER);
+        table.getTableHeader().setBackground(Palette.SECONDARY_BACKGROUND);
         table.getTableHeader().setForeground(Color.WHITE);
-        table.getTableHeader().setFont(Palette.customFont.deriveFont(Font.PLAIN, 11));
+        table.getTableHeader().setFont(Palette.FONT.deriveFont(Font.PLAIN, 11));
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table.getSelectionModel().addListSelectionListener(controleur);
         scrollPane.setViewportView(table);
@@ -147,14 +146,13 @@ public class ConsultationSaisonVue extends CustomJFrame {
         listetournois = new JList<TournoiModele>();
         listetournoismodele = new DefaultListModel<TournoiModele>();
         listetournois.setModel(listetournoismodele);
-        listetournois.setBackground(Palette.BLACKDARKER);
-        listetournois.setForeground(Palette.WHITE);
-        listetournois.setFont(Palette.customTextFont);
+        listetournois.setBackground(Palette.QUATERNARY_BACKGROUND);
+        listetournois.setForeground(Palette.SECONDARY_FOREGROUND);
+        listetournois.setFont(Palette.FONT);
         listetournois.setBorder(new EmptyBorder(3, 3, 3, 3));
         scrollTournois.setViewportView(listetournois);
         panelTournois.add(scrollTournois);
         CustomJLabel labelTournois = new CustomJLabel("Tournois disputés", 20);
-        labelTournois.setFont(Palette.customFont);
         panelTournois.add(labelTournois, BorderLayout.NORTH);
         panelInfos.add(panelTournois);
 
@@ -166,14 +164,13 @@ public class ConsultationSaisonVue extends CustomJFrame {
         listejoueurs = new JList<Joueur>();
         listejoueursmodele = new DefaultListModel<Joueur>();
         listejoueurs.setModel(listejoueursmodele);
-        listejoueurs.setBackground(Palette.BLACKDARKER);
-        listejoueurs.setForeground(Palette.WHITE);
-        listejoueurs.setFont(Palette.customTextFont);
+        listejoueurs.setBackground(Palette.QUATERNARY_BACKGROUND);
+        listejoueurs.setForeground(Palette.SECONDARY_FOREGROUND);
+        listejoueurs.setFont(Palette.FONT);
         listejoueurs.setBorder(new EmptyBorder(3, 3, 3, 3));
         scrollJoueurs.setViewportView(listejoueurs);
         panelJoueurs.add(scrollJoueurs);
         CustomJLabel labelJoueurs = new CustomJLabel("Joueurs de l'équipe", 20);
-        labelJoueurs.setFont(Palette.customFont);
         panelJoueurs.add(labelJoueurs, BorderLayout.NORTH);
         panelInfos.add(panelJoueurs);
 
@@ -182,7 +179,7 @@ public class ConsultationSaisonVue extends CustomJFrame {
         panelQuitter.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
         CustomJButton btnQuitter = new CustomJButton("Quitter", 15);
         btnQuitter.setActionCommand("quitter");
-        btnQuitter.setBackground(Palette.REDQUIT);
+        btnQuitter.setBackground(Palette.TIERTIARY_BACKGROUND);
         btnQuitter.addActionListener(controleur);
         panelQuitter.setBorder(new EmptyBorder(10, 10, 10, 10));
         panelQuitter.add(btnQuitter);

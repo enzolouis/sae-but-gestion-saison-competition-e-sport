@@ -60,10 +60,10 @@ public class CustomJButton extends JButton {
         this.round = round;
         this.initialBackground = this.getBackground();
         this.addMouseListener(anim);
-        setBackground(Palette.BLUE);
-        setForeground(Palette.WHITE);
+        setBackground(Palette.SECONDARY_BACKGROUND);
+        setForeground(Palette.SECONDARY_FOREGROUND);
         setOpaque(false);
-        setFont(Palette.customFont);
+        setFont(Palette.FONT);
         setFocusPainted(false);
         setUI(new BasicButtonUI());
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -84,11 +84,11 @@ public class CustomJButton extends JButton {
         this.round = round;
         this.initialBackground = this.getBackground();
         this.addMouseListener(anim);
-        setBackground(Palette.BLUE);
-        setForeground(Palette.WHITE);
+        setBackground(Palette.SECONDARY_BACKGROUND);
+        setForeground(Palette.SECONDARY_FOREGROUND);
         setBorder(border);
         setOpaque(false);
-        setFont(Palette.customFont);
+        setFont(Palette.FONT);
         setFocusPainted(false);
         setUI(new BasicButtonUI());
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

@@ -27,7 +27,7 @@ public class CustomJComboBoxRenderer extends JLabel implements ListCellRenderer 
         }
 
         setForeground(Color.WHITE);
-        setFont(Palette.customFont);
+        setFont(Palette.FONT);
         return this;
     }
 }

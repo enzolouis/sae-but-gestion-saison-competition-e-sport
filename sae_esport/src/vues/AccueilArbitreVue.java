@@ -40,8 +40,8 @@ public class AccueilArbitreVue extends CustomJFrame {
         contentPane.add(panelTitre, BorderLayout.NORTH);
 
         CustomJLabel titreFenetre = new CustomJLabel("PAGE D'ARBITRAGE", 25);
-        titreFenetre.setFont(Palette.customFont.deriveFont(Font.BOLD, 20));
-        titreFenetre.setForeground(Palette.WHITE);
+        titreFenetre.setFont(Palette.FONT.deriveFont(Font.BOLD, 20));
+        titreFenetre.setForeground(Palette.PRIMARY_FOREGROUND);
         panelTitre.add(titreFenetre, BorderLayout.CENTER);
 
         CustomJSeparator separatorTitre = new CustomJSeparator();
@@ -60,8 +60,6 @@ public class AccueilArbitreVue extends CustomJFrame {
 
         CustomJButton btnAccesAuTournoi = new CustomJButton("Accès au tournoi", 10);
         btnAccesAuTournoi.setActionCommand("accesTournoi");
-        btnAccesAuTournoi.setBackground(Palette.BLUE);
-        btnAccesAuTournoi.setForeground(Palette.WHITE);
         btnAccesAuTournoi.addActionListener(controleur);
         gbc_panelMiddle.gridx = 0;
         gbc_panelMiddle.gridy = 0;
@@ -71,8 +69,6 @@ public class AccueilArbitreVue extends CustomJFrame {
 
         CustomJButton btnStatistiquesDeLa = new CustomJButton("Statistiques du tournoi", 10);
         btnStatistiquesDeLa.setActionCommand("statsTournoi");
-        btnStatistiquesDeLa.setBackground(Palette.BLUE);
-        btnStatistiquesDeLa.setForeground(Palette.WHITE);
         btnStatistiquesDeLa.addActionListener(controleur);
         gbc_panelMiddle.gridx = 0;
         gbc_panelMiddle.gridy = 1;
@@ -86,8 +82,7 @@ public class AccueilArbitreVue extends CustomJFrame {
 
         CustomJButton btnDeconnexion = new CustomJButton("Se déconnecter", 10);
         btnDeconnexion.setActionCommand("deconnecter");
-        btnDeconnexion.setBackground(Palette.REDQUIT);
-        btnDeconnexion.setForeground(Palette.WHITE);
+        btnDeconnexion.setBackground(Palette.TIERTIARY_BACKGROUND);
         btnDeconnexion.addActionListener(this.controleur);
         panelQuitterSeconnecter.add(btnDeconnexion, BorderLayout.CENTER);
 
@@ -98,8 +93,7 @@ public class AccueilArbitreVue extends CustomJFrame {
         btnQuit.setPreferredSize(
                 new Dimension(btnDeconnexion.getPreferredSize().width, btnQuit.getPreferredSize().height));
 
-        btnQuit.setBackground(Palette.REDQUIT);
-        btnQuit.setForeground(Palette.WHITE);
+        btnQuit.setBackground(Palette.TIERTIARY_BACKGROUND);
         btnQuit.addActionListener(this.controleur);
         panelQuitterSeconnecter.add(btnQuit, BorderLayout.CENTER);
     }

@@ -17,7 +17,7 @@ public class CustomScrollBarUI extends BasicScrollBarUI {
     protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2.setColor(Palette.BLUE);
+        g2.setColor(Palette.SECONDARY_BACKGROUND);
         g2.fillRoundRect(thumbBounds.x, thumbBounds.y, thumbBounds.width, thumbBounds.height, 15, 15);
     }
 

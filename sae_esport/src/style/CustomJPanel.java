@@ -46,7 +46,7 @@ public class CustomJPanel extends JPanel {
         setOpaque(false);
 
 
-        this.setBackground(Palette.BLACK);
+        this.setBackground(Palette.PRIMARY_BACKGROUND);
         this.setBorder(new EmptyBorder(0, 0, 0, 0));
         this.setLayout(new BorderLayout(0, 0));
     }
@@ -62,7 +62,7 @@ public class CustomJPanel extends JPanel {
         super();
         setOpaque(false);
 
-        this.setBackground(Palette.BLACK);
+        this.setBackground(Palette.PRIMARY_BACKGROUND);
         this.setBorder(new EmptyBorder(0, 0, 0, 0));
         this.setLayout(layout);
     }
@@ -71,7 +71,7 @@ public class CustomJPanel extends JPanel {
         super();
         setOpaque(false);
 
-        this.setBackground(Palette.BLACK);
+        this.setBackground(Palette.PRIMARY_BACKGROUND);
         this.setBorder(new EmptyBorder(0, 0, 0, 0));
         this.setLayout(layout);
     }
@@ -87,7 +87,7 @@ public class CustomJPanel extends JPanel {
         super();
         setOpaque(false);
 
-        this.setBackground(Palette.BLACK);
+        this.setBackground(Palette.PRIMARY_BACKGROUND);
         this.setLayout(new BorderLayout(0, 0));
         this.setBorder(border);
     }
@@ -105,7 +105,7 @@ public class CustomJPanel extends JPanel {
         super();
         setOpaque(false);
 
-        this.setBackground(Palette.BLACK);
+        this.setBackground(Palette.PRIMARY_BACKGROUND);
         this.setBorder(border);
         this.setLayout(layout);
     }
@@ -123,7 +123,7 @@ public class CustomJPanel extends JPanel {
         super();
         setOpaque(false);
 
-        this.setBackground(Palette.BLACK);
+        this.setBackground(Palette.PRIMARY_BACKGROUND);
         this.setBorder(border);
         this.setLayout(layout);
     }
@@ -141,7 +141,7 @@ public class CustomJPanel extends JPanel {
         super();
         setOpaque(false);
 
-        this.setBackground(Palette.BLACK);
+        this.setBackground(Palette.PRIMARY_BACKGROUND);
         this.setBorder(border);
         this.setLayout(layout);
     }
@@ -159,7 +159,7 @@ public class CustomJPanel extends JPanel {
         super();
         setOpaque(false);
 
-        this.setBackground(Palette.BLACK);
+        this.setBackground(Palette.PRIMARY_BACKGROUND);
         this.setBorder(border);
         this.setLayout(layout);
     }

@@ -64,7 +64,7 @@ public class ChoixArbitreVue extends CustomJFrame {
         contentPanel.add(panelTop, BorderLayout.NORTH);
 
         CustomJLabel titleTop = new CustomJLabel("GESTION DES ARBITRES", 25);
-        titleTop.setFont(Palette.customFont.deriveFont(Font.BOLD, 20));
+        titleTop.setFont(Palette.FONT.deriveFont(Font.BOLD, 20));
         panelTop.add(titleTop);
 
         CustomJSeparator separatorTop = new CustomJSeparator();
@@ -117,13 +117,12 @@ public class ChoixArbitreVue extends CustomJFrame {
         panelMiddle.add(panelArbitreActions, gbc_panelArbitreActions);
 
         // Panel de consultation d'un arbitre
-        JPanel panelTournois = new JPanel();
-        panelTournois.setBackground(Palette.BLACK);
+        CustomJPanel panelTournois = new CustomJPanel();
         panelTournois.setLayout(new BorderLayout(0, 0));
         panelArbitreActions.add(panelTournois);
 
         JScrollPane scrollPaneTournois = new JScrollPane();
-        scrollPaneTournois.setBackground(Palette.BLACK);
+        scrollPaneTournois.setBackground(Palette.PRIMARY_BACKGROUND);
         panelTournois.add(scrollPaneTournois, BorderLayout.CENTER);
 
         listTournois = new JList<>();
@@ -137,18 +136,18 @@ public class ChoixArbitreVue extends CustomJFrame {
         panelTournois.add(lbNomArbitre, BorderLayout.NORTH);
 
         JPanel panelBoutonSupprimer = new JPanel();
-        panelBoutonSupprimer.setBackground(Palette.BLACK);
+        panelBoutonSupprimer.setBackground(Palette.PRIMARY_BACKGROUND);
         panelTournois.add(panelBoutonSupprimer, BorderLayout.SOUTH);
 
         btnSupprimer = new CustomJButton("Supprimer cet arbitre", 15);
         btnSupprimer.setActionCommand("suppArbitre");
-        btnSupprimer.setBackground(Palette.REDQUIT);
+        btnSupprimer.setBackground(Palette.TIERTIARY_BACKGROUND);
         btnSupprimer.addActionListener(controleur);
         btnSupprimer.setEnabled(false);
         panelBoutonSupprimer.add(btnSupprimer);
 
         JPanel panelAjout = new JPanel();
-        panelAjout.setBackground(Palette.BLACK);
+        panelAjout.setBackground(Palette.PRIMARY_BACKGROUND);
         panelArbitreActions.add(panelAjout);
         panelAjout.setLayout(new BorderLayout(0, 0));
 
@@ -158,12 +157,12 @@ public class ChoixArbitreVue extends CustomJFrame {
         panelAjout.add(lbNouvelArbitre, BorderLayout.NORTH);
 
         JPanel panelInformations = new JPanel();
-        panelInformations.setBackground(Palette.BLACK);
+        panelInformations.setBackground(Palette.PRIMARY_BACKGROUND);
         panelAjout.add(panelInformations, BorderLayout.CENTER);
         panelInformations.setLayout(new GridLayout(3, 0, 0, 0));
 
         JPanel panelNom = new JPanel();
-        panelNom.setBackground(Palette.BLACK);
+        panelNom.setBackground(Palette.PRIMARY_BACKGROUND);
         panelInformations.add(panelNom);
 
         JLabel lblNouveauNom = new CustomJLabel("Nom", 12);
@@ -174,7 +173,7 @@ public class ChoixArbitreVue extends CustomJFrame {
         textFieldNom.setColumns(10);
 
         JPanel panelPrenom = new JPanel();
-        panelPrenom.setBackground(Palette.BLACK);
+        panelPrenom.setBackground(Palette.PRIMARY_BACKGROUND);
         panelInformations.add(panelPrenom);
 
         JLabel lblNouveauPrenom = new CustomJLabel("Prénom", 12);
@@ -185,7 +184,7 @@ public class ChoixArbitreVue extends CustomJFrame {
         textFieldPrenom.setColumns(10);
 
         JPanel panelNationalite = new JPanel();
-        panelNationalite.setBackground(Palette.BLACK);
+        panelNationalite.setBackground(Palette.PRIMARY_BACKGROUND);
         panelInformations.add(panelNationalite);
 
         JLabel lblNationalite = new CustomJLabel("Nationalité", 12);
@@ -202,7 +201,7 @@ public class ChoixArbitreVue extends CustomJFrame {
         panelNationalite.add(comboBoxNationalite);
 
         JPanel panelBoutonAjouter = new JPanel();
-        panelBoutonAjouter.setBackground(Palette.BLACK);
+        panelBoutonAjouter.setBackground(Palette.PRIMARY_BACKGROUND);
         panelAjout.add(panelBoutonAjouter, BorderLayout.SOUTH);
 
         JButton btnAjouterArbitre = new CustomJButton("Ajouter cet arbitre", 15);
@@ -216,12 +215,12 @@ public class ChoixArbitreVue extends CustomJFrame {
         contentPanel.add(panelBottom, BorderLayout.SOUTH);
 
         JPanel panelBtnQuitter = new JPanel();
-        panelBtnQuitter.setBackground(Palette.BLACK);
+        panelBtnQuitter.setBackground(Palette.PRIMARY_BACKGROUND);
 
         // Bouton quitter
         CustomJButton btnQuit = new CustomJButton("Quitter", 10);
         btnQuit.setActionCommand("quitter");
-        btnQuit.setBackground(Palette.REDQUIT);
+        btnQuit.setBackground(Palette.TIERTIARY_BACKGROUND);
         btnQuit.addActionListener(this.controleur);
         panelBottom.setLayout(new GridLayout(1, 2, 0, 0));
         panelBtnQuitter.add(btnQuit);
@@ -231,7 +230,7 @@ public class ChoixArbitreVue extends CustomJFrame {
         panelErreur = new CustomJPanel(new FlowLayout(FlowLayout.CENTER, 5, 5));
         erreur = new CustomJLabel("", 10);
         erreur.setText(" ");
-        erreur.setForeground(Palette.REDERRORFOREGROUND);
+        erreur.setForeground(Palette.ERROR_FOREGROUND);
         erreur.setBorder(new EmptyBorder(3, 3, 3, 3));
         erreur.setAlignmentX(Component.CENTER_ALIGNMENT);
         panelErreur.add(erreur);

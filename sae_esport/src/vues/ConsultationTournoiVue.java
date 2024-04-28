@@ -51,7 +51,7 @@ public class ConsultationTournoiVue extends CustomJFrame {
         contentPane.add(panelTop, BorderLayout.NORTH);
 
         CustomJLabel titleTop = new CustomJLabel("CLASSEMENT DE " + tournoiCourant.getNomTournoi().toUpperCase(), 25);
-        titleTop.setFont(Palette.customFont.deriveFont(Font.BOLD, 20));
+        titleTop.setFont(Palette.FONT.deriveFont(Font.BOLD, 20));
         panelTop.add(titleTop);
 
         CustomJSeparator separatorTop = new CustomJSeparator();
@@ -69,10 +69,10 @@ public class ConsultationTournoiVue extends CustomJFrame {
         };
         tableClassement.setBorder(null);
         tableClassement.setOpaque(false);
-        tableClassement.setFont(Palette.customFont.deriveFont(Font.PLAIN, 12));
-        tableClassement.setForeground(Palette.WHITE);
-        tableClassement.setSelectionBackground(Palette.WHITE);
-        tableClassement.setGridColor(Palette.WHITE);
+        tableClassement.setFont(Palette.FONT.deriveFont(Font.PLAIN, 12));
+        tableClassement.setForeground(Palette.SECONDARY_FOREGROUND);
+        tableClassement.setSelectionBackground(Palette.QUATERNARY_BACKGROUND);
+        tableClassement.setGridColor(Palette.QUATERNARY_BACKGROUND);
         tableClassement.setRowHeight(34);
 
         tableModel = new DefaultTableModel();
@@ -91,9 +91,9 @@ public class ConsultationTournoiVue extends CustomJFrame {
         EvenOddRenderer renderer = new EvenOddRenderer();
         tableClassement.setDefaultRenderer(Object.class, renderer);
 
-        tableClassement.getTableHeader().setBackground(Palette.BLACKLIGHTER);
+        tableClassement.getTableHeader().setBackground(Palette.SECONDARY_BACKGROUND);
         tableClassement.getTableHeader().setForeground(Color.WHITE);
-        tableClassement.getTableHeader().setFont(Palette.customFont.deriveFont(Font.PLAIN, 11));
+        tableClassement.getTableHeader().setFont(Palette.FONT.deriveFont(Font.PLAIN, 11));
         panelMiddleClassement.add(tableClassement.getTableHeader(), BorderLayout.NORTH);
         panelMiddleClassement.add(tableClassement, BorderLayout.CENTER);
 
@@ -105,7 +105,7 @@ public class ConsultationTournoiVue extends CustomJFrame {
         CustomJButton btnQuit = new CustomJButton("Quitter", 5);
         btnQuit.setActionCommand("quitter");
         btnQuit.addActionListener(this.controleur);
-        btnQuit.setBackground(Palette.REDQUIT);
+        btnQuit.setBackground(Palette.TIERTIARY_BACKGROUND);
         panelQuitterSeconnecter.add(btnQuit);
     }
 

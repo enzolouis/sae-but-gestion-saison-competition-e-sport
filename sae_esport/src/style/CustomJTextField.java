@@ -164,11 +164,11 @@ public class CustomJTextField extends JTextField {
     private void setBasicConstructor() {
         this.borderColor = getForeground();
         this.radius = 15;
-        setCaretColor(Palette.BLACKLIGHTER);
+        setCaretColor(Palette.PRIMARY_FOREGROUND);
         setOpaque(false);
-        setForeground(Palette.BLACKLIGHTER);
-        setBackground(Palette.WHITE);
-        setFont(Palette.customTextFont);
+        setForeground(Palette.PRIMARY_FOREGROUND);
+        setBackground(Palette.PRIMARY_BACKGROUND);
+        setFont(Palette.FONT);
     }
 
     public String getPlaceholder() {

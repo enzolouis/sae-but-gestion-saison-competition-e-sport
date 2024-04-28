@@ -80,14 +80,14 @@ public class ChoixArbitreControleur implements ActionListener {
                     }
                 }
                 this.vue.erreur.setText("Cet arbitre a été supprimé.");
-                this.vue.erreur.setForeground(Palette.GREEN);
-                this.vue.panelErreur.setBackground(Palette.GREENLIGHTER);
-                this.vue.panelErreur.setBorder(new LineBorder(Palette.GREEN, 1));
+                this.vue.erreur.setForeground(Palette.SUCCESS_FOREGROUND);
+                this.vue.panelErreur.setBackground(Palette.SUCCESS_BACKGROUND);
+                this.vue.panelErreur.setBorder(new LineBorder(Palette.SUCCESS_BORDER, 1));
             } else {
                 this.vue.erreur.setText("Cet arbitre n'est pas supprimable!");
-                this.vue.panelErreur.setBackground(Palette.REDERRORBACKGROUND);
-                this.vue.erreur.setForeground(Palette.REDERRORFOREGROUND);
-                this.vue.panelErreur.setBorder(new LineBorder(Palette.REDERRORBORDER, 1));
+                this.vue.panelErreur.setBackground(Palette.ERROR_BACKGROUND);
+                this.vue.erreur.setForeground(Palette.ERROR_FOREGROUND);
+                this.vue.panelErreur.setBorder(new LineBorder(Palette.ERROR_BORDER, 1));
             }
 
         } catch (Exception e1) {
@@ -99,9 +99,9 @@ public class ChoixArbitreControleur implements ActionListener {
         if (this.vue.textFieldNom.getText().equals("") || this.vue.textFieldPrenom.getText().equals("")
                 || this.vue.comboBoxNationalite.getSelectedIndex() == -1) {
             this.vue.erreur.setText("Champs de saisie manquant.");
-            this.vue.panelErreur.setBackground(Palette.REDERRORBACKGROUND);
-            this.vue.erreur.setForeground(Palette.REDERRORFOREGROUND);
-            this.vue.panelErreur.setBorder(new LineBorder(Palette.REDERRORBORDER, 1));
+            this.vue.panelErreur.setBackground(Palette.ERROR_BACKGROUND);
+            this.vue.erreur.setForeground(Palette.ERROR_FOREGROUND);
+            this.vue.panelErreur.setBorder(new LineBorder(Palette.ERROR_BORDER, 1));
         } else {
             Arbitre a = new Arbitre(0, this.vue.textFieldNom.getText(),
                     this.vue.textFieldPrenom.getText(), (Nationalite) this.vue.comboBoxNationalite.getSelectedItem());
@@ -116,9 +116,9 @@ public class ChoixArbitreControleur implements ActionListener {
                 e1.printStackTrace();
             }
             this.vue.erreur.setText("Arbitre créé!");
-            this.vue.erreur.setForeground(Palette.GREEN);
-            this.vue.panelErreur.setBackground(Palette.GREENLIGHTER);
-            this.vue.panelErreur.setBorder(new LineBorder(Palette.GREEN, 1));
+            this.vue.erreur.setForeground(Palette.SUCCESS_FOREGROUND);
+            this.vue.panelErreur.setBackground(Palette.SUCCESS_BACKGROUND);
+            this.vue.panelErreur.setBorder(new LineBorder(Palette.SUCCESS_BORDER, 1));
             this.vue.textFieldNom.setText("");
             this.vue.textFieldPrenom.setText("");
             this.vue.comboBoxNationalite.setSelectedIndex(-1);

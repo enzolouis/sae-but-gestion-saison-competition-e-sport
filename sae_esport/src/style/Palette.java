@@ -10,46 +10,39 @@ import java.io.IOException;
 
 import javax.swing.ImageIcon;
 
+class Rgb extends Color {
+    public Rgb(int r, int g, int b) {
+        super(r, g, b);
+    }
+}
+
 public class Palette {
 
-    // couleurs de la palette 39, 60, 117
-    // bleu violet : 52, 31, 151
-    public static final Color BLACKLIGHTERDARKER = new Color(0, 113, 235); /* header */
-    public static final Color GOLD = new Color(25,103,210);
-    public static final Color GREEN = new Color(10, 200, 185); /* valid button create tournoi, minimize button */
-    public static final Color GREENLIGHTER = new Color(210, 253, 250);
-    public static final Color REDERRORBACKGROUND = new Color(254, 220, 222);
-    public static final Color REDERRORBORDER = new Color(255, 144, 144);
-    public static final Color BLACKDARKER = new Color(25,103,210);
+    // --------------------------------------- Colors ---------------------------------------
 
+    public static final Color PRIMARY_BACKGROUND    = new Rgb(255, 255, 255); // WHITE BLACK
+    public static final Color SECONDARY_BACKGROUND  = new Rgb(  0, 123, 255); // BLACKLIGHTER BLUE
+    public static final Color TIERTIARY_BACKGROUND  = new Rgb( 60,  70,  75); // REDQUIT
+    public static final Color QUATERNARY_BACKGROUND = new Rgb( 25, 103, 210); // Rgb(37, 89, 168) Rgb(11, 24, 67)
+    public static final Color ERROR_BACKGROUND      = new Rgb(254, 220, 222);
+    public static final Color SUCCESS_BACKGROUND    = new Rgb(210, 253, 250);
 
-    public static final Color WHITE = new Color(255, 255, 255);
-    public static final Color BLACK = new Color(255, 255, 255); /* fond */
-    public static final Color BLACKLIGHTER = new Color(0, 123, 255); /* header */
-    public static final Color BLUE = new Color(0, 123, 255); /* bouton, input, fond liste page create tournoi */
-    public static final Color REDQUIT = new Color(60, 70, 75);
-
-    public static final Color SMOOTH_GREY = new Color(225, 228, 232);
-    public static final Color GREY = new Color(177, 180, 184);
-
-
-    /*public static final Color DARKBLUE = new Color(37, 89, 168);
-    public static final Color DARKBLUE2 = new Color(11, 24, 67);*/
-
-
-    public static final Color REDERRORFOREGROUND = new Color(235, 77, 75);
-
+    public static final Color PRIMARY_FOREGROUND    = new Rgb(  0, 123, 255); // BLACKLIGHTER BLUE
+    public static final Color SECONDARY_FOREGROUND  = new Rgb(255, 255, 255); // WHITE BLACK
+    public static final Color TIERTIARY_FOREGROUND  = new Rgb(177, 180, 184); // GREY
+    public static final Color QUATERNARY_FOREGROUND = new Rgb(225, 228, 232); // SMOOTH_GREY
+    public static final Color ERROR_FOREGROUND      = new Rgb(235,  77,  75);
+    public static final Color SUCCESS_FOREGROUND    = new Rgb( 10, 200, 185);
     
+    public static final Color ERROR_BORDER          = new Rgb(255, 144, 144);
+    public static final Color SUCCESS_BORDER        = new Rgb( 10, 200, 185);
 
-    // polices
-    public static final Font customFont;
-    public static final Font customTextFont;
-    public static final Font customTextFont2;
+    // --------------------------------------- Fonts ---------------------------------------
+
+    public static final Font FONT;
 
     static {
         Font loadedFont = null;
-        // fonts/BeaufortforLOL-Heavy.ttf
-        // fonts/Montserrat-Black.ttf pour les titres des page
         try {
             loadedFont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/Montserrat-Medium.ttf"))
                     .deriveFont(11f);
@@ -58,35 +51,11 @@ public class Palette {
         } catch (IOException | FontFormatException e) {
             e.printStackTrace();
         }
-        customFont = loadedFont;
+        FONT = loadedFont;
     }
 
-    static {
-        Font loadedFont = null;
-        // fonts/Spiegel_TT_SemiBold.ttf
-        try {
-            loadedFont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/Montserrat-Medium.ttf")).deriveFont(11f);
-            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            ge.registerFont(loadedFont);
-        } catch (IOException | FontFormatException e) {
-            e.printStackTrace();
-        }
-        customTextFont = loadedFont;
-    }
-
-    static {
-        Font loadedFont = null;
-        // fonts/Spiegel_TT_SemiBold.ttf
-        try {
-            loadedFont = Font.createFont(Font.TRUETYPE_FONT, new File("fonts/BeaufortforLOL-Heavy.ttf")).deriveFont(11f);
-            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            ge.registerFont(loadedFont);
-        } catch (IOException | FontFormatException e) {
-            e.printStackTrace();
-        }
-        customTextFont2 = loadedFont;
-    }
-
+    // --------------------------------------- Icons ---------------------------------------
+    
     public static final ImageIcon OEIL_INVISIBLE_ICON = new ImageIcon(
             new ImageIcon(Palette.class.getClassLoader().getResource("assets/hidden-eye.png")).getImage()
                     .getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH));
@@ -131,6 +100,8 @@ public class Palette {
             new ImageIcon(Palette.class.getClassLoader().getResource("assets/connect.png")).getImage()
                     .getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH));
 
+
+    // --------------------------------------- Screen properties ---------------------------------------
 
     public static final int SCREEN_WIDTH = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
     public static final int SCREEN_HEIGHT = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();

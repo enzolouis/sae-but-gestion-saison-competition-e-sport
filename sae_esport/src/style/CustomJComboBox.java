@@ -16,6 +16,6 @@ public class CustomJComboBox extends JComboBox {
         setBackground(new Color(44, 47, 51));
         setForeground(Color.white);
         setUI(new CustomJComboBoxUI());
-        setFont(Palette.customFont);
+        setFont(Palette.FONT);
     }
 }

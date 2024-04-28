@@ -149,7 +149,7 @@ public class CreationTournoiControleur implements ActionListener {
     }
 
     public void disableAllFields(TournoiModele t) {
-        vue.messageCreation.setForeground(Palette.GREEN);
+        vue.messageCreation.setForeground(Palette.SUCCESS_FOREGROUND);
         vue.messageCreation.setText("Le tournoi N°" + t.getIDTournoi() + " a été créé.");
         vue.btnAddArbitre.setEnabled(false);
         vue.btnImportEquipes.setEnabled(false);
