@@ -10,5 +10,6 @@ Tout le cahier des charges du projet a été remplis en 3 mois avec 5 sprints de
 ## 🛠️ Refactoring
 Une fois les exigences remplis, un refactoring d'un mois a été appliqué au projet suite à une revue de code.
 
-## ♻️ Refonte graphique
-Hors universitaire, le projet a été repris pour une refonte graphique.
+## ♻️ Refonte graphique et pratique
+Hors universitaire, le projet a été repris pour une refonte graphique et une mise à jour de l'arborescence pour le respect des conventions.
+La refonte est disponible sur la [branche clean-project](https://github.com/enzolouis/tournament-manager-software/tree/1-clean-project).
